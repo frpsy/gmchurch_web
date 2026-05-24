@@ -6,14 +6,14 @@ const CHURCH_DATA = {
     info: {
         name: "대한성공회 광명교회",
         subName: "성 디모테오 성당",
-        slogan: "녹색 교회, 모든 생명을 환대하는 교회",
+        slogan: "모든 생명을 환대하는 교회",
         vision: "하느님 나라를 살아가는 사랑의 공동체",
         established: "1990년 2월 11일",
         address: "(14335) 경기도 광명시 아방리 2길 10",
         addressShort: "경기도 광명시 아방리 2길 10",
         phone: "02-2686-0091",
         fax: "02-2686-0092",
-        email: "contact@gmskh.org"
+        email: "bsyg2000@hanmail.net"
     },
 
     clergy: [
@@ -27,7 +27,7 @@ const CHURCH_DATA = {
         },
         {
             name: "이남호(사도요한)",
-            title: "부제",
+            title: "협동사제",
             ordained: "",
             quote: "",
             desc: "광명교회 공동체를 함께 섬기고 있습니다.",
@@ -130,7 +130,7 @@ const CHURCH_DATA = {
         diocesan: "https://seoul.anglican.kr/"
     },
 
-    liveUrl: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
+    liveUrl: "https://youtu.be/5tTJvrTX4aA",
 
     navigation: [
         {
