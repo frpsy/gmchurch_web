@@ -324,9 +324,21 @@ const VisitRenderer = {
             </div>
             <div class="info-card" id="parking" style="max-width:760px; margin:0 auto;">
                 <h3>교통·주차 안내</h3>
-                <div class="info-row"><strong>지하철</strong><span>광명사거리역(7호선) 도보 약 10분</span></div>
-                <div class="info-row"><strong>버스</strong><span>광명사거리 정류장 인근 (다수 노선)</span></div>
-                <div class="info-row"><strong>주차</strong><span>교회 인근 공영주차장 이용 권장</span></div>
+                <div class="info-row">
+                    <strong>승용차</strong>
+                    <span>내비게이션에 <em>대한성공회 광명교회</em> 또는 위 주소를 검색해 주세요.</span>
+                </div>
+                <div class="info-row">
+                    <strong>대중교통</strong>
+                    <span>정확한 대중교통 안내는 교회 사무실(${phone})로 문의해 주세요.</span>
+                </div>
+                <div class="info-row">
+                    <strong>주차</strong>
+                    <span>주차 가능 여부는 방문 전 교회 사무실로 확인 부탁드립니다.</span>
+                </div>
+                <p style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); line-height:1.7;">
+                    ※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong> 또는 <strong>성 디모테오 성당</strong>으로 검색하시면 최단 경로 안내를 받으실 수 있습니다.
+                </p>
             </div>
         `;
     }
