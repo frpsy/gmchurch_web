@@ -142,14 +142,14 @@ const CHURCH_DATA = {
         {
             year: "2023",
             media: "동아일보",
-            title: ""하나님의 사랑이 설마 인간에게만 국한됐을 리가 있을까요?"",
+            title: "하나님의 사랑이 설마 인간에게만 국한됐을 리가 있을까요?",
             date: "2023.11.29",
             url: "https://www.donga.com"
         },
         {
             year: "2022",
             media: "뉴스앤조이",
-            title: ""참사 후 신속해야 할 것은 유가족과 시민을 단속하는 일이 아닙니다"",
+            title: "참사 후 신속해야 할 것은 유가족과 시민을 단속하는 일이 아닙니다",
             date: "2022.11.11",
             url: "https://www.newsnjoy.or.kr"
         },
@@ -163,7 +163,7 @@ const CHURCH_DATA = {
         {
             year: "2019",
             media: "국민일보",
-            title: ""남녀 양성 배제 받지 않을 때 조화로운 교회 될 것"",
+            title: "남녀 양성 배제 받지 않을 때 조화로운 교회 될 것",
             date: "2019.01.07",
             url: "https://www.kmib.co.kr"
         }
