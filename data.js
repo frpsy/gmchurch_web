@@ -125,12 +125,12 @@ const CHURCH_DATA = {
     },
 
     sns: {
-        youtube: "https://youtube.com/@gmskh",
+        youtube: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
         instagram: "https://instagram.com/gmskh",
         diocesan: "https://seoul.anglican.kr/"
     },
 
-    liveUrl: "https://youtube.com/@gmskh",
+    liveUrl: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
 
     navigation: [
         {
