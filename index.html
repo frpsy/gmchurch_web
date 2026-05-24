@@ -2,8 +2,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>대한성공회 광명교회</title>
+    <meta name="description" content="녹색 교회, 모든 생명을 환대하는 교회. 대한성공회 광명교회 성 디모테오 성당.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,45 +12,62 @@
 
     <header class="hero">
         <div class="container">
+            <div class="hero-label">대한성공회 · 서울교구 서부교무구</div>
             <h1 id="hero-title"></h1>
-            <p id="hero-sub"></p>
+            <p class="hero-sub" id="hero-sub"></p>
             <div class="hero-actions">
-                <a href="#" id="live-btn" class="btn-live">실시간 예배 참여하기</a>
+                <a href="#" id="live-btn" class="btn-live">● 실시간 예배 참여</a>
                 <a href="worship.html" class="btn-outline">예배 안내 보기</a>
             </div>
         </div>
     </header>
 
-    <section class="section container" id="worship">
-        <div class="section-header">
-            <h2 class="section-title">예배 안내</h2>
-            <p class="section-sub">함께 드리는 예배에 여러분을 초대합니다</p>
+    <!-- 예배 -->
+    <section class="section" id="worship">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow">Worship</p>
+                <h2 class="section-title">예배 안내</h2>
+                <p class="section-sub">성공회 전례 안에서 드리는 깊고 풍성한 예배에 초대합니다.</p>
+            </div>
+            <div id="worship-grid" class="grid"></div>
+            <div class="guide-banner" id="worship-guide"></div>
         </div>
-        <div id="worship-grid" class="grid"></div>
-        <div class="guide-banner" id="worship-guide"></div>
     </section>
 
-    <section class="section container" id="community">
-        <div class="section-header">
-            <h2 class="section-title">함께하는 공동체</h2>
-            <p class="section-sub">믿음 안에서 삶을 나누는 소공동체</p>
+    <!-- 공동체 -->
+    <section class="section" id="community" style="background:var(--white);">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow">Community</p>
+                <h2 class="section-title">함께하는 공동체</h2>
+                <p class="section-sub">믿음 안에서 삶을 나누는 소공동체가 열려 있습니다.</p>
+            </div>
+            <div id="community-grid" class="grid"></div>
         </div>
-        <div id="community-grid" class="grid"></div>
     </section>
 
-    <section class="section container" id="giving">
-        <div class="section-header">
-            <h2 class="section-title">헌금과 살림</h2>
-            <p class="section-sub">투명하게 운영되는 교회 살림</p>
-        </div>
-        <div class="grid">
-            <div class="info-card" id="bank-info"></div>
-            <div class="info-card">
-                <h3>오시는 길</h3>
-                <div class="info-row"><strong>주소</strong> 경기도 광명시 아방리 2길 10</div>
-                <div class="info-row"><strong>전화</strong> 02-2686-0091</div>
-                <div style="margin-top:1.5rem;">
-                    <a href="https://map.kakao.com/link/search/경기도 광명시 아방리 2길 10" target="_blank" style="color:var(--primary-green); font-weight:bold;">카카오지도 보기 →</a>
+    <!-- 헌금과 살림 -->
+    <section class="section" id="giving">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow">Giving</p>
+                <h2 class="section-title">헌금과 살림</h2>
+                <p class="section-sub">투명하게 운영되는 교회 살림과 봉헌 안내입니다.</p>
+            </div>
+            <div class="grid">
+                <div class="info-card" id="bank-info"></div>
+                <div class="info-card">
+                    <h3>오시는 길</h3>
+                    <div class="info-row"><strong>주소</strong><span>경기도 광명시 아방리 2길 10</span></div>
+                    <div class="info-row"><strong>전화</strong><span>02-2686-0091</span></div>
+                    <div style="margin-top:1.5rem;">
+                        <a href="https://map.kakao.com/link/search/경기도 광명시 아방리 2길 10"
+                           target="_blank" rel="noopener"
+                           style="color:var(--green-mid); font-weight:700; font-size:0.9rem;">
+                            카카오지도 보기 →
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

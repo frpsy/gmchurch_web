@@ -1,67 +1,71 @@
-/* app.js */
-const App = {
-    init() {
-        this.renderNav();
-        this.initNavBehavior();
+/**
+ * app.js — 대한성공회 광명교회
+ *
+ * SOLID 적용:
+ *  S — 각 render* 메서드가 단일 책임
+ *  O — NavRenderer / PageRenderer 확장 가능, 기존 코드 미수정
+ *  L — 모든 렌더러는 동일 인터페이스(render) 준수
+ *  I — 페이지별 필요한 렌더러만 호출
+ *  D — App이 구체 DOM에 직접 의존하지 않고 ID 기반 접근
+ */
 
-        // Index page
-        if (document.getElementById('hero-title'))    this.renderHero();
-        if (document.getElementById('worship-grid'))  this.renderWorship();
-        if (document.getElementById('community-grid')) this.renderCommunity();
-        if (document.getElementById('bank-info'))     this.renderGiving();
-
-        // Sub-pages
-        if (document.getElementById('worship-full'))   this.renderWorshipFull();
-        if (document.getElementById('community-full')) this.renderCommunityFull();
-        if (document.getElementById('giving-full'))    this.renderGivingFull();
-
-        this.renderFooter();
-    },
-
-    renderNav() {
+/* ── NavRenderer ─────────────────────────────────────────── */
+const NavRenderer = {
+    render() {
         const nav = document.getElementById('main-nav');
         if (!nav) return;
+
         const items = CHURCH_DATA.navigation.map(item => `
             <li class="nav-item has-dropdown">
                 <a href="${item.href}" class="nav-link">${item.label}</a>
                 <ul class="dropdown">
-                    ${item.items.map(sub => `<li><a href="${sub.href}">${sub.label}</a></li>`).join('')}
+                    ${item.items.map(sub =>
+                        `<li><a href="${sub.href}">${sub.label}</a></li>`
+                    ).join('')}
                 </ul>
             </li>
         `).join('');
+
         nav.innerHTML = `
             <div class="container nav-inner">
                 <a href="index.html" class="nav-logo">
                     <span class="nav-logo-name">${CHURCH_DATA.info.name}</span>
                     <span class="nav-logo-sub">${CHURCH_DATA.info.subName}</span>
                 </a>
-                <button class="nav-toggle" id="nav-toggle" aria-label="메뉴">
+                <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
-                <ul class="nav-menu" id="nav-menu">${items}</ul>
-                <a href="${CHURCH_DATA.liveUrl}" target="_blank" class="btn-nav-live">📺 실시간 예배</a>
+                <ul class="nav-menu" id="nav-menu" role="navigation">${items}</ul>
+                <a href="${CHURCH_DATA.liveUrl}" target="_blank" rel="noopener" class="btn-nav-live">
+                    ● 실시간 예배
+                </a>
             </div>
         `;
+
+        this._bindEvents();
     },
 
-    initNavBehavior() {
-        const nav = document.querySelector('.nav-header');
-        if (nav) {
-            window.addEventListener('scroll', () => {
-                nav.classList.toggle('scrolled', window.scrollY > 50);
-            });
-        }
-
+    _bindEvents() {
+        const header = document.querySelector('.nav-header');
         const toggle = document.getElementById('nav-toggle');
-        const menu = document.getElementById('nav-menu');
+        const menu   = document.getElementById('nav-menu');
         if (!toggle || !menu) return;
 
+        // Scroll shadow
+        if (header) {
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            }, { passive: true });
+        }
+
+        // Hamburger toggle
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            menu.classList.toggle('open');
+            const isOpen = menu.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', isOpen);
         });
 
-        // Mobile: tap nav-link with children to expand dropdown
+        // Mobile: tap parent nav-link → expand dropdown
         menu.querySelectorAll('.has-dropdown > .nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 if (window.innerWidth <= 768) {
@@ -71,136 +75,42 @@ const App = {
             });
         });
 
+        // Close on outside click
         document.addEventListener('click', (e) => {
             if (!menu.contains(e.target) && !toggle.contains(e.target)) {
                 menu.classList.remove('open');
+                toggle.setAttribute('aria-expanded', false);
             }
         });
-    },
+    }
+};
 
-    renderHero() {
-        document.getElementById('hero-title').innerText = CHURCH_DATA.info.slogan;
-        document.getElementById('hero-sub').innerText = CHURCH_DATA.info.vision;
-        document.getElementById('live-btn').href = CHURCH_DATA.liveUrl;
-    },
-
-    renderWorship() {
-        const container = document.getElementById('worship-grid');
-        container.innerHTML = CHURCH_DATA.worship.main.map(w => `
-            <div class="card">
-                <h3>${w.title}</h3>
-                <p><strong>${w.time}</strong></p>
-                <p style="margin-top:0.5rem; color:var(--text-muted); font-size:0.9rem;">${w.desc}</p>
-            </div>
-        `).join('');
-        const guide = document.getElementById('worship-guide');
-        if (guide) guide.innerHTML = `<p>${CHURCH_DATA.worship.guide}</p>`;
-    },
-
-    renderCommunity() {
-        const container = document.getElementById('community-grid');
-        container.innerHTML = CHURCH_DATA.community.groups.map(g => `
-            <div class="card" style="text-align:center;">
-                <div class="card-icon">${g.icon}</div>
-                <h3>${g.title}</h3>
-                <p style="color:var(--text-muted);">${g.desc}</p>
-            </div>
-        `).join('');
-    },
-
-    renderGiving() {
-        document.getElementById('bank-info').innerHTML = `
-            <h3>봉헌 안내</h3>
-            <div class="info-row"><strong>은행</strong> 국민은행</div>
-            <div class="info-row"><strong>계좌번호</strong> ${CHURCH_DATA.giving.bank}</div>
-            <div class="info-row"><strong>예금주</strong> ${CHURCH_DATA.giving.holder}</div>
-            <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-muted);">${CHURCH_DATA.giving.report}</p>
-        `;
-    },
-
-    renderWorshipFull() {
-        document.getElementById('worship-full').innerHTML = `
-            <div class="grid">
-                ${CHURCH_DATA.worship.main.map(w => `
-                    <div class="info-card" id="${w.title === '어린이 예배' ? 'children' : 'main'}">
-                        <h3>${w.title}</h3>
-                        <div class="info-row"><strong>시간</strong> ${w.time}</div>
-                        <p style="margin-top:1rem; color:var(--text-muted); font-size:0.93rem;">${w.desc}</p>
-                    </div>
-                `).join('')}
-                <div class="info-card" id="newcomer">
-                    <h3>새신자 안내</h3>
-                    <p style="color:var(--text-muted); font-size:0.93rem; line-height:1.9;">${CHURCH_DATA.worship.guide}</p>
-                </div>
-            </div>
-        `;
-    },
-
-    renderCommunityFull() {
-        const ids = ['hopecenter', 'emmaus', 'smallgroup'];
-        document.getElementById('community-full').innerHTML = `
-            <div class="grid">
-                ${CHURCH_DATA.community.groups.map((g, i) => `
-                    <div class="card" id="${ids[i]}" style="text-align:center;">
-                        <div class="card-icon">${g.icon}</div>
-                        <h3>${g.title}</h3>
-                        <p style="color:var(--text-muted);">${g.desc}</p>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    },
-
-    renderGivingFull() {
-        document.getElementById('giving-full').innerHTML = `
-            <div class="grid">
-                <div class="info-card" id="offering">
-                    <h3>봉헌 계좌 안내</h3>
-                    <div class="info-row"><strong>은행</strong> 국민은행</div>
-                    <div class="info-row"><strong>계좌</strong> ${CHURCH_DATA.giving.bank}</div>
-                    <div class="info-row"><strong>예금주</strong> ${CHURCH_DATA.giving.holder}</div>
-                    <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-muted);" id="report">${CHURCH_DATA.giving.report}</p>
-                </div>
-                <div class="info-card" id="location">
-                    <h3>오시는 길</h3>
-                    <div class="info-row"><strong>주소</strong> ${CHURCH_DATA.info.address}</div>
-                    <div class="info-row"><strong>전화</strong> ${CHURCH_DATA.info.phone}</div>
-                    <div class="info-row"><strong>팩스</strong> ${CHURCH_DATA.info.fax}</div>
-                    <div style="margin-top:1.5rem;">
-                        <a href="https://map.kakao.com/link/search/${encodeURIComponent(CHURCH_DATA.info.address)}" target="_blank" style="color:var(--primary-green); font-weight:bold;">카카오지도 보기 →</a>
-                    </div>
-                </div>
-            </div>
-        `;
-    },
-
-    renderFooter() {
+/* ── FooterRenderer ──────────────────────────────────────── */
+const FooterRenderer = {
+    render() {
         const footer = document.getElementById('main-footer');
         if (!footer) return;
+        const { info, clergy, sns } = CHURCH_DATA;
         footer.innerHTML = `
             <div class="container">
                 <div class="footer-inner">
                     <div class="footer-col">
                         <h4>광명교회</h4>
-                        <p>${CHURCH_DATA.info.name}</p>
-                        <p>${CHURCH_DATA.info.subName}</p>
-                        <p style="margin-top:0.5rem;">설립 ${CHURCH_DATA.info.established}</p>
+                        <p>${info.name}<br>${info.subName}<br>설립 ${info.established}</p>
                     </div>
                     <div class="footer-col">
                         <h4>연락처</h4>
-                        <p>${CHURCH_DATA.info.address}</p>
-                        <p>Tel: ${CHURCH_DATA.info.phone}</p>
-                        <p>${CHURCH_DATA.clergy.priest}</p>
+                        <p>${info.addressShort}<br>Tel. ${info.phone}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
                     </div>
                     <div class="footer-col">
                         <h4>바로가기</h4>
-                        <a href="${CHURCH_DATA.sns.youtube}" target="_blank">유튜브 채널</a>
-                        <a href="${CHURCH_DATA.sns.instagram}" target="_blank">인스타그램</a>
-                        <a href="${CHURCH_DATA.sns.diocesan}" target="_blank">성공회 서울교구</a>
+                        <a href="${sns.youtube}"    target="_blank" rel="noopener">유튜브 채널</a>
+                        <a href="${sns.instagram}"  target="_blank" rel="noopener">인스타그램</a>
+                        <a href="${sns.diocesan}"   target="_blank" rel="noopener">성공회 서울교구</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <span>&copy; 2026 ${CHURCH_DATA.info.name}. All rights reserved.</span>
+                    <span>© 2026 ${info.name}. All rights reserved.</span>
                     <span>대한성공회 서울교구</span>
                 </div>
             </div>
@@ -208,4 +118,233 @@ const App = {
     }
 };
 
-window.onload = () => App.init();
+/* ── IndexRenderer ───────────────────────────────────────── */
+const IndexRenderer = {
+    render() {
+        this._hero();
+        this._worship();
+        this._community();
+        this._giving();
+    },
+
+    _hero() {
+        const t = document.getElementById('hero-title');
+        const s = document.getElementById('hero-sub');
+        const b = document.getElementById('live-btn');
+        if (t) t.textContent = CHURCH_DATA.info.slogan;
+        if (s) s.textContent = CHURCH_DATA.info.vision;
+        if (b) b.href = CHURCH_DATA.liveUrl;
+    },
+
+    _worship() {
+        const el = document.getElementById('worship-grid');
+        if (!el) return;
+        el.innerHTML = CHURCH_DATA.worship.main.map(w => `
+            <div class="card">
+                <h3>${w.title}</h3>
+                <p style="font-weight:700; color:var(--green-mid); margin-bottom:0.5rem;">${w.time}</p>
+                <p style="color:var(--text-muted); font-size:0.9rem;">${w.desc}</p>
+            </div>
+        `).join('');
+        const guide = document.getElementById('worship-guide');
+        if (guide) guide.innerHTML = `<p>${CHURCH_DATA.worship.guide}</p>`;
+    },
+
+    _community() {
+        const el = document.getElementById('community-grid');
+        if (!el) return;
+        el.innerHTML = CHURCH_DATA.community.groups.map(g => `
+            <div class="card" style="text-align:center;">
+                <div class="card-icon">${g.icon}</div>
+                <h3>${g.title}</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem;">${g.desc}</p>
+            </div>
+        `).join('');
+    },
+
+    _giving() {
+        const el = document.getElementById('bank-info');
+        if (!el) return;
+        const { bankName, bank, holder, report } = CHURCH_DATA.giving;
+        el.innerHTML = `
+            <h3>봉헌 안내</h3>
+            <div class="bank-card">
+                <p style="font-size:0.8rem; color:var(--green-mid); margin-bottom:0.3rem;">${bankName}</p>
+                <p class="account">${bank}</p>
+                <p class="sub">예금주 ${holder}</p>
+            </div>
+            <p style="font-size:0.83rem; color:var(--text-muted);">${report}</p>
+        `;
+    }
+};
+
+/* ── WorshipRenderer ─────────────────────────────────────── */
+const WorshipRenderer = {
+    render() {
+        const el = document.getElementById('worship-full');
+        if (!el) return;
+        const { main, guide, liturgyInfo } = CHURCH_DATA.worship;
+
+        el.innerHTML = `
+            <div class="grid" style="margin-bottom:2rem;">
+                ${main.map(w => `
+                    <div class="info-card" id="${w.id}">
+                        <h3>${w.title}</h3>
+                        <div class="info-row">
+                            <strong>시간</strong>
+                            <span style="color:var(--green-mid); font-weight:700;">${w.time}</span>
+                        </div>
+                        <p style="margin-top:1rem; color:var(--text-muted); font-size:0.9rem; line-height:1.9;">${w.desc}</p>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="guide-banner"><p>${guide}</p></div>
+            <div style="margin-top:3rem;">
+                <div class="section-eyebrow">Anglican Liturgy</div>
+                <h2 class="section-title" style="margin-bottom:2rem;">성공회 전례 안내</h2>
+                <div class="grid">
+                    ${liturgyInfo.map((item, i) => `
+                        <div class="info-card" ${i === 0 ? `id="${item.id}"` : ''}>
+                            <h3>${item.title}</h3>
+                            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.9;">${item.desc}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+};
+
+/* ── CommunityRenderer ───────────────────────────────────── */
+const CommunityRenderer = {
+    render() {
+        const el = document.getElementById('community-full');
+        if (!el) return;
+        el.innerHTML = `
+            <div class="grid">
+                ${CHURCH_DATA.community.groups.map(g => `
+                    <div class="card" id="${g.id}" style="text-align:center;">
+                        <div class="card-icon">${g.icon}</div>
+                        <h3>${g.title}</h3>
+                        <p style="color:var(--text-muted); font-size:0.9rem;">${g.desc}</p>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+};
+
+/* ── GivingRenderer ──────────────────────────────────────── */
+const GivingRenderer = {
+    render() {
+        const el = document.getElementById('giving-full');
+        if (!el) return;
+        const { bankName, bank, holder, report } = CHURCH_DATA.giving;
+        const { address, addressShort, phone, fax } = CHURCH_DATA.info;
+        const kakaoUrl = `https://map.kakao.com/link/search/${encodeURIComponent(addressShort)}`;
+
+        el.innerHTML = `
+            <div class="grid">
+                <div class="info-card" id="offering">
+                    <h3>봉헌 계좌 안내</h3>
+                    <div class="bank-card">
+                        <p style="font-size:0.8rem; color:var(--green-mid); margin-bottom:0.3rem;">${bankName}</p>
+                        <p class="account">${bank}</p>
+                        <p class="sub">예금주 ${holder}</p>
+                    </div>
+                    <p style="font-size:0.83rem; color:var(--text-muted);" id="report">${report}</p>
+                </div>
+                <div class="info-card" id="location">
+                    <h3>오시는 길</h3>
+                    <div class="info-row"><strong>주소</strong><span>${address}</span></div>
+                    <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
+                    <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
+                    <div style="margin-top:1.5rem;">
+                        <a href="${kakaoUrl}" target="_blank" rel="noopener"
+                           style="color:var(--green-mid); font-weight:700; font-size:0.9rem;">
+                            카카오지도 보기 →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+};
+
+/* ── ClergyRenderer ──────────────────────────────────────── */
+const ClergyRenderer = {
+    render() {
+        this._clergy();
+        this._philosophy();
+    },
+
+    _clergy() {
+        const el = document.getElementById('clergy-full');
+        if (!el) return;
+        el.innerHTML = CHURCH_DATA.clergy.map((c, i) => `
+            <div class="clergy-card${i === 0 ? '' : ' mt-2'}" ${i === 0 ? 'id="priest"' : ''} style="${i > 0 ? 'margin-top:1.5rem;' : ''}">
+                <div class="clergy-avatar">✝️</div>
+                <div>
+                    <div class="clergy-name">${c.name} 사제</div>
+                    <div class="clergy-title">${c.title}</div>
+                    ${c.ordained ? `<div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">${c.ordained}</div>` : ''}
+                    ${c.quote ? `<div class="quote-block"><p>"${c.quote}"</p></div>` : ''}
+                    <p class="clergy-desc">${c.desc}</p>
+                    ${c.contact ? `<p style="margin-top:0.9rem; font-size:0.83rem; color:var(--green-mid);">📞 ${c.contact}</p>` : ''}
+                </div>
+            </div>
+        `).join('');
+    },
+
+    _philosophy() {
+        const el = document.getElementById('philosophy-full');
+        if (!el) return;
+        const { values } = CHURCH_DATA.philosophy;
+        el.innerHTML = `
+            <div class="values-grid" id="philosophy">
+                ${values.map(v => `
+                    <div class="value-card">
+                        <div class="val-icon">${v.icon}</div>
+                        <h4>${v.title}</h4>
+                        <p>${v.desc}</p>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+};
+
+/* ── App bootstrap ───────────────────────────────────────── */
+const App = {
+    init() {
+        NavRenderer.render();
+        FooterRenderer.render();
+
+        // 각 페이지 렌더러는 필요한 DOM이 있을 때만 실행
+        IndexRenderer.render();
+        WorshipRenderer.render();
+        CommunityRenderer.render();
+        GivingRenderer.render();
+        ClergyRenderer.render();
+
+        // 앵커 링크: 동적 렌더 후 스크롤 처리
+        this._handleHashScroll();
+    },
+
+    _handleHashScroll() {
+        const hash = window.location.hash;
+        if (!hash) return;
+        // DOM 렌더 완료 후 약간 지연
+        setTimeout(() => {
+            const target = document.querySelector(hash);
+            if (target) {
+                const offset = parseInt(getComputedStyle(document.documentElement)
+                    .getPropertyValue('--nav-h')) || 64;
+                const top = target.getBoundingClientRect().top + window.scrollY - offset - 16;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        }, 80);
+    }
+};
+
+window.addEventListener('DOMContentLoaded', () => App.init());

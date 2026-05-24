@@ -1,6 +1,6 @@
 /**
- * [Data Module] 
- * 주보 사진 검증 데이터 + 기획안 상세 내용
+ * [ChurchData] Single source of truth
+ * SOLID: Single Responsibility — 모든 콘텐츠 데이터만 담당
  */
 const CHURCH_DATA = {
     info: {
@@ -10,40 +10,128 @@ const CHURCH_DATA = {
         vision: "하느님 나라를 살아가는 사랑의 공동체",
         established: "1990년 2월 11일",
         address: "(14335) 경기도 광명시 아방리 2길 10",
+        addressShort: "경기도 광명시 아방리 2길 10",
         phone: "02-2686-0091",
         fax: "02-2686-0092",
         email: "contact@gmskh.org"
     },
-    clergy: {
-        priest: "민숙희(마가렛) 사제",
-        assistant: "이남호(사도요한) 사제",
-        contact: "010-8652-0688"
-    },
-    worship: {
-        main: [
-            { title: "주일 감사성찬례", time: "매주 일요일 오전 11:00", desc: "전례와 성찬 중심의 깊은 예배" },
-            { title: "어린이 예배", time: "매주 일요일 오전 11:00", desc: "아이들의 눈높이에 맞춘 전례" }
-        ],
-        guide: "성공회 전례가 처음이신가요? 기도서와 성가집은 안내위원이 전해드립니다. 복장은 마음 가볍게 편안한 차림으로 오시면 됩니다."
-    },
-    community: {
-        groups: [
-            { title: "광명 희망터", desc: "이웃을 섬기는 나눔 사역", icon: "🌱" },
-            { title: "엠마우스 코스", desc: "신앙 기초 교육 과정", icon: "📖" },
-            { title: "소그룹 모임", desc: "삶과 말씀의 깊은 나눔", icon: "🤝" }
+
+    clergy: [
+        {
+            name: "민숙희(마가렛)",
+            title: "관할사제 · 서울교구 서부교무구 총사제",
+            ordained: "2005년 서품",
+            quote: "교회는 모든 이를 위해 존재해야 하며, 누구도 소외받지 않아야 합니다.",
+            desc: "대한성공회 서울교구 최초의 여성 총사제(2025년 3월 임명). 성평등한 교회, 녹색교회를 지향하며 광명교회를 섬기고 있습니다. 동물·성소수자·장애인·외국인 등 누구나 감사성찬례에 참여할 수 있는 열린 교회를 만들어 가고 있습니다.",
+            contact: "010-8652-0688"
+        },
+        {
+            name: "이남호(사도요한)",
+            title: "부제",
+            ordained: "",
+            quote: "",
+            desc: "광명교회 공동체를 함께 섬기고 있습니다.",
+            contact: ""
+        }
+    ],
+
+    philosophy: {
+        title: "우리가 지향하는 교회",
+        values: [
+            {
+                icon: "🌿",
+                title: "녹색 교회",
+                desc: "하느님의 창조 세계를 돌보고, 생태적 삶을 실천하는 공동체입니다."
+            },
+            {
+                icon: "🤲",
+                title: "열린 교회",
+                desc: "동물·성소수자·장애인·외국인 등 모든 생명을 환대합니다. 누구도 교회 안에서 소외받지 않습니다."
+            },
+            {
+                icon: "⚖️",
+                title: "평등한 교회",
+                desc: "성별·나이·배경에 관계없이 모두가 동등하게 참여하는 공동체를 만들어 갑니다."
+            },
+            {
+                icon: "✝️",
+                title: "전례 중심",
+                desc: "성공회 고유의 전례와 성찬례를 통해 하느님 나라를 미리 맛봅니다."
+            }
         ]
     },
+
+    worship: {
+        main: [
+            {
+                id: "main",
+                title: "주일 감사성찬례",
+                time: "매주 일요일 오전 11:00",
+                desc: "성공회 전례의 핵심인 감사성찬례(Eucharist). 말씀 전례와 성찬 전례 두 부분으로 이루어집니다. 모든 세례 교인이 성체를 모시며, 처음 오신 분도 환영합니다."
+            },
+            {
+                id: "children",
+                title: "어린이 예배",
+                time: "매주 일요일 오전 11:00",
+                desc: "교육관에서 어린이들의 눈높이에 맞는 전례로 함께 드립니다. 아이들이 신앙의 언어를 몸으로 배우는 시간입니다."
+            }
+        ],
+        guide: "성공회 전례가 처음이신가요? 기도서와 성가집은 안내위원이 전해드립니다. 복장은 편안한 차림으로 오시면 됩니다. 세례 여부와 무관하게 모든 분을 환영합니다.",
+        liturgyInfo: [
+            {
+                id: "newcomer",
+                title: "성공회 전례란?",
+                desc: "성공회(Anglican Church)는 말씀과 성찬을 함께 중시하는 전례 교회입니다. 예배는 공동기도서(Book of Common Prayer)에 따라 드리며, 회중이 함께 기도하고 응답하는 대화 형식으로 진행됩니다. 모든 신자가 성직자와 동등하게 예배를 '드리는' 주체입니다."
+            },
+            {
+                title: "감사성찬례 순서",
+                desc: "시작 예식 → 말씀 전례(성경 봉독·설교) → 신앙 고백·중보기도 → 성찬 전례(빵과 포도주 축성·영성체) → 파송"
+            },
+            {
+                title: "영성체 안내",
+                desc: "세례받은 모든 그리스도인은 영성체(성체를 모시는 것)에 참여하실 수 있습니다. 세례를 받지 않으셨더라도 제대 앞에 나오셔서 강복을 받으실 수 있습니다."
+            }
+        ]
+    },
+
+    community: {
+        groups: [
+            {
+                id: "hopecenter",
+                title: "광명 희망터",
+                desc: "지역 이웃을 섬기는 나눔 사역. 소외된 이들과 함께 하느님 나라를 만들어 갑니다.",
+                icon: "🌱"
+            },
+            {
+                id: "emmaus",
+                title: "엠마우스 코스",
+                desc: "성공회 신앙 기초 교육 과정. 전례의 의미와 신앙의 언어를 함께 배웁니다.",
+                icon: "📖"
+            },
+            {
+                id: "smallgroup",
+                title: "소그룹 모임",
+                desc: "삶과 말씀의 깊은 나눔. 작은 공동체 안에서 서로를 돌보며 함께 성장합니다.",
+                icon: "🤝"
+            }
+        ]
+    },
+
     giving: {
-        bank: "국민은행 2680-100-14008",
+        bankName: "국민은행",
+        bank: "2680-100-14008",
         holder: "재단법인대한성공회",
         report: "투명한 재정 운영을 위해 분기별 사역 재정 보고를 공유합니다."
     },
+
     sns: {
         youtube: "https://youtube.com/@gmskh",
         instagram: "https://instagram.com/gmskh",
         diocesan: "https://seoul.anglican.kr/"
     },
-    liveUrl: "https://youtube.com/@gmskh", // 매주 업데이트
+
+    liveUrl: "https://youtube.com/@gmskh",
+
     navigation: [
         {
             label: "예배",
@@ -51,7 +139,7 @@ const CHURCH_DATA = {
             items: [
                 { label: "주일 감사성찬례", href: "worship.html#main" },
                 { label: "어린이 예배", href: "worship.html#children" },
-                { label: "새신자 안내", href: "worship.html#newcomer" }
+                { label: "성공회 전례 안내", href: "worship.html#newcomer" }
             ]
         },
         {
@@ -64,11 +152,18 @@ const CHURCH_DATA = {
             ]
         },
         {
+            label: "사제 소개",
+            href: "clergy.html",
+            items: [
+                { label: "관할사제", href: "clergy.html#priest" },
+                { label: "교회 철학", href: "clergy.html#philosophy" }
+            ]
+        },
+        {
             label: "헌금과 살림",
             href: "giving.html",
             items: [
                 { label: "봉헌 안내", href: "giving.html#offering" },
-                { label: "재정 보고", href: "giving.html#report" },
                 { label: "오시는 길", href: "giving.html#location" }
             ]
         }
