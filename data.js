@@ -130,6 +130,30 @@ const CHURCH_DATA = {
         diocesan: "https://seoul.anglican.kr/"
     },
 
+    press: [
+        {
+            media: "성공회신문",
+            title: "서울교구 최초 여성 총사제 민숙희 마가렛 사제 인터뷰",
+            date: "2025",
+            summary: "서울교구 서부교무구 최초 여성 총사제 임명 후 인터뷰. 녹색교회 비전과 소외된 이들을 향한 목회 방향, 동료 성직자들과의 소통을 밝혔다.",
+            url: "http://www.skhnews.or.kr/news/articleView.html?idxno=768"
+        },
+        {
+            media: "뉴스앤조이",
+            title: "대한성공회 여성 사제 서품 20주년…여성 성직 역사는 교단 여성들의 투쟁기",
+            date: "2021",
+            summary: "여성사제 서품 20주년 특집 보도. 전국여성성직자회 회장으로서 여성 성직의 역사적 의미와 앞으로의 과제를 조명했다.",
+            url: "https://www.newsnjoy.or.kr/news/articleView.html?idxno=303297"
+        },
+        {
+            media: "베리타스",
+            title: "대한성공회, 여성 사제 서품 20주년 맞아 감사성찬례 드려",
+            date: "2021.09.04",
+            summary: "20주년 기념 감사성찬례 설교를 담당. \"여성사제의 출현은 세상이 만든 울타리를 넘으라는 주님의 부르심\"이라 선포했다.",
+            url: "https://veritas.kr/articles/35610/20210904/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C-%EC%97%AC%EC%84%B1-%EC%82%AC%EC%A0%9C-%EC%84%9C%ED%92%88-20%EC%A3%BC%EB%85%84-%EB%A7%9E%EC%95%84-%EA%B0%90%EC%82%AC%EC%84%B1%EC%B0%AC%EB%A1%80-%EB%93%9C%EB%A0%A4.htm"
+        }
+    ],
+
     liveUrl: "https://youtu.be/5tTJvrTX4aA",
 
     navigation: [

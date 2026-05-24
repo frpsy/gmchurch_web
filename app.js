@@ -351,6 +351,41 @@ const ClergyRenderer = {
     }
 };
 
+/* ── PressRenderer ───────────────────────────────────────── */
+const PressRenderer = {
+    render() {
+        const el = document.getElementById('press-table');
+        if (!el || !CHURCH_DATA.press) return;
+        el.innerHTML = `
+            <div class="press-wrap">
+                <table class="press-table">
+                    <thead>
+                        <tr>
+                            <th>매체</th>
+                            <th>제목 / 요약</th>
+                            <th>날짜</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${CHURCH_DATA.press.map(p => `
+                            <tr>
+                                <td class="press-media">${p.media}</td>
+                                <td>
+                                    <div class="press-title">
+                                        <a href="${p.url}" target="_blank" rel="noopener">${p.title}</a>
+                                    </div>
+                                    <div class="press-summary">${p.summary}</div>
+                                </td>
+                                <td class="press-date">${p.date}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+};
+
 /* ── App bootstrap ───────────────────────────────────────── */
 const App = {
     init() {
@@ -361,6 +396,7 @@ const App = {
         CommunityRenderer.render();
         GivingRenderer.render();
         ClergyRenderer.render();
+        PressRenderer.render();
         this._handleHashScroll();
     },
 

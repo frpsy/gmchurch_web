@@ -434,6 +434,55 @@ img { display: block; max-width: 100%; }
 }
 .bank-card .sub { font-size: 0.82rem; color: #3a6a3a; margin-top: 0.3rem; }
 
+/* ── Press Table ─────────────────────────────────────────── */
+.press-wrap { overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--border); }
+.press-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+.press-table th {
+    background: var(--green-deep);
+    color: #fff;
+    padding: 0.85rem 1.1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.press-table td {
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.65;
+}
+.press-table tr:last-child td { border-bottom: none; }
+.press-table tbody tr:hover td { background: var(--green-light); }
+.press-media {
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--green-deep);
+    font-size: 0.83rem;
+}
+.press-date {
+    white-space: nowrap;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+}
+.press-title a {
+    color: var(--text);
+    font-weight: 600;
+    transition: color 0.15s;
+}
+.press-title a:hover { color: var(--green-mid); }
+.press-summary {
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    margin-top: 0.3rem;
+}
+
 /* ── Footer ──────────────────────────────────────────────── */
 footer {
     background: var(--green-deep);
