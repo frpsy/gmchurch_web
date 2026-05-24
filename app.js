@@ -11,8 +11,9 @@
 
 /* ── MapHelper ───────────────────────────────────────────── */
 const MapHelper = {
-    // 광명교회 카카오맵 정적 좌표 (위도 37.4757, 경도 126.8641)
-    iframeUrl: "https://map.kakao.com/link/embed/map/대한성공회광명교회,37.475700,126.864100,3,0",
+    // 광명교회 좌표 (위도 37.4757, 경도 126.8641)
+    // 카카오 embed가 외부 도메인 iframe을 차단하여 Google Maps embed 사용
+    iframeUrl: "https://maps.google.com/maps?q=37.4757,126.8641&hl=ko&z=17&output=embed",
     linkUrl:   "https://map.kakao.com/link/map/대한성공회광명교회,37.475700,126.864100",
 
     html(compact = false) {
