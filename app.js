@@ -9,6 +9,37 @@
  *  D — App이 구체 DOM에 직접 의존하지 않고 ID 기반 접근
  */
 
+/* ── MapHelper ───────────────────────────────────────────── */
+const MapHelper = {
+    // 광명교회 카카오맵 정적 좌표 (위도 37.4757, 경도 126.8641)
+    iframeUrl: "https://map.kakao.com/link/embed/map/대한성공회광명교회,37.475700,126.864100,3,0",
+    linkUrl:   "https://map.kakao.com/link/map/대한성공회광명교회,37.475700,126.864100",
+
+    html(compact = false) {
+        const h = compact ? '220px' : '300px';
+        return `
+            <div style="border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border); margin-bottom:1rem; height:${h}; background:#e8f5e9;">
+                <iframe
+                    src="${this.iframeUrl}"
+                    width="100%" height="100%"
+                    frameborder="0"
+                    scrolling="no"
+                    marginheight="0"
+                    marginwidth="0"
+                    loading="lazy"
+                    title="광명교회 오시는 길"
+                    style="display:block;"
+                ></iframe>
+            </div>
+            <a href="${this.linkUrl}" target="_blank" rel="noopener"
+               style="display:inline-flex; align-items:center; gap:0.4rem;
+                      color:var(--green-mid); font-weight:700; font-size:0.88rem;">
+                카카오지도에서 크게 보기 →
+            </a>
+        `;
+    }
+};
+
 /* ── NavRenderer ─────────────────────────────────────────── */
 const NavRenderer = {
     render() {
@@ -51,21 +82,18 @@ const NavRenderer = {
         const menu   = document.getElementById('nav-menu');
         if (!toggle || !menu) return;
 
-        // Scroll shadow
         if (header) {
             window.addEventListener('scroll', () => {
                 header.classList.toggle('scrolled', window.scrollY > 50);
             }, { passive: true });
         }
 
-        // Hamburger toggle
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();
             const isOpen = menu.classList.toggle('open');
             toggle.setAttribute('aria-expanded', isOpen);
         });
 
-        // Mobile: tap parent nav-link → expand dropdown
         menu.querySelectorAll('.has-dropdown > .nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 if (window.innerWidth <= 768) {
@@ -75,7 +103,6 @@ const NavRenderer = {
             });
         });
 
-        // Close on outside click
         document.addEventListener('click', (e) => {
             if (!menu.contains(e.target) && !toggle.contains(e.target)) {
                 menu.classList.remove('open');
@@ -104,9 +131,9 @@ const FooterRenderer = {
                     </div>
                     <div class="footer-col">
                         <h4>바로가기</h4>
-                        <a href="${sns.youtube}"    target="_blank" rel="noopener">유튜브 채널</a>
-                        <a href="${sns.instagram}"  target="_blank" rel="noopener">인스타그램</a>
-                        <a href="${sns.diocesan}"   target="_blank" rel="noopener">성공회 서울교구</a>
+                        <a href="${sns.youtube}"   target="_blank" rel="noopener">유튜브 채널</a>
+                        <a href="${sns.instagram}" target="_blank" rel="noopener">인스타그램</a>
+                        <a href="${sns.diocesan}"  target="_blank" rel="noopener">성공회 서울교구</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
@@ -166,6 +193,7 @@ const IndexRenderer = {
         const el = document.getElementById('bank-info');
         if (!el) return;
         const { bankName, bank, holder, report } = CHURCH_DATA.giving;
+        const { addressShort, phone } = CHURCH_DATA.info;
         el.innerHTML = `
             <h3>봉헌 안내</h3>
             <div class="bank-card">
@@ -175,6 +203,19 @@ const IndexRenderer = {
             </div>
             <p style="font-size:0.83rem; color:var(--text-muted);">${report}</p>
         `;
+
+        // 오시는 길 카드에 지도 삽입
+        const locationEl = document.getElementById('location-card');
+        if (locationEl) {
+            locationEl.innerHTML = `
+                <h3>오시는 길</h3>
+                ${MapHelper.html(true)}
+                <div style="margin-top:1rem;">
+                    <div class="info-row"><strong>주소</strong><span>${addressShort}</span></div>
+                    <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
+                </div>
+            `;
+        }
     }
 };
 
@@ -241,7 +282,6 @@ const GivingRenderer = {
         if (!el) return;
         const { bankName, bank, holder, report } = CHURCH_DATA.giving;
         const { address, addressShort, phone, fax } = CHURCH_DATA.info;
-        const kakaoUrl = `https://map.kakao.com/link/search/${encodeURIComponent(addressShort)}`;
 
         el.innerHTML = `
             <div class="grid">
@@ -256,14 +296,11 @@ const GivingRenderer = {
                 </div>
                 <div class="info-card" id="location">
                     <h3>오시는 길</h3>
-                    <div class="info-row"><strong>주소</strong><span>${address}</span></div>
-                    <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
-                    <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
-                    <div style="margin-top:1.5rem;">
-                        <a href="${kakaoUrl}" target="_blank" rel="noopener"
-                           style="color:var(--green-mid); font-weight:700; font-size:0.9rem;">
-                            카카오지도 보기 →
-                        </a>
+                    ${MapHelper.html(false)}
+                    <div style="margin-top:1.25rem;">
+                        <div class="info-row"><strong>주소</strong><span>${address}</span></div>
+                        <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
+                        <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
                     </div>
                 </div>
             </div>
@@ -282,7 +319,7 @@ const ClergyRenderer = {
         const el = document.getElementById('clergy-full');
         if (!el) return;
         el.innerHTML = CHURCH_DATA.clergy.map((c, i) => `
-            <div class="clergy-card${i === 0 ? '' : ' mt-2'}" ${i === 0 ? 'id="priest"' : ''} style="${i > 0 ? 'margin-top:1.5rem;' : ''}">
+            <div class="clergy-card" ${i === 0 ? 'id="priest"' : ''} style="${i > 0 ? 'margin-top:1.5rem;' : ''}">
                 <div class="clergy-avatar">✝️</div>
                 <div>
                     <div class="clergy-name">${c.name} 사제</div>
@@ -299,10 +336,9 @@ const ClergyRenderer = {
     _philosophy() {
         const el = document.getElementById('philosophy-full');
         if (!el) return;
-        const { values } = CHURCH_DATA.philosophy;
         el.innerHTML = `
             <div class="values-grid" id="philosophy">
-                ${values.map(v => `
+                ${CHURCH_DATA.philosophy.values.map(v => `
                     <div class="value-card">
                         <div class="val-icon">${v.icon}</div>
                         <h4>${v.title}</h4>
@@ -319,22 +355,17 @@ const App = {
     init() {
         NavRenderer.render();
         FooterRenderer.render();
-
-        // 각 페이지 렌더러는 필요한 DOM이 있을 때만 실행
         IndexRenderer.render();
         WorshipRenderer.render();
         CommunityRenderer.render();
         GivingRenderer.render();
         ClergyRenderer.render();
-
-        // 앵커 링크: 동적 렌더 후 스크롤 처리
         this._handleHashScroll();
     },
 
     _handleHashScroll() {
         const hash = window.location.hash;
         if (!hash) return;
-        // DOM 렌더 완료 후 약간 지연
         setTimeout(() => {
             const target = document.querySelector(hash);
             if (target) {
