@@ -482,63 +482,53 @@ img { display: block; max-width: 100%; }
 }
 .bank-card .sub { font-size: 0.85rem; color: var(--green-mid); margin-top: 0.35rem; }
 
-/* ── Press Table ─────────────────────────────────────────── */
-.press-wrap {
-    overflow-x: auto;
-    border-radius: var(--radius-md);
+/* ── Press List ─────────────────────────────────────────── */
+.press-list {
+    list-style: none;
     background: var(--white);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
+    overflow: hidden;
 }
-.press-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
+.press-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
 }
-.press-table th {
+.press-item:last-child { border-bottom: none; }
+.press-item:hover { background: var(--green-light); }
+.press-year {
+    flex-shrink: 0;
     background: var(--green-deep);
     color: #fff;
-    padding: 1rem 1.4rem;
-    text-align: left;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-.press-table td {
-    padding: 1.4rem;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-    line-height: 1.7;
-}
-.press-table tr:last-child td { border-bottom: none; }
-.press-table tbody tr { transition: background 0.2s; }
-.press-table tbody tr:hover { background: var(--green-light); }
-.press-media {
-    white-space: nowrap;
+    font-size: 0.7rem;
     font-weight: 700;
-    color: var(--green-deep);
-    font-size: 0.85rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    margin-top: 0.18rem;
+    min-width: 38px;
+    text-align: center;
 }
-.press-date {
-    white-space: nowrap;
-    color: var(--text-muted);
-    font-size: 0.82rem;
-    font-variant-numeric: tabular-nums;
-}
-.press-title a {
+.press-main { flex: 1; min-width: 0; }
+.press-link {
+    display: block;
     color: var(--text);
     font-weight: 600;
-    transition: color 0.2s;
-    display: inline-block;
+    font-size: 0.92rem;
     line-height: 1.55;
+    transition: color 0.2s;
+    word-break: keep-all;
 }
-.press-title a:hover { color: var(--green-mid); }
-.press-summary {
+.press-link:hover { color: var(--green-mid); text-decoration: underline; }
+.press-meta {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
-    font-size: 0.87rem;
-    margin-top: 0.5rem;
-    line-height: 1.7;
 }
 
 /* ── Footer ──────────────────────────────────────────────── */
