@@ -1,22 +1,57 @@
-function renderChurchInfo() {
-    document.getElementById('church-name').innerText = CHURCH_DATA.name;
-    document.getElementById('main-slogan').innerText = CHURCH_DATA.slogan;
-    document.getElementById('sub-slogan').innerText = CHURCH_DATA.vision;
-    document.getElementById('church-address').innerText = CHURCH_DATA.address;
+/* app.js */
+const App = {
+    init() {
+        this.renderHero();
+        this.renderWorship();
+        this.renderCommunity();
+        this.renderGiving();
+        this.renderFooter();
+    },
 
-    const liveLink = document.getElementById('live-link');
-    liveLink.href = CHURCH_DATA.liveUrl || "https://youtube.com";
+    renderHero() {
+        document.getElementById('hero-title').innerText = CHURCH_DATA.info.slogan;
+        document.getElementById('hero-sub').innerText = CHURCH_DATA.info.vision;
+        document.getElementById('live-btn').href = CHURCH_DATA.liveUrl;
+    },
 
-    const worshipList = document.getElementById('worship-list');
-    worshipList.innerHTML = CHURCH_DATA.worship.map(item =>
-        `<li><strong>${item.title}</strong>: ${item.time}</li>`
-    ).join('');
+    renderWorship() {
+        const container = document.getElementById('worship-grid');
+        let html = CHURCH_DATA.worship.main.map(w => `
+            <div class="card">
+                <h3>${w.title}</h3>
+                <p><strong>${w.time}</strong></p>
+                <p style="font-size:0.9rem; color:#666;">${w.desc}</p>
+            </div>
+        `).join('');
+        html += `<div class="card" style="grid-column: 1 / -1; background:#e8f5e9;">
+                    <p>💡 ${CHURCH_DATA.worship.guide}</p>
+                 </div>`;
+        container.innerHTML = html;
+    },
 
-    document.getElementById('footer-contact').innerHTML = `
-        <p>${CHURCH_DATA.address}</p>
-        <p>전화: ${CHURCH_DATA.contact.phone} | ${CHURCH_DATA.contact.priest}</p>
-        <p style="margin-top:1rem; opacity:0.6;">&copy; 2026 ${CHURCH_DATA.name}</p>
-    `;
-}
+    renderCommunity() {
+        const container = document.getElementById('community-grid');
+        container.innerHTML = CHURCH_DATA.community.groups.map(g => `
+            <div class="card" style="text-align:center;">
+                <div style="font-size:2rem; margin-bottom:1rem;">${g.icon}</div>
+                <h3>${g.title}</h3>
+                <p>${g.desc}</p>
+            </div>
+        `).join('');
+    },
 
-window.onload = renderChurchInfo;
+    renderGiving() {
+        document.getElementById('bank-info').innerHTML = `
+            <p><strong>국민은행</strong> ${CHURCH_DATA.giving.bank}</p>
+            <p>예금주: ${CHURCH_DATA.giving.holder}</p>
+            <p style="margin-top:1rem; font-size:0.85rem; color:#888;">${CHURCH_DATA.giving.report}</p>
+        `;
+    },
+
+    renderFooter() {
+        document.getElementById('footer-addr').innerText = CHURCH_DATA.info.address;
+        document.getElementById('footer-info').innerText = `Tel: ${CHURCH_DATA.info.phone} | ${CHURCH_DATA.clergy.priest}`;
+    }
+};
+
+window.onload = () => App.init();

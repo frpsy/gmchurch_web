@@ -7,40 +7,50 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container"><h1 class="logo" id="church-name"></h1></div>
+    <header class="hero">
+        <div class="container">
+            <h1 id="hero-title"></h1>
+            <p id="hero-sub"></p>
+            <a href="#live" id="live-btn" class="btn-live">실시간 예배 참여하기</a>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h2 id="main-slogan"></h2>
-                <p id="sub-slogan"></p>
-            </div>
-        </section>
+    <section class="section container" id="worship">
+        <h2 class="section-title">예배 안내 (Worship)</h2>
+        <div id="worship-grid" class="grid"></div>
+    </section>
 
-        <section class="live-banner">
-            <div class="container">
-                <h3 style="margin-bottom:1rem;">실시간 온라인 예배</h3>
-                <a href="#" id="live-link" target="_blank" class="btn-live">라이브 참여하기</a>
-            </div>
-        </section>
+    <section class="section container" id="community">
+        <h2 class="section-title">함께하는 공동체 (Community)</h2>
+        <div id="community-grid" class="grid"></div>
+    </section>
 
-        <section class="section container">
-            <div class="grid">
-                <div class="card">
-                    <h3>예배 안내</h3>
-                    <ul id="worship-list"></ul>
-                </div>
-                <div class="card">
-                    <h3>오시는 길</h3>
-                    <p id="church-address"></p>
+    <section class="section container" id="giving">
+        <h2 class="section-title">헌금과 살림 (Giving)</h2>
+        <div class="grid">
+            <div class="card" id="bank-info"></div>
+            <div class="card">
+                <h3>오시는 길</h3>
+                <p>성 디모테오 성당: 경기도 광명시 아방리 2길 10</p>
+                <div style="margin-top:1rem;">
+                    <a href="https://map.kakao.com" target="_blank" style="color:var(--primary-green); font-weight:bold;">[카카오지도 보기]</a>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer id="footer-contact"></footer>
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">유튜브</a>
+                <a href="#">인스타그램</a>
+                <a href="https://seoul.anglican.kr/">성공회 서울교구</a>
+            </div>
+            <p id="footer-addr"></p>
+            <p id="footer-info"></p>
+            <p style="margin-top:2rem; opacity:0.5;">&copy; 2026 대한성공회 광명교회. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="data.js"></script>
     <script src="app.js"></script>
