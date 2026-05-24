@@ -11,7 +11,37 @@
     <nav id="main-nav" class="nav-header"></nav>
 
     <header class="hero">
-        <div class="container">
+        <!--
+            YouTube 배경 영상
+            영상: "4K Forest" (Relaxing White Noise) — youtube.com/watch?v=1t7g690boao
+            파라미터:
+              autoplay=1        자동재생
+              mute=1            음소거 (autoplay 필수 조건)
+              loop=1            반복
+              playlist=VIDEO_ID loop 작동에 필요
+              controls=0        컨트롤 숨김
+              disablekb=1       키보드 입력 차단
+              modestbranding=1  유튜브 로고 최소화
+              rel=0             관련 영상 숨김
+              enablejsapi=1     JS API 활성화
+            포인터 이벤트 차단 + z-index 구조로 클릭 통과 불가 처리
+        -->
+        <div class="hero-video-wrap">
+            <iframe
+                class="hero-yt"
+                src="https://www.youtube.com/embed/1t7g690boao?autoplay=1&mute=1&loop=1&playlist=1t7g690boao&controls=0&disablekb=1&modestbranding=1&rel=0&enablejsapi=1&iv_load_policy=3&start=10"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="배경 영상"
+                aria-hidden="true"
+                tabindex="-1"
+                frameborder="0"
+            ></iframe>
+        </div>
+        <!-- 정적 fallback: 모바일 / 저전력 / iframe 차단 환경 -->
+        <div class="hero-fallback"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
             <div class="hero-label">대한성공회 · 서울교구 서부교무구</div>
             <h1 id="hero-title"></h1>
             <p class="hero-sub" id="hero-sub"></p>
