@@ -61,8 +61,18 @@ const NavRenderer = {
         nav.innerHTML = `
             <div class="container nav-inner">
                 <a href="index.html" class="nav-logo">
-                    <span class="nav-logo-name">${CHURCH_DATA.info.name}</span>
-                    <span class="nav-logo-sub">${CHURCH_DATA.info.subName}</span>
+                    <span class="nav-logo-mark" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" focusable="false">
+                            <rect width="64" height="64" rx="12" fill="#ffffff"/>
+                            <text x="32" y="42" text-anchor="middle"
+                                  font-family="inherit" font-weight="800"
+                                  font-size="22" fill="#1b4d2e" letter-spacing="-1">GMC</text>
+                        </svg>
+                    </span>
+                    <span class="nav-logo-text">
+                        <span class="nav-logo-name">${CHURCH_DATA.info.name}</span>
+                        <span class="nav-logo-sub">${CHURCH_DATA.info.subName}</span>
+                    </span>
                 </a>
                 <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
                     <span></span><span></span><span></span>
