@@ -393,17 +393,31 @@ const PressRenderer = {
         const el = document.getElementById('press-table');
         if (!el || !CHURCH_DATA.press) return;
         el.innerHTML = `
-            <ul class="press-list">
-                ${CHURCH_DATA.press.map(p => `
-                    <li class="press-item">
-                        <span class="press-year">${p.year}</span>
-                        <div class="press-main">
-                            <a href="${p.url}" target="_blank" rel="noopener" class="press-link">${p.title}</a>
-                            <span class="press-meta">${p.media} · ${p.date}</span>
-                        </div>
-                    </li>
-                `).join('')}
-            </ul>
+            <div class="press-wrap">
+                <table class="press-table">
+                    <thead>
+                        <tr>
+                            <th>매체</th>
+                            <th>제목 / 요약</th>
+                            <th>날짜</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${CHURCH_DATA.press.map(p => `
+                            <tr>
+                                <td class="press-media">${p.media}</td>
+                                <td>
+                                    <div class="press-title">
+                                        <a href="${p.url}" target="_blank" rel="noopener">${p.title}</a>
+                                    </div>
+                                    <div class="press-summary">${p.summary}</div>
+                                </td>
+                                <td class="press-date">${p.date}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
         `;
     }
 };

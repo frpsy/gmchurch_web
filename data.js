@@ -133,39 +133,25 @@ const CHURCH_DATA = {
 
     press: [
         {
-            year: "2025",
-            media: "가톨릭신문",
-            title: "[인터뷰] 대한성공회 서울교구 첫 여성 총사제 임명된 민숙희 신부",
-            date: "2025.04.07",
-            url: "https://www.catholictimes.org/list/21"
+            media: "성공회신문",
+            title: "서울교구 최초 여성 총사제 민숙희 마가렛 사제 인터뷰",
+            date: "2025",
+            summary: "서울교구 서부교무구 최초 여성 총사제 임명 후 인터뷰. 녹색교회 비전과 소외된 이들을 향한 목회 방향, 동료 성직자들과의 소통을 밝혔다.",
+            url: "http://www.skhnews.or.kr/news/articleView.html?idxno=768"
         },
         {
-            year: "2023",
-            media: "동아일보",
-            title: ""하나님의 사랑이 설마 인간에게만 국한됐을 리가 있을까요?"",
-            date: "2023.11.29",
-            url: "https://www.donga.com"
-        },
-        {
-            year: "2022",
             media: "뉴스앤조이",
-            title: ""참사 후 신속해야 할 것은 유가족과 시민을 단속하는 일이 아닙니다"",
-            date: "2022.11.11",
-            url: "https://www.newsnjoy.or.kr"
+            title: "대한성공회 여성 사제 서품 20주년…여성 성직 역사는 교단 여성들의 투쟁기",
+            date: "2021",
+            summary: "여성사제 서품 20주년 특집 보도. 전국여성성직자회 회장으로서 여성 성직의 역사적 의미와 앞으로의 과제를 조명했다.",
+            url: "https://www.newsnjoy.or.kr/news/articleView.html?idxno=303297"
         },
         {
-            year: "2021",
-            media: "국민일보",
-            title: "여성 성직자로 16년은 분투의 역사… 성평등 지향 않는 교회 도태될 것",
-            date: "2021.10.14",
-            url: "https://www.kmib.co.kr"
-        },
-        {
-            year: "2019",
-            media: "국민일보",
-            title: ""남녀 양성 배제 받지 않을 때 조화로운 교회 될 것"",
-            date: "2019.01.07",
-            url: "https://www.kmib.co.kr"
+            media: "노컷뉴스",
+            title: "대한성공회 여성 사제 서품 20주년 기념 감사성찬례",
+            date: "2021.09.04",
+            summary: "20주년 기념 감사성찬례 설교 영상 보도. \"여성사제의 출현은 세상이 만든 울타리를 넘으라는 주님의 부르심\"이라 선포했다.",
+            url: "https://www.nocutnews.co.kr/news/5620051"
         }
     ],
 
