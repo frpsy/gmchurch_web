@@ -19,6 +19,7 @@
         /* 브랜드 컬러 정의 (녹색 교회 테마) */
         :root {
             --primary-green: #2e7d32; 
+            --live-red: #d32f2f;
             --bg-light: #f8f9fa;
             --text-muted: #666;
         }
@@ -26,7 +27,7 @@
         /* 레이아웃 컨테이너 */
         .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* 상단 내비게이션 (극단적 단순화) */
+        /* 상단 내비게이션 */
         header { background: #fff; padding: 1.5rem 0; position: sticky; top: 0; z-index: 100; }
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.2rem; font-weight: 700; color: var(--primary-green); letter-spacing: -0.03em; }
@@ -34,16 +35,26 @@
         .nav-links a { font-weight: 500; font-size: 0.95rem; }
         .nav-links a:hover { color: var(--primary-green); }
 
-        /* 메인 비주얼 영역 (One Scroll, One Action) */
+        /* 메인 비주얼 영역 */
         .hero { 
-            padding: 9rem 0; 
+            padding: 8rem 0; 
             text-align: center; 
             background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; 
         }
         .hero h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom: 1.2rem; line-height: 1.3; }
         .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; font-weight: 400; }
-        .btn { display: inline-block; background: var(--primary-green); color: #fff; padding: 0.85rem 2.2rem; border-radius: 4px; font-weight: 600; font-size: 0.95rem; }
+        .btn { display: inline-block; background: var(--primary-green); color: #fff; padding: 0.85rem 2.2rem; border-radius: 4px; font-weight: 600; font-size: 0.95rem; cursor: pointer; }
         .btn:hover { opacity: 0.9; }
+
+        /* 실시간 스트리밍 알림 배너 (추가된 핵심 인터랙션) */
+        .live-banner { background-color: #fff; padding: 2.5rem 0; text-align: center; border-bottom: 1px solid #f0f0f0; }
+        .live-status { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--live-red); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .live-dot { width: 8px; height: 8px; background-color: var(--live-red); border-radius: 50%; display: inline-block; animation: blink 1.5s infinite; }
+        .live-banner h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.03em; }
+        .btn-live { background-color: var(--live-red); }
+        
+        /* 숨겨진 링크 업데이트 버튼 (텍스트 여백을 더블클릭하면 노출) */
+        .admin-trigger { color: #f8f9fa; font-size: 0.8rem; cursor: default; user-select: none; }
 
         /* 본문 섹션 공통 */
         .section { padding: 6rem 0; }
@@ -54,36 +65,32 @@
         .card { background: #fff; }
         .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; color: #111; }
         .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.6rem; }
-        .card ul { list-style: none; color: var(--text-muted); font-size: 0.95rem; }
-        .card li { margin-bottom: 0.5rem; }
 
-        /* 하단 고정 탭 바 (모바일 전용) */
+        /* 하단 고정 탭 바 */
         .mobile-sticky-bar {
             display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #fff;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 999; grid-template-columns: repeat(3, 1fr); text-align: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 999; grid-template-columns: repeat(4, 1fr); text-align: center;
         }
-        .mobile-sticky-bar a { padding: 1rem 0; font-size: 0.9rem; font-weight: 600; color: #444; }
+        .mobile-sticky-bar a { padding: 1rem 0; font-size: 0.85rem; font-weight: 600; color: #444; }
         .mobile-sticky-bar a:not(:last-child) { border-right: 1px solid #f0f0f0; }
+        .mobile-live { color: var(--live-red) !important; }
 
         /* 푸터 영역 */
         footer { background: var(--bg-light); padding: 4rem 0; font-size: 0.9rem; color: var(--text-muted); }
         .footer-container { display: flex; flex-direction: column; gap: 2rem; }
         .footer-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
         .footer-links a { text-decoration: underline; }
-        .footer-links a:hover { color: var(--primary-green); }
-        .footer-info { line-height: 1.8; }
+
+        @keyframes blink { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
 
         /* 모바일 최적화 미디어 쿼리 */
         @media (max-width: 768px) {
             header { padding: 1rem 0; }
             .nav-links { display: none; } 
             .mobile-sticky-bar { display: grid; } 
-            .hero { padding: 6rem 0; }
+            .hero { padding: 5rem 0; }
             .hero h1 { font-size: 1.75rem; word-break: keep-all; }
-            .hero p { font-size: 0.95rem; }
             .section { padding: 4rem 0; }
-            .section-title { margin-bottom: 2rem; }
-            .grid { gap: 2rem; }
             body { padding-bottom: 3.5rem; } 
         }
     </style>
@@ -95,6 +102,7 @@
         <div class="container nav-container">
             <div class="logo">대한성공회 광명교회</div>
             <ul class="nav-links">
+                <li><a href="#live-section" style="color: var(--live-red); font-weight:700;">● 라이브 예배</a></li>
                 <li><a href="#worship">예배 안내</a></li>
                 <li><a href="#community">공동체</a></li>
                 <li><a href="#giving">헌금/위치</a></li>
@@ -102,12 +110,26 @@
         </div>
     </header>
 
-    <!-- 메인 비주얼 (슬로건 강조) -->
+    <!-- 메인 비주얼 -->
     <section class="hero">
         <div class="container">
             <h1>녹색 교회,<br>모든 생명을 환대하는 교회</h1>
             <p>우리는 창조질서를 보존하며, 찾아오는 모든 이들을 있는 그대로 축복합니다.</p>
             <a href="#worship" class="btn">이번 주 예배 안내 보기</a>
+        </div>
+    </section>
+
+    <!-- 실시간 스트리밍 세션 (누구나 쉽게 클릭하여 입장 가능) -->
+    <section class="live-banner" id="live-section">
+        <div class="container">
+            <div class="live-status">
+                <span class="live-dot"></span> LIVE STREAMING
+            </div>
+            <h2>이번 주 주일 감사성찬례 온라인 생중계</h2>
+            <a href="https://youtube.com" id="live-link" target="_blank" rel="noopener" class="btn btn-live">실시간 예배 참여하기</a>
+            <div style="margin-top: 1.5rem;">
+                <span class="admin-trigger" onclick="updateLiveLink()">👋</span>
+            </div>
         </div>
     </section>
 
@@ -174,6 +196,7 @@
 
     <!-- 모바일 전용 하단 고정 내비게이션 바 -->
     <div class="mobile-sticky-bar">
+        <a href="#live-section" class="mobile-live">● 라이브</a>
         <a href="#worship">예배안내</a>
         <a href="#community">공동체</a>
         <a href="#giving">헌금/위치</a>
@@ -194,5 +217,28 @@
         </div>
     </footer>
 
+    <!-- 실시간 링크 업데이트 스크립트 -->
+    <script>
+        // 로컬 스토리지에서 기존에 저장된 링크가 있다면 불러옵니다. 기본값은 유튜브 메인입니다.
+        const savedLink = localStorage.getItem('church_live_url') || 'https://youtube.com';
+        document.getElementById('live-link').href = savedLink;
+
+        // 링크를 쉽게 업데이트할 수 있는 프롬프트 창 함수
+        function updateLiveLink() {
+            const password = prompt("관리자 비밀번호를 입력하세요:");
+            
+            // 임시 관리자 비밀번호 세팅 (원하는 번호로 변경 가능)
+            if (password === "1234") { 
+                const newUrl = prompt("새로운 유튜브 라이브 스트리밍 전체 링크(URL)를 붙여넣으세요:", savedLink);
+                if (newUrl && newUrl.trim() !== "") {
+                    localStorage.setItem('church_live_url', newUrl.trim());
+                    document.getElementById('live-link').href = newUrl.trim();
+                    alert("라이브 예배 링크가 성공적으로 업데이트되었습니다!");
+                }
+            } else if (password !== null) {
+                alert("비밀번호가 올바르지 않습니다.");
+            }
+        }
+    </script>
 </body>
 </html>
