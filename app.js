@@ -159,8 +159,8 @@ const IndexRenderer = {
         const t = document.getElementById('hero-title');
         const s = document.getElementById('hero-sub');
         const b = document.getElementById('live-btn');
-        if (t) t.textContent = CHURCH_DATA.info.slogan;
-        if (s) s.textContent = CHURCH_DATA.info.vision;
+        if (t) t.textContent = CHURCH_DATA.info.name;
+        if (s) s.textContent = CHURCH_DATA.info.slogan;
         if (b) b.href = CHURCH_DATA.liveUrl;
     },
 
