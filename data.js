@@ -32,7 +32,7 @@ const CHURCH_DATA = {
             quote: "",
             desc: "연세대 불어불문학과를 졸업하고 36세에 성공회대 신학과에 편입해 성직자가 되었습니다. 가톨릭대학교 상담심리대학원에서 상담심리석사 학위와 상담심리사 자격을 취득하였으며, 동방문화대학원대학교에서 주역·명리학을 전공하고 철학박사 학위를 받았습니다. 성공회대학교 및 한겨레문화센터에서 강의하였고, 현재 광명교회 협동사제로 섬기고 있습니다.",
             contact: "",
-            kyoboUrl: "https://store.kyobobook.co.kr/person/detail/1000237503"
+            kyoboUrl: "https://search.kyobobook.co.kr/search?keyword=%EC%9D%B4%EB%82%A8%ED%98%B8%20%EC%8B%A0%EB%B6%80"
         }
     ],
 
@@ -147,17 +147,26 @@ const CHURCH_DATA = {
             url: "https://www.newsnjoy.or.kr/news/articleView.html?idxno=303297"
         },
         {
-            media: "베리타스",
-            title: "대한성공회, 여성 사제 서품 20주년 맞아 감사성찬례 드려",
+            media: "노컷뉴스",
+            title: "대한성공회 여성 사제 서품 20주년 기념 감사성찬례",
             date: "2021.09.04",
-            summary: "20주년 기념 감사성찬례 설교를 담당. \"여성사제의 출현은 세상이 만든 울타리를 넘으라는 주님의 부르심\"이라 선포했다.",
-            url: "https://veritas.kr/articles/35610/20210904/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C-%EC%97%AC%EC%84%B1-%EC%82%AC%EC%A0%9C-%EC%84%9C%ED%92%88-20%EC%A3%BC%EB%85%84-%EB%A7%9E%EC%95%84-%EA%B0%90%EC%82%AC%EC%84%B1%EC%B0%AC%EB%A1%80-%EB%93%9C%EB%A0%A4.htm"
+            summary: "20주년 기념 감사성찬례 설교 영상 보도. \"여성사제의 출현은 세상이 만든 울타리를 넘으라는 주님의 부르심\"이라 선포했다.",
+            url: "https://www.nocutnews.co.kr/news/5620051"
         }
     ],
 
     liveUrl: "https://youtu.be/5tTJvrTX4aA",
 
     navigation: [
+        {
+            label: "교회 소개",
+            href: "clergy.html",
+            items: [
+                { label: "관할사제", href: "clergy.html#priest" },
+                { label: "교회 철학", href: "clergy.html#philosophy" },
+                { label: "언론 보도", href: "clergy.html#press" }
+            ]
+        },
         {
             label: "예배",
             href: "worship.html",
@@ -177,19 +186,19 @@ const CHURCH_DATA = {
             ]
         },
         {
-            label: "사제 소개",
-            href: "clergy.html",
+            label: "오시는 길",
+            href: "visit.html",
             items: [
-                { label: "관할사제", href: "clergy.html#priest" },
-                { label: "교회 철학", href: "clergy.html#philosophy" }
+                { label: "주소·교통", href: "visit.html#location" },
+                { label: "주차 안내", href: "visit.html#parking" }
             ]
         },
         {
-            label: "헌금과 살림",
+            label: "헌금",
             href: "giving.html",
             items: [
-                { label: "봉헌 안내", href: "giving.html#offering" },
-                { label: "오시는 길", href: "giving.html#location" }
+                { label: "봉헌 계좌", href: "giving.html#offering" },
+                { label: "재정 보고", href: "giving.html#report" }
             ]
         }
     ]
