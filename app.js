@@ -68,9 +68,6 @@ const NavRenderer = {
                     <span></span><span></span><span></span>
                 </button>
                 <ul class="nav-menu" id="nav-menu" role="navigation">${items}</ul>
-                <a href="${CHURCH_DATA.liveUrl}" target="_blank" rel="noopener" class="btn-nav-live">
-                    ● 실시간 예배
-                </a>
             </div>
         `;
 
@@ -158,10 +155,8 @@ const IndexRenderer = {
     _hero() {
         const t = document.getElementById('hero-title');
         const s = document.getElementById('hero-sub');
-        const b = document.getElementById('live-btn');
         if (t) t.textContent = CHURCH_DATA.info.name;
         if (s) s.textContent = CHURCH_DATA.info.slogan;
-        if (b) b.href = CHURCH_DATA.liveUrl;
     },
 
     _worship() {
@@ -329,6 +324,7 @@ const ClergyRenderer = {
                     ${c.quote ? `<div class="quote-block"><p>"${c.quote}"</p></div>` : ''}
                     <p class="clergy-desc">${c.desc}</p>
                     ${c.contact ? `<p style="margin-top:0.9rem; font-size:0.83rem; color:var(--green-mid);">📞 ${c.contact}</p>` : ''}
+                    ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">📚 <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 목록 (교보문고)</a></p>` : ''}
                 </div>
             </div>
         `).join('');
@@ -351,6 +347,41 @@ const ClergyRenderer = {
     }
 };
 
+/* ── PressRenderer ───────────────────────────────────────── */
+const PressRenderer = {
+    render() {
+        const el = document.getElementById('press-table');
+        if (!el || !CHURCH_DATA.press) return;
+        el.innerHTML = `
+            <div class="press-wrap">
+                <table class="press-table">
+                    <thead>
+                        <tr>
+                            <th>매체</th>
+                            <th>제목 / 요약</th>
+                            <th>날짜</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${CHURCH_DATA.press.map(p => `
+                            <tr>
+                                <td class="press-media">${p.media}</td>
+                                <td>
+                                    <div class="press-title">
+                                        <a href="${p.url}" target="_blank" rel="noopener">${p.title}</a>
+                                    </div>
+                                    <div class="press-summary">${p.summary}</div>
+                                </td>
+                                <td class="press-date">${p.date}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+};
+
 /* ── App bootstrap ───────────────────────────────────────── */
 const App = {
     init() {
@@ -361,6 +392,7 @@ const App = {
         CommunityRenderer.render();
         GivingRenderer.render();
         ClergyRenderer.render();
+        PressRenderer.render();
         this._handleHashScroll();
     },
 
