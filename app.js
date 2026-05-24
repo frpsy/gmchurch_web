@@ -477,10 +477,10 @@ const VisitRenderer = {
                 </div>
                 <div class="info-row">
                     <strong>주차</strong>
-                    <span>주차 가능 여부는 방문 전 교회 사무실(${phone})로 확인 부탁드립니다.</span>
+                    <span>교회 인근에 무료 주차가 가능합니다. 방문 전 교회 사무실(${phone})로 확인해 주세요.</span>
                 </div>
                 <p style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); line-height:1.7;">
-                    ※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong> 또는 <strong>성 디모테오 성당</strong>으로 검색하시면 최단 경로 안내를 받으실 수 있습니다.
+                    ※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong> 로 검색하시면 최단 경로 안내를 받으실 수 있습니다.
                 </p>
             </div>
         `;
