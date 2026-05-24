@@ -482,6 +482,26 @@ img { display: block; max-width: 100%; }
 }
 .bank-card .sub { font-size: 0.85rem; color: var(--green-mid); margin-top: 0.35rem; }
 
+/* ── Bus Chips ──────────────────────────────────────────── */
+.bus-list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.45rem;
+}
+.bus-chip {
+    display: inline-block;
+    padding: 0.18rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+}
+.bus-chip.bus-blue  { background: #2c6aa6; }
+.bus-chip.bus-green { background: #3d6b4a; }
+
 /* ── Press List ─────────────────────────────────────────── */
 .press-list {
     list-style: none;

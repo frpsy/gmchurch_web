@@ -329,12 +329,23 @@ const VisitRenderer = {
                     <span>내비게이션에 <em>대한성공회 광명교회</em> 또는 위 주소를 검색해 주세요.</span>
                 </div>
                 <div class="info-row">
-                    <strong>대중교통</strong>
-                    <span>정확한 대중교통 안내는 교회 사무실(${phone})로 문의해 주세요.</span>
+                    <strong>버스</strong>
+                    <span>
+                        가까운 정류장: <strong>온신초등학교앞</strong>
+                        <span class="bus-list">
+                            <span class="bus-chip bus-blue">505</span>
+                            <span class="bus-chip bus-green">5627</span>
+                            <span class="bus-chip bus-green">5633</span>
+                            <span class="bus-chip bus-green">6637</span>
+                        </span>
+                        <span style="display:block; font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
+                            서울역·구로디지털단지·목동 방면에서 접근 가능합니다.
+                        </span>
+                    </span>
                 </div>
                 <div class="info-row">
                     <strong>주차</strong>
-                    <span>주차 가능 여부는 방문 전 교회 사무실로 확인 부탁드립니다.</span>
+                    <span>주차 가능 여부는 방문 전 교회 사무실(${phone})로 확인 부탁드립니다.</span>
                 </div>
                 <p style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); line-height:1.7;">
                     ※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong> 또는 <strong>성 디모테오 성당</strong>으로 검색하시면 최단 경로 안내를 받으실 수 있습니다.
