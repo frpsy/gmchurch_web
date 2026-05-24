@@ -43,5 +43,34 @@ const CHURCH_DATA = {
         instagram: "https://instagram.com/gmskh",
         diocesan: "https://seoul.anglican.kr/"
     },
-    liveUrl: "https://youtube.com" // 매주 업데이트
+    liveUrl: "https://youtube.com/@gmskh", // 매주 업데이트
+    navigation: [
+        {
+            label: "예배",
+            href: "worship.html",
+            items: [
+                { label: "주일 감사성찬례", href: "worship.html#main" },
+                { label: "어린이 예배", href: "worship.html#children" },
+                { label: "새신자 안내", href: "worship.html#newcomer" }
+            ]
+        },
+        {
+            label: "공동체",
+            href: "community.html",
+            items: [
+                { label: "광명 희망터", href: "community.html#hopecenter" },
+                { label: "엠마우스 코스", href: "community.html#emmaus" },
+                { label: "소그룹 모임", href: "community.html#smallgroup" }
+            ]
+        },
+        {
+            label: "헌금과 살림",
+            href: "giving.html",
+            items: [
+                { label: "봉헌 안내", href: "giving.html#offering" },
+                { label: "재정 보고", href: "giving.html#report" },
+                { label: "오시는 길", href: "giving.html#location" }
+            ]
+        }
+    ]
 };
