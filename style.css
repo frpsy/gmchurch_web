@@ -174,7 +174,7 @@ img { display: block; max-width: 100%; }
 .hero-video-wrap {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    z-index: 1; /* fallback(z-index:0) 위에 렌더링 */
     overflow: hidden;
     pointer-events: none; /* 클릭 통과 차단 */
 }
@@ -189,7 +189,7 @@ img { display: block; max-width: 100%; }
     border: 0;
 }
 
-/* 정적 fallback (모바일 / iframe 차단 환경) */
+/* 정적 fallback — 항상 기저 레이어로 표시, 영상이 위에서 덮음 */
 .hero-fallback {
     position: absolute;
     inset: 0;
@@ -198,14 +198,12 @@ img { display: block; max-width: 100%; }
         url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=80')
         center/cover no-repeat;
 }
-/* iframe 로드 성공 시 fallback 숨김 */
-.hero-video-wrap ~ .hero-fallback { display: none; }
 
 /* 어두운 오버레이 */
 .hero-overlay {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 2;
     background: linear-gradient(
         to bottom,
         rgba(5, 20, 10, 0.5) 0%,
@@ -217,14 +215,13 @@ img { display: block; max-width: 100%; }
 /* 텍스트 컨텐츠 */
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     padding-top: var(--nav-h);
 }
 
-/* 모션 감소 선호 → iframe 숨기고 정지 이미지로 */
+/* 모션 감소 선호 → iframe만 숨김, fallback은 항상 표시되므로 별도 처리 불필요 */
 @media (prefers-reduced-motion: reduce) {
     .hero-video-wrap { display: none; }
-    .hero-fallback { display: block !important; }
 }
 
 /* 모바일: YouTube autoplay는 대부분 차단됨 → fallback이 자연스럽게 노출 */
