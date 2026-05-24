@@ -166,30 +166,13 @@ img { display: block; max-width: 100%; }
     color: #fff;
 }
 
-/*
- * YouTube iframe 배경 레이어
- * iframe은 비율 유지 때문에 단순 100%/100%로는 커버가 안 됨.
- * 16:9 → 뷰포트보다 무조건 크게 확장하는 트릭 사용.
- */
-.hero-video-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: 1; /* fallback(z-index:0) 위에 렌더링 */
-    overflow: hidden;
-    pointer-events: none; /* 클릭 통과 차단 */
-}
-.hero-yt {
-    position: absolute;
-    /* 16:9 영상을 화면에 꽉 채우는 공식 */
-    top: 50%; left: 50%;
-    width: max(100%, calc(100vh * 16 / 9));
-    height: max(100%, calc(100vw * 9 / 16));
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    border: 0;
+/* Ken Burns — 배경 이미지를 천천히 줌·이동하여 생동감 부여 */
+@keyframes hero-kenburns {
+    0%   { transform: scale(1.06) translate(0,      0);     }
+    50%  { transform: scale(1.13) translate(-1.2%,  0.7%);  }
+    100% { transform: scale(1.06) translate(0,      0);     }
 }
 
-/* 정적 fallback — 항상 기저 레이어로 표시, 영상이 위에서 덮음 */
 .hero-fallback {
     position: absolute;
     inset: 0;
@@ -197,13 +180,15 @@ img { display: block; max-width: 100%; }
     background:
         url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=80')
         center/cover no-repeat;
+    animation: hero-kenburns 24s ease-in-out infinite;
+    will-change: transform;
 }
 
 /* 어두운 오버레이 */
 .hero-overlay {
     position: absolute;
     inset: 0;
-    z-index: 2;
+    z-index: 1;
     background: linear-gradient(
         to bottom,
         rgba(5, 20, 10, 0.5) 0%,
@@ -215,16 +200,15 @@ img { display: block; max-width: 100%; }
 /* 텍스트 컨텐츠 */
 .hero-content {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     padding-top: var(--nav-h);
 }
 
-/* 모션 감소 선호 → iframe만 숨김, fallback은 항상 표시되므로 별도 처리 불필요 */
+/* 모션 감소 선호 → 애니메이션 정지 */
 @media (prefers-reduced-motion: reduce) {
-    .hero-video-wrap { display: none; }
+    .hero-fallback { animation: none; }
 }
 
-/* 모바일: YouTube autoplay는 대부분 차단됨 → fallback이 자연스럽게 노출 */
 .hero-label {
     display: inline-block;
     font-size: 0.72rem;
