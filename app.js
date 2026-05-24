@@ -214,12 +214,15 @@ const IndexRenderer = {
         const locationEl = document.getElementById('location-card');
         if (locationEl) {
             locationEl.innerHTML = `
-                <h3>오시는 길</h3>
+                <h3>광명교회로 오시는 길</h3>
                 ${MapHelper.html(true)}
                 <div style="margin-top:1rem;">
                     <div class="info-row"><strong>주소</strong><span>${addressShort}</span></div>
                     <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
                 </div>
+                <p style="margin-top:1.25rem;">
+                    <a href="visit.html" style="color:var(--green-mid); font-weight:700; font-size:0.88rem;">자세히 보기 →</a>
+                </p>
             `;
         }
     }
@@ -287,28 +290,43 @@ const GivingRenderer = {
         const el = document.getElementById('giving-full');
         if (!el) return;
         const { bankName, bank, holder, report } = CHURCH_DATA.giving;
-        const { address, addressShort, phone, fax } = CHURCH_DATA.info;
 
         el.innerHTML = `
-            <div class="grid">
-                <div class="info-card" id="offering">
-                    <h3>봉헌 계좌 안내</h3>
-                    <div class="bank-card">
-                        <p style="font-size:0.8rem; color:var(--green-mid); margin-bottom:0.3rem;">${bankName}</p>
-                        <p class="account">${bank}</p>
-                        <p class="sub">예금주 ${holder}</p>
-                    </div>
-                    <p style="font-size:0.83rem; color:var(--text-muted);" id="report">${report}</p>
+            <div class="info-card" id="offering" style="max-width:640px; margin:0 auto;">
+                <h3>봉헌 계좌</h3>
+                <div class="bank-card">
+                    <p style="font-size:0.8rem; color:var(--green-mid); margin-bottom:0.3rem;">${bankName}</p>
+                    <p class="account">${bank}</p>
+                    <p class="sub">예금주 ${holder}</p>
                 </div>
-                <div class="info-card" id="location">
-                    <h3>오시는 길</h3>
-                    ${MapHelper.html(false)}
-                    <div style="margin-top:1.25rem;">
-                        <div class="info-row"><strong>주소</strong><span>${address}</span></div>
-                        <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
-                        <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
-                    </div>
+                <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.8;" id="report">${report}</p>
+            </div>
+        `;
+    }
+};
+
+/* ── VisitRenderer ───────────────────────────────────────── */
+const VisitRenderer = {
+    render() {
+        const el = document.getElementById('visit-full');
+        if (!el) return;
+        const { address, phone, fax } = CHURCH_DATA.info;
+
+        el.innerHTML = `
+            <div class="info-card" id="location" style="max-width:760px; margin:0 auto 1.5rem;">
+                <h3>주소와 연락처</h3>
+                ${MapHelper.html(false)}
+                <div style="margin-top:1.5rem;">
+                    <div class="info-row"><strong>주소</strong><span>${address}</span></div>
+                    <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
+                    <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
                 </div>
+            </div>
+            <div class="info-card" id="parking" style="max-width:760px; margin:0 auto;">
+                <h3>교통·주차 안내</h3>
+                <div class="info-row"><strong>지하철</strong><span>광명사거리역(7호선) 도보 약 10분</span></div>
+                <div class="info-row"><strong>버스</strong><span>광명사거리 정류장 인근 (다수 노선)</span></div>
+                <div class="info-row"><strong>주차</strong><span>교회 인근 공영주차장 이용 권장</span></div>
             </div>
         `;
     }
@@ -401,6 +419,7 @@ const App = {
         WorshipRenderer.render();
         CommunityRenderer.render();
         GivingRenderer.render();
+        VisitRenderer.render();
         ClergyRenderer.render();
         PressRenderer.render();
         this._handleHashScroll();
