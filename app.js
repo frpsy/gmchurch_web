@@ -140,6 +140,7 @@ const FooterRenderer = {
                     <div class="footer-col">
                         <h4>바로가기</h4>
                         <a href="${sns.youtube}"   target="_blank" rel="noopener">유튜브 채널</a>
+                        <a href="${sns.instagram}" target="_blank" rel="noopener">인스타그램</a>
                         <a href="${sns['naver blog']}" target="_blank" rel="noopener">네이버 블로그</a>
                         <a href="${sns.diocesan}"  target="_blank" rel="noopener">성공회 서울교구</a>
                     </div>
