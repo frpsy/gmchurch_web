@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gmchurchweb.netlify.app/sitemap.xml
+Sitemap: https://frpsy.github.io/gmchurch_web/sitemap.xml

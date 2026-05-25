@@ -5,9 +5,9 @@
 | 항목 | 내용 |
 |------|------|
 | 저장소 | `frpsy/gmchurch_web` (GitHub) |
-| 배포 | Netlify — `https://gmchurchweb.netlify.app` |
+| 배포 | GitHub Pages — `https://frpsy.github.io/gmchurch_web` |
 | 방식 | 빌드 없는 순수 정적 사이트 (HTML + CSS + Vanilla JS) |
-| 브랜치 전략 | 작업 브랜치 → PR → squash merge to `main` → Netlify 자동 배포 |
+| 브랜치 전략 | 작업 브랜치 → PR → squash merge to `main` → GitHub Pages 자동 배포 |
 
 ---
 
