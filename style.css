@@ -551,6 +551,218 @@ img { display: block; max-width: 100%; }
     color: var(--text-muted);
 }
 
+/* ── Liturgy Guide ──────────────────────────────────────── */
+.liturgy-guide {
+    max-width: 760px;
+    margin: 4rem auto 0;
+}
+.liturgy-season-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 0.35rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2.25rem;
+    box-shadow: var(--shadow-sm);
+}
+.season-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.season-note {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-left: 0.25rem;
+}
+.liturgy-quote {
+    border-left: 3px solid;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3.5rem;
+}
+.liturgy-quote p {
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.8;
+    font-weight: 500;
+}
+.liturgy-quote cite {
+    display: block;
+    margin-top: 0.55rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: normal;
+}
+.liturgy-section { margin-bottom: 3.5rem; }
+.liturgy-body {
+    font-size: 0.97rem;
+    color: var(--text);
+    line-height: 1.95;
+    margin-bottom: 1.1rem;
+}
+.liturgy-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-left: 3px solid;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 1.4rem 1.75rem;
+    margin-top: 1.5rem;
+}
+.liturgy-card-title {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 0.85rem;
+}
+.liturgy-list { list-style: none; padding: 0; }
+.liturgy-list li {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.85;
+    padding: 0.2rem 0 0.2rem 1.2rem;
+    position: relative;
+}
+.liturgy-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0.25rem;
+    color: var(--green-mid);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+.liturgy-inner-quote {
+    background: var(--white);
+    border-left: 3px solid;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 1.2rem 1.5rem;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.9;
+}
+
+/* Steps */
+.liturgy-steps { display: flex; flex-direction: column; gap: 1rem; }
+.liturgy-step {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 1.35rem 1.5rem;
+    border: 1px solid var(--border);
+}
+.step-num {
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+}
+.step-body { flex: 1; min-width: 0; }
+.step-title {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 0.55rem;
+}
+.step-list { list-style: none; padding: 0; }
+.step-list li {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    line-height: 1.85;
+    padding-left: 1rem;
+    position: relative;
+}
+.step-list li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--border);
+}
+
+/* Communion */
+.communion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+.communion-card {
+    border: 1px solid var(--border);
+    border-top: 3px solid;
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.75rem;
+}
+.communion-card h3 {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Checklist */
+.liturgy-checklist { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+.check-icon {
+    flex-shrink: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding-top: 0.1rem;
+}
+.checklist-item p {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Closing meditation */
+.liturgy-closing {
+    border: 1px solid;
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2.25rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+.liturgy-closing h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+}
+.closing-body p {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 2.05;
+    margin-bottom: 1.2rem;
+}
+.closing-body p:last-child { margin-bottom: 0; }
+
 /* ── Footer ──────────────────────────────────────────────── */
 footer {
     background: var(--green-deep);
