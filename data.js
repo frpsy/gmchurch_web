@@ -91,6 +91,16 @@ const CHURCH_DATA = {
         established: "1990년 2월 11일",
         address: "경기도 광명시 아방리 2길 10",
         addressShort: "경기도 광명시 아방리 2길 10",
+        postalCode: "14335",
+        addressJibun: "경기도 광명시 노온사동 373-1",
+        addressDetail: {
+            sido: "경기도",
+            sigungu: "광명시",
+            eupmyeondong: "노온사동",
+            jibun: "373-1",
+            road: "아방리 2길 10"
+        },
+        geo: { latitude: 37.4757, longitude: 126.8641 },
         phone: "02-2686-0091",
         fax: "02-2686-0092",
         email: "bsyg2000@hanmail.net"
