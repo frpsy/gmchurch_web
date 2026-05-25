@@ -2,6 +2,86 @@
  * [ChurchData] Single source of truth
  * SOLID: Single Responsibility — 모든 콘텐츠 데이터만 담당
  */
+
+/**
+ * 전례력 계산 — 부활절(Meeus/Jones/Butcher) 기준으로 절기와 색을 산출.
+ * 대한성공회 기도서 절기 색 기준.
+ */
+const LiturgicalCalendar = (() => {
+    function easterDate(year) {
+        const a = year % 19;
+        const b = Math.floor(year / 100);
+        const c = year % 100;
+        const d = Math.floor(b / 4);
+        const e = b % 4;
+        const f = Math.floor((b + 8) / 25);
+        const g = Math.floor((b - f + 1) / 3);
+        const h = (19 * a + b - d - g + 15) % 30;
+        const i = Math.floor(c / 4);
+        const k = c % 4;
+        const l = (32 + 2 * e + 2 * i - h - k) % 7;
+        const m = Math.floor((a + 11 * h + 22 * l) / 451);
+        const month = Math.floor((h + l - 7 * m + 114) / 31);
+        const day = ((h + l - 7 * m + 114) % 31) + 1;
+        return new Date(year, month - 1, day);
+    }
+    function addDays(date, days) {
+        const d = new Date(date);
+        d.setDate(d.getDate() + days);
+        return d;
+    }
+    function startOfDay(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+    function adventStart(year) {
+        // 대림 1주일 = 성탄절(12/25) 이전의 네 번째 주일
+        const dec25 = new Date(year, 11, 25);
+        const dec25Day = dec25.getDay(); // 0 = 일요일
+        const daysBack = dec25Day === 0 ? 28 : dec25Day + 21;
+        return addDays(dec25, -daysBack);
+    }
+
+    const SEASONS = {
+        advent:    { name: "대림절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", symbol: "🕯️", note: "주님의 오심을 기다리는 시간" },
+        christmas: { name: "성탄절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", symbol: "⭐",   note: "말씀이 사람이 되시다"   },
+        epiphany:  { name: "공현절 후",    colorName: "녹색", color: "#3d6b4a", colorLight: "#eef2ec", symbol: "✨",   note: "주님이 세상에 드러나심" },
+        lent:      { name: "사순절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", symbol: "✝️",  note: "회개와 절제의 시간"     },
+        holyweek:  { name: "성주간",       colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", symbol: "🌿",   note: "주님의 수난을 묵상"     },
+        easter:    { name: "부활절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", symbol: "🌅",   note: "다시 살아나신 주님"     },
+        pentecost: { name: "성령강림절",   colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", symbol: "🔥",   note: "성령께서 임하시다"      },
+        ordinary:  { name: "성령강림 후",  colorName: "녹색", color: "#3d6b4a", colorLight: "#eef2ec", symbol: "🌿",   note: "그리스도인의 일상"      }
+    };
+
+    function compute(today = new Date()) {
+        const day       = startOfDay(today);
+        const y         = day.getFullYear();
+        const easter    = easterDate(y);
+        const ashWed    = addDays(easter, -46);
+        const palmSun   = addDays(easter, -7);
+        const pentecost = addDays(easter, 49);
+        const dec25     = new Date(y, 11, 25);
+        const jan6      = new Date(y, 0, 6);
+        const advent    = adventStart(y);
+
+        let season;
+        if      (day <  jan6)                          season = SEASONS.christmas; // 1/1~1/5
+        else if (day <  ashWed)                        season = SEASONS.epiphany;
+        else if (day <  palmSun)                       season = SEASONS.lent;
+        else if (day <  easter)                        season = SEASONS.holyweek;
+        else if (day <  pentecost)                     season = SEASONS.easter;
+        else if (day.getTime() === pentecost.getTime()) season = SEASONS.pentecost;
+        else if (day <  advent)                        season = SEASONS.ordinary;
+        else if (day <  dec25)                         season = SEASONS.advent;
+        else                                            season = SEASONS.christmas; // 12/25~12/31
+
+        // 표시용 부가 정보
+        const yearLabel = `${y}년 ${day.getMonth() + 1}월`;
+        return { ...season, year: y, dateLabel: yearLabel };
+    }
+
+    return { compute, easterDate, adventStart };
+})();
+
 const CHURCH_DATA = {
     info: {
         name: "대한성공회 광명교회",
@@ -135,14 +215,7 @@ const CHURCH_DATA = {
     },
 
     worship: {
-        liturgicalSeason: {
-            name: "성령강림절",
-            color: "#c0390f",
-            colorLight: "#fdf2ee",
-            colorName: "적색",
-            symbol: "🔥",
-            note: "2026년 5월"
-        },
+        liturgicalSeason: LiturgicalCalendar.compute(),
         main: [
             {
                 id: "main",
