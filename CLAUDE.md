@@ -290,7 +290,9 @@ window DOMContentLoaded
 
 ### index.html
 ```html
+<a class="skip-link" href="#main-content">  ← 접근성 skip-link
 <nav id="main-nav">                         ← NavRenderer
+<main id="main-content">
 <header class="hero">
   #hero-title / #hero-sub                   ← IndexRenderer._hero()
 <section id="about-brief">
@@ -301,6 +303,7 @@ window DOMContentLoaded
   #location-card                            ← IndexRenderer._giving()
 <section id="giving">
   #bank-info                                ← IndexRenderer._giving()
+</main>
 <footer id="main-footer">                   ← FooterRenderer
 ```
 
@@ -369,6 +372,7 @@ window DOMContentLoaded
 
 | 클래스 | 용도 |
 |--------|------|
+| `.skip-link` | 접근성 건너뛰기 링크 (포커스 시 노출) |
 | `.nav-header` | 고정 헤더, scroll 시 `.scrolled` |
 | `.nav-chevron` | 모바일 드롭다운 토글 화살표 버튼 (desktop: hidden) |
 | `.nav-item.mobile-open` | 모바일 드롭다운 열림 상태 |
@@ -434,6 +438,11 @@ window DOMContentLoaded
 - `.nav-chevron` (▾ 버튼): 드롭다운 토글만 담당
 - 다른 드롭다운 열리면 이전 것 자동 닫힘
 - 드롭다운 링크 클릭 시 모바일 메뉴 자동 닫힘
+
+### 접근성 구조
+- 모든 HTML: `<body>` 첫 자식 = `<a href="#main-content" class="skip-link">본문으로 바로가기</a>`
+- 모든 HTML: `<nav>` 뒤 ~ `<footer>` 앞 = `<main id="main-content">...</main>`
+- `:focus-visible` 스타일 — style.css Accessibility 섹션 참조
 
 ### 중복 ID 금지
 - `clergy.html` 섹션 태그에 `id="philosophy"` 이미 있음
