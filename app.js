@@ -369,15 +369,6 @@ const WorshipRenderer = {
                         <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>모르는 것이 있으시면 옆자리 교우나 안내위원에게 편하게 물어보세요.</p></div>
                     </div>
                 </div>
-
-                <div class="liturgy-closing" style="background:${s.colorLight}; border-color:${s.color};">
-                    <h3>감사성찬례, 우리 삶의 오아시스</h3>
-                    <div class="closing-body">
-                        <p>감사성찬례는 그리스도인이 머무는 안식처가 아닙니다.<br>인생의 굽이길에서 만나는 <strong>오아시스</strong> 같은 자리입니다.</p>
-                        <p>지나온 길에서 쌓인 피로를 풀고,<br>더럽혀진 몸과 마음을 씻고,<br>새로운 힘을 얻어 다음 여정을 시작하는 곳입니다.</p>
-                        <p>이곳에서 우리는 하느님을 만나고, 이웃을 만나고, 자신을 만납니다.<br>그리고 다시 세상으로 파송됩니다 — <strong>새로운 마음으로, 새로운 걸음으로.</strong></p>
-                    </div>
-                </div>
             </div>
         `;
     }
