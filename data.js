@@ -32,7 +32,7 @@ const CHURCH_DATA = {
             quote: "",
             desc: "연세대 불어불문학과를 졸업하고 36세에 성공회대 신학과에 편입해 성직자가 되었습니다. 가톨릭대학교 상담심리대학원에서 상담심리석사 학위와 상담심리사 자격을 취득하였으며, 동방문화대학원대학교에서 주역·명리학을 전공하고 철학박사 학위를 받았습니다. 성공회대학교 및 한겨레문화센터에서 강의하였고, 현재 광명교회 협동사제로 섬기고 있습니다.",
             contact: "",
-            kyoboUrl: "https://search.kyobobook.co.kr/search?keyword=%EC%9D%B4%EB%82%A8%ED%98%B8%20%EC%8B%A0%EB%B6%80"
+            kyoboUrl: "https://www.aladin.co.kr/m/mproduct.aspx?itemid=287238568"
         }
     ],
 
