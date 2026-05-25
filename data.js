@@ -250,10 +250,11 @@ const CHURCH_DATA = {
             label: "교회 소개",
             href: "clergy.html",
             items: [
-                { label: "성공회란?", href: "clergy.html#what-is-anglican" },
-                { label: "관할사제", href: "clergy.html#priest" },
-                { label: "교회 철학", href: "clergy.html#philosophy" },
-                { label: "언론 보도", href: "clergy.html#press" }
+                { label: "성공회란?",   href: "clergy.html#what-is-anglican" },
+                { label: "대한성공회",  href: "clergy.html#ack" },
+                { label: "관할사제",   href: "clergy.html#priest" },
+                { label: "교회 철학",  href: "clergy.html#philosophy" },
+                { label: "언론 보도",  href: "clergy.html#press" }
             ]
         },
         {
@@ -261,25 +262,24 @@ const CHURCH_DATA = {
             href: "worship.html",
             items: [
                 { label: "주일 감사성찬례", href: "worship.html#main" },
-                { label: "어린이 예배", href: "worship.html#children" }
+                { label: "어린이 예배",    href: "worship.html#children" }
             ]
         },
         {
             label: "처음 오시는 분",
-            href: "worship.html#firsttime",
+            href: "worship.html#newcomer",
             items: [
-                { label: "처음 오신 분들께", href: "worship.html#firsttime" },
-                { label: "성공회란?", href: "clergy.html#what-is-anglican" },
                 { label: "성공회 전례란?", href: "worship.html#newcomer" },
-                { label: "예배 순서", href: "worship.html#eucharist-order" },
-                { label: "영성체 안내", href: "worship.html#communion" }
+                { label: "예배 순서",      href: "worship.html#eucharist-order" },
+                { label: "영성체 안내",    href: "worship.html#communion" },
+                { label: "처음 오신 분들께", href: "worship.html#firsttime" }
             ]
         },
         {
             label: "공동체",
             href: "community.html",
             items: [
-                { label: "광명 희망터", href: "community.html#hopecenter" },
+                { label: "광명 희망터",  href: "community.html#hopecenter" },
                 { label: "엠마우스 코스", href: "community.html#emmaus" },
                 { label: "소그룹 모임", href: "community.html#smallgroup" }
             ]
@@ -296,8 +296,7 @@ const CHURCH_DATA = {
             label: "헌금",
             href: "giving.html",
             items: [
-                { label: "봉헌 계좌", href: "giving.html#offering" },
-                { label: "재정 보고", href: "giving.html#report" }
+                { label: "봉헌 계좌", href: "giving.html#offering" }
             ]
         }
     ]
