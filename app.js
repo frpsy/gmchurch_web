@@ -675,7 +675,7 @@ const ClergyRenderer = {
         const el = document.getElementById('philosophy-full');
         if (!el) return;
         el.innerHTML = `
-            <div class="values-grid" id="philosophy">
+            <div class="values-grid">
                 ${CHURCH_DATA.philosophy.values.map(v => `
                     <div class="value-card">
                         <div class="val-icon">${v.icon}</div>
