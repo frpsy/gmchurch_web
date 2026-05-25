@@ -258,11 +258,6 @@ const WorshipRenderer = {
                     <span class="season-note">${s.note}</span>
                 </div>
 
-                <blockquote class="liturgy-quote" style="border-left-color:${s.color}; background:${s.colorLight};">
-                    <p>"섬김을 받으러 온 것이 아니라 섬기러 왔다."</p>
-                    <cite>— 마르코복음 10:45</cite>
-                </blockquote>
-
                 <div class="liturgy-section">
                     <p class="section-eyebrow" style="color:${s.color};">Anglican Liturgy</p>
                     <h2 class="section-title">성공회 전례란?</h2>
