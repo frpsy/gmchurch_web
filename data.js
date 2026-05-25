@@ -16,6 +16,39 @@ const CHURCH_DATA = {
         email: "bsyg2000@hanmail.net"
     },
 
+    anglican: {
+        welcome: "성공회(Anglican Church)라는 이름이 낯선 분들도 많습니다. 이 페이지에서는 성공회가 어떤 교회인지, 대한성공회는 어떤 역사를 걸어왔는지, 그리고 광명교회가 어떤 사람들과 함께 신앙의 길을 걷고 있는지를 소개합니다. 처음 오시는 분도 부담 없이 읽어보세요.",
+        what: {
+            eyebrow: "Anglican Church",
+            title: "성공회란?",
+            paras: [
+                "성공회(聖公會)는 '거룩하고 공번된 교회'라는 뜻입니다. 16세기 종교개혁 시기 영국에서 시작된 교회로, 가톨릭의 풍부한 전례 전통과 개신교의 성서 중심 신앙을 함께 품는 <strong>'중도의 길(Via Media)'</strong>을 걸어왔습니다.",
+                "오늘날 성공회는 전 세계 165개국, 약 1억 명의 신자가 함께하는 세계 공동체입니다. 특정 교리를 강요하거나 한 지도자에게 권위를 집중하지 않으며, <strong>말씀과 성찬을 중심으로 다양한 사람들이 함께 신앙을 나누는 공동체</strong>를 지향합니다."
+            ],
+            pillars: [
+                { icon: "📖", title: "성경", desc: "하느님의 말씀인 성경은 신앙과 삶의 최고 권위입니다. 예배 때마다 구약·서신서·복음서가 봉독됩니다." },
+                { icon: "🏛", title: "전통", desc: "초대교회로부터 이어진 사도적 전통과 2,000년 공동체의 지혜를 신앙의 안내자로 삼습니다." },
+                { icon: "💡", title: "이성", desc: "하느님이 주신 이성으로 말씀을 해석하고 신앙을 현실 속에서 살아냅니다." }
+            ],
+            pillarNote: "16세기 신학자 리처드 후커(Richard Hooker)가 정립한 '세 기둥' — 성경·전통·이성이 균형을 이룰 때 신앙은 온전해진다고 봅니다."
+        },
+        korea: {
+            eyebrow: "Anglican Church of Korea",
+            title: "대한성공회",
+            founded: "1890",
+            paras: [
+                "1890년, 영국 성공회 선교사 찰스 존 코프(Charles John Corfe) 주교가 처음 한국 땅을 밟으면서 대한성공회의 역사가 시작되었습니다. 선교 초기부터 병원과 학교를 세워 몸과 마음을 함께 돌보는 통전적 선교를 실천했습니다.",
+                "일제강점기와 민주화 운동 시기에도 사회적 약자와 함께했으며, 오늘날에도 교육·의료·사회복지 사업을 통해 하느님 나라를 이 땅에 이루어 가고 있습니다."
+            ],
+            highlights: [
+                { icon: "⛪", text: "서울·부산·대전 3개 교구, 전국 200여 교회" },
+                { icon: "🎓", text: "성공회대학교, 의료복지재단 등 교육·사회 사업 운영" },
+                { icon: "🌐", text: "세계성공회공동체(Anglican Communion) 정식 회원 교회" },
+                { icon: "⚖️", text: "여성 사제 서품(2001년~), 사회 정의와 인권을 위한 목소리" }
+            ]
+        }
+    },
+
     clergy: [
         {
             name: "민숙희(마가렛)",
@@ -198,6 +231,7 @@ const CHURCH_DATA = {
             label: "교회 소개",
             href: "clergy.html",
             items: [
+                { label: "성공회 소개", href: "clergy.html#what-is-anglican" },
                 { label: "관할사제", href: "clergy.html#priest" },
                 { label: "교회 철학", href: "clergy.html#philosophy" },
                 { label: "언론 보도", href: "clergy.html#press" }

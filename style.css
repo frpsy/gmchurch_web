@@ -559,6 +559,104 @@ img { display: block; max-width: 100%; }
 .bio-ministry-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
 .bio-ministry-note p { font-size: 0.88rem; line-height: 1.8; color: var(--text); margin: 0; }
 
+/* ── Anglican Intro Sections ─────────────────────────────── */
+.anglican-welcome {
+    background: var(--green-deep);
+    color: rgba(255,255,255,0.9);
+    padding: 1.25rem 0;
+}
+.anglican-welcome .container {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+.anglican-welcome-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+.anglican-welcome p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin: 0;
+    opacity: 0.92;
+}
+.anglican-para {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 1.1rem;
+}
+.anglican-para:last-child { margin-bottom: 0; }
+.anglican-body { margin-bottom: 2.5rem; max-width: 760px; }
+
+/* Pillars (three-column card grid) */
+.anglican-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+.anglican-pillar {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.6rem 1.4rem;
+    text-align: center;
+}
+.anglican-pillar-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.anglican-pillar-title { font-size: 1rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
+.anglican-pillar-desc { font-size: 0.85rem; line-height: 1.75; color: var(--text-muted); }
+.anglican-pillar-note {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding: 0.9rem 1.1rem;
+    background: var(--green-light);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--green-mid);
+}
+
+/* Korea section — two-column layout */
+.anglican-korea-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+}
+.founded-badge {
+    background: var(--green-deep);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.founded-year {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+.founded-label {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    margin-top: 0.4rem;
+}
+.korea-highlights { list-style: none; padding: 0; margin: 0; min-width: 240px; }
+.korea-highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.55rem 0;
+    font-size: 0.87rem;
+    line-height: 1.6;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+}
+.korea-highlight-item:last-child { border-bottom: none; }
+.korea-hl-icon { flex-shrink: 0; font-size: 1rem; margin-top: 0.05rem; }
+
 /* Bank Card */
 .bank-card {
     background: var(--green-light);
@@ -964,6 +1062,13 @@ footer {
 
     /* Clergy Card */
     .clergy-card { grid-template-columns: 1fr; gap: 1rem; }
+
+    /* Anglican intro */
+    .anglican-pillars { grid-template-columns: 1fr; }
+    .anglican-korea-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .anglican-korea-side { display: flex; flex-direction: column; align-items: flex-start; }
+    .founded-badge { padding: 1rem 1.5rem; align-self: flex-start; }
+    .korea-highlights { min-width: unset; width: 100%; }
 
     /* Footer */
     .footer-inner { grid-template-columns: 1fr; gap: 2rem; }

@@ -488,6 +488,84 @@ const VisitRenderer = {
     }
 };
 
+/* ── AnglicanRenderer ────────────────────────────────────── */
+const AnglicanRenderer = {
+    render() {
+        this._welcome();
+        this._what();
+        this._korea();
+    },
+
+    _welcome() {
+        const el = document.getElementById('anglican-welcome-banner');
+        if (!el || !CHURCH_DATA.anglican) return;
+        el.innerHTML = `
+            <div class="anglican-welcome">
+                <div class="container">
+                    <span class="anglican-welcome-icon">✝️</span>
+                    <p>${CHURCH_DATA.anglican.welcome}</p>
+                </div>
+            </div>
+        `;
+    },
+
+    _what() {
+        const el = document.getElementById('anglican-what');
+        if (!el || !CHURCH_DATA.anglican) return;
+        const { what } = CHURCH_DATA.anglican;
+        el.innerHTML = `
+            <div class="section-header">
+                <p class="section-eyebrow">${what.eyebrow}</p>
+                <h2 class="section-title">${what.title}</h2>
+            </div>
+            <div class="anglican-body">
+                ${what.paras.map(p => `<p class="anglican-para">${p}</p>`).join('')}
+            </div>
+            <div class="anglican-pillars">
+                ${what.pillars.map(p => `
+                    <div class="anglican-pillar">
+                        <div class="anglican-pillar-icon">${p.icon}</div>
+                        <h4 class="anglican-pillar-title">${p.title}</h4>
+                        <p class="anglican-pillar-desc">${p.desc}</p>
+                    </div>
+                `).join('')}
+            </div>
+            <p class="anglican-pillar-note">${what.pillarNote}</p>
+        `;
+    },
+
+    _korea() {
+        const el = document.getElementById('anglican-korea');
+        if (!el || !CHURCH_DATA.anglican) return;
+        const { korea } = CHURCH_DATA.anglican;
+        el.innerHTML = `
+            <div class="anglican-korea-inner">
+                <div class="anglican-korea-text">
+                    <div class="section-header" style="margin-bottom:2rem;">
+                        <p class="section-eyebrow">${korea.eyebrow}</p>
+                        <h2 class="section-title">${korea.title}</h2>
+                    </div>
+                    ${korea.paras.map(p => `<p class="anglican-para">${p}</p>`).join('')}
+                </div>
+                <div class="anglican-korea-side">
+                    <div class="founded-badge">
+                        <span class="founded-year">${korea.founded}</span>
+                        <span class="founded-label">창립</span>
+                    </div>
+                    <ul class="korea-highlights">
+                        ${korea.highlights.map(h => `
+                            <li class="korea-highlight-item">
+                                <span class="korea-hl-icon">${h.icon}</span>
+                                <span>${h.text}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            </div>
+        `;
+    }
+};
+
 /* ── ClergyRenderer ──────────────────────────────────────── */
 const ClergyRenderer = {
     render() {
@@ -590,6 +668,7 @@ const App = {
         CommunityRenderer.render();
         GivingRenderer.render();
         VisitRenderer.render();
+        AnglicanRenderer.render();
         ClergyRenderer.render();
         PressRenderer.render();
         this._handleHashScroll();
