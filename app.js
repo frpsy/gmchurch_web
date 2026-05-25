@@ -262,7 +262,7 @@ const WorshipRenderer = {
                     <p class="section-eyebrow" style="color:${s.color};">Anglican Liturgy</p>
                     <h2 class="section-title">성공회 전례란?</h2>
                     <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 내려오는 말씀의 전례와 성찬의 전례가 아름답게 조화를 이루는 깊은 영성의 예배 전통을 400여 년간 이어오고 있습니다.</p>
-                    <p class="liturgy-body">성공회의 예배는 <strong>공동기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 처음 편찬한 공동기도서는, 라틴어가 아닌 회중이 알아듣는 자국어로 예배드려 <strong>모든 신자가 전례에 능동적으로 참여</strong>할 수 있도록 했다는 점에서 종교개혁의 중요한 유산입니다.</p>
+                    <p class="liturgy-body">성공회의 예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 주도하여 처음 편찬한 성공회 기도서는, 라틴어가 아닌 회중이 알아듣는 자국어로 예배드려 <strong>모든 신자가 전례에 능동적으로 참여</strong>할 수 있도록 했다는 점에서 종교개혁의 중요한 유산입니다.</p>
                     <div class="liturgy-card" style="border-left-color:${s.color};">
                         <h3 class="liturgy-card-title">전례 교회의 의미</h3>
                         <p class="liturgy-body"><strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말로, "공동체를 위해 수행하는 일"을 뜻합니다. 곧 전례는 <strong>그리스도인이 함께 드리고 함께 살아내는 신앙의 실천</strong>입니다.</p>
@@ -286,12 +286,12 @@ const WorshipRenderer = {
                 <div class="liturgy-section">
                     <p class="section-eyebrow" style="color:${s.color};">Order of Service</p>
                     <h2 class="section-title">감사성찬례 순서</h2>
-                    <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 감사성찬례는 크게 <strong>다섯 부분</strong>으로 구성됩니다.</p>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 기도서에 따른 감사성찬례는 크게 <strong>네 부분</strong>으로 구성됩니다.</p>
                     <div class="liturgy-steps">
                         <div class="liturgy-step">
                             <div class="step-num" style="background:${s.color};">1</div>
                             <div class="step-body">
-                                <h4 class="step-title">시작 예식</h4>
+                                <h4 class="step-title">입당예식</h4>
                                 <ul class="step-list">
                                     <li>입당 성가와 함께 집전자가 입장합니다.</li>
                                     <li>회중은 다 함께 일어나 하느님께 예배드릴 준비를 합니다.</li>
@@ -302,29 +302,19 @@ const WorshipRenderer = {
                         <div class="liturgy-step">
                             <div class="step-num" style="background:${s.color};">2</div>
                             <div class="step-body">
-                                <h4 class="step-title">말씀 전례</h4>
+                                <h4 class="step-title">말씀의 전례</h4>
                                 <ul class="step-list">
                                     <li>구약 성서 봉독 · 시편 화답송 · 서신서 봉독</li>
                                     <li>복음환호송(<em>"알렐루야, 알렐루야"</em>) 후 <strong>복음서 봉독</strong>과 설교</li>
-                                    <li>말씀에 귀 기울이고 삶의 자리에서 응답을 다짐하는 시간입니다.</li>
+                                    <li>사도신경 또는 니케아 신경으로 신앙을 함께 고백합니다.</li>
+                                    <li>교회와 세상, 이웃과 자신을 위한 중보기도 — 회중은 <em>"주여, 우리의 기도를 들으소서"</em>로 응답합니다.</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="liturgy-step">
                             <div class="step-num" style="background:${s.color};">3</div>
                             <div class="step-body">
-                                <h4 class="step-title">신앙 고백 · 중보기도</h4>
-                                <ul class="step-list">
-                                    <li>사도신경 또는 니케아 신경으로 신앙을 함께 고백합니다.</li>
-                                    <li>교회와 세상, 이웃과 자신을 위한 중보기도를 드립니다.</li>
-                                    <li>회중은 <em>"주여, 우리의 기도를 들으소서"</em>로 응답합니다.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="liturgy-step">
-                            <div class="step-num" style="background:${s.color};">4</div>
-                            <div class="step-body">
-                                <h4 class="step-title">성찬 전례</h4>
+                                <h4 class="step-title">성찬의 전례</h4>
                                 <ul class="step-list">
                                     <li>평화의 인사를 나눕니다.</li>
                                     <li>빵과 포도주, 헌금을 봉헌하고 집전자가 <strong>빵과 포도주를 축성</strong>합니다.</li>
@@ -333,9 +323,9 @@ const WorshipRenderer = {
                             </div>
                         </div>
                         <div class="liturgy-step">
-                            <div class="step-num" style="background:${s.color};">5</div>
+                            <div class="step-num" style="background:${s.color};">4</div>
                             <div class="step-body">
-                                <h4 class="step-title">파송</h4>
+                                <h4 class="step-title">파송예식</h4>
                                 <ul class="step-list">
                                     <li>감사 기도와 강복을 받습니다.</li>
                                     <li><em>"나가서 주님의 복음을 전합시다 / 평화를 이룹시다 / 사랑을 나눕시다"</em></li>
@@ -611,6 +601,9 @@ const ClergyRenderer = {
                     <span class="bio-ministry-icon">🕊</span>
                     <p>${bio.ministryNote}</p>
                 </div>
+                ${bio.source ? `
+                <p class="bio-source">출처: ${bio.source.author} 지음, ${bio.source.title}, ${bio.source.publisher} (${bio.source.year})</p>
+                ` : ''}
             </div>
         `;
     },
