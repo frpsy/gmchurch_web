@@ -62,21 +62,11 @@ const NavRenderer = {
             <div class="container nav-inner">
                 <a href="index.html" class="nav-logo">
                     <span class="nav-logo-mark" aria-hidden="true">
-                        <svg viewBox="0 0 64 64" focusable="false" overflow="hidden">
+                        <svg viewBox="0 0 64 64" focusable="false">
                             <rect width="64" height="64" rx="12" fill="#ffffff"/>
-                            <text x="32" y="12" text-anchor="middle"
-                                  font-family="inherit" font-weight="400" font-size="5.4"
-                                  fill="#1b4d2e" opacity="0.42"
-                                  textLength="50" lengthAdjust="spacingAndGlyphs">St. Timothy's Anglican</text>
-                            <line x1="9" y1="17" x2="55" y2="17" stroke="#1b4d2e" stroke-width="0.8" opacity="0.25"/>
-                            <text x="32" y="38" text-anchor="middle"
+                            <text x="32" y="40" text-anchor="middle"
                                   font-family="inherit" font-weight="800"
-                                  font-size="21" fill="#1b4d2e" letter-spacing="-1">GMC</text>
-                            <line x1="9" y1="44" x2="55" y2="44" stroke="#1b4d2e" stroke-width="0.8" opacity="0.25"/>
-                            <text x="32" y="55" text-anchor="middle"
-                                  font-family="inherit" font-weight="400" font-size="5.4"
-                                  fill="#1b4d2e" opacity="0.42"
-                                  textLength="50" lengthAdjust="spacingAndGlyphs">church in Gwangmyeong.</text>
+                                  font-size="19" fill="#1b4d2e" letter-spacing="-0.5">ACGM</text>
                         </svg>
                     </span>
                     <span class="nav-logo-text">
