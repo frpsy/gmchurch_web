@@ -627,21 +627,36 @@ const ClergyRenderer = {
     _clergy() {
         const el = document.getElementById('clergy-full');
         if (!el) return;
-        el.innerHTML = CHURCH_DATA.clergy.map((c, i) => `
-            <div class="clergy-card" ${i === 0 ? 'id="priest"' : ''} style="${i > 0 ? 'margin-top:1.5rem;' : ''}">
-                <div class="clergy-avatar">✝️</div>
-                <div>
-                    <div class="clergy-name">${c.name} 사제</div>
-                    <div class="clergy-title">${c.title}</div>
-                    ${c.ordained ? `<div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">${c.ordained}</div>` : ''}
-                    ${c.quote ? `<div class="quote-block"><p>"${c.quote}"</p></div>` : ''}
-                    <p class="clergy-desc">${c.desc}</p>
-                    ${c.bio ? this._bioSection(c.bio) : ''}
-                    ${c.contact ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">📞 <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>` : ''}
-                    ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">📚 <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
-                </div>
-            </div>
-        `).join('');
+        const cats = CHURCH_DATA.ministerSection.categories;
+        let firstPriestRendered = false;
+        el.innerHTML = cats.map(cat => {
+            const members = CHURCH_DATA.clergy.filter(c => c.category === cat.id);
+            const membersHtml = members.length > 0
+                ? members.map(c => {
+                    const isFirstPriest = !firstPriestRendered && cat.id === '성직자';
+                    if (isFirstPriest) firstPriestRendered = true;
+                    return `
+                    <div class="clergy-card" ${isFirstPriest ? 'id="priest"' : ''}>
+                        <div class="clergy-avatar">✝️</div>
+                        <div>
+                            <div class="clergy-name">${c.name} 사제</div>
+                            <div class="clergy-title">${c.title}</div>
+                            ${c.ordained ? `<div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">${c.ordained}</div>` : ''}
+                            ${c.quote ? `<div class="quote-block"><p>"${c.quote}"</p></div>` : ''}
+                            <p class="clergy-desc">${c.desc}</p>
+                            ${c.bio ? this._bioSection(c.bio) : ''}
+                            ${c.contact ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">📞 <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>` : ''}
+                            ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">📚 <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
+                        </div>
+                    </div>`;
+                }).join('')
+                : `<div class="minister-empty">준비 중입니다.</div>`;
+            return `
+            <div class="minister-category">
+                <h3 class="minister-cat-title">${cat.title}</h3>
+                ${membersHtml}
+            </div>`;
+        }).join('');
     },
 
     _bioSection(bio) {

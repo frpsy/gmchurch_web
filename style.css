@@ -474,6 +474,25 @@ button:focus:not(:focus-visible) { outline: none; }
 .value-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
 .value-card p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.8; }
 
+/* Minister Category */
+.minister-category { margin-bottom: 2.5rem; }
+.minister-cat-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--green-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--green-soft);
+}
+.minister-category:first-child .minister-cat-title { margin-top: 0; }
+.minister-empty {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    padding: 0.75rem 0;
+}
+
 /* Clergy Card */
 .clergy-card {
     background: var(--white);
