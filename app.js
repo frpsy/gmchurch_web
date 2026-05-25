@@ -62,11 +62,21 @@ const NavRenderer = {
             <div class="container nav-inner">
                 <a href="index.html" class="nav-logo">
                     <span class="nav-logo-mark" aria-hidden="true">
-                        <svg viewBox="0 0 64 64" focusable="false">
+                        <svg viewBox="0 0 64 64" focusable="false" overflow="hidden">
                             <rect width="64" height="64" rx="12" fill="#ffffff"/>
-                            <text x="32" y="42" text-anchor="middle"
+                            <line x1="9" y1="17" x2="55" y2="17" stroke="#1b4d2e" stroke-width="0.8" opacity="0.25"/>
+                            <text x="32" y="35" text-anchor="middle"
                                   font-family="inherit" font-weight="800"
-                                  font-size="22" fill="#1b4d2e" letter-spacing="-1">GMC</text>
+                                  font-size="21" fill="#1b4d2e" letter-spacing="-1">GMC</text>
+                            <line x1="9" y1="41" x2="55" y2="41" stroke="#1b4d2e" stroke-width="0.8" opacity="0.25"/>
+                            <text x="32" y="50.5" text-anchor="middle"
+                                  font-family="inherit" font-weight="400" font-size="5.4"
+                                  fill="#1b4d2e" opacity="0.42"
+                                  textLength="50" lengthAdjust="spacingAndGlyphs">St. Timothy's Anglican</text>
+                            <text x="32" y="58.5" text-anchor="middle"
+                                  font-family="inherit" font-weight="400" font-size="5.4"
+                                  fill="#1b4d2e" opacity="0.42"
+                                  textLength="50" lengthAdjust="spacingAndGlyphs">church in Gwangmyeong.</text>
                         </svg>
                     </span>
                     <span class="nav-logo-text">
