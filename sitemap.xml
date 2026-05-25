@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://gmchurchweb.netlify.app/</loc>
+    <loc>https://frpsy.github.io/gmchurch_web/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://gmchurchweb.netlify.app/clergy.html</loc>
+    <loc>https://frpsy.github.io/gmchurch_web/clergy.html</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gmchurchweb.netlify.app/worship.html</loc>
+    <loc>https://frpsy.github.io/gmchurch_web/worship.html</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gmchurchweb.netlify.app/community.html</loc>
+    <loc>https://frpsy.github.io/gmchurch_web/community.html</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gmchurchweb.netlify.app/visit.html</loc>
+    <loc>https://frpsy.github.io/gmchurch_web/visit.html</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gmchurchweb.netlify.app/giving.html</loc>
+    <loc>https://frpsy.github.io/gmchurch_web/giving.html</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://gmchurchweb.netlify.app/privacy.html</loc>
+    <loc>https://frpsy.github.io/gmchurch_web/privacy.html</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
