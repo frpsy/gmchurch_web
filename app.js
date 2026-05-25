@@ -158,8 +158,8 @@ const FooterRenderer = {
 const IndexRenderer = {
     render() {
         this._hero();
+        this._about();
         this._worship();
-        this._community();
         this._giving();
     },
 
@@ -168,6 +168,24 @@ const IndexRenderer = {
         const s = document.getElementById('hero-sub');
         if (t) t.textContent = CHURCH_DATA.info.name;
         if (s) s.textContent = CHURCH_DATA.info.slogan;
+    },
+
+    _about() {
+        const el = document.getElementById('about-brief-content');
+        if (!el) return;
+        const { name, subName, slogan, vision, established } = CHURCH_DATA.info;
+        el.innerHTML = `
+            <div class="about-brief">
+                <p class="about-brief-lead">${slogan}</p>
+                <p class="about-brief-desc">${vision}. 성공회 전통 안에서 깊은 전례와 따뜻한 환대를 함께 나누는 공동체입니다. 처음 오시는 분도, 오래 머무신 분도 모두 환영합니다.</p>
+                <ul class="about-brief-facts">
+                    <li><strong>이름</strong><span>${name} · ${subName}</span></li>
+                    <li><strong>설립</strong><span>${established}</span></li>
+                    <li><strong>소속</strong><span>대한성공회 서울교구 서부교무구</span></li>
+                </ul>
+                <a href="clergy.html" class="about-brief-link">교회 소개 자세히 보기 →</a>
+            </div>
+        `;
     },
 
     _worship() {
@@ -283,7 +301,7 @@ const WorshipRenderer = {
                     </blockquote>
                 </div>
 
-                <div class="liturgy-section">
+                <div class="liturgy-section" id="eucharist-order">
                     <p class="section-eyebrow" style="color:${s.color};">Order of Service</p>
                     <h2 class="section-title">감사성찬례 순서</h2>
                     <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 기도서에 따른 감사성찬례는 크게 <strong>네 부분</strong>으로 구성됩니다.</p>
@@ -546,6 +564,44 @@ const ClergyRenderer = {
     render() {
         this._clergy();
         this._philosophy();
+        this._logo();
+    },
+
+    _logo() {
+        const el = document.getElementById('logo-content');
+        if (!el || !CHURCH_DATA.logo) return;
+        const { eyebrow, title, desc, letters, colors } = CHURCH_DATA.logo;
+        el.innerHTML = `
+            <div class="section-header">
+                <p class="section-eyebrow">${eyebrow}</p>
+                <h2 class="section-title">${title}</h2>
+            </div>
+            <div class="logo-intro-grid">
+                <div class="logo-display">
+                    <svg viewBox="0 0 64 64" aria-label="ACGM 로고">
+                        <rect width="64" height="64" rx="12" fill="#163d24"/>
+                        <text x="32" y="40" text-anchor="middle"
+                              font-family="inherit" font-weight="800"
+                              font-size="19" fill="#ffffff" letter-spacing="-0.5">ACGM</text>
+                    </svg>
+                    <p class="logo-colors">${colors}</p>
+                </div>
+                <div class="logo-meaning">
+                    <p class="logo-desc">${desc}</p>
+                    <div class="logo-letters">
+                        ${letters.map(l => `
+                            <div class="logo-letter">
+                                <span class="logo-letter-mark">${l.letter}</span>
+                                <div class="logo-letter-text">
+                                    <strong>${l.word}</strong>
+                                    <span>${l.desc}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
     },
 
     _clergy() {

@@ -569,6 +569,131 @@ img { display: block; max-width: 100%; }
     line-height: 1.6;
 }
 
+/* ── Index: Brief About ──────────────────────────────────── */
+.about-brief {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+.about-brief-lead {
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+}
+.about-brief-desc {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 2rem;
+}
+.about-brief-facts {
+    list-style: none;
+    padding: 1.5rem 1.75rem;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    margin: 0 0 2rem;
+    text-align: left;
+    display: grid;
+    gap: 0.85rem;
+}
+.about-brief-facts li {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    font-size: 0.92rem;
+}
+.about-brief-facts strong {
+    min-width: 56px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--green-mid);
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+.about-brief-facts span { color: var(--text); }
+.about-brief-link {
+    display: inline-block;
+    color: var(--green-mid);
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 0.15rem;
+    transition: color 0.2s;
+}
+.about-brief-link:hover { color: var(--green-deep); }
+
+/* ── Logo Intro (clergy page) ────────────────────────────── */
+.logo-intro-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: start;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.logo-display { text-align: center; }
+.logo-display svg {
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+}
+.logo-colors {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 200px;
+}
+.logo-desc {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 1.75rem;
+}
+.logo-letters {
+    display: grid;
+    gap: 0.85rem;
+}
+.logo-letter {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+.logo-letter-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: var(--green-deep);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+.logo-letter-text { display: flex; flex-direction: column; gap: 0.2rem; }
+.logo-letter-text strong {
+    font-size: 0.95rem;
+    color: var(--green-deep);
+    font-weight: 700;
+}
+.logo-letter-text span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
 /* ── Anglican Intro Sections ─────────────────────────────── */
 .anglican-welcome {
     background: var(--green-deep);
@@ -1072,6 +1197,11 @@ footer {
 
     /* Clergy Card */
     .clergy-card { grid-template-columns: 1fr; gap: 1rem; }
+
+    /* Logo intro */
+    .logo-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .logo-display { display: flex; flex-direction: column; align-items: center; }
+    .logo-colors { max-width: unset; text-align: center; }
 
     /* Anglican intro */
     .anglican-pillars { grid-template-columns: 1fr; }
