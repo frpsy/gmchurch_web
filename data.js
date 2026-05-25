@@ -49,6 +49,19 @@ const CHURCH_DATA = {
         }
     },
 
+    logo: {
+        eyebrow: "Our Identity",
+        title: "ACGM — 광명교회의 모노그램",
+        desc: "ACGM은 광명교회의 정체성을 네 글자에 담은 모노그램입니다. <strong>A</strong>nglican <strong>C</strong>hurch of <strong>G</strong>wangmyeong, <strong>M</strong>ission — 광명에 자리한 성공회 교회의 사명을 표현합니다.",
+        letters: [
+            { letter: "A", word: "Anglican", desc: "성공회 — 말씀과 성찬을 함께 중시하는 전례 교회 전통" },
+            { letter: "C", word: "Church", desc: "교회 — 모든 사람에게 열려 있는 공번된 공동체" },
+            { letter: "G", word: "Gwangmyeong", desc: "광명(光明) — 우리가 자리한 도시이자 비추고자 하는 빛" },
+            { letter: "M", word: "Mission", desc: "사명 — 환대·평등·생명을 실천하는 부르심" }
+        ],
+        colors: "짙은 녹색은 성공회 전통과 생명의 색, 흰색은 모든 이를 향한 환대와 빛을 상징합니다."
+    },
+
     clergy: [
         {
             name: "민숙희(마가렛)",
@@ -248,8 +261,17 @@ const CHURCH_DATA = {
             href: "worship.html",
             items: [
                 { label: "주일 감사성찬례", href: "worship.html#main" },
-                { label: "어린이 예배", href: "worship.html#children" },
-                { label: "성공회 전례 안내", href: "worship.html#newcomer" }
+                { label: "어린이 예배", href: "worship.html#children" }
+            ]
+        },
+        {
+            label: "새신자",
+            href: "worship.html#newcomer",
+            items: [
+                { label: "성공회 전례 안내", href: "worship.html#newcomer" },
+                { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
+                { label: "영성체 안내", href: "worship.html#communion" },
+                { label: "처음 오신 분들께", href: "worship.html#firsttime" }
             ]
         },
         {
