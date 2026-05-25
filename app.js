@@ -566,19 +566,30 @@ const App = {
         this._handleHashScroll();
     },
 
+    _scrollToHash(hash) {
+        const el = document.querySelector(hash);
+        if (!el) return;
+        const navH = parseInt(getComputedStyle(document.documentElement)
+            .getPropertyValue('--nav-h')) || 64;
+        window.scrollTo({
+            top: el.getBoundingClientRect().top + window.scrollY - navH - 16,
+            behavior: 'smooth'
+        });
+    },
+
     _handleHashScroll() {
         const hash = window.location.hash;
         if (!hash) return;
-        setTimeout(() => {
-            const target = document.querySelector(hash);
-            if (target) {
-                const offset = parseInt(getComputedStyle(document.documentElement)
-                    .getPropertyValue('--nav-h')) || 64;
-                const top = target.getBoundingClientRect().top + window.scrollY - offset - 16;
-                window.scrollTo({ top, behavior: 'smooth' });
-            }
-        }, 80);
+        // Wait for Pretendard (CDN font) to finish loading so layout is stable
+        const ready = (document.fonts && document.fonts.ready)
+            ? document.fonts.ready
+            : Promise.resolve();
+        ready.then(() => requestAnimationFrame(() => this._scrollToHash(hash)));
     }
 };
 
-window.addEventListener('DOMContentLoaded', () => App.init());
+window.addEventListener('DOMContentLoaded', () => {
+    App.init();
+    // Handle same-page hash navigation (dropdown clicks while already on the page)
+    window.addEventListener('hashchange', () => App._scrollToHash(window.location.hash));
+});
