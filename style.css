@@ -57,6 +57,31 @@ img { display: block; max-width: 100%; }
     padding: 0 clamp(1.25rem, 5vw, 2.5rem);
 }
 
+/* ── Accessibility ───────────────────────────────────────── */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 0.6rem 1.2rem;
+    background: var(--green-deep);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    z-index: 10000;
+    transition: top 0.1s;
+}
+.skip-link:focus { top: 0; }
+
+:focus-visible {
+    outline: 3px solid var(--green-mid);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) { outline: none; }
+
 /* ── Navigation ──────────────────────────────────────────── */
 .nav-header {
     position: fixed;
