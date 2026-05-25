@@ -9,7 +9,7 @@ const CHURCH_DATA = {
         slogan: "모든 생명을 환대하는 교회",
         vision: "하느님 나라를 살아가는 사랑의 공동체",
         established: "1990년 2월 11일",
-        address: "(14335) 경기도 광명시 아방리 2길 10",
+        address: "경기도 광명시 아방리 2길 10",
         addressShort: "경기도 광명시 아방리 2길 10",
         phone: "02-2686-0091",
         fax: "02-2686-0092",
