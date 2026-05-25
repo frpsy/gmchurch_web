@@ -288,6 +288,8 @@ img { display: block; max-width: 100%; }
 .page-hero {
     padding-top: calc(var(--nav-h) + 5.5rem);
     padding-bottom: 5rem;
+    padding-left: clamp(1.25rem, 5vw, 2.5rem);
+    padding-right: clamp(1.25rem, 5vw, 2.5rem);
     text-align: center;
     background: linear-gradient(180deg, var(--green-light) 0%, var(--cream) 100%);
     border-bottom: 1px solid var(--border);
