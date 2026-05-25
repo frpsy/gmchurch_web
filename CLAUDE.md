@@ -21,6 +21,7 @@ gmchurch_web/
 ├── community.html    공동체 (희망터·엠마우스·소그룹)
 ├── visit.html        오시는 길 (지도·교통·주차)
 ├── giving.html       헌금 (봉헌 계좌)
+├── privacy.html      개인정보 처리방침 (noindex)
 ├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA
 ├── app.js            렌더러 모음 + App bootstrap
 ├── style.css         전체 스타일 (~1260줄)
@@ -243,7 +244,7 @@ window DOMContentLoaded
       │       • .dropdown a click → 모바일 메뉴 자동 닫힘
       │
       ├── FooterRenderer.render()     → #main-footer (모든 페이지)
-      │     info + clergy[0] + sns 4개 링크
+      │     info + clergy[0] + sns 4개 링크 + 개인정보 처리방침 링크
       │
       ├── IndexRenderer.render()      → index.html 전용
       │     _hero()    → #hero-title, #hero-sub

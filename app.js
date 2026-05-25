@@ -164,6 +164,7 @@ const FooterRenderer = {
                 </div>
                 <div class="footer-bottom">
                     <span>© 2026 ${info.name}. All rights reserved.</span>
+                    <a href="privacy.html">개인정보 처리방침</a>
                     <span>대한성공회 서울교구</span>
                 </div>
             </div>
