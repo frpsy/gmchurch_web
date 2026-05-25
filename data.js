@@ -135,7 +135,7 @@ const CHURCH_DATA = {
 
     sns: {
         youtube: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
-        instagram: "https://instagram.com/gmskh",
+        "naver blog": "https://blog.naver.com/moona426/223951136876",
         diocesan: "https://seoul.anglican.kr/"
     },
 
