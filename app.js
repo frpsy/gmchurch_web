@@ -487,7 +487,6 @@ const AnglicanRenderer = {
         el.innerHTML = `
             <div class="anglican-welcome">
                 <div class="container">
-                    <span class="anglican-welcome-icon">✝️</span>
                     <p>${CHURCH_DATA.anglican.welcome}</p>
                 </div>
             </div>
