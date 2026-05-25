@@ -201,7 +201,7 @@ const CHURCH_DATA = {
     giving: {
         bankName: "국민은행",
         bank: "2680-100-14008",
-        holder: "재단법인대한성공회",
+        holder: "대한성공회 광명교회",
         report: "투명한 재정 운영을 위해 분기별 사역 재정 보고를 공유합니다."
     },
 
