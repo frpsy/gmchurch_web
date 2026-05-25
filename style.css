@@ -466,6 +466,99 @@ img { display: block; max-width: 100%; }
 .clergy-title { font-size: 0.85rem; color: var(--green-mid); font-weight: 600; margin-top: 0.25rem; letter-spacing: 0.02em; }
 .clergy-desc { font-size: 0.95rem; color: var(--text); line-height: 1.85; margin-top: 1rem; opacity: 0.85; }
 
+/* ── Clergy Bio Section ──────────────────────────────────── */
+.bio-section { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.bio-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin: 0 0 0.75rem;
+}
+.bio-timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+.bio-timeline::before {
+    content: '';
+    position: absolute;
+    left: 46px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--border);
+}
+.bio-milestone {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    padding: 0.45rem 0;
+    position: relative;
+}
+.bio-year {
+    min-width: 38px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--green-mid);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    padding-right: 0.5rem;
+    text-align: right;
+    line-height: 1.6;
+}
+.bio-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--green-mid);
+    flex-shrink: 0;
+    margin: 0 0.6rem;
+    position: relative;
+    top: 1px;
+}
+.bio-text {
+    flex: 1;
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: var(--text);
+}
+.bio-first {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: var(--green-deep);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+}
+.bio-roles { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.bio-role-tag {
+    font-size: 0.78rem;
+    color: var(--green-mid);
+    background: var(--green-light);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.25rem 0.65rem;
+    white-space: nowrap;
+}
+.bio-ministry-note {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    background: var(--cream);
+    border-left: 3px solid var(--green-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 1rem 1.1rem;
+    margin-top: 1.25rem;
+}
+.bio-ministry-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.bio-ministry-note p { font-size: 0.88rem; line-height: 1.8; color: var(--text); margin: 0; }
+
 /* Bank Card */
 .bank-card {
     background: var(--green-light);
