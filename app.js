@@ -507,11 +507,39 @@ const ClergyRenderer = {
                     ${c.ordained ? `<div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">${c.ordained}</div>` : ''}
                     ${c.quote ? `<div class="quote-block"><p>"${c.quote}"</p></div>` : ''}
                     <p class="clergy-desc">${c.desc}</p>
-                    ${c.contact ? `<p style="margin-top:0.9rem; font-size:0.83rem; color:var(--green-mid);">📞 ${c.contact}</p>` : ''}
+                    ${c.bio ? this._bioSection(c.bio) : ''}
+                    ${c.contact ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">📞 ${c.contact}</p>` : ''}
                     ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">📚 <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
                 </div>
             </div>
         `).join('');
+    },
+
+    _bioSection(bio) {
+        const milestones = bio.milestones.map(m => `
+            <li class="bio-milestone">
+                <span class="bio-year">${m.year}</span>
+                <span class="bio-dot"></span>
+                <span class="bio-text">${m.text}${m.first ? ' <span class="bio-first">최초</span>' : ''}</span>
+            </li>
+        `).join('');
+
+        const roles = bio.roles.map(r =>
+            `<span class="bio-role-tag">${r}</span>`
+        ).join('');
+
+        return `
+            <div class="bio-section">
+                <p class="bio-label">주요 사목 이력</p>
+                <ul class="bio-timeline">${milestones}</ul>
+                <p class="bio-label" style="margin-top:1.5rem;">교단 내 소임</p>
+                <div class="bio-roles">${roles}</div>
+                <div class="bio-ministry-note">
+                    <span class="bio-ministry-icon">🕊</span>
+                    <p>${bio.ministryNote}</p>
+                </div>
+            </div>
+        `;
     },
 
     _philosophy() {
