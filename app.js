@@ -454,14 +454,16 @@ const VisitRenderer = {
     render() {
         const el = document.getElementById('visit-full');
         if (!el) return;
-        const { address, phone, fax } = CHURCH_DATA.info;
+        const { address, addressJibun, postalCode, phone, fax } = CHURCH_DATA.info;
 
         el.innerHTML = `
             <div class="info-card" id="location" style="max-width:760px; margin:0 auto 1.5rem;">
                 <h3>주소와 연락처</h3>
                 ${MapHelper.html(false)}
                 <div style="margin-top:1.5rem;">
-                    <div class="info-row"><strong>주소</strong><span>${address}</span></div>
+                    <div class="info-row"><strong>도로명</strong><span>${address}</span></div>
+                    <div class="info-row"><strong>지번</strong><span>${addressJibun}</span></div>
+                    <div class="info-row"><strong>우편번호</strong><span>${postalCode}</span></div>
                     <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
                     <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
                 </div>
