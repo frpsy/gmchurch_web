@@ -250,7 +250,7 @@ const CHURCH_DATA = {
             label: "교회 소개",
             href: "clergy.html",
             items: [
-                { label: "성공회 소개", href: "clergy.html#what-is-anglican" },
+                { label: "성공회란?", href: "clergy.html#what-is-anglican" },
                 { label: "관할사제", href: "clergy.html#priest" },
                 { label: "교회 철학", href: "clergy.html#philosophy" },
                 { label: "언론 보도", href: "clergy.html#press" }
@@ -265,13 +265,14 @@ const CHURCH_DATA = {
             ]
         },
         {
-            label: "새신자",
-            href: "worship.html#newcomer",
+            label: "처음 오시는 분",
+            href: "worship.html#firsttime",
             items: [
-                { label: "성공회 전례 안내", href: "worship.html#newcomer" },
-                { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
-                { label: "영성체 안내", href: "worship.html#communion" },
-                { label: "처음 오신 분들께", href: "worship.html#firsttime" }
+                { label: "처음 오신 분들께", href: "worship.html#firsttime" },
+                { label: "성공회란?", href: "clergy.html#what-is-anglican" },
+                { label: "성공회 전례란?", href: "worship.html#newcomer" },
+                { label: "예배 순서", href: "worship.html#eucharist-order" },
+                { label: "영성체 안내", href: "worship.html#communion" }
             ]
         },
         {

@@ -50,6 +50,9 @@ const NavRenderer = {
         const items = CHURCH_DATA.navigation.map(item => `
             <li class="nav-item has-dropdown">
                 <a href="${item.href}" class="nav-link">${item.label}</a>
+                <button class="nav-chevron" aria-label="${item.label} 하위 메뉴" aria-expanded="false">
+                    <svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
                 <ul class="dropdown">
                     ${item.items.map(sub =>
                         `<li><a href="${sub.href}">${sub.label}</a></li>`
@@ -102,12 +105,26 @@ const NavRenderer = {
             toggle.setAttribute('aria-expanded', isOpen);
         });
 
-        menu.querySelectorAll('.has-dropdown > .nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    link.closest('.nav-item').classList.toggle('mobile-open');
-                }
+        menu.querySelectorAll('.nav-chevron').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const item = btn.closest('.nav-item');
+                const isOpen = item.classList.toggle('mobile-open');
+                btn.setAttribute('aria-expanded', isOpen);
+                menu.querySelectorAll('.nav-item').forEach(other => {
+                    if (other !== item) {
+                        other.classList.remove('mobile-open');
+                        const otherBtn = other.querySelector('.nav-chevron');
+                        if (otherBtn) otherBtn.setAttribute('aria-expanded', false);
+                    }
+                });
+            });
+        });
+
+        menu.querySelectorAll('.dropdown a').forEach(a => {
+            a.addEventListener('click', () => {
+                menu.classList.remove('open');
+                toggle.setAttribute('aria-expanded', false);
             });
         });
 
