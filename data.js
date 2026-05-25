@@ -63,6 +63,14 @@ const CHURCH_DATA = {
     },
 
     worship: {
+        liturgicalSeason: {
+            name: "성령강림절",
+            color: "#c0390f",
+            colorLight: "#fdf2ee",
+            colorName: "적색",
+            symbol: "🔥",
+            note: "2026년 5월"
+        },
         main: [
             {
                 id: "main",
