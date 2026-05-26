@@ -270,6 +270,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* ── Hero ────────────────────────────────────────────────── */
 .hero {
     position: relative;
+    height: 100vh;
     height: 100svh;
     min-height: 560px;
     display: flex;
@@ -292,7 +293,7 @@ button:focus:not(:focus-visible) { outline: none; }
     inset: 0;
     z-index: 0;
     background:
-        url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80&fm=webp')
+        var(--green-deep) url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80&fm=webp')
         center/cover no-repeat;
     animation: hero-kenburns 24s ease-in-out infinite;
     will-change: transform;
@@ -1173,6 +1174,7 @@ footer {
         flex-direction: column;
         align-items: stretch;
         height: auto;
+        max-height: calc(100vh - var(--nav-h));
         max-height: calc(100svh - var(--nav-h));
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
@@ -1241,7 +1243,7 @@ footer {
     }
 
     /* Hero */
-    .hero { min-height: 100svh; }
+    .hero { min-height: 100vh; min-height: 100svh; }
 
     /* Clergy Card */
     .clergy-card { grid-template-columns: 1fr; gap: 1rem; }
