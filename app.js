@@ -217,7 +217,7 @@ const IndexRenderer = {
             </div>
         `).join('');
         const guide = document.getElementById('worship-guide');
-        if (guide) guide.innerHTML = `<p>${CHURCH_DATA.worship.guide}</p>`;
+        if (guide) guide.innerHTML = CHURCH_DATA.worship.guide ? `<p>${CHURCH_DATA.worship.guide}</p>` : '';
     },
 
     _community() {
@@ -285,7 +285,7 @@ const WorshipRenderer = {
                     </div>
                 `).join('')}
             </div>
-            <div class="guide-banner"><p>${guide}</p></div>
+            ${guide ? `<div class="guide-banner"><p>${guide}</p></div>` : ''}
 
             <div class="liturgy-guide" id="newcomer">
                 <div class="liturgy-season-badge">

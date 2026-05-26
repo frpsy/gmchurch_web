@@ -250,7 +250,7 @@ const CHURCH_DATA = {
                 desc: "교육관에서 어린이들의 눈높이에 맞는 전례로 함께 드립니다. 아이들이 신앙의 언어를 몸으로 배우는 시간입니다."
             }
         ],
-        guide: "처음 오시는 분도 편안하게 오세요. 누구나 환영합니다.",
+        guide: "",
         liturgyInfo: [
             {
                 id: "newcomer",
