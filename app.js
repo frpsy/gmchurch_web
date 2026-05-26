@@ -152,7 +152,8 @@ const FooterRenderer = {
                     </div>
                     <div class="footer-col">
                         <h4>오시는 길</h4>
-                        <p>${info.addressShort}<br><a href="tel:${info.phone}" style="color:inherit;">Tel. ${info.phone}</a></p>
+                        <p style="margin-bottom:0.6rem;">주소<br>${info.addressShort}</p>
+                        <p>연락처<br><a href="tel:${info.phone}" style="color:inherit;">Tel. ${info.phone}</a></p>
                     </div>
                     <div class="footer-col">
                         <h4>바로가기</h4>
