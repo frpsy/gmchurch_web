@@ -384,6 +384,23 @@ document.readyState === 'loading' ? DOMContentLoaded : 즉시
 
 ## style.css 주요 컴포넌트
 
+### CSS 레이어 구조 (R-2 이후)
+
+```css
+@layer reset, tokens, base, layout, components, utilities;
+```
+
+| 레이어 | 내용 |
+|--------|------|
+| `tokens` | `:root` CSS 변수 |
+| `reset` | `*`, `html`, `body`, `a`, `img` 기본값 초기화 |
+| `base` | `.skip-link`, `:focus-visible`, 접근성 기반 |
+| `layout` | `.container`, `.section`, `.grid`, `@supports` |
+| `components` | 네비게이션 ~ 푸터 전체 컴포넌트, `@media` 오버라이드 |
+| `utilities` | `.text-muted` |
+
+우선순위: `utilities` > `components` > `layout` > `base` > `tokens` > `reset`
+
 ### CSS 변수
 
 ```css
@@ -427,7 +444,7 @@ document.readyState === 'loading' ? DOMContentLoaded : 즉시
 | `.bio-first` | '최초' 배지 |
 | `.bio-roles` / `.bio-role-tag` | 소임 태그 그룹 |
 | `.bio-source` | 출처 각주 |
-| `.liturgy-guide` | 전례 가이드 전체 래퍼 |
+| `.liturgy-guide` | 전례 가이드 전체 래퍼 (max-width 760px) |
 | `.liturgy-season-badge` | 현재 절기 배지 (색·심볼·절기명) |
 | `.liturgy-steps` / `.liturgy-step` | 감사성찬례 4단계 |
 | `.communion-grid` / `.communion-card` | 영성체 안내 카드 |

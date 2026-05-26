@@ -1,9 +1,14 @@
 /* ==========================================================
    style.css — 대한성공회 광명교회
-   SOLID: Open/Closed — 컴포넌트 단위로 확장 가능한 구조
    ========================================================== */
 
-/* ── Variables ───────────────────────────────────────────── */
+@layer reset, tokens, base, layout, components, utilities;
+
+/* ════════════════════════════════════════════════════════════
+   @layer tokens — CSS 변수 / 디자인 토큰
+   ════════════════════════════════════════════════════════════ */
+@layer tokens {
+
 :root {
     /* Primary palette — refined forest green */
     --green-deep:   #163d24;
@@ -33,7 +38,13 @@
     --shadow-lg:    0 12px 36px rgba(20, 35, 25, 0.08);
 }
 
-/* ── Reset ───────────────────────────────────────────────── */
+} /* end @layer tokens */
+
+/* ════════════════════════════════════════════════════════════
+   @layer reset — 브라우저 기본값 초기화
+   ════════════════════════════════════════════════════════════ */
+@layer reset {
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
@@ -49,15 +60,13 @@ body {
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 
-/* ── Layout ──────────────────────────────────────────────── */
-.container {
-    width: 100%;
-    max-width: var(--content-max);
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 5vw, 2.5rem);
-}
+} /* end @layer reset */
 
-/* ── Accessibility ───────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════════
+   @layer base — 접근성 · 공통 기반
+   ════════════════════════════════════════════════════════════ */
+@layer base {
+
 .skip-link {
     position: absolute;
     top: -100%;
@@ -81,6 +90,70 @@ img { display: block; max-width: 100%; }
 }
 a:focus:not(:focus-visible),
 button:focus:not(:focus-visible) { outline: none; }
+
+} /* end @layer base */
+
+/* ════════════════════════════════════════════════════════════
+   @layer layout — 구조 레이아웃
+   ════════════════════════════════════════════════════════════ */
+@layer layout {
+
+.container {
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+}
+
+.section { padding: var(--section-pad) 0; }
+
+.section-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 0.85rem;
+    font-weight: 600;
+}
+.section-title {
+    font-size: clamp(1.75rem, 3.6vw, 2.4rem);
+    font-weight: 700;
+    color: var(--green-deep);
+    letter-spacing: -0.025em;
+    margin-bottom: 0.65rem;
+    line-height: 1.25;
+}
+.section-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    line-height: 1.7;
+}
+.section-header { margin-bottom: 4rem; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    :root { --section-pad: 4rem; }
+}
+
+@supports (padding: env(safe-area-inset-left)) {
+    .container {
+        padding-left: max(clamp(1.25rem, 5vw, 2.5rem), env(safe-area-inset-left));
+        padding-right: max(clamp(1.25rem, 5vw, 2.5rem), env(safe-area-inset-right));
+    }
+}
+
+} /* end @layer layout */
+
+/* ════════════════════════════════════════════════════════════
+   @layer components — UI 컴포넌트
+   ════════════════════════════════════════════════════════════ */
+@layer components {
 
 /* ── Navigation ──────────────────────────────────────────── */
 .nav-header {
@@ -171,20 +244,6 @@ button:focus:not(:focus-visible) { outline: none; }
     background: var(--green-light);
     padding-left: 1.6rem;
 }
-
-/* Live button */
-.btn-nav-live {
-    flex-shrink: 0;
-    background: var(--red);
-    color: #fff;
-    padding: 0.45rem 1.1rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    white-space: nowrap;
-    transition: background 0.2s;
-}
-.btn-nav-live:hover { background: #9b1c1c; }
 
 /* Dropdown chevron (mobile-only toggle) */
 .nav-chevron {
@@ -339,40 +398,6 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: 1.7;
 }
 
-/* ── Sections ────────────────────────────────────────────── */
-.section { padding: var(--section-pad) 0; }
-
-.section-eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--green-mid);
-    margin-bottom: 0.85rem;
-    font-weight: 600;
-}
-.section-title {
-    font-size: clamp(1.75rem, 3.6vw, 2.4rem);
-    font-weight: 700;
-    color: var(--green-deep);
-    letter-spacing: -0.025em;
-    margin-bottom: 0.65rem;
-    line-height: 1.25;
-}
-.section-sub {
-    font-size: 1rem;
-    color: var(--text-muted);
-    max-width: 560px;
-    line-height: 1.7;
-}
-.section-header { margin-bottom: 4rem; }
-
-/* ── Grid ────────────────────────────────────────────────── */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: 1.5rem;
-}
-
 /* ── Cards ───────────────────────────────────────────────── */
 .card {
     padding: 2.25rem 2rem;
@@ -517,7 +542,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .clergy-title { font-size: 0.85rem; color: var(--green-mid); font-weight: 600; margin-top: 0.25rem; letter-spacing: 0.02em; }
 .clergy-desc { font-size: 0.95rem; color: var(--text); line-height: 1.85; margin-top: 1rem; opacity: 0.85; }
 
-/* ── Clergy Bio Section ──────────────────────────────────── */
+/* Clergy Bio Section */
 .bio-section { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
 .bio-label {
     font-size: 0.7rem;
@@ -618,7 +643,7 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: 1.6;
 }
 
-/* ── Index: Brief About ──────────────────────────────────── */
+/* Index: Brief About */
 .about-brief {
     max-width: 760px;
     margin: 0 auto;
@@ -676,7 +701,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .about-brief-link:hover { color: var(--green-deep); }
 
-/* ── Logo Intro (clergy page) ────────────────────────────── */
+/* Logo Intro (clergy page) */
 .logo-intro-grid {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -743,7 +768,7 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: 1.6;
 }
 
-/* ── Anglican Intro Sections ─────────────────────────────── */
+/* Anglican Intro Sections */
 .anglican-welcome {
     background: var(--green-deep);
     color: rgba(255,255,255,0.9);
@@ -754,7 +779,6 @@ button:focus:not(:focus-visible) { outline: none; }
     align-items: center;
     gap: 1rem;
 }
-.anglican-welcome-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
 .anglican-welcome p {
     font-size: 0.92rem;
     line-height: 1.75;
@@ -857,7 +881,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .bank-card .sub { font-size: 0.85rem; color: var(--green-mid); margin-top: 0.35rem; }
 
-/* ── Bus Chips ──────────────────────────────────────────── */
+/* Bus Chips */
 .bus-list {
     display: inline-flex;
     flex-wrap: wrap;
@@ -877,7 +901,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .bus-chip.bus-blue  { background: #2c6aa6; }
 .bus-chip.bus-green { background: #3d6b4a; }
 
-/* ── Press List ─────────────────────────────────────────── */
+/* Press List */
 .press-list {
     list-style: none;
     background: var(--white);
@@ -926,7 +950,7 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--text-muted);
 }
 
-/* ── Liturgy Guide ──────────────────────────────────────── */
+/* Liturgy Guide */
 .liturgy-guide {
     max-width: 760px;
     margin: 4rem auto 0;
@@ -955,26 +979,6 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--text-muted);
     font-weight: 400;
     margin-left: 0.25rem;
-}
-.liturgy-quote {
-    border-left: 3px solid;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    padding: 1.5rem 2rem;
-    margin-bottom: 3.5rem;
-}
-.liturgy-quote p {
-    font-size: 1.05rem;
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.8;
-    font-weight: 500;
-}
-.liturgy-quote cite {
-    display: block;
-    margin-top: 0.55rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-style: normal;
 }
 .liturgy-section { margin-bottom: 3.5rem; }
 .liturgy-body {
@@ -1115,30 +1119,7 @@ button:focus:not(:focus-visible) { outline: none; }
     margin: 0;
 }
 
-/* Closing meditation */
-.liturgy-closing {
-    border: 1px solid;
-    border-radius: var(--radius-lg);
-    padding: 2.5rem 2.25rem;
-    margin-top: 1rem;
-    text-align: center;
-}
-.liturgy-closing h3 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--green-deep);
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.01em;
-}
-.closing-body p {
-    font-size: 0.95rem;
-    color: var(--text);
-    line-height: 2.05;
-    margin-bottom: 1.2rem;
-}
-.closing-body p:last-child { margin-bottom: 0; }
-
-/* ── Footer ──────────────────────────────────────────────── */
+/* Footer */
 footer {
     background: var(--green-deep);
     color: rgba(255,255,255,0.65);
@@ -1180,20 +1161,10 @@ footer {
     opacity: 0.45;
 }
 
-/* ── Utilities ───────────────────────────────────────────── */
-.text-muted { color: var(--text-muted); }
-.mt-1 { margin-top: 1rem; }
-.mt-2 { margin-top: 2rem; }
-
-/* ── Mobile ──────────────────────────────────────────────── */
+/* Mobile overrides */
 @media (max-width: 768px) {
-    :root {
-        --section-pad: 4rem;
-    }
-
     /* Nav */
     .nav-toggle { display: flex; }
-    .btn-nav-live { display: none; }
     .nav-menu {
         display: none;
         position: fixed;
@@ -1298,10 +1269,13 @@ footer {
     .btn-live, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
 }
 
-/* Safe area (iPhone notch / home indicator) */
-@supports (padding: env(safe-area-inset-left)) {
-    .container {
-        padding-left: max(clamp(1.25rem, 5vw, 2.5rem), env(safe-area-inset-left));
-        padding-right: max(clamp(1.25rem, 5vw, 2.5rem), env(safe-area-inset-right));
-    }
-}
+} /* end @layer components */
+
+/* ════════════════════════════════════════════════════════════
+   @layer utilities — 유틸리티 클래스
+   ════════════════════════════════════════════════════════════ */
+@layer utilities {
+
+.text-muted { color: var(--text-muted); }
+
+} /* end @layer utilities */
