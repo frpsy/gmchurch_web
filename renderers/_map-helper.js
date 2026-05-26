@@ -24,7 +24,7 @@ export const MapHelper = {
                     style="display:block;"
                 ></iframe>
             </div>
-            <a href="${this.linkUrl}" target="_blank" rel="noopener"
+            <a href="${this.linkUrl}" target="_blank" rel="noopener noreferrer"
                style="display:inline-flex; align-items:center; gap:0.4rem;
                       color:var(--green-mid); font-weight:700; font-size:0.88rem;">
                 카카오지도에서 크게 보기 →

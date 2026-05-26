@@ -14,7 +14,7 @@ export const PressRenderer = {
                     <li class="press-item">
                         <span class="press-year">${p.year}</span>
                         <div class="press-main">
-                            <a href="${p.url}" target="_blank" rel="noopener" class="press-link">${p.title}</a>
+                            <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="press-link">${p.title}</a>
                             <span class="press-meta">${p.media} · ${p.date}</span>
                         </div>
                     </li>
