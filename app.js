@@ -67,9 +67,9 @@ const NavRenderer = {
                     <span class="nav-logo-mark" aria-hidden="true">
                         <svg viewBox="0 0 64 64" focusable="false">
                             <rect width="64" height="64" rx="12" fill="#ffffff"/>
-                            <text x="32" y="40" text-anchor="middle"
+                            <text x="32" y="42" text-anchor="middle"
                                   font-family="inherit" font-weight="800"
-                                  font-size="19" fill="#1b4d2e" letter-spacing="-0.5">ACGM</text>
+                                  font-size="22" fill="#1b4d2e" letter-spacing="-0.5">ACG</text>
                         </svg>
                     </span>
                     <span class="nav-logo-text">
@@ -604,11 +604,11 @@ const ClergyRenderer = {
             </div>
             <div class="logo-intro-grid">
                 <div class="logo-display">
-                    <svg viewBox="0 0 64 64" aria-label="ACGM 로고">
+                    <svg viewBox="0 0 64 64" aria-label="ACG 로고">
                         <rect width="64" height="64" rx="12" fill="#163d24"/>
-                        <text x="32" y="40" text-anchor="middle"
+                        <text x="32" y="42" text-anchor="middle"
                               font-family="inherit" font-weight="800"
-                              font-size="19" fill="#ffffff" letter-spacing="-0.5">ACGM</text>
+                              font-size="22" fill="#ffffff" letter-spacing="-0.5">ACG</text>
                     </svg>
                     <p class="logo-colors">${colors}</p>
                 </div>
