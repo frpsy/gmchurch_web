@@ -395,3 +395,8 @@ const CHURCH_DATA = {
         }
     ]
 };
+
+// Expose globals so ES Module renderers can access them
+// (const declarations in classic scripts don't attach to window automatically)
+window.CHURCH_DATA = CHURCH_DATA;
+window.LiturgicalCalendar = LiturgicalCalendar;
