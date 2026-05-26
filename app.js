@@ -217,7 +217,13 @@ const IndexRenderer = {
             </div>
         `).join('');
         const guide = document.getElementById('worship-guide');
-        if (guide) guide.innerHTML = CHURCH_DATA.worship.guide ? `<p>${CHURCH_DATA.worship.guide}</p>` : '';
+        if (guide) {
+            if (CHURCH_DATA.worship.guide) {
+                guide.innerHTML = `<p>${CHURCH_DATA.worship.guide}</p>`;
+            } else {
+                guide.hidden = true;
+            }
+        }
     },
 
     _community() {
