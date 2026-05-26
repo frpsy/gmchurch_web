@@ -22,15 +22,34 @@ gmchurch_web/
 ├── visit.html        오시는 길 (지도·교통·주차)
 ├── giving.html       헌금 (봉헌 계좌)
 ├── privacy.html      개인정보 처리방침 (noindex)
-├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA
-├── app.js            렌더러 모음 + App bootstrap
-├── style.css         전체 스타일 (~1260줄)
+├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA (classic script, window.CHURCH_DATA 노출)
+├── app.js            ES Module bootstrap — 렌더러 import + App.init()
+├── renderers/        ★ 렌더러별 ES Module 분리 (R-1 리팩토링)
+│   ├── _map-helper.js   MapHelper 유틸 (IndexRenderer, VisitRenderer 공용)
+│   ├── nav.js           NavRenderer
+│   ├── footer.js        FooterRenderer
+│   ├── index.js         IndexRenderer (홈 페이지)
+│   ├── worship.js       WorshipRenderer
+│   ├── community.js     CommunityRenderer
+│   ├── giving.js        GivingRenderer
+│   ├── visit.js         VisitRenderer
+│   ├── clergy.js        AnglicanRenderer + ClergyRenderer (clergy.html 공용)
+│   └── press.js         PressRenderer
+├── style.css         전체 스타일 (~1300줄)
 ├── favicon.svg
+├── docs/             분석·리팩토링 문서
 └── CLAUDE.md         (이 파일)
 ```
 
-**스크립트 로드 순서**: 모든 HTML 공통 — `data.js` → `app.js`  
-`data.js`가 먼저 로드되어 `CHURCH_DATA` / `LiturgicalCalendar` 전역 변수를 정의하고, `app.js`가 이를 참조해 렌더링함.
+**스크립트 로드 순서**: 모든 HTML 공통
+```html
+<script src="data.js"></script>                  <!-- classic, 동기 실행 -->
+<script type="module" src="app.js"></script>    <!-- module, defer 자동 -->
+```
+
+`data.js`가 먼저 동기 로드되어 `window.CHURCH_DATA` / `window.LiturgicalCalendar`를 노출하고, `app.js`(module)가 deferred 로드되며 `renderers/*.js`를 import해서 `window.CHURCH_DATA`를 참조해 렌더링한다.
+
+> **빌드 도구 없음** — 브라우저 네이티브 ES Module만 사용. 로컬 개발 시에는 file:// 가 아닌 HTTP 서버 필요 (예: `python3 -m http.server`).
 
 ---
 
@@ -232,8 +251,21 @@ const CHURCH_DATA = {
 
 ## app.js 렌더러 구조
 
+> R-1 리팩토링 (2026-05) 이후: 각 렌더러는 `renderers/<name>.js` ES Module로 분리. `app.js`는 bootstrap만 담당.
+
 ```
-window DOMContentLoaded
+app.js  (ES Module)
+├── import { NavRenderer }       from './renderers/nav.js'
+├── import { FooterRenderer }    from './renderers/footer.js'
+├── import { IndexRenderer }     from './renderers/index.js'      // _map-helper 사용
+├── import { WorshipRenderer }   from './renderers/worship.js'
+├── import { CommunityRenderer } from './renderers/community.js'
+├── import { GivingRenderer }    from './renderers/giving.js'
+├── import { VisitRenderer }     from './renderers/visit.js'      // _map-helper 사용
+├── import { AnglicanRenderer, ClergyRenderer } from './renderers/clergy.js'
+└── import { PressRenderer }     from './renderers/press.js'
+
+document.readyState === 'loading' ? DOMContentLoaded : 즉시
 └── App.init()
       ├── NavRenderer.render()        → #main-nav (모든 페이지)
       │     _bindEvents()
