@@ -99,6 +99,41 @@ const LiturgicalCalendar = (() => {
 
 ---
 
+### JSDoc 타입 + 런타임 검증 (R-5 이후)
+
+`data.js` 상단에 `@typedef` 블록이 정의되어 있어 VS Code 등에서 자동완성·타입 추론을 받을 수 있다. 주요 타입:
+
+```
+ChurchData
+├─ ChurchInfo (info)        + GeoCoordinates, AddressDetail
+├─ Anglican (anglican)      + AnglicanWhat, AnglicanPillar, AnglicanKorea, AnglicanHighlight
+├─ Logo (logo)              + LogoLetter
+├─ Clergy[] (clergy)        + ClergyBio, BioMilestone, BioSource
+├─ MinisterCategory[] (ministerSection.categories)
+├─ Philosophy (philosophy)  + PhilosophyValue
+├─ Worship (worship)        + WorshipMain, LiturgyInfo, LiturgicalSeasonInfo
+├─ Community (community)    + CommunityGroup
+├─ Giving (giving)
+├─ Sns (sns)
+├─ PressItem[] (press)
+└─ NavItem[] (navigation)   + NavSubItem
+```
+
+`window.validateChurchData()` — 누락·잘못된 필드를 콘솔에 보고 (비파괴적). data.js 로드 직후 자동 실행되며, 문제가 없으면 무음.
+
+```js
+validateChurchData()  // { valid: true, errors: [], warnings: [] }
+```
+
+검사 항목:
+- 최상위 키 12종 존재 (`info, anglican, logo, ministerSection, clergy, philosophy, worship, community, giving, sns, press, navigation`)
+- `info` 필수 필드 + `geo.{latitude, longitude}` 숫자 타입
+- `clergy[].name` 필수, `category`가 `ministerSection.categories`에 존재
+- `navigation[].label/href` + 하위 `items[].label/href` 모두 존재
+- `press[].url` http(s):// 스킴
+- `worship.liturgicalSeason` 5개 필드 존재
+- `sns` 4채널 URL
+
 ### CHURCH_DATA 스키마
 
 ```javascript
