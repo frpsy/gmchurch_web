@@ -345,7 +345,7 @@ const CHURCH_DATA = {
             items: [
                 { label: "성공회란?",   href: "clergy.html#what-is-anglican" },
                 { label: "대한성공회",  href: "clergy.html#ack" },
-                { label: "관할사제",   href: "clergy.html#priest" },
+                { label: "섬기는 이들", href: "clergy.html#priest-section" },
                 { label: "교회 철학",  href: "clergy.html#philosophy" },
                 { label: "로고 소개",  href: "clergy.html#logo-intro" },
                 { label: "언론 보도",  href: "clergy.html#press" }
