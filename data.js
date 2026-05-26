@@ -1,6 +1,254 @@
 /**
  * [ChurchData] Single source of truth
  * SOLID: Single Responsibility — 모든 콘텐츠 데이터만 담당
+ *
+ * R-5: JSDoc @typedef 스키마 정의 + validateChurchData() 런타임 검증.
+ * 빌드 도구 없이도 IDE/에디터에서 자동완성·타입 추론을 받을 수 있다.
+ */
+
+/**
+ * @typedef {Object} GeoCoordinates
+ * @property {number} latitude
+ * @property {number} longitude
+ */
+
+/**
+ * @typedef {Object} AddressDetail
+ * @property {string} sido
+ * @property {string} sigungu
+ * @property {string} eupmyeondong
+ * @property {string} jibun
+ * @property {string} road
+ */
+
+/**
+ * @typedef {Object} ChurchInfo
+ * @property {string} name           정식 명칭
+ * @property {string} subName        성당명 (성 디모테오 성당 등)
+ * @property {string} slogan
+ * @property {string} vision
+ * @property {string} established    설립일 (자연어)
+ * @property {string} address        도로명 주소 (전체)
+ * @property {string} addressShort
+ * @property {string} postalCode
+ * @property {string} addressJibun
+ * @property {AddressDetail} addressDetail
+ * @property {GeoCoordinates} geo
+ * @property {string} phone          tel: 링크용 (하이픈 포함)
+ * @property {string} fax
+ * @property {string} email
+ */
+
+/**
+ * @typedef {Object} AnglicanPillar
+ * @property {string} icon
+ * @property {string} title
+ * @property {string} desc
+ */
+
+/**
+ * @typedef {Object} AnglicanWhat
+ * @property {string} eyebrow
+ * @property {string} title
+ * @property {string[]} paras
+ * @property {AnglicanPillar[]} pillars   3기둥 — 성경·전통·이성
+ * @property {string} pillarNote
+ */
+
+/**
+ * @typedef {Object} AnglicanHighlight
+ * @property {string} icon
+ * @property {string} text
+ */
+
+/**
+ * @typedef {Object} AnglicanKorea
+ * @property {string} eyebrow
+ * @property {string} title
+ * @property {string} founded   창립연도 (문자열)
+ * @property {string[]} paras
+ * @property {AnglicanHighlight[]} highlights
+ */
+
+/**
+ * @typedef {Object} Anglican
+ * @property {string} welcome
+ * @property {AnglicanWhat} what
+ * @property {AnglicanKorea} korea
+ */
+
+/**
+ * @typedef {Object} LogoLetter
+ * @property {string} letter   단일 문자 (A·C·G·M)
+ * @property {string} word     영문 풀어쓰기
+ * @property {string} desc
+ */
+
+/**
+ * @typedef {Object} Logo
+ * @property {string} eyebrow
+ * @property {string} title
+ * @property {string} desc
+ * @property {LogoLetter[]} letters
+ * @property {string} colors
+ */
+
+/**
+ * @typedef {Object} MinisterCategory
+ * @property {string} id      "성직자" | "사역자" | "교회위원"
+ * @property {string} title
+ */
+
+/**
+ * @typedef {Object} BioMilestone
+ * @property {string}  year
+ * @property {string}  text
+ * @property {boolean} [first]   true이면 '최초' 배지 표시
+ */
+
+/**
+ * @typedef {Object} BioSource
+ * @property {string} title
+ * @property {string} author
+ * @property {string} publisher
+ * @property {string} year
+ */
+
+/**
+ * @typedef {Object} ClergyBio
+ * @property {BioMilestone[]} milestones
+ * @property {string[]}       roles
+ * @property {string}         ministryNote
+ * @property {BioSource}      [source]
+ */
+
+/**
+ * @typedef {Object} Clergy
+ * @property {string}     category    "성직자" | "사역자" | "교회위원"
+ * @property {string}     name
+ * @property {string}     title
+ * @property {string}     [ordained]
+ * @property {string}     [quote]
+ * @property {string}     desc
+ * @property {string}     [contact]   tel: 링크용 (없으면 빈 문자열)
+ * @property {string}     [kyoboUrl]  저서 외부 링크
+ * @property {ClergyBio}  [bio]
+ */
+
+/**
+ * @typedef {Object} PhilosophyValue
+ * @property {string} icon
+ * @property {string} title
+ * @property {string} desc
+ */
+
+/**
+ * @typedef {Object} Philosophy
+ * @property {string} title
+ * @property {PhilosophyValue[]} values
+ */
+
+/**
+ * @typedef {Object} LiturgicalSeasonInfo
+ * @property {string} name         절기명 (한국어)
+ * @property {string} colorName    절기색명 (자색·백색·녹색·적색)
+ * @property {string} color        HEX
+ * @property {string} colorLight   HEX (배경용)
+ * @property {string} symbol       이모지
+ * @property {string} note         부가 설명
+ * @property {number} [year]
+ * @property {string} [dateLabel]
+ */
+
+/**
+ * @typedef {Object} WorshipMain
+ * @property {string} id
+ * @property {string} title
+ * @property {string} time
+ * @property {string} desc
+ */
+
+/**
+ * @typedef {Object} LiturgyInfo
+ * @property {string} [id]
+ * @property {string} title
+ * @property {string} desc
+ */
+
+/**
+ * @typedef {Object} Worship
+ * @property {LiturgicalSeasonInfo} liturgicalSeason
+ * @property {WorshipMain[]} main
+ * @property {string} guide
+ * @property {LiturgyInfo[]} liturgyInfo
+ */
+
+/**
+ * @typedef {Object} CommunityGroup
+ * @property {string} id
+ * @property {string} title
+ * @property {string} desc
+ * @property {string} icon
+ */
+
+/**
+ * @typedef {Object} Community
+ * @property {CommunityGroup[]} groups
+ */
+
+/**
+ * @typedef {Object} Giving
+ * @property {string} bankName
+ * @property {string} bank
+ * @property {string} holder
+ * @property {string} report
+ */
+
+/**
+ * @typedef {Object} Sns
+ * @property {string} youtube
+ * @property {string} instagram
+ * @property {string} "naver blog"
+ * @property {string} diocesan
+ */
+
+/**
+ * @typedef {Object} PressItem
+ * @property {string} year
+ * @property {string} media
+ * @property {string} title
+ * @property {string} date
+ * @property {string} url
+ */
+
+/**
+ * @typedef {Object} NavSubItem
+ * @property {string} label
+ * @property {string} href
+ */
+
+/**
+ * @typedef {Object} NavItem
+ * @property {string} label
+ * @property {string} href
+ * @property {NavSubItem[]} items
+ */
+
+/**
+ * @typedef {Object} ChurchData
+ * @property {ChurchInfo}            info
+ * @property {Anglican}              anglican
+ * @property {Logo}                  logo
+ * @property {{categories:MinisterCategory[]}} ministerSection
+ * @property {Clergy[]}              clergy
+ * @property {Philosophy}            philosophy
+ * @property {Worship}               worship
+ * @property {Community}             community
+ * @property {Giving}                giving
+ * @property {Sns}                   sns
+ * @property {string}                liveUrl
+ * @property {PressItem[]}           press
+ * @property {NavItem[]}             navigation
  */
 
 /**
@@ -396,7 +644,105 @@ const CHURCH_DATA = {
     ]
 };
 
+/**
+ * 런타임 스키마 검증 — CHURCH_DATA 누락/잘못된 필드를 감지해 콘솔에 보고.
+ * 비파괴적: 오류가 있어도 렌더링은 진행되며 콘솔 에러로만 노출됨.
+ *
+ * @param {ChurchData} [data=CHURCH_DATA]
+ * @returns {{valid: boolean, errors: string[], warnings: string[]}}
+ */
+function validateChurchData(data = CHURCH_DATA) {
+    const errors = [];
+    const warnings = [];
+
+    const required = ['info','anglican','logo','ministerSection','clergy','philosophy',
+                      'worship','community','giving','sns','press','navigation'];
+    required.forEach(k => {
+        if (!(k in data)) errors.push(`CHURCH_DATA.${k}: 누락`);
+    });
+
+    // info — 사이트 식별·연락
+    if (data.info) {
+        ['name','subName','slogan','phone','address','postalCode','email'].forEach(k => {
+            if (!data.info[k]) errors.push(`info.${k}: 비어있음`);
+        });
+        if (data.info.geo) {
+            const { latitude, longitude } = data.info.geo;
+            if (typeof latitude !== 'number' || typeof longitude !== 'number') {
+                errors.push('info.geo.{latitude,longitude}: number 필수');
+            }
+        } else errors.push('info.geo: 누락');
+    }
+
+    // clergy — 카테고리·이름 필수
+    if (Array.isArray(data.clergy)) {
+        const validCats = new Set(((data.ministerSection || {}).categories || []).map(c => c.id));
+        data.clergy.forEach((c, i) => {
+            if (!c.name)     errors.push(`clergy[${i}].name: 비어있음`);
+            if (!c.title)    warnings.push(`clergy[${i}].title: 비어있음`);
+            if (!c.category) errors.push(`clergy[${i}].category: 누락 — ministerSection 그룹핑 필요`);
+            else if (validCats.size && !validCats.has(c.category)) {
+                warnings.push(`clergy[${i}].category="${c.category}": ministerSection.categories에 없는 ID`);
+            }
+        });
+    } else errors.push('clergy: 배열이어야 함');
+
+    // navigation — 내부 링크 무결성
+    if (Array.isArray(data.navigation)) {
+        data.navigation.forEach((n, i) => {
+            if (!n.label) errors.push(`navigation[${i}].label: 누락`);
+            if (!n.href)  errors.push(`navigation[${i}].href: 누락`);
+            if (Array.isArray(n.items)) {
+                n.items.forEach((s, j) => {
+                    if (!s.label) errors.push(`navigation[${i}].items[${j}].label: 누락`);
+                    if (!s.href)  errors.push(`navigation[${i}].items[${j}].href: 누락`);
+                });
+            }
+        });
+    }
+
+    // press — 외부 URL 필수
+    if (Array.isArray(data.press)) {
+        data.press.forEach((p, i) => {
+            if (!p.url)   errors.push(`press[${i}].url: 누락`);
+            if (!p.title) errors.push(`press[${i}].title: 누락`);
+            if (p.url && !/^https?:\/\//.test(p.url)) {
+                warnings.push(`press[${i}].url="${p.url}": http(s):// 스킴 권장`);
+            }
+        });
+    }
+
+    // worship.liturgicalSeason — LiturgicalCalendar.compute() 산출물
+    const s = data.worship && data.worship.liturgicalSeason;
+    if (!s) errors.push('worship.liturgicalSeason: 누락 (LiturgicalCalendar.compute() 호출 확인)');
+    else {
+        ['name','colorName','color','colorLight','symbol'].forEach(k => {
+            if (!s[k]) errors.push(`worship.liturgicalSeason.${k}: 누락`);
+        });
+    }
+
+    // SNS — 4개 채널 URL
+    if (data.sns) {
+        ['youtube','instagram','naver blog','diocesan'].forEach(k => {
+            if (!data.sns[k]) warnings.push(`sns["${k}"]: 비어있음`);
+        });
+    }
+
+    // Logging — 문제 있을 때만 출력 (정상 시 무음)
+    if (errors.length || warnings.length) {
+        const prefix = '[CHURCH_DATA]';
+        errors.forEach(e   => console.error(prefix, e));
+        warnings.forEach(w => console.warn(prefix,  w));
+    }
+
+    return { valid: errors.length === 0, errors, warnings };
+}
+
 // Expose globals so ES Module renderers can access them
 // (const declarations in classic scripts don't attach to window automatically)
-window.CHURCH_DATA = CHURCH_DATA;
+window.CHURCH_DATA        = CHURCH_DATA;
 window.LiturgicalCalendar = LiturgicalCalendar;
+window.validateChurchData = validateChurchData;
+
+// 로드 시점 자동 검증 (비파괴적)
+validateChurchData();
