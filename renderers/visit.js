@@ -34,11 +34,11 @@ export const VisitRenderer = {
                     <strong>버스</strong>
                     <span>
                         가까운 정류장: <strong>온신초등학교앞</strong>
-                        <span class="bus-list">
-                            <span class="bus-chip bus-blue">505</span>
-                            <span class="bus-chip bus-green">5627</span>
-                            <span class="bus-chip bus-green">5633</span>
-                            <span class="bus-chip bus-green">6637</span>
+                        <span class="bus-list" role="list" aria-label="버스 노선 목록">
+                            <span class="bus-chip bus-blue" role="listitem" aria-label="간선버스 505번">505</span>
+                            <span class="bus-chip bus-green" role="listitem" aria-label="지선버스 5627번">5627</span>
+                            <span class="bus-chip bus-green" role="listitem" aria-label="지선버스 5633번">5633</span>
+                            <span class="bus-chip bus-green" role="listitem" aria-label="지선버스 6637번">6637</span>
                         </span>
                         <span style="display:block; font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
                             서울역·구로디지털단지·목동 방면에서 접근 가능합니다.
