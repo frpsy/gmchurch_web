@@ -148,11 +148,11 @@ const FooterRenderer = {
                 <div class="footer-inner">
                     <div class="footer-col">
                         <h4>광명교회</h4>
-                        <p>${info.name}<br>${info.subName}<br>설립 ${info.established}</p>
+                        <p>${info.name}<br>${info.subName}<br>설립 ${info.established}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
                     </div>
                     <div class="footer-col">
-                        <h4>연락처</h4>
-                        <p>${info.addressShort}<br><a href="tel:${info.phone}" style="color:inherit;">Tel. ${info.phone}</a><br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
+                        <h4>오시는 길</h4>
+                        <p>${info.addressShort}<br><a href="tel:${info.phone}" style="color:inherit;">Tel. ${info.phone}</a></p>
                     </div>
                     <div class="footer-col">
                         <h4>바로가기</h4>
