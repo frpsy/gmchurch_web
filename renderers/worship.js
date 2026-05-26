@@ -28,8 +28,8 @@ export const WorshipRenderer = {
             ${guide ? `<div class="guide-banner"><p>${guide}</p></div>` : ''}
 
             <div class="liturgy-guide" id="newcomer">
-                <div class="liturgy-season-badge">
-                    <span class="season-dot" style="background:${s.color};"></span>
+                <div class="liturgy-season-badge" role="status" aria-label="현재 전례 절기: ${s.name}, 절기색: ${s.colorName}">
+                    <span class="season-dot" style="background:${s.color};" aria-hidden="true"></span>
                     ${s.symbol}&nbsp;${s.name}&nbsp;·&nbsp;<span style="color:${s.color}; font-weight:700;">${s.colorName}</span>
                     <span class="season-note">${s.note}</span>
                 </div>

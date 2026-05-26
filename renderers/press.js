@@ -9,7 +9,7 @@ export const PressRenderer = {
         const el = document.getElementById('press-table');
         if (!el || !CHURCH_DATA.press) return;
         el.innerHTML = `
-            <ul class="press-list">
+            <ul class="press-list" aria-label="민숙희 사제 관련 언론 보도 목록">
                 ${CHURCH_DATA.press.map(p => `
                     <li class="press-item">
                         <span class="press-year">${p.year}</span>
