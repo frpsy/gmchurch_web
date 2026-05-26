@@ -229,6 +229,12 @@ button:focus:not(:focus-visible) { outline: none; }
     100% { transform: scale(1.06) translate(0,      0);     }
 }
 
+/* Hero text entrance — staggered fade-up */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 .hero-fallback {
     position: absolute;
     inset: 0;
@@ -263,6 +269,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* 모션 감소 선호 → 애니메이션 정지 */
 @media (prefers-reduced-motion: reduce) {
     .hero-fallback { animation: none; }
+    .hero-label, .hero h1, .hero-sub, .hero-actions { animation: none; }
 }
 
 .hero-label {
@@ -271,33 +278,38 @@ button:focus:not(:focus-visible) { outline: none; }
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.75);
-    border: 1px solid rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.28);
     padding: 0.4rem 1.2rem;
     border-radius: 50px;
     margin-bottom: 2rem;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background: rgba(255,255,255,0.06);
+    animation: fadeUp 0.7s cubic-bezier(.22,.68,0,1.2) 0.1s both;
 }
 .hero h1 {
-    font-size: clamp(2rem, 5.2vw, 3.8rem);
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    line-height: 1.18;
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
     margin-bottom: 1.2rem;
+    animation: fadeUp 0.75s cubic-bezier(.22,.68,0,1.2) 0.28s both;
 }
 .hero-sub {
-    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+    font-size: clamp(0.98rem, 2.5vw, 1.18rem);
     opacity: 0.88;
     max-width: 520px;
     margin: 0 auto 2.5rem;
+    animation: fadeUp 0.7s cubic-bezier(.22,.68,0,1.2) 0.46s both;
 }
 .hero-actions {
     display: flex; gap: 0.9rem;
     justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.7s cubic-bezier(.22,.68,0,1.2) 0.6s both;
 }
 .btn-outline {
     display: inline-block;
-    border: 1.5px solid rgba(255,255,255,0.55);
+    border: 1.5px solid rgba(255,255,255,0.5);
     color: #fff;
     padding: 0.85rem 1.9rem;
     border-radius: 50px;
@@ -305,14 +317,29 @@ button:focus:not(:focus-visible) { outline: none; }
     font-weight: 500;
     letter-spacing: 0.01em;
     transition: background 0.25s ease, border-color 0.25s ease,
-                transform 0.25s ease;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+                transform 0.25s ease, box-shadow 0.25s ease;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 .btn-outline:hover {
-    background: rgba(255,255,255,0.14);
-    border-color: #fff;
-    transform: translateY(-1px);
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.85);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Primary CTA — first hero button fills solid white */
+.hero-actions a:first-child {
+    background: rgba(255,255,255,0.95);
+    color: var(--green-deep);
+    border-color: transparent;
+    font-weight: 700;
+}
+.hero-actions a:first-child:hover {
+    background: #fff;
+    border-color: transparent;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transform: translateY(-2px);
 }
 
 /* ── Page Hero (sub-pages) ───────────────────────────────── */
@@ -344,12 +371,25 @@ button:focus:not(:focus-visible) { outline: none; }
 .section { padding: var(--section-pad) 0; }
 
 .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
     font-size: 0.72rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--green-mid);
     margin-bottom: 0.85rem;
     font-weight: 600;
+}
+.section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.55;
+    border-radius: 1px;
+    flex-shrink: 0;
 }
 .section-title {
     font-size: clamp(1.75rem, 3.6vw, 2.4rem);
@@ -379,13 +419,16 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 2.25rem 2rem;
     background: var(--white);
     border-radius: var(--radius-md);
+    border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
     transition: transform 0.3s cubic-bezier(.2,.7,.3,1),
-                box-shadow 0.3s cubic-bezier(.2,.7,.3,1);
+                box-shadow 0.3s cubic-bezier(.2,.7,.3,1),
+                border-color 0.3s;
 }
 .card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--green-soft);
 }
 .card h3 {
     font-size: 1.1rem;
