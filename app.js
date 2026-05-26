@@ -152,7 +152,7 @@ const FooterRenderer = {
                     </div>
                     <div class="footer-col">
                         <h4>연락처</h4>
-                        <p>${info.addressShort}<br>Tel. ${info.phone}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
+                        <p>${info.addressShort}<br><a href="tel:${info.phone}" style="color:inherit;">Tel. ${info.phone}</a><br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
                     </div>
                     <div class="footer-col">
                         <h4>바로가기</h4>
@@ -255,7 +255,7 @@ const IndexRenderer = {
                 ${MapHelper.html(true)}
                 <div style="margin-top:1rem;">
                     <div class="info-row"><strong>주소</strong><span>${addressShort}</span></div>
-                    <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
+                    <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
                 </div>
                 <p style="margin-top:1.25rem;">
                     <a href="visit.html" style="color:var(--green-mid); font-weight:700; font-size:0.88rem;">자세히 보기 →</a>
@@ -465,7 +465,7 @@ const VisitRenderer = {
                     <div class="info-row"><strong>도로명</strong><span>${address}</span></div>
                     <div class="info-row"><strong>지번</strong><span>${addressJibun}</span></div>
                     <div class="info-row"><strong>우편번호</strong><span>${postalCode}</span></div>
-                    <div class="info-row"><strong>전화</strong><span>${phone}</span></div>
+                    <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
                     <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
                 </div>
             </div>
@@ -492,7 +492,7 @@ const VisitRenderer = {
                 </div>
                 <div class="info-row">
                     <strong>주차</strong>
-                    <span>교회 인근에 무료 주차가 가능합니다. 방문 전 교회 사무실(${phone})로 확인해 주세요.</span>
+                    <span>교회 인근에 무료 주차가 가능합니다. 방문 전 교회 사무실(<a href="tel:${phone}" style="color:inherit;">${phone}</a>)로 확인해 주세요.</span>
                 </div>
                 <p style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); line-height:1.7;">
                     ※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong> 로 검색하시면 최단 경로 안내를 받으실 수 있습니다.
