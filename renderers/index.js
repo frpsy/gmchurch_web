@@ -3,7 +3,7 @@
  * DOM: #hero-title, #hero-sub, #about-brief-content, #worship-grid,
  *      #worship-guide, #bank-info, #location-card
  */
-import { MapHelper } from './_map-helper.js';
+import { MapHelper } from './_map-helper.js?v=3';
 
 const { CHURCH_DATA } = window;
 

@@ -2,7 +2,7 @@
  * VisitRenderer — visit.html 전용
  * DOM: #visit-full
  */
-import { MapHelper } from './_map-helper.js';
+import { MapHelper } from './_map-helper.js?v=3';
 
 const { CHURCH_DATA } = window;
 

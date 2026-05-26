@@ -8,15 +8,18 @@
  *   1. data.js (classic script)            → window.CHURCH_DATA, window.LiturgicalCalendar
  *   2. app.js  (script type="module")     → 본 파일, defer 동작
  */
-import { NavRenderer }       from './renderers/nav.js';
-import { FooterRenderer }    from './renderers/footer.js';
-import { IndexRenderer }     from './renderers/index.js';
-import { WorshipRenderer }   from './renderers/worship.js';
-import { CommunityRenderer } from './renderers/community.js';
-import { GivingRenderer }    from './renderers/giving.js';
-import { VisitRenderer }     from './renderers/visit.js';
-import { AnglicanRenderer, ClergyRenderer } from './renderers/clergy.js';
-import { PressRenderer }     from './renderers/press.js';
+// NOTE: Query strings on imports cache-bust the renderer modules in iOS Safari.
+// app.js?v=N alone does NOT propagate to bare './renderers/*.js' imports because
+// they resolve to a separate cache key. Bump in lockstep with HTML script tags.
+import { NavRenderer }       from './renderers/nav.js?v=3';
+import { FooterRenderer }    from './renderers/footer.js?v=3';
+import { IndexRenderer }     from './renderers/index.js?v=3';
+import { WorshipRenderer }   from './renderers/worship.js?v=3';
+import { CommunityRenderer } from './renderers/community.js?v=3';
+import { GivingRenderer }    from './renderers/giving.js?v=3';
+import { VisitRenderer }     from './renderers/visit.js?v=3';
+import { AnglicanRenderer, ClergyRenderer } from './renderers/clergy.js?v=3';
+import { PressRenderer }     from './renderers/press.js?v=3';
 
 const App = {
     init() {
