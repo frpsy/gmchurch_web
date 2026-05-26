@@ -160,12 +160,11 @@ const FooterRenderer = {
                         <a href="${sns.instagram}" target="_blank" rel="noopener">인스타그램</a>
                         <a href="${sns['naver blog']}" target="_blank" rel="noopener">네이버 블로그</a>
                         <a href="${sns.diocesan}"  target="_blank" rel="noopener">성공회 서울교구</a>
+                        <a href="privacy.html">개인정보 처리방침</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <span>© 2026 ${info.name}. All rights reserved.</span>
-                    <a href="privacy.html">개인정보 처리방침</a>
-                    <span>대한성공회 서울교구</span>
+                    <span>© ${new Date().getFullYear()} ${info.name}</span>
                 </div>
             </div>
         `;
