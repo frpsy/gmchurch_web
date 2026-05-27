@@ -14,8 +14,8 @@ const MapHelper = {
     // 광명교회 좌표 (위도 37.4757, 경도 126.8641)
     // 카카오 embed가 외부 도메인 iframe을 차단하여 Google Maps embed 사용
     iframeUrl: "https://maps.google.com/maps?q=37.4757,126.8641&hl=ko&z=17&output=embed",
-    linkUrl:   "https://map.kakao.com/link/search/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C%20%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
     naverUrl:  "https://map.naver.com/p/search/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C%20%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
+    googleUrl: "https://www.google.com/maps/search/?api=1&query=%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C+%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
 
     html(compact = false) {
         const h = compact ? '220px' : '300px';
@@ -34,15 +34,15 @@ const MapHelper = {
                 ></iframe>
             </div>
             <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-                <a href="${this.linkUrl}" target="_blank" rel="noopener"
-                   style="display:inline-flex; align-items:center; gap:0.4rem;
-                          color:var(--green-mid); font-weight:700; font-size:0.88rem;">
-                    카카오지도에서 보기 →
-                </a>
                 <a href="${this.naverUrl}" target="_blank" rel="noopener"
                    style="display:inline-flex; align-items:center; gap:0.4rem;
                           color:var(--green-mid); font-weight:700; font-size:0.88rem;">
                     네이버지도에서 보기 →
+                </a>
+                <a href="${this.googleUrl}" target="_blank" rel="noopener"
+                   style="display:inline-flex; align-items:center; gap:0.4rem;
+                          color:var(--green-mid); font-weight:700; font-size:0.88rem;">
+                    Google 지도에서 보기 →
                 </a>
             </div>
         `;
