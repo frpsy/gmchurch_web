@@ -227,9 +227,9 @@ const IndexRenderer = {
         el.innerHTML = `
             <div class="about-brief">
                 <p class="about-brief-lead">${slogan}</p>
-                <p class="about-brief-desc">${vision}. 성공회 전례를 중심으로 예배하는 경기도 광명시의 교회입니다.</p>
+                <p class="about-brief-desc">성공회 전례를 중심으로 예배하는 경기도 광명시의 교회입니다.</p>
                 <ul class="about-brief-facts">
-                    <li><strong>이름</strong><span>${name} · ${subName}</span></li>
+                    <li><strong>이름</strong><span>${name}</span></li>
                     <li><strong>설립</strong><span>${established}</span></li>
                     <li><strong>소속</strong><span>대한성공회 서울교구 서부교무구</span></li>
                 </ul>
