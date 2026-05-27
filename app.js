@@ -157,9 +157,9 @@ const FooterRenderer = {
                     <div class="footer-col">
                         <div class="footer-brand">
                             <span class="footer-logo-mark" aria-hidden="true">
-                                <svg viewBox="0 0 64 64" width="22" height="22" focusable="false">
-                                    <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="rgba(255,255,255,0.75)"/>
-                                    <circle cx="32" cy="32" r="3.5" fill="rgba(255,255,255,0.75)"/>
+                                <svg viewBox="0 0 64 64" width="26" height="26" focusable="false">
+                                    <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#ffffff"/>
+                                    <circle cx="32" cy="32" r="3.5" fill="#ffffff"/>
                                 </svg>
                             </span>
                             <div>
