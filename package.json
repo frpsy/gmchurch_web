@@ -10,5 +10,8 @@
   "devDependencies": {
     "@vitest/coverage-v8": "^2.1.0",
     "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.0"
   }
 }
