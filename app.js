@@ -194,7 +194,7 @@ const FooterRenderer = {
                         </div>
                         <div class="footer-info-row">
                             <span class="footer-info-label">전화</span>
-                            <a href="tel:${info.phone}" class="footer-info-link">${info.phone}</a>
+                            <a href="tel:${info.phone}" class="footer-info-link footer-addr-link">${info.phone} <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                     <div class="footer-col">
