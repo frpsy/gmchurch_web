@@ -180,7 +180,7 @@ const FooterRenderer = {
                         <div class="footer-sep"></div>
                         <div class="footer-info-row">
                             <span class="footer-info-label">주소</span>
-                            <span>${info.addressShort}</span>
+                            <a href="${MapHelper.naverUrl}" target="_blank" rel="noopener" class="footer-info-link">${info.addressShort}</a>
                         </div>
                         <div class="footer-info-row">
                             <span class="footer-info-label">전화</span>

@@ -7,7 +7,7 @@
 | 저장소 | `frpsy/gmchurch_web` (GitHub) |
 | 배포 | GitHub Pages — `https://frpsy.github.io/gmchurch_web` |
 | 방식 | 빌드 없는 순수 정적 사이트 (HTML + CSS + Vanilla JS) |
-| 브랜치 전략 | 작업 브랜치 → PR → squash merge to `main` → GitHub Pages 자동 배포 |
+| 브랜치 전략 | 작업 브랜치 → PR → main 머지 → GitHub Pages 자동 배포 |
 
 ---
 
@@ -23,9 +23,14 @@ gmchurch_web/
 ├── giving.html       헌금 (봉헌 계좌)
 ├── privacy.html      개인정보 처리방침 (noindex)
 ├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA
-├── app.js            렌더러 모음 + App bootstrap
-├── style.css         전체 스타일 (~1260줄)
-├── favicon.svg
+├── app.js            렌더러 모음 + App bootstrap (~807줄)
+├── style.css         전체 스타일 (~1443줄)
+├── favicon.svg       캔터베리 십자가 (짙은 녹색 배경 + 흰색 십자가)
+├── apple-touch-icon.png
+├── og-image-v2.png   소셜 공유 OG 이미지 (1200×630)
+├── robots.txt
+├── sitemap.xml
+├── docs/             위원회 audit 보고서 · 작업 지시서
 └── CLAUDE.md         (이 파일)
 ```
 
@@ -118,10 +123,10 @@ const CHURCH_DATA = {
     }
   },
 
-  logo: {                           // ACGM 모노그램 소개
+  logo: {                           // 캔터베리 십자가 소개 (clergy.html)
     eyebrow, title, desc,
-    letters: [{ letter, word, desc }],  // A·C·G·M
     colors: String
+    // letters 필드 없음 — ACGM 모노그램 → 캔터베리 십자가로 변경됨
   },
 
   clergy: [
@@ -131,10 +136,11 @@ const CHURCH_DATA = {
       ordained: "2005년 서품",
       quote: String,
       desc: String,
-      contact: "010-8652-0688",     // tel: 링크로 렌더됨
+      contact: "bsyg2000@hanmail.net",  // @ 포함 시 mailto:, 아니면 tel: 링크
       bio: {
         milestones: [{ year, text, first? }],  // first=true → '최초' 배지
         roles: [String],
+        externalRoles: [String],               // 교회 밖 활동 태그
         ministryNote: String,
         source: { title, author, publisher, year }
       }
@@ -174,7 +180,8 @@ const CHURCH_DATA = {
     bankName: "국민은행",
     bank: "2680-100-14008",
     holder: "대한성공회 광명교회",
-    report: String
+    report: String,
+    receiptInfo: String    // 기부금 영수증 안내 (두 문장 → 렌더 시 <br> 삽입)
   },
 
   sns: {
@@ -236,6 +243,7 @@ const CHURCH_DATA = {
 window DOMContentLoaded
 └── App.init()
       ├── NavRenderer.render()        → #main-nav (모든 페이지)
+      │     로고: 투명 배경 + 흰색 캔터베리 십자가 SVG + 교회명
       │     _bindEvents()
       │       • scroll → .nav-header.scrolled
       │       • hamburger toggle → .nav-menu.open
@@ -245,6 +253,7 @@ window DOMContentLoaded
       │
       ├── FooterRenderer.render()     → #main-footer (모든 페이지)
       │     info + clergy[0] + sns 4개 링크 + 개인정보 처리방침 링크
+      │     주소 → 네이버지도 링크로 렌더됨 (MapHelper.naverUrl)
       │
       ├── IndexRenderer.render()      → index.html 전용
       │     _hero()    → #hero-title, #hero-sub
@@ -264,6 +273,7 @@ window DOMContentLoaded
       │
       ├── GivingRenderer.render()     → #giving-full (giving.html)
       │     id="offering" div 내 봉헌 계좌 카드
+      │     receiptInfo → ". " 기준 <br> 삽입하여 두 줄 렌더
       │
       ├── VisitRenderer.render()      → #visit-full (visit.html)
       │     id="location" : Google Maps iframe + 주소
@@ -275,9 +285,9 @@ window DOMContentLoaded
       │     _korea()   → #anglican-korea (2단 레이아웃: 텍스트 + 배지)
       │
       ├── ClergyRenderer.render()     → clergy.html 전용
-      │     _logo()       → #logo-content  (ACGM SVG + 글자 breakdown)
+      │     _logo()       → #logo-content  (캔터베리 십자가 SVG + 설명)
       │     _clergy()     → #clergy-full   (clergy-card × 2)
-      │       _bioSection(bio) → 타임라인 + 소임 태그 + 출처
+      │       _bioSection(bio) → 타임라인 + 소임 태그 + 교회 밖 활동 + 출처
       │     _philosophy() → #philosophy-full  (.values-grid)
       │
       ├── PressRenderer.render()      → #press-table (clergy.html)
@@ -355,7 +365,7 @@ window DOMContentLoaded
 ### CSS 변수
 
 ```css
---green-deep:   #163d24   /* 주 브랜드 색 */
+--green-deep:   #0a1f12   /* 주 브랜드 색 (nav, footer, 제목) */
 --green-mid:    #3d6b4a
 --green-light:  #eef2ec
 --green-soft:   #cdd9cf
@@ -365,12 +375,13 @@ window DOMContentLoaded
 --white:        #ffffff
 --text:         #1a1a1a
 --text-muted:   #6b6b66
---border:       #e5e2d8
+--border:       #e8e5dc
 --red:          #b53737
+--nav-glass:    rgba(10, 31, 18, 0.9)  /* 네비게이션 글래스 배경 */
 --nav-h:        68px
---section-pad:  7rem  (모바일: 4rem)
---content-max:  1140px
---radius-sm/md/lg: 10px / 16px / 24px
+--section-pad:  9rem  (모바일: 5rem)
+--content-max:  1200px
+--radius-sm/md/lg: 8px / 14px / 20px
 ```
 
 ### 주요 클래스 목록
@@ -378,15 +389,15 @@ window DOMContentLoaded
 | 클래스 | 용도 |
 |--------|------|
 | `.skip-link` | 접근성 건너뛰기 링크 (포커스 시 노출) |
-| `.nav-header` | 고정 헤더, scroll 시 `.scrolled` |
+| `.nav-header` | 고정 헤더 (--nav-glass), scroll 시 `.scrolled` |
 | `.nav-chevron` | 모바일 드롭다운 토글 화살표 버튼 (desktop: hidden) |
 | `.nav-item.mobile-open` | 모바일 드롭다운 열림 상태 |
 | `.hero` / `.hero-fallback` | Ken Burns 애니메이션 배경 (Unsplash 이미지) |
 | `.page-hero` | 서브 페이지 상단 헤더 |
 | `.section` / `.section-header` | 섹션 레이아웃 |
-| `.container` | 최대폭 1140px, 패딩 clamp |
+| `.container` | 최대폭 1200px, 패딩 clamp |
 | `.grid` | auto-fit minmax(280px) 그리드 |
-| `.card` / `.info-card` | 콘텐츠 카드 |
+| `.card` / `.info-card` | 콘텐츠 카드 (기본 shadow 없음, hover 시 표시) |
 | `.guide-banner` | 녹색 좌측 보더 배너 |
 | `.quote-block` | 골드 좌측 보더 인용 |
 | `.about-brief-*` | 메인 교회 소개 블록 |
@@ -402,12 +413,13 @@ window DOMContentLoaded
 | `.liturgy-checklist` / `.checklist-item` | 처음 오신 분 체크리스트 |
 | `.anglican-pillars` | 성공회 3기둥 카드 그리드 |
 | `.anglican-korea-inner` | 대한성공회 2단 레이아웃 |
-| `.logo-intro-grid` / `.logo-letter` | ACGM 로고 소개 |
+| `.logo-intro-grid` | 캔터베리 십자가 소개 그리드 |
 | `.press-list` / `.press-item` | 언론 보도 리스트 |
 | `.bus-chip.bus-blue/green` | 버스 번호 칩 |
 | `.bank-card` | 봉헌 계좌 카드 |
 | `.values-grid` / `.value-card` | 교회 철학 카드 |
 | `.footer-inner` | 푸터 3단 그리드 |
+| `.footer-logo-mark` | 푸터 캔터베리 십자가 컨테이너 (38×38px, 흰색 SVG) |
 
 ### 반응형 브레이크포인트
 
@@ -431,7 +443,7 @@ window DOMContentLoaded
 2. `data.js`에 데이터 추가
 3. `app.js`에 렌더러 메서드 추가
 4. `data.js navigation`에 앵커 링크 추가
-5. 앵커 검증 스크립트로 확인
+5. CLAUDE.md 동기화
 
 ### 앵커 / 해시 스크롤
 - JS 렌더러가 생성하는 동적 ID는 `App._handleHashScroll()`이 처리
@@ -461,7 +473,7 @@ git checkout -b claude/작업명 origin/main
 git add 파일
 git commit -m "설명"
 git push -u origin claude/작업명
-# GitHub MCP로 PR 생성 → 리뷰 확인 → squash merge
+# PR 생성 → 직접 검토 후 main에 머지
 ```
 
 ### 전례력 자동화 참고
