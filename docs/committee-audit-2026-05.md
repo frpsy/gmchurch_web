@@ -1,9 +1,10 @@
 # 광명교회 홈페이지 — 위원회 audit 보고서 (현재 코드베이스 반영)
 
-> **작성일**: 2026-05-25
-> **저장소**: `frpsy/gmchurch_web` (main 브랜치 점검)
-> **배포**: `gmchurchweb.netlify.app`
-> **현 구조**: 빌드 없는 정적 사이트 (HTML 6개 + Vanilla JS 2개 + CSS 1개, 총 2,688줄)
+> **작성일**: 2026-05-25  
+> **업데이트**: 2026-05-27 (P0 완료 반영)  
+> **저장소**: `frpsy/gmchurch_web` (main 브랜치 점검)  
+> **배포**: `https://frpsy.github.io/gmchurch_web` (GitHub Pages)  
+> **현 구조**: 빌드 없는 정적 사이트 (HTML 7개 + Vanilla JS 2개 + CSS 1개, 총 ~3,050줄)
 
 -----
 
@@ -44,15 +45,15 @@
 |`<title>` 페이지별 설정                   |✅ |6개 페이지 모두 적절                 |
 |`<meta description>`                |✅ |모든 페이지 존재                    |
 |`<html lang="ko">`                  |✅ |                             |
-|Open Graph 태그 (og:title, og:image 등)|❌ |**0개** — 카카오톡·페북 공유 시 미리보기 깨짐|
-|Twitter Card 태그                     |❌ |                             |
-|`robots.txt`                        |❌ |없음                           |
-|`sitemap.xml`                       |❌ |없음 — 6페이지뿐이라 수동 작성 가능        |
-|JSON-LD 구조화 데이터 (`Church`, `Place`) |❌ |검색엔진에 “이건 교회”임을 명시할 수 있음     |
-|캐노니컬 URL (`<link rel="canonical">`) |❌ |                             |
-|파비콘                                 |✅ |`favicon.svg` 존재             |
-|애플 터치 아이콘                           |❌ |iOS 홈화면 추가 시 기본 아이콘          |
-|`theme-color` 메타                    |❌ |모바일 브라우저 상단 색상               |
+|Open Graph 태그 (og:title, og:image 등)|✅ |`og-image-v2.png` (1200×630) 적용, KakaoTalk 확인|
+|Twitter Card 태그                     |✅ |summary_large_image 적용        |
+|`robots.txt`                        |✅ |완료                           |
+|`sitemap.xml`                       |✅ |7개 페이지 등록 (privacy.html 포함) |
+|JSON-LD 구조화 데이터 (`Church`, `Place`) |✅ |index.html Church 스키마 삽입     |
+|캐노니컬 URL (`<link rel=”canonical”>`) |✅ |6개 HTML 모두 적용               |
+|파비콘                                 |✅ |`favicon.svg` 캔터베리 십자가       |
+|애플 터치 아이콘                           |✅ |`apple-touch-icon.png` 180×180 |
+|`theme-color` 메타                    |✅ |`#163d24` 적용                 |
 
 **우선순위 ★★★**: OG 태그는 카카오톡 공유가 교회 홍보의 주 채널이므로 즉시 추가 필요.
 
@@ -63,15 +64,15 @@
 |`<html lang="ko">`                      |✅ |                                                        |
 |`<h1>` 페이지별 1개                          |✅ |6개 페이지 모두 정확히 1개                                        |
 |시맨틱 태그 사용 (nav, section, header, footer)|✅ |27회 사용                                                  |
-|**`<main>` 태그**                         |❌ |**6개 페이지 모두 없음** — 스크린리더 핵심 랜드마크 누락                     |
-|ARIA 속성 (aria-label, aria-expanded 등)   |✅ |app.js에서 10회 사용 (햄버거 메뉴 등)                              |
-|`:focus` 스타일                            |❌ |**CSS에 0개** — 키보드 사용자가 현재 포커스 위치 확인 불가                  |
-|`:focus-visible`                        |❌ |                                                        |
+|**`<main>` 태그**                         |✅ |7개 페이지 모두 `<main id="main-content">` 적용                |
+|ARIA 속성 (aria-label, aria-expanded 등)   |✅ |app.js에서 다수 사용 (햄버거 메뉴 등)                              |
+|`:focus` 스타일                            |✅ |`:focus-visible` 스타일 적용 (그린 outline)                    |
+|`:focus-visible`                        |✅ |완료                                                      |
 |`prefers-reduced-motion` 대응             |✅ |1회 정의 (Ken Burns 애니메이션)                                 |
 |이미지 `alt` 속성                            |⚠️ |HTML에 `<img>` 자체가 거의 없음 (SVG 인라인 위주) — 큰 문제 아님          |
-|색 대비비 (WCAG AA)                         |🔍 |별도 검증 필요 — `#163d24` on `#f7f4ed`는 통과 추정                |
-|키보드 네비게이션                               |⚠️ |nav-toggle은 button이라 OK, but `.nav-chevron` 키보드 동작 확인 필요|
-|Skip to main content 링크                 |❌ |스크린리더 사용자가 nav 건너뛰기 불가                                  |
+|색 대비비 (WCAG AA)                         |🔍 |별도 검증 필요 — `#0a1f12` on `#f7f4ed`는 통과 추정               |
+|키보드 네비게이션                               |✅ |`.nav-chevron`은 `<button>` — Enter/Space 동작               |
+|Skip to main content 링크                 |✅ |7개 페이지 모두 추가                                            |
 |폰트 크기 조절 토글                             |❌ |고령 신자 위해 검토 가치                                          |
 
 **우선순위 ★★★**: `<main>` 태그 추가, `:focus-visible` 스타일 추가는 즉시 가능한 큰 개선.
@@ -81,7 +82,7 @@
 |항목                                 |상태 |비고                                                  |
 |-----------------------------------|---|----------------------------------------------------|
 |Pretendard CDN preconnect          |✅  |`<link rel="preconnect">` 적용                        |
-|폰트 preload                         |❌  |preconnect는 있으나 preload 없음 — 첫 페인트 시 텍스트 깜빡임 가능     |
+|폰트 preload                         |✅  |preload + crossorigin 적용                                |
 |`font-display: swap`               |🔍  |Pretendard 기본값 확인 필요                                |
 |CSS·JS 미니파이                        |❌  |정적 사이트라 빌드 단계 없음 — Netlify asset optimization 켤 수 있음|
 |이미지 최적화                            |N/A|외부 Unsplash 이미지 1개만 사용 (hero)                       |
@@ -112,18 +113,18 @@
 |CSP 헤더                |❌  |`_headers` 파일로 Netlify 설정 가능 |
 |폼 제출                  |N/A|현재 폼 없음 (새가족 등록 폼 추가 시 검토)   |
 |환경변수 노출               |N/A|환경변수 자체 없음                   |
-|개인정보 처리방침 페이지         |❌  |**연락처(전화·이메일) 게시 중이라 사실상 필요**|
+|개인정보 처리방침 페이지         |✅  |`privacy.html` 작성 완료, 푸터 링크 추가   |
 
 ### 2.6 콘텐츠·정보 정합성
 
 |항목                   |상태|비고                                                                                                        |
 |---------------------|--|----------------------------------------------------------------------------------------------------------|
-|교회 주소                |⚠️ |`data.js`: “경기도 광명시 **아방리** 2길 10” — **“아방리”는 광명시 행정동에 없음**. “아우디 2길”·“아방리”·“오리로” 등 정확한 주소 확인 필요. 우편번호도 누락|
-|우편번호                 |❌ |누락                                                                                                        |
-|사업자(고유번호)·교회 등록번호    |❌ |헌금 페이지에 기부금 영수증 발급 관련 정보 권장                                                                               |
-|카카오 지도 vs Google Maps|⚠️ |iframe은 Google Maps, 링크는 카카오맵 — 한국 사용자 일관성 위해 Naver/카카오 통일 검토                                             |
-|사제 연락처 노출            |✅ |tel: 링크로 정상                                                                                               |
-|이메일 노출               |⚠️ |`bsyg2000@hanmail.net` — 스팸 봇 크롤링 대상, 난독화 검토                                                              |
+|교회 주소                |✅ |”경기도 광명시 아방리 2길 10” — 사제 확인 완료. 우편번호(14335)·지번(노온사동 373-1) 추가|
+|우편번호                 |✅ |`14335` 추가                                                                                                |
+|사업자(고유번호)·교회 등록번호    |❌ |헌금 페이지에 기부금 영수증 안내 텍스트 추가 (receiptInfo)                                                                    |
+|지도 링크                |✅ |카카오맵 Android 딥링크 이슈로 Naver Maps + Google Maps로 교체. 푸터 주소 → 네이버지도 링크|
+|사제 연락처 노출            |✅ |이메일(mailto:) 링크로 변경                                                                                       |
+|이메일 노출               |⚠️ |`bsyg2000@hanmail.net` — 스팸 봇 크롤링 대상, 난독화 장기 검토                                                           |
 |전례력 8절기 매핑           |✅ |대한성공회 기도서 기준 정확                                                                                           |
 
 **우선순위 ★★★**: 주소 정확성 즉시 확인 필요. 검색·내비게이션·신뢰도에 직결.
@@ -142,7 +143,7 @@
 |새가족 등록 폼       |❌ |★★  |Netlify Forms로 무빌드 구현 가능                    |
 |사진 갤러리         |❌ |★   |                                            |
 |봉사부서·구역 안내     |❌ |★   |community.html에 통합 가능                       |
-|개인정보 처리방침      |❌ |★★★ |법적 요구                                       |
+|개인정보 처리방침      |✅ |★★★ |`privacy.html` 완료                            |
 |사이트맵·푸터 링크     |⚠️ |★   |FooterRenderer에 일부 있음                       |
 
 -----
@@ -175,8 +176,8 @@
 - ⚠️ **타입 안정성**: TypeScript 마이그레이션은 과잉. 대신 `data.js` 상단에 JSDoc `@typedef`로 스키마 명시 권장
 - ⚠️ **테스트 부재**: 앵커 검증 스크립트만 있음. Playwright로 6페이지 스모크 테스트 1개만 추가해도 큰 안전망
 - ⚠️ **린트·포맷터**: ESLint·Prettier 설정 누락 — `.editorconfig`만이라도 추가
-- ⚠️ **app.js 754줄**: 임계점 근접. 추후 페이지별 렌더러 분리 검토 (지금은 ok)
-- ⚠️ **style.css 1262줄**: 마찬가지. CSS layer(@layer)로 구조화 또는 페이지별 분리 검토
+- ⚠️ **app.js ~807줄**: 임계점 근접. 추후 페이지별 렌더러 분리 검토 (지금은 ok)
+- ⚠️ **style.css ~1443줄**: 마찬가지. CSS layer(@layer)로 구조화 또는 페이지별 분리 검토
 
 ### 3.5 신자 회장 코멘트
 
@@ -301,7 +302,7 @@ docs/
 
 - 기존 코드 스타일·아키텍처(SOLID 렌더러 패턴, `data.js` 단일 소스) **엄격히 유지**
 - TypeScript·React·CMS 도입 **금지** (별도 위원회 결의 전까지)
-- 모든 작업은 별도 브랜치 → PR → 신자 회장 또는 사제 1명 리뷰 → squash merge
+- 모든 작업은 별도 브랜치 → PR → 직접 검토 후 main 머지
 - `CLAUDE.md` 업데이트도 같은 PR에 포함
 - 외부 의존성 추가 시 위원회 사전 협의 (현재 외부 의존: Pretendard CDN, Google Maps iframe, Unsplash 이미지 1개)
 
