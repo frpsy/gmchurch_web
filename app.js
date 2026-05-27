@@ -151,7 +151,7 @@ const FooterRenderer = {
                         <p>${info.name}<br>${info.subName}<br>설립 ${info.established}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
                     </div>
                     <div class="footer-col">
-                        <h4>오시는 길</h4>
+                        <h4>주소 & 연락처</h4>
                         <p style="margin-bottom:0.6rem;">주소<br>${info.addressShort}</p>
                         <p>연락처<br><a href="tel:${info.phone}" style="color:inherit;">Tel. ${info.phone}</a></p>
                     </div>
