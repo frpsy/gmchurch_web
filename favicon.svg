@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
     <rect width="64" height="64" rx="12" fill="#1b4d2e"/>
-    <text x="32" y="42" text-anchor="middle"
-          font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-          font-weight="800" font-size="22" fill="#ffffff" letter-spacing="-1">GMC</text>
+    <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#ffffff"/>
+    <circle cx="32" cy="32" r="3.5" fill="#ffffff"/>
 </svg>
