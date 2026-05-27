@@ -190,11 +190,11 @@ const FooterRenderer = {
                         <div class="footer-sep"></div>
                         <div class="footer-info-row">
                             <span class="footer-info-label">주소</span>
-                            <a href="${MapHelper.naverUrl}" target="_blank" rel="noopener" class="footer-info-link footer-addr-link">${info.addressShort} <span aria-hidden="true">↗</span></a>
+                            <a href="${MapHelper.naverUrl}" target="_blank" rel="noopener" class="footer-info-link footer-addr-link">${info.addressShort}</a>
                         </div>
                         <div class="footer-info-row">
                             <span class="footer-info-label">전화</span>
-                            <a href="tel:${info.phone}" class="footer-info-link footer-addr-link">${info.phone} <span aria-hidden="true">↗</span></a>
+                            <a href="tel:${info.phone}" class="footer-info-link footer-addr-link">${info.phone}</a>
                         </div>
                     </div>
                     <div class="footer-col">
