@@ -186,6 +186,23 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .btn-nav-live:hover { background: #9b1c1c; }
 
+/* Nav watermark */
+.nav-header::before {
+    content: 'GWANGMYEONG ANGLICAN CHURCH';
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    line-height: var(--nav-h);
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.065);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 /* Dropdown chevron (mobile-only toggle) */
 .nav-chevron {
     display: none;
@@ -259,10 +276,30 @@ button:focus:not(:focus-visible) { outline: none; }
     );
 }
 
+/* Hero watermark */
+.hero::before {
+    content: 'GWANGMYEONG ANGLICAN CHURCH';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(2.6rem, 9.5vw, 8.5rem);
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.06);
+    pointer-events: none;
+    user-select: none;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 /* 텍스트 컨텐츠 */
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     padding-top: var(--nav-h);
 }
 
