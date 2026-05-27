@@ -1238,12 +1238,7 @@ footer {
     flex-shrink: 0;
 }
 
-/* Separator */
-.footer-sep {
-    height: 1px;
-    background: rgba(255,255,255,0.1);
-    margin: 1rem 0;
-}
+.footer-info-row--first { margin-top: 1rem; }
 
 /* Contact rows */
 .footer-info-row {
