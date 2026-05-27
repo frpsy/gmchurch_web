@@ -28,9 +28,9 @@
     --radius-md:    16px;
     --radius-lg:    24px;
     /* Shadows */
-    --shadow-sm:    0 1px 2px rgba(20, 35, 25, 0.04);
-    --shadow-md:    0 4px 16px rgba(20, 35, 25, 0.06);
-    --shadow-lg:    0 12px 36px rgba(20, 35, 25, 0.08);
+    --shadow-sm:    0 1px 4px rgba(20, 35, 25, 0.07);
+    --shadow-md:    0 4px 20px rgba(20, 35, 25, 0.10);
+    --shadow-lg:    0 16px 48px rgba(20, 35, 25, 0.13);
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
@@ -247,9 +247,9 @@ button:focus:not(:focus-visible) { outline: none; }
     z-index: 1;
     background: linear-gradient(
         180deg,
-        rgba(10, 25, 15, 0.35) 0%,
-        rgba(10, 25, 15, 0.30) 50%,
-        rgba(10, 25, 15, 0.60) 100%
+        rgba(10, 25, 15, 0.20) 0%,
+        rgba(10, 25, 15, 0.28) 55%,
+        rgba(8, 20, 12, 0.70) 100%
     );
 }
 
@@ -270,13 +270,14 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: 0.72rem;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.82);
+    border: 1px solid rgba(255,255,255,0.28);
+    background: rgba(255,255,255,0.09);
     padding: 0.4rem 1.2rem;
     border-radius: 50px;
     margin-bottom: 2rem;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 .hero h1 {
     font-size: clamp(2rem, 5.2vw, 3.8rem);
@@ -284,12 +285,14 @@ button:focus:not(:focus-visible) { outline: none; }
     letter-spacing: -0.025em;
     line-height: 1.18;
     margin-bottom: 1.2rem;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.28);
 }
 .hero-sub {
     font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-    opacity: 0.88;
+    opacity: 0.90;
     max-width: 520px;
     margin: 0 auto 2.5rem;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.20);
 }
 .hero-actions {
     display: flex; gap: 0.9rem;
@@ -297,7 +300,8 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .btn-outline {
     display: inline-block;
-    border: 1.5px solid rgba(255,255,255,0.55);
+    border: 1.5px solid rgba(255,255,255,0.50);
+    background: rgba(255,255,255,0.07);
     color: #fff;
     padding: 0.85rem 1.9rem;
     border-radius: 50px;
@@ -305,14 +309,15 @@ button:focus:not(:focus-visible) { outline: none; }
     font-weight: 500;
     letter-spacing: 0.01em;
     transition: background 0.25s ease, border-color 0.25s ease,
-                transform 0.25s ease;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+                transform 0.25s ease, box-shadow 0.25s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 .btn-outline:hover {
-    background: rgba(255,255,255,0.14);
-    border-color: #fff;
-    transform: translateY(-1px);
+    background: rgba(255,255,255,0.16);
+    border-color: rgba(255,255,255,0.85);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
 
 /* ── Page Hero (sub-pages) ───────────────────────────────── */
@@ -322,7 +327,7 @@ button:focus:not(:focus-visible) { outline: none; }
     padding-left: clamp(1.25rem, 5vw, 2.5rem);
     padding-right: clamp(1.25rem, 5vw, 2.5rem);
     text-align: center;
-    background: linear-gradient(180deg, var(--green-light) 0%, var(--cream) 100%);
+    background: linear-gradient(158deg, var(--green-light) 0%, var(--cream) 100%);
     border-bottom: 1px solid var(--border);
 }
 .page-hero h1 {
@@ -348,8 +353,11 @@ button:focus:not(:focus-visible) { outline: none; }
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--green-mid);
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.95rem;
     font-weight: 600;
+    display: inline-block;
+    padding-bottom: 0.35rem;
+    border-bottom: 1.5px solid var(--green-soft);
 }
 .section-title {
     font-size: clamp(1.75rem, 3.6vw, 2.4rem);
@@ -379,13 +387,16 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 2.25rem 2rem;
     background: var(--white);
     border-radius: var(--radius-md);
+    border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
     transition: transform 0.3s cubic-bezier(.2,.7,.3,1),
-                box-shadow 0.3s cubic-bezier(.2,.7,.3,1);
+                box-shadow 0.3s cubic-bezier(.2,.7,.3,1),
+                border-color 0.3s;
 }
 .card:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--green-soft);
 }
 .card h3 {
     font-size: 1.1rem;
@@ -400,6 +411,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .info-card {
     background: var(--white);
     border-radius: var(--radius-md);
+    border: 1px solid var(--border);
     box-shadow: var(--shadow-md);
     padding: 2.25rem 2rem;
 }
@@ -433,7 +445,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* Guide Banner */
 .guide-banner {
     background: var(--green-light);
-    border-left: 3px solid var(--green-mid);
+    border-left: 4px solid var(--green-mid);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: 1.6rem 2rem;
     margin-top: 2.5rem;
@@ -447,7 +459,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* Quote Block */
 .quote-block {
     background: var(--gold-bg);
-    border-left: 3px solid var(--gold);
+    border-left: 4px solid var(--gold);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: 1.4rem 1.75rem;
     margin: 1.5rem 0;
@@ -470,6 +482,14 @@ button:focus:not(:focus-visible) { outline: none; }
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 1.75rem 1.5rem;
+    transition: transform 0.3s cubic-bezier(.2,.7,.3,1),
+                box-shadow 0.3s cubic-bezier(.2,.7,.3,1),
+                border-color 0.3s;
+}
+.value-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--green-soft);
 }
 .value-card .val-icon { font-size: 1.8rem; margin-bottom: 0.85rem; }
 .value-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
@@ -498,6 +518,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .clergy-card {
     background: var(--white);
     border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
     box-shadow: var(--shadow-md);
     padding: 2.75rem 2.25rem;
     display: grid;
@@ -603,7 +624,7 @@ button:focus:not(:focus-visible) { outline: none; }
     gap: 0.9rem;
     align-items: flex-start;
     background: var(--cream);
-    border-left: 3px solid var(--green-mid);
+    border-left: 4px solid var(--green-mid);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     padding: 1rem 1.1rem;
     margin-top: 1.25rem;
@@ -795,7 +816,7 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 0.9rem 1.1rem;
     background: var(--green-light);
     border-radius: var(--radius-sm);
-    border-left: 3px solid var(--green-mid);
+    border-left: 4px solid var(--green-mid);
 }
 
 /* Korea section — two-column layout */
@@ -958,7 +979,7 @@ button:focus:not(:focus-visible) { outline: none; }
     margin-left: 0.25rem;
 }
 .liturgy-quote {
-    border-left: 3px solid;
+    border-left: 4px solid;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: 1.5rem 2rem;
     margin-bottom: 3.5rem;
@@ -987,7 +1008,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .liturgy-card {
     background: var(--cream);
     border: 1px solid var(--border);
-    border-left: 3px solid;
+    border-left: 4px solid;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: 1.4rem 1.75rem;
     margin-top: 1.5rem;
@@ -1017,7 +1038,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .liturgy-inner-quote {
     background: var(--white);
-    border-left: 3px solid;
+    border-left: 4px solid;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     padding: 1.2rem 1.5rem;
     margin: 1.25rem 0;
@@ -1178,7 +1199,7 @@ footer {
     flex-wrap: wrap;
     gap: 0.5rem;
     font-size: 0.76rem;
-    opacity: 0.45;
+    opacity: 0.58;
 }
 
 /* ── Utilities ───────────────────────────────────────────── */
