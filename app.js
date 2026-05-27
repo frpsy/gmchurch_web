@@ -158,8 +158,8 @@ const FooterRenderer = {
                         <div class="footer-brand">
                             <span class="footer-logo-mark" aria-hidden="true">
                                 <svg viewBox="0 0 64 64" width="22" height="22" focusable="false">
-                                    <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#1a1a1a"/>
-                                    <circle cx="32" cy="32" r="3.5" fill="#1a1a1a"/>
+                                    <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="rgba(255,255,255,0.75)"/>
+                                    <circle cx="32" cy="32" r="3.5" fill="rgba(255,255,255,0.75)"/>
                                 </svg>
                             </span>
                             <div>
@@ -483,7 +483,7 @@ const GivingRenderer = {
                     <p class="sub">예금주 ${holder}</p>
                 </div>
                 <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.8;" id="report">${report}</p>
-                ${receiptInfo ? `<p style="margin-top:0.8rem; font-size:0.88rem; color:var(--text-muted); line-height:1.8; padding-top:0.8rem; border-top:1px solid var(--border);">${receiptInfo}</p>` : ''}
+                ${receiptInfo ? `<p style="margin-top:0.8rem; font-size:0.88rem; color:var(--text-muted); line-height:1.8; padding-top:0.8rem; border-top:1px solid var(--border);">${receiptInfo.replace(/\. (?=\S)/g, '.<br>')}</p>` : ''}
             </div>
         `;
     }
