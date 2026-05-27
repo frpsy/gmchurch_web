@@ -187,8 +187,7 @@ const FooterRenderer = {
                             <span class="footer-service-label">${s.title}</span>
                             <span class="footer-service-time">${s.time.replace('매주 일요일 ', '')}</span>
                         </div>`).join('')}
-                        <div class="footer-sep"></div>
-                        <div class="footer-info-row">
+                        <div class="footer-info-row footer-info-row--first">
                             <span class="footer-info-label">주소</span>
                             <a href="${MapHelper.naverUrl}" target="_blank" rel="noopener" class="footer-info-link footer-addr-link">${info.addressShort} <span aria-hidden="true">↗</span></a>
                         </div>
