@@ -51,13 +51,22 @@ const MapHelper = {
 
 /* ── NavRenderer ─────────────────────────────────────────── */
 const NavRenderer = {
+    _currentPage() {
+        const path = window.location.pathname.split('/').pop();
+        return path === '' ? 'index.html' : path;
+    },
+
     render() {
         const nav = document.getElementById('main-nav');
         if (!nav) return;
 
-        const items = CHURCH_DATA.navigation.map(item => `
+        const currentPage = this._currentPage();
+        const items = CHURCH_DATA.navigation.map(item => {
+            const itemPage = item.href.split('#')[0];
+            const isActive = itemPage === currentPage;
+            return `
             <li class="nav-item has-dropdown">
-                <a href="${item.href}" class="nav-link">${item.label}</a>
+                <a href="${item.href}" class="nav-link${isActive ? ' active' : ''}"${isActive ? ' aria-current="page"' : ''}>${item.label}</a>
                 <button class="nav-chevron" aria-label="${item.label} 하위 메뉴" aria-expanded="false">
                     <svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
@@ -67,7 +76,8 @@ const NavRenderer = {
                     ).join('')}
                 </ul>
             </li>
-        `).join('');
+        `;
+        }).join('');
 
         nav.innerHTML = `
             <div class="container nav-inner">
