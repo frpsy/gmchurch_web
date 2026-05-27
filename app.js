@@ -15,6 +15,7 @@ const MapHelper = {
     // 카카오 embed가 외부 도메인 iframe을 차단하여 Google Maps embed 사용
     iframeUrl: "https://maps.google.com/maps?q=37.4757,126.8641&hl=ko&z=17&output=embed",
     linkUrl:   "https://map.kakao.com/link/map/대한성공회광명교회,37.475700,126.864100",
+    naverUrl:  "https://map.naver.com/p/search/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C%20%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
 
     html(compact = false) {
         const h = compact ? '220px' : '300px';
@@ -32,11 +33,18 @@ const MapHelper = {
                     style="display:block;"
                 ></iframe>
             </div>
-            <a href="${this.linkUrl}" target="_blank" rel="noopener"
-               style="display:inline-flex; align-items:center; gap:0.4rem;
-                      color:var(--green-mid); font-weight:700; font-size:0.88rem;">
-                카카오지도에서 크게 보기 →
-            </a>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                <a href="${this.linkUrl}" target="_blank" rel="noopener"
+                   style="display:inline-flex; align-items:center; gap:0.4rem;
+                          color:var(--green-mid); font-weight:700; font-size:0.88rem;">
+                    카카오지도에서 보기 →
+                </a>
+                <a href="${this.naverUrl}" target="_blank" rel="noopener"
+                   style="display:inline-flex; align-items:center; gap:0.4rem;
+                          color:var(--green-mid); font-weight:700; font-size:0.88rem;">
+                    네이버지도에서 보기 →
+                </a>
+            </div>
         `;
     }
 };
@@ -67,9 +75,8 @@ const NavRenderer = {
                     <span class="nav-logo-mark" aria-hidden="true">
                         <svg viewBox="0 0 64 64" focusable="false">
                             <rect width="64" height="64" rx="12" fill="#ffffff"/>
-                            <text x="32" y="42" text-anchor="middle"
-                                  font-family="inherit" font-weight="800"
-                                  font-size="22" fill="#1b4d2e" letter-spacing="-0.5">ACG</text>
+                            <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#1b4d2e"/>
+                            <circle cx="32" cy="32" r="3.5" fill="#1b4d2e"/>
                         </svg>
                     </span>
                     <span class="nav-logo-text">
@@ -149,7 +156,12 @@ const FooterRenderer = {
                 <div class="footer-inner">
                     <div class="footer-col">
                         <div class="footer-brand">
-                            <span class="footer-logo-mark" aria-hidden="true">ACG</span>
+                            <span class="footer-logo-mark" aria-hidden="true">
+                                <svg viewBox="0 0 64 64" width="22" height="22" focusable="false">
+                                    <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="rgba(255,255,255,0.85)"/>
+                                    <circle cx="32" cy="32" r="3.5" fill="rgba(255,255,255,0.85)"/>
+                                </svg>
+                            </span>
                             <div>
                                 <strong class="footer-brand-name">${info.name}</strong>
                                 <span class="footer-brand-sub">${info.subName}</span>
@@ -404,7 +416,7 @@ const WorshipRenderer = {
                     <div class="communion-grid">
                         <div class="communion-card" style="border-top-color:${s.color}; background:${s.colorLight};">
                             <h3>세례받으신 분</h3>
-                            <p class="liturgy-body">성공회는 <strong>열린 성찬(Open Communion)</strong> 전통을 따릅니다. 교파에 관계없이 <strong>세례받은 그리스도인이라면 누구나</strong> 그리스도의 몸과 피를 모실 수 있습니다.</p>
+                            <p class="liturgy-body">성공회의 성찬은 모든 그리스도인에게 열려 있습니다. 교파에 관계없이 <strong>세례받은 그리스도인이라면 누구나</strong> 그리스도의 몸과 피를 모실 수 있습니다.</p>
                             <ul class="liturgy-list">
                                 <li>제대 앞으로 나오셔서 두 손을 모으거나 펴고 빵을 받으십시오.</li>
                                 <li>빵을 모신 후 포도주 잔이 전해지면 한 모금 받으십시오.</li>
@@ -460,7 +472,7 @@ const GivingRenderer = {
     render() {
         const el = document.getElementById('giving-full');
         if (!el) return;
-        const { bankName, bank, holder, report } = CHURCH_DATA.giving;
+        const { bankName, bank, holder, report, receiptInfo } = CHURCH_DATA.giving;
 
         el.innerHTML = `
             <div class="info-card" id="offering" style="max-width:640px; margin:0 auto;">
@@ -471,6 +483,7 @@ const GivingRenderer = {
                     <p class="sub">예금주 ${holder}</p>
                 </div>
                 <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.8;" id="report">${report}</p>
+                ${receiptInfo ? `<p style="margin-top:0.8rem; font-size:0.88rem; color:var(--text-muted); line-height:1.8; padding-top:0.8rem; border-top:1px solid var(--border);">${receiptInfo}</p>` : ''}
             </div>
         `;
     }
@@ -616,7 +629,7 @@ const ClergyRenderer = {
     _logo() {
         const el = document.getElementById('logo-content');
         if (!el || !CHURCH_DATA.logo) return;
-        const { eyebrow, title, desc, letters, colors } = CHURCH_DATA.logo;
+        const { eyebrow, title, desc, colors } = CHURCH_DATA.logo;
         el.innerHTML = `
             <div class="section-header">
                 <p class="section-eyebrow">${eyebrow}</p>
@@ -624,27 +637,15 @@ const ClergyRenderer = {
             </div>
             <div class="logo-intro-grid">
                 <div class="logo-display">
-                    <svg viewBox="0 0 64 64" aria-label="ACG 로고">
+                    <svg viewBox="0 0 64 64" aria-label="캔터베리 십자가">
                         <rect width="64" height="64" rx="12" fill="#163d24"/>
-                        <text x="32" y="42" text-anchor="middle"
-                              font-family="inherit" font-weight="800"
-                              font-size="22" fill="#ffffff" letter-spacing="-0.5">ACG</text>
+                        <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#ffffff"/>
+                        <circle cx="32" cy="32" r="3.5" fill="#ffffff"/>
                     </svg>
                     <p class="logo-colors">${colors}</p>
                 </div>
                 <div class="logo-meaning">
                     <p class="logo-desc">${desc}</p>
-                    <div class="logo-letters">
-                        ${letters.map(l => `
-                            <div class="logo-letter">
-                                <span class="logo-letter-mark">${l.letter}</span>
-                                <div class="logo-letter-text">
-                                    <strong>${l.word}</strong>
-                                    <span>${l.desc}</span>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
                 </div>
             </div>
         `;
@@ -671,7 +672,9 @@ const ClergyRenderer = {
                             ${c.quote ? `<div class="quote-block"><p>"${c.quote}"</p></div>` : ''}
                             <p class="clergy-desc">${c.desc}</p>
                             ${c.bio ? this._bioSection(c.bio) : ''}
-                            ${c.contact ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">📞 <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>` : ''}
+                            ${c.contact ? (c.contact.includes('@')
+                                ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">✉️ <a href="mailto:${c.contact}" style="color:inherit;">${c.contact}</a></p>`
+                                : `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">📞 <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>`) : ''}
                             ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">📚 <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
                         </div>
                     </div>`;
@@ -698,12 +701,18 @@ const ClergyRenderer = {
             `<span class="bio-role-tag">${r}</span>`
         ).join('');
 
+        const externalRolesHtml = bio.externalRoles && bio.externalRoles.length > 0
+            ? `<p class="bio-label" style="margin-top:1.5rem;">교회 밖 활동</p>
+               <div class="bio-roles">${bio.externalRoles.map(r => `<span class="bio-role-tag">${r}</span>`).join('')}</div>`
+            : '';
+
         return `
             <div class="bio-section">
                 <p class="bio-label">주요 사목 이력</p>
                 <ul class="bio-timeline">${milestones}</ul>
                 <p class="bio-label" style="margin-top:1.5rem;">교단 내 소임</p>
                 <div class="bio-roles">${roles}</div>
+                ${externalRolesHtml}
                 <div class="bio-ministry-note">
                     <span class="bio-ministry-icon">🕊</span>
                     <p>${bio.ministryNote}</p>
