@@ -215,7 +215,7 @@ const IndexRenderer = {
         el.innerHTML = `
             <div class="about-brief">
                 <p class="about-brief-lead">${slogan}</p>
-                <p class="about-brief-desc">${vision}. 성공회 전통 안에서 깊은 전례와 따뜻한 환대를 함께 나누는 공동체입니다. 처음 오시는 분도, 오래 머무신 분도 모두 환영합니다.</p>
+                <p class="about-brief-desc">${vision}. 성공회 전례를 중심으로 예배하는 경기도 광명시의 교회입니다.</p>
                 <ul class="about-brief-facts">
                     <li><strong>이름</strong><span>${name} · ${subName}</span></li>
                     <li><strong>설립</strong><span>${established}</span></li>
