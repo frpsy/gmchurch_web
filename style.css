@@ -1263,6 +1263,7 @@ footer {
 }
 .footer-info-link { color: inherit; transition: color 0.2s; }
 .footer-info-link:hover { color: #fff; }
+.footer-addr-link { text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); text-underline-offset: 3px; }
 
 /* Channel links */
 .footer-col .footer-ext-link {
