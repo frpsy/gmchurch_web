@@ -142,30 +142,50 @@ const FooterRenderer = {
     render() {
         const footer = document.getElementById('main-footer');
         if (!footer) return;
-        const { info, clergy, sns } = CHURCH_DATA;
+        const { info, clergy, sns, worship } = CHURCH_DATA;
+        const services = worship.main;
         footer.innerHTML = `
             <div class="container">
                 <div class="footer-inner">
                     <div class="footer-col">
-                        <h4>광명교회</h4>
-                        <p>${info.name}<br>${info.subName}<br>설립 ${info.established}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
+                        <div class="footer-brand">
+                            <span class="footer-logo-mark" aria-hidden="true">ACG</span>
+                            <div>
+                                <strong class="footer-brand-name">${info.name}</strong>
+                                <span class="footer-brand-sub">${info.subName}</span>
+                            </div>
+                        </div>
+                        <p class="footer-brand-slogan">"${info.slogan}"</p>
+                        <p class="footer-brand-meta">설립 ${info.established}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
                     </div>
                     <div class="footer-col">
-                        <h4>주소 & 연락처</h4>
-                        <p style="margin-bottom:0.6rem;">주소<br>${info.addressShort}</p>
-                        <p>연락처<br><a href="tel:${info.phone}" style="color:inherit;">Tel. ${info.phone}</a></p>
+                        <h4>예배</h4>
+                        ${services.map(s => `
+                        <div class="footer-service-row">
+                            <span class="footer-service-label">${s.title}</span>
+                            <span class="footer-service-time">${s.time.replace('매주 일요일 ', '')}</span>
+                        </div>`).join('')}
+                        <div class="footer-sep"></div>
+                        <div class="footer-info-row">
+                            <span class="footer-info-label">주소</span>
+                            <span>${info.addressShort}</span>
+                        </div>
+                        <div class="footer-info-row">
+                            <span class="footer-info-label">전화</span>
+                            <a href="tel:${info.phone}" class="footer-info-link">${info.phone}</a>
+                        </div>
                     </div>
                     <div class="footer-col">
-                        <h4>바로가기</h4>
-                        <a href="${sns.youtube}"   target="_blank" rel="noopener">유튜브 채널</a>
-                        <a href="${sns.instagram}" target="_blank" rel="noopener">인스타그램</a>
-                        <a href="${sns['naver blog']}" target="_blank" rel="noopener">네이버 블로그</a>
-                        <a href="${sns.diocesan}"  target="_blank" rel="noopener">성공회 서울교구</a>
-                        <a href="privacy.html">개인정보 처리방침</a>
+                        <h4>채널</h4>
+                        <a href="${sns.youtube}"           target="_blank" rel="noopener" class="footer-ext-link">유튜브 채널</a>
+                        <a href="${sns.instagram}"         target="_blank" rel="noopener" class="footer-ext-link">인스타그램</a>
+                        <a href="${sns['naver blog']}"     target="_blank" rel="noopener" class="footer-ext-link">네이버 블로그</a>
+                        <a href="${sns.diocesan}"          target="_blank" rel="noopener" class="footer-ext-link footer-ext-link--dim">성공회 서울교구</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
                     <span>© ${new Date().getFullYear()} ${info.name}</span>
+                    <a href="privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
                 </div>
             </div>
         `;
