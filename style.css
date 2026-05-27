@@ -1267,7 +1267,16 @@ footer {
 }
 .footer-info-link { color: inherit; transition: color 0.2s; }
 .footer-info-link:hover { color: #fff; }
-.footer-addr-link { text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); text-underline-offset: 3px; }
+.footer-addr-link { text-decoration: none; }
+.footer-addr-link::after {
+    content: '↗';
+    font-size: 0.68rem;
+    opacity: 0;
+    margin-left: 0.3rem;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.footer-addr-link:hover { text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); text-underline-offset: 3px; }
+.footer-addr-link:hover::after { opacity: 0.55; transform: translate(2px, -2px); }
 
 /* Channel links */
 .footer-col .footer-ext-link {
