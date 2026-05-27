@@ -74,9 +74,9 @@ const NavRenderer = {
                 <a href="index.html" class="nav-logo">
                     <span class="nav-logo-mark" aria-hidden="true">
                         <svg viewBox="0 0 64 64" focusable="false">
-                            <rect width="64" height="64" rx="12" fill="#ffffff"/>
-                            <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#1b4d2e"/>
-                            <circle cx="32" cy="32" r="3.5" fill="#1b4d2e"/>
+                            <circle cx="32" cy="32" r="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+                            <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#ffffff"/>
+                            <circle cx="32" cy="32" r="4" fill="#ffffff"/>
                         </svg>
                     </span>
                     <span class="nav-logo-text">
