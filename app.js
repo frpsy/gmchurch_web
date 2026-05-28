@@ -16,7 +16,6 @@ const MapHelper = {
     // Google iframe은 한국 라벨이 빈약하여 디자인된 위치 카드 + 외부 앱 이동 방식 채택.
     naverUrl:  "https://map.naver.com/p/search/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C%20%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
     kakaoUrl:  "https://map.kakao.com/link/search/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C%20%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
-    googleUrl: "https://www.google.com/maps/search/?api=1&query=%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C+%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
 
     _illustration() {
         // 실제 광명교회 주변 (광명IC, 제2경인고속도로, GS칼텍스, 노인회관, SK엔크린, 타이어프로)을
@@ -179,16 +178,11 @@ const MapHelper = {
                         <span class="map-btn-label">네이버지도에서 길찾기</span>
                         <span class="map-btn-arrow" aria-hidden="true">→</span>
                     </a>
-                    <div class="map-actions-row">
-                        <a href="${this.kakaoUrl}" target="_blank" rel="noopener" class="map-btn map-btn--kakao">
-                            <span class="map-btn-mark map-btn-mark--kakao">K</span>
-                            <span class="map-btn-label">카카오맵</span>
-                        </a>
-                        <a href="${this.googleUrl}" target="_blank" rel="noopener" class="map-btn map-btn--google">
-                            <span class="map-btn-mark map-btn-mark--google">G</span>
-                            <span class="map-btn-label">Google 지도</span>
-                        </a>
-                    </div>
+                    <a href="${this.kakaoUrl}" target="_blank" rel="noopener" class="map-btn map-btn--kakao">
+                        <span class="map-btn-mark map-btn-mark--kakao">K</span>
+                        <span class="map-btn-label">카카오맵에서 보기</span>
+                        <span class="map-btn-arrow" aria-hidden="true">→</span>
+                    </a>
                 </div>
             </div>
         `;
