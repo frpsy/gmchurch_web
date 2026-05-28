@@ -1675,6 +1675,141 @@ footer {
 }
 .placeholder-contact:hover { background: var(--green-mid); color: #fff; }
 
+/* ── Map card (iframe-free 위치 카드) ────────────────────── */
+.map-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.map-preview {
+    width: 100%;
+    aspect-ratio: 400 / 220;
+    background: var(--green-light);
+    overflow: hidden;
+    position: relative;
+}
+.map-preview-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.map-card-addr {
+    padding: 1.1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.map-addr-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+.map-addr-tag {
+    flex-shrink: 0;
+    width: 44px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--green-mid);
+    letter-spacing: 0.02em;
+    padding-top: 0.05rem;
+}
+.map-addr-text {
+    color: var(--text);
+    font-weight: 500;
+    word-break: keep-all;
+}
+
+.map-actions {
+    padding: 0.85rem 0.85rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+.map-actions-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+}
+
+.map-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text);
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s, background 0.15s;
+    text-decoration: none;
+}
+.map-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--green-soft);
+}
+.map-btn-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #03c75a;       /* 네이버 그린 */
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+}
+.map-btn-mark--kakao  { background: #fee500; color: #3c1e1e; }
+.map-btn-mark--google { background: #ffffff; color: #4285f4; border: 1px solid #dadce0; }
+.map-btn-label { white-space: nowrap; }
+.map-btn-arrow { margin-left: auto; color: var(--text-muted); font-size: 0.9rem; }
+
+/* Naver primary CTA */
+.map-btn--naver {
+    background: linear-gradient(135deg, #03c75a 0%, #00a04a 100%);
+    color: #ffffff;
+    border-color: transparent;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 2px 10px rgba(3,199,90,0.25);
+}
+.map-btn--naver:hover {
+    box-shadow: 0 6px 18px rgba(3,199,90,0.35);
+    border-color: transparent;
+}
+.map-btn--naver .map-btn-mark {
+    background: rgba(255,255,255,0.18);
+    color: #ffffff;
+}
+.map-btn--naver .map-btn-arrow { color: rgba(255,255,255,0.75); }
+
+/* Compact variant (index card) */
+.map-card--compact .map-preview { aspect-ratio: 400 / 180; }
+.map-card--compact .map-card-addr { padding: 0.9rem 1rem; }
+.map-card--compact .map-addr-row { font-size: 0.85rem; }
+.map-card--compact .map-actions { padding: 0.7rem; }
+.map-card--compact .map-btn { padding: 0.7rem 0.9rem; font-size: 0.82rem; }
+.map-card--compact .map-btn--naver { padding: 0.85rem 1rem; font-size: 0.88rem; }
+
+@media (max-width: 480px) {
+    .map-actions-row { grid-template-columns: 1fr; }
+    .map-btn-label { font-size: 0.85rem; }
+}
+
 /* Safe area (iPhone notch / home indicator) */
 @supports (padding: env(safe-area-inset-left)) {
     .container {

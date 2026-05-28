@@ -12,38 +12,118 @@
 /* ── MapHelper ───────────────────────────────────────────── */
 const MapHelper = {
     // 광명교회 좌표 (위도 37.4757, 경도 126.8641)
-    // 카카오 embed가 외부 도메인 iframe을 차단하여 Google Maps embed 사용
-    iframeUrl: "https://maps.google.com/maps?q=37.4757,126.8641&hl=ko&z=17&output=embed",
+    // 네이버/카카오 iframe은 X-Frame-Options 차단으로 임베드 불가,
+    // Google iframe은 한국 라벨이 빈약하여 디자인된 위치 카드 + 외부 앱 이동 방식 채택.
     naverUrl:  "https://map.naver.com/p/search/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C%20%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
+    kakaoUrl:  "https://map.kakao.com/link/search/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C%20%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
     googleUrl: "https://www.google.com/maps/search/?api=1&query=%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C+%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
 
-    html(compact = false) {
-        const h = compact ? '220px' : '300px';
+    _illustration() {
+        // Stylized SVG 일러스트 — 도로/주변 블록 + 중앙 캔터베리 십자가 마커
         return `
-            <div style="border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border); margin-bottom:1rem; height:${h}; background:#e8f5e9;">
-                <iframe
-                    src="${this.iframeUrl}"
-                    width="100%" height="100%"
-                    frameborder="0"
-                    scrolling="no"
-                    marginheight="0"
-                    marginwidth="0"
-                    loading="lazy"
-                    title="광명교회 오시는 길"
-                    style="display:block;"
-                ></iframe>
-            </div>
-            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-                <a href="${this.naverUrl}" target="_blank" rel="noopener"
-                   style="display:inline-flex; align-items:center; gap:0.4rem;
-                          color:var(--green-mid); font-weight:700; font-size:0.88rem;">
-                    네이버지도에서 보기 →
-                </a>
-                <a href="${this.googleUrl}" target="_blank" rel="noopener"
-                   style="display:inline-flex; align-items:center; gap:0.4rem;
-                          color:var(--green-mid); font-weight:700; font-size:0.88rem;">
-                    Google 지도에서 보기 →
-                </a>
+            <svg class="map-preview-svg" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                    <linearGradient id="map-bg-grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#eef2ec"/>
+                        <stop offset="100%" stop-color="#dde6dd"/>
+                    </linearGradient>
+                    <pattern id="map-dots" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="0.8" fill="rgba(10,31,18,0.07)"/>
+                    </pattern>
+                </defs>
+
+                <!-- Background -->
+                <rect width="400" height="220" fill="url(#map-bg-grad)"/>
+                <rect width="400" height="220" fill="url(#map-dots)"/>
+
+                <!-- Abstract street grid -->
+                <g stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity="0.95">
+                    <line x1="-10" y1="62"  x2="410" y2="58"/>
+                    <line x1="-10" y1="158" x2="410" y2="162"/>
+                </g>
+                <g stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.85">
+                    <line x1="120" y1="-10" x2="116" y2="230"/>
+                    <line x1="288" y1="-10" x2="292" y2="230"/>
+                </g>
+
+                <!-- Subtle road borders -->
+                <g stroke="rgba(10,31,18,0.08)" stroke-width="0.5" fill="none">
+                    <path d="M-10 55 L410 51 M-10 69 L410 65"/>
+                    <path d="M-10 151 L410 155 M-10 165 L410 169"/>
+                    <path d="M113 -10 L109 230 M127 -10 L123 230"/>
+                    <path d="M281 -10 L285 230 M295 -10 L299 230"/>
+                </g>
+
+                <!-- Blocks of buildings (subtle) -->
+                <g fill="rgba(10,31,18,0.04)">
+                    <rect x="135" y="80" width="60" height="58" rx="3"/>
+                    <rect x="210" y="80" width="55" height="58" rx="3"/>
+                    <rect x="20"  y="80" width="80" height="58" rx="3"/>
+                    <rect x="310" y="80" width="80" height="58" rx="3"/>
+                    <rect x="20"  y="175" width="80" height="38" rx="3"/>
+                    <rect x="135" y="175" width="60" height="38" rx="3"/>
+                    <rect x="210" y="175" width="55" height="38" rx="3"/>
+                    <rect x="310" y="175" width="80" height="38" rx="3"/>
+                </g>
+
+                <!-- Center marker shadow -->
+                <ellipse cx="200" cy="135" rx="20" ry="5" fill="rgba(10,31,18,0.18)"/>
+
+                <!-- Pin -->
+                <g transform="translate(200,108)">
+                    <path d="M0 -30 C-16 -30 -28 -18 -28 -3 C-28 14 0 28 0 28 C0 28 28 14 28 -3 C28 -18 16 -30 0 -30 Z" fill="#0a1f12"/>
+                    <circle cx="0" cy="-2" r="13" fill="#ffffff"/>
+                    <!-- Mini canterbury cross inside pin -->
+                    <g transform="translate(-7,-9) scale(0.22)" fill="#0a1f12">
+                        <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z"/>
+                        <circle cx="32" cy="32" r="3.5"/>
+                    </g>
+                </g>
+
+                <!-- "광명교회" label chip -->
+                <g transform="translate(200,50)">
+                    <rect x="-44" y="-12" width="88" height="22" rx="11" fill="#0a1f12"/>
+                    <text x="0" y="3" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11" font-weight="700" fill="#ffffff">광명교회</text>
+                </g>
+            </svg>
+        `;
+    },
+
+    html(compact = false) {
+        const addr = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.info)
+            ? CHURCH_DATA.info.address : '경기도 광명시 아방리 2길 10';
+        const jibun = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.info)
+            ? CHURCH_DATA.info.addressJibun : '경기도 광명시 노온사동 373-1';
+        return `
+            <div class="map-card${compact ? ' map-card--compact' : ''}">
+                <div class="map-preview" aria-hidden="true">${this._illustration()}</div>
+                <div class="map-card-addr">
+                    <div class="map-addr-row">
+                        <span class="map-addr-tag">도로명</span>
+                        <span class="map-addr-text">${addr}</span>
+                    </div>
+                    <div class="map-addr-row">
+                        <span class="map-addr-tag">지번</span>
+                        <span class="map-addr-text">${jibun}</span>
+                    </div>
+                </div>
+                <div class="map-actions">
+                    <a href="${this.naverUrl}" target="_blank" rel="noopener" class="map-btn map-btn--naver">
+                        <span class="map-btn-mark">N</span>
+                        <span class="map-btn-label">네이버지도에서 길찾기</span>
+                        <span class="map-btn-arrow" aria-hidden="true">→</span>
+                    </a>
+                    <div class="map-actions-row">
+                        <a href="${this.kakaoUrl}" target="_blank" rel="noopener" class="map-btn map-btn--kakao">
+                            <span class="map-btn-mark map-btn-mark--kakao">K</span>
+                            <span class="map-btn-label">카카오맵</span>
+                        </a>
+                        <a href="${this.googleUrl}" target="_blank" rel="noopener" class="map-btn map-btn--google">
+                            <span class="map-btn-mark map-btn-mark--google">G</span>
+                            <span class="map-btn-label">Google 지도</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         `;
     }
@@ -300,10 +380,7 @@ const IndexRenderer = {
             locationEl.innerHTML = `
                 <h3>광명교회로 오시는 길</h3>
                 ${MapHelper.html(true)}
-                <div style="margin-top:1rem;">
-                    <div class="info-row"><strong>주소</strong><span>${addressShort}</span></div>
-                    <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
-                </div>
+                <div class="info-row" style="margin-top:1rem;"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
                 <p style="margin-top:1.25rem;">
                     <a href="visit.html" style="color:var(--green-mid); font-weight:700; font-size:0.88rem;">자세히 보기 →</a>
                 </p>
@@ -511,8 +588,6 @@ const VisitRenderer = {
                 <h3>주소와 연락처</h3>
                 ${MapHelper.html(false)}
                 <div style="margin-top:1.5rem;">
-                    <div class="info-row"><strong>도로명</strong><span>${address}</span></div>
-                    <div class="info-row"><strong>지번</strong><span>${addressJibun}</span></div>
                     <div class="info-row"><strong>우편번호</strong><span>${postalCode}</span></div>
                     <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
                     <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
