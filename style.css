@@ -1430,6 +1430,10 @@ footer {
     .founded-badge { padding: 1rem 1.5rem; align-self: flex-start; }
     .korea-highlights { min-width: unset; width: 100%; }
 
+    /* Info row */
+    .info-row { gap: 0.6rem; }
+    .info-row strong { min-width: 44px; }
+
     /* Footer */
     .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     .footer-bottom { flex-direction: column; text-align: center; }
