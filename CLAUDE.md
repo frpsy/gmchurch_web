@@ -37,6 +37,11 @@ gmchurch_web/
 **스크립트 로드 순서**: 모든 HTML 공통 — `data.js` → `app.js`  
 `data.js`가 먼저 로드되어 `CHURCH_DATA` / `LiturgicalCalendar` 전역 변수를 정의하고, `app.js`가 이를 참조해 렌더링함.
 
+**로고(캔터베리 십자가) 단일 소스**: `app.js` 상단의 `CANTERBURY_CROSS_PATH` 상수 +
+`canterburyCrossSVG()` 헬퍼가 nav · footer · 로고 소개 · 지도 핀의 십자가를 공유함.
+트럼펫형(오목) 4팔 + 계단형 중앙 사각 + 중앙 점(`fill-rule="evenodd"` 구멍). favicon.svg도 동일 경로 사용.
+로고 디자인 변경 시 `CANTERBURY_CROSS_PATH` 1곳 + `favicon.svg` 1곳만 수정.
+
 ---
 
 ## data.js 구조

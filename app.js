@@ -9,6 +9,20 @@
  *  D — App이 구체 DOM에 직접 의존하지 않고 ID 기반 접근
  */
 
+/* ── 캔터베리 십자가 ─────────────────────────────────────────
+ * 단일 소스: nav · footer · 로고 소개 · 지도 핀이 모두 이 경로를 공유.
+ * 트럼펫형(오목) 4팔 + 계단형 중앙 사각 + 중앙 점(evenodd 구멍).
+ * viewBox 0 0 64 64, 중심 32,32. 흰색 단색 마크로 다크 배경 위에서 사용. */
+const CANTERBURY_CROSS_PATH = "M 25.6,23.2 C 25.4,14.56 22,8.22 20.8,4 Q 32,6.4 43.2,4 C 42,8.22 38.6,14.56 38.4,23.2 L 40.8,23.2 40.8,25.6 C 49.44,25.4 55.78,22 60,20.8 Q 57.6,32 60,43.2 C 55.78,42 49.44,38.6 40.8,38.4 L 40.8,40.8 38.4,40.8 C 38.6,49.44 42,55.78 43.2,60 Q 32,57.6 20.8,60 C 22,55.78 25.4,49.44 25.6,40.8 L 23.2,40.8 23.2,38.4 C 14.56,38.6 8.22,42 4,43.2 Q 6.4,32 4,20.8 C 8.22,22 14.56,25.4 23.2,25.6 L 23.2,23.2 25.6,23.2 Z M 28.9,32 a 3.1,3.1 0 1,0 6.2,0 a 3.1,3.1 0 1,0 -6.2,0 Z";
+
+// 십자가 SVG 마크업 (fill 색 지정 가능)
+function canterburyCrossSVG({ size = null, fill = '#ffffff', cls = '', label = null } = {}) {
+    const dims = size ? ` width="${size}" height="${size}"` : '';
+    const a11y = label ? ` role="img" aria-label="${label}"` : ' aria-hidden="true" focusable="false"';
+    const klass = cls ? ` class="${cls}"` : '';
+    return `<svg viewBox="0 0 64 64"${dims}${klass}${a11y}><path d="${CANTERBURY_CROSS_PATH}" fill="${fill}" fill-rule="evenodd"/></svg>`;
+}
+
 /* ── MapHelper ───────────────────────────────────────────── */
 const MapHelper = {
     // 광명교회 좌표 (위도 37.4757, 경도 126.8641)
@@ -139,9 +153,8 @@ const MapHelper = {
                 <g transform="translate(200,98)">
                     <path d="M0 -30 C-16 -30 -28 -18 -28 -3 C-28 14 0 28 0 28 C0 28 28 14 28 -3 C28 -18 16 -30 0 -30 Z" fill="#0a1f12"/>
                     <circle cx="0" cy="-2" r="13" fill="#ffffff"/>
-                    <g transform="translate(-7,-9) scale(0.22)" fill="#0a1f12">
-                        <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z"/>
-                        <circle cx="32" cy="32" r="3.5"/>
+                    <g transform="translate(-7,-9) scale(0.22)">
+                        <path d="${CANTERBURY_CROSS_PATH}" fill="#0a1f12" fill-rule="evenodd"/>
                     </g>
                 </g>
 
@@ -223,11 +236,7 @@ const NavRenderer = {
             <div class="container nav-inner">
                 <a href="index.html" class="nav-logo">
                     <span class="nav-logo-mark" aria-hidden="true">
-                        <svg viewBox="0 0 64 64" focusable="false">
-                            <circle cx="32" cy="32" r="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
-                            <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#ffffff"/>
-                            <circle cx="32" cy="32" r="4" fill="#ffffff"/>
-                        </svg>
+                        ${canterburyCrossSVG()}
                     </span>
                     <span class="nav-logo-text">
                         <span class="nav-logo-name">${CHURCH_DATA.info.name}</span>
@@ -337,10 +346,7 @@ const FooterRenderer = {
                     <div class="footer-col">
                         <div class="footer-brand">
                             <span class="footer-logo-mark" aria-hidden="true">
-                                <svg viewBox="0 0 64 64" width="26" height="26" focusable="false">
-                                    <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#ffffff"/>
-                                    <circle cx="32" cy="32" r="3.5" fill="#ffffff"/>
-                                </svg>
+                                ${canterburyCrossSVG({ size: 26 })}
                             </span>
                             <div>
                                 <strong class="footer-brand-name">${info.name}</strong>
@@ -827,10 +833,9 @@ const ClergyRenderer = {
             </div>
             <div class="logo-intro-grid">
                 <div class="logo-display">
-                    <svg viewBox="0 0 64 64" aria-label="캔터베리 십자가">
+                    <svg viewBox="0 0 64 64" role="img" aria-label="캔터베리 십자가">
                         <rect width="64" height="64" rx="12" fill="#163d24"/>
-                        <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z" fill="#ffffff"/>
-                        <circle cx="32" cy="32" r="3.5" fill="#ffffff"/>
+                        <path d="${CANTERBURY_CROSS_PATH}" fill="#ffffff" fill-rule="evenodd"/>
                     </svg>
                     <p class="logo-colors">${colors}</p>
                 </div>
