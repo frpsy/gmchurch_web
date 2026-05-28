@@ -478,9 +478,9 @@ const WorshipRenderer = {
 
                 <div class="newcomer-intro">
                     <h2 class="newcomer-intro-title">처음 오시는 분께</h2>
-                    <p class="newcomer-intro-body">성공회 예배는 다른 교단의 예배와 조금 다를 수 있습니다. 회중이 함께 앉고, 서고, 응답하고, 무릎 꿇는 흐름이 있어 처음에는 낯설게 느껴질 수 있습니다.</p>
-                    <p class="newcomer-intro-body">모든 순서를 익숙하게 따라 하지 않으셔도 괜찮습니다. 잘 모르는 부분에서는 자리에 앉아 지켜보셔도 됩니다. 아래 안내는 예배의 흐름을 미리 짚어보시도록 정리한 글입니다.</p>
-                    <p class="newcomer-intro-note">예배 후 궁금한 점이 있으시면 사제나 교인에게 편하게 말씀해 주세요.</p>
+                    <p class="newcomer-intro-body">광명교회에 오신 것을 환영합니다. 성공회 예배가 처음이신 분도, 오랫동안 교회를 떠나 계셨던 분도, 아직 믿음이 확실하지 않으신 분도 — 편안한 마음으로 오실 수 있습니다. 광명교회는 모든 분을 있는 그대로 맞이합니다.</p>
+                    <p class="newcomer-intro-body">예배 중에 모든 순서를 따라 하지 않아도 괜찮습니다. 낯선 부분이 있으면 잠시 앉아 바라보셔도 충분합니다. 아래 안내를 미리 읽어두시면 조금 더 친숙하게 참여하실 수 있습니다.</p>
+                    <p class="newcomer-intro-note">궁금한 점은 예배 후 사제나 교인에게 편하게 물어보세요.</p>
                 </div>
 
                 <div class="liturgy-season-badge">
