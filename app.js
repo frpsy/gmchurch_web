@@ -323,6 +323,7 @@ const NavRenderer = {
                 if (window.location.hash !== '#' + hash) {
                     history.pushState(null, '', '#' + hash);
                 }
+                NavRenderer._updateActive();
                 App._scrollToHash('#' + hash);
             }
         };
@@ -339,6 +340,28 @@ const NavRenderer = {
             if (!menu.contains(e.target) && !toggle.contains(e.target)) {
                 closeMenu();
             }
+        });
+
+        // hashchange(브라우저 뒤로/앞으로)에서도 active 갱신
+        window.addEventListener('hashchange', () => NavRenderer._updateActive());
+    },
+
+    // nav 전체 재렌더 없이 active 클래스만 갱신
+    _updateActive() {
+        const currentPage = this._currentPage();
+        const currentHash = window.location.hash.replace('#', '');
+        let activeHref = null;
+        for (const item of CHURCH_DATA.navigation) {
+            const [itemPage, itemHash] = item.href.split('#');
+            if (itemPage !== currentPage) continue;
+            if (itemHash && itemHash === currentHash) { activeHref = item.href; break; }
+            if (!itemHash && !activeHref) activeHref = item.href;
+        }
+        document.querySelectorAll('#nav-menu .nav-link').forEach(a => {
+            const isActive = a.getAttribute('href') === activeHref;
+            a.classList.toggle('active', isActive);
+            if (isActive) a.setAttribute('aria-current', 'page');
+            else a.removeAttribute('aria-current');
         });
     }
 };
