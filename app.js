@@ -133,13 +133,6 @@ const MapHelper = {
                     <text x="-9" y="-10" font-family="Pretendard, sans-serif" font-size="9" font-weight="600" fill="#3d4a3d">SK엔크린</text>
                 </g>
 
-                <!-- 랜드마크: 타이어프로 (남쪽, 고속도로 아래) -->
-                <g transform="translate(124,204)">
-                    <circle cx="0" cy="0" r="5" fill="#ffffff" stroke="#6b6b66" stroke-width="0.8"/>
-                    <circle cx="0" cy="0" r="2" fill="#6b6b66"/>
-                    <text x="9" y="3" font-family="Pretendard, sans-serif" font-size="9" font-weight="500" fill="#3d4a3d">타이어프로</text>
-                </g>
-
                 <!-- Center marker shadow -->
                 <ellipse cx="200" cy="125" rx="22" ry="5.5" fill="rgba(10,31,18,0.22)"/>
 
