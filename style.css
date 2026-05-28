@@ -1732,11 +1732,6 @@ footer {
     flex-direction: column;
     gap: 0.55rem;
 }
-.map-actions-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.55rem;
-}
 
 .map-btn {
     display: flex;
@@ -1773,7 +1768,6 @@ footer {
     flex-shrink: 0;
 }
 .map-btn-mark--kakao  { background: #fee500; color: #3c1e1e; }
-.map-btn-mark--google { background: #ffffff; color: #4285f4; border: 1px solid #dadce0; }
 .map-btn-label { white-space: nowrap; }
 .map-btn-arrow { margin-left: auto; color: var(--text-muted); font-size: 0.9rem; }
 
@@ -1797,6 +1791,20 @@ footer {
 }
 .map-btn--naver .map-btn-arrow { color: rgba(255,255,255,0.75); }
 
+/* Kakao secondary CTA */
+.map-btn--kakao {
+    background: #fee500;
+    color: #3c1e1e;
+    border-color: #f0d800;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 1rem 1.1rem;
+}
+.map-btn--kakao:hover {
+    background: #ffd900;
+    border-color: #f0ca00;
+}
+
 /* Compact variant (index card) */
 .map-card--compact .map-preview { aspect-ratio: 400 / 180; }
 .map-card--compact .map-card-addr { padding: 0.9rem 1rem; }
@@ -1806,7 +1814,6 @@ footer {
 .map-card--compact .map-btn--naver { padding: 0.85rem 1rem; font-size: 0.88rem; }
 
 @media (max-width: 480px) {
-    .map-actions-row { grid-template-columns: 1fr; }
     .map-btn-label { font-size: 0.85rem; }
 }
 
