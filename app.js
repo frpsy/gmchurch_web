@@ -51,10 +51,8 @@ const MapHelper = {
                 <!-- Building blocks -->
                 <g fill="rgba(10,31,18,0.07)">
                     <rect x="155" y="86"  width="42" height="24" rx="2"/>
-                    <rect x="202" y="86"  width="34" height="20" rx="2"/>
                     <rect x="155" y="114" width="22" height="18" rx="2"/>
-                    <rect x="182" y="114" width="32" height="18" rx="2"/>
-                    <rect x="220" y="110" width="38" height="24" rx="2"/>
+                    <rect x="182" y="114" width="14" height="18" rx="2"/>
                     <rect x="70"  y="92"  width="32" height="22" rx="2"/>
                     <rect x="70"  y="120" width="32" height="18" rx="2"/>
                     <rect x="280" y="86"  width="32" height="24" rx="2"/>
@@ -63,6 +61,19 @@ const MapHelper = {
 
                 <!-- 교회 블록 (옅은 골드 강조) -->
                 <rect x="184" y="100" width="32" height="34" rx="2" fill="rgba(139,115,85,0.12)" stroke="rgba(139,115,85,0.30)" stroke-width="0.6"/>
+
+                <!-- 광명온신초등학교 부지 (교회 동쪽 바로 옆) -->
+                <g>
+                    <!-- 부지 (옅은 베이지) -->
+                    <rect x="222" y="88" width="46" height="56" rx="3" fill="rgba(232,166,72,0.10)" stroke="rgba(232,166,72,0.32)" stroke-width="0.6"/>
+                    <!-- 본관 건물 (위쪽) -->
+                    <rect x="226" y="92" width="38" height="14" rx="1.5" fill="rgba(10,31,18,0.14)"/>
+                    <!-- 운동장 (아래쪽 사각형 + 트랙 라인) -->
+                    <rect x="226" y="112" width="38" height="28" rx="3" fill="#f0e9d8" stroke="rgba(10,31,18,0.18)" stroke-width="0.6"/>
+                    <ellipse cx="245" cy="126" rx="14" ry="9" fill="none" stroke="rgba(139,115,85,0.45)" stroke-width="0.6" stroke-dasharray="2 2"/>
+                    <!-- 학교 라벨 -->
+                    <text x="245" y="100" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="6.5" font-weight="700" fill="#ffffff" opacity="0.95">온신초</text>
+                </g>
 
                 <!-- 작은 골목길 (얇은 흰선) -->
                 <g stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.9" fill="none">
