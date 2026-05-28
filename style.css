@@ -1440,6 +1440,241 @@ footer {
     .btn-live, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
 }
 
+/* ── Community detail link ───────────────────────────────── */
+.community-detail-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    color: var(--green-mid);
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: color 0.15s;
+}
+.community-detail-link:hover {
+    color: var(--green-deep);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ── Emmaus page ─────────────────────────────────────────── */
+.emmaus-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+@media (max-width: 768px) { .emmaus-intro-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+.emmaus-lead {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.9;
+    margin-bottom: 1.25rem;
+}
+.emmaus-lead:last-child { margin-bottom: 0; }
+
+.emmaus-scripture-block {
+    background: var(--green-light);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    border-left: 4px solid var(--green-mid);
+}
+.emmaus-scripture-ref {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 0.75rem;
+}
+.emmaus-scripture {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--green-deep);
+    font-style: italic;
+    margin-bottom: 1.25rem;
+    border: none;
+    padding: 0;
+}
+.emmaus-scripture-caption {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+/* Stage cards */
+.emmaus-stages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+@media (max-width: 768px) { .emmaus-stages { grid-template-columns: 1fr; } }
+
+.emmaus-stage {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 2rem 1.75rem;
+    border: 1px solid var(--border);
+}
+.emmaus-stage--featured {
+    border-color: var(--green-mid);
+    background: var(--white);
+    box-shadow: 0 4px 20px rgba(46,125,50,0.08);
+}
+.emmaus-stage-num {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--green-soft);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+.emmaus-stage--featured .emmaus-stage-num { color: var(--green-mid); }
+.emmaus-stage-en {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+.emmaus-stage-ko {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.emmaus-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: var(--green-mid);
+    color: #fff;
+    padding: 0.15rem 0.55rem;
+    border-radius: 50px;
+    letter-spacing: 0.03em;
+}
+.emmaus-stage-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+.emmaus-stage-note {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--green-mid);
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+}
+
+/* Nurture 15-session grid */
+.nurture-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+@media (max-width: 768px) { .nurture-grid { grid-template-columns: 1fr; } }
+
+.nurture-part {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+}
+.nurture-part-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 0.4rem;
+}
+.nurture-part-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+.nurture-sessions {
+    padding-left: 1.2rem;
+    margin: 0;
+}
+.nurture-sessions li {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.85;
+}
+
+/* Join section */
+.emmaus-join-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+@media (max-width: 768px) { .emmaus-join-grid { grid-template-columns: 1fr; } }
+
+.emmaus-join-card { text-align: center; }
+.emmaus-join-icon { font-size: 2rem; margin-bottom: 1rem; }
+.emmaus-contact-link {
+    display: block;
+    color: var(--green-mid);
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-top: 0.35rem;
+}
+.emmaus-contact-link:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Reference list */
+.reference-list {
+    list-style: none;
+    padding: 0;
+}
+.reference-list li {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.7;
+}
+.reference-list li:last-child { border-bottom: none; }
+
+/* ── Placeholder (준비중) ────────────────────────────────── */
+.placeholder-wrap {
+    max-width: 540px;
+    margin: 4rem auto;
+    text-align: center;
+}
+.placeholder-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+.placeholder-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 0.75rem;
+}
+.placeholder-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    margin-bottom: 0;
+}
+.placeholder-contact {
+    display: inline-block;
+    margin-top: 1.75rem;
+    padding: 0.7rem 1.75rem;
+    border: 1.5px solid var(--green-mid);
+    border-radius: 50px;
+    color: var(--green-mid);
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: background 0.15s, color 0.15s;
+}
+.placeholder-contact:hover { background: var(--green-mid); color: #fff; }
+
 /* Safe area (iPhone notch / home indicator) */
 @supports (padding: env(safe-area-inset-left)) {
     .container {

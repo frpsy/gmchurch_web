@@ -469,6 +469,7 @@ const CommunityRenderer = {
                         <div class="card-icon">${g.icon}</div>
                         <h3>${g.title}</h3>
                         <p style="color:var(--text-muted); font-size:0.9rem;">${g.desc}</p>
+                        ${g.detailUrl ? `<a href="${g.detailUrl}" class="community-detail-link">자세히 보기 →</a>` : ''}
                     </div>
                 `).join('')}
             </div>

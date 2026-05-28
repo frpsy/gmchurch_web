@@ -270,19 +270,22 @@ const CHURCH_DATA = {
                 id: "hopecenter",
                 title: "광명 희망터",
                 desc: "지역 소외 계층을 위한 나눔 사역입니다.",
-                icon: "🌱"
+                icon: "🌱",
+                detailUrl: "hopecenter.html"
             },
             {
                 id: "emmaus",
                 title: "엠마우스 코스",
                 desc: "편안한 분위기에서 대화를 나누며 신앙의 언어를 함께 배웁니다.",
-                icon: "📖"
+                icon: "📖",
+                detailUrl: "emmaus.html"
             },
             {
                 id: "smallgroup",
                 title: "소그룹 모임",
                 desc: "소규모 모임에서 말씀을 나누고 신앙을 점검합니다.",
-                icon: "🤝"
+                icon: "🤝",
+                detailUrl: "smallgroup.html"
             }
         ]
     },
