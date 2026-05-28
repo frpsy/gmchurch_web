@@ -475,6 +475,14 @@ const WorshipRenderer = {
             ${guide ? `<div class="guide-banner"><p>${guide}</p></div>` : ''}
 
             <div class="liturgy-guide" id="newcomer">
+
+                <div class="newcomer-intro">
+                    <h2 class="newcomer-intro-title">처음 오시는 분께</h2>
+                    <p class="newcomer-intro-body">광명교회에 오신 것을 환영합니다. 성공회 예배가 처음이신 분도, 오랫동안 교회를 떠나 계셨던 분도, 아직 믿음이 확실하지 않으신 분도 — 편안한 마음으로 오실 수 있습니다. 광명교회는 모든 분을 있는 그대로 맞이합니다.</p>
+                    <p class="newcomer-intro-body">예배 중에 모든 순서를 따라 하지 않아도 괜찮습니다. 낯선 부분이 있으면 잠시 앉아 바라보셔도 충분합니다. 아래 안내를 미리 읽어두시면 조금 더 친숙하게 참여하실 수 있습니다.</p>
+                    <p class="newcomer-intro-note">궁금한 점은 예배 후 사제나 교인에게 편하게 물어보세요.</p>
+                </div>
+
                 <div class="liturgy-season-badge">
                     <span class="season-dot" style="background:${s.color};"></span>
                     ${s.symbol}&nbsp;${s.name}&nbsp;·&nbsp;<span style="color:${s.color}; font-weight:700;">${s.colorName}</span>
