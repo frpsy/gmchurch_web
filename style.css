@@ -291,6 +291,7 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: 1.18;
     margin-bottom: 1.2rem;
     text-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.4);
+    word-break: keep-all;
 }
 .hero-sub {
     font-size: clamp(0.95rem, 2.5vw, 1.15rem);
@@ -340,6 +341,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-weight: 700;
     color: var(--green-deep);
     letter-spacing: -0.025em;
+    word-break: keep-all;
 }
 .page-hero p {
     margin-top: 1rem;
@@ -369,6 +371,7 @@ button:focus:not(:focus-visible) { outline: none; }
     letter-spacing: -0.03em;
     margin-bottom: 1rem;
     line-height: 1.2;
+    word-break: keep-all;
 }
 .section-sub {
     font-size: 1rem;
@@ -533,7 +536,7 @@ button:focus:not(:focus-visible) { outline: none; }
     color: #fff;
 }
 .clergy-name { font-size: 1.3rem; font-weight: 700; color: var(--green-deep); letter-spacing: -0.01em; }
-.clergy-title { font-size: 0.85rem; color: var(--green-mid); font-weight: 600; margin-top: 0.25rem; letter-spacing: 0.02em; }
+.clergy-title { font-size: 0.85rem; color: var(--green-mid); font-weight: 600; margin-top: 0.25rem; letter-spacing: 0.02em; word-break: keep-all; overflow-wrap: break-word; }
 .clergy-desc { font-size: 0.95rem; color: var(--text); line-height: 1.85; margin-top: 1rem; opacity: 0.85; }
 
 /* ── Clergy Bio Section ──────────────────────────────────── */
@@ -1413,7 +1416,7 @@ footer {
     .hero { min-height: 100vh; min-height: 100svh; }
 
     /* Clergy Card */
-    .clergy-card { grid-template-columns: 1fr; gap: 1rem; }
+    .clergy-card { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 1.75rem; }
 
     /* Logo intro */
     .logo-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -1432,6 +1435,12 @@ footer {
     .footer-bottom { flex-direction: column; text-align: center; }
     .footer-service-row { font-size: 0.85rem; }
     .footer-col .footer-ext-link--dim { margin-top: 0.5rem; }
+}
+
+@media (max-width: 390px) {
+    .clergy-card { padding: 1.75rem 1.25rem; }
+    .bio-timeline::before { left: 38px; }
+    .bio-year { min-width: 30px; font-size: 0.68rem; }
 }
 
 @media (max-width: 480px) {
