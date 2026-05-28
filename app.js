@@ -466,6 +466,8 @@ const WorshipRenderer = {
         const el = document.getElementById('worship-full');
         if (!el) return;
         const { main, guide, liturgicalSeason: s } = CHURCH_DATA.worship;
+        const { info, clergy } = CHURCH_DATA;
+        const primary = clergy[0] || {};
 
         el.innerHTML = `
             <div class="grid" style="margin-bottom:2rem;">
@@ -486,9 +488,39 @@ const WorshipRenderer = {
 
                 <div class="newcomer-intro">
                     <h2 class="newcomer-intro-title">처음 오신 분께</h2>
-                    <p class="newcomer-intro-body">성공회 예배는 다른 교단과 조금 다를 수 있습니다. 회중이 함께 앉고, 서고, 응답하고, 무릎 꿇는 흐름이 있어 처음에는 낯설게 느껴지실 수 있습니다.</p>
-                    <p class="newcomer-intro-body">모든 순서를 익숙하게 따라 하지 않으셔도 괜찮습니다. 잘 모르는 부분은 자리에 앉아 지켜보셔도 됩니다. 아래 안내는 예배의 흐름을 미리 살펴보실 수 있도록 정리한 내용입니다.</p>
-                    <p class="newcomer-intro-note">예배 후 궁금하신 점은 사제나 교우에게 편하게 말씀해 주세요.</p>
+                    <p class="newcomer-intro-body">광명교회는 처음 오신 분을 따뜻하게 맞이합니다. 성공회 예배는 회중이 함께 기도하고 응답하며 진행되는 전례 예배로, 처음에는 흐름이 낯설게 느껴지실 수 있습니다.</p>
+                    <p class="newcomer-intro-body">모든 순서를 따라 하지 않으셔도 괜찮습니다. 익숙하지 않은 부분은 자리에 앉아 지켜보셔도 좋습니다. 아래 안내가 예배의 흐름을 이해하시는 데 도움이 될 것입니다.</p>
+                    <div class="newcomer-key-facts">
+                        <div class="newcomer-key-row">
+                            <span class="newcomer-key-label">예배</span>
+                            <span class="newcomer-key-value"><strong>주일 감사성찬례</strong> · 매주 일요일 오전 11:00</span>
+                        </div>
+                        <div class="newcomer-key-row">
+                            <span class="newcomer-key-label">장소</span>
+                            <span class="newcomer-key-value">${info.name} (${info.subName})<br><a href="visit.html" class="newcomer-key-link">${info.addressShort} · 오시는 길 →</a></span>
+                        </div>
+                        <div class="newcomer-key-row">
+                            <span class="newcomer-key-label">소요</span>
+                            <span class="newcomer-key-value">약 1시간</span>
+                        </div>
+                        <div class="newcomer-key-row">
+                            <span class="newcomer-key-label">복장</span>
+                            <span class="newcomer-key-value">단정한 평상복이면 충분합니다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="liturgy-section" id="firsttime">
+                    <p class="section-eyebrow" style="color:${s.color};">First Visit</p>
+                    <h2 class="section-title">참여 안내</h2>
+                    <p class="liturgy-body" style="margin-bottom:1rem;">처음 참석하실 때 알아두시면 도움이 되는 내용을 정리했습니다.</p>
+                    <div class="liturgy-checklist">
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>앉고 서는</strong> 순서가 있지만, 몸이 불편하시면 그대로 앉아 계셔도 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>주보</strong>에 예배 순서가 안내되어 있고, <strong>회중석의 기도서</strong>를 함께 펴고 응답하시면 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>회중이 함께 부르는 <strong>성가</strong>는 따라 부르지 않으셔도 괜찮습니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>처음에는 낯설어도 한두 번 참여하시면 자연스럽게 익숙해지실 수 있습니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>궁금하신 점은 옆자리 교우나 안내위원에게 편하게 물어보세요.</p></div>
+                    </div>
                 </div>
 
                 <div class="liturgy-season-badge">
@@ -598,14 +630,13 @@ const WorshipRenderer = {
                     </div>
                 </div>
 
-                <div class="liturgy-section" id="firsttime">
-                    <p class="section-eyebrow" style="color:${s.color};">First Visit</p>
-                    <h2 class="section-title">처음 오신 분께</h2>
-                    <div class="liturgy-checklist">
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>앉고 서는</strong> 순서가 있지만, 몸이 불편하시면 그대로 앉아 계셔도 됩니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>주보</strong>에 예배 순서가 안내되어 있고, <strong>회중석의 기도서</strong>를 함께 펴고 응답하시면 됩니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>처음에는 낯설어도 한두 번 참여하시면 자연스럽게 따라오실 수 있습니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>궁금하신 점은 옆자리 교우나 안내위원에게 편하게 물어보세요.</p></div>
+                <div class="newcomer-cta" id="contact">
+                    <h3>더 궁금하신 점이 있으신가요?</h3>
+                    <p>성공회 예배나 광명교회에 대해 궁금하신 점이 있으시면 편하게 문의해 주세요. 사제와 교회 사무실이 정성껏 답변드립니다.</p>
+                    <div class="newcomer-cta-actions">
+                        ${primary.contact ? `<a href="mailto:${primary.contact}" class="newcomer-cta-link"><span aria-hidden="true">✉️</span> ${primary.name} 사제에게 메일 보내기</a>` : ''}
+                        <a href="tel:${info.phone}" class="newcomer-cta-link"><span aria-hidden="true">📞</span> 교회 사무실 ${info.phone}</a>
+                        <a href="visit.html" class="newcomer-cta-link"><span aria-hidden="true">🗺</span> 오시는 길 안내</a>
                     </div>
                 </div>
             </div>

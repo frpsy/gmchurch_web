@@ -998,6 +998,124 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--text-muted);
     font-style: normal;
 }
+/* Newcomer intro block */
+.newcomer-intro {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem 2rem;
+    margin-bottom: 2.75rem;
+}
+.newcomer-intro-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+.newcomer-intro-body {
+    font-size: 0.97rem;
+    color: var(--text);
+    line-height: 1.95;
+    margin-bottom: 0.85rem;
+}
+.newcomer-intro-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.85;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.85rem;
+}
+.newcomer-key-facts {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.4rem;
+    background: var(--green-light);
+    border-radius: var(--radius-md);
+    display: grid;
+    gap: 0.7rem;
+}
+.newcomer-key-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+.newcomer-key-label {
+    flex-shrink: 0;
+    min-width: 44px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    padding-top: 0.15rem;
+}
+.newcomer-key-value {
+    color: var(--text);
+    flex: 1;
+    min-width: 0;
+}
+.newcomer-key-link {
+    display: inline-block;
+    margin-top: 0.25rem;
+    color: var(--green-mid);
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+.newcomer-key-link:hover { text-decoration: underline; }
+
+/* Newcomer CTA (page closing) */
+.newcomer-cta {
+    margin-top: 3rem;
+    padding: 2.25rem 2rem;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+.newcomer-cta h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+}
+.newcomer-cta > p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.85;
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+}
+.newcomer-cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: center;
+}
+.newcomer-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 1.4rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.newcomer-cta-link:hover {
+    border-color: var(--green-mid);
+    color: var(--green-deep);
+    background: var(--green-light);
+}
+
 .liturgy-section { margin-bottom: 3.5rem; }
 .liturgy-body {
     font-size: 0.97rem;
@@ -1434,6 +1552,16 @@ footer {
     /* Info row */
     .info-row { gap: 0.6rem; }
     .info-row strong { min-width: 44px; }
+
+    /* Newcomer guide */
+    .newcomer-intro { padding: 1.75rem 1.4rem; }
+    .newcomer-intro-title { font-size: 1.3rem; }
+    .newcomer-key-facts { padding: 1.1rem 1.1rem; gap: 0.6rem; }
+    .newcomer-key-row { gap: 0.7rem; font-size: 0.88rem; }
+    .newcomer-key-label { min-width: 38px; font-size: 0.7rem; }
+    .newcomer-cta { padding: 1.75rem 1.4rem; }
+    .newcomer-cta h3 { font-size: 1.05rem; }
+    .newcomer-cta-link { width: 100%; max-width: 320px; justify-content: center; }
 
     /* Footer */
     .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
