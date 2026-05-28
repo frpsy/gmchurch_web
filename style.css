@@ -1228,7 +1228,6 @@ footer {
     border-bottom: 1px solid rgba(255,255,255,0.07);
     font-size: 0.82rem;
 }
-.footer-service-row:first-of-type { border-top: 1px solid rgba(255,255,255,0.07); }
 .footer-service-label { color: rgba(255,255,255,0.58); }
 .footer-service-time {
     color: #fff;
