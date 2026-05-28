@@ -19,71 +19,133 @@ const MapHelper = {
     googleUrl: "https://www.google.com/maps/search/?api=1&query=%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C+%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
 
     _illustration() {
-        // Stylized SVG 일러스트 — 도로/주변 블록 + 중앙 캔터베리 십자가 마커
+        // 실제 광명교회 주변 (광명IC, 제2경인고속도로, GS칼텍스, 노인회관, SK엔크린, 타이어프로)을
+        // 단순화한 일러스트 — viewBox 400x220
         return `
             <svg class="map-preview-svg" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                 <defs>
                     <linearGradient id="map-bg-grad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#eef2ec"/>
-                        <stop offset="100%" stop-color="#dde6dd"/>
+                        <stop offset="0%"   stop-color="#f1f0e9"/>
+                        <stop offset="100%" stop-color="#e6e4d8"/>
                     </linearGradient>
-                    <pattern id="map-dots" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="0.8" fill="rgba(10,31,18,0.07)"/>
+                    <pattern id="map-topo" width="38" height="38" patternUnits="userSpaceOnUse">
+                        <path d="M0 19 Q10 13 19 19 T38 19" stroke="rgba(10,31,18,0.05)" stroke-width="0.6" fill="none"/>
+                        <path d="M0 30 Q10 24 19 30 T38 30" stroke="rgba(10,31,18,0.04)" stroke-width="0.6" fill="none"/>
                     </pattern>
                 </defs>
 
-                <!-- Background -->
+                <!-- Background + topo lines (산악 느낌) -->
                 <rect width="400" height="220" fill="url(#map-bg-grad)"/>
-                <rect width="400" height="220" fill="url(#map-dots)"/>
+                <rect width="400" height="220" fill="url(#map-topo)"/>
 
-                <!-- Abstract street grid -->
-                <g stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity="0.95">
-                    <line x1="-10" y1="62"  x2="410" y2="58"/>
-                    <line x1="-10" y1="158" x2="410" y2="162"/>
-                </g>
-                <g stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.85">
-                    <line x1="120" y1="-10" x2="116" y2="230"/>
-                    <line x1="288" y1="-10" x2="292" y2="230"/>
+                <!-- 하천 / 수로 (옅은 청록) — 고속도로 위로 살짝 -->
+                <path d="M-10 152 Q70 150 130 154 T260 152 T410 148"
+                      stroke="#c7d8d0" stroke-width="2.5" fill="none" opacity="0.6"/>
+
+                <!-- 산 / 녹지 (북동쪽, 옅은 초록) -->
+                <path d="M270 -10 Q310 20 350 35 Q380 50 410 60 L410 -10 Z"
+                      fill="rgba(61,107,74,0.10)"/>
+                <path d="M-10 -10 Q20 10 50 25 L50 -10 Z"
+                      fill="rgba(61,107,74,0.10)"/>
+
+                <!-- Building blocks -->
+                <g fill="rgba(10,31,18,0.07)">
+                    <rect x="155" y="86"  width="42" height="24" rx="2"/>
+                    <rect x="202" y="86"  width="34" height="20" rx="2"/>
+                    <rect x="155" y="114" width="22" height="18" rx="2"/>
+                    <rect x="182" y="114" width="32" height="18" rx="2"/>
+                    <rect x="220" y="110" width="38" height="24" rx="2"/>
+                    <rect x="70"  y="92"  width="32" height="22" rx="2"/>
+                    <rect x="70"  y="120" width="32" height="18" rx="2"/>
+                    <rect x="280" y="86"  width="32" height="24" rx="2"/>
+                    <rect x="22"  y="50"  width="38" height="20" rx="2"/>
                 </g>
 
-                <!-- Subtle road borders -->
-                <g stroke="rgba(10,31,18,0.08)" stroke-width="0.5" fill="none">
-                    <path d="M-10 55 L410 51 M-10 69 L410 65"/>
-                    <path d="M-10 151 L410 155 M-10 165 L410 169"/>
-                    <path d="M113 -10 L109 230 M127 -10 L123 230"/>
-                    <path d="M281 -10 L285 230 M295 -10 L299 230"/>
+                <!-- 교회 블록 (옅은 골드 강조) -->
+                <rect x="184" y="100" width="32" height="34" rx="2" fill="rgba(139,115,85,0.12)" stroke="rgba(139,115,85,0.30)" stroke-width="0.6"/>
+
+                <!-- 작은 골목길 (얇은 흰선) -->
+                <g stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.9" fill="none">
+                    <path d="M40 68 L130 72 L198 88"/>
+                    <path d="M155 110 L260 112"/>
+                    <path d="M70 88 L70 140"/>
+                    <path d="M260 80 L260 140"/>
+                    <path d="M308 60 L320 135"/>
+                    <path d="M340 22 L350 85"/>
                 </g>
 
-                <!-- Blocks of buildings (subtle) -->
-                <g fill="rgba(10,31,18,0.04)">
-                    <rect x="135" y="80" width="60" height="58" rx="3"/>
-                    <rect x="210" y="80" width="55" height="58" rx="3"/>
-                    <rect x="20"  y="80" width="80" height="58" rx="3"/>
-                    <rect x="310" y="80" width="80" height="58" rx="3"/>
-                    <rect x="20"  y="175" width="80" height="38" rx="3"/>
-                    <rect x="135" y="175" width="60" height="38" rx="3"/>
-                    <rect x="210" y="175" width="55" height="38" rx="3"/>
-                    <rect x="310" y="175" width="80" height="38" rx="3"/>
+                <!-- 메인 세로 도로 (북쪽 GS칼텍스 방향) -->
+                <path d="M196 -10 Q200 38 198 88 L198 144"
+                      stroke="#ffffff" stroke-width="11" stroke-linecap="round" fill="none"/>
+
+                <!-- 고속도로 (제2경인) — 가로 오렌지 띠 -->
+                <g>
+                    <path d="M-10 178 L410 178" stroke="rgba(0,0,0,0.10)" stroke-width="22" stroke-linecap="butt"/>
+                    <path d="M-10 178 L410 178" stroke="#e8a648" stroke-width="20" stroke-linecap="butt"/>
+                    <path d="M-10 178 L410 178" stroke="#ffffff" stroke-width="0.8" stroke-dasharray="6 6" opacity="0.7"/>
+                </g>
+
+                <!-- 광명 IC 인터체인지 (오른쪽 루프) -->
+                <g fill="none" stroke="rgba(0,0,0,0.10)" stroke-width="10.5">
+                    <path d="M345 178 C 380 178 393 187 388 200 C 380 218 358 220 348 208"/>
+                </g>
+                <g fill="none" stroke="#e8a648" stroke-width="9" opacity="0.98">
+                    <path d="M345 178 C 380 178 393 187 388 200 C 380 218 358 220 348 208"/>
+                    <path d="M310 178 Q 330 185 348 198 Q 360 208 372 212"/>
+                    <path d="M285 178 Q 302 168 320 162"/>
+                </g>
+
+                <!-- IC 표지 -->
+                <g transform="translate(364,196)">
+                    <rect x="-13" y="-8" width="26" height="16" rx="2" fill="#ffffff" stroke="#c98a2f" stroke-width="1"/>
+                    <text x="0" y="3" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="8" font-weight="800" fill="#c98a2f">광명IC</text>
+                </g>
+
+                <!-- 랜드마크: GS칼텍스 (북쪽) -->
+                <g transform="translate(178,28)">
+                    <circle cx="0" cy="0" r="6" fill="#ffffff" stroke="#3d6b4a" stroke-width="1"/>
+                    <text x="0" y="3" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="7" font-weight="800" fill="#3d6b4a">GS</text>
+                    <text x="10" y="3" font-family="Pretendard, sans-serif" font-size="9" font-weight="600" fill="#3d4a3d">GS칼텍스</text>
+                </g>
+
+                <!-- 랜드마크: 원노온사동 노인회관 (북동) -->
+                <g transform="translate(298,52)">
+                    <circle cx="0" cy="0" r="5" fill="#ffffff" stroke="#6b6b66" stroke-width="0.8"/>
+                    <circle cx="0" cy="0" r="2" fill="#6b6b66"/>
+                    <text x="-2" y="-9" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="9" font-weight="500" fill="#3d4a3d">노인회관</text>
+                </g>
+
+                <!-- 랜드마크: SK엔크린 (남서) -->
+                <g transform="translate(44,148)">
+                    <circle cx="0" cy="0" r="6" fill="#ffffff" stroke="#3d6b4a" stroke-width="1"/>
+                    <text x="0" y="3" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="7" font-weight="800" fill="#3d6b4a">SK</text>
+                    <text x="-9" y="-10" font-family="Pretendard, sans-serif" font-size="9" font-weight="600" fill="#3d4a3d">SK엔크린</text>
+                </g>
+
+                <!-- 랜드마크: 타이어프로 (남쪽, 고속도로 아래) -->
+                <g transform="translate(124,204)">
+                    <circle cx="0" cy="0" r="5" fill="#ffffff" stroke="#6b6b66" stroke-width="0.8"/>
+                    <circle cx="0" cy="0" r="2" fill="#6b6b66"/>
+                    <text x="9" y="3" font-family="Pretendard, sans-serif" font-size="9" font-weight="500" fill="#3d4a3d">타이어프로</text>
                 </g>
 
                 <!-- Center marker shadow -->
-                <ellipse cx="200" cy="135" rx="20" ry="5" fill="rgba(10,31,18,0.18)"/>
+                <ellipse cx="200" cy="125" rx="22" ry="5.5" fill="rgba(10,31,18,0.22)"/>
 
-                <!-- Pin -->
-                <g transform="translate(200,108)">
+                <!-- Pin (위로 살짝 — 고속도로 칩과 분리) -->
+                <g transform="translate(200,98)">
                     <path d="M0 -30 C-16 -30 -28 -18 -28 -3 C-28 14 0 28 0 28 C0 28 28 14 28 -3 C28 -18 16 -30 0 -30 Z" fill="#0a1f12"/>
                     <circle cx="0" cy="-2" r="13" fill="#ffffff"/>
-                    <!-- Mini canterbury cross inside pin -->
                     <g transform="translate(-7,-9) scale(0.22)" fill="#0a1f12">
                         <path d="M26,26 L13,6 Q32,12 51,6 L38,26 L58,13 Q52,32 58,51 L38,38 L51,58 Q32,52 13,58 L26,38 L6,51 Q12,32 6,13 Z"/>
                         <circle cx="32" cy="32" r="3.5"/>
                     </g>
                 </g>
 
-                <!-- "광명교회" label chip -->
-                <g transform="translate(200,50)">
-                    <rect x="-44" y="-12" width="88" height="22" rx="11" fill="#0a1f12"/>
-                    <text x="0" y="3" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11" font-weight="700" fill="#ffffff">광명교회</text>
+                <!-- "광명교회" label chip — pin 바로 아래 -->
+                <g transform="translate(200,143)">
+                    <rect x="-42" y="-10" width="84" height="20" rx="10" fill="#0a1f12"/>
+                    <text x="0" y="4" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="11" font-weight="700" fill="#ffffff">광명교회</text>
                 </g>
             </svg>
         `;
