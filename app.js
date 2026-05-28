@@ -387,7 +387,7 @@ const IndexRenderer = {
         el.innerHTML = `
             <div class="about-brief">
                 <p class="about-brief-lead">${slogan}</p>
-                <p class="about-brief-desc">성공회 전례를 중심으로 예배합니다.</p>
+                <p class="about-brief-desc">성공회 기도서를 따라 예배하며, 지역과 함께 살아가는 교회입니다.</p>
                 <ul class="about-brief-facts">
                     <li><strong>이름</strong><span>${name}</span></li>
                     <li><strong>설립</strong><span>${established}</span></li>
@@ -500,15 +500,15 @@ const WorshipRenderer = {
                 <div class="liturgy-section">
                     <p class="section-eyebrow" style="color:${s.color};">Anglican Liturgy</p>
                     <h2 class="section-title">성공회 전례란?</h2>
-                    <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 내려오는 말씀의 전례와 성찬의 전례가 아름답게 조화를 이루는 깊은 영성의 예배 전통을 400여 년간 이어오고 있습니다.</p>
-                    <p class="liturgy-body">성공회의 예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 주도하여 처음 편찬한 성공회 기도서는, 라틴어가 아닌 회중이 알아듣는 자국어로 예배드려 <strong>모든 신자가 전례에 능동적으로 참여</strong>할 수 있도록 했다는 점에서 종교개혁의 중요한 유산입니다.</p>
+                    <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 이어진 말씀의 전례와 성찬의 전례가 조화를 이루는 예배 전통을 400여 년간 지켜오고 있습니다.</p>
+                    <p class="liturgy-body">예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 편찬한 이 기도서는, 라틴어가 아닌 자국어로 예배를 드리도록 하여 <strong>모든 신자가 전례에 직접 참여</strong>할 수 있게 한 종교개혁의 중요한 유산입니다.</p>
                     <div class="liturgy-card" style="border-left-color:${s.color};">
                         <h3 class="liturgy-card-title">전례 교회의 의미</h3>
-                        <p class="liturgy-body"><strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말로, "공동체를 위해 수행하는 일"을 뜻합니다. 곧 전례는 <strong>그리스도인이 함께 드리고 함께 살아내는 신앙의 실천</strong>입니다.</p>
+                        <p class="liturgy-body"><strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말로, '공동체를 위해 수행하는 일'을 뜻합니다. 곧 전례는 <strong>그리스도인이 함께 드리고 함께 살아가는 신앙의 실천</strong>입니다.</p>
                         <ul class="liturgy-list">
-                            <li><strong>회중이 함께 기도하고 응답하는 대화 형식</strong>으로 진행됩니다.</li>
-                            <li><strong>모든 신자가 성직자와 동등하게 예배를 '드리는' 주체</strong>입니다.</li>
-                            <li>성서, 성가집, 기도서, 주보를 함께 펴들고 능동적으로 참여합니다.</li>
+                            <li>회중이 <strong>함께 기도하고 응답하는 대화 형식</strong>으로 진행됩니다.</li>
+                            <li>모든 신자가 성직자와 함께 <strong>예배를 드리는 주체</strong>가 됩니다.</li>
+                            <li>성서·성가집·기도서·주보를 함께 펴고 능동적으로 참여합니다.</li>
                         </ul>
                     </div>
                 </div>
@@ -516,9 +516,9 @@ const WorshipRenderer = {
                 <div class="liturgy-section">
                     <p class="section-eyebrow" style="color:${s.color};">Eucharist</p>
                     <h2 class="section-title">감사성찬례란?</h2>
-                    <p class="liturgy-body">성공회 주일 예배의 핵심은 <strong>감사성찬례</strong>입니다. 천주교의 '미사', 개신교의 '주님의 만찬'과 같은 예배로, 그리스도교 예배의 출발이자 기초이며 핵심입니다.</p>
+                    <p class="liturgy-body">성공회 주일 예배의 중심은 <strong>감사성찬례</strong>입니다. 천주교의 '미사', 개신교의 '성만찬'과 같은 예배로, 그리스도교 예배의 출발이자 핵심입니다.</p>
                     <blockquote class="liturgy-inner-quote" style="border-left-color:${s.color};">
-                        감사성찬례는 빵과 포도주를 나누는 예수님의 마지막 만찬에서 비롯되었으며, <strong>하느님 앞에서 공동체로 모여 말씀을 듣고 성찬을 나누는</strong> 거룩한 시간입니다.
+                        감사성찬례는 예수님의 마지막 만찬에서 비롯되었으며, <strong>공동체가 함께 모여 말씀을 듣고 성찬을 나누는</strong> 시간입니다.
                     </blockquote>
                 </div>
 
@@ -533,8 +533,8 @@ const WorshipRenderer = {
                                 <h4 class="step-title">입당예식</h4>
                                 <ul class="step-list">
                                     <li>입당 성가와 함께 집전자가 입장합니다.</li>
-                                    <li>회중은 다 함께 일어나 하느님께 예배드릴 준비를 합니다.</li>
-                                    <li>죄를 고백하고 용서를 구하는 시간을 가집니다.</li>
+                                    <li>회중은 모두 일어나 하느님께 예배드릴 준비를 합니다.</li>
+                                    <li>죄를 고백하고 용서를 구합니다.</li>
                                 </ul>
                             </div>
                         </div>
@@ -583,16 +583,16 @@ const WorshipRenderer = {
                             <h3>세례받으신 분</h3>
                             <p class="liturgy-body">성공회의 성찬은 모든 그리스도인에게 열려 있습니다. 교파에 관계없이 <strong>세례받은 그리스도인이라면 누구나</strong> 그리스도의 몸과 피를 모실 수 있습니다.</p>
                             <ul class="liturgy-list">
-                                <li>제대 앞으로 나오셔서 두 손을 모으거나 펴고 빵을 받으십시오.</li>
+                                <li>제대 앞으로 나오신 뒤, 두 손을 모으거나 펴서 빵을 받으십시오.</li>
                                 <li>빵을 모신 후 포도주 잔이 전해지면 한 모금 받으십시오.</li>
                             </ul>
                         </div>
                         <div class="communion-card" style="border-top-color:var(--green-mid); background:var(--green-light);">
                             <h3>아직 세례를 받지 않으신 분</h3>
-                            <p class="liturgy-body"><strong>제대 앞에 나오셔서 강복(축복)을 받으실 수 있습니다.</strong></p>
+                            <p class="liturgy-body"><strong>제대 앞으로 나오시면 강복(축복)을 받으실 수 있습니다.</strong></p>
                             <ul class="liturgy-list">
                                 <li>두 손을 가슴에 X자로 모으시면, 집전자가 머리에 손을 얹고 강복해 드립니다.</li>
-                                <li>부담 갖지 마시고 편안한 마음으로 나오세요. 그 자체가 하느님께서 여러분을 맞이하시는 시간입니다.</li>
+                                <li>편안한 마음으로 나오세요. 이 시간은 하느님께서 여러분을 맞이하시는 자리입니다.</li>
                             </ul>
                         </div>
                     </div>
