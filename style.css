@@ -1301,8 +1301,6 @@ footer {
     opacity: 0.62;
     font-size: 0.78rem;
     margin-top: 0.65rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 0.75rem;
     border-bottom: none;
 }
 
