@@ -5,47 +5,39 @@
 
 /* ── Variables ───────────────────────────────────────────── */
 :root {
-    /* Primary palette — refined forest green */
-    --green-deep:   #0a1f12;
-    --green-mid:    #3d6b4a;
-    --green-light:  #eef2ec;
-    --green-soft:   #cdd9cf;
-    /* Accent — warm bronze */
-    --gold:         #8b7355;
-    --gold-bg:      #f5efe3;
-    /* Neutrals */
-    --cream:        #f7f4ed;
+    --green-deep:   #1b4d2e;
+    --green-mid:    #2e7d32;
+    --green-light:  #e8f5e9;
+    --green-soft:   #c8e6c9;
+    --gold:         #9a7b00;
+    --gold-bg:      #fdf8e1;
+    --cream:        #faf8f3;
     --white:        #ffffff;
     --text:         #1a1a1a;
-    --text-muted:   #5a5a54;
-    --border:       #e8e5dc;
-    --red:          #b53737;
-    /* Nav glass */
-    --nav-glass:    rgba(10, 31, 18, 0.9);
-    /* Layout */
-    --nav-h:        68px;
-    --section-pad:  9rem;
-    --content-max:  1200px;
+    --text-muted:   #5c5c5c;
+    --border:       #e4e4e0;
+    --red:          #c62828;
+    --nav-glass:    rgba(27, 77, 46, 0.97);
+    --nav-h:        64px;
+    --section-pad:  6rem;
+    --content-max:  1100px;
     --radius-sm:    8px;
     --radius-md:    14px;
     --radius-lg:    20px;
-    /* Shadows — lighter, less decorative */
-    --shadow-sm:    0 1px 3px rgba(10, 31, 18, 0.05);
-    --shadow-md:    0 3px 14px rgba(10, 31, 18, 0.07);
-    --shadow-lg:    0 12px 40px rgba(10, 31, 18, 0.10);
+    --shadow-sm:    0 1px 3px rgba(27, 77, 46, 0.05);
+    --shadow-md:    0 3px 14px rgba(27, 77, 46, 0.07);
+    --shadow-lg:    0 12px 40px rgba(27, 77, 46, 0.10);
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
-    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Noto Sans KR",
-                 "Segoe UI", "Apple SD Gothic Neo", sans-serif;
+    font-family: -apple-system, "Noto Sans KR", BlinkMacSystemFont, "Segoe UI",
+                 "Apple SD Gothic Neo", sans-serif;
     color: var(--text);
     background: var(--cream);
     line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
 }
 a { text-decoration: none; color: inherit; }
@@ -214,117 +206,73 @@ button:focus:not(:focus-visible) { outline: none; }
 
 /* ── Hero ────────────────────────────────────────────────── */
 .hero {
-    position: relative;
     height: 100vh;
     height: 100svh;
     min-height: 560px;
+    padding-top: var(--nav-h);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    overflow: hidden;
+    background:
+        linear-gradient(rgba(10,30,15,0.5), rgba(10,30,15,0.65)),
+        url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1800&q=80')
+        center/cover no-repeat;
     color: #fff;
 }
 
-/* Ken Burns — 배경 이미지를 천천히 줌·이동하여 생동감 부여 */
-@keyframes hero-kenburns {
-    0%   { transform: scale(1.06) translate(0,      0);     }
-    50%  { transform: scale(1.13) translate(-1.2%,  0.7%);  }
-    100% { transform: scale(1.06) translate(0,      0);     }
-}
-
-.hero-fallback {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background:
-        var(--green-deep) url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=80')
-        center/cover no-repeat;
-    animation: hero-kenburns 24s ease-in-out infinite;
-    will-change: transform;
-}
-
-/* 오버레이 — 상단/하단 강화로 텍스트 가독성 확보 */
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.50) 0%,
-        rgba(0, 0, 0, 0.20) 40%,
-        rgba(0, 0, 0, 0.80) 100%
-    );
-}
-
-/* 텍스트 컨텐츠 */
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding-top: var(--nav-h);
-}
-
-/* 모션 감소 선호 → 애니메이션 정지 */
-@media (prefers-reduced-motion: reduce) {
-    .hero-fallback { animation: none; }
-}
+.hero-content { width: 100%; }
 
 .hero-label {
     display: inline-block;
     font-size: 0.72rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: #ffffff;
-    font-weight: 700;
-    border: 1px solid rgba(255,255,255,0.50);
-    background: rgba(255,255,255,0.12);
-    padding: 0.4rem 1.2rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.35rem 1.1rem;
     border-radius: 50px;
-    margin-bottom: 2rem;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    margin-bottom: 1.8rem;
 }
 .hero h1 {
-    font-size: clamp(2rem, 5.2vw, 3.8rem);
+    font-size: clamp(1.9rem, 5vw, 3.6rem);
     font-weight: 800;
-    letter-spacing: -0.025em;
-    line-height: 1.18;
-    margin-bottom: 1.2rem;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.4);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    margin-bottom: 1.1rem;
     word-break: keep-all;
 }
 .hero-sub {
     font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-    opacity: 0.90;
+    opacity: 0.88;
     max-width: 520px;
     margin: 0 auto 2.5rem;
-    text-shadow: 0 1px 10px rgba(0,0,0,0.20);
 }
 .hero-actions {
     display: flex; gap: 0.9rem;
     justify-content: center; flex-wrap: wrap;
 }
+.btn-live {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background 0.2s, transform 0.2s;
+}
+.btn-live:hover { background: #9b1c1c; transform: translateY(-2px); }
 .btn-outline {
     display: inline-block;
-    border: 1.5px solid rgba(255,255,255,0.50);
-    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.6);
     color: #fff;
-    padding: 0.85rem 1.9rem;
+    padding: 0.8rem 1.8rem;
     border-radius: 50px;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    letter-spacing: 0.01em;
-    transition: background 0.25s ease, border-color 0.25s ease,
-                transform 0.25s ease, box-shadow 0.25s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    transition: background 0.2s, border-color 0.2s;
 }
-.btn-outline:hover {
-    background: rgba(255,255,255,0.16);
-    border-color: rgba(255,255,255,0.85);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-}
+.btn-outline:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
 
 /* ── Page Hero (sub-pages) ───────────────────────────────── */
 .page-hero {
@@ -1476,10 +1424,22 @@ footer {
     .clergy-card { padding: 1.75rem 1.25rem; }
     .bio-timeline::before { left: 38px; }
     .bio-year { min-width: 30px; font-size: 0.68rem; }
+    .nav-logo-name { font-size: 0.88rem; }
+    .section-title { word-break: keep-all; }
+    .clergy-title { word-break: keep-all; overflow-wrap: break-word; }
+    .info-card { padding: 1.5rem 1.25rem; }
+}
+
+@media (max-width: 360px) {
+    .hero h1 { font-size: 1.65rem; line-height: 1.25; }
+    .hero-label { font-size: 0.65rem; letter-spacing: 0.2em; padding: 0.3rem 0.9rem; }
+    .nav-logo-name { font-size: 0.82rem; }
+    .nav-logo-sub  { display: none; }
+    .container { padding: 0 1rem; }
 }
 
 @media (max-width: 480px) {
-    .hero h1 { font-size: 1.75rem; }
+    .hero h1 { font-size: 1.75rem; word-break: keep-all; }
     .hero-actions { flex-direction: column; align-items: center; }
     .btn-live, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
 }
