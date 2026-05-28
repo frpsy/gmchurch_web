@@ -1411,6 +1411,7 @@ footer {
         background: rgba(255,255,255,0.05);
         padding-left: 1.4rem;
     }
+    .nav-link.active { box-shadow: none; }
 
     /* Hero */
     .hero { min-height: 100vh; min-height: 100svh; }
