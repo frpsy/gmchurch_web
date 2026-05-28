@@ -363,10 +363,11 @@ const CHURCH_DATA = {
             label: "처음 오신 분",
             href: "worship.html#newcomer",
             items: [
+                { label: "참여 안내",      href: "worship.html#firsttime" },
                 { label: "성공회 전례란?", href: "worship.html#newcomer" },
                 { label: "예배 순서",      href: "worship.html#eucharist-order" },
                 { label: "영성체 안내",    href: "worship.html#communion" },
-                { label: "처음 오신 분께", href: "worship.html#firsttime" }
+                { label: "문의하기",       href: "worship.html#contact" }
             ]
         },
         {
