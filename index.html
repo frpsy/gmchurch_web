@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>대한성공회 광명교회</title>
     <meta name="description" content="녹색 교회, 모든 생명을 환대하는 교회. 대한성공회 광명교회 성 디모테오 성당.">
-    <meta name="theme-color" content="#163d24">
+    <meta name="theme-color" content="#1b4d2e">
     <link rel="canonical" href="https://frpsy.github.io/gmchurch_web/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="대한성공회 광명교회">
@@ -22,47 +22,7 @@
     <meta name="twitter:image" content="https://frpsy.github.io/gmchurch_web/og-image-v2.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" as="style">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
     <link rel="stylesheet" href="style.css">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Church",
-      "name": "대한성공회 광명교회",
-      "alternateName": "성 디모테오 성당",
-      "url": "https://frpsy.github.io/gmchurch_web/",
-      "description": "녹색 교회, 모든 생명을 환대하는 교회. 대한성공회 광명교회 성 디모테오 성당.",
-      "telephone": "+82-2-2686-0091",
-      "email": "bsyg2000@hanmail.net",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "아방리 2길 10",
-        "addressLocality": "광명시",
-        "addressRegion": "경기도",
-        "postalCode": "14335",
-        "addressCountry": "KR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 37.4757,
-        "longitude": 126.8641
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Sunday",
-        "opens": "11:00",
-        "closes": "12:30"
-      },
-      "sameAs": [
-        "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
-        "https://www.instagram.com/anglican_gm?igsh=MTdnbWRsdHF3OGVucw==",
-        "https://m.blog.naver.com/bambi_0mini",
-        "https://seoul.anglican.kr/"
-      ]
-    }
-    </script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">본문으로 바로가기</a>
@@ -70,65 +30,54 @@
 
     <main id="main-content">
     <header class="hero">
-        <div class="hero-fallback"></div>
-        <div class="hero-overlay"></div>
         <div class="container hero-content">
             <div class="hero-label">대한성공회 · 서울교구 서부교무구</div>
             <h1 id="hero-title"></h1>
             <p class="hero-sub" id="hero-sub"></p>
             <div class="hero-actions">
-                <a href="worship.html#newcomer" class="btn-outline">처음 오시는 분</a>
-                <a href="worship.html" class="btn-outline">예배 안내</a>
-                <a href="visit.html" class="btn-outline">오시는 길</a>
+                <a href="#" id="live-btn" class="btn-live" target="_blank" rel="noopener">● 실시간 예배 참여</a>
+                <a href="worship.html" class="btn-outline">예배 안내 보기</a>
             </div>
         </div>
     </header>
 
-    <!-- 교회 소개 (간략) -->
-    <section class="section" id="about-brief">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-eyebrow">About</p>
-                <h2 class="section-title">광명교회</h2>
-            </div>
-            <div id="about-brief-content"></div>
-        </div>
-    </section>
-
     <!-- 예배 -->
-    <section class="section" id="worship" style="background:var(--white);">
+    <section class="section" id="worship">
         <div class="container">
             <div class="section-header">
                 <p class="section-eyebrow">Worship</p>
                 <h2 class="section-title">예배 안내</h2>
-                <p class="section-sub">성공회 전례를 중심으로 드리는 주일 예배입니다.</p>
+                <p class="section-sub">성공회 전례 안에서 드리는 주일 예배입니다.</p>
             </div>
             <div id="worship-grid" class="grid"></div>
             <div class="guide-banner" id="worship-guide"></div>
         </div>
     </section>
 
-    <!-- 오시는 길 -->
-    <section class="section" id="visit-preview">
+    <!-- 공동체 -->
+    <section class="section" id="community" style="background:var(--white);">
         <div class="container">
             <div class="section-header">
-                <p class="section-eyebrow">Visit</p>
-                <h2 class="section-title">오시는 길</h2>
-                <p class="section-sub">광명교회로 초대합니다. 누구나 환영합니다.</p>
+                <p class="section-eyebrow">Community</p>
+                <h2 class="section-title">함께하는 공동체</h2>
+                <p class="section-sub">믿음 안에서 삶을 나누는 소공동체가 열려 있습니다.</p>
             </div>
-            <div class="info-card" id="location-card" style="max-width:760px; margin:0 auto;"></div>
+            <div id="community-grid" class="grid"></div>
         </div>
     </section>
 
-    <!-- 헌금 -->
-    <section class="section" id="giving" style="background:var(--white);">
+    <!-- 헌금과 살림 -->
+    <section class="section" id="giving">
         <div class="container">
             <div class="section-header">
                 <p class="section-eyebrow">Giving</p>
-                <h2 class="section-title">헌금</h2>
+                <h2 class="section-title">헌금과 살림</h2>
                 <p class="section-sub">투명하게 운영되는 교회 살림과 봉헌 안내입니다.</p>
             </div>
-            <div class="info-card" id="bank-info" style="max-width:560px; margin:0 auto;"></div>
+            <div class="grid">
+                <div class="info-card" id="bank-info"></div>
+                <div class="info-card" id="location-card"></div>
+            </div>
         </div>
     </section>
 
