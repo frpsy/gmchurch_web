@@ -727,43 +727,6 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--text);
     margin-bottom: 1.75rem;
 }
-.logo-letters {
-    display: grid;
-    gap: 0.85rem;
-}
-.logo-letter {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 0.9rem 1.1rem;
-    background: var(--white);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
-}
-.logo-letter-mark {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    background: var(--green-deep);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1rem;
-    flex-shrink: 0;
-}
-.logo-letter-text { display: flex; flex-direction: column; gap: 0.2rem; }
-.logo-letter-text strong {
-    font-size: 0.95rem;
-    color: var(--green-deep);
-    font-weight: 700;
-}
-.logo-letter-text span {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-}
 
 /* ── Anglican Intro Sections ─────────────────────────────── */
 .anglican-welcome {
@@ -776,7 +739,6 @@ button:focus:not(:focus-visible) { outline: none; }
     align-items: center;
     gap: 1rem;
 }
-.anglican-welcome-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
 .anglican-welcome p {
     font-size: 0.92rem;
     line-height: 1.75;
@@ -978,26 +940,6 @@ button:focus:not(:focus-visible) { outline: none; }
     font-weight: 400;
     margin-left: 0.25rem;
 }
-.liturgy-quote {
-    border-left: 4px solid;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    padding: 1.5rem 2rem;
-    margin-bottom: 3.5rem;
-}
-.liturgy-quote p {
-    font-size: 1.05rem;
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.8;
-    font-weight: 500;
-}
-.liturgy-quote cite {
-    display: block;
-    margin-top: 0.55rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-style: normal;
-}
 /* Newcomer intro block */
 .newcomer-intro {
     background: var(--white);
@@ -1018,14 +960,6 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--text);
     line-height: 1.95;
     margin-bottom: 0.85rem;
-}
-.newcomer-intro-note {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.85;
-    padding-top: 0.85rem;
-    border-top: 1px solid var(--border);
-    margin-top: 0.85rem;
 }
 .newcomer-key-facts {
     margin-top: 1.5rem;
@@ -1253,29 +1187,6 @@ button:focus:not(:focus-visible) { outline: none; }
     margin: 0;
 }
 
-/* Closing meditation */
-.liturgy-closing {
-    border: 1px solid;
-    border-radius: var(--radius-lg);
-    padding: 2.5rem 2.25rem;
-    margin-top: 1rem;
-    text-align: center;
-}
-.liturgy-closing h3 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--green-deep);
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.01em;
-}
-.closing-body p {
-    font-size: 0.95rem;
-    color: var(--text);
-    line-height: 2.05;
-    margin-bottom: 1.2rem;
-}
-.closing-body p:last-child { margin-bottom: 0; }
-
 /* ── Footer ──────────────────────────────────────────────── */
 footer {
     background: var(--green-deep);
@@ -1437,6 +1348,7 @@ footer {
     font-size: 0.76rem;
     opacity: 0.58;
 }
+.footer-bottom-links { display: flex; align-items: center; gap: 1.25rem; }
 .footer-privacy-link { color: inherit; transition: opacity 0.2s; }
 .footer-privacy-link:hover { opacity: 1; }
 

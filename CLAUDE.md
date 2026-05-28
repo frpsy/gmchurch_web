@@ -164,8 +164,7 @@ const CHURCH_DATA = {
       { id: "main",     title: "주일 감사성찬례", time, desc },
       { id: "children", title: "어린이 예배",     time, desc }
     ],
-    guide: String,         // 처음 오시는 분 안내 한 줄
-    liturgyInfo: [...]     // 레거시 배열 — WorshipRenderer가 직접 렌더
+    guide: String         // 안내 배너 한 줄 (빈 문자열이면 미표시)
   },
 
   community: {
@@ -216,11 +215,12 @@ const CHURCH_DATA = {
   └ 주일 감사성찬례    worship.html#main            (JS)
   └ 어린이 예배        worship.html#children        (JS)
 
-처음 오시는 분  worship.html#newcomer
-  └ 성공회 전례란?     worship.html#newcomer        (JS)
+처음 오신 분  worship.html#newcomer
+  └ 참여 안내          worship.html#firsttime       (JS)
+  └ 성공회 전례란?     worship.html#liturgy         (JS)
   └ 예배 순서          worship.html#eucharist-order (JS)
   └ 영성체 안내        worship.html#communion       (JS)
-  └ 처음 오신 분들께   worship.html#firsttime       (JS)
+  └ 문의하기           worship.html#contact         (JS)
 
 공동체  community.html
   └ 광명 희망터        community.html#hopecenter    (JS)
@@ -231,8 +231,8 @@ const CHURCH_DATA = {
   └ 주소·교통          visit.html#location          (JS)
   └ 주차 안내          visit.html#parking           (JS)
 
-헌금  giving.html
-  └ 봉헌 계좌          giving.html#offering         (JS)
+※ '헌금'은 상단 내비·메인 페이지에서 제외하고 푸터 하단 바의
+  '봉헌 안내' 링크(→ giving.html)로만 접근. giving.html 페이지는 유지.
 ```
 
 ---
@@ -252,21 +252,24 @@ window DOMContentLoaded
       │       • .dropdown a click → 모바일 메뉴 자동 닫힘
       │
       ├── FooterRenderer.render()     → #main-footer (모든 페이지)
-      │     info + clergy[0] + sns 4개 링크 + 개인정보 처리방침 링크
+      │     info + clergy[0] + sns 4개 링크
+      │     하단 바: 봉헌 안내(→ giving.html) + 개인정보 처리방침 링크
       │     주소 → 네이버지도 링크로 렌더됨 (MapHelper.naverUrl)
       │
       ├── IndexRenderer.render()      → index.html 전용
-      │     _hero()    → #hero-title, #hero-sub
-      │     _about()   → #about-brief-content
+      │     _hero()    → #hero-title, #hero-sub (이름 + 슬로건)
+      │     _about()   → #about-brief-content (lead = info.vision)
       │     _worship() → #worship-grid, #worship-guide
-      │     _giving()  → #bank-info, #location-card (지도 + 주소)
+      │     _visit()   → #location-card (지도 + 주소 + 전화)
       │
       ├── WorshipRenderer.render()    → #worship-full (worship.html)
       │     예배 카드 그리드 + guide-banner
-      │     liturgy-guide (id="newcomer")
+      │     liturgy-guide (id="newcomer" — newcomer-intro 서두)
+      │       id="firsttime"        참여 안내 (체크리스트)
+      │       id="liturgy"          성공회 전례란?
       │       id="eucharist-order"  감사성찬례 4단계
       │       id="communion"        영성체 안내
-      │       id="firsttime"        처음 오신 분들께
+      │       id="contact"          문의하기 CTA (newcomer-cta)
       │     ※ liturgicalSeason(s).color / s.colorLight 인라인 style 적용
       │
       ├── CommunityRenderer.render()  → #community-full (community.html)
@@ -315,9 +318,7 @@ window DOMContentLoaded
 <section id="worship">
   #worship-grid / #worship-guide            ← IndexRenderer._worship()
 <section id="visit-preview">
-  #location-card                            ← IndexRenderer._giving()
-<section id="giving">
-  #bank-info                                ← IndexRenderer._giving()
+  #location-card                            ← IndexRenderer._visit()
 </main>
 <footer id="main-footer">                   ← FooterRenderer
 ```
@@ -346,10 +347,12 @@ window DOMContentLoaded
 <section>
   #worship-full                             ← WorshipRenderer
     #main / #children       예배 카드
-    #newcomer               전례 가이드 시작
+    #newcomer               전례 가이드 시작 (처음 오신 분께 서두)
+    #firsttime              참여 안내 (체크리스트)
+    #liturgy                성공회 전례란?
     #eucharist-order        감사성찬례 순서
     #communion              영성체 안내
-    #firsttime              처음 오신 분들께
+    #contact                문의하기 CTA
 ```
 
 ### community.html / giving.html / visit.html

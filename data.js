@@ -246,22 +246,7 @@ const CHURCH_DATA = {
                 desc: "교육관에서 드리는 어린이 예배입니다. 성공회 전례를 어린이 눈높이에 맞추어 구성합니다."
             }
         ],
-        guide: "",
-        liturgyInfo: [
-            {
-                id: "newcomer",
-                title: "성공회 전례란?",
-                desc: "성공회(Anglican Church)는 말씀과 성찬을 함께 중시하는 전례 교회입니다. 예배는 성공회 기도서(Book of Common Prayer)에 따라 드리며, 회중이 함께 기도하고 응답하는 대화 형식으로 진행됩니다. 모든 신자가 성직자와 동등하게 예배를 '드리는' 주체입니다."
-            },
-            {
-                title: "감사성찬례 순서",
-                desc: "입당예식 → 말씀의 전례(성경 봉독·설교·신앙고백·중보기도) → 성찬의 전례(빵과 포도주 축성·영성체) → 파송예식"
-            },
-            {
-                title: "영성체 안내",
-                desc: "세례를 받은 모든 그리스도인은 영성체에 참여하실 수 있습니다. 아직 세례를 받지 않으셨더라도 제대 앞에 나오시면 강복을 받으실 수 있습니다."
-            }
-        ]
+        guide: ""
     },
 
     community: {
@@ -364,7 +349,7 @@ const CHURCH_DATA = {
             href: "worship.html#newcomer",
             items: [
                 { label: "참여 안내",      href: "worship.html#firsttime" },
-                { label: "성공회 전례란?", href: "worship.html#newcomer" },
+                { label: "성공회 전례란?", href: "worship.html#liturgy" },
                 { label: "예배 순서",      href: "worship.html#eucharist-order" },
                 { label: "영성체 안내",    href: "worship.html#communion" },
                 { label: "문의하기",       href: "worship.html#contact" }
@@ -385,13 +370,6 @@ const CHURCH_DATA = {
             items: [
                 { label: "주소·교통", href: "visit.html#location" },
                 { label: "주차 안내", href: "visit.html#parking" }
-            ]
-        },
-        {
-            label: "헌금",
-            href: "giving.html",
-            items: [
-                { label: "봉헌 계좌", href: "giving.html#offering" }
             ]
         }
     ]

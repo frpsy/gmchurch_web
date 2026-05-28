@@ -237,7 +237,7 @@ const NavRenderer = {
                 <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
-                <ul class="nav-menu" id="nav-menu" role="navigation">${items}</ul>
+                <ul class="nav-menu" id="nav-menu">${items}</ul>
             </div>
         `;
 
@@ -376,7 +376,10 @@ const FooterRenderer = {
                 </div>
                 <div class="footer-bottom">
                     <span>© ${new Date().getFullYear()} ${info.name}</span>
-                    <a href="privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
+                    <nav class="footer-bottom-links" aria-label="하단 안내">
+                        <a href="giving.html" class="footer-privacy-link">봉헌 안내</a>
+                        <a href="privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
+                    </nav>
                 </div>
             </div>
         `;
@@ -389,7 +392,7 @@ const IndexRenderer = {
         this._hero();
         this._about();
         this._worship();
-        this._giving();
+        this._visit();
     },
 
     _hero() {
@@ -402,10 +405,10 @@ const IndexRenderer = {
     _about() {
         const el = document.getElementById('about-brief-content');
         if (!el) return;
-        const { name, subName, slogan, vision, established } = CHURCH_DATA.info;
+        const { name, vision, established } = CHURCH_DATA.info;
         el.innerHTML = `
             <div class="about-brief">
-                <p class="about-brief-lead">${slogan}</p>
+                <p class="about-brief-lead">${vision}</p>
                 <p class="about-brief-desc">성공회 기도서를 따라 예배하며, 지역과 함께 살아가는 교회입니다.</p>
                 <ul class="about-brief-facts">
                     <li><strong>이름</strong><span>${name}</span></li>
@@ -437,45 +440,18 @@ const IndexRenderer = {
         }
     },
 
-    _community() {
-        const el = document.getElementById('community-grid');
-        if (!el) return;
-        el.innerHTML = CHURCH_DATA.community.groups.map(g => `
-            <div class="card" style="text-align:center;">
-                <div class="card-icon">${g.icon}</div>
-                <h3>${g.title}</h3>
-                <p style="color:var(--text-muted); font-size:0.9rem;">${g.desc}</p>
-            </div>
-        `).join('');
-    },
-
-    _giving() {
-        const el = document.getElementById('bank-info');
-        if (!el) return;
-        const { bankName, bank, holder, report } = CHURCH_DATA.giving;
-        const { addressShort, phone } = CHURCH_DATA.info;
-        el.innerHTML = `
-            <h3>봉헌 안내</h3>
-            <div class="bank-card">
-                <p style="font-size:0.8rem; color:var(--green-mid); margin-bottom:0.3rem;">${bankName}</p>
-                <p class="account">${bank}</p>
-                <p class="sub">예금주 ${holder}</p>
-            </div>
-            <p style="font-size:0.83rem; color:var(--text-muted);">${report}</p>
-        `;
-
-        // 오시는 길 카드에 지도 삽입
+    _visit() {
         const locationEl = document.getElementById('location-card');
-        if (locationEl) {
-            locationEl.innerHTML = `
-                <h3>광명교회로 오시는 길</h3>
-                ${MapHelper.html(true)}
-                <div class="info-row" style="margin-top:1rem;"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
-                <p style="margin-top:1.25rem;">
-                    <a href="visit.html" style="color:var(--green-mid); font-weight:700; font-size:0.88rem;">자세히 보기 →</a>
-                </p>
-            `;
-        }
+        if (!locationEl) return;
+        const { phone } = CHURCH_DATA.info;
+        locationEl.innerHTML = `
+            <h3>광명교회로 오시는 길</h3>
+            ${MapHelper.html(true)}
+            <div class="info-row" style="margin-top:1rem;"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
+            <p style="margin-top:1.25rem;">
+                <a href="visit.html" style="color:var(--green-mid); font-weight:700; font-size:0.88rem;">자세히 보기 →</a>
+            </p>
+        `;
     }
 };
 
@@ -548,7 +524,7 @@ const WorshipRenderer = {
                     <span class="season-note">${s.note}</span>
                 </div>
 
-                <div class="liturgy-section">
+                <div class="liturgy-section" id="liturgy">
                     <p class="section-eyebrow" style="color:${s.color};">Anglican Liturgy</p>
                     <h2 class="section-title">성공회 전례란?</h2>
                     <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 이어진 말씀의 전례와 성찬의 전례가 조화를 이루는 예배 전통을 400여 년간 지켜오고 있습니다.</p>
