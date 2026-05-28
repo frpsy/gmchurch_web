@@ -346,7 +346,10 @@ const FooterRenderer = {
                 </div>
                 <div class="footer-bottom">
                     <span>© ${new Date().getFullYear()} ${info.name}</span>
-                    <a href="privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
+                    <div style="display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:center;">
+                        <a href="giving.html" class="footer-privacy-link">헌금 안내</a>
+                        <a href="privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
+                    </div>
                 </div>
             </div>
         `;
