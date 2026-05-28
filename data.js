@@ -386,5 +386,12 @@ const CHURCH_DATA = {
                 { label: "주차 안내", href: "visit.html#parking" }
             ]
         },
+        {
+            label: "헌금",
+            href: "giving.html",
+            items: [
+                { label: "봉헌 계좌", href: "giving.html#offering" }
+            ]
+        }
     ]
 };

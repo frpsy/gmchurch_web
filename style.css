@@ -948,37 +948,6 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--text-muted);
 }
 
-/* ── Newcomer Intro ─────────────────────────────────────── */
-.newcomer-intro {
-    margin-bottom: 2.75rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--border);
-}
-.newcomer-intro-title {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 700;
-    color: var(--green-deep);
-    letter-spacing: -0.025em;
-    margin-bottom: 1.25rem;
-    word-break: keep-all;
-    line-height: 1.3;
-}
-.newcomer-intro-body {
-    font-size: 1rem;
-    line-height: 1.95;
-    color: var(--text);
-    margin-bottom: 0.9rem;
-    word-break: keep-all;
-}
-.newcomer-intro-note {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    margin-top: 1.25rem;
-    padding-left: 1rem;
-    border-left: 3px solid var(--green-soft);
-    line-height: 1.75;
-}
-
 /* ── Liturgy Guide ──────────────────────────────────────── */
 .liturgy-guide {
     max-width: 760px;
@@ -1686,39 +1655,6 @@ footer {
     line-height: 1.7;
 }
 .reference-list li:last-child { border-bottom: none; }
-
-/* ── Clergy Quick Facts ──────────────────────────────────── */
-.clergy-quick-facts {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 1.1rem 0;
-}
-.quick-facts-row {
-    display: flex;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-    align-items: center;
-}
-.quick-fact {
-    display: flex;
-    align-items: baseline;
-    gap: 0.55rem;
-    font-size: 0.9rem;
-}
-.quick-fact-label {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--green-mid);
-    flex-shrink: 0;
-}
-.quick-fact-value { color: var(--text); font-weight: 500; }
-.quick-fact-link { color: var(--text); transition: color 0.15s; }
-.quick-fact-link:hover { color: var(--green-mid); }
-@media (max-width: 480px) {
-    .quick-facts-row { gap: 0.9rem; flex-direction: column; }
-}
 
 /* ── Placeholder (준비중) ────────────────────────────────── */
 .placeholder-wrap {

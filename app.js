@@ -346,10 +346,7 @@ const FooterRenderer = {
                 </div>
                 <div class="footer-bottom">
                     <span>© ${new Date().getFullYear()} ${info.name}</span>
-                    <div style="display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:center;">
-                        <a href="giving.html" class="footer-privacy-link">헌금 안내</a>
-                        <a href="privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
-                    </div>
+                    <a href="privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
                 </div>
             </div>
         `;
@@ -475,14 +472,6 @@ const WorshipRenderer = {
             ${guide ? `<div class="guide-banner"><p>${guide}</p></div>` : ''}
 
             <div class="liturgy-guide" id="newcomer">
-
-                <div class="newcomer-intro">
-                    <h2 class="newcomer-intro-title">처음 오시는 분께</h2>
-                    <p class="newcomer-intro-body">성공회 예배는 다른 교단의 예배와 조금 다를 수 있습니다. 회중이 함께 앉고, 서고, 응답하고, 무릎 꿇는 흐름이 있어 처음에는 낯설게 느껴질 수 있습니다.</p>
-                    <p class="newcomer-intro-body">모든 순서를 익숙하게 따라 하지 않으셔도 괜찮습니다. 잘 모르는 부분에서는 자리에 앉아 지켜보셔도 됩니다. 아래 안내는 예배의 흐름을 미리 짚어보시도록 정리한 글입니다.</p>
-                    <p class="newcomer-intro-note">예배 후 궁금한 점이 있으시면 사제나 교인에게 편하게 말씀해 주세요.</p>
-                </div>
-
                 <div class="liturgy-season-badge">
                     <span class="season-dot" style="background:${s.color};"></span>
                     ${s.symbol}&nbsp;${s.name}&nbsp;·&nbsp;<span style="color:${s.color}; font-weight:700;">${s.colorName}</span>
@@ -700,37 +689,9 @@ const VisitRenderer = {
 /* ── AnglicanRenderer ────────────────────────────────────── */
 const AnglicanRenderer = {
     render() {
-        this._quickFacts();
         this._welcome();
         this._what();
         this._korea();
-    },
-
-    _quickFacts() {
-        const el = document.getElementById('clergy-quick-facts');
-        if (!el) return;
-        const { info, worship } = CHURCH_DATA;
-        const s = worship.main[0];
-        el.innerHTML = `
-            <div class="clergy-quick-facts">
-                <div class="container">
-                    <div class="quick-facts-row">
-                        <div class="quick-fact">
-                            <span class="quick-fact-label">예배</span>
-                            <span class="quick-fact-value">${s.time}</span>
-                        </div>
-                        <div class="quick-fact">
-                            <span class="quick-fact-label">장소</span>
-                            <span class="quick-fact-value">${info.addressShort}</span>
-                        </div>
-                        <div class="quick-fact">
-                            <span class="quick-fact-label">전화</span>
-                            <a href="tel:${info.phone}" class="quick-fact-value quick-fact-link">${info.phone}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
     },
 
     _welcome() {
