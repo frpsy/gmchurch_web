@@ -214,9 +214,19 @@ const NavRenderer = {
         if (!nav) return;
 
         const currentPage = this._currentPage();
+        const currentHash = window.location.hash.replace('#', '');
+
+        // active 우선순위: 페이지+해시 완전 일치 > 해시 없는 페이지 일치(fallback)
+        let activeHref = null;
+        for (const item of CHURCH_DATA.navigation) {
+            const [itemPage, itemHash] = item.href.split('#');
+            if (itemPage !== currentPage) continue;
+            if (itemHash && itemHash === currentHash) { activeHref = item.href; break; }
+            if (!itemHash && !activeHref) activeHref = item.href;
+        }
+
         const items = CHURCH_DATA.navigation.map(item => {
-            const itemPage = item.href.split('#')[0];
-            const isActive = itemPage === currentPage && !item.href.includes('#');
+            const isActive = item.href === activeHref;
             return `
             <li class="nav-item has-dropdown">
                 <a href="${item.href}" class="nav-link${isActive ? ' active' : ''}"${isActive ? ' aria-current="page"' : ''}>${item.label}</a>
