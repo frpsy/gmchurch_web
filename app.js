@@ -155,18 +155,22 @@ const MapHelper = {
     },
 
     html(compact = false) {
-        const info = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.info) ? CHURCH_DATA.info : {};
-        const addr = info.address || '경기도 광명시 아방리 2길 10';
-        const jibun = info.addressJibun || '';
+        const addr = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.info)
+            ? CHURCH_DATA.info.address : '경기도 광명시 아방리 2길 10';
+        const jibun = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.info)
+            ? CHURCH_DATA.info.addressJibun : '경기도 광명시 노온사동 373-1';
         return `
             <div class="map-card${compact ? ' map-card--compact' : ''}">
                 <div class="map-preview" aria-hidden="true">${this._illustration()}</div>
                 <div class="map-card-addr">
                     <div class="map-addr-row">
-                        <span class="map-addr-tag">주소</span>
+                        <span class="map-addr-tag">도로명</span>
                         <span class="map-addr-text">${addr}</span>
                     </div>
-                    ${jibun ? `<div class="map-addr-row"><span class="map-addr-tag">지번</span><span class="map-addr-text">${jibun}</span></div>` : ''}
+                    <div class="map-addr-row">
+                        <span class="map-addr-tag">지번</span>
+                        <span class="map-addr-text">${jibun}</span>
+                    </div>
                 </div>
                 <div class="map-actions">
                     <a href="${this.naverUrl}" target="_blank" rel="noopener" class="map-btn map-btn--naver">
@@ -334,10 +338,10 @@ const FooterRenderer = {
                     </div>
                     <div class="footer-col">
                         <h4>채널</h4>
-                        ${sns.youtube ? `<a href="${sns.youtube}" target="_blank" rel="noopener" class="footer-ext-link">유튜브 채널</a>` : ''}
-                        ${sns.instagram ? `<a href="${sns.instagram}" target="_blank" rel="noopener" class="footer-ext-link">인스타그램</a>` : ''}
-                        ${sns['naver blog'] ? `<a href="${sns['naver blog']}" target="_blank" rel="noopener" class="footer-ext-link">네이버 블로그</a>` : ''}
-                        ${sns.diocesan ? `<a href="${sns.diocesan}" target="_blank" rel="noopener" class="footer-ext-link footer-ext-link--dim">성공회 서울교구</a>` : ''}
+                        <a href="${sns.youtube}"           target="_blank" rel="noopener" class="footer-ext-link">유튜브 채널</a>
+                        <a href="${sns.instagram}"         target="_blank" rel="noopener" class="footer-ext-link">인스타그램</a>
+                        <a href="${sns['naver blog']}"     target="_blank" rel="noopener" class="footer-ext-link">네이버 블로그</a>
+                        <a href="${sns.diocesan}"          target="_blank" rel="noopener" class="footer-ext-link footer-ext-link--dim">성공회 서울교구</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
@@ -356,20 +360,16 @@ const FooterRenderer = {
 const IndexRenderer = {
     render() {
         this._hero();
+        this._about();
         this._worship();
-        this._community();
         this._giving();
     },
 
     _hero() {
         const t = document.getElementById('hero-title');
         const s = document.getElementById('hero-sub');
-        const liveBtn = document.getElementById('live-btn');
         if (t) t.textContent = CHURCH_DATA.info.name;
         if (s) s.textContent = CHURCH_DATA.info.slogan;
-        if (liveBtn && CHURCH_DATA.liveUrl) {
-            liveBtn.href = CHURCH_DATA.liveUrl;
-        }
     },
 
     _about() {
@@ -457,12 +457,7 @@ const WorshipRenderer = {
     render() {
         const el = document.getElementById('worship-full');
         if (!el) return;
-        const { main, guide } = CHURCH_DATA.worship;
-        const s = CHURCH_DATA.worship.liturgicalSeason ||
-            (typeof LiturgicalCalendar !== 'undefined' ? LiturgicalCalendar.compute() : {
-                name: '성령강림 후', colorName: '녹색', color: '#2e7d32',
-                colorLight: '#e8f5e9', symbol: '🌿', note: '그리스도인의 일상'
-            });
+        const { main, guide, liturgicalSeason: s } = CHURCH_DATA.worship;
 
         el.innerHTML = `
             <div class="grid" style="margin-bottom:2rem;">
@@ -597,7 +592,7 @@ const WorshipRenderer = {
 
                 <div class="liturgy-section" id="firsttime">
                     <p class="section-eyebrow" style="color:${s.color};">First Visit</p>
-                    <h2 class="section-title">처음 오시는 분들께</h2>
+                    <h2 class="section-title">처음 오신 분들께</h2>
                     <div class="liturgy-checklist">
                         <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>앉고 서는</strong> 순서가 있지만, 몸이 불편하시면 그대로 앉아 계셔도 괜찮습니다.</p></div>
                         <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>주보</strong>에 모든 순서가 안내되어 있고, <strong>회중석에 비치된 기도서</strong>를 펴 함께 응답하시면 됩니다.</p></div>
@@ -657,16 +652,16 @@ const VisitRenderer = {
     render() {
         const el = document.getElementById('visit-full');
         if (!el) return;
-        const { postalCode, phone, fax } = CHURCH_DATA.info;
+        const { address, addressJibun, postalCode, phone, fax } = CHURCH_DATA.info;
 
         el.innerHTML = `
             <div class="info-card" id="location" style="max-width:760px; margin:0 auto 1.5rem;">
                 <h3>주소와 연락처</h3>
                 ${MapHelper.html(false)}
                 <div style="margin-top:1.5rem;">
-                    ${postalCode ? `<div class="info-row"><strong>우편번호</strong><span>${postalCode}</span></div>` : ''}
-                    ${phone ? `<div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>` : ''}
-                    ${fax ? `<div class="info-row"><strong>팩스</strong><span>${fax}</span></div>` : ''}
+                    <div class="info-row"><strong>우편번호</strong><span>${postalCode}</span></div>
+                    <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
+                    <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
                 </div>
             </div>
             <div class="info-card" id="parking" style="max-width:760px; margin:0 auto;">
@@ -843,22 +838,38 @@ const ClergyRenderer = {
     _clergy() {
         const el = document.getElementById('clergy-full');
         if (!el) return;
-        el.innerHTML = CHURCH_DATA.clergy.map((c, i) => `
-            <div class="clergy-card"${i === 0 ? ' id="priest"' : ''}>
-                <div class="clergy-avatar">✝️</div>
-                <div>
-                    <div class="clergy-name">${c.name}</div>
-                    <div class="clergy-title">${c.title}</div>
-                    ${c.ordained ? `<div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">${c.ordained}</div>` : ''}
-                    ${c.quote ? `<div class="quote-block"><p>"${c.quote}"</p></div>` : ''}
-                    <p class="clergy-desc">${c.desc}</p>
-                    ${c.bio ? this._bioSection(c.bio) : ''}
-                    ${c.contact ? (c.contact.includes('@')
-                        ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">✉️ <a href="mailto:${c.contact}" style="color:inherit;">${c.contact}</a></p>`
-                        : `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">📞 <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>`) : ''}
-                    ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">📚 <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
-                </div>
-            </div>`).join('');
+        const cats = CHURCH_DATA.ministerSection.categories;
+        let firstPriestRendered = false;
+        el.innerHTML = cats.map(cat => {
+            const members = CHURCH_DATA.clergy.filter(c => c.category === cat.id);
+            const membersHtml = members.length > 0
+                ? members.map(c => {
+                    const isFirstPriest = !firstPriestRendered && cat.id === '성직자';
+                    if (isFirstPriest) firstPriestRendered = true;
+                    return `
+                    <div class="clergy-card" ${isFirstPriest ? 'id="priest"' : ''}>
+                        <div class="clergy-avatar">✝️</div>
+                        <div>
+                            <div class="clergy-name">${c.name} 사제</div>
+                            <div class="clergy-title">${c.title}</div>
+                            ${c.ordained ? `<div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">${c.ordained}</div>` : ''}
+                            ${c.quote ? `<div class="quote-block"><p>"${c.quote}"</p></div>` : ''}
+                            <p class="clergy-desc">${c.desc}</p>
+                            ${c.bio ? this._bioSection(c.bio) : ''}
+                            ${c.contact ? (c.contact.includes('@')
+                                ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">✉️ <a href="mailto:${c.contact}" style="color:inherit;">${c.contact}</a></p>`
+                                : `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">📞 <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>`) : ''}
+                            ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">📚 <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
+                        </div>
+                    </div>`;
+                }).join('')
+                : `<div class="minister-empty">준비 중입니다.</div>`;
+            return `
+            <div class="minister-category">
+                <h3 class="minister-cat-title">${cat.title}</h3>
+                ${membersHtml}
+            </div>`;
+        }).join('');
     },
 
     _bioSection(bio) {
