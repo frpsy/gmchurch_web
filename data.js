@@ -237,7 +237,7 @@ const CHURCH_DATA = {
                 id: "main",
                 title: "주일 감사성찬례",
                 time: "매주 일요일 오전 11:00",
-                desc: "성공회 전례의 핵심인 감사성찬례(Eucharist)입니다. 말씀과 성찬 안에서 예수 그리스도를 만나는 시간으로, 세례받은 모든 그리스도인이 성체를 받을 수 있습니다."
+                desc: "성공회 전례의 중심이 되는 감사성찬례(Eucharist)입니다. 말씀과 성찬 안에서 예수 그리스도를 만나는 시간이며, 세례받은 모든 그리스도인이 성체를 받을 수 있습니다."
             },
             {
                 id: "children",
@@ -360,13 +360,13 @@ const CHURCH_DATA = {
             ]
         },
         {
-            label: "처음 오시는 분",
+            label: "처음 오신 분",
             href: "worship.html#newcomer",
             items: [
                 { label: "성공회 전례란?", href: "worship.html#newcomer" },
                 { label: "예배 순서",      href: "worship.html#eucharist-order" },
                 { label: "영성체 안내",    href: "worship.html#communion" },
-                { label: "처음 오신 분들께", href: "worship.html#firsttime" }
+                { label: "처음 오신 분께", href: "worship.html#firsttime" }
             ]
         },
         {

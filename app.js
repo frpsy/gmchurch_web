@@ -279,9 +279,20 @@ const NavRenderer = {
         });
 
         menu.querySelectorAll('.dropdown a').forEach(a => {
-            a.addEventListener('click', () => {
+            a.addEventListener('click', (e) => {
                 menu.classList.remove('open');
                 toggle.setAttribute('aria-expanded', false);
+                const href = a.getAttribute('href') || '';
+                const [page, hash] = href.split('#');
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                const samePage = (page === '' || page === currentPage);
+                if (samePage && hash) {
+                    e.preventDefault();
+                    if (window.location.hash !== '#' + hash) {
+                        history.pushState(null, '', '#' + hash);
+                    }
+                    App._scrollToHash('#' + hash);
+                }
             });
         });
 
@@ -474,10 +485,10 @@ const WorshipRenderer = {
             <div class="liturgy-guide" id="newcomer">
 
                 <div class="newcomer-intro">
-                    <h2 class="newcomer-intro-title">처음 오시는 분께</h2>
-                    <p class="newcomer-intro-body">성공회 예배는 다른 교단의 예배와 조금 다를 수 있습니다. 회중이 함께 앉고, 서고, 응답하고, 무릎 꿇는 흐름이 있어 처음에는 낯설게 느껴질 수 있습니다.</p>
-                    <p class="newcomer-intro-body">모든 순서를 익숙하게 따라 하지 않으셔도 괜찮습니다. 잘 모르는 부분에서는 자리에 앉아 지켜보셔도 됩니다. 아래 안내는 예배의 흐름을 미리 짚어보시도록 정리한 글입니다.</p>
-                    <p class="newcomer-intro-note">예배 후 궁금한 점이 있으시면 사제나 교인에게 편하게 말씀해 주세요.</p>
+                    <h2 class="newcomer-intro-title">처음 오신 분께</h2>
+                    <p class="newcomer-intro-body">성공회 예배는 다른 교단과 조금 다를 수 있습니다. 회중이 함께 앉고, 서고, 응답하고, 무릎 꿇는 흐름이 있어 처음에는 낯설게 느껴지실 수 있습니다.</p>
+                    <p class="newcomer-intro-body">모든 순서를 익숙하게 따라 하지 않으셔도 괜찮습니다. 잘 모르는 부분은 자리에 앉아 지켜보셔도 됩니다. 아래 안내는 예배의 흐름을 미리 살펴보실 수 있도록 정리한 내용입니다.</p>
+                    <p class="newcomer-intro-note">예배 후 궁금하신 점은 사제나 교우에게 편하게 말씀해 주세요.</p>
                 </div>
 
                 <div class="liturgy-season-badge">
@@ -589,12 +600,12 @@ const WorshipRenderer = {
 
                 <div class="liturgy-section" id="firsttime">
                     <p class="section-eyebrow" style="color:${s.color};">First Visit</p>
-                    <h2 class="section-title">처음 오신 분들께</h2>
+                    <h2 class="section-title">처음 오신 분께</h2>
                     <div class="liturgy-checklist">
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>앉고 서는</strong> 순서가 있지만, 몸이 불편하시면 그대로 앉아 계셔도 괜찮습니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>주보</strong>에 모든 순서가 안내되어 있고, <strong>회중석에 비치된 기도서</strong>를 펴 함께 응답하시면 됩니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>처음에는 낯설어도, 한두 번 참여하시면 자연스럽게 따라오실 수 있습니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>모르는 것이 있으시면 옆자리 교우나 안내위원에게 편하게 물어보세요.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>앉고 서는</strong> 순서가 있지만, 몸이 불편하시면 그대로 앉아 계셔도 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>주보</strong>에 예배 순서가 안내되어 있고, <strong>회중석의 기도서</strong>를 함께 펴고 응답하시면 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>처음에는 낯설어도 한두 번 참여하시면 자연스럽게 따라오실 수 있습니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>궁금하신 점은 옆자리 교우나 안내위원에게 편하게 물어보세요.</p></div>
                     </div>
                 </div>
             </div>
