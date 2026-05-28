@@ -203,7 +203,7 @@ const NavRenderer = {
         const currentPage = this._currentPage();
         const items = CHURCH_DATA.navigation.map(item => {
             const itemPage = item.href.split('#')[0];
-            const isActive = itemPage === currentPage;
+            const isActive = itemPage === currentPage && !item.href.includes('#');
             return `
             <li class="nav-item has-dropdown">
                 <a href="${item.href}" class="nav-link${isActive ? ' active' : ''}"${isActive ? ' aria-current="page"' : ''}>${item.label}</a>
