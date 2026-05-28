@@ -692,9 +692,37 @@ const VisitRenderer = {
 /* ── AnglicanRenderer ────────────────────────────────────── */
 const AnglicanRenderer = {
     render() {
+        this._quickFacts();
         this._welcome();
         this._what();
         this._korea();
+    },
+
+    _quickFacts() {
+        const el = document.getElementById('clergy-quick-facts');
+        if (!el) return;
+        const { info, worship } = CHURCH_DATA;
+        const s = worship.main[0];
+        el.innerHTML = `
+            <div class="clergy-quick-facts">
+                <div class="container">
+                    <div class="quick-facts-row">
+                        <div class="quick-fact">
+                            <span class="quick-fact-label">예배</span>
+                            <span class="quick-fact-value">${s.time}</span>
+                        </div>
+                        <div class="quick-fact">
+                            <span class="quick-fact-label">장소</span>
+                            <span class="quick-fact-value">${info.addressShort}</span>
+                        </div>
+                        <div class="quick-fact">
+                            <span class="quick-fact-label">전화</span>
+                            <a href="tel:${info.phone}" class="quick-fact-value quick-fact-link">${info.phone}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
     },
 
     _welcome() {

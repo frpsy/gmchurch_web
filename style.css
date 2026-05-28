@@ -1656,6 +1656,39 @@ footer {
 }
 .reference-list li:last-child { border-bottom: none; }
 
+/* ── Clergy Quick Facts ──────────────────────────────────── */
+.clergy-quick-facts {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 1.1rem 0;
+}
+.quick-facts-row {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.quick-fact {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    font-size: 0.9rem;
+}
+.quick-fact-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    flex-shrink: 0;
+}
+.quick-fact-value { color: var(--text); font-weight: 500; }
+.quick-fact-link { color: var(--text); transition: color 0.15s; }
+.quick-fact-link:hover { color: var(--green-mid); }
+@media (max-width: 480px) {
+    .quick-facts-row { gap: 0.9rem; flex-direction: column; }
+}
+
 /* ── Placeholder (준비중) ────────────────────────────────── */
 .placeholder-wrap {
     max-width: 540px;
