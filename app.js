@@ -250,6 +250,16 @@ const NavRenderer = {
         const menu   = document.getElementById('nav-menu');
         if (!toggle || !menu) return;
 
+        const closeMenu = () => {
+            menu.classList.remove('open');
+            toggle.setAttribute('aria-expanded', false);
+            menu.querySelectorAll('.nav-item.mobile-open').forEach(item => {
+                item.classList.remove('mobile-open');
+                const btn = item.querySelector('.nav-chevron');
+                if (btn) btn.setAttribute('aria-expanded', false);
+            });
+        };
+
         if (header) {
             window.addEventListener('scroll', () => {
                 header.classList.toggle('scrolled', window.scrollY > 50);
@@ -258,8 +268,12 @@ const NavRenderer = {
 
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = menu.classList.toggle('open');
-            toggle.setAttribute('aria-expanded', isOpen);
+            if (menu.classList.contains('open')) {
+                closeMenu();
+            } else {
+                menu.classList.add('open');
+                toggle.setAttribute('aria-expanded', true);
+            }
         });
 
         menu.querySelectorAll('.nav-chevron').forEach(btn => {
@@ -278,28 +292,33 @@ const NavRenderer = {
             });
         });
 
-        menu.querySelectorAll('.dropdown a').forEach(a => {
-            a.addEventListener('click', (e) => {
-                menu.classList.remove('open');
-                toggle.setAttribute('aria-expanded', false);
-                const href = a.getAttribute('href') || '';
-                const [page, hash] = href.split('#');
-                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-                const samePage = (page === '' || page === currentPage);
-                if (samePage && hash) {
-                    e.preventDefault();
-                    if (window.location.hash !== '#' + hash) {
-                        history.pushState(null, '', '#' + hash);
-                    }
-                    App._scrollToHash('#' + hash);
+        const handleAnchorClick = (e, a) => {
+            const href = a.getAttribute('href') || '';
+            closeMenu();
+            if (!href.includes('#')) return;
+            const [page, hash] = href.split('#');
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const samePage = (page === '' || page === currentPage);
+            if (samePage && hash) {
+                e.preventDefault();
+                if (window.location.hash !== '#' + hash) {
+                    history.pushState(null, '', '#' + hash);
                 }
-            });
+                App._scrollToHash('#' + hash);
+            }
+        };
+
+        menu.querySelectorAll('.nav-link').forEach(a => {
+            a.addEventListener('click', (e) => handleAnchorClick(e, a));
+        });
+
+        menu.querySelectorAll('.dropdown a').forEach(a => {
+            a.addEventListener('click', (e) => handleAnchorClick(e, a));
         });
 
         document.addEventListener('click', (e) => {
             if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-                menu.classList.remove('open');
-                toggle.setAttribute('aria-expanded', false);
+                closeMenu();
             }
         });
     }
