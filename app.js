@@ -216,14 +216,8 @@ const NavRenderer = {
         const currentPage = this._currentPage();
         const currentHash = window.location.hash.replace('#', '');
 
-        // active 우선순위: 페이지+해시 완전 일치 > 해시 없는 페이지 일치(fallback)
-        let activeHref = null;
-        for (const item of CHURCH_DATA.navigation) {
-            const [itemPage, itemHash] = item.href.split('#');
-            if (itemPage !== currentPage) continue;
-            if (itemHash && itemHash === currentHash) { activeHref = item.href; break; }
-            if (!itemHash && !activeHref) activeHref = item.href;
-        }
+        // active 우선순위: 페이지+해시 완전 일치 > 하위 메뉴 hash 일치 > 해시 없는 페이지 일치(fallback)
+        const activeHref = this._resolveActiveHref(currentPage, currentHash);
 
         const items = CHURCH_DATA.navigation.map(item => {
             const isActive = item.href === activeHref;
@@ -346,17 +340,27 @@ const NavRenderer = {
         window.addEventListener('hashchange', () => NavRenderer._updateActive());
     },
 
+    // active href 결정: top-level 완전 일치 > 하위 메뉴 hash 일치 > page-only fallback
+    _resolveActiveHref(currentPage, currentHash) {
+        let fallback = null;
+        for (const item of CHURCH_DATA.navigation) {
+            const [itemPage, itemHash] = item.href.split('#');
+            if (itemPage !== currentPage) continue;
+            if (itemHash && itemHash === currentHash) return item.href;
+            if (currentHash && item.items) {
+                const subMatch = item.items.some(sub => sub.href.split('#')[1] === currentHash);
+                if (subMatch) return item.href;
+            }
+            if (!itemHash && !fallback) fallback = item.href;
+        }
+        return fallback;
+    },
+
     // nav 전체 재렌더 없이 active 클래스만 갱신
     _updateActive() {
         const currentPage = this._currentPage();
         const currentHash = window.location.hash.replace('#', '');
-        let activeHref = null;
-        for (const item of CHURCH_DATA.navigation) {
-            const [itemPage, itemHash] = item.href.split('#');
-            if (itemPage !== currentPage) continue;
-            if (itemHash && itemHash === currentHash) { activeHref = item.href; break; }
-            if (!itemHash && !activeHref) activeHref = item.href;
-        }
+        const activeHref = this._resolveActiveHref(currentPage, currentHash);
         document.querySelectorAll('#nav-menu .nav-link').forEach(a => {
             const isActive = a.getAttribute('href') === activeHref;
             a.classList.toggle('active', isActive);
