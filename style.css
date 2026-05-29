@@ -667,6 +667,8 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: 1.9;
     color: var(--text);
     margin-bottom: 2rem;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 .about-brief-facts {
     list-style: none;
