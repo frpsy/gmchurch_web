@@ -522,8 +522,7 @@ const WorshipRenderer = {
 
                 <div class="newcomer-intro">
                     <h2 class="newcomer-intro-title">처음 오신 분께</h2>
-                    <p class="newcomer-intro-body">광명교회는 처음 오신 분을 따뜻하게 맞이합니다. 성공회 예배는 회중이 함께 기도하고 응답하며 진행되는 전례 예배로, 처음에는 흐름이 낯설게 느껴지실 수 있습니다.</p>
-                    <p class="newcomer-intro-body">모든 순서를 따라 하지 않으셔도 괜찮습니다. 익숙하지 않은 부분은 자리에 앉아 지켜보셔도 좋습니다. 아래 안내가 예배의 흐름을 이해하시는 데 도움이 될 것입니다.</p>
+                    <p class="newcomer-intro-body">광명교회에 오신 것을 환영합니다. 성공회 예배는 회중이 함께 기도하고 응답하는 전례 예배입니다. 처음에는 흐름이 낯설 수 있으니, 익숙하지 않은 부분은 편안히 지켜보셔도 좋습니다. 아래 안내가 예배의 흐름을 이해하시는 데 작은 도움이 되시기를 바라겠습니다.</p>
                     <div class="newcomer-key-facts">
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">예배</span>
