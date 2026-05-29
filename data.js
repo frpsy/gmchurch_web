@@ -264,7 +264,7 @@ const CHURCH_DATA = {
                 icon: "✝️",
                 title: "공동번역 성서",
                 desc: "성공회 예배에서 봉독하는 공동번역 성서입니다.",
-                url: "https://bible.cbck.or.kr/Ncb"
+                url: "https://bible.anglican.kr/"
             }
         ]
     },
