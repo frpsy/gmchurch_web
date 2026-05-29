@@ -667,8 +667,8 @@ const WorshipRenderer = {
                             <h3>세례받으신 분</h3>
                             <p class="liturgy-body">성공회의 성찬은 모든 그리스도인에게 열려 있습니다. 교파에 관계없이 <strong>세례받은 그리스도인이라면 누구나</strong> 그리스도의 몸과 피를 모실 수 있습니다.</p>
                             <ul class="liturgy-list">
-                                <li>제대 앞으로 나오신 뒤, 두 손을 모으거나 펴서 빵을 받으십시오.</li>
-                                <li>빵을 모신 후 포도주 잔이 전해지면 한 모금 받으십시오.</li>
+                                <li>제대 앞으로 나오신 후, 두 손을 펴서 빵을 받으십시오.</li>
+                                <li>빵을 받으신 후, 포도주에 찍어 <strong>영하십시오</strong>.<br><small style="color:var(--text-muted); font-size:0.82em;">영하다: 성체를 받아 모시다</small></li>
                                 <li>빵과 포도주를 받을 때 <em>"아멘"</em>으로 응답합니다.</li>
                                 <li>성찬을 받는 방법이 궁금하시면 안내위원에게 문의해 주세요.</li>
                             </ul>
