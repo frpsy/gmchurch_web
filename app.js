@@ -499,7 +499,7 @@ const WorshipRenderer = {
     render() {
         const el = document.getElementById('worship-full');
         if (!el) return;
-        const { main, guide, liturgicalSeason: s } = CHURCH_DATA.worship;
+        const { main, guide, liturgicalSeason: s, resources } = CHURCH_DATA.worship;
         const { info, clergy } = CHURCH_DATA;
         const primary = clergy[0] || {};
 
@@ -569,7 +569,7 @@ const WorshipRenderer = {
                     <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 이어진 말씀의 전례와 성찬의 전례가 조화를 이루는 예배 전통을 400여 년간 지켜오고 있습니다.</p>
                     <p class="liturgy-body">예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 편찬한 이 기도서는, 라틴어가 아닌 자국어로 예배를 드리도록 하여 <strong>모든 신자가 전례에 직접 참여</strong>할 수 있게 한 종교개혁의 중요한 유산입니다.</p>
                     <div class="liturgy-card" style="border-left-color:${s.color};">
-                        <h3 class="liturgy-card-title">전례 교회의 의미</h3>
+                        <h3 class="liturgy-card-title">전례의 의미</h3>
                         <p class="liturgy-body"><strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말로, '공동체를 위해 수행하는 일'을 뜻합니다. 곧 전례는 <strong>그리스도인이 함께 드리고 함께 살아가는 신앙의 실천</strong>입니다.</p>
                         <ul class="liturgy-list">
                             <li>회중이 <strong>함께 기도하고 응답하는 대화 형식</strong>으로 진행됩니다.</li>
@@ -578,6 +578,24 @@ const WorshipRenderer = {
                         </ul>
                     </div>
                 </div>
+
+                ${resources && resources.length ? `
+                <div class="liturgy-section" id="resources">
+                    <p class="section-eyebrow" style="color:${s.color};">Worship Resources</p>
+                    <h2 class="section-title">예배 자료</h2>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">예배 중 함께 펴는 기도서·성가·성서를 온라인으로도 보실 수 있습니다.</p>
+                    <div class="resource-grid">
+                        ${resources.map(r => `
+                            <a class="resource-card" href="${r.url}" target="_blank" rel="noopener noreferrer" style="border-top-color:${s.color};">
+                                <span class="resource-icon" aria-hidden="true">${r.icon}</span>
+                                <h3 class="resource-title">${r.title}</h3>
+                                <p class="resource-desc">${r.desc}</p>
+                                <span class="resource-link" style="color:${s.color};">바로가기 <span aria-hidden="true">↗</span></span>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
 
                 <div class="liturgy-section">
                     <p class="section-eyebrow" style="color:${s.color};">Eucharist</p>
@@ -651,6 +669,8 @@ const WorshipRenderer = {
                             <ul class="liturgy-list">
                                 <li>제대 앞으로 나오신 뒤, 두 손을 모으거나 펴서 빵을 받으십시오.</li>
                                 <li>빵을 모신 후 포도주 잔이 전해지면 한 모금 받으십시오.</li>
+                                <li>빵과 포도주를 받을 때 <em>"아멘"</em>으로 응답합니다.</li>
+                                <li>성찬을 받는 방법이 궁금하시면 안내위원에게 문의해 주세요.</li>
                             </ul>
                         </div>
                         <div class="communion-card" style="border-top-color:var(--green-mid); background:var(--green-light);">

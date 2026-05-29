@@ -246,7 +246,27 @@ const CHURCH_DATA = {
                 desc: "교육관에서 드리는 어린이 예배입니다. 성공회 전례를 어린이 눈높이에 맞추어 구성합니다."
             }
         ],
-        guide: ""
+        guide: "",
+        resources: [
+            {
+                icon: "📖",
+                title: "성공회 기도서",
+                desc: "주일 예배에서 함께 펴는 공동기도서(BCP)입니다.",
+                url: "https://dulkuka12.github.io/kbcp/"
+            },
+            {
+                icon: "🎵",
+                title: "성가집",
+                desc: "예배 성가를 온라인으로 펼쳐 함께 부를 수 있습니다.",
+                url: "https://dulkuka12.github.io/khymn/"
+            },
+            {
+                icon: "✝️",
+                title: "공동번역 성서",
+                desc: "성공회 예배에서 봉독하는 공동번역 성서입니다.",
+                url: "https://bible.anglican.kr/"
+            }
+        ]
     },
 
     community: {
@@ -350,6 +370,7 @@ const CHURCH_DATA = {
             items: [
                 { label: "참여 안내",      href: "worship.html#firsttime" },
                 { label: "성공회 전례란?", href: "worship.html#liturgy" },
+                { label: "예배 자료",      href: "worship.html#resources" },
                 { label: "예배 순서",      href: "worship.html#eucharist-order" },
                 { label: "영성체 안내",    href: "worship.html#communion" },
                 { label: "문의하기",       href: "worship.html#contact" }
