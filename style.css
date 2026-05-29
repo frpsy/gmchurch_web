@@ -1171,6 +1171,50 @@ button:focus:not(:focus-visible) { outline: none; }
     border-bottom: 1px solid var(--border);
 }
 
+/* Worship Resources */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 1.25rem;
+}
+.resource-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid;
+    border-radius: var(--radius-md);
+    padding: 1.6rem 1.6rem 1.4rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s ease;
+}
+.resource-card:hover {
+    border-color: var(--green-soft);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+.resource-icon { font-size: 1.9rem; margin-bottom: 0.8rem; }
+.resource-title {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 0.45rem;
+    letter-spacing: -0.01em;
+}
+.resource-desc {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+.resource-link { font-size: 0.84rem; font-weight: 700; letter-spacing: 0.01em; }
+@media (prefers-reduced-motion: reduce) {
+    .resource-card { transition: border-color 0.25s, box-shadow 0.25s; }
+    .resource-card:hover { transform: none; }
+}
+
 /* Checklist */
 .liturgy-checklist { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
 .checklist-item {

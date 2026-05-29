@@ -169,7 +169,10 @@ const CHURCH_DATA = {
       { id: "main",     title: "주일 감사성찬례", time, desc },
       { id: "children", title: "어린이 예배",     time, desc }
     ],
-    guide: String         // 안내 배너 한 줄 (빈 문자열이면 미표시)
+    guide: String,        // 안내 배너 한 줄 (빈 문자열이면 미표시)
+    resources: [          // 예배 자료 — 외부 앱 링크 카드 (worship.html#resources)
+      { icon, title, desc, url }   // 기도서·성가·공동번역 성서
+    ]
   },
 
   community: {
@@ -223,6 +226,7 @@ const CHURCH_DATA = {
 처음 오신 분  worship.html#newcomer
   └ 참여 안내          worship.html#firsttime       (JS)
   └ 성공회 전례란?     worship.html#liturgy         (JS)
+  └ 예배 자료          worship.html#resources       (JS)
   └ 예배 순서          worship.html#eucharist-order (JS)
   └ 영성체 안내        worship.html#communion       (JS)
   └ 문의하기           worship.html#contact         (JS)
@@ -272,6 +276,7 @@ window DOMContentLoaded
       │     liturgy-guide (id="newcomer" — newcomer-intro 서두)
       │       id="firsttime"        참여 안내 (체크리스트)
       │       id="liturgy"          성공회 전례란?
+      │       id="resources"        예배 자료 (기도서·성가·성서 외부 링크 카드)
       │       id="eucharist-order"  감사성찬례 4단계
       │       id="communion"        영성체 안내
       │       id="contact"          문의하기 CTA (newcomer-cta)
@@ -355,6 +360,7 @@ window DOMContentLoaded
     #newcomer               전례 가이드 시작 (처음 오신 분께 서두)
     #firsttime              참여 안내 (체크리스트)
     #liturgy                성공회 전례란?
+    #resources              예배 자료 (외부 앱 링크)
     #eucharist-order        감사성찬례 순서
     #communion              영성체 안내
     #contact                문의하기 CTA
@@ -418,6 +424,7 @@ window DOMContentLoaded
 | `.liturgy-season-badge` | 현재 절기 배지 (색·심볼·절기명) |
 | `.liturgy-steps` / `.liturgy-step` | 감사성찬례 4단계 |
 | `.communion-grid` / `.communion-card` | 영성체 안내 카드 |
+| `.resource-grid` / `.resource-card` | 예배 자료 외부 링크 카드 (hover lift) |
 | `.liturgy-checklist` / `.checklist-item` | 처음 오신 분 체크리스트 |
 | `.anglican-pillars` | 성공회 3기둥 카드 그리드 |
 | `.anglican-korea-inner` | 대한성공회 2단 레이아웃 |
