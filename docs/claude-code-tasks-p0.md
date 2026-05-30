@@ -43,7 +43,7 @@
 - ✅ SOLID 의식한 렌더러 패턴 (`*Renderer.render()`)
 - ✅ CSS 변수 토큰 (`--green-deep`, `--cream` 등)
 - ✅ ID 기반 DOM 접근, 시맨틱 HTML
-- ✅ 새 섹션 추가 시 `CLAUDE.md` 동기화
+- ✅ 새 섹션 추가 시 `ARCHITECTURE.md` 동기화
 
 ### 0.2 Git 워크플로
 
@@ -160,5 +160,5 @@ P0 완료 후 위원회 검토 미팅 → 다음 항목으로 진행:
 ## 4. 질문·이슈 발생 시
 
 - 위원회 결의 사항과 충돌하는 기술 결정 필요 → 작업 중단하고 사용자(상열님)에게 보고
-- CLAUDE.md 와 실제 구현이 불일치 발견 → CLAUDE.md 업데이트도 같은 PR에 포함
+- ARCHITECTURE.md 와 실제 구현이 불일치 발견 → ARCHITECTURE.md 업데이트도 같은 PR에 포함
 - 외부 의존성 추가 필요 → 위원회 사전 협의

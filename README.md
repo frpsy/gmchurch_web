@@ -18,31 +18,51 @@
 
 ```
 gmchurch_web/
-├── index.html        메인 페이지
-├── clergy.html       교회 소개 (성공회·사제·철학·로고·언론)
-├── worship.html      예배 안내 + 전례 가이드
-├── community.html    공동체 (희망터·엠마우스·소그룹)
-├── visit.html        오시는 길 (지도·교통·주차)
-├── giving.html       헌금 (봉헌 계좌)
-├── privacy.html      개인정보 처리방침
-├── data.js           ★ 단일 콘텐츠 소스 (CHURCH_DATA)
-├── app.js            렌더러 모음 + App bootstrap (~807줄)
-├── style.css         전체 스타일 (~1443줄)
+├── index.html        메인 페이지 (메인 정보 + 예배 · 방문 요약)
+├── clergy.html       교회 소개 (성공회란? · 사제 · 철학 · 로고 · 언론)
+├── story.html        교회 이야기 (5대 정체성 서사)
+├── worship.html      예배 안내 (예배 카드 · 감사성찬례 순서 · 예배 자료)
+├── newcomer.html     처음 오신 분 (환영 · 참여 안내 · 전례 · 영성체 · 문의)
+├── community.html    공동체 (희망터 · 엠마우스 · 소그룹 · 주일 애찬)
+├── emmaus.html       엠마우스 코스 상세 페이지
+├── hopecenter.html   광명 희망터 상세 페이지
+├── smallgroup.html   소그룹 모임 상세 페이지
+├── media.html        교회 영상 (유튜브 영상 소개)
+├── visit.html        오시는 길 (지도 · 교통 · 주차)
+├── giving.html       헌금 (봉헌 계좌 · 영수증 안내)
+├── privacy.html      개인정보 처리방침 (noindex)
+├── data.js           ★ 단일 콘텐츠 소스 (487줄)
+├── app.js            렌더러 모음 + App bootstrap (1235줄)
+├── style.css         전체 스타일 (2543줄)
 ├── favicon.svg       캔터베리 십자가 아이콘
 ├── apple-touch-icon.png
 ├── og-image-v2.png   소셜 공유 OG 이미지
 ├── robots.txt
 ├── sitemap.xml
 ├── docs/             위원회 audit 보고서 · 작업 지시서
-└── CLAUDE.md         개발 가이드 (AI·개발자용)
+├── scripts/          생성 스크립트 (OG 이미지 등)
+├── tests/            테스트 코드 (전례력 · 데이터 검증)
+└── ARCHITECTURE.md   개발 가이드 (AI·개발자·구조 설명용)
 ```
+
+## 주요 페이지
+
+- **메인 페이지** (`index.html`) — 교회 소개, 예배 시간, 찾아오시는 길 요약
+- **교회 소개** (`clergy.html`) — 성공회 신앙, 관할사제 소개, 교회 철학, 캔터베리 십자가, 언론 보도
+- **교회 이야기** (`story.html`) — 5대 정체성 서사 (거룩한 전례 · 평등 공동체 · 부활 신앙 · 애찬 · 약자·창조 돌봄)
+- **예배 안내** (`worship.html`) — 주일 예배·어린이 예배, 감사성찬례 순서, 예배 자료 (기도서·성가·성서 온라인 링크)
+- **처음 오신 분** (`newcomer.html`) — 환영 인사, 참여 안내 체크리스트, 성공회 전례 소개, 전례 공간 안내, 영성체 안내
+- **공동체** (`community.html`) — 광명 희망터, 엠마우스 코스, 소그룹 모임, 주일 애찬 소개
+- **오시는 길** (`visit.html`) — Google Maps 지도, 대중교통, 주차 안내
+- **헌금** (`giving.html`) — 봉헌 계좌, 기부금 영수증 안내
+- **교회 영상** (`media.html`) — 성공회·신앙·공동체 관련 유튜브 영상 소개
 
 ## 콘텐츠 수정 방법
 
 텍스트·일정 등 콘텐츠는 **`data.js`의 `CHURCH_DATA` 객체만 편집**하면 됩니다.  
 레이아웃/동작 변경은 `app.js`, 스타일 변경은 `style.css`를 수정합니다.
 
-자세한 구조 설명은 [CLAUDE.md](./CLAUDE.md)를 참고하세요.
+자세한 구조 설명은 [ARCHITECTURE.md](./ARCHITECTURE.md)를 참고하세요.
 
 ## 로컬 실행
 

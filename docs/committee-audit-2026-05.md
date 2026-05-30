@@ -16,7 +16,7 @@
 - ✅ **전례력 자동 계산**: Meeus/Jones/Butcher 알고리즘으로 부활절 산출 → 8개 절기 자동 매핑은 한국 교회 홈페이지 중 드문 수준
 - ✅ **빌드 없는 정적 사이트**: Netlify 자동 배포, 비기술자도 `data.js`만 편집하면 콘텐츠 수정 가능
 - ✅ **CSS 변수 기반 디자인 토큰**: `--green-deep`, `--cream` 등 일관된 팔레트
-- ✅ **CLAUDE.md 문서화 수준 우수**: 다른 개발자(또는 AI)가 즉시 작업 가능한 구조
+- ✅ **ARCHITECTURE.md 문서화 수준 우수**: 다른 개발자(또는 AI)가 즉시 작업 가능한 구조
 
 **즉, 첫 미팅 결과서(`광명교회_홈페이지_위원회_미팅결과.md`)에서 제안했던 “Next.js + TypeScript + CMS”는 과잉 설계였습니다.** 현 vanilla 구조가 이 규모 교회 홈페이지에 더 적합합니다. 아래 audit은 **현 구조를 유지하면서 개선할 항목**에 초점을 둡니다.
 
@@ -303,7 +303,7 @@ docs/
 - 기존 코드 스타일·아키텍처(SOLID 렌더러 패턴, `data.js` 단일 소스) **엄격히 유지**
 - TypeScript·React·CMS 도입 **금지** (별도 위원회 결의 전까지)
 - 모든 작업은 별도 브랜치 → PR → 직접 검토 후 main 머지
-- `CLAUDE.md` 업데이트도 같은 PR에 포함
+- `ARCHITECTURE.md` 업데이트도 같은 PR에 포함
 - 외부 의존성 추가 시 위원회 사전 협의 (현재 외부 의존: Pretendard CDN, Google Maps iframe, Unsplash 이미지 1개)
 
 -----

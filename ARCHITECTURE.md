@@ -23,7 +23,8 @@ gmchurch_web/
 ├── newcomer.html     처음 오신 분 (환영·참여 안내·전례·전례 공간·영성체·문의)
 ├── community.html    공동체 (희망터·엠마우스·소그룹·주일 애찬)
 ├── emmaus.html       엠마우스 코스 상세 페이지
-├── hopecenter.html / smallgroup.html  공동체 상세 (준비중 placeholder)
+├── hopecenter.html   광명 희망터 상세 페이지
+├── smallgroup.html   소그룹 모임 상세 페이지
 ├── visit.html        오시는 길 (지도·교통·주차)
 ├── giving.html       헌금 (봉헌 계좌)
 ├── media.html        교회 영상 (유튜브 영상 소개)
@@ -37,7 +38,7 @@ gmchurch_web/
 ├── robots.txt
 ├── sitemap.xml
 ├── docs/             위원회 audit 보고서 · 작업 지시서
-└── CLAUDE.md         (이 파일)
+└── ARCHITECTURE.md   (이 파일)
 ```
 
 **스크립트 로드 순서**: 모든 HTML 공통 — `data.js` → `app.js`  
@@ -564,7 +565,7 @@ window DOMContentLoaded
 2. `data.js`에 데이터 추가
 3. `app.js`에 렌더러 메서드 추가
 4. `data.js navigation`에 앵커 링크 추가
-5. CLAUDE.md 동기화
+5. ARCHITECTURE.md 동기화
 
 ### 앵커 / 해시 스크롤
 - JS 렌더러가 생성하는 동적 ID는 `App._handleHashScroll()`이 처리
@@ -594,7 +595,7 @@ window DOMContentLoaded
    - 페이지별 렌더러는 해당 HTML 페이지에서만 실행 (예: `if (document.getElementById('media-full'))`)
 4. `data.js`의 `navigation` 배열에 새 메뉴 항목 추가
 5. 필요 시 media.html, story.html처럼 별도 대문 이미지 제공
-6. CLAUDE.md와 docs/ 작업 지시서 동기화
+6. ARCHITECTURE.md와 docs/ 작업 지시서 동기화
 
 ### Git 워크플로
 ```bash
