@@ -439,10 +439,30 @@ const IndexRenderer = {
     },
 
     _hero() {
-        const t = document.getElementById('hero-title');
-        const s = document.getElementById('hero-sub');
-        if (t) t.textContent = CHURCH_DATA.info.name;
-        if (s) s.textContent = CHURCH_DATA.info.slogan;
+        const { name, subName, slogan, vision, established, addressShort } = CHURCH_DATA.info;
+
+        const label = document.getElementById('hero-label');
+        const title = document.getElementById('hero-title');
+        const sub   = document.getElementById('hero-sub');
+        const acts  = document.getElementById('hero-actions');
+        const stats = document.getElementById('hero-stats');
+
+        if (label) label.textContent = `${name} · ${subName}`;
+        if (title) title.textContent = slogan;
+        if (sub)   sub.textContent   = vision;
+
+        if (acts) acts.innerHTML = `
+            <a href="worship.html#newcomer" class="btn-hero-primary">처음 오신 분께 →</a>
+            <a href="worship.html" class="btn-outline">예배 안내</a>
+        `;
+
+        if (stats) stats.innerHTML = `
+            <div class="hero-stat"><span class="hero-stat-val">${established.replace('년 ', '').replace('월 ', '.').replace('일', '')}</span><span class="hero-stat-lbl">설립</span></div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat"><span class="hero-stat-val">매주 일요일 11:00</span><span class="hero-stat-lbl">주일 예배</span></div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat"><span class="hero-stat-val">경기도 광명시</span><span class="hero-stat-lbl">위치</span></div>
+        `;
     },
 
     _about() {
