@@ -254,6 +254,41 @@ const CHURCH_DATA = {
             }
         ],
         guide: "",
+        spaceGuide: {
+            intro: "성공회 성당에 처음 들어서면 낯선 공간과 물건들을 만나게 됩니다. 하나하나에 담긴 의미를 알고 나면, 눈에 보이는 상징을 통해 보이지 않는 하느님을 만나는 예배가 한결 가깝게 다가옵니다.",
+            items: [
+                {
+                    icon: "💧",
+                    name: "성수대",
+                    en: "Holy Water",
+                    desc: "예배당 입구에 놓인 성수입니다. 세례를 통해 하느님의 백성이 되었음을 기억하며, 손끝에 적셔 십자 성호를 긋고 예배의 자리로 들어섭니다."
+                },
+                {
+                    icon: "📖",
+                    name: "독서대",
+                    en: "Ambo · Lectern",
+                    desc: "하느님의 말씀을 봉독하고 설교를 선포하는 자리입니다. 구약·서신서·복음서가 이곳에서 회중에게 선포됩니다."
+                },
+                {
+                    icon: "🍞",
+                    name: "제대",
+                    en: "Altar",
+                    desc: "감사성찬례의 중심이 되는 거룩한 식탁입니다. 빵과 포도주를 축성하여 그리스도의 몸과 피를 나누는, 예배의 가장 거룩한 자리입니다."
+                },
+                {
+                    icon: "🕯️",
+                    name: "성막",
+                    en: "Tabernacle",
+                    desc: "축성된 성체를 모셔 두는 곳입니다. 거동이 어려운 병자나 교우를 방문하여 성체를 나눌 때 이곳에 보관된 성체를 사용합니다."
+                },
+                {
+                    icon: "🔥",
+                    name: "부활초",
+                    en: "Paschal Candle",
+                    desc: "부활하신 그리스도의 빛과 새 생명·영생의 소망을 상징합니다. 부활절에 새로 축복하여 밝히며, 세례와 장례 예식에서도 함께합니다."
+                }
+            ]
+        },
         resources: [
             {
                 icon: "📖",
@@ -298,6 +333,12 @@ const CHURCH_DATA = {
                 desc: "성서를 함께 묵상하고 신앙을 나누는 작은 모임입니다.",
                 icon: "🤝",
                 detailUrl: "smallgroup.html"
+            },
+            {
+                id: "agape",
+                title: "주일 애찬",
+                desc: "주일 감사성찬례를 마친 뒤, 온 교우가 함께 모여 밥을 나누는 친교의 자리입니다. 제대에서 나눈 성찬이 식탁의 나눔으로 이어지는 '밥상 공동체'입니다.",
+                icon: "🍚"
             }
         ]
     },
@@ -360,7 +401,8 @@ const CHURCH_DATA = {
                 { label: "섬기는 이들", href: "clergy.html#priest-section" },
                 { label: "교회 철학",  href: "clergy.html#philosophy" },
                 { label: "로고 소개",  href: "clergy.html#logo-intro" },
-                { label: "언론 보도",  href: "clergy.html#press" }
+                { label: "언론 보도",  href: "clergy.html#press" },
+                { label: "교회 이야기", href: "story.html", badge: "임시" }
             ]
         },
         {
@@ -377,6 +419,7 @@ const CHURCH_DATA = {
             items: [
                 { label: "참여 안내",      href: "worship.html#firsttime" },
                 { label: "성공회 전례란?", href: "worship.html#liturgy" },
+                { label: "전례 공간 안내", href: "worship.html#worship-space" },
                 { label: "예배 자료",      href: "worship.html#resources" },
                 { label: "예배 순서",      href: "worship.html#eucharist-order" },
                 { label: "영성체 안내",    href: "worship.html#communion" },
@@ -389,7 +432,8 @@ const CHURCH_DATA = {
             items: [
                 { label: "광명 희망터",  href: "community.html#hopecenter" },
                 { label: "엠마우스 코스", href: "community.html#emmaus" },
-                { label: "소그룹 모임", href: "community.html#smallgroup" }
+                { label: "소그룹 모임", href: "community.html#smallgroup" },
+                { label: "주일 애찬", href: "community.html#agape" }
             ]
         },
         {
