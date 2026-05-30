@@ -461,7 +461,7 @@ const IndexRenderer = {
         if (sub)   sub.textContent   = vision;
 
         if (acts) acts.innerHTML = `
-            <a href="newcomer.html" class="btn-hero-primary">처음이세요?</a>
+            <a href="newcomer.html" class="btn-hero-primary">처음 오셨나요?</a>
             <a href="worship.html" class="btn-outline">예배 안내</a>
         `;
 
