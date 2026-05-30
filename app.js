@@ -1175,13 +1175,18 @@ const ScrollProgress = {
         bar.setAttribute('aria-hidden', 'true');
         document.body.prepend(bar);
 
+        let rafId = null;
         const update = () => {
+            rafId = null;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
-            bar.style.width = pct + '%';
+            const pct = docHeight > 0 ? window.scrollY / docHeight : 0;
+            bar.style.transform = `scaleX(${pct})`;
+        };
+        const onScroll = () => {
+            if (!rafId) rafId = requestAnimationFrame(update);
         };
 
-        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('scroll', onScroll, { passive: true });
         update();
     }
 };
