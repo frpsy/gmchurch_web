@@ -1243,38 +1243,23 @@ window.addEventListener('DOMContentLoaded', () => {
 /* ── BackToTop ────────────────────────────────────────── */
 const BackToTop = {
     init() {
-        // 1. 버튼 엘리먼트 생성 및 추가
         const btn = document.createElement('button');
         btn.id = 'back-to-top';
         btn.setAttribute('aria-label', '최상단으로 이동');
-        btn.innerHTML = `
-            <svg class="to-top-icon" viewBox="0 0 24 24">
-                <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
-            </svg>
-        `;
+        btn.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>`;
         document.body.appendChild(btn);
 
-        // 2. 클릭 이벤트: 최상단으로 부드럽게 이동
-        btn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // 3. 스크롤/리사이즈 감시: 문서 최하단에 도달했을 때만 표시
-        const checkAtBottom = () => {
-            const scrollPos = window.scrollY + window.innerHeight;
-            const docHeight = document.documentElement.scrollHeight;
-            const tolerance = 12; // 작은 오차 허용
-            if (scrollPos >= (docHeight - tolerance)) {
-                btn.classList.add('visible');
-            } else {
-                btn.classList.remove('visible');
-            }
+        let rafId = null;
+        const THRESHOLD = 400;
+        const check = () => {
+            rafId = null;
+            btn.classList.toggle('visible', window.scrollY >= THRESHOLD);
         };
+        const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(check); };
 
-        window.addEventListener('scroll', checkAtBottom, { passive: true });
-        window.addEventListener('resize', checkAtBottom, { passive: true });
-
-        // 초기 상태 검사
-        checkAtBottom();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        check();
     }
 };
