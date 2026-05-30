@@ -504,6 +504,35 @@ button:focus:not(:focus-visible) { outline: none; }
 .value-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
 .value-card p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.8; }
 
+.philosophy-intro {
+    max-width: 740px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+}
+.philosophy-intro p {
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.85;
+    margin-bottom: 0.75rem;
+    word-break: keep-all;
+}
+.philosophy-intro p:last-child { margin-bottom: 0; }
+
+.philosophy-closing {
+    margin-top: 2.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--green-light);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+.philosophy-closing p {
+    font-size: 1rem;
+    color: var(--green-deep);
+    line-height: 1.85;
+    margin: 0;
+    word-break: keep-all;
+}
+
 /* Minister Category */
 .minister-category { margin-bottom: 2.5rem; }
 .minister-cat-title {

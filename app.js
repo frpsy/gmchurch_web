@@ -978,9 +978,19 @@ const ClergyRenderer = {
     _philosophy() {
         const el = document.getElementById('philosophy-full');
         if (!el) return;
+        const { intro, values, closing } = CHURCH_DATA.philosophy;
+        const introHtml = intro ? `
+            <div class="philosophy-intro">
+                ${intro.map(p => `<p>${p}</p>`).join('')}
+            </div>` : '';
+        const closingHtml = closing ? `
+            <div class="philosophy-closing">
+                <p>${closing}</p>
+            </div>` : '';
         el.innerHTML = `
+            ${introHtml}
             <div class="values-grid">
-                ${CHURCH_DATA.philosophy.values.map(v => `
+                ${values.map(v => `
                     <div class="value-card">
                         <div class="val-icon">${v.icon}</div>
                         <h4>${v.title}</h4>
@@ -988,6 +998,7 @@ const ClergyRenderer = {
                     </div>
                 `).join('')}
             </div>
+            ${closingHtml}
         `;
     }
 };
