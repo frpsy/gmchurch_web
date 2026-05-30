@@ -1115,22 +1115,22 @@ const PressRenderer = {
     }
 };
 
-/* ── ScrollToTop ─────────────────────────────────────── */
-const ScrollToTop = {
+/* ── BackToTop ────────────────────────────────────────── */
+const BackToTop = {
     init() {
         const btn = document.createElement('button');
-        btn.id = 'scroll-to-top';
-        btn.setAttribute('aria-label', '맨 위로 이동');
-        btn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor"/></svg>`;
+        btn.id = 'back-to-top';
+        btn.setAttribute('aria-label', '맨 위로');
+        btn.innerHTML = `<svg class="to-top-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>`;
         document.body.appendChild(btn);
-
-        window.addEventListener('scroll', () => {
-            btn.classList.toggle('visible', window.scrollY > 300);
-        }, { passive: true });
 
         btn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+
+        window.addEventListener('scroll', () => {
+            btn.classList.toggle('visible', window.scrollY > 300);
+        }, { passive: true });
     }
 };
 
@@ -1223,7 +1223,7 @@ const App = {
         this._handleHashScroll();
         ScrollReveal.init();
         ScrollProgress.init();
-        ScrollToTop.init();
+        BackToTop.init();
     },
 
     _scrollToHash(hash) {
