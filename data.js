@@ -410,20 +410,21 @@ const CHURCH_DATA = {
             href: "worship.html",
             items: [
                 { label: "주일 감사성찬례", href: "worship.html#main" },
-                { label: "어린이 예배",    href: "worship.html#children" }
+                { label: "어린이 예배",    href: "worship.html#children" },
+                { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
+                { label: "예배 자료",      href: "worship.html#resources" }
             ]
         },
         {
             label: "처음 오신 분",
-            href: "worship.html#newcomer",
+            href: "newcomer.html",
             items: [
-                { label: "참여 안내",      href: "worship.html#firsttime" },
-                { label: "성공회 전례란?", href: "worship.html#liturgy" },
-                { label: "전례 공간 안내", href: "worship.html#worship-space" },
-                { label: "예배 자료",      href: "worship.html#resources" },
-                { label: "예배 순서",      href: "worship.html#eucharist-order" },
-                { label: "영성체 안내",    href: "worship.html#communion" },
-                { label: "문의하기",       href: "worship.html#contact" }
+                { label: "처음 오신 분께", href: "newcomer.html#newcomer" },
+                { label: "참여 안내",      href: "newcomer.html#firsttime" },
+                { label: "성공회 전례란?", href: "newcomer.html#liturgy" },
+                { label: "전례 공간 안내", href: "newcomer.html#worship-space" },
+                { label: "영성체 안내",    href: "newcomer.html#communion" },
+                { label: "문의하기",       href: "newcomer.html#contact" }
             ]
         },
         {

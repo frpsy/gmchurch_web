@@ -452,7 +452,7 @@ const IndexRenderer = {
         if (sub)   sub.textContent   = vision;
 
         if (acts) acts.innerHTML = `
-            <a href="worship.html#newcomer" class="btn-hero-primary">처음 오신 분께 →</a>
+            <a href="newcomer.html" class="btn-hero-primary">처음 오신 분께 →</a>
             <a href="worship.html" class="btn-outline">예배 안내</a>
         `;
 
@@ -525,9 +525,7 @@ const WorshipRenderer = {
     render() {
         const el = document.getElementById('worship-full');
         if (!el) return;
-        const { main, guide, liturgicalSeason: s, resources, spaceGuide } = CHURCH_DATA.worship;
-        const { info, clergy } = CHURCH_DATA;
-        const primary = clergy[0] || {};
+        const { main, guide, liturgicalSeason: s, resources } = CHURCH_DATA.worship;
 
         el.innerHTML = `
             <div class="grid" style="margin-bottom:2rem;">
@@ -544,102 +542,13 @@ const WorshipRenderer = {
             </div>
             ${guide ? `<div class="guide-banner"><p>${guide}</p></div>` : ''}
 
-            <div class="liturgy-guide" id="newcomer">
-
-                <div class="newcomer-intro">
-                    <h2 class="newcomer-intro-title">처음 오신 분께</h2>
-                    <p class="newcomer-intro-body">광명교회에 오신 것을 환영합니다. 성공회 예배는 회중이 함께 기도하고 응답하는 전례 예배입니다. 처음에는 흐름이 낯설 수 있으니, 익숙하지 않은 부분은 편안히 지켜보셔도 좋습니다. 아래 안내가 예배의 흐름을 이해하시는 데 작은 도움이 되시기를 바라겠습니다.</p>
-                    <div class="newcomer-key-facts">
-                        <div class="newcomer-key-row">
-                            <span class="newcomer-key-label">예배</span>
-                            <span class="newcomer-key-value"><strong>주일 감사성찬례</strong> · 매주 일요일 오전 11:00</span>
-                        </div>
-                        <div class="newcomer-key-row">
-                            <span class="newcomer-key-label">장소</span>
-                            <span class="newcomer-key-value">${info.name} (${info.subName})<br><a href="visit.html" class="newcomer-key-link">${info.addressShort} · 오시는 길 →</a></span>
-                        </div>
-                        <div class="newcomer-key-row">
-                            <span class="newcomer-key-label">소요</span>
-                            <span class="newcomer-key-value">약 1시간</span>
-                        </div>
-                        <div class="newcomer-key-row">
-                            <span class="newcomer-key-label">복장</span>
-                            <span class="newcomer-key-value">단정한 평상복이면 충분합니다</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="liturgy-section" id="firsttime">
-                    <p class="section-eyebrow" style="color:${s.color};">First Visit</p>
-                    <h2 class="section-title">참여 안내</h2>
-                    <p class="liturgy-body" style="margin-bottom:1rem;">처음 참석하실 때 알아두시면 도움이 되는 내용을 정리했습니다.</p>
-                    <div class="liturgy-checklist">
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>앉고 서는</strong> 순서가 있지만, 몸이 불편하시면 그대로 앉아 계셔도 됩니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>주보</strong>에 예배 순서가 안내되어 있고, <strong>회중석의 기도서</strong>를 함께 펴고 응답하시면 됩니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>회중이 함께 부르는 <strong>성가</strong>는 따라 부르지 않으셔도 괜찮습니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>처음에는 낯설어도 한두 번 참여하시면 자연스럽게 익숙해지실 수 있습니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>궁금하신 점은 옆자리 교우나 안내위원에게 편하게 물어보세요.</p></div>
-                    </div>
-                </div>
+            <div class="liturgy-guide">
 
                 <div class="liturgy-season-badge">
                     <span class="season-dot" style="background:${s.color};"></span>
                     ${s.symbol}&nbsp;${s.name}&nbsp;·&nbsp;<span style="color:${s.color}; font-weight:700;">${s.colorName}</span>
                     <span class="season-note">${s.note}</span>
                 </div>
-
-                <div class="liturgy-section" id="liturgy">
-                    <p class="section-eyebrow" style="color:${s.color};">Anglican Liturgy</p>
-                    <h2 class="section-title">성공회 전례란?</h2>
-                    <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 이어진 말씀의 전례와 성찬의 전례가 조화를 이루는 예배 전통을 400여 년간 지켜오고 있습니다.</p>
-                    <p class="liturgy-body">예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 편찬한 이 기도서는, 라틴어가 아닌 자국어로 예배를 드리도록 하여 <strong>모든 신자가 전례에 직접 참여</strong>할 수 있게 한 종교개혁의 중요한 유산입니다.</p>
-                    <div class="liturgy-card" style="border-left-color:${s.color};">
-                        <h3 class="liturgy-card-title">전례의 의미</h3>
-                        <p class="liturgy-body"><strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말로, '공동체를 위해 수행하는 일'을 뜻합니다. 곧 전례는 <strong>그리스도인이 함께 드리고 함께 살아가는 신앙의 실천</strong>입니다.</p>
-                        <ul class="liturgy-list">
-                            <li>회중이 <strong>함께 기도하고 응답하는 대화 형식</strong>으로 진행됩니다.</li>
-                            <li>모든 신자가 성직자와 함께 <strong>예배를 드리는 주체</strong>가 됩니다.</li>
-                            <li>성서·성가집·기도서·주보를 함께 펴고 능동적으로 참여합니다.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                ${spaceGuide && spaceGuide.items && spaceGuide.items.length ? `
-                <div class="liturgy-section" id="worship-space">
-                    <p class="section-eyebrow" style="color:${s.color};">Inside the Church</p>
-                    <h2 class="section-title">전례 공간 안내</h2>
-                    <p class="liturgy-body" style="margin-bottom:1.5rem;">${spaceGuide.intro}</p>
-                    <div class="space-grid">
-                        ${spaceGuide.items.map(item => `
-                            <div class="space-item" style="border-top-color:${s.color};">
-                                <span class="space-icon" aria-hidden="true">${item.icon}</span>
-                                <div class="space-text">
-                                    <h3 class="space-name">${item.name} <span class="space-en">${item.en}</span></h3>
-                                    <p class="space-desc">${item.desc}</p>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-                ` : ''}
-
-                ${resources && resources.length ? `
-                <div class="liturgy-section" id="resources">
-                    <p class="section-eyebrow" style="color:${s.color};">Worship Resources</p>
-                    <h2 class="section-title">예배 자료</h2>
-                    <p class="liturgy-body" style="margin-bottom:1.5rem;">예배 중 함께 펴는 기도서·성가·성서를 온라인으로도 보실 수 있습니다.</p>
-                    <div class="resource-grid">
-                        ${resources.map(r => `
-                            <a class="resource-card" href="${r.url}" target="_blank" rel="noopener noreferrer" style="border-top-color:${s.color};">
-                                <span class="resource-icon" aria-hidden="true">${r.icon}</span>
-                                <h3 class="resource-title">${r.title}</h3>
-                                <p class="resource-desc">${r.desc}</p>
-                                <span class="resource-link" style="color:${s.color};">바로가기 <span aria-hidden="true">↗</span></span>
-                            </a>
-                        `).join('')}
-                    </div>
-                </div>
-                ` : ''}
 
                 <div class="liturgy-section">
                     <p class="section-eyebrow" style="color:${s.color};">Eucharist</p>
@@ -702,6 +611,111 @@ const WorshipRenderer = {
                         </div>
                     </div>
                 </div>
+
+                ${resources && resources.length ? `
+                <div class="liturgy-section" id="resources">
+                    <p class="section-eyebrow" style="color:${s.color};">Worship Resources</p>
+                    <h2 class="section-title">예배 자료</h2>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">예배 중 함께 펴는 기도서·성가·성서를 온라인으로도 보실 수 있습니다.</p>
+                    <div class="resource-grid">
+                        ${resources.map(r => `
+                            <a class="resource-card" href="${r.url}" target="_blank" rel="noopener noreferrer" style="border-top-color:${s.color};">
+                                <span class="resource-icon" aria-hidden="true">${r.icon}</span>
+                                <h3 class="resource-title">${r.title}</h3>
+                                <p class="resource-desc">${r.desc}</p>
+                                <span class="resource-link" style="color:${s.color};">바로가기 <span aria-hidden="true">↗</span></span>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+            </div>
+        `;
+    }
+};
+
+/* ── NewcomerRenderer (처음 오신 분 — newcomer.html) ─────────── */
+const NewcomerRenderer = {
+    render() {
+        const el = document.getElementById('newcomer-full');
+        if (!el) return;
+        const { liturgicalSeason: s, spaceGuide } = CHURCH_DATA.worship;
+        const { info, clergy } = CHURCH_DATA;
+        const primary = clergy[0] || {};
+
+        el.innerHTML = `
+            <div class="liturgy-guide" id="newcomer">
+
+                <div class="newcomer-intro">
+                    <h2 class="newcomer-intro-title">처음 오신 분께</h2>
+                    <p class="newcomer-intro-body">광명교회에 오신 것을 환영합니다. 성공회 예배는 회중이 함께 기도하고 응답하는 전례 예배입니다. 처음에는 흐름이 낯설 수 있으니, 익숙하지 않은 부분은 편안히 지켜보셔도 좋습니다. 아래 안내가 예배의 흐름을 이해하시는 데 작은 도움이 되시기를 바라겠습니다.</p>
+                    <div class="newcomer-key-facts">
+                        <div class="newcomer-key-row">
+                            <span class="newcomer-key-label">예배</span>
+                            <span class="newcomer-key-value"><strong>주일 감사성찬례</strong> · 매주 일요일 오전 11:00</span>
+                        </div>
+                        <div class="newcomer-key-row">
+                            <span class="newcomer-key-label">장소</span>
+                            <span class="newcomer-key-value">${info.name} (${info.subName})<br><a href="visit.html" class="newcomer-key-link">${info.addressShort} · 오시는 길 →</a></span>
+                        </div>
+                        <div class="newcomer-key-row">
+                            <span class="newcomer-key-label">소요</span>
+                            <span class="newcomer-key-value">약 1시간</span>
+                        </div>
+                        <div class="newcomer-key-row">
+                            <span class="newcomer-key-label">복장</span>
+                            <span class="newcomer-key-value">단정한 평상복이면 충분합니다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="liturgy-section" id="firsttime">
+                    <p class="section-eyebrow" style="color:${s.color};">First Visit</p>
+                    <h2 class="section-title">참여 안내</h2>
+                    <p class="liturgy-body" style="margin-bottom:1rem;">처음 참석하실 때 알아두시면 도움이 되는 내용을 정리했습니다.</p>
+                    <div class="liturgy-checklist">
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>앉고 서는</strong> 순서가 있지만, 몸이 불편하시면 그대로 앉아 계셔도 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p><strong>주보</strong>에 예배 순서가 안내되어 있고, <strong>회중석의 기도서</strong>를 함께 펴고 응답하시면 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>회중이 함께 부르는 <strong>성가</strong>는 따라 부르지 않으셔도 괜찮습니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>처음에는 낯설어도 한두 번 참여하시면 자연스럽게 익숙해지실 수 있습니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon" style="color:${s.color};">✓</span><p>궁금하신 점은 옆자리 교우나 안내위원에게 편하게 물어보세요.</p></div>
+                    </div>
+                </div>
+
+                <div class="liturgy-section" id="liturgy">
+                    <p class="section-eyebrow" style="color:${s.color};">Anglican Liturgy</p>
+                    <h2 class="section-title">성공회 전례란?</h2>
+                    <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 이어진 말씀의 전례와 성찬의 전례가 조화를 이루는 예배 전통을 400여 년간 지켜오고 있습니다.</p>
+                    <p class="liturgy-body">예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 편찬한 이 기도서는, 라틴어가 아닌 자국어로 예배를 드리도록 하여 <strong>모든 신자가 전례에 직접 참여</strong>할 수 있게 한 종교개혁의 중요한 유산입니다.</p>
+                    <div class="liturgy-card" style="border-left-color:${s.color};">
+                        <h3 class="liturgy-card-title">전례의 의미</h3>
+                        <p class="liturgy-body"><strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말로, '공동체를 위해 수행하는 일'을 뜻합니다. 곧 전례는 <strong>그리스도인이 함께 드리고 함께 살아가는 신앙의 실천</strong>입니다.</p>
+                        <ul class="liturgy-list">
+                            <li>회중이 <strong>함께 기도하고 응답하는 대화 형식</strong>으로 진행됩니다.</li>
+                            <li>모든 신자가 성직자와 함께 <strong>예배를 드리는 주체</strong>가 됩니다.</li>
+                            <li>성서·성가집·기도서·주보를 함께 펴고 능동적으로 참여합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                ${spaceGuide && spaceGuide.items && spaceGuide.items.length ? `
+                <div class="liturgy-section" id="worship-space">
+                    <p class="section-eyebrow" style="color:${s.color};">Inside the Church</p>
+                    <h2 class="section-title">전례 공간 안내</h2>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">${spaceGuide.intro}</p>
+                    <div class="space-grid">
+                        ${spaceGuide.items.map(item => `
+                            <div class="space-item" style="border-top-color:${s.color};">
+                                <span class="space-icon" aria-hidden="true">${item.icon}</span>
+                                <div class="space-text">
+                                    <h3 class="space-name">${item.name} <span class="space-en">${item.en}</span></h3>
+                                    <p class="space-desc">${item.desc}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
 
                 <div class="liturgy-section" id="communion">
                     <p class="section-eyebrow" style="color:${s.color};">Holy Communion</p>
@@ -1143,6 +1157,7 @@ const App = {
         FooterRenderer.render();
         IndexRenderer.render();
         WorshipRenderer.render();
+        NewcomerRenderer.render();
         CommunityRenderer.render();
         GivingRenderer.render();
         VisitRenderer.render();
