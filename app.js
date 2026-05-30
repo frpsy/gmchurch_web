@@ -167,11 +167,19 @@ const MapHelper = {
         `;
     },
 
+    copyAddr(btn) {
+        const addr = btn.dataset.copy;
+        if (!addr) return;
+        navigator.clipboard.writeText(addr).then(() => {
+            const prev = btn.textContent;
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = prev; }, 1800);
+        }).catch(() => {});
+    },
+
     html(compact = false) {
-        const addr = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.info)
-            ? CHURCH_DATA.info.address : '경기도 광명시 아방리 2길 10';
-        const jibun = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.info)
-            ? CHURCH_DATA.info.addressJibun : '경기도 광명시 노온사동 373-1';
+        const addr = CHURCH_DATA.info.address;
+        const jibun = CHURCH_DATA.info.addressJibun;
         return `
             <div class="map-card${compact ? ' map-card--compact' : ''}">
                 <div class="map-preview" aria-hidden="true">${this._illustration()}</div>
@@ -179,6 +187,7 @@ const MapHelper = {
                     <div class="map-addr-row">
                         <span class="map-addr-tag">도로명</span>
                         <span class="map-addr-text">${addr}</span>
+                        <button class="map-copy-btn" data-copy="${addr}" onclick="MapHelper.copyAddr(this)" aria-label="도로명 주소 복사">복사</button>
                     </div>
                     <div class="map-addr-row">
                         <span class="map-addr-tag">지번</span>
@@ -188,12 +197,12 @@ const MapHelper = {
                 <div class="map-actions">
                     <a href="${this.naverUrl}" target="_blank" rel="noopener" class="map-btn map-btn--naver">
                         <span class="map-btn-mark">N</span>
-                        <span class="map-btn-label">네이버지도에서 길찾기</span>
+                        <span class="map-btn-label">네이버 길찾기</span>
                         <span class="map-btn-arrow" aria-hidden="true">→</span>
                     </a>
                     <a href="${this.kakaoUrl}" target="_blank" rel="noopener" class="map-btn map-btn--kakao">
                         <span class="map-btn-mark map-btn-mark--kakao">K</span>
-                        <span class="map-btn-label">카카오맵에서 길찾기</span>
+                        <span class="map-btn-label">카카오 길찾기</span>
                         <span class="map-btn-arrow" aria-hidden="true">→</span>
                     </a>
                 </div>
@@ -512,9 +521,9 @@ const IndexRenderer = {
         locationEl.innerHTML = `
             <h3>광명교회로 오시는 길</h3>
             ${MapHelper.html(true)}
-            <div class="info-row" style="margin-top:1rem;"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
-            <p style="margin-top:1.25rem;">
-                <a href="visit.html" style="color:var(--green-mid); font-weight:700; font-size:0.88rem;">자세히 보기 →</a>
+            <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" class="link-plain">${phone}</a></span></div>
+            <p class="visit-detail-wrap">
+                <a href="visit.html" class="detail-link">자세히 보기 →</a>
             </p>
         `;
     }
@@ -809,16 +818,16 @@ const VisitRenderer = {
         const { address, addressJibun, postalCode, phone, fax } = CHURCH_DATA.info;
 
         el.innerHTML = `
-            <div class="info-card" id="location" style="max-width:760px; margin:0 auto 1.5rem;">
+            <div class="info-card info-card--wide" id="location">
                 <h3>주소와 연락처</h3>
                 ${MapHelper.html(false)}
-                <div style="margin-top:1.5rem;">
+                <div class="visit-contact">
                     <div class="info-row"><strong>우편번호</strong><span>${postalCode}</span></div>
-                    <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" style="color:inherit;">${phone}</a></span></div>
+                    <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" class="link-plain">${phone}</a></span></div>
                     <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
                 </div>
             </div>
-            <div class="info-card" id="parking" style="max-width:760px; margin:0 auto;">
+            <div class="info-card info-card--wide" id="parking">
                 <h3>교통·주차 안내</h3>
                 <div class="info-row">
                     <strong>승용차</strong>
@@ -834,18 +843,14 @@ const VisitRenderer = {
                             <span class="bus-chip bus-green">5633</span>
                             <span class="bus-chip bus-green">6637</span>
                         </span>
-                        <span style="display:block; font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
-                            서울역·구로디지털단지·목동 방면에서 접근 가능합니다.
-                        </span>
+                        <span class="bus-note">서울역·구로디지털단지·목동 방면에서 접근 가능합니다.</span>
                     </span>
                 </div>
                 <div class="info-row">
                     <strong>주차</strong>
-                    <span>교회 인근에 무료 주차가 가능합니다. 방문 전 교회 사무실(<a href="tel:${phone}" style="color:inherit;">${phone}</a>)로 확인해 주세요.</span>
+                    <span>교회 인근에 무료 주차가 가능합니다. 방문 전 교회 사무실(<a href="tel:${phone}" class="link-plain">${phone}</a>)로 확인해 주세요.</span>
                 </div>
-                <p style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); line-height:1.7;">
-                    ※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong> 로 검색하시면 최단 경로 안내를 받으실 수 있습니다.
-                </p>
+                <p class="visit-note">※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong>로 검색하시면 최단 경로 안내를 받으실 수 있습니다.</p>
             </div>
         `;
     }
