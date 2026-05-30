@@ -2542,45 +2542,53 @@ footer {
     }
 }
 
-/* ── Back to Top Button ──────────────────────────────────── */
+/* ── Back To Top 버튼 (화이트 반투명, 아이콘 녹색) ───────────────── */
 #back-to-top {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 45px;
-    height: 45px;
-    background-color: var(--gold);
-    color: var(--white);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-md);
-    z-index: 999;
-    
-    /* 초기 상태: 숨김 */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    right: clamp(0.8rem, 2.5vw, 1.5rem);
+    bottom: clamp(0.8rem, 2.5vw, 1.5rem);
+    width: 44px;
+    height: 44px;
+    display: inline-grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.400); /* 밝은 반투명 화이트 */
+    color: var(--green-deep); /* 아이콘 색 */
+    border: 1px solid rgba(10,31,18,0.06); /* 연한 그림자/테두리 */
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(10,31,18,0.06);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0; /* 보이지 않음이 기본 */
+    transform: translateY(6px) scale(0.98);
+    transition: opacity 180ms ease, transform 180ms ease, right 160ms ease, background 160ms ease;
+    z-index: 1050; /* 네비/모달보다 아래, 진행바보다 위 */
+    pointer-events: none; /* 기본 비활성화 */
 }
 
 #back-to-top.visible {
     opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    cursor: pointer;
 }
 
+#back-to-top .to-top-icon {
+    width: 20px; height: 20px; display: block; fill: var(--green-deep); opacity: 0.98;
+}
+
+/* Hover: 배경을 약간 더 불투명하게 하여 터치에서 식별되도록 함 */
 #back-to-top:hover {
-    background-color: var(--green-mid);
-    transform: scale(1.1);
+    background: rgba(255,255,255,1);
+    transform: translateY(0) scale(1.04);
+    box-shadow: 0 10px 30px rgba(10,31,18,0.08);
 }
 
-/* 아이콘 스타일 (SVG 사용 권장) */
-.to-top-icon {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
+/* 더 작은 화면에서는 버튼을 약간 작게 하여 공간을 덜 차지하도록 함 */
+@media (max-width: 460px) {
+    #back-to-top { width: 40px; height: 40px; border-radius: 9px; }
+}
+
+/* 만약 화면 하단의 중요 UI(예: 모바일 바)가 있다면 오른쪽에서 살짝 띄움 */
+@media (max-width: 820px) {
+    #back-to-top { right: clamp(0.9rem, 4vw, 2.2rem); }
 }
