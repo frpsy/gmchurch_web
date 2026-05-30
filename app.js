@@ -1254,9 +1254,10 @@ const BackToTop = {
         let rafId = null;
         const check = () => {
             rafId = null;
-            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-            const pct = scrollable > 0 ? window.scrollY / scrollable : 0;
-            btn.classList.toggle('visible', pct >= 0.7);
+            const docH = document.documentElement.scrollHeight;
+            const vpH = document.documentElement.clientHeight;
+            const scrollable = docH - vpH;
+            btn.classList.toggle('visible', scrollable > 200 && window.scrollY / scrollable >= 0.7);
         };
         const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(check); };
 
