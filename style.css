@@ -105,6 +105,7 @@ button:focus:not(:focus-visible) { outline: none; }
     z-index: 1000;
     transition: box-shadow 0.3s, background 0.3s;
     animation: nav-enter 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+    will-change: transform, opacity;
 }
 .nav-header.scrolled {
     background: rgba(10, 31, 18, 0.97);
@@ -498,6 +499,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .page-hero > * {
     opacity: 0;
     animation: hero-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+    will-change: transform, opacity;
 }
 .page-hero > :nth-child(1) { animation-delay: 0.10s; }
 .page-hero > :nth-child(2) { animation-delay: 0.24s; }
@@ -584,6 +586,7 @@ button:focus:not(:focus-visible) { outline: none; }
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
     transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s ease;
+    will-change: transform, opacity;
 }
 .card:hover {
     border-color: var(--green-soft);
@@ -2090,6 +2093,7 @@ footer {
     border-left: 4px solid var(--green-mid);
     border-radius: var(--radius-md);
     padding: 1.6rem 1.8rem;
+    will-change: transform, opacity;
 }
 .story-value-icon {
     font-size: 1.9rem;
