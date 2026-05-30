@@ -1254,13 +1254,22 @@ const BackToTop = {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // 3. 스크롤 감시: 300px 이상 내려오면 표시
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+        // 3. 스크롤/리사이즈 감시: 문서 최하단에 도달했을 때만 표시
+        const checkAtBottom = () => {
+            const scrollPos = window.scrollY + window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+            const tolerance = 12; // 작은 오차 허용
+            if (scrollPos >= (docHeight - tolerance)) {
                 btn.classList.add('visible');
             } else {
                 btn.classList.remove('visible');
             }
-        }, { passive: true });
+        };
+
+        window.addEventListener('scroll', checkAtBottom, { passive: true });
+        window.addEventListener('resize', checkAtBottom, { passive: true });
+
+        // 초기 상태 검사
+        checkAtBottom();
     }
 };
