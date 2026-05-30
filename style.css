@@ -2541,3 +2541,46 @@ footer {
         --shadow-lg:    0 12px 40px rgba(0, 0, 0, 0.60);
     }
 }
+
+/* ── Back to Top Button ──────────────────────────────────── */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background-color: var(--gold);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    z-index: 999;
+    
+    /* 초기 상태: 숨김 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#back-to-top:hover {
+    background-color: var(--green-mid);
+    transform: scale(1.1);
+}
+
+/* 아이콘 스타일 (SVG 사용 권장) */
+.to-top-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}

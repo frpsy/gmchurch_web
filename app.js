@@ -1204,6 +1204,7 @@ const App = {
         this._handleHashScroll();
         ScrollReveal.init();
         ScrollProgress.init();
+        BackToTop.init();
     },
 
     _scrollToHash(hash) {
@@ -1233,3 +1234,33 @@ window.addEventListener('DOMContentLoaded', () => {
     // Handle same-page hash navigation (dropdown clicks while already on the page)
     window.addEventListener('hashchange', () => App._scrollToHash(window.location.hash));
 });
+
+/* ── BackToTop ────────────────────────────────────────── */
+const BackToTop = {
+    init() {
+        // 1. 버튼 엘리먼트 생성 및 추가
+        const btn = document.createElement('button');
+        btn.id = 'back-to-top';
+        btn.setAttribute('aria-label', '최상단으로 이동');
+        btn.innerHTML = `
+            <svg class="to-top-icon" viewBox="0 0 24 24">
+                <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+            </svg>
+        `;
+        document.body.appendChild(btn);
+
+        // 2. 클릭 이벤트: 최상단으로 부드럽게 이동
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // 3. 스크롤 감시: 300px 이상 내려오면 표시
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        }, { passive: true });
+    }
+};

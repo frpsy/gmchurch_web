@@ -8,6 +8,7 @@
 | 배포 | GitHub Pages — `https://frpsy.github.io/gmchurch_web` |
 | 방식 | 빌드 없는 순수 정적 사이트 (HTML + CSS + Vanilla JS) |
 | 브랜치 전략 | 작업 브랜치 → PR → main 머지 → GitHub Pages 자동 배포 |
+| 현재 상태 | 2026년 5월 30일 (금) |
 
 ---
 
@@ -25,10 +26,11 @@ gmchurch_web/
 ├── hopecenter.html / smallgroup.html  공동체 상세 (준비중 placeholder)
 ├── visit.html        오시는 길 (지도·교통·주차)
 ├── giving.html       헌금 (봉헌 계좌)
+├── media.html        교회 영상 (유튜브 영상 소개)
 ├── privacy.html      개인정보 처리방침 (noindex)
-├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA
-├── app.js            렌더러 모음 + App bootstrap (~807줄)
-├── style.css         전체 스타일 (~1443줄)
+├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA (487줄)
+├── app.js            렌더러 모음 + App bootstrap (1235줄)
+├── style.css         전체 스타일 (2543줄)
 ├── favicon.svg       캔터베리 십자가 (짙은 녹색 배경 + 흰색 십자가)
 ├── apple-touch-icon.png
 ├── og-image-v2.png   소셜 공유 OG 이미지 (1200×630)
@@ -138,8 +140,17 @@ const CHURCH_DATA = {
     // letters 필드 없음 — ACGM 모노그램 → 캔터베리 십자가로 변경됨
   },
 
+  ministerSection: {
+    categories: [
+      { id: "성직자", title: "성직자" },
+      { id: "사역자", title: "사역자" },
+      { id: "교회위원", title: "교회위원" }
+    ]
+  },
+
   clergy: [
     {
+      category: "성직자",
       name: "민숙희(마가렛)",
       title: "관할사제 · 서울교구 서부교무구 총사제",
       ordained: "2005년 서품",
@@ -155,6 +166,7 @@ const CHURCH_DATA = {
       }
     },
     {
+      category: "성직자",
       name: "이남호(사도요한)",
       title: "협동사제",
       ordained: "", quote: "", desc: String,
@@ -164,7 +176,10 @@ const CHURCH_DATA = {
   ],
 
   philosophy: {
-    values: [{ icon, title, desc }]  // 녹색·열린·평등·전례 4개
+    title: "우리가 지향하는 교회",
+    intro: [String, String],           // 2개 문단 소개
+    values: [{ icon, title, desc }],   // 4개: 녹색·열린·평등·전례
+    closing: String                     // 마무리 문구
   },
 
   worship: {
@@ -197,7 +212,7 @@ const CHURCH_DATA = {
     bank: "2680-100-14008",
     holder: "대한성공회 광명교회",
     report: String,
-    receiptInfo: String    // 기부금 영수증 안내 (두 문장 → 렌더 시 <br> 삽입)
+    receiptInfo: String    // 기부금 영수증 안내
   },
 
   sns: {
@@ -206,8 +221,16 @@ const CHURCH_DATA = {
 
   liveUrl: "https://youtu.be/5tTJvrTX4aA",
 
+  media: {
+    intro: String,
+    channelUrl: String,
+    videos: [
+      { id, title, desc, category }  // 5개 이상의 유튜브 영상
+    ]
+  },
+
   press: [
-    { year, media, title, date, url }  // 4건 (2005·2016·2021·2025)
+    { year, media, title, date, url }  // 4건 (2025·2021·2016·2005)
   ],
 
   navigation: [...]  // 아래 참조
@@ -224,34 +247,36 @@ const CHURCH_DATA = {
 교회 소개  clergy.html
   └ 성공회란?          clergy.html#what-is-anglican
   └ 대한성공회         clergy.html#ack
-  └ 관할사제           clergy.html#priest           (JS)
+  └ 섬기는 이들        clergy.html#priest-section       (JS)
   └ 교회 철학          clergy.html#philosophy
+  └ 로고 소개          clergy.html#logo-intro
   └ 언론 보도          clergy.html#press
-  └ 교회 이야기        story.html                   (badge: "임시")
+  └ 교회 영상          media.html
+  └ 교회 이야기        story.html                       (badge: "임시")
 
 예배  worship.html
-  └ 주일 감사성찬례    worship.html#main            (JS)
-  └ 어린이 예배        worship.html#children        (JS)
-  └ 감사성찬례 순서    worship.html#eucharist-order (JS)
-  └ 예배 자료          worship.html#resources       (JS)
+  └ 주일 감사성찬례    worship.html#main                (JS)
+  └ 어린이 예배        worship.html#children            (JS)
+  └ 감사성찬례 순서    worship.html#eucharist-order     (JS)
+  └ 예배 자료          worship.html#resources           (JS)
 
 처음 오신 분  newcomer.html
-  └ 처음 오신 분께     newcomer.html#newcomer       (JS)
-  └ 참여 안내          newcomer.html#firsttime      (JS)
-  └ 성공회 전례란?     newcomer.html#liturgy        (JS)
-  └ 전례 공간 안내     newcomer.html#worship-space  (JS)  성수대·독서대·제대·성막·부활초
-  └ 영성체 안내        newcomer.html#communion      (JS)
-  └ 문의하기           newcomer.html#contact        (JS)
+  └ 처음 오신 분께     newcomer.html#newcomer           (JS)
+  └ 참여 안내          newcomer.html#firsttime          (JS)
+  └ 성공회 전례란?     newcomer.html#liturgy            (JS)
+  └ 전례 공간 안내     newcomer.html#worship-space      (JS)  성수대·독서대·제대·성막·부활초
+  └ 영성체 안내        newcomer.html#communion          (JS)
+  └ 문의하기           newcomer.html#contact            (JS)
 
 공동체  community.html
-  └ 광명 희망터        community.html#hopecenter    (JS)
-  └ 엠마우스 코스      community.html#emmaus        (JS)
-  └ 소그룹 모임        community.html#smallgroup    (JS)
-  └ 주일 애찬          community.html#agape         (JS)
+  └ 광명 희망터        community.html#hopecenter        (JS)
+  └ 엠마우스 코스      community.html#emmaus            (JS)
+  └ 소그룹 모임        community.html#smallgroup        (JS)
+  └ 주일 애찬          community.html#agape             (JS)
 
 오시는 길  visit.html
-  └ 주소·교통          visit.html#location          (JS)
-  └ 주차 안내          visit.html#parking           (JS)
+  └ 주소·교통          visit.html#location              (JS)
+  └ 주차 안내          visit.html#parking               (JS)
 
 ※ '헌금'은 상단 내비·메인 페이지에서 제외하고 푸터 하단 바의
   '봉헌 안내' 링크(→ giving.html)로만 접근. giving.html 페이지는 유지.
@@ -260,6 +285,8 @@ const CHURCH_DATA = {
 ---
 
 ## app.js 렌더러 구조
+
+총 1235줄, 12개의 렌더러 모듈 + 2개 유틸리티(ScrollReveal, ScrollProgress) + App 부트스트랩.
 
 ```
 window DOMContentLoaded
@@ -325,8 +352,23 @@ window DOMContentLoaded
       │       _bioSection(bio) → 타임라인 + 소임 태그 + 교회 밖 활동 + 출처
       │     _philosophy() → #philosophy-full  (.values-grid)
       │
-      ├── PressRenderer.render()      → #press-table (clergy.html)
+      ├── MediaRenderer.render()      → #media-full (media.html)
+      │     유튜브 영상 소개 섹션 헤더
+      │     video-grid: 5개+ 영상 카드 (썸네일 + 카테고리 + 제목 + 설명)
+      │     각 카드는 유튜브 링크로 이동
+      │     video-channel-cta: 유튜브 채널 전체 보기 버튼
       │
+      ├── PressRenderer.render()      → #press-table (clergy.html)
+      │     press-list: press 배열의 모든 기사
+      │     각 항목: 연도 | 미디어 · 날짜 | 제목(링크)
+      │
+      ├── ScrollReveal.init()         (모든 페이지)
+      │     .reveal 클래스 요소들을 scroll 시 페이드인
+      │     Intersection Observer 사용, 애니메이션 감소 설정 존중
+      │
+      └── ScrollProgress.init()       (모든 페이지)
+            페이지 스크롤 진행도를 시각화 (막대 또는 스타일 적용)
+            
       └── App._handleHashScroll()
             window.location.hash 존재 시:
             document.fonts.ready → requestAnimationFrame → _scrollToHash()
@@ -370,7 +412,17 @@ window DOMContentLoaded
 <section id="logo-intro">
   #logo-content                             ← ClergyRenderer._logo()
 <section id="press">
-  #press-table                              ← PressRenderer
+  #press-table                              ← PressRenderer.render()
+```
+
+### media.html
+```html
+<div class="page-hero">
+<section>
+  #media-full                               ← MediaRenderer.render()
+    intro + 유튜브 채널 소개
+    video-grid: 영상 카드들 (썸네일 + 카테고리 + 제목 + 설명)
+    video-channel-cta: 채널 전체 보기 버튼
 ```
 
 ### worship.html
@@ -481,8 +533,14 @@ window DOMContentLoaded
 | `.bus-chip.bus-blue/green` | 버스 번호 칩 |
 | `.bank-card` | 봉헌 계좌 카드 |
 | `.values-grid` / `.value-card` | 교회 철학 카드 |
+| `.video-grid` / `.video-card` | 유튜브 영상 카드 (썸네일 + 정보) |
+| `.video-thumb` | 영상 썸네일 컨테이너 (재생 버튼 오버레이) |
+| `.video-play-btn` | 영상 재생 버튼 아이콘 (> 기호) |
+| `.video-info` / `.video-category` | 영상 카테고리·제목·설명 |
+| `.video-channel-cta` | 유튜브 채널 전체 보기 CTA 버튼 |
 | `.footer-inner` | 푸터 3단 그리드 |
 | `.footer-logo-mark` | 푸터 캔터베리 십자가 컨테이너 (38×38px, 흰색 SVG) |
+| `.reveal` | ScrollReveal 애니메이션 대상 (fade-in on scroll) |
 
 ### 반응형 브레이크포인트
 
@@ -527,6 +585,16 @@ window DOMContentLoaded
 ### 중복 ID 금지
 - `clergy.html` 섹션 태그에 `id="philosophy"` 이미 있음
 - `ClergyRenderer._philosophy()` 내부 div에 동일 ID 추가 금지
+- `media.html` 페이지 추가로 id="media-full" 사용
+
+### 새 페이지 렌더러 추가 시 유의사항
+1. `app.js`에 `const PageNameRenderer = { render() { ... } }` 정의
+2. 해당 페이지에 `<div id="page-name-full"></div>` 마크업 준비
+3. `App.init()` 메서드에서 조건부로 렌더러 호출
+   - 페이지별 렌더러는 해당 HTML 페이지에서만 실행 (예: `if (document.getElementById('media-full'))`)
+4. `data.js`의 `navigation` 배열에 새 메뉴 항목 추가
+5. 필요 시 media.html, story.html처럼 별도 대문 이미지 제공
+6. CLAUDE.md와 docs/ 작업 지시서 동기화
 
 ### Git 워크플로
 ```bash
