@@ -748,7 +748,6 @@ const NewcomerRenderer = {
                     <div class="newcomer-cta-actions">
                         ${primary.contact ? `<a href="mailto:${primary.contact}" class="newcomer-cta-link"><span aria-hidden="true">✉️</span> ${primary.name} 사제에게 메일 보내기</a>` : ''}
                         <a href="tel:${info.phone}" class="newcomer-cta-link"><span aria-hidden="true">📞</span> 교회 사무실 ${info.phone}</a>
-                        <a href="visit.html" class="newcomer-cta-link"><span aria-hidden="true">🗺</span> 오시는 길 안내</a>
                     </div>
                 </div>
             </div>
