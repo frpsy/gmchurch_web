@@ -229,7 +229,7 @@ const NavRenderer = {
                 </button>
                 <ul class="dropdown">
                     ${item.items.map(sub =>
-                        `<li><a href="${sub.href}">${sub.label}</a></li>`
+                        `<li><a href="${sub.href}">${sub.label}${sub.badge ? ` <span class="nav-badge">${sub.badge}</span>` : ''}</a></li>`
                     ).join('')}
                 </ul>
             </li>
@@ -503,7 +503,7 @@ const WorshipRenderer = {
     render() {
         const el = document.getElementById('worship-full');
         if (!el) return;
-        const { main, guide, liturgicalSeason: s, resources } = CHURCH_DATA.worship;
+        const { main, guide, liturgicalSeason: s, resources, spaceGuide } = CHURCH_DATA.worship;
         const { info, clergy } = CHURCH_DATA;
         const primary = clergy[0] || {};
 
@@ -581,6 +581,25 @@ const WorshipRenderer = {
                         </ul>
                     </div>
                 </div>
+
+                ${spaceGuide && spaceGuide.items && spaceGuide.items.length ? `
+                <div class="liturgy-section" id="worship-space">
+                    <p class="section-eyebrow" style="color:${s.color};">Inside the Church</p>
+                    <h2 class="section-title">전례 공간 안내</h2>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">${spaceGuide.intro}</p>
+                    <div class="space-grid">
+                        ${spaceGuide.items.map(item => `
+                            <div class="space-item" style="border-top-color:${s.color};">
+                                <span class="space-icon" aria-hidden="true">${item.icon}</span>
+                                <div class="space-text">
+                                    <h3 class="space-name">${item.name} <span class="space-en">${item.en}</span></h3>
+                                    <p class="space-desc">${item.desc}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
 
                 ${resources && resources.length ? `
                 <div class="liturgy-section" id="resources">

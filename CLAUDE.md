@@ -16,9 +16,12 @@
 ```
 gmchurch_web/
 ├── index.html        메인 페이지
-├── clergy.html       교회 소개 (성공회·사제·철학·로고·언론)
-├── worship.html      예배 안내 + 전례 가이드
-├── community.html    공동체 (희망터·엠마우스·소그룹)
+├── clergy.html       교회 소개 (성공회·사제·철학·로고·언론·교회 이야기)
+├── story.html        교회 이야기 — 5대 정체성 서사 (임시/초안 페이지)
+├── worship.html      예배 안내 + 전례 가이드 (전례 공간 안내 포함)
+├── community.html    공동체 (희망터·엠마우스·소그룹·주일 애찬)
+├── emmaus.html       엠마우스 코스 상세 페이지
+├── hopecenter.html / smallgroup.html  공동체 상세 (준비중 placeholder)
 ├── visit.html        오시는 길 (지도·교통·주차)
 ├── giving.html       헌금 (봉헌 계좌)
 ├── privacy.html      개인정보 처리방침 (noindex)
@@ -170,6 +173,10 @@ const CHURCH_DATA = {
       { id: "children", title: "어린이 예배",     time, desc }
     ],
     guide: String,        // 안내 배너 한 줄 (빈 문자열이면 미표시)
+    spaceGuide: {         // 전례 공간 안내 (worship.html#worship-space)
+      intro: String,
+      items: [{ icon, name, en, desc }]  // 성수대·독서대·제대·성막·부활초 5개
+    },
     resources: [          // 예배 자료 — 외부 앱 링크 카드 (worship.html#resources)
       { icon, title, desc, url }   // 기도서·성가·공동번역 성서
     ]
@@ -177,9 +184,10 @@ const CHURCH_DATA = {
 
   community: {
     groups: [
-      { id: "hopecenter", title: "광명 희망터",  desc, icon },
-      { id: "emmaus",     title: "엠마우스 코스", desc, icon },
-      { id: "smallgroup", title: "소그룹 모임",  desc, icon }
+      { id: "hopecenter", title: "광명 희망터",  desc, icon, detailUrl },
+      { id: "emmaus",     title: "엠마우스 코스", desc, icon, detailUrl },
+      { id: "smallgroup", title: "소그룹 모임",  desc, icon, detailUrl },
+      { id: "agape",      title: "주일 애찬",     desc, icon }  // 밥상 공동체 (detailUrl 없음)
     ]
   },
 
@@ -209,7 +217,7 @@ const CHURCH_DATA = {
 
 ### 내비게이션 구조 (`navigation` 배열)
 
-전체 앵커 22개 자동 검증 완료. `(JS)` = JS 렌더러가 동적으로 생성하는 ID.
+`(JS)` = JS 렌더러가 동적으로 생성하는 ID. nav item에 `badge` 필드가 있으면 하위 메뉴에 칩(.nav-badge) 표시.
 
 ```
 교회 소개  clergy.html
@@ -218,6 +226,7 @@ const CHURCH_DATA = {
   └ 관할사제           clergy.html#priest           (JS)
   └ 교회 철학          clergy.html#philosophy
   └ 언론 보도          clergy.html#press
+  └ 교회 이야기        story.html                   (badge: "임시")
 
 예배  worship.html
   └ 주일 감사성찬례    worship.html#main            (JS)
@@ -226,6 +235,7 @@ const CHURCH_DATA = {
 처음 오신 분  worship.html#newcomer
   └ 참여 안내          worship.html#firsttime       (JS)
   └ 성공회 전례란?     worship.html#liturgy         (JS)
+  └ 전례 공간 안내     worship.html#worship-space   (JS)  성수대·독서대·제대·성막·부활초
   └ 예배 자료          worship.html#resources       (JS)
   └ 예배 순서          worship.html#eucharist-order (JS)
   └ 영성체 안내        worship.html#communion       (JS)
@@ -235,6 +245,7 @@ const CHURCH_DATA = {
   └ 광명 희망터        community.html#hopecenter    (JS)
   └ 엠마우스 코스      community.html#emmaus        (JS)
   └ 소그룹 모임        community.html#smallgroup    (JS)
+  └ 주일 애찬          community.html#agape         (JS)
 
 오시는 길  visit.html
   └ 주소·교통          visit.html#location          (JS)
@@ -259,6 +270,7 @@ window DOMContentLoaded
       │       • .nav-chevron click → .nav-item.mobile-open 토글
       │         (nav-link는 e.preventDefault() 없이 항상 이동)
       │       • .dropdown a click → 모바일 메뉴 자동 닫힘
+      │     하위 메뉴 item에 badge 필드 → .nav-badge 칩 렌더 (예: "임시")
       │
       ├── FooterRenderer.render()     → #main-footer (모든 페이지)
       │     info + clergy[0] + sns 4개 링크
@@ -276,6 +288,7 @@ window DOMContentLoaded
       │     liturgy-guide (id="newcomer" — newcomer-intro 서두)
       │       id="firsttime"        참여 안내 (체크리스트)
       │       id="liturgy"          성공회 전례란?
+      │       id="worship-space"    전례 공간 안내 (성수대·독서대·제대·성막·부활초 / .space-grid)
       │       id="resources"        예배 자료 (기도서·성가·성서 외부 링크 카드)
       │       id="eucharist-order"  감사성찬례 4단계
       │       id="communion"        영성체 안내
@@ -283,6 +296,8 @@ window DOMContentLoaded
       │     ※ liturgicalSeason(s).color / s.colorLight 인라인 style 적용
       │
       ├── CommunityRenderer.render()  → #community-full (community.html)
+      │     groups 카드 (id=각 그룹). detailUrl 있으면 '자세히 보기' 링크.
+      │     주일 애찬(id="agape")은 detailUrl 없이 친교 안내만 표시.
       │
       ├── GivingRenderer.render()     → #giving-full (giving.html)
       │     id="offering" div 내 봉헌 계좌 카드
@@ -360,6 +375,7 @@ window DOMContentLoaded
     #newcomer               전례 가이드 시작 (처음 오신 분께 서두)
     #firsttime              참여 안내 (체크리스트)
     #liturgy                성공회 전례란?
+    #worship-space          전례 공간 안내 (성수대·독서대·제대·성막·부활초)
     #resources              예배 자료 (외부 앱 링크)
     #eucharist-order        감사성찬례 순서
     #communion              영성체 안내
@@ -370,6 +386,17 @@ window DOMContentLoaded
 ```html
 <div class="page-hero">
 <section>  #community-full / #giving-full / #visit-full
+   (community-full에 #agape 주일 애찬 카드 포함)
+```
+
+### story.html (교회 이야기 — 임시/초안)
+```html
+<div class="page-hero">                       교회 이야기
+<section id="welcome">  .draft-banner(임시 안내) + .story-lead 환영
+<section id="identity"> .story-values — 5대 정체성 서사 블록
+   01 거룩한 전례  02 평등 공동체  03 부활 신앙  04 애찬  05 약자·창조 돌봄
+<section id="invite">   .newcomer-cta 초대 + 가안 안내
+※ 정적 HTML 페이지 (data.js 비의존), nav/footer는 공통 렌더러가 채움
 ```
 
 ---
@@ -424,8 +451,12 @@ window DOMContentLoaded
 | `.liturgy-season-badge` | 현재 절기 배지 (색·심볼·절기명) |
 | `.liturgy-steps` / `.liturgy-step` | 감사성찬례 4단계 |
 | `.communion-grid` / `.communion-card` | 영성체 안내 카드 |
+| `.space-grid` / `.space-item` | 전례 공간 안내 카드 (아이콘 + 국문/영문명 + 설명) |
 | `.resource-grid` / `.resource-card` | 예배 자료 외부 링크 카드 (hover lift) |
 | `.liturgy-checklist` / `.checklist-item` | 처음 오신 분 체크리스트 |
+| `.nav-badge` | 내비 하위 메뉴 상태 칩 (골드, 예: "임시") |
+| `.draft-banner` | 임시/초안 페이지 상단 안내 배너 (골드) |
+| `.story-values` / `.story-value` | 교회 이야기 5대 정체성 블록 (story.html) |
 | `.anglican-pillars` | 성공회 3기둥 카드 그리드 |
 | `.anglican-korea-inner` | 대한성공회 2단 레이아웃 |
 | `.logo-intro-grid` | 캔터베리 십자가 소개 그리드 |
