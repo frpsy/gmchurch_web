@@ -660,7 +660,7 @@ const NewcomerRenderer = {
             <div class="liturgy-guide" id="newcomer">
 
                 <div class="newcomer-intro">
-                    <h2 class="newcomer-intro-title">처음 오신 분께</h2>
+                    <h2 class="newcomer-intro-title">환영합니다</h2>
                     <p class="newcomer-intro-body">광명교회에 오신 것을 환영합니다. 성공회 예배는 회중이 함께 기도하고 응답하는 전례 예배입니다. 처음에는 흐름이 낯설 수 있으니, 익숙하지 않은 부분은 편안히 지켜보셔도 좋습니다. 아래 안내가 예배의 흐름을 이해하시는 데 작은 도움이 되시기를 바라겠습니다.</p>
                     <div class="newcomer-key-facts">
                         <div class="newcomer-key-row">
