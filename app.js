@@ -748,7 +748,6 @@ const NewcomerRenderer = {
                     <div class="newcomer-cta-actions">
                         ${primary.contact ? `<a href="mailto:${primary.contact}" class="newcomer-cta-link"><span aria-hidden="true">✉️</span> ${primary.name} 사제에게 메일 보내기</a>` : ''}
                         <a href="tel:${info.phone}" class="newcomer-cta-link"><span aria-hidden="true">📞</span> 교회 사무실 ${info.phone}</a>
-                        <a href="visit.html" class="newcomer-cta-link"><span aria-hidden="true">🗺</span> 오시는 길 안내</a>
                     </div>
                 </div>
             </div>
@@ -1116,6 +1115,25 @@ const PressRenderer = {
     }
 };
 
+/* ── ScrollToTop ─────────────────────────────────────── */
+const ScrollToTop = {
+    init() {
+        const btn = document.createElement('button');
+        btn.id = 'scroll-to-top';
+        btn.setAttribute('aria-label', '맨 위로 이동');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor"/></svg>`;
+        document.body.appendChild(btn);
+
+        window.addEventListener('scroll', () => {
+            btn.classList.toggle('visible', window.scrollY > 300);
+        }, { passive: true });
+
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+};
+
 /* ── ScrollReveal ────────────────────────────────────────── */
 const ScrollReveal = {
     init() {
@@ -1205,6 +1223,7 @@ const App = {
         this._handleHashScroll();
         ScrollReveal.init();
         ScrollProgress.init();
+        ScrollToTop.init();
     },
 
     _scrollToHash(hash) {
