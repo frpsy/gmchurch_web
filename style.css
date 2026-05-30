@@ -98,9 +98,9 @@ button:focus:not(:focus-visible) { outline: none; }
     position: fixed;
     top: 0; left: 0; right: 0;
     height: var(--nav-h);
-    background: var(--nav-glass);
-    backdrop-filter: saturate(1.5) blur(24px);
-    -webkit-backdrop-filter: saturate(1.5) blur(24px);
+    background: rgba(10, 31, 18, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.08);
     z-index: 1000;
     transition: box-shadow 0.3s, background 0.3s;
@@ -380,8 +380,8 @@ button:focus:not(:focus-visible) { outline: none; }
 .btn-outline:hover {
     background: rgba(255,255,255,0.16);
     border-color: rgba(255,255,255,0.85);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(139, 115, 85, 0.30);
 }
 
 /* Hero — 실시간 예배 버튼 (히어로 외부 영역용) */
@@ -412,8 +412,8 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .btn-hero-primary:hover {
     background: var(--green-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 32px rgba(139, 115, 85, 0.28);
 }
 
 /* Hero — 하단 스탯 스트립 */
@@ -585,13 +585,13 @@ button:focus:not(:focus-visible) { outline: none; }
     background: var(--white);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
-    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     will-change: transform, opacity;
 }
 .card:hover {
     border-color: var(--green-soft);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(139, 115, 85, 0.22);
+    transform: translateY(-4px);
 }
 @media (prefers-reduced-motion: reduce) {
     .card { transition: border-color 0.25s, box-shadow 0.25s; }
@@ -2277,4 +2277,25 @@ footer {
         padding-left: max(clamp(1.25rem, 5vw, 2.5rem), env(safe-area-inset-left));
         padding-right: max(clamp(1.25rem, 5vw, 2.5rem), env(safe-area-inset-right));
     }
+}
+
+/* ── Skeleton Loading ─────────────────────────────────── */
+@keyframes skeleton-pulse {
+    0%   { background-color: #dbd8d0; }
+    50%  { background-color: #c8c5bc; }
+    100% { background-color: #dbd8d0; }
+}
+
+.skeleton {
+    background-color: #dbd8d0;
+    border-radius: var(--radius-sm);
+    color: transparent;
+    user-select: none;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton * { visibility: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton { animation: none; background-color: #d4d1c8; }
 }
