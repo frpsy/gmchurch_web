@@ -18,7 +18,8 @@ gmchurch_web/
 ├── index.html        메인 페이지
 ├── clergy.html       교회 소개 (성공회·사제·철학·로고·언론·교회 이야기)
 ├── story.html        교회 이야기 — 5대 정체성 서사 (임시/초안 페이지)
-├── worship.html      예배 안내 + 전례 가이드 (전례 공간 안내 포함)
+├── worship.html      예배 안내 (예배 카드·감사성찬례란·순서·예배 자료)
+├── newcomer.html     처음 오신 분 (환영·참여 안내·전례·전례 공간·영성체·문의)
 ├── community.html    공동체 (희망터·엠마우스·소그룹·주일 애찬)
 ├── emmaus.html       엠마우스 코스 상세 페이지
 ├── hopecenter.html / smallgroup.html  공동체 상세 (준비중 placeholder)
@@ -231,15 +232,16 @@ const CHURCH_DATA = {
 예배  worship.html
   └ 주일 감사성찬례    worship.html#main            (JS)
   └ 어린이 예배        worship.html#children        (JS)
-
-처음 오신 분  worship.html#newcomer
-  └ 참여 안내          worship.html#firsttime       (JS)
-  └ 성공회 전례란?     worship.html#liturgy         (JS)
-  └ 전례 공간 안내     worship.html#worship-space   (JS)  성수대·독서대·제대·성막·부활초
+  └ 감사성찬례 순서    worship.html#eucharist-order (JS)
   └ 예배 자료          worship.html#resources       (JS)
-  └ 예배 순서          worship.html#eucharist-order (JS)
-  └ 영성체 안내        worship.html#communion       (JS)
-  └ 문의하기           worship.html#contact         (JS)
+
+처음 오신 분  newcomer.html
+  └ 처음 오신 분께     newcomer.html#newcomer       (JS)
+  └ 참여 안내          newcomer.html#firsttime      (JS)
+  └ 성공회 전례란?     newcomer.html#liturgy        (JS)
+  └ 전례 공간 안내     newcomer.html#worship-space  (JS)  성수대·독서대·제대·성막·부활초
+  └ 영성체 안내        newcomer.html#communion      (JS)
+  └ 문의하기           newcomer.html#contact        (JS)
 
 공동체  community.html
   └ 광명 희망터        community.html#hopecenter    (JS)
@@ -284,16 +286,21 @@ window DOMContentLoaded
       │     _visit()   → #location-card (지도 + 주소 + 전화)
       │
       ├── WorshipRenderer.render()    → #worship-full (worship.html)
-      │     예배 카드 그리드 + guide-banner
+      │     예배 카드 그리드(id="main"·"children") + guide-banner
+      │     liturgy-guide (liturgy-season-badge)
+      │       (감사성찬례란?)        감사성찬례 소개 + 인용
+      │       id="eucharist-order"  감사성찬례 순서 4단계
+      │       id="resources"        예배 자료 (기도서·성가·성서 외부 링크 카드)
+      │     ※ liturgicalSeason(s).color / s.colorLight 인라인 style 적용
+      │
+      ├── NewcomerRenderer.render()   → #newcomer-full (newcomer.html)
       │     liturgy-guide (id="newcomer" — newcomer-intro 서두)
       │       id="firsttime"        참여 안내 (체크리스트)
       │       id="liturgy"          성공회 전례란?
       │       id="worship-space"    전례 공간 안내 (성수대·독서대·제대·성막·부활초 / .space-grid)
-      │       id="resources"        예배 자료 (기도서·성가·성서 외부 링크 카드)
-      │       id="eucharist-order"  감사성찬례 4단계
       │       id="communion"        영성체 안내
       │       id="contact"          문의하기 CTA (newcomer-cta)
-      │     ※ liturgicalSeason(s).color / s.colorLight 인라인 style 적용
+      │     ※ 데이터 출처: CHURCH_DATA.worship.spaceGuide / liturgicalSeason
       │
       ├── CommunityRenderer.render()  → #community-full (community.html)
       │     groups 카드 (id=각 그룹). detailUrl 있으면 '자세히 보기' 링크.
@@ -372,14 +379,24 @@ window DOMContentLoaded
 <section>
   #worship-full                             ← WorshipRenderer
     #main / #children       예배 카드
-    #newcomer               전례 가이드 시작 (처음 오신 분께 서두)
+    (감사성찬례란?)         감사성찬례 소개
+    #eucharist-order        감사성찬례 순서
+    #resources              예배 자료 (외부 앱 링크)
+<section class="next-step-cta">           처음 오신 분으로 유도 CTA
+```
+
+### newcomer.html
+```html
+<div class="page-hero">
+<section>
+  #newcomer-full                            ← NewcomerRenderer
+    #newcomer               처음 오신 분께 (환영 서두 + key facts)
     #firsttime              참여 안내 (체크리스트)
     #liturgy                성공회 전례란?
     #worship-space          전례 공간 안내 (성수대·독서대·제대·성막·부활초)
-    #resources              예배 자료 (외부 앱 링크)
-    #eucharist-order        감사성찬례 순서
     #communion              영성체 안내
     #contact                문의하기 CTA
+<section class="next-step-cta">           예배 안내로 유도 CTA
 ```
 
 ### community.html / giving.html / visit.html
