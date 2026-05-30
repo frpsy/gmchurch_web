@@ -656,7 +656,7 @@ const NewcomerRenderer = {
                         </div>
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">장소</span>
-                            <span class="newcomer-key-value">${info.name} (${info.subName})<br><a href="visit.html" class="newcomer-key-link">${info.addressShort} · 오시는 길 →</a></span>
+                            <span class="newcomer-key-value">${info.name} (${info.subName})<br>${info.addressShort}</span>
                         </div>
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">소요</span>
