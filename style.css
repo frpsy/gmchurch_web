@@ -1158,6 +1158,21 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 /* ── Liturgy Guide ──────────────────────────────────────── */
+/* ── Liturgical season colour tokens ──────────────────────── */
+:root { --season: var(--green-mid); --season-light: var(--green-light); }
+
+.liturgy-season-badge .season-dot      { background: var(--season); }
+.liturgy-season-badge .season-name     { color: var(--season); font-weight: 700; }
+.liturgy-guide .section-eyebrow        { color: var(--season); }
+.liturgy-guide .liturgy-inner-quote    { border-left-color: var(--season); }
+.liturgy-guide .liturgy-card           { border-left-color: var(--season); }
+.liturgy-guide .step-num               { background: var(--season); }
+.liturgy-guide .resource-card          { border-top-color: var(--season); }
+.liturgy-guide .resource-link          { color: var(--season); }
+.liturgy-guide .space-item             { border-top-color: var(--season); }
+.liturgy-guide .communion-season       { border-top-color: var(--season); background: var(--season-light); }
+.liturgy-guide .check-icon             { color: var(--season); }
+
 .liturgy-guide {
     max-width: 760px;
     margin: 4rem auto 0;
