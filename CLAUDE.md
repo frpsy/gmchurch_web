@@ -8,7 +8,7 @@
 | 배포 | GitHub Pages — `https://frpsy.github.io/gmchurch_web` |
 | 방식 | 빌드 없는 순수 정적 사이트 (HTML + CSS + Vanilla JS) |
 | 브랜치 전략 | 작업 브랜치 → PR → main 머지 → GitHub Pages 자동 배포 |
-| 현재 상태 | 2026년 5월 30일 (금) |
+| 현재 상태 | 2026년 5월 30일 (토) |
 
 ---
 
