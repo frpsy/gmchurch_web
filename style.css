@@ -511,6 +511,8 @@ button:focus:not(:focus-visible) { outline: none; }
     .hero-stat-divider { height: 1.8rem; }
     .hero-scroll { bottom: 5rem; }
     .btn-hero-primary { font-size: 0.92rem; }
+
+    .hero-fallback { animation: none; transform: none; will-change: auto; }
 }
 
 /* ── Page Hero (sub-pages) ───────────────────────────────── */
