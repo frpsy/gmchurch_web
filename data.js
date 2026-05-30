@@ -457,7 +457,7 @@ const CHURCH_DATA = {
             label: "처음 오신 분",
             href: "newcomer.html",
             items: [
-                { label: "처음 오신 분께", href: "newcomer.html#newcomer" },
+                { label: "인사말",         href: "newcomer.html#newcomer" },
                 { label: "참여 안내",      href: "newcomer.html#firsttime" },
                 { label: "성공회 전례란?", href: "newcomer.html#liturgy" },
                 { label: "전례 공간 안내", href: "newcomer.html#worship-space" },
