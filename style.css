@@ -94,10 +94,12 @@ button:focus:not(:focus-visible) { outline: none; }
     position: fixed;
     top: 0; left: 0;
     width: 0%;
-    height: 2px;
-    background: var(--gold);
-    z-index: 1001;
-    transition: width 0.1s linear;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), #d6b986);
+    box-shadow: 0 0 8px rgba(214, 185, 134, 0.65);
+    border-radius: 0 2px 2px 0;
+    z-index: 1100;
+    transition: width 0.12s linear;
     pointer-events: none;
 }
 
@@ -1249,31 +1251,80 @@ button:focus:not(:focus-visible) { outline: none; }
 /* Newcomer CTA (page closing) */
 /* ── Next Step CTA ────────────────────────────────────────── */
 .next-step-cta {
-    background: var(--green-light);
+    padding: 5rem 0;
+    background: linear-gradient(168deg, var(--green-light) 0%, var(--cream) 100%);
     border-top: 1px solid var(--green-soft);
+}
+.next-step-cta .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 .next-step-cta-eyebrow {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--green-mid);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
 }
 .next-step-cta-title {
-    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
     font-weight: 800;
     color: var(--green-deep);
     margin-bottom: 0.9rem;
     letter-spacing: -0.02em;
+    line-height: 1.25;
+    word-break: keep-all;
 }
 .next-step-cta-desc {
     font-size: 1rem;
     color: var(--text-muted);
-    max-width: 540px;
-    margin: 0 auto 2rem;
+    max-width: 480px;
+    margin: 0 0 2.2rem;
     line-height: 1.75;
+    word-break: keep-all;
+}
+.next-step-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+}
+.btn-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.7rem;
+    border-radius: 50px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: transform 0.25s ease, box-shadow 0.25s ease,
+                border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.btn-next:hover {
+    transform: translateY(-3px);
+    border-color: var(--green-mid);
+    box-shadow: 0 10px 24px rgba(139, 115, 85, 0.22);
+}
+.btn-next--primary {
+    background: var(--green-deep);
+    border-color: var(--green-deep);
+    color: #fff;
+}
+.btn-next--primary:hover {
+    background: var(--green-mid);
+    border-color: var(--green-mid);
+    color: #fff;
+}
+@media (max-width: 560px) {
+    .next-step-cta { padding: 3.5rem 0; }
+    .next-step-cta-actions { flex-direction: column; width: 100%; align-items: center; }
+    .btn-next { width: 100%; max-width: 320px; justify-content: center; }
 }
 
 .newcomer-cta {
