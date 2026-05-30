@@ -1065,6 +1065,58 @@ const PressRenderer = {
     }
 };
 
+/* ── ScrollReveal ────────────────────────────────────────── */
+const ScrollReveal = {
+    init() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (!window.IntersectionObserver) return;
+
+        // Single-block targets: section headers and feature blocks
+        [
+            '.section-header',
+            '.about-brief',
+            '.guide-banner',
+            '.story-lead',
+            '.draft-banner',
+            '.newcomer-cta',
+        ].forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => el.classList.add('reveal'));
+        });
+
+        // Grid children — stagger each card within its own grid
+        document.querySelectorAll('.section .grid').forEach(grid => {
+            Array.from(grid.children).forEach((child, i) => {
+                child.classList.add('reveal');
+                child.style.transitionDelay = `${i * 0.07}s`;
+            });
+        });
+
+        // Story values — stagger each value block
+        document.querySelectorAll('.story-values').forEach(container => {
+            Array.from(container.children).forEach((child, i) => {
+                child.classList.add('reveal');
+                child.style.transitionDelay = `${i * 0.06}s`;
+            });
+        });
+
+        // Standalone info-cards not inside a grid
+        document.querySelectorAll('.info-card').forEach(el => {
+            if (!el.closest('.grid')) el.classList.add('reveal');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+};
+
 /* ── App bootstrap ───────────────────────────────────────── */
 const App = {
     init() {
@@ -1079,6 +1131,7 @@ const App = {
         ClergyRenderer.render();
         PressRenderer.render();
         this._handleHashScroll();
+        ScrollReveal.init();
     },
 
     _scrollToHash(hash) {
