@@ -85,6 +85,15 @@ a:focus:not(:focus-visible),
 button:focus:not(:focus-visible) { outline: none; }
 
 /* ── Navigation ──────────────────────────────────────────── */
+@keyframes nav-enter {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+}
+@keyframes mobile-menu-open {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 .nav-header {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -95,6 +104,7 @@ button:focus:not(:focus-visible) { outline: none; }
     border-bottom: 1px solid rgba(255,255,255,0.08);
     z-index: 1000;
     transition: box-shadow 0.3s, background 0.3s;
+    animation: nav-enter 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both;
 }
 .nav-header.scrolled {
     background: rgba(10, 31, 18, 0.97);
@@ -300,12 +310,20 @@ button:focus:not(:focus-visible) { outline: none; }
     animation: hero-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) 0.72s both;
 }
 
-/* 모션 감소 선호 → 모든 히어로 애니메이션 정지 */
+/* 모션 감소 선호 → 모든 애니메이션 정지 */
 @media (prefers-reduced-motion: reduce) {
     .hero-fallback,
     .hero-content > *,
     .hero-stats,
-    .hero-scroll { animation: none; opacity: 1; transform: none; }
+    .hero-scroll,
+    .page-hero > *,
+    .nav-header { animation: none; opacity: 1; transform: none; }
+
+    .reveal, .reveal.visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 
 .hero-label {
@@ -476,6 +494,16 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 /* ── Page Hero (sub-pages) ───────────────────────────────── */
+/* Stagger children so eyebrow → h1 → subtitle animate in sequence */
+.page-hero > * {
+    opacity: 0;
+    animation: hero-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+.page-hero > :nth-child(1) { animation-delay: 0.10s; }
+.page-hero > :nth-child(2) { animation-delay: 0.24s; }
+.page-hero > :nth-child(3) { animation-delay: 0.38s; }
+.page-hero > :nth-child(4) { animation-delay: 0.50s; }
+
 .page-hero {
     padding-top: calc(var(--nav-h) + 6.5rem);
     padding-bottom: 6rem;
@@ -499,6 +527,18 @@ button:focus:not(:focus-visible) { outline: none; }
     max-width: 560px;
     margin-left: auto; margin-right: auto;
     line-height: 1.7;
+}
+
+/* ── Scroll Reveal ───────────────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.75s cubic-bezier(0.2, 0.7, 0.3, 1),
+                transform 0.75s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ── Sections ────────────────────────────────────────────── */
@@ -1647,7 +1687,13 @@ footer {
         padding-bottom: env(safe-area-inset-bottom);
         border-top: 1px solid rgba(255,255,255,0.1);
     }
-    .nav-menu.open { display: flex; }
+    .nav-menu.open {
+        display: flex;
+        animation: mobile-menu-open 0.22s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .nav-menu.open { animation: none; }
+    }
     .nav-item {
         height: auto;
         flex-direction: row;
