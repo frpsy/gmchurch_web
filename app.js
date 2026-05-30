@@ -1117,6 +1117,25 @@ const ScrollReveal = {
     }
 };
 
+/* ── ScrollProgress ──────────────────────────────────── */
+const ScrollProgress = {
+    init() {
+        const bar = document.createElement('div');
+        bar.id = 'scroll-progress-bar';
+        bar.setAttribute('aria-hidden', 'true');
+        document.body.prepend(bar);
+
+        const update = () => {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+            bar.style.width = pct + '%';
+        };
+
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+    }
+};
+
 /* ── App bootstrap ───────────────────────────────────────── */
 const App = {
     init() {
@@ -1132,6 +1151,7 @@ const App = {
         PressRenderer.render();
         this._handleHashScroll();
         ScrollReveal.init();
+        ScrollProgress.init();
     },
 
     _scrollToHash(hash) {

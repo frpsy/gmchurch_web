@@ -89,6 +89,18 @@ button:focus-visible {
 a:focus:not(:focus-visible),
 button:focus:not(:focus-visible) { outline: none; }
 
+/* ── Scroll Progress Bar ─────────────────────────────────── */
+#scroll-progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--gold);
+    z-index: 1001;
+    transition: width 0.1s linear;
+    pointer-events: none;
+}
+
 /* ── Navigation ──────────────────────────────────────────── */
 @keyframes nav-enter {
     from { transform: translateY(-100%); opacity: 0; }
@@ -1235,6 +1247,35 @@ button:focus:not(:focus-visible) { outline: none; }
 .newcomer-key-link:hover { text-decoration: underline; }
 
 /* Newcomer CTA (page closing) */
+/* ── Next Step CTA ────────────────────────────────────────── */
+.next-step-cta {
+    background: var(--green-light);
+    border-top: 1px solid var(--green-soft);
+    text-align: center;
+}
+.next-step-cta-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 0.75rem;
+}
+.next-step-cta-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 800;
+    color: var(--green-deep);
+    margin-bottom: 0.9rem;
+    letter-spacing: -0.02em;
+}
+.next-step-cta-desc {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 540px;
+    margin: 0 auto 2rem;
+    line-height: 1.75;
+}
+
 .newcomer-cta {
     margin-top: 3rem;
     padding: 2.25rem 2rem;
