@@ -2397,6 +2397,123 @@ footer {
     .skeleton { animation: none; background-color: #d4d1c8; }
 }
 
+/* ── Video Cards (media.html) ─────────────────────────── */
+.section-desc {
+    font-size: 0.97rem;
+    color: var(--text-muted);
+    line-height: 1.85;
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+}
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.75rem;
+    margin-bottom: 2.5rem;
+}
+.video-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+.video-thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--green-deep);
+    overflow: hidden;
+}
+.video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.2s;
+}
+.video-card:hover .video-thumb img {
+    opacity: 0.85;
+}
+.video-play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    color: #fff;
+    opacity: 0;
+    background: rgba(10, 31, 18, 0.45);
+    transition: opacity 0.2s;
+}
+.video-card:hover .video-play-btn {
+    opacity: 1;
+}
+.video-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.2rem 1.4rem 1.4rem;
+    flex: 1;
+}
+.video-category {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--green-mid);
+    text-transform: uppercase;
+}
+.video-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    line-height: 1.5;
+    margin: 0;
+}
+.video-desc {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin: 0;
+    flex: 1;
+}
+.video-channel-cta {
+    text-align: center;
+    padding: 1rem 0 0.5rem;
+}
+.video-channel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 1.75rem;
+    background: var(--green-deep);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s, opacity 0.2s;
+}
+.video-channel-link:hover {
+    opacity: 0.85;
+}
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    .video-play-btn { opacity: 0.7; }
+}
+
 /* ── Dark Mode ────────────────────────────────────────── */
 @media (prefers-color-scheme: dark) {
     :root {
