@@ -283,15 +283,35 @@ button:focus:not(:focus-visible) { outline: none; }
     padding-top: var(--nav-h);
 }
 
-/* 모션 감소 선호 → 애니메이션 정지 */
+/* 콘텐츠 스태거 등장 — 위로 살짝 떠오르며 페이드 인 */
+@keyframes hero-fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.hero-content > * {
+    opacity: 0;
+    animation: hero-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+.hero-label   { animation-delay: 0.10s; }
+.hero h1      { animation-delay: 0.24s; }
+.hero-sub     { animation-delay: 0.40s; }
+.hero-actions { animation-delay: 0.56s; }
+.hero-stats {
+    animation: hero-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) 0.72s both;
+}
+
+/* 모션 감소 선호 → 모든 히어로 애니메이션 정지 */
 @media (prefers-reduced-motion: reduce) {
-    .hero-fallback { animation: none; }
+    .hero-fallback,
+    .hero-content > *,
+    .hero-stats,
+    .hero-scroll { animation: none; opacity: 1; transform: none; }
 }
 
 .hero-label {
     display: inline-block;
     font-size: 0.72rem;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #ffffff;
     font-weight: 700;
@@ -416,8 +436,11 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .hero-stat-divider {
     width: 1px;
-    height: 2rem;
-    background: rgba(255,255,255,0.18);
+    height: 2.2rem;
+    background: linear-gradient(180deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.35) 50%,
+        rgba(255,255,255,0) 100%);
     flex-shrink: 0;
 }
 
@@ -438,12 +461,18 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 @media (max-width: 768px) {
-    .hero-stats { gap: 0; padding: 0.85rem 0.75rem; }
-    .hero-stat { padding: 0.2rem 0.9rem; }
-    .hero-stat-val { font-size: 0.8rem; }
-    .hero-stat-divider { height: 1.5rem; }
+    /* CTA — 세로 스택 시 동일 너비로 정렬 */
+    .hero-actions { flex-direction: column; align-items: center; gap: 0.7rem; }
+    .hero-actions a { width: 100%; max-width: 300px; text-align: center; }
+    .hero-label { letter-spacing: 0.1em; font-size: 0.66rem; padding: 0.35rem 1rem; }
+
+    .hero-stats { gap: 0; padding: 0.8rem 0.5rem; }
+    .hero-stat { padding: 0.2rem 0.7rem; }
+    .hero-stat-val { font-size: 0.82rem; }
+    .hero-stat-lbl { font-size: 0.6rem; }
+    .hero-stat-divider { height: 1.8rem; }
     .hero-scroll { bottom: 5rem; }
-    .btn-hero-primary { padding: 0.85rem 1.6rem; font-size: 0.9rem; }
+    .btn-hero-primary { font-size: 0.92rem; }
 }
 
 /* ── Page Hero (sub-pages) ───────────────────────────────── */
