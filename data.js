@@ -391,6 +391,43 @@ const CHURCH_DATA = {
 
     liveUrl: "https://youtu.be/5tTJvrTX4aA",
 
+    media: {
+        intro: "광명교회 유튜브 채널에서는 성공회의 신앙과 예배, 그리고 광명교회의 공동체 이야기를 나눕니다. 영상을 통해 저희 교회를 미리 만나보세요.",
+        channelUrl: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
+        videos: [
+            {
+                id: "ZwZie64rrZ0",
+                title: "성공회 교회에 들어오면 깜짝 놀라는 이유",
+                desc: "처음 성공회 교회나 성당에 방문했을 때 겪을 수 있는 낯선 예배 형식과 성찬례 등 성공회만의 독특한 특징을 소개합니다.",
+                category: "성공회 소개"
+            },
+            {
+                id: "9gah5PrWiWk",
+                title: "광명교회 주일 애찬 풍경",
+                desc: "주일 성찬예배가 끝난 후, 성도들이 모여 밥을 먹으며 친교와 사랑을 나누는 따뜻한 애찬 시간을 보여줍니다.",
+                category: "공동체"
+            },
+            {
+                id: "HhG_WUnRbPA",
+                title: "젊은 여성들이 교회를 떠나는 이유?",
+                desc: "여성 선교 주일을 맞아 교회 내 여성의 역할과 교회를 떠나는 현실적인 고민을 다룬 설교 영상입니다.",
+                category: "설교"
+            },
+            {
+                id: "YnOIUmn-BtM",
+                title: "'성공회를 조심하라'고 하는 사람을 조심하세요!",
+                desc: "구원은 사람이 선언하는 것이 아니라 하느님께서 주시는 선물임을 강조하며, 타 교파에 대한 오해를 바로잡는 내용입니다.",
+                category: "신앙 이야기"
+            },
+            {
+                id: "hYwgh1NV8QE",
+                title: "예수님의 승천이 우리에게 미치는 영향",
+                desc: "성공회 교회력을 바탕으로 예수님의 부활뿐만 아니라 '승천'이 우리의 신앙과 삶에 어떤 의미를 갖는지 짧게 설명합니다.",
+                category: "신앙 이야기"
+            }
+        ]
+    },
+
     navigation: [
         {
             label: "교회 소개",
@@ -402,6 +439,7 @@ const CHURCH_DATA = {
                 { label: "교회 철학",  href: "clergy.html#philosophy" },
                 { label: "로고 소개",  href: "clergy.html#logo-intro" },
                 { label: "언론 보도",  href: "clergy.html#press" },
+                { label: "교회 영상",  href: "media.html" },
                 { label: "교회 이야기", href: "story.html", badge: "임시" }
             ]
         },

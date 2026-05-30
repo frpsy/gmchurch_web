@@ -1058,6 +1058,43 @@ const ClergyRenderer = {
     }
 };
 
+/* ── MediaRenderer ───────────────────────────────────────── */
+const MediaRenderer = {
+    render() {
+        const el = document.getElementById('media-full');
+        if (!el || !CHURCH_DATA.media) return;
+        const { intro, channelUrl, videos } = CHURCH_DATA.media;
+
+        el.innerHTML = `
+            <div class="section-header">
+                <p class="section-eyebrow">YouTube</p>
+                <h2 class="section-title">교회 영상</h2>
+                <p class="section-desc">${intro}</p>
+            </div>
+            <div class="video-grid">
+                ${videos.map(v => `
+                    <a class="video-card" href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener noreferrer">
+                        <div class="video-thumb">
+                            <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}" loading="lazy" width="480" height="360">
+                            <span class="video-play-btn" aria-hidden="true">▶</span>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-category">${v.category}</span>
+                            <h3 class="video-title">${v.title}</h3>
+                            <p class="video-desc">${v.desc}</p>
+                        </div>
+                    </a>
+                `).join('')}
+            </div>
+            <div class="video-channel-cta">
+                <a href="${channelUrl}" target="_blank" rel="noopener noreferrer" class="video-channel-link">
+                    유튜브 채널 전체 보기 ↗
+                </a>
+            </div>
+        `;
+    }
+};
+
 /* ── PressRenderer ───────────────────────────────────────── */
 const PressRenderer = {
     render() {
@@ -1164,6 +1201,7 @@ const App = {
         AnglicanRenderer.render();
         ClergyRenderer.render();
         PressRenderer.render();
+        MediaRenderer.render();
         this._handleHashScroll();
         ScrollReveal.init();
         ScrollProgress.init();
