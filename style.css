@@ -37,7 +37,7 @@
 
 /* ── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
 body {
     font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Noto Sans KR",
                  "Segoe UI", "Apple SD Gothic Neo", sans-serif;
@@ -80,6 +80,11 @@ img { display: block; max-width: 100%; }
     outline: 3px solid var(--green-mid);
     outline-offset: 3px;
     border-radius: 3px;
+}
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
 }
 a:focus:not(:focus-visible),
 button:focus:not(:focus-visible) { outline: none; }
@@ -2298,4 +2303,32 @@ footer {
 
 @media (prefers-reduced-motion: reduce) {
     .skeleton { animation: none; background-color: #d4d1c8; }
+}
+
+/* ── Dark Mode ────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Backgrounds — 짙은 숲 색 기반 다크 서피스 */
+        --cream:        #111a13;
+        --white:        #192216;
+        /* Text — 따뜻한 크림 계열 */
+        --text:         #e4e0d4;
+        --text-muted:   #9a9a92;
+        /* Borders */
+        --border:       #2a3d2e;
+        /* Green scale — 다크 배경에서 가독성 확보 */
+        --green-deep:   #0a1f12;
+        --green-mid:    #5a9168;
+        --green-light:  #1e3325;
+        --green-soft:   #2d4d35;
+        /* Gold — 다크 배경 대비 밝게 조정 */
+        --gold:         #c9a97d;
+        --gold-bg:      #1e1b14;
+        /* Nav */
+        --nav-glass:    rgba(10, 31, 18, 0.95);
+        /* Shadows */
+        --shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.40);
+        --shadow-md:    0 3px 14px rgba(0, 0, 0, 0.50);
+        --shadow-lg:    0 12px 40px rgba(0, 0, 0, 0.60);
+    }
 }
