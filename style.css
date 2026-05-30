@@ -2563,12 +2563,13 @@ footer {
     pointer-events: none;
 }
 #back-to-top.visible {
-    opacity: 1;
+    opacity: 0.45;
     transform: translateY(0);
     pointer-events: auto;
     cursor: pointer;
 }
 #back-to-top:hover, #back-to-top:focus-visible {
+    opacity: 1;
     background: var(--green-mid);
     box-shadow: 0 6px 24px rgba(10,31,18,0.30);
     outline: none;
