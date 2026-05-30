@@ -439,7 +439,7 @@ const IndexRenderer = {
     },
 
     _hero() {
-        const { name, subName, slogan, vision, established, addressShort } = CHURCH_DATA.info;
+        const { name, slogan, vision, established } = CHURCH_DATA.info;
 
         const label = document.getElementById('hero-label');
         const title = document.getElementById('hero-title');
@@ -447,7 +447,7 @@ const IndexRenderer = {
         const acts  = document.getElementById('hero-actions');
         const stats = document.getElementById('hero-stats');
 
-        if (label) label.textContent = `${name} · ${subName}`;
+        if (label) label.textContent = name;
         if (title) title.textContent = slogan;
         if (sub)   sub.textContent   = vision;
 
@@ -456,12 +456,14 @@ const IndexRenderer = {
             <a href="worship.html" class="btn-outline">예배 안내</a>
         `;
 
+        // 설립 연도만 추출 ("1990년 2월 11일" → "1990")
+        const foundedYear = (established.match(/\d{4}/) || [established])[0];
         if (stats) stats.innerHTML = `
-            <div class="hero-stat"><span class="hero-stat-val">${established.replace('년 ', '').replace('월 ', '.').replace('일', '')}</span><span class="hero-stat-lbl">설립</span></div>
-            <div class="hero-stat-divider"></div>
-            <div class="hero-stat"><span class="hero-stat-val">매주 일요일 11:00</span><span class="hero-stat-lbl">주일 예배</span></div>
-            <div class="hero-stat-divider"></div>
-            <div class="hero-stat"><span class="hero-stat-val">경기도 광명시</span><span class="hero-stat-lbl">위치</span></div>
+            <div class="hero-stat"><span class="hero-stat-val">${foundedYear}</span><span class="hero-stat-lbl">설립</span></div>
+            <span class="hero-stat-divider" aria-hidden="true"></span>
+            <div class="hero-stat"><span class="hero-stat-val">오전 11:00</span><span class="hero-stat-lbl">주일 예배</span></div>
+            <span class="hero-stat-divider" aria-hidden="true"></span>
+            <div class="hero-stat"><span class="hero-stat-val">경기 광명시</span><span class="hero-stat-lbl">위치</span></div>
         `;
     },
 
