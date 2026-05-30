@@ -1252,10 +1252,11 @@ const BackToTop = {
         btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
         let rafId = null;
-        const THRESHOLD = 400;
         const check = () => {
             rafId = null;
-            btn.classList.toggle('visible', window.scrollY >= THRESHOLD);
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = scrollable > 0 ? window.scrollY / scrollable : 0;
+            btn.classList.toggle('visible', pct >= 0.7);
         };
         const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(check); };
 

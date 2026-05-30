@@ -2563,7 +2563,7 @@ footer {
     pointer-events: none;
 }
 #back-to-top.visible {
-    opacity: 1;
+    opacity: 0.45;
     transform: translateY(0);
     pointer-events: auto;
     cursor: pointer;
