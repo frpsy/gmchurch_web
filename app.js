@@ -678,7 +678,7 @@ const WorshipRenderer = {
 
                 ${prayer ? `
                 <div class="liturgy-section" id="daily-office">
-                    <p class="section-eyebrow">Daily Office</p>
+                    <p class="section-eyebrow">DIVINE OFFICE</p>
                     <h2 class="section-title">성무일도</h2>
                     <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 기도서는 하루의 흐름에 따른 네 가지 기도를 제공합니다. 공동체나 개인이 매일 같은 기도문으로 하느님 앞에 하루를 열고 닫는 전통입니다.</p>
                     <div class="resource-grid">
