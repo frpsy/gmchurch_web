@@ -561,6 +561,12 @@ const WorshipRenderer = {
                             <span style="color:var(--green-mid); font-weight:700;">${w.time}</span>
                         </div>
                         <p style="margin-top:1rem; color:var(--text-muted); font-size:0.9rem; line-height:1.9;">${w.desc}</p>
+                        ${w.verse ? `
+                        <blockquote class="liturgy-inner-quote" style="margin-top:1.25rem; font-size:0.9rem;">
+                            "${w.verse}"<br><cite style="font-size:0.8rem; font-style:normal; color:var(--text-muted);">— ${w.verseRef}</cite>
+                        </blockquote>
+                        <p style="margin-top:1rem; font-size:0.87rem; color:var(--text-muted); line-height:1.9;">${w.detail}</p>
+                        ` : ''}
                     </div>
                 `).join('')}
             </div>
@@ -1004,6 +1010,7 @@ const AnglicanRenderer = {
         const el = document.getElementById('anglican-what');
         if (!el || !CHURCH_DATA.anglican) return;
         const { what } = CHURCH_DATA.anglican;
+        const m = what.mission;
         el.innerHTML = `
             <div class="section-header">
                 <p class="section-eyebrow">${what.eyebrow}</p>
@@ -1022,6 +1029,28 @@ const AnglicanRenderer = {
                 `).join('')}
             </div>
             <p class="anglican-pillar-note">${what.pillarNote}</p>
+
+            ${m ? `
+            <div style="margin-top:3rem; padding-top:2.5rem; border-top:1px solid var(--border);">
+                <div class="section-header" style="margin-bottom:1.5rem;">
+                    <p class="section-eyebrow">${m.eyebrow}</p>
+                    <h2 class="section-title" style="font-size:1.4rem;">${m.title}</h2>
+                    <p class="section-sub" style="font-style:italic; color:var(--text-muted);">${m.intro}</p>
+                </div>
+                <div class="liturgy-steps">
+                    ${m.marks.map(mk => `
+                        <div class="liturgy-step">
+                            <div class="step-num">${mk.num}</div>
+                            <div class="step-body">
+                                <h4 class="step-title">${mk.ko}</h4>
+                                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem; font-style:italic;">${mk.en}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <p class="anglican-pillar-note" style="margin-top:1.5rem;">${m.note}</p>
+            </div>
+            ` : ''}
         `;
     },
 
@@ -1029,6 +1058,7 @@ const AnglicanRenderer = {
         const el = document.getElementById('anglican-korea');
         if (!el || !CHURCH_DATA.anglican) return;
         const { korea } = CHURCH_DATA.anglican;
+        const iona = korea.ionaLink;
         el.innerHTML = `
             <div class="anglican-korea-inner">
                 <div class="anglican-korea-text">
@@ -1037,6 +1067,17 @@ const AnglicanRenderer = {
                         <h2 class="section-title">${korea.title}</h2>
                     </div>
                     ${korea.paras.map(p => `<p class="anglican-para">${p}</p>`).join('')}
+                    ${iona ? `
+                    <a href="${iona.url}" target="_blank" rel="noopener noreferrer"
+                       style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.5rem;
+                              padding:0.65rem 1.1rem; border:1px solid var(--green-mid); border-radius:8px;
+                              color:var(--green-mid); font-size:0.88rem; font-weight:600;
+                              text-decoration:none; transition:background 0.2s, color 0.2s;"
+                       onmouseover="this.style.background='var(--green-mid)';this.style.color='#fff'"
+                       onmouseout="this.style.background='';this.style.color='var(--green-mid)'">
+                        ⛵ ${iona.desc} <span aria-hidden="true">↗</span>
+                    </a>
+                    ` : ''}
                 </div>
                 <div class="anglican-korea-side">
                     <div class="founded-badge">
@@ -1092,9 +1133,24 @@ const ClergyRenderer = {
     _clergy() {
         const el = document.getElementById('clergy-full');
         if (!el) return;
+        const bishop = CHURCH_DATA.bishop;
+        const bishopHtml = bishop ? `
+            <div style="margin-bottom:2rem; padding:1.5rem; background:var(--green-light);
+                        border-radius:12px; border-left:4px solid var(--green-mid);">
+                <p class="section-eyebrow" style="margin-bottom:0.5rem;">Diocese of Seoul</p>
+                <div style="display:flex; align-items:flex-start; gap:1rem;">
+                    <span style="font-size:2rem;" aria-hidden="true">🏛</span>
+                    <div>
+                        <p style="font-weight:700; font-size:1.05rem; color:var(--green-deep); margin-bottom:0.2rem;">${bishop.name} 주교</p>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">${bishop.title}</p>
+                        <p style="font-size:0.88rem; line-height:1.8; color:var(--text-muted);">${bishop.desc}</p>
+                    </div>
+                </div>
+            </div>
+        ` : '';
         const cats = CHURCH_DATA.ministerSection.categories;
         let firstPriestRendered = false;
-        el.innerHTML = cats.map(cat => {
+        el.innerHTML = bishopHtml + cats.map(cat => {
             const members = CHURCH_DATA.clergy.filter(c => c.category === cat.id);
             const membersHtml = members.length > 0
                 ? members.map(c => {
