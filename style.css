@@ -33,6 +33,10 @@
     --shadow-sm:    0 1px 3px rgba(10, 31, 18, 0.05);
     --shadow-md:    0 3px 14px rgba(10, 31, 18, 0.07);
     --shadow-lg:    0 12px 40px rgba(10, 31, 18, 0.10);
+    /* Motion — shared language for hover/reveal across all pages */
+    --ease-out:        cubic-bezier(0.2, 0.7, 0.3, 1);
+    --hover-shadow:    0 12px 36px rgba(22, 61, 36, 0.13);
+    --hover-shadow-sm: 0 8px 26px rgba(22, 61, 36, 0.10);
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
@@ -606,12 +610,12 @@ button:focus:not(:focus-visible) { outline: none; }
     background: var(--white);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
-    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease;
     will-change: transform, opacity;
 }
 .card:hover {
     border-color: var(--green-mid);
-    box-shadow: 0 12px 36px rgba(22, 61, 36, 0.13);
+    box-shadow: var(--hover-shadow);
     transform: translateY(-6px);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -629,7 +633,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: 2.2rem;
     margin-bottom: 1.1rem;
     display: inline-block;
-    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+    transition: transform 0.35s var(--ease-out);
 }
 .card:hover .card-icon { transform: scale(1.18) translateY(-3px); }
 
@@ -639,6 +643,16 @@ button:focus:not(:focus-visible) { outline: none; }
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
     padding: 2.5rem 2.25rem;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease;
+}
+.info-card:hover {
+    border-color: var(--green-mid);
+    box-shadow: var(--hover-shadow-sm);
+    transform: translateY(-4px);
+}
+@media (prefers-reduced-motion: reduce) {
+    .info-card { transition: border-color 0.25s, box-shadow 0.25s; }
+    .info-card:hover { transform: none; }
 }
 .info-card h3 {
     font-size: 1.15rem;
@@ -1022,8 +1036,27 @@ button:focus:not(:focus-visible) { outline: none; }
     border-radius: var(--radius-md);
     padding: 1.6rem 1.4rem;
     text-align: center;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease;
 }
-.anglican-pillar-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.anglican-pillar:hover {
+    border-color: var(--green-mid);
+    box-shadow: var(--hover-shadow-sm);
+    transform: translateY(-4px);
+}
+@media (prefers-reduced-motion: reduce) {
+    .anglican-pillar { transition: border-color 0.25s, box-shadow 0.25s; }
+    .anglican-pillar:hover { transform: none; }
+}
+.anglican-pillar-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: inline-block;
+    transition: transform 0.35s var(--ease-out);
+}
+.anglican-pillar:hover .anglican-pillar-icon { transform: scale(1.15) translateY(-2px); }
+@media (prefers-reduced-motion: reduce) {
+    .anglican-pillar-icon { transition: none; }
+}
 .anglican-pillar-title { font-size: 1rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
 .anglican-pillar-desc { font-size: 0.85rem; line-height: 1.75; color: var(--text-muted); }
 .anglican-pillar-note {
@@ -1091,7 +1124,7 @@ button:focus:not(:focus-visible) { outline: none; }
     border-radius: 8px;
     color: var(--green-mid);
     text-decoration: none;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.25s var(--ease-out), color 0.25s;
     width: 100%;
     box-sizing: border-box;
 }
@@ -1100,14 +1133,40 @@ button:focus:not(:focus-visible) { outline: none; }
 .iona-link-card__text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .iona-link-card__label { font-size: 0.9rem; font-weight: 700; }
 .iona-link-card__desc  { font-size: 0.78rem; margin-top: 0.15rem; opacity: 0.8; }
-.iona-link-card__arrow { flex-shrink: 0; font-size: 1rem; }
+.iona-link-card__arrow {
+    flex-shrink: 0;
+    font-size: 1rem;
+    transition: transform 0.25s var(--ease-out);
+}
+.iona-link-card:hover .iona-link-card__arrow { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) {
+    .iona-link-card__arrow { transition: none; }
+    .iona-link-card:hover .iona-link-card__arrow { transform: none; }
+}
 
 /* Five Marks of Mission */
 .mission-marks { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
-.mission-mark { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem; background: var(--surface); border-radius: 8px; border-left: 3px solid var(--green-mid); }
+.mission-mark {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--green-light);
+    border-radius: 8px;
+    border-left: 3px solid var(--green-mid);
+    transition: box-shadow 0.3s ease, transform 0.3s var(--ease-out), opacity 0.6s ease;
+}
+.mission-mark:hover {
+    box-shadow: var(--hover-shadow-sm);
+    transform: translateY(-3px);
+}
+@media (prefers-reduced-motion: reduce) {
+    .mission-mark { transition: box-shadow 0.25s; }
+    .mission-mark:hover { transform: none; }
+}
 .mission-mark__num { flex-shrink: 0; width: 1.75rem; height: 1.75rem; background: var(--green-mid); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
 .mission-mark__body { flex: 1; min-width: 0; }
-.mission-mark__title { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 0 0 0.25rem; }
+.mission-mark__title { font-size: 0.95rem; font-weight: 700; color: var(--green-deep); margin: 0 0 0.25rem; }
 .mission-mark__en { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin: 0; }
 
 /* Bank Card */
@@ -1356,13 +1415,16 @@ button:focus:not(:focus-visible) { outline: none; }
     background: var(--white);
     border: 1px solid var(--border);
     color: var(--text);
-    transition: transform 0.25s ease, box-shadow 0.25s ease,
+    transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease,
                 border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 .btn-next:hover {
     transform: translateY(-3px);
     border-color: var(--green-mid);
-    box-shadow: 0 10px 24px rgba(139, 115, 85, 0.22);
+    box-shadow: var(--hover-shadow-sm);
+}
+@media (prefers-reduced-motion: reduce) {
+    .btn-next:hover { transform: none; }
 }
 .btn-next--primary {
     background: var(--green-deep);
@@ -1487,6 +1549,16 @@ button:focus:not(:focus-visible) { outline: none; }
     border-radius: var(--radius-md);
     padding: 1.5rem 1.75rem;
     border: 1px solid var(--border);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s var(--ease-out), opacity 0.6s ease;
+}
+.liturgy-step:hover {
+    border-color: var(--green-soft);
+    box-shadow: var(--hover-shadow-sm);
+    transform: translateY(-3px);
+}
+@media (prefers-reduced-motion: reduce) {
+    .liturgy-step { transition: border-color 0.25s, box-shadow 0.25s; }
+    .liturgy-step:hover { transform: none; }
 }
 .step-num {
     flex-shrink: 0;
@@ -1557,14 +1629,20 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 1.6rem 1.6rem 1.4rem;
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s ease;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease;
 }
 .resource-card:hover {
-    border-color: var(--green-soft);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-3px);
+    border-color: var(--green-mid);
+    box-shadow: var(--hover-shadow-sm);
+    transform: translateY(-5px);
 }
-.resource-icon { font-size: 1.9rem; margin-bottom: 0.8rem; }
+.resource-icon {
+    font-size: 1.9rem;
+    margin-bottom: 0.8rem;
+    display: inline-block;
+    transition: transform 0.35s var(--ease-out);
+}
+.resource-card:hover .resource-icon { transform: scale(1.12) translateY(-2px); }
 .resource-title {
     font-size: 1.02rem;
     font-weight: 700;
@@ -1583,6 +1661,8 @@ button:focus:not(:focus-visible) { outline: none; }
 @media (prefers-reduced-motion: reduce) {
     .resource-card { transition: border-color 0.25s, box-shadow 0.25s; }
     .resource-card:hover { transform: none; }
+    .resource-icon { transition: none; }
+    .resource-card:hover .resource-icon { transform: none; }
 }
 
 /* Lectionary Calendar */
