@@ -1153,11 +1153,11 @@ const ClergyRenderer = {
         const bishop = CHURCH_DATA.bishop;
         const bishopHtml = bishop ? `
             <div class="bishop-card">
-                <p class="section-eyebrow" style="margin-bottom:0.85rem;">Diocese of Seoul</p>
+                <p class="bishop-eyebrow">Diocese of Seoul</p>
                 <div class="bishop-card-inner">
                     ${bishop.photo
                         ? `<div class="bishop-portrait-wrap"><img src="${bishop.photo}" alt="${bishop.name} 주교 초상" class="bishop-portrait" loading="lazy"></div>`
-                        : `<span class="bishop-portrait-fallback" aria-hidden="true">🏛</span>`}
+                        : `<div class="bishop-portrait-wrap bishop-portrait-fallback" aria-hidden="true">🏛</div>`}
                     <div class="bishop-card-body">
                         <p class="bishop-name">${bishop.name} 주교</p>
                         <p class="bishop-title">${bishop.title}</p>
@@ -1178,10 +1178,10 @@ const ClergyRenderer = {
                     if (isFirstPriest) firstPriestRendered = true;
                     return `
                     <div class="clergy-card" ${isFirstPriest ? 'id="priest"' : ''}>
-                        <div class="clergy-avatar">
+                        <div class="clergy-avatar${c.photo ? '' : ' clergy-avatar--fallback'}">
                             ${c.photo
                                 ? `<img src="${c.photo}" alt="${c.name} 사제" loading="lazy" class="clergy-avatar-img">`
-                                : '✝️'}
+                                : '<span aria-hidden="true">✝️</span>'}
                         </div>
                         <div>
                             <div class="clergy-name">${c.name} 사제</div>
