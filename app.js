@@ -1037,13 +1037,13 @@ const AnglicanRenderer = {
                     <h2 class="section-title" style="font-size:1.4rem;">${m.title}</h2>
                     <p class="section-sub" style="font-style:italic; color:var(--text-muted);">${m.intro}</p>
                 </div>
-                <div class="liturgy-steps">
+                <div class="mission-marks">
                     ${m.marks.map(mk => `
-                        <div class="liturgy-step">
-                            <div class="step-num">${mk.num}</div>
-                            <div class="step-body">
-                                <h4 class="step-title">${mk.ko}</h4>
-                                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem; font-style:italic;">${mk.en}</p>
+                        <div class="mission-mark">
+                            <span class="mission-mark__num">${mk.num}</span>
+                            <div class="mission-mark__body">
+                                <h4 class="mission-mark__title">${mk.ko}</h4>
+                                <p class="mission-mark__en">${mk.en}</p>
                             </div>
                         </div>
                     `).join('')}
