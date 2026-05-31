@@ -1156,7 +1156,7 @@ const ClergyRenderer = {
                 <p class="section-eyebrow" style="margin-bottom:0.85rem;">Diocese of Seoul</p>
                 <div class="bishop-card-inner">
                     ${bishop.photo
-                        ? `<img src="${bishop.photo}" alt="${bishop.name} 주교 초상" class="bishop-portrait" loading="lazy">`
+                        ? `<div class="bishop-portrait-wrap"><img src="${bishop.photo}" alt="${bishop.name} 주교 초상" class="bishop-portrait" loading="lazy"></div>`
                         : `<span class="bishop-portrait-fallback" aria-hidden="true">🏛</span>`}
                     <div class="bishop-card-body">
                         <p class="bishop-name">${bishop.name} 주교</p>
