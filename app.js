@@ -1149,10 +1149,11 @@ const ClergyRenderer = {
             </div>
             <div class="logo-intro-grid">
                 <div class="logo-display">
-                    <svg viewBox="0 0 64 64" role="img" aria-label="캔터베리 십자가">
-                        <rect width="64" height="64" rx="12" fill="#163d24"/>
-                        <path d="${CANTERBURY_CROSS_PATH}" fill="#ffffff" fill-rule="evenodd"/>
-                    </svg>
+                    <div class="logo-badge">
+                        <svg viewBox="0 0 64 64" role="img" aria-label="캔터베리 십자가">
+                            <path d="${CANTERBURY_CROSS_PATH}" fill="#ffffff" fill-rule="evenodd"/>
+                        </svg>
+                    </div>
                     <p class="logo-subtitle">${subtitle}</p>
                     <p class="logo-colors">${colors}</p>
                 </div>
