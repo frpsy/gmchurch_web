@@ -662,7 +662,7 @@ const WorshipRenderer = {
                 <div class="liturgy-section" id="resources">
                     <p class="section-eyebrow">Worship Resources</p>
                     <h2 class="section-title">예배 자료</h2>
-                    <p class="liturgy-body" style="margin-bottom:1.5rem;">예배 중 함께 펴는 기도서·성가·성서를 온라인으로도 보실 수 있습니다.</p>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">기도서·성가·성서를 온라인으로도 보실 수 있습니다.</p>
                     <div class="resource-grid">
                         ${resources.map(r => `
                             <a class="resource-card" href="${r.url}" target="_blank" rel="noopener noreferrer">
