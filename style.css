@@ -1549,6 +1549,24 @@ button:focus:not(:focus-visible) { outline: none; }
     .resource-card:hover { transform: none; }
 }
 
+/* Lectionary Calendar */
+.lectionary-cal-wrap {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+.lectionary-cal {
+    display: block;
+    width: 100%;
+    height: 480px;
+    border: none;
+}
+@media (max-width: 600px) {
+    .lectionary-cal { height: 380px; }
+}
+
 /* Worship Space (전례 공간 안내) */
 .space-grid {
     display: grid;
@@ -1618,7 +1636,7 @@ footer {
 }
 .footer-inner {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
     gap: 3rem;
     margin-bottom: 3.5rem;
 }
@@ -1905,10 +1923,14 @@ footer {
     .newcomer-cta-link { width: 100%; max-width: 320px; justify-content: center; }
 
     /* Footer */
-    .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
     .footer-bottom { flex-direction: column; text-align: center; }
     .footer-service-row { font-size: 0.85rem; }
     .footer-col .footer-ext-link--dim { margin-top: 0.5rem; }
+}
+
+@media (max-width: 460px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
 }
 
 @media (max-width: 390px) {
