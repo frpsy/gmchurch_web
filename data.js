@@ -259,10 +259,10 @@ const CHURCH_DATA = {
             {
                 icon: "✝️",
                 title: "전례 중심",
-                desc: "성공회 기도서에 따른 전례와 성찬을 예배의 중심에 둡니다. 감사성찬례는 다양한 이들이 함께하는 생명의 식탁입니다."
+                desc: "성공회 기도서에 따른 전례와 성찬을 예배의 중심에 둡니다."
             }
         ],
-        closing: "광명교회는 신앙과 일상, 사람과 이웃이 연결되는 열린 공동체입니다. 예수 그리스도 안에서 함께 기도하고 나누는 자리로 여러분을 초대합니다."
+        closing: "광명교회는 신앙과 일상, 사람과 이웃이 연결되는 열린 공동체입니다."
     },
 
     worship: {
@@ -286,7 +286,7 @@ const CHURCH_DATA = {
         ],
         guide: "",
         spaceGuide: {
-            intro: "성공회 성당에 처음 들어서면 낯선 공간과 물건들을 만나게 됩니다. 하나하나에 담긴 의미를 알고 나면, 눈에 보이는 상징을 통해 보이지 않는 하느님을 만나는 예배가 한결 가깝게 다가옵니다.",
+            intro: "성공회 성당에 처음 들어서면 낯선 공간과 물건들을 만나게 됩니다.",
             items: [
                 {
                     icon: "💧",
@@ -346,14 +346,14 @@ const CHURCH_DATA = {
                     icon: "🌅",
                     title: "아침기도",
                     en: "Morning Prayer",
-                    desc: "하루를 주님께 봉헌하며 시작하는 기도입니다. 찬가·시편·성서 봉독·기도로 구성되며, 하느님 앞에 하루를 여는 시간입니다.",
+                    desc: "하루를 시작하며 드리는 기도입니다. 찬가·시편·성서 봉독·기도로 구성됩니다.",
                     url: "https://dulkuka12.github.io/kbcp/morning-prayer.html"
                 },
                 {
                     icon: "☀️",
                     title: "낮기도",
                     en: "Noonday Prayer",
-                    desc: "하루의 한가운데서 잠시 멈추어 드리는 짧은 기도입니다. 바쁜 일상 속에서 하느님을 기억하는 시간입니다.",
+                    desc: "하루의 한가운데서 잠시 멈추어 드리는 짧은 기도입니다.",
                     url: "https://dulkuka12.github.io/kbcp/noonday-prayer.html"
                 },
                 {
@@ -367,7 +367,7 @@ const CHURCH_DATA = {
                     icon: "🌙",
                     title: "밤기도",
                     en: "Compline",
-                    desc: "하루를 마치고 잠자리에 들기 전 드리는 기도입니다. 수도원 전통에서 비롯된 짧고 고요한 기도로, 하느님의 보호 아래 하루를 맡깁니다.",
+                    desc: "수도원 전통에서 비롯된 짧고 고요한 기도입니다. 잠자리에 들기 전 하루를 마감합니다.",
                     url: "https://dulkuka12.github.io/kbcp/compline-prayer.html"
                 }
             ],
@@ -375,7 +375,7 @@ const CHURCH_DATA = {
                 icon: "🌍",
                 title: "세계성공회 중보기도 목록",
                 en: "Anglican Cycle of Prayer",
-                desc: "전 세계 성공회 교구와 교회를 날마다 기억하며 함께 기도합니다. 세계성공회가 공식 발행한 2023–2026년 기도 목록으로, 우리 교회가 세계 교회와 하나임을 고백하는 기도입니다.",
+                desc: "전 세계 성공회 교구와 교회를 날마다 기억하며 기도합니다. 세계성공회가 공식 발행한 2023–2026년 기도 목록입니다.",
                 url: "https://www.anglicancommunion.org/wp-content/uploads/2026/02/acp_from-aba-to-divine-hope-via-zululand-2023-to-2026_webpdf.pdf"
             }
         }
@@ -481,7 +481,7 @@ const CHURCH_DATA = {
     liveUrl: "https://youtu.be/5tTJvrTX4aA",
 
     media: {
-        intro: "광명교회 유튜브 채널에서는 성공회의 신앙과 예배, 그리고 광명교회의 공동체 이야기를 나눕니다. 영상을 통해 저희 교회를 미리 만나보세요.",
+        intro: "성공회의 신앙과 예배, 광명교회 공동체 이야기를 담은 영상입니다.",
         channelUrl: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
         videos: [
             {
