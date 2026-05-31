@@ -428,6 +428,42 @@ const CHURCH_DATA = {
         ]
     },
 
+    links: {
+        groups: [
+            {
+                title: "대한성공회",
+                items: [
+                    { name: "대한성공회 관구",   url: "https://anglicankr.church/",                                        desc: "대한성공회 공식 홈페이지" },
+                    { name: "서울교구",           url: "https://seoul.anglican.kr/",                                        desc: "대한성공회 서울교구 공식 홈페이지" },
+                    { name: "서울주교좌성당",     url: "https://www.cathedral.or.kr/main/main.html",                        desc: "대한성공회 서울주교좌성당" },
+                    { name: "성공회신문",         url: "https://www.skhnews.or.kr/",                                        desc: "대한성공회 공식 신문" },
+                    { name: "성공회출판사",       url: "https://m.smartstore.naver.com/skhnews21",                          desc: "성공회 서적·자료 온라인 서점" }
+                ]
+            },
+            {
+                title: "교육 기관",
+                items: [
+                    { name: "성공회대학교",       url: "https://www.skhu.ac.kr/introMain/index.html",                       desc: "대한성공회가 설립한 4년제 대학교" }
+                ]
+            },
+            {
+                title: "수도 공동체",
+                items: [
+                    { name: "성 프란시스 수도회", url: "https://naver.me/xB77Wcf2",                                          desc: "강원 춘천시 한덕발산길 1190 (네이버 지도)", external: true },
+                    { name: "성가수도회",         url: "https://www.sister.or.kr",                                           desc: "대한성공회 성가수도회 공식 홈페이지" },
+                    { name: "나눔의 집 협의회",   url: "https://skhnanum.tistory.com/m/",                                    desc: "성공회 나눔과 봉사 공동체 네트워크" }
+                ]
+            },
+            {
+                title: "세계성공회",
+                items: [
+                    { name: "세계성공회",         url: "https://www.anglicancommunion.org/",                                 desc: "Anglican Communion — 전 세계 성공회 공동체" },
+                    { name: "캔터베리 대주교",    url: "https://www.archbishopofcanterbury.org/",                            desc: "세계성공회 정신적 수장의 공식 홈페이지" }
+                ]
+            }
+        ]
+    },
+
     navigation: [
         {
             label: "교회 소개",
@@ -440,7 +476,8 @@ const CHURCH_DATA = {
                 { label: "로고 소개",  href: "clergy.html#logo-intro" },
                 { label: "언론 보도",  href: "clergy.html#press" },
                 { label: "교회 영상",  href: "media.html" },
-                { label: "교회 이야기", href: "story.html", badge: "임시" }
+                { label: "교회 이야기", href: "story.html", badge: "임시" },
+                { label: "관련 기관",  href: "links.html" }
             ]
         },
         {

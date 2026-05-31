@@ -856,6 +856,28 @@ const VisitRenderer = {
     }
 };
 
+/* ── LinksRenderer ───────────────────────────────────────── */
+const LinksRenderer = {
+    render() {
+        const el = document.getElementById('links-full');
+        if (!el) return;
+        el.innerHTML = CHURCH_DATA.links.groups.map(group => `
+            <div class="links-group">
+                <h2 class="links-group-title">${group.title}</h2>
+                <div class="links-grid">
+                    ${group.items.map(item => `
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="links-card">
+                            <span class="links-card-name">${item.name}</span>
+                            <span class="links-card-desc">${item.desc}</span>
+                            <span class="links-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+                    `).join('')}
+                </div>
+            </div>
+        `).join('');
+    }
+};
+
 /* ── AnglicanRenderer ────────────────────────────────────── */
 const AnglicanRenderer = {
     render() {
@@ -1215,6 +1237,7 @@ const App = {
         ClergyRenderer.render();
         PressRenderer.render();
         MediaRenderer.render();
+        LinksRenderer.render();
         this._handleHashScroll();
         ScrollReveal.init();
         ScrollProgress.init();
