@@ -1055,6 +1055,13 @@ button:focus:not(:focus-visible) { outline: none; }
     outline: 3px solid var(--gold);
     outline-offset: 3px;
 }
+/* E — 중앙 채움: evenodd 구멍을 흰 원으로 메운 버전 */
+.logo-badge--e {
+    width: 140px; height: 140px;
+    border-radius: 20px;
+    background: #163d24;
+    box-shadow: var(--shadow-md);
+}
 .logo-subtitle {
     margin-top: 0.75rem;
     font-size: 0.72rem;
