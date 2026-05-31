@@ -546,7 +546,7 @@ const WorshipRenderer = {
     render() {
         const el = document.getElementById('worship-full');
         if (!el) return;
-        const { main, guide, liturgicalSeason: s, resources } = CHURCH_DATA.worship;
+        const { main, guide, liturgicalSeason: s, resources, prayer } = CHURCH_DATA.worship;
         document.documentElement.style.setProperty('--season', s.color);
         document.documentElement.style.setProperty('--season-light', s.colorLight);
 
@@ -665,6 +665,40 @@ const WorshipRenderer = {
                                 <span class="resource-link">바로가기 <span aria-hidden="true">↗</span></span>
                             </a>
                         `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${prayer ? `
+                <div class="liturgy-section" id="daily-office">
+                    <p class="section-eyebrow">Daily Office</p>
+                    <h2 class="section-title">성무일도</h2>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 기도서는 하루의 흐름에 따른 네 가지 기도를 제공합니다. 공동체나 개인이 매일 같은 기도문으로 하느님 앞에 하루를 열고 닫는 전통입니다.</p>
+                    <div class="resource-grid">
+                        ${prayer.dailyOffice.map(o => `
+                            <a class="resource-card" href="${o.url}" target="_blank" rel="noopener noreferrer">
+                                <span class="resource-icon" aria-hidden="true">${o.icon}</span>
+                                <h3 class="resource-title">${o.title}</h3>
+                                <p class="resource-desc" style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.4rem;">${o.en}</p>
+                                <p class="resource-desc">${o.desc}</p>
+                                <span class="resource-link">기도서 열기 <span aria-hidden="true">↗</span></span>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="liturgy-section" id="intercession">
+                    <p class="section-eyebrow">Anglican Cycle of Prayer</p>
+                    <h2 class="section-title">세계성공회 중보기도</h2>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">세계성공회(Anglican Communion)는 날마다 특정 교구와 지역 교회를 위해 함께 기도하는 기도 달력을 발행합니다. 전 세계 165개 이상의 나라에 퍼져 있는 성공회 공동체와 하나로 이어지는 기도입니다.</p>
+                    <div class="resource-grid" style="--resource-cols:1;">
+                        <a class="resource-card" href="${prayer.intercession.url}" target="_blank" rel="noopener noreferrer">
+                            <span class="resource-icon" aria-hidden="true">${prayer.intercession.icon}</span>
+                            <h3 class="resource-title">${prayer.intercession.title}</h3>
+                            <p class="resource-desc" style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.4rem;">${prayer.intercession.en}</p>
+                            <p class="resource-desc">${prayer.intercession.desc}</p>
+                            <span class="resource-link">PDF 내려받기 <span aria-hidden="true">↗</span></span>
+                        </a>
                     </div>
                 </div>
                 ` : ''}

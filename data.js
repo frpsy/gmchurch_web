@@ -308,7 +308,46 @@ const CHURCH_DATA = {
                 desc: "성공회 예배에서 봉독하는 공동번역 성서입니다.",
                 url: "https://bible.anglican.kr/"
             }
-        ]
+        ],
+        prayer: {
+            dailyOffice: [
+                {
+                    icon: "🌅",
+                    title: "아침기도",
+                    en: "Morning Prayer",
+                    desc: "하루를 주님께 봉헌하며 시작하는 기도입니다. 찬가·시편·성서 봉독·기도로 구성되며, 하느님 앞에 하루를 여는 시간입니다.",
+                    url: "https://dulkuka12.github.io/kbcp/"
+                },
+                {
+                    icon: "☀️",
+                    title: "낮기도",
+                    en: "Noonday Prayer",
+                    desc: "하루의 한가운데서 잠시 멈추어 드리는 짧은 기도입니다. 바쁜 일상 속에서 하느님을 기억하는 시간입니다.",
+                    url: "https://dulkuka12.github.io/kbcp/"
+                },
+                {
+                    icon: "🌆",
+                    title: "저녁기도",
+                    en: "Evening Prayer",
+                    desc: "하루를 마감하며 감사와 참회로 드리는 기도입니다. 성모찬가(마그니피캇)를 포함하며, 빛이신 그리스도를 찬양합니다.",
+                    url: "https://dulkuka12.github.io/kbcp/"
+                },
+                {
+                    icon: "🌙",
+                    title: "밤기도",
+                    en: "Compline",
+                    desc: "하루를 마치고 잠자리에 들기 전 드리는 기도입니다. 수도원 전통에서 비롯된 짧고 고요한 기도로, 하느님의 보호 아래 하루를 맡깁니다.",
+                    url: "https://dulkuka12.github.io/kbcp/"
+                }
+            ],
+            intercession: {
+                icon: "🌍",
+                title: "세계성공회 중보기도 목록",
+                en: "Anglican Cycle of Prayer",
+                desc: "전 세계 성공회 교구와 교회를 날마다 기억하며 함께 기도합니다. 세계성공회가 공식 발행한 2023–2026년 기도 목록으로, 우리 교회가 세계 교회와 하나임을 고백하는 기도입니다.",
+                url: "https://www.anglicancommunion.org/wp-content/uploads/2026/02/acp_from-aba-to-divine-hope-via-zululand-2023-to-2026_webpdf.pdf"
+            }
+        }
     },
 
     community: {
@@ -479,14 +518,16 @@ const CHURCH_DATA = {
             ]
         },
         {
-            label: "예배",
+            label: "예배와 기도",
             href: "worship.html",
             items: [
                 { label: "주일 감사성찬례", href: "worship.html#main" },
                 { label: "어린이 예배",    href: "worship.html#children" },
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
                 { label: "전례독서",        href: "worship.html#lectionary" },
-                { label: "예배 자료",      href: "worship.html#resources" }
+                { label: "예배 자료",      href: "worship.html#resources" },
+                { label: "성무일도",       href: "worship.html#daily-office" },
+                { label: "세계성공회 중보기도", href: "worship.html#intercession" }
             ]
         },
         {
