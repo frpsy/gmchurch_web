@@ -487,6 +487,7 @@ const CHURCH_DATA = {
                 { label: "주일 감사성찬례", href: "worship.html#main" },
                 { label: "어린이 예배",    href: "worship.html#children" },
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
+                { label: "전례독서",        href: "worship.html#lectionary" },
                 { label: "예배 자료",      href: "worship.html#resources" }
             ]
         },

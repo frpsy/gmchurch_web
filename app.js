@@ -419,6 +419,11 @@ const FooterRenderer = {
                         </div>
                     </div>
                     <div class="footer-col">
+                        <h4>예배 자료</h4>
+                        <a href="worship.html#lectionary" class="footer-ext-link">전례독서</a>
+                        ${resources.map(r => `<a href="${r.url}" target="_blank" rel="noopener" class="footer-ext-link">${r.title}</a>`).join('')}
+                    </div>
+                    <div class="footer-col">
                         <h4>채널</h4>
                         <a href="${sns.youtube}"           target="_blank" rel="noopener" class="footer-ext-link">유튜브 채널</a>
                         <a href="${sns.instagram}"         target="_blank" rel="noopener" class="footer-ext-link">인스타그램</a>
@@ -620,6 +625,22 @@ const WorshipRenderer = {
                                 </ul>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="liturgy-section" id="lectionary">
+                    <p class="section-eyebrow">Lectionary</p>
+                    <h2 class="section-title">전례독서</h2>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 전례력에 따른 주일 성서 독서 일정을 확인하실 수 있습니다.</p>
+                    <div class="lectionary-cal-wrap">
+                        <iframe
+                            src="https://calendar.google.com/calendar/embed?src=anglican.kr_ep5i6qcm67gl19st7m0fd32l30%40group.calendar.google.com&ctz=Asia%2FSeoul&mode=AGENDA&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&hl=ko"
+                            class="lectionary-cal"
+                            frameborder="0"
+                            scrolling="no"
+                            title="전례독서 일정"
+                            loading="lazy"
+                        ></iframe>
                     </div>
                 </div>
 
