@@ -18,7 +18,7 @@
 gmchurch_web/
 ├── index.html        메인 페이지
 ├── clergy.html       교회 소개 (성공회·사제·철학·로고·언론·교회 이야기)
-├── story.html        교회 이야기 — 5대 정체성 서사 (임시/초안 페이지)
+├── story.html        교회 이야기 — What We Cherish (5대 정체성 서사)
 ├── worship.html      예배 안내 (예배 카드·감사성찬례란·순서·예배 자료)
 ├── newcomer.html     처음 오신 분 (환영·참여 안내·전례·전례 공간·영성체·문의)
 ├── community.html    공동체 (희망터·엠마우스·소그룹·주일 애찬)
@@ -250,19 +250,19 @@ const CHURCH_DATA = {
   └ 대한성공회         clergy.html#ack
   └ 섬기는 이들        clergy.html#priest-section       (JS)
   └ 교회 철학          clergy.html#philosophy
+  └ 교회 이야기        story.html
   └ 로고 소개          clergy.html#logo-intro
   └ 언론 보도          clergy.html#press
-  └ 교회 영상          media.html
-  └ 교회 이야기        story.html                       (badge: "임시")
 
 예배  worship.html
   └ 주일 감사성찬례    worship.html#main                (JS)
   └ 어린이 예배        worship.html#children            (JS)
   └ 감사성찬례 순서    worship.html#eucharist-order     (JS)
+  └ 전례독서           worship.html#lectionary
   └ 예배 자료          worship.html#resources           (JS)
 
 처음 오신 분  newcomer.html
-  └ 처음 오신 분께     newcomer.html#newcomer           (JS)
+  └ 인사말             newcomer.html#newcomer           (JS)
   └ 참여 안내          newcomer.html#firsttime          (JS)
   └ 성공회 전례란?     newcomer.html#liturgy            (JS)
   └ 전례 공간 안내     newcomer.html#worship-space      (JS)  성수대·독서대·제대·성막·부활초
@@ -274,13 +274,17 @@ const CHURCH_DATA = {
   └ 엠마우스 코스      community.html#emmaus            (JS)
   └ 소그룹 모임        community.html#smallgroup        (JS)
   └ 주일 애찬          community.html#agape             (JS)
+  └ 헌금               giving.html
+
+미디어·자료  media.html
+  └ 교회 영상          media.html
+  └ 관련 기관          links.html
 
 오시는 길  visit.html
   └ 주소·교통          visit.html#location              (JS)
   └ 주차 안내          visit.html#parking               (JS)
 
-※ '헌금'은 상단 내비·메인 페이지에서 제외하고 푸터 하단 바의
-  '봉헌 안내' 링크(→ giving.html)로만 접근. giving.html 페이지는 유지.
+※ Footer 전용 링크: giving.html(봉헌 안내), privacy.html(개인정보처리방침)
 ```
 
 ---
@@ -459,13 +463,13 @@ window DOMContentLoaded
    (community-full에 #agape 주일 애찬 카드 포함)
 ```
 
-### story.html (교회 이야기 — 임시/초안)
+### story.html (교회 이야기 — What We Cherish)
 ```html
 <div class="page-hero">                       교회 이야기
-<section id="welcome">  .draft-banner(임시 안내) + .story-lead 환영
+<section id="welcome">  .story-lead 환영 문구
 <section id="identity"> .story-values — 5대 정체성 서사 블록
-   01 거룩한 전례  02 평등 공동체  03 부활 신앙  04 애찬  05 약자·창조 돌봄
-<section id="invite">   .newcomer-cta 초대 + 가안 안내
+   01 전례 전통  02 평등 공동체  03 부활 신앙  04 밥상 공동체  05 약자·창조 돌봄
+<section id="invite">   .newcomer-cta 초대
 ※ 정적 HTML 페이지 (data.js 비의존), nav/footer는 공통 렌더러가 채움
 ```
 
