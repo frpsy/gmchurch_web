@@ -1152,16 +1152,18 @@ const ClergyRenderer = {
         if (!el) return;
         const bishop = CHURCH_DATA.bishop;
         const bishopHtml = bishop ? `
-            <div style="margin-bottom:2rem; padding:1.5rem; background:var(--green-light);
-                        border-radius:12px; border-left:4px solid var(--green-mid);">
-                <p class="section-eyebrow" style="margin-bottom:0.5rem;">Diocese of Seoul</p>
-                <div style="display:flex; align-items:flex-start; gap:1rem;">
-                    <span style="font-size:2rem;" aria-hidden="true">🏛</span>
-                    <div>
-                        <p style="font-weight:700; font-size:1.05rem; color:var(--green-deep); margin-bottom:0.15rem;">${bishop.name} 주교</p>
-                        <p style="font-size:0.85rem; color:var(--green-mid); font-weight:600; margin-bottom:0.1rem;">${bishop.title}</p>
-                        ${bishop.ordained ? `<p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.75rem;">${bishop.ordained}</p>` : ''}
-                        <p style="font-size:0.88rem; line-height:1.85; color:var(--text-muted);">${bishop.desc}</p>
+            <div class="bishop-card">
+                <p class="section-eyebrow" style="margin-bottom:0.85rem;">Diocese of Seoul</p>
+                <div class="bishop-card-inner">
+                    ${bishop.photo
+                        ? `<img src="${bishop.photo}" alt="${bishop.name} 주교 초상" class="bishop-portrait" loading="lazy">`
+                        : `<span class="bishop-portrait-fallback" aria-hidden="true">🏛</span>`}
+                    <div class="bishop-card-body">
+                        <p class="bishop-name">${bishop.name} 주교</p>
+                        <p class="bishop-title">${bishop.title}</p>
+                        ${bishop.ordained ? `<p class="bishop-ordained">${bishop.ordained}</p>` : ''}
+                        <p class="bishop-desc">${bishop.desc}</p>
+                        ${bishop.note ? `<p class="bishop-note">${bishop.note}</p>` : ''}
                     </div>
                 </div>
             </div>
