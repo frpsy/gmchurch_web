@@ -1178,7 +1178,11 @@ const ClergyRenderer = {
                     if (isFirstPriest) firstPriestRendered = true;
                     return `
                     <div class="clergy-card" ${isFirstPriest ? 'id="priest"' : ''}>
-                        <div class="clergy-avatar">✝️</div>
+                        <div class="clergy-avatar">
+                            ${c.photo
+                                ? `<img src="${c.photo}" alt="${c.name} 사제" loading="lazy" class="clergy-avatar-img">`
+                                : '✝️'}
+                        </div>
                         <div>
                             <div class="clergy-name">${c.name} 사제</div>
                             <div class="clergy-title">${c.title}</div>

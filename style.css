@@ -794,6 +794,13 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: 1.7rem;
     flex-shrink: 0;
     color: #fff;
+    overflow: hidden;
+}
+.clergy-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 8%;
 }
 .clergy-name { font-size: 1.3rem; font-weight: 700; color: var(--green-deep); letter-spacing: -0.01em; }
 .clergy-title { font-size: 0.85rem; color: var(--green-mid); font-weight: 600; margin-top: 0.25rem; letter-spacing: 0.02em; word-break: keep-all; overflow-wrap: break-word; }
