@@ -1975,6 +1975,9 @@ footer {
     .btn-live, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
 }
 
+/* ── Community card note (footnote) ─────────────────────── */
+.community-card-note { font-size: 0.75rem; color: var(--text-muted); opacity: 0.7; margin-top: 0.5rem; }
+
 /* ── Community detail link ───────────────────────────────── */
 .community-detail-link {
     display: inline-block;
