@@ -1144,6 +1144,9 @@ const ClergyRenderer = {
 
         const crossSvg = (fill) =>
             `<svg viewBox="0 0 64 64" role="img" aria-label="캔터베리 십자가"><path d="${CANTERBURY_CROSS_PATH}" fill="${fill}" fill-rule="evenodd"/></svg>`;
+        /* 중앙 원(evenodd 구멍)을 채운 버전 — 흰 원을 path 위에 올림 */
+        const crossSvgSolid = (crossFill, dotFill) =>
+            `<svg viewBox="0 0 64 64" role="img" aria-label="캔터베리 십자가"><path d="${CANTERBURY_CROSS_PATH}" fill="${crossFill}" fill-rule="evenodd"/><circle cx="32" cy="32" r="3.2" fill="${dotFill}"/></svg>`;
 
         el.innerHTML = `
             <div class="section-header">
@@ -1168,6 +1171,10 @@ const ClergyRenderer = {
                 <div class="logo-candidate">
                     <div class="logo-badge logo-badge--d">${crossSvg('#ffffff')}</div>
                     <p class="logo-candidate-label">D · 골드 테두리</p>
+                </div>
+                <div class="logo-candidate">
+                    <div class="logo-badge logo-badge--e">${crossSvgSolid('#ffffff', '#ffffff')}</div>
+                    <p class="logo-candidate-label">E · 중앙 채움</p>
                 </div>
             </div>
             <!-- ────────────────────────────────────────────── -->
