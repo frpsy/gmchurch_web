@@ -228,7 +228,7 @@ const CHURCH_DATA = {
             quote: "목회와 상담의 공통 원칙은 공감이며, 타인의 아픔을 공감하는 것은 주님이 주시는 능력입니다.",
             desc: "인문학, 신학, 상담심리, 동양철학을 두루 공부한 성공회 사제입니다. 35세에 늦깎이로 신학의 길에 들어서 사제 서품을 받았으며, 마포들음교회에서 상담센터를 운영하는 등 사목과 상담을 접목한 사역을 이어왔습니다. 현재 광명교회 협동사제로 섬기고 있습니다.",
             contact: "",
-            kyoboUrl: "https://store.kyobobook.co.kr/person/detail/1000237503",
+            kyoboUrl: "https://www.aladin.co.kr/m/mproduct.aspx?itemid=287238568",
             bio: {
                 milestones: [
                     { year: "—", text: "서울 출생, 서대문·은평 지역에서 성장 — 충암초·중학교, 명지고등학교 졸업" },
