@@ -808,7 +808,9 @@ const CommunityRenderer = {
                         <div class="card-icon">${g.icon}</div>
                         <h3>${g.title}</h3>
                         <p style="color:var(--text-muted); font-size:0.9rem;">${g.desc}</p>
-                        ${g.detailUrl ? `<a href="${g.detailUrl}" class="community-detail-link">자세히 보기 →</a>` : ''}
+                        ${g.note ? `<p style="font-size:0.9rem; color:var(--text-muted); margin-top:0.5rem;">${g.note}</p>` : ''}
+                        ${g.footnote ? `<p class="community-card-note">${g.footnote}</p>` : ''}
+                        ${g.detailUrl ? `<a href="${g.detailUrl}" class="community-detail-link"><span>자세히 보기</span><span class="link-arrow" aria-hidden="true">→</span></a>` : ''}
                     </div>
                 `).join('')}
             </div>
@@ -1188,6 +1190,8 @@ const ScrollReveal = {
             '.story-lead',
             '.draft-banner',
             '.newcomer-cta',
+            '.liturgy-inner-quote',
+            '.next-step-cta',
         ].forEach(sel => {
             document.querySelectorAll(sel).forEach(el => el.classList.add('reveal'));
         });
@@ -1211,6 +1215,16 @@ const ScrollReveal = {
         // Standalone info-cards not inside a grid
         document.querySelectorAll('.info-card').forEach(el => {
             if (!el.closest('.grid')) el.classList.add('reveal');
+        });
+
+        // Stagger: liturgy steps, mission marks, anglican pillars
+        ['.liturgy-steps', '.mission-marks', '.anglican-pillars'].forEach(sel => {
+            document.querySelectorAll(sel).forEach(container => {
+                Array.from(container.children).forEach((child, i) => {
+                    child.classList.add('reveal');
+                    child.style.transitionDelay = `${i * 0.08}s`;
+                });
+            });
         });
 
         const observer = new IntersectionObserver((entries) => {
