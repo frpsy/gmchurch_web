@@ -324,13 +324,13 @@ const CHURCH_DATA = {
             {
                 icon: "📖",
                 title: "성공회 기도서",
-                desc: "주일 예배에서 함께 펴는 공동기도서(BCP)입니다.",
+                desc: "공동기도서(BCP)입니다.",
                 url: "https://dulkuka12.github.io/kbcp/"
             },
             {
                 icon: "🎵",
                 title: "성가집",
-                desc: "예배 성가를 온라인으로 펼쳐 함께 부를 수 있습니다.",
+                desc: "예배 성가를 온라인으로 볼 수 있습니다.",
                 url: "https://dulkuka12.github.io/khymn/"
             },
             {
