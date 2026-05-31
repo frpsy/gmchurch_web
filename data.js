@@ -473,11 +473,9 @@ const CHURCH_DATA = {
                 { label: "대한성공회",  href: "clergy.html#ack" },
                 { label: "섬기는 이들", href: "clergy.html#priest-section" },
                 { label: "교회 철학",  href: "clergy.html#philosophy" },
+                { label: "교회 이야기", href: "story.html" },
                 { label: "로고 소개",  href: "clergy.html#logo-intro" },
-                { label: "언론 보도",  href: "clergy.html#press" },
-                { label: "교회 영상",  href: "media.html" },
-                { label: "교회 이야기", href: "story.html", badge: "임시" },
-                { label: "관련 기관",  href: "links.html" }
+                { label: "언론 보도",  href: "clergy.html#press" }
             ]
         },
         {
@@ -507,10 +505,19 @@ const CHURCH_DATA = {
             label: "공동체",
             href: "community.html",
             items: [
-                { label: "광명 희망터",  href: "community.html#hopecenter" },
+                { label: "광명 희망터",   href: "community.html#hopecenter" },
                 { label: "엠마우스 코스", href: "community.html#emmaus" },
-                { label: "소그룹 모임", href: "community.html#smallgroup" },
-                { label: "주일 애찬", href: "community.html#agape" }
+                { label: "소그룹 모임",  href: "community.html#smallgroup" },
+                { label: "주일 애찬",    href: "community.html#agape" },
+                { label: "헌금",         href: "giving.html" }
+            ]
+        },
+        {
+            label: "미디어·자료",
+            href: "media.html",
+            items: [
+                { label: "교회 영상", href: "media.html" },
+                { label: "관련 기관", href: "links.html" }
             ]
         },
         {
