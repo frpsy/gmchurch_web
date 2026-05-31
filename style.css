@@ -817,7 +817,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .clergy-desc { font-size: 0.95rem; color: var(--text); line-height: 1.85; margin-top: 1rem; opacity: 0.85; }
 
 /* ── Clergy Bio Section ──────────────────────────────────── */
-.bio-section { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.bio-section { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: left; }
 .bio-label {
     font-size: 0.7rem;
     font-weight: 700;
@@ -2043,8 +2043,9 @@ footer {
     /* Hero */
     .hero { min-height: 100vh; min-height: 100svh; }
 
-    /* Clergy Card */
-    .clergy-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem 1.75rem; justify-items: center; text-align: center; }
+    /* Clergy Card — 초상만 가운데, bio 텍스트는 좌측 정렬 유지 */
+    .clergy-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem 1.75rem; }
+    .clergy-avatar { margin: 0 auto; }
 
     /* Logo intro */
     .logo-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -2965,8 +2966,8 @@ footer {
     font-style: italic;
 }
 @media (max-width: 540px) {
-    .bishop-card-inner { grid-template-columns: 1fr; gap: 1.25rem; justify-items: center; text-align: center; }
-    .bishop-portrait-wrap { width: 120px; height: 120px; }
+    .bishop-card-inner { grid-template-columns: 1fr; gap: 1.25rem; }
+    .bishop-portrait-wrap { width: 120px; height: 120px; margin: 0 auto; }
     .clergy-avatar { width: 100px; height: 100px; }
 }
 
