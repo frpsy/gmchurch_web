@@ -408,7 +408,7 @@ const CHURCH_DATA = {
                 id: "agape",
                 title: "주일 애찬",
                 desc: "예배 후 함께 밥을 나누는 자리",
-                note: "채식주의(비건) 애찬도 준비됩니다",
+                note: "비건(완전 채식) 애찬도 준비됩니다",
                 icon: "🍚"
             }
         ],
