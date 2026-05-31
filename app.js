@@ -57,9 +57,9 @@ const MapHelper = {
 
                 <!-- 산 / 녹지 (북동쪽, 옅은 초록) -->
                 <path d="M270 -10 Q310 20 350 35 Q380 50 410 60 L410 -10 Z"
-                      fill="rgba(61,107,74,0.10)"/>
+                      fill="rgba(58,114,82,0.10)"/>
                 <path d="M-10 -10 Q20 10 50 25 L50 -10 Z"
-                      fill="rgba(61,107,74,0.10)"/>
+                      fill="rgba(58,114,82,0.10)"/>
 
                 <!-- Building blocks -->
                 <g fill="rgba(10,31,18,0.07)">
@@ -73,7 +73,7 @@ const MapHelper = {
                 </g>
 
                 <!-- 교회 블록 (옅은 골드 강조) -->
-                <rect x="184" y="100" width="32" height="34" rx="2" fill="rgba(139,115,85,0.12)" stroke="rgba(139,115,85,0.30)" stroke-width="0.6"/>
+                <rect x="184" y="100" width="32" height="34" rx="2" fill="rgba(192,154,96,0.15)" stroke="rgba(192,154,96,0.38)" stroke-width="0.6"/>
 
                 <!-- 광명온신초등학교 부지 (교회 동쪽 바로 옆) -->
                 <g>

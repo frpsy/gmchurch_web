@@ -7,12 +7,12 @@
 :root {
     /* Primary palette — refined forest green */
     --green-deep:   #0a1f12;
-    --green-mid:    #3d6b4a;
+    --green-mid:    #3a7252;
     --green-light:  #eef2ec;
-    --green-soft:   #cdd9cf;
-    /* Accent — warm bronze */
-    --gold:         #8b7355;
-    --gold-bg:      #f5efe3;
+    --green-soft:   #c4d6c8;
+    /* Accent — luminous amber gold */
+    --gold:         #c09a60;
+    --gold-bg:      #faf3e6;
     /* Neutrals */
     --cream:        #f7f4ed;
     --white:        #ffffff;
@@ -95,8 +95,8 @@ button:focus:not(:focus-visible) { outline: none; }
     top: 0; left: 0;
     width: 100%;
     height: 3px;
-    background: linear-gradient(90deg, var(--gold), #d6b986);
-    box-shadow: 0 0 8px rgba(214, 185, 134, 0.65);
+    background: linear-gradient(90deg, var(--gold), #dbb870);
+    box-shadow: 0 0 10px rgba(192, 154, 96, 0.55);
     border-radius: 0 2px 2px 0;
     z-index: 1100;
     transform: scaleX(0);
@@ -400,7 +400,7 @@ button:focus:not(:focus-visible) { outline: none; }
     background: rgba(255,255,255,0.16);
     border-color: rgba(255,255,255,0.85);
     transform: translateY(-4px);
-    box-shadow: 0 10px 28px rgba(139, 115, 85, 0.30);
+    box-shadow: 0 10px 28px rgba(192, 154, 96, 0.28);
 }
 
 /* Hero — 실시간 예배 버튼 (히어로 외부 영역용) */
@@ -432,7 +432,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .btn-hero-primary:hover {
     background: var(--green-light);
     transform: translateY(-4px);
-    box-shadow: 0 10px 32px rgba(139, 115, 85, 0.28);
+    box-shadow: 0 10px 32px rgba(192, 154, 96, 0.28);
 }
 
 /* Hero — 하단 스탯 스트립 */
@@ -533,7 +533,7 @@ button:focus:not(:focus-visible) { outline: none; }
     padding-left: clamp(1.25rem, 5vw, 2.5rem);
     padding-right: clamp(1.25rem, 5vw, 2.5rem);
     text-align: center;
-    background: linear-gradient(158deg, var(--green-light) 0%, var(--cream) 100%);
+    background: linear-gradient(165deg, #c8dbd0 0%, var(--green-light) 38%, var(--cream) 100%);
     border-bottom: 1px solid var(--border);
 }
 .page-hero h1 {
@@ -1144,7 +1144,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-variant-numeric: tabular-nums;
 }
 .bus-chip.bus-blue  { background: #2c6aa6; }
-.bus-chip.bus-green { background: #3d6b4a; }
+.bus-chip.bus-green { background: #3a7252; }
 
 /* ── Press List ─────────────────────────────────────────── */
 .press-list {
@@ -1304,9 +1304,9 @@ button:focus:not(:focus-visible) { outline: none; }
 /* Newcomer CTA (page closing) */
 /* ── Next Step CTA ────────────────────────────────────────── */
 .next-step-cta {
-    padding: 5rem 0;
-    background: linear-gradient(168deg, var(--green-light) 0%, var(--cream) 100%);
-    border-top: 1px solid var(--green-soft);
+    padding: 6rem 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, #1e4530 0%, var(--green-deep) 65%);
+    border-top: none;
 }
 .next-step-cta .container {
     display: flex;
@@ -1317,15 +1317,15 @@ button:focus:not(:focus-visible) { outline: none; }
 .next-step-cta-eyebrow {
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--green-mid);
+    color: var(--gold);
     margin-bottom: 0.85rem;
 }
 .next-step-cta-title {
     font-size: clamp(1.5rem, 3vw, 2.1rem);
     font-weight: 800;
-    color: var(--green-deep);
+    color: #ffffff;
     margin-bottom: 0.9rem;
     letter-spacing: -0.02em;
     line-height: 1.25;
@@ -1333,9 +1333,9 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .next-step-cta-desc {
     font-size: 1rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.70);
     max-width: 480px;
-    margin: 0 0 2.2rem;
+    margin: 0 0 2.4rem;
     line-height: 1.75;
     word-break: keep-all;
 }
@@ -1374,8 +1374,32 @@ button:focus:not(:focus-visible) { outline: none; }
     border-color: var(--green-mid);
     color: #fff;
 }
+/* Dark CTA — 다크 패널 안에서 버튼 재정의 (전역 btn-next 불변) */
+.next-step-cta .btn-next {
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(255,255,255,0.22);
+    color: rgba(255,255,255,0.88);
+}
+.next-step-cta .btn-next:hover {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.48);
+    color: #fff;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+}
+.next-step-cta .btn-next--primary {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+}
+.next-step-cta .btn-next--primary:hover {
+    background: #d4aa70;
+    border-color: #d4aa70;
+    color: #fff;
+    box-shadow: 0 8px 28px rgba(192,154,96,0.35);
+}
+
 @media (max-width: 560px) {
-    .next-step-cta { padding: 3.5rem 0; }
+    .next-step-cta { padding: 4rem 0; }
     .next-step-cta-actions { flex-direction: column; width: 100%; align-items: center; }
     .btn-next { width: 100%; max-width: 320px; justify-content: center; }
 }
