@@ -349,20 +349,26 @@ const NavRenderer = {
         window.addEventListener('hashchange', () => NavRenderer._updateActive());
     },
 
-    // active href 결정: top-level 완전 일치 > 하위 메뉴 hash 일치 > page-only fallback
+    // active href 결정: top-level 완전 일치 > 하위 메뉴 hash 일치 > page-only fallback > 하위 페이지 일치
     _resolveActiveHref(currentPage, currentHash) {
         let fallback = null;
+        let subPageFallback = null;
         for (const item of CHURCH_DATA.navigation) {
             const [itemPage, itemHash] = item.href.split('#');
-            if (itemPage !== currentPage) continue;
-            if (itemHash && itemHash === currentHash) return item.href;
-            if (currentHash && item.items) {
-                const subMatch = item.items.some(sub => sub.href.split('#')[1] === currentHash);
-                if (subMatch) return item.href;
+            if (itemPage === currentPage) {
+                if (itemHash && itemHash === currentHash) return item.href;
+                if (currentHash && item.items) {
+                    const subMatch = item.items.some(sub => sub.href.split('#')[1] === currentHash);
+                    if (subMatch) return item.href;
+                }
+                if (!itemHash && !fallback) fallback = item.href;
+            } else if (!subPageFallback && item.items) {
+                // 하위 메뉴에 현재 페이지가 있으면 상위 메뉴를 active로
+                const subPageMatch = item.items.some(sub => sub.href.split('#')[0] === currentPage);
+                if (subPageMatch) subPageFallback = item.href;
             }
-            if (!itemHash && !fallback) fallback = item.href;
         }
-        return fallback;
+        return fallback || subPageFallback;
     },
 
     // nav 전체 재렌더 없이 active 클래스만 갱신
