@@ -316,28 +316,28 @@ const CHURCH_DATA = {
                     title: "아침기도",
                     en: "Morning Prayer",
                     desc: "하루를 주님께 봉헌하며 시작하는 기도입니다. 찬가·시편·성서 봉독·기도로 구성되며, 하느님 앞에 하루를 여는 시간입니다.",
-                    url: "https://dulkuka12.github.io/kbcp/"
+                    url: "https://dulkuka12.github.io/kbcp/daily-office-select.html"
                 },
                 {
                     icon: "☀️",
                     title: "낮기도",
                     en: "Noonday Prayer",
                     desc: "하루의 한가운데서 잠시 멈추어 드리는 짧은 기도입니다. 바쁜 일상 속에서 하느님을 기억하는 시간입니다.",
-                    url: "https://dulkuka12.github.io/kbcp/"
+                    url: "https://dulkuka12.github.io/kbcp/daily-office-select.html"
                 },
                 {
                     icon: "🌆",
                     title: "저녁기도",
                     en: "Evening Prayer",
                     desc: "하루를 마감하며 감사와 참회로 드리는 기도입니다. 성모찬가(마그니피캇)를 포함하며, 빛이신 그리스도를 찬양합니다.",
-                    url: "https://dulkuka12.github.io/kbcp/"
+                    url: "https://dulkuka12.github.io/kbcp/daily-office-select.html"
                 },
                 {
                     icon: "🌙",
                     title: "밤기도",
                     en: "Compline",
                     desc: "하루를 마치고 잠자리에 들기 전 드리는 기도입니다. 수도원 전통에서 비롯된 짧고 고요한 기도로, 하느님의 보호 아래 하루를 맡깁니다.",
-                    url: "https://dulkuka12.github.io/kbcp/"
+                    url: "https://dulkuka12.github.io/kbcp/daily-office-select.html"
                 }
             ],
             intercession: {
@@ -379,7 +379,26 @@ const CHURCH_DATA = {
                 desc: "주일 감사성찬례를 마친 뒤, 온 교우가 함께 모여 밥을 나누는 친교의 자리입니다. 제대에서 나눈 성찬이 식탁의 나눔으로 이어지는 '밥상 공동체'입니다.",
                 icon: "🍚"
             }
-        ]
+        ],
+        smallgroups: {
+            intro: "소그룹은 큰 공동체 안에서 서로를 이름으로 알고, 함께 기도하고 이야기 나누는 작은 자리입니다. 광명교회 소그룹은 특정 교재나 형식보다 사람과 사람 사이의 솔직한 만남을 중심에 둡니다.",
+            groups: [
+                {
+                    id: "parents",
+                    icon: "🏡",
+                    title: "주일학교 양육자모임",
+                    en: "Sunday School Parents",
+                    schedule: "매월 셋째 주일 애찬 후",
+                    desc: "아이를 신앙 안에서 키우는 일은 부모 혼자 감당하기 어렵습니다. 이 모임은 주일학교 자녀를 둔 양육자들이 함께 모여, 가정 안의 신앙 교육을 솔직하게 이야기하고 서로를 위해 기도하는 자리입니다.",
+                    details: [
+                        "매월 셋째 주일 애찬을 마친 후, 교회 내 소모임 공간에서 진행합니다.",
+                        "정해진 교재나 커리큘럼 없이, 그 달의 관심사나 고민을 자유롭게 나눕니다.",
+                        "기도와 나눔으로 마무리하며, 한 시간 안팎으로 진행합니다.",
+                        "주일학교에 아이가 다니고 있다면 누구나 참여할 수 있습니다."
+                    ]
+                }
+            ]
+        }
     },
 
     giving: {

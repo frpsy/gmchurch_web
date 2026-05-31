@@ -390,9 +390,10 @@ const FooterRenderer = {
     render() {
         const footer = document.getElementById('main-footer');
         if (!footer) return;
-        const { info, clergy, sns, worship } = CHURCH_DATA;
+        const { info, clergy, sns, worship, navigation } = CHURCH_DATA;
         const services = worship.main;
         const resources = worship.resources || [];
+        const worshipNavLabel = (navigation.find(n => n.href === 'worship.html') || {}).label || '예배와 기도';
         footer.innerHTML = `
             <div class="container">
                 <div class="footer-inner">
@@ -410,7 +411,7 @@ const FooterRenderer = {
                         <p class="footer-brand-meta">설립 ${info.established}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
                     </div>
                     <div class="footer-col">
-                        <h4>예배</h4>
+                        <h4>${worshipNavLabel}</h4>
                         ${services.map(s => `
                         <div class="footer-service-row">
                             <span class="footer-service-label">${s.title}</span>
@@ -844,6 +845,45 @@ const CommunityRenderer = {
                         <p style="color:var(--text-muted); font-size:0.9rem;">${g.desc}</p>
                         ${g.detailUrl ? `<a href="${g.detailUrl}" class="community-detail-link">자세히 보기 →</a>` : ''}
                     </div>
+                `).join('')}
+            </div>
+        `;
+    }
+};
+
+/* ── SmallGroupRenderer ──────────────────────────────────── */
+const SmallGroupRenderer = {
+    render() {
+        const el = document.getElementById('smallgroup-full');
+        if (!el) return;
+        const { smallgroups } = CHURCH_DATA.community;
+        if (!smallgroups) return;
+        el.innerHTML = `
+            <div class="liturgy-guide">
+                <div class="liturgy-section">
+                    <p class="liturgy-body">${smallgroups.intro}</p>
+                </div>
+                ${smallgroups.groups.map(g => `
+                <div class="liturgy-section" id="${g.id}">
+                    <div class="info-card info-card--wide">
+                        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+                            <span style="font-size:2rem;" aria-hidden="true">${g.icon}</span>
+                            <div>
+                                <p class="section-eyebrow" style="margin-bottom:0.2rem;">${g.en}</p>
+                                <h2 style="margin:0; font-size:1.25rem;">${g.title}</h2>
+                            </div>
+                        </div>
+                        <div class="info-row" style="margin-bottom:1.25rem;">
+                            <strong>모임 일정</strong>
+                            <span style="color:var(--green-mid); font-weight:600;">${g.schedule}</span>
+                        </div>
+                        <p style="color:var(--text-muted); font-size:0.92rem; line-height:1.9; margin-bottom:1.25rem;">${g.desc}</p>
+                        ${g.details && g.details.length ? `
+                        <ul style="margin:0; padding-left:1.2rem; color:var(--text-muted); font-size:0.9rem; line-height:2;">
+                            ${g.details.map(d => `<li>${d}</li>`).join('')}
+                        </ul>` : ''}
+                    </div>
+                </div>
                 `).join('')}
             </div>
         `;
@@ -1293,6 +1333,7 @@ const App = {
         WorshipRenderer.render();
         NewcomerRenderer.render();
         CommunityRenderer.render();
+        SmallGroupRenderer.render();
         GivingRenderer.render();
         VisitRenderer.render();
         AnglicanRenderer.render();
