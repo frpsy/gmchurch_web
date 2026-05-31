@@ -120,7 +120,20 @@ const CHURCH_DATA = {
                 { icon: "🏛", title: "전통", desc: "초대교회로부터 이어진 사도적 전통과 2,000년 공동체의 지혜를 신앙의 안내자로 삼습니다." },
                 { icon: "💡", title: "이성", desc: "하느님이 주신 이성으로 말씀을 해석하고, 그 신앙을 일상에서 실천합니다." }
             ],
-            pillarNote: "16세기 신학자 리처드 후커(Richard Hooker)가 정립한 '세 기둥'입니다. 성경·전통·이성이 균형을 이룰 때 신앙이 온전해진다는 가르침입니다."
+            pillarNote: "16세기 신학자 리처드 후커(Richard Hooker)가 정립한 '세 기둥'입니다. 성경·전통·이성이 균형을 이룰 때 신앙이 온전해진다는 가르침입니다.",
+            mission: {
+                eyebrow: "Five Marks of Mission",
+                title: "성공회 선교정신",
+                intro: "성공회는 그리스도를 따르는 선교 공동체로서, The Mission of the Church is the Mission of Christ",
+                marks: [
+                    { num: "01", ko: "하느님 나라의 기쁜 소식을 전합니다.", en: "To proclaim the Good News of the Kingdom" },
+                    { num: "02", ko: "새 신자를 가르치고, 세례 주고, 양육합니다.", en: "To teach, baptize and nurture new believers" },
+                    { num: "03", ko: "사랑의 섬김으로 이웃의 필요에 응답합니다.", en: "To respond to human need by loving service" },
+                    { num: "04", ko: "불의한 사회를 변화시키기 위해 노력합니다.", en: "To seek to transform unjust structures of society" },
+                    { num: "05", ko: "창조질서를 보존하며, 지구생명의 회복과 유지에 헌신합니다.", en: "To strive to safeguard the integrity of creation and sustain and renew the life of the earth" }
+                ],
+                note: "성공회선교정신(The Five Marks of Mission)은 세계성공회협의회(Anglican Consultative Council)와 람베스회의(Lambeth Conference)를 통해 확인된 세계성공회의 공통된 선교원칙입니다."
+            }
         },
         korea: {
             eyebrow: "Anglican Church of Korea",
@@ -135,7 +148,12 @@ const CHURCH_DATA = {
                 { icon: "🎓", text: "성공회대학교 등 교육·사회 사업 운영" },
                 { icon: "🌐", text: "세계성공회공동체(Anglican Communion) 정식 회원 교회" },
                 { icon: "⚖️", text: "2001년 여성 사제 서품 시작, 사회 정의와 인권 옹호" }
-            ]
+            ],
+            ionaLink: {
+                label: "강화 아이오나 순례길",
+                desc: "대한성공회의 모태가 된 강화 아이오나 순례길 소개",
+                url: "https://iona-ganghwa.com/25"
+            }
         }
     },
 
@@ -206,6 +224,13 @@ const CHURCH_DATA = {
         }
     ],
 
+    bishop: {
+        name: "김장환(엘리야)",
+        title: "서울교구장 주교",
+        diocese: "대한성공회 서울교구",
+        desc: "대한성공회 서울교구를 관할하는 교구장 주교입니다. 광명교회는 서울교구 소속으로, 교구장 주교 아래 서부교무구 총사제인 민숙희 사제가 교회를 섬기고 있습니다."
+    },
+
     philosophy: {
         title: "우리가 지향하는 교회",
         intro: [
@@ -250,7 +275,10 @@ const CHURCH_DATA = {
                 id: "children",
                 title: "어린이 예배",
                 time: "매주 일요일 오전 11:00",
-                desc: "교육관에서 드리는 어린이 예배입니다. 성공회 전례를 어린이 눈높이에 맞추어 구성합니다."
+                desc: "교육관에서 드리는 어린이 예배입니다. 성공회 전례를 어린이 눈높이에 맞추어 구성합니다.",
+                verse: "나는 분명히 말한다. 너희가 생각을 바꾸어 어린이와 같이 되지 않으면 결코 하늘 나라에 들어가지 못할 것이다.",
+                verseRef: "마태 18:3",
+                detail: "주일학교 선생님들과 해당 주일 전례독서에 따라 찬양과 말씀 관련 활동을 하고, 영성체 시간에 어른들과 함께 영성체를 합니다. 세례받은 모든 어린이는 성체(흰색 밀 면병)를 받고, 보혈(무알콜 포도즙)을 받을 수 있습니다."
             }
         ],
         guide: "",
