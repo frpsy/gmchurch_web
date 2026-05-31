@@ -386,6 +386,7 @@ const FooterRenderer = {
         if (!footer) return;
         const { info, clergy, sns, worship } = CHURCH_DATA;
         const services = worship.main;
+        const resources = worship.resources || [];
         footer.innerHTML = `
             <div class="container">
                 <div class="footer-inner">
