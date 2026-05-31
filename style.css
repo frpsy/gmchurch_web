@@ -1003,6 +1003,58 @@ button:focus:not(:focus-visible) { outline: none; }
     width: 100%;
     height: 100%;
 }
+
+/* ── 로고 후보 비교 (임시) ─────────────────────────────────── */
+.logo-candidates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin: 2.5rem 0 3rem;
+    padding: 2rem;
+    background: var(--green-light);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+}
+.logo-candidate { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+.logo-candidate-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+}
+/* A — 원형: 동그란 배지, 현재 색상 유지 */
+.logo-badge--a {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: #163d24;
+    box-shadow: var(--shadow-md);
+}
+/* B — 여백 강조: 패딩 늘리고 cross 작게 */
+.logo-badge--b {
+    width: 140px; height: 140px;
+    border-radius: 24px;
+    background: #163d24;
+    box-shadow: var(--shadow-md);
+    padding: 20px;
+}
+/* C — 반전: 흰 배경에 녹색 십자가 */
+.logo-badge--c {
+    width: 140px; height: 140px;
+    border-radius: 20px;
+    background: var(--white);
+    border: 2px solid var(--border);
+    box-shadow: var(--shadow-md);
+}
+/* D — 골드 테두리: 현재 배경 + 골드 링 */
+.logo-badge--d {
+    width: 140px; height: 140px;
+    border-radius: 20px;
+    background: #163d24;
+    box-shadow: var(--shadow-md);
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
 .logo-subtitle {
     margin-top: 0.75rem;
     font-size: 0.72rem;
