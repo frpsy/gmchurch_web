@@ -1,0 +1,34 @@
+name: Auto Cache Bust
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.js"
+      - "**.css"
+
+jobs:
+  cache-bust:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Inject commit SHA as asset version
+        run: |
+          SHA=$(git rev-parse --short HEAD)
+          sed -i "s/?v=[A-Za-z0-9_-]*/?v=${SHA}/g" *.html
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet && echo "No changes" || (
+            git add *.html
+            git commit -m "chore: cache-bust asset refs → $(git rev-parse --short HEAD~1)"
+          )
+          git push
