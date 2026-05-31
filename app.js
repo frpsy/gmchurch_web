@@ -1143,9 +1143,10 @@ const ClergyRenderer = {
                 <div style="display:flex; align-items:flex-start; gap:1rem;">
                     <span style="font-size:2rem;" aria-hidden="true">🏛</span>
                     <div>
-                        <p style="font-weight:700; font-size:1.05rem; color:var(--green-deep); margin-bottom:0.2rem;">${bishop.name} 주교</p>
-                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">${bishop.title}</p>
-                        <p style="font-size:0.88rem; line-height:1.8; color:var(--text-muted);">${bishop.desc}</p>
+                        <p style="font-weight:700; font-size:1.05rem; color:var(--green-deep); margin-bottom:0.15rem;">${bishop.name} 주교</p>
+                        <p style="font-size:0.85rem; color:var(--green-mid); font-weight:600; margin-bottom:0.1rem;">${bishop.title}</p>
+                        ${bishop.ordained ? `<p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.75rem;">${bishop.ordained}</p>` : ''}
+                        <p style="font-size:0.88rem; line-height:1.85; color:var(--text-muted);">${bishop.desc}</p>
                     </div>
                 </div>
             </div>
