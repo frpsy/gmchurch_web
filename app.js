@@ -1323,23 +1323,26 @@ const ScrollReveal = {
             '.story-lead',
             '.draft-banner',
             '.newcomer-cta',
+            '.liturgy-inner-quote',
+            '.next-step-cta',
         ].forEach(sel => {
             document.querySelectorAll(sel).forEach(el => el.classList.add('reveal'));
         });
 
-        // Grid children — stagger each card within its own grid
-        document.querySelectorAll('.section .grid').forEach(grid => {
-            Array.from(grid.children).forEach((child, i) => {
-                child.classList.add('reveal');
-                child.style.transitionDelay = `${i * 0.07}s`;
-            });
-        });
-
-        // Story values — stagger each value block
-        document.querySelectorAll('.story-values').forEach(container => {
-            Array.from(container.children).forEach((child, i) => {
-                child.classList.add('reveal');
-                child.style.transitionDelay = `${i * 0.06}s`;
+        // Staggered containers — each child animates in sequence
+        [
+            { sel: '.section .grid',  step: 0.07 },
+            { sel: '.story-values',   step: 0.06 },
+            { sel: '.anglican-pillars', step: 0.08 },
+            { sel: '.mission-marks',  step: 0.07 },
+            { sel: '.liturgy-steps',  step: 0.07 },
+            { sel: '.resource-grid',  step: 0.07 },
+        ].forEach(({ sel, step }) => {
+            document.querySelectorAll(sel).forEach(container => {
+                Array.from(container.children).forEach((child, i) => {
+                    child.classList.add('reveal');
+                    child.style.transitionDelay = `${i * step}s`;
+                });
             });
         });
 
