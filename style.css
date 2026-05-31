@@ -1096,6 +1096,14 @@ button:focus:not(:focus-visible) { outline: none; }
 .iona-link-card__desc  { font-size: 0.78rem; margin-top: 0.15rem; opacity: 0.8; }
 .iona-link-card__arrow { flex-shrink: 0; font-size: 1rem; }
 
+/* Five Marks of Mission */
+.mission-marks { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+.mission-mark { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem; background: var(--surface); border-radius: 8px; border-left: 3px solid var(--green-mid); }
+.mission-mark__num { flex-shrink: 0; width: 1.75rem; height: 1.75rem; background: var(--green-mid); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+.mission-mark__body { flex: 1; min-width: 0; }
+.mission-mark__title { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 0 0 0.25rem; }
+.mission-mark__en { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin: 0; }
+
 /* Bank Card */
 .bank-card {
     background: var(--green-light);

@@ -346,28 +346,28 @@ const CHURCH_DATA = {
                     title: "아침기도",
                     en: "Morning Prayer",
                     desc: "하루를 주님께 봉헌하며 시작하는 기도입니다. 찬가·시편·성서 봉독·기도로 구성되며, 하느님 앞에 하루를 여는 시간입니다.",
-                    url: "https://dulkuka12.github.io/kbcp/daily-office-select.html"
+                    url: "https://dulkuka12.github.io/kbcp/morning-prayer.html"
                 },
                 {
                     icon: "☀️",
                     title: "낮기도",
                     en: "Noonday Prayer",
                     desc: "하루의 한가운데서 잠시 멈추어 드리는 짧은 기도입니다. 바쁜 일상 속에서 하느님을 기억하는 시간입니다.",
-                    url: "https://dulkuka12.github.io/kbcp/daily-office-select.html"
+                    url: "https://dulkuka12.github.io/kbcp/noonday-prayer.html"
                 },
                 {
                     icon: "🌆",
                     title: "저녁기도",
                     en: "Evening Prayer",
                     desc: "하루를 마감하며 감사와 참회로 드리는 기도입니다. 성모찬가(마그니피캇)를 포함하며, 빛이신 그리스도를 찬양합니다.",
-                    url: "https://dulkuka12.github.io/kbcp/daily-office-select.html"
+                    url: "https://dulkuka12.github.io/kbcp/evening-prayer.html"
                 },
                 {
                     icon: "🌙",
                     title: "밤기도",
                     en: "Compline",
                     desc: "하루를 마치고 잠자리에 들기 전 드리는 기도입니다. 수도원 전통에서 비롯된 짧고 고요한 기도로, 하느님의 보호 아래 하루를 맡깁니다.",
-                    url: "https://dulkuka12.github.io/kbcp/daily-office-select.html"
+                    url: "https://dulkuka12.github.io/kbcp/evening-prayer.html"
                 }
             ],
             intercession: {
