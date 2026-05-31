@@ -1407,6 +1407,43 @@ const ScrollProgress = {
     }
 };
 
+/* ── Portrait Lightbox ───────────────────────────────────── */
+const PortraitLightbox = {
+    init() {
+        const overlay = document.createElement('div');
+        overlay.id = 'portrait-lightbox';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-label', '초상 확대 보기');
+        const img = document.createElement('img');
+        img.id = 'portrait-lightbox-img';
+        overlay.appendChild(img);
+        document.body.appendChild(overlay);
+
+        const open = (src, alt) => {
+            img.src = src;
+            img.alt = alt;
+            overlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        };
+        const close = () => {
+            overlay.classList.remove('is-open');
+            document.body.style.overflow = '';
+        };
+
+        overlay.addEventListener('click', close);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') close();
+        });
+
+        document.addEventListener('click', e => {
+            const el = e.target.closest('.clergy-avatar-img, .bishop-portrait');
+            if (el && el.tagName === 'IMG') {
+                open(el.src, el.alt);
+            }
+        });
+    }
+};
+
 /* ── App bootstrap ───────────────────────────────────────── */
 const App = {
     init() {
@@ -1428,6 +1465,7 @@ const App = {
         ScrollReveal.init();
         ScrollProgress.init();
         BackToTop.init();
+        PortraitLightbox.init();
     },
 
     _scrollToHash(hash) {
