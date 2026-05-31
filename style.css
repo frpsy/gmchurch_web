@@ -606,13 +606,13 @@ button:focus:not(:focus-visible) { outline: none; }
     background: var(--white);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
     will-change: transform, opacity;
 }
 .card:hover {
-    border-color: var(--green-soft);
-    box-shadow: 0 8px 28px rgba(139, 115, 85, 0.22);
-    transform: translateY(-4px);
+    border-color: var(--green-mid);
+    box-shadow: 0 12px 36px rgba(22, 61, 36, 0.13);
+    transform: translateY(-6px);
 }
 @media (prefers-reduced-motion: reduce) {
     .card { transition: border-color 0.25s, box-shadow 0.25s; }
@@ -625,7 +625,13 @@ button:focus:not(:focus-visible) { outline: none; }
     margin-bottom: 0.7rem;
     letter-spacing: -0.01em;
 }
-.card-icon { font-size: 2.2rem; margin-bottom: 1.1rem; }
+.card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1.1rem;
+    display: inline-block;
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.card:hover .card-icon { transform: scale(1.18) translateY(-3px); }
 
 /* Info Card */
 .info-card {
@@ -1980,17 +1986,18 @@ footer {
 
 /* ── Community detail link ───────────────────────────────── */
 .community-detail-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
     margin-top: 1.25rem;
     color: var(--green-mid);
     font-size: 0.85rem;
     font-weight: 700;
-    transition: color 0.15s;
+    transition: color 0.2s, gap 0.25s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 .community-detail-link:hover {
     color: var(--green-deep);
-    text-decoration: underline;
-    text-underline-offset: 2px;
+    gap: 0.55rem;
 }
 
 /* ── Emmaus page ─────────────────────────────────────────── */
