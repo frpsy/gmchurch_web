@@ -153,6 +153,11 @@ const CHURCH_DATA = {
                 label: "강화 아이오나 순례길",
                 desc: "대한성공회의 모태가 된 강화 아이오나 순례길 소개",
                 url: "https://iona-ganghwa.com/25"
+            },
+            incheonLink: {
+                label: "인천 내동교회와 랜디스 박사의 삶",
+                desc: "인천 개항장 거리의 성공회 내동교회와 인천의 슈바이처, 랜디스 박사 이야기",
+                url: "https://www.incheontoday.com/news/articleView.html?idxno=210910"
             }
         }
     },
@@ -532,9 +537,10 @@ const CHURCH_DATA = {
                 ]
             },
             {
-                title: "교육 기관",
+                title: "교육·선교 기관",
                 items: [
-                    { name: "성공회대학교",       url: "https://www.skhu.ac.kr/introMain/index.html",                       desc: "대한성공회가 설립한 4년제 대학교" }
+                    { name: "성공회대학교",   url: "https://www.skhu.ac.kr/introMain/index.html", desc: "대한성공회가 설립한 4년제 대학교" },
+                    { name: "여성선교센터",   url: "https://www.awmck.org",                        desc: "Anglican Women's Mission Center Korea" }
                 ]
             },
             {

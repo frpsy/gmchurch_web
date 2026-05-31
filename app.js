@@ -1082,6 +1082,19 @@ const AnglicanRenderer = {
                         <span class="iona-link-card__arrow" aria-hidden="true">↗</span>
                     </a>
                     ` : ''}
+                    ${korea.incheonLink ? `
+                    <a href="${korea.incheonLink.url}" target="_blank" rel="noopener noreferrer"
+                       class="iona-link-card"
+                       onmouseover="this.classList.add('iona-link-card--hover')"
+                       onmouseout="this.classList.remove('iona-link-card--hover')">
+                        <span style="font-size:1.2rem;" aria-hidden="true">⛪</span>
+                        <span class="iona-link-card__text">
+                            <span class="iona-link-card__label">${korea.incheonLink.label}</span>
+                            <span class="iona-link-card__desc">${korea.incheonLink.desc}</span>
+                        </span>
+                        <span class="iona-link-card__arrow" aria-hidden="true">↗</span>
+                    </a>
+                    ` : ''}
                 </div>
                 <div class="anglican-korea-side">
                     <div class="founded-badge">
