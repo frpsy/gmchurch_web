@@ -1142,11 +1142,36 @@ const ClergyRenderer = {
                 ${refs.map((r, i) => `<li class="logo-ref-item"><span class="logo-ref-num" aria-hidden="true">${i + 1}</span><span class="logo-ref-text">${r}</span></li>`).join('')}
             </ol>` : '';
 
+        const crossSvg = (fill) =>
+            `<svg viewBox="0 0 64 64" role="img" aria-label="캔터베리 십자가"><path d="${CANTERBURY_CROSS_PATH}" fill="${fill}" fill-rule="evenodd"/></svg>`;
+
         el.innerHTML = `
             <div class="section-header">
                 <p class="section-eyebrow">${eyebrow}</p>
                 <h2 class="section-title">${title}</h2>
             </div>
+
+            <!-- ── 로고 후보 비교 ───────────────────────────── -->
+            <div class="logo-candidates">
+                <div class="logo-candidate">
+                    <div class="logo-badge logo-badge--a">${crossSvg('#ffffff')}</div>
+                    <p class="logo-candidate-label">A · 원형</p>
+                </div>
+                <div class="logo-candidate">
+                    <div class="logo-badge logo-badge--b">${crossSvg('#ffffff')}</div>
+                    <p class="logo-candidate-label">B · 여백 강조</p>
+                </div>
+                <div class="logo-candidate">
+                    <div class="logo-badge logo-badge--c">${crossSvg('#163d24')}</div>
+                    <p class="logo-candidate-label">C · 반전</p>
+                </div>
+                <div class="logo-candidate">
+                    <div class="logo-badge logo-badge--d">${crossSvg('#ffffff')}</div>
+                    <p class="logo-candidate-label">D · 골드 테두리</p>
+                </div>
+            </div>
+            <!-- ────────────────────────────────────────────── -->
+
             <div class="logo-intro-grid">
                 <div class="logo-display">
                     <div class="logo-badge">
