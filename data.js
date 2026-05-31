@@ -393,7 +393,7 @@ const CHURCH_DATA = {
             {
                 id: "emmaus",
                 title: "엠마우스 코스",
-                desc: "그리스도교 신앙의 기초를 편안하게 배우는 과정",
+                desc: "그리스도교 신앙의 기초를 배우는 과정",
                 icon: "📖",
                 detailUrl: "emmaus.html"
             },
