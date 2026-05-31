@@ -367,7 +367,7 @@ const CHURCH_DATA = {
                     title: "밤기도",
                     en: "Compline",
                     desc: "하루를 마치고 잠자리에 들기 전 드리는 기도입니다. 수도원 전통에서 비롯된 짧고 고요한 기도로, 하느님의 보호 아래 하루를 맡깁니다.",
-                    url: "https://dulkuka12.github.io/kbcp/evening-prayer.html"
+                    url: "https://dulkuka12.github.io/kbcp/compline-prayer.html"
                 }
             ],
             intercession: {
