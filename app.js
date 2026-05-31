@@ -1126,7 +1126,22 @@ const ClergyRenderer = {
     _logo() {
         const el = document.getElementById('logo-content');
         if (!el || !CHURCH_DATA.logo) return;
-        const { eyebrow, title, desc, colors } = CHURCH_DATA.logo;
+        const { eyebrow, title, subtitle, desc, colors, history, elements, refs } = CHURCH_DATA.logo;
+
+        const elementsHtml = elements ? `
+            <div class="logo-elements">
+                ${elements.map(e => `
+                    <div class="logo-element-item">
+                        <p class="logo-element-label">${e.label}</p>
+                        <p class="logo-element-desc">${e.desc}</p>
+                    </div>`).join('')}
+            </div>` : '';
+
+        const refsHtml = refs && refs.length ? `
+            <ol class="logo-refs">
+                ${refs.map(r => `<li class="logo-ref-item">${r}</li>`).join('')}
+            </ol>` : '';
+
         el.innerHTML = `
             <div class="section-header">
                 <p class="section-eyebrow">${eyebrow}</p>
@@ -1138,12 +1153,16 @@ const ClergyRenderer = {
                         <rect width="64" height="64" rx="12" fill="#163d24"/>
                         <path d="${CANTERBURY_CROSS_PATH}" fill="#ffffff" fill-rule="evenodd"/>
                     </svg>
+                    <p class="logo-subtitle">${subtitle}</p>
                     <p class="logo-colors">${colors}</p>
                 </div>
                 <div class="logo-meaning">
                     <p class="logo-desc">${desc}</p>
+                    ${history ? `<p class="logo-history">${history}</p>` : ''}
+                    ${elementsHtml}
                 </div>
             </div>
+            ${refsHtml}
         `;
     },
 

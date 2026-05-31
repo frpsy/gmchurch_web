@@ -993,8 +993,16 @@ button:focus:not(:focus-visible) { outline: none; }
     border-radius: 20px;
     box-shadow: var(--shadow-md);
 }
+.logo-subtitle {
+    margin-top: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+}
 .logo-colors {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     font-size: 0.8rem;
     color: var(--text-muted);
     line-height: 1.7;
@@ -1004,7 +1012,75 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: 1rem;
     line-height: 1.9;
     color: var(--text);
+    margin-bottom: 1.25rem;
+}
+.logo-history {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--text);
+    opacity: 0.85;
     margin-bottom: 1.75rem;
+}
+.logo-elements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+.logo-element-item {
+    background: var(--green-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+}
+.logo-element-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--green-mid);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.02em;
+}
+.logo-element-desc {
+    font-size: 0.83rem;
+    line-height: 1.65;
+    color: var(--text);
+    opacity: 0.85;
+}
+.logo-refs {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    list-style: none;
+    counter-reset: logo-ref;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.logo-ref-item {
+    counter-increment: logo-ref;
+    display: flex;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+.logo-ref-item::before {
+    content: counter(logo-ref);
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--green-mid);
+    background: var(--green-light);
+    border-radius: 50%;
+    width: 1.4em;
+    height: 1.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.15em;
 }
 
 /* ── Anglican Intro Sections ─────────────────────────────── */
@@ -2051,6 +2127,8 @@ footer {
     .logo-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
     .logo-display { display: flex; flex-direction: column; align-items: center; }
     .logo-colors { max-width: unset; text-align: center; }
+    .logo-subtitle { text-align: center; }
+    .logo-elements { grid-template-columns: 1fr; }
 
     /* Anglican intro */
     .anglican-pillars { grid-template-columns: 1fr; }
