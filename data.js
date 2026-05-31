@@ -386,28 +386,29 @@ const CHURCH_DATA = {
             {
                 id: "hopecenter",
                 title: "광명 희망터",
-                desc: "지역의 소외된 이웃과 함께하는 돌봄 사역입니다.",
+                desc: "지역의 소외된 이웃과 함께하는 돌봄 사역",
                 icon: "🌱",
                 detailUrl: "hopecenter.html"
             },
             {
                 id: "emmaus",
                 title: "엠마우스 코스",
-                desc: "그리스도교 신앙의 기초를 편안하게 배우는 과정입니다.",
+                desc: "그리스도교 신앙의 기초를 편안하게 배우는 과정",
                 icon: "📖",
                 detailUrl: "emmaus.html"
             },
             {
                 id: "smallgroup",
                 title: "소그룹 모임",
-                desc: "기도하고 이야기 나누는 작은 모임입니다.",
+                desc: "기도하고 이야기 나누는 작은 모임",
                 icon: "🤝",
                 detailUrl: "smallgroup.html"
             },
             {
                 id: "agape",
                 title: "주일 애찬",
-                desc: "예배 후 함께 밥을 나누는 자리입니다. 채식주의(비건) 애찬도 준비됩니다.",
+                desc: "예배 후 함께 밥을 나누는 자리",
+                note: "채식주의(비건) 애찬도 준비됩니다",
                 icon: "🍚"
             }
         ],
