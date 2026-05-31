@@ -1074,6 +1074,28 @@ button:focus:not(:focus-visible) { outline: none; }
 .korea-highlight-item:last-child { border-bottom: none; }
 .korea-hl-icon { flex-shrink: 0; font-size: 1rem; margin-top: 0.05rem; }
 
+/* Iona pilgrim trail link card */
+.iona-link-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--green-mid);
+    border-radius: 8px;
+    color: var(--green-mid);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+.iona-link-card--hover,
+.iona-link-card:hover { background: var(--green-mid); color: #fff; }
+.iona-link-card__text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.iona-link-card__label { font-size: 0.9rem; font-weight: 700; }
+.iona-link-card__desc  { font-size: 0.78rem; margin-top: 0.15rem; opacity: 0.8; }
+.iona-link-card__arrow { flex-shrink: 0; font-size: 1rem; }
+
 /* Bank Card */
 .bank-card {
     background: var(--green-light);

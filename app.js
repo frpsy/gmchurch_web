@@ -1069,13 +1069,15 @@ const AnglicanRenderer = {
                     ${korea.paras.map(p => `<p class="anglican-para">${p}</p>`).join('')}
                     ${iona ? `
                     <a href="${iona.url}" target="_blank" rel="noopener noreferrer"
-                       style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.5rem;
-                              padding:0.65rem 1.1rem; border:1px solid var(--green-mid); border-radius:8px;
-                              color:var(--green-mid); font-size:0.88rem; font-weight:600;
-                              text-decoration:none; transition:background 0.2s, color 0.2s;"
-                       onmouseover="this.style.background='var(--green-mid)';this.style.color='#fff'"
-                       onmouseout="this.style.background='';this.style.color='var(--green-mid)'">
-                        ⛵ ${iona.desc} <span aria-hidden="true">↗</span>
+                       class="iona-link-card"
+                       onmouseover="this.classList.add('iona-link-card--hover')"
+                       onmouseout="this.classList.remove('iona-link-card--hover')">
+                        <span style="font-size:1.2rem;" aria-hidden="true">⛵</span>
+                        <span class="iona-link-card__text">
+                            <span class="iona-link-card__label">${iona.label}</span>
+                            <span class="iona-link-card__desc">${iona.desc}</span>
+                        </span>
+                        <span class="iona-link-card__arrow" aria-hidden="true">↗</span>
                     </a>
                     ` : ''}
                 </div>
