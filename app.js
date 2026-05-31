@@ -1139,7 +1139,7 @@ const ClergyRenderer = {
 
         const refsHtml = refs && refs.length ? `
             <ol class="logo-refs">
-                ${refs.map(r => `<li class="logo-ref-item">${r}</li>`).join('')}
+                ${refs.map((r, i) => `<li class="logo-ref-item"><span class="logo-ref-num" aria-hidden="true">${i + 1}</span><span class="logo-ref-text">${r}</span></li>`).join('')}
             </ol>` : '';
 
         el.innerHTML = `

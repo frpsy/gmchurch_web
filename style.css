@@ -1061,7 +1061,6 @@ button:focus:not(:focus-visible) { outline: none; }
     padding-top: 1.5rem;
     border-top: 1px solid var(--border);
     list-style: none;
-    counter-reset: logo-ref;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
@@ -1070,15 +1069,14 @@ button:focus:not(:focus-visible) { outline: none; }
     gap: 0.5rem;
 }
 .logo-ref-item {
-    counter-increment: logo-ref;
     display: flex;
     gap: 0.6rem;
+    align-items: flex-start;
     font-size: 0.78rem;
     color: var(--text-muted);
     line-height: 1.7;
 }
-.logo-ref-item::before {
-    content: counter(logo-ref);
+.logo-ref-num {
     font-size: 0.68rem;
     font-weight: 700;
     color: var(--green-mid);
@@ -1091,6 +1089,11 @@ button:focus:not(:focus-visible) { outline: none; }
     justify-content: center;
     flex-shrink: 0;
     margin-top: 0.15em;
+}
+/* flex: 1 + min-width: 0 으로 <em> 구간에서 줄 끊김 방지 */
+.logo-ref-text {
+    flex: 1;
+    min-width: 0;
 }
 
 /* ── Anglican Intro Sections ─────────────────────────────── */
