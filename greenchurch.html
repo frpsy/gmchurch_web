@@ -42,7 +42,7 @@
         </div>
 
         <!-- ── 도입 ───────────────────────────────────────────── -->
-        <section class="section" id="intro">
+        <section class="section" id="intro" style="padding-bottom:0;">
             <div class="container">
                 <p class="story-lead">
                     광명교회는 생태와 환경 보전을 신앙의 과제로 삼습니다.
@@ -51,6 +51,24 @@
                 </p>
             </div>
         </section>
+
+        <!-- ── 섹션 내비게이션 (sticky) ──────────────────────── -->
+        <nav class="gc-page-nav" aria-label="녹색교회 섹션 이동">
+            <div class="container">
+                <a href="#climate" class="gc-nav-link" data-gc-section="climate">
+                    <span aria-hidden="true">🌍</span> 기후위기와 신앙
+                </a>
+                <a href="#vegan" class="gc-nav-link" data-gc-section="vegan">
+                    <span aria-hidden="true">🥦</span> 비건 식탁
+                </a>
+                <a href="#animals" class="gc-nav-link" data-gc-section="animals">
+                    <span aria-hidden="true">🐾</span> 동물복지
+                </a>
+                <a href="#resources" class="gc-nav-link" data-gc-section="resources">
+                    <span aria-hidden="true">📚</span> 자료 링크
+                </a>
+            </div>
+        </nav>
 
         <!-- ── 섹션 1: 기후위기와 신앙 ──────────────────────── -->
         <section class="section" id="climate" style="background:var(--green-light);">
@@ -218,8 +236,8 @@
                     <p class="section-eyebrow">02 · Plant-Based Table</p>
                     <h2 class="section-title">비건 식탁</h2>
                     <p class="section-sub">
-                        광명교회 주일 애찬은 비건(완전 채식)으로 준비됩니다.
-                        이것은 창조세계를 돌보는 신앙의 실천이며, 모든 생명에 대한 존중입니다.
+                        광명교회 주일 애찬은 <strong>비건 지향</strong> 공동 식사입니다.
+                        비건 옵션이 기본으로 제공되며, 창조세계를 돌보는 신앙의 실천입니다.
                     </p>
                 </div>
 
@@ -261,11 +279,12 @@
                         <span class="story-value-icon" aria-hidden="true">🍽</span>
                         <div class="story-value-body">
                             <p class="story-value-num">실천</p>
-                            <h3 class="story-value-title">광명교회의 비건 애찬</h3>
+                            <h3 class="story-value-title">광명교회의 비건 지향 애찬</h3>
                             <p class="story-value-text">
                                 광명교회 주일 <a href="community.html#agape">애찬</a>은
+                                <strong>비건 지향 공동 식사</strong>입니다.
                                 우유·달걀을 포함한 모든 동물성 식재료를 사용하지 않는
-                                <strong>비건(완전 채식)</strong>으로 준비됩니다.
+                                비건 옵션이 기본으로 준비되며,
                                 성찬의 식탁이 일상의 밥상으로 이어지는 이 자리는
                                 창조세계와의 화해를 먹고 나누는 시간입니다.
                             </p>
@@ -374,12 +393,16 @@
                         </div>
                     </div>
 
-                    <!-- 공장식 축산 -->
+                    <!-- 공장식 축산 (가안) -->
                     <div class="story-value">
                         <span class="story-value-icon" aria-hidden="true">🚫</span>
                         <div class="story-value-body">
                             <p class="story-value-num">실천</p>
                             <h3 class="story-value-title">공장식 축산에 대한 신앙적 입장</h3>
+                            <div class="draft-banner" role="note">
+                                <span class="draft-banner-icon" aria-hidden="true">✏️</span>
+                                <p><strong>가안 (검토 중)</strong> — 아래 내용은 광명교회의 공식 입장 확정 전 초안입니다. 내용이 변경될 수 있습니다.</p>
+                            </div>
                             <p class="story-value-text">
                                 공장식 축산은 동물을 "대상·기계·도구·상품"으로 취급합니다.
                                 이는 창조세계의 내재적 가치를 부정하는 것입니다.
@@ -390,9 +413,6 @@
                                 한국 동물자유연대는 이를 이렇게 표현합니다:<br>
                                 "교회와 교리, 신학이 동물에 대한 시각을 달리하지 않는 한,
                                 기독교가 주장하는 대로 동물의 본래적 가치는 여전히 인간의 저 밑에 위치할 수밖에 없다."
-                            </p>
-                            <p class="story-value-text">
-                                광명교회는 공장식 축산에 반대하며, 이것이 비건 식탁을 실천하는 신앙적 이유 중 하나입니다.
                             </p>
                         </div>
                     </div>
@@ -522,5 +542,25 @@
 
     <script src="data.js?v=10bb746"></script>
     <script src="app.js?v=10bb746"></script>
+    <script>
+    /* 섹션 내비게이션 활성 상태 표시 */
+    (function () {
+        var links = document.querySelectorAll('.gc-nav-link[data-gc-section]');
+        var sections = Array.from(links).map(function (l) {
+            return document.getElementById(l.dataset.gcSection);
+        });
+        if (!('IntersectionObserver' in window) || !sections[0]) return;
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    links.forEach(function (l) { l.classList.remove('is-active'); });
+                    var active = document.querySelector('.gc-nav-link[data-gc-section="' + e.target.id + '"]');
+                    if (active) active.classList.add('is-active');
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px' });
+        sections.forEach(function (s) { if (s) io.observe(s); });
+    }());
+    </script>
 </body>
 </html>

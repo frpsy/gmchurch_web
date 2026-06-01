@@ -671,9 +671,11 @@ const CHURCH_DATA = {
             label: "미디어·자료",
             href: "media.html",
             items: [
-                { label: "교회 영상", href: "media.html" },
-                { label: "녹색교회",  href: "greenchurch.html" },
-                { label: "관련 기관", href: "links.html" }
+                { label: "교회 영상",     href: "media.html" },
+                { label: "기후위기와 신앙", href: "greenchurch.html#climate" },
+                { label: "비건 식탁",     href: "greenchurch.html#vegan" },
+                { label: "동물복지",      href: "greenchurch.html#animals" },
+                { label: "관련 기관",     href: "links.html" }
             ]
         },
         {
