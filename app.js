@@ -1218,11 +1218,24 @@ const ClergyRenderer = {
                         </div>
                     </div>`;
                 }).join('')
-                : `<div class="minister-empty">준비 중입니다.</div>`;
+                : '';
+            const officers = (CHURCH_DATA.officers || []).filter(o => o.category === cat.id);
+            const officersHtml = officers.length > 0
+                ? `<div class="officer-card">
+                    <ul class="officer-list">
+                        ${officers.map(o => `
+                        <li class="officer-row">
+                            <span class="officer-role">${o.role}</span>
+                            <span class="officer-names">${o.members.join(', ')}</span>
+                        </li>`).join('')}
+                    </ul>
+                </div>`
+                : '';
+            const bodyHtml = (membersHtml + officersHtml) || `<div class="minister-empty">준비 중입니다.</div>`;
             return `
             <div class="minister-category">
                 <h3 class="minister-cat-title">${cat.title}</h3>
-                ${membersHtml}
+                ${bodyHtml}
             </div>`;
         }).join('');
     },

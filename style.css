@@ -780,6 +780,41 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 0.75rem 0;
 }
 
+/* 평신도 임원진 명단 — 성직자 카드보다 가벼운 직분·이름 표시 */
+.officer-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--green-mid);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.9rem;
+    box-shadow: var(--shadow-md);
+}
+.officer-list { list-style: none; display: flex; flex-direction: column; }
+.officer-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.officer-row:first-child { padding-top: 0; }
+.officer-row:last-child { padding-bottom: 0; border-bottom: none; }
+.officer-role {
+    flex-shrink: 0;
+    width: 96px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--green-mid);
+    letter-spacing: 0.02em;
+}
+.officer-names {
+    color: var(--heading);
+    font-size: 0.98rem;
+    font-weight: 500;
+    line-height: 1.7;
+    word-break: keep-all;
+}
+
 /* Clergy Card */
 .clergy-card {
     background: var(--white);
@@ -2142,6 +2177,11 @@ footer {
     /* Clergy Card — 초상만 가운데, bio 텍스트는 좌측 정렬 유지 */
     .clergy-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem 1.75rem; }
     .clergy-avatar { margin: 0 auto; }
+
+    /* 임원진 명단 — 좁은 화면에서 직분 라벨을 이름 위로 */
+    .officer-card { padding: 1.4rem 1.5rem; }
+    .officer-row { flex-direction: column; gap: 0.2rem; }
+    .officer-role { width: auto; }
 
     /* Logo intro */
     .logo-intro-grid { grid-template-columns: 1fr; gap: 2rem; }

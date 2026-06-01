@@ -172,8 +172,14 @@ const CHURCH_DATA = {
       title: "협동사제",
       ordained: "", quote: "", desc: String,
       contact: "",
-      kyoboUrl: "https://www.aladin.co.kr/…"  // 저서 링크
+      kyoboUrl: "https://www.aladin.co.kr/…",  // 저서 링크
+      blogUrl: "https://m.blog.naver.com/…"    // 블로그 링크
     }
+  ],
+
+  // 평신도 임원진 — category로 ministerSection.categories와 매칭, 경량 명단(officer-card)으로 렌더
+  officers: [
+    { category: "교회위원", role: "신자회장", members: [String] }  // members 1+ 명, ', '로 표시
   ],
 
   philosophy: {
@@ -353,7 +359,7 @@ window DOMContentLoaded
       │
       ├── ClergyRenderer.render()     → clergy.html 전용
       │     _logo()       → #logo-content  (캔터베리 십자가 SVG + 설명)
-      │     _clergy()     → #clergy-full   (clergy-card × 2)
+      │     _clergy()     → #clergy-full   (주교 + 카테고리별 성직자 clergy-card / 임원진 officer-card)
       │       _bioSection(bio) → 타임라인 + 소임 태그 + 교회 밖 활동 + 출처
       │     _philosophy() → #philosophy-full  (.values-grid)
       │
