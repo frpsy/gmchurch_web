@@ -17,7 +17,7 @@
     --cream:        #f7f4ed;
     --white:        #ffffff;
     --text:         #1a1a1a;
-    --text-muted:   #5a5a54;
+    --text-muted:   #4d4c46;  /* WCAG AA(4.5:1) 충족 — cream/white 배경 위 본문용 */
     --border:       #e8e5dc;
     /* 표면 위 제목 텍스트 — 모드별로 분기 (green-deep은 배경 전용으로 유지) */
     --heading:      #0a1f12;
@@ -46,7 +46,11 @@
 
 /* ── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
+/* 부드러운 스크롤은 모션 민감 사용자에게는 비활성화 (전정기관 자극 방지) */
+@media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+}
 body {
     font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Noto Sans KR",
                  "Segoe UI", "Apple SD Gothic Neo", sans-serif;
@@ -201,8 +205,8 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .dropdown li a {
     display: block;
-    padding: 0.65rem 1.25rem;
-    font-size: 0.85rem;
+    padding: 0.8rem 1.25rem;  /* 터치 타깃 ≥44px 확보 */
+    font-size: 0.9rem;
     color: var(--text-muted);
     border-bottom: 1px solid var(--border);
     transition: color 0.15s, background 0.15s, padding-left 0.15s;
@@ -235,9 +239,9 @@ button:focus:not(:focus-visible) { outline: none; }
     flex-shrink: 0;
     background: var(--red);
     color: #fff;
-    padding: 0.45rem 1.1rem;
+    padding: 0.55rem 1.15rem;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     font-weight: 700;
     white-space: nowrap;
     transition: background 0.2s;
@@ -468,9 +472,9 @@ button:focus:not(:focus-visible) { outline: none; }
     white-space: nowrap;
 }
 .hero-stat-lbl {
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     font-weight: 500;
-    color: rgba(255,255,255,0.58);
+    color: rgba(255,255,255,0.78);  /* 어두운 오버레이 위 대비 상향 */
     letter-spacing: 0.1em;
     text-transform: uppercase;
 }
@@ -509,7 +513,7 @@ button:focus:not(:focus-visible) { outline: none; }
     .hero-stats { gap: 0; padding: 0.8rem 0.5rem; }
     .hero-stat { padding: 0.2rem 0.7rem; }
     .hero-stat-val { font-size: 0.82rem; }
-    .hero-stat-lbl { font-size: 0.6rem; }
+    .hero-stat-lbl { font-size: 0.68rem; }
     .hero-stat-divider { height: 1.8rem; }
     .hero-scroll { bottom: 5rem; }
     .btn-hero-primary { font-size: 0.92rem; }
@@ -1919,7 +1923,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* ── Footer ──────────────────────────────────────────────── */
 footer {
     background: var(--green-deep);
-    color: rgba(255,255,255,0.82);
+    color: rgba(255,255,255,0.85);
     padding: 6rem 0 4rem;
 }
 .footer-inner {
@@ -1929,9 +1933,9 @@ footer {
     margin-bottom: 3.5rem;
 }
 .footer-col h4 {
-    font-size: 0.68rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.62);  /* 섹션 제목 대비 상향 */
     letter-spacing: 0.18em;
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -1961,20 +1965,20 @@ footer {
 }
 .footer-brand-sub {
     display: block;
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.42);
+    font-size: 0.74rem;
+    color: rgba(255,255,255,0.65);
     margin-top: 0.12rem;
 }
 .footer-col .footer-brand-slogan {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-style: italic;
-    color: rgba(255,255,255,0.46);
+    color: rgba(255,255,255,0.7);
     line-height: 1.75;
     margin: 0 0 0.85rem;
 }
 .footer-col .footer-brand-meta {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.32);
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.68);
     line-height: 1.9;
     margin: 0;
 }
@@ -1989,7 +1993,7 @@ footer {
     border-bottom: 1px solid rgba(255,255,255,0.07);
     font-size: 0.82rem;
 }
-.footer-service-label { color: rgba(255,255,255,0.58); }
+.footer-service-label { color: rgba(255,255,255,0.75); }
 .footer-service-time {
     color: #fff;
     font-weight: 600;
@@ -2004,18 +2008,18 @@ footer {
 .footer-info-row {
     display: flex;
     gap: 0.7rem;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     padding: 0.28rem 0;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.8);  /* 연락처 본문 — AA 충족 */
     line-height: 1.65;
     align-items: flex-start;
 }
 .footer-info-label {
-    font-size: 0.63rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.33);
+    color: rgba(255,255,255,0.6);
     min-width: 26px;
     flex-shrink: 0;
     padding-top: 0.2rem;
@@ -2038,9 +2042,9 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.83rem;
-    color: rgba(255,255,255,0.62);
-    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.8);
+    padding: 0.6rem 0;
     border-bottom: 1px solid rgba(255,255,255,0.07);
     transition: color 0.2s;
     line-height: 1.4;
@@ -2059,8 +2063,8 @@ footer {
     transform: translate(2px, -2px);
 }
 .footer-col .footer-ext-link--dim {
-    opacity: 0.62;
-    font-size: 0.78rem;
+    opacity: 0.78;
+    font-size: 0.8rem;
     margin-top: 0.65rem;
     border-bottom: none;
 }
@@ -2074,8 +2078,8 @@ footer {
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
-    font-size: 0.76rem;
-    opacity: 0.58;
+    font-size: 0.78rem;
+    opacity: 0.78;
 }
 .footer-bottom-links { display: flex; align-items: center; gap: 1.25rem; }
 .footer-privacy-link { color: inherit; transition: opacity 0.2s; }
@@ -2166,10 +2170,10 @@ footer {
     }
     .nav-item.mobile-open .dropdown { display: block; }
     .dropdown li a {
-        color: rgba(255,255,255,0.65);
-        padding: 0.6rem 1.1rem;
+        color: rgba(255,255,255,0.82);  /* 대비 상향 (AA) */
+        padding: 0.85rem 1.1rem;        /* 터치 타깃 ≥44px */
         border-bottom: 1px solid rgba(255,255,255,0.05);
-        font-size: 0.83rem;
+        font-size: 0.92rem;
     }
     .dropdown li a:hover {
         color: #fff;
