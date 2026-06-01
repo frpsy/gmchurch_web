@@ -530,8 +530,8 @@ button:focus:not(:focus-visible) { outline: none; }
 .page-hero > :nth-child(4) { animation-delay: 0.50s; }
 
 .page-hero {
-    padding-top: calc(var(--nav-h) + 6.5rem);
-    padding-bottom: 6rem;
+    padding-top: calc(var(--nav-h) + 5rem);
+    padding-bottom: 4rem;
     padding-left: clamp(1.25rem, 5vw, 2.5rem);
     padding-right: clamp(1.25rem, 5vw, 2.5rem);
     text-align: center;
@@ -542,7 +542,8 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: clamp(2.2rem, 4.5vw, 3.4rem);
     font-weight: 700;
     color: var(--heading);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
     word-break: keep-all;
 }
 .page-hero p {
@@ -593,7 +594,7 @@ button:focus:not(:focus-visible) { outline: none; }
     max-width: 520px;
     line-height: 1.75;
 }
-.section-header { margin-bottom: 5rem; }
+.section-header { margin-bottom: 3.5rem; }
 
 /* ── Grid ────────────────────────────────────────────────── */
 .grid {
@@ -2504,11 +2505,12 @@ footer {
 .story-lead {
     max-width: 760px;
     margin: 0 auto;
-    font-size: 1.08rem;
+    font-size: 1.05rem;
     color: var(--text);
-    line-height: 1.95;
+    line-height: 1.8;
     text-align: center;
     word-break: keep-all;
+    letter-spacing: -0.01em;
 }
 .story-lead strong { color: var(--heading); }
 
@@ -2544,19 +2546,20 @@ footer {
     margin-bottom: 0.3rem;
 }
 .story-value-title {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--heading);
-    margin-bottom: 0.6rem;
-    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.015em;
 }
 .story-value-text {
-    font-size: 0.93rem;
+    font-size: 0.92rem;
     color: var(--text);
-    line-height: 1.9;
+    line-height: 1.75;
     word-break: keep-all;
+    letter-spacing: -0.005em;
 }
-.story-value-text + .story-value-text { margin-top: 0.7rem; }
+.story-value-text + .story-value-text { margin-top: 0.65rem; }
 .story-value-text a { color: var(--green-mid); font-weight: 600; }
 .story-value-text a:hover { text-decoration: underline; text-underline-offset: 2px; }
 
