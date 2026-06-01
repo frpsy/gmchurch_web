@@ -774,6 +774,12 @@ button:focus:not(:focus-visible) { outline: none; }
     border-bottom: 2px solid var(--green-soft);
 }
 .minister-category:first-child .minister-cat-title { margin-top: 0; }
+.minister-cat-note {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    margin: -0.5rem 0 1.25rem;
+}
 .minister-empty {
     color: var(--text-muted);
     font-size: 0.88rem;

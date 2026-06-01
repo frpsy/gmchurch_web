@@ -645,7 +645,7 @@ const WorshipRenderer = {
                 <div class="liturgy-section" id="lectionary">
                     <p class="section-eyebrow">Lectionary</p>
                     <h2 class="section-title">전례독서</h2>
-                    <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 전례력에 따른 주일 성서 독서 일정을 확인하실 수 있습니다.</p>
+                    <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 전례력에 따른 성서 본문을 확인하실 수 있습니다.</p>
                     <div class="lectionary-cal-wrap">
                         <iframe
                             src="https://calendar.google.com/calendar/embed?src=anglican.kr_ep5i6qcm67gl19st7m0fd32l30%40group.calendar.google.com&ctz=Asia%2FSeoul&mode=AGENDA&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&hl=ko"
@@ -1095,6 +1095,19 @@ const AnglicanRenderer = {
                         <span class="iona-link-card__arrow" aria-hidden="true">↗</span>
                     </a>
                     ` : ''}
+                    ${korea.cathedralLink ? `
+                    <a href="${korea.cathedralLink.url}" target="_blank" rel="noopener noreferrer"
+                       class="iona-link-card"
+                       onmouseover="this.classList.add('iona-link-card--hover')"
+                       onmouseout="this.classList.remove('iona-link-card--hover')">
+                        <span style="font-size:1.2rem;" aria-hidden="true">🕊️</span>
+                        <span class="iona-link-card__text">
+                            <span class="iona-link-card__label">${korea.cathedralLink.label}</span>
+                            <span class="iona-link-card__desc">${korea.cathedralLink.desc}</span>
+                        </span>
+                        <span class="iona-link-card__arrow" aria-hidden="true">↗</span>
+                    </a>
+                    ` : ''}
                 </div>
                 <div class="anglican-korea-side">
                     <div class="founded-badge">
@@ -1235,6 +1248,7 @@ const ClergyRenderer = {
             return `
             <div class="minister-category">
                 <h3 class="minister-cat-title">${cat.title}</h3>
+                ${cat.note ? `<p class="minister-cat-note">${cat.note}</p>` : ''}
                 ${bodyHtml}
             </div>`;
         }).join('');
