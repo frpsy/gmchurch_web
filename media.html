@@ -139,30 +139,26 @@
     <script src="data.js?v=8d89053"></script>
     <script src="app.js?v=8d89053"></script>
     <script>
-    /* 섹션 내비게이션 활성 상태 표시 — 진입/이탈 모두 추적 */
+    /* 섹션 내비게이션 활성 상태 표시 — 스크롤 기반 */
     (function () {
         var links = document.querySelectorAll('.gc-nav-link[data-media-section]');
-        if (!links.length || !('IntersectionObserver' in window)) return;
+        if (!links.length) return;
         var ids = Array.from(links).map(function (l) { return l.dataset.mediaSection; });
-        var state = {};
-        ids.forEach(function (id) { state[id] = false; });
 
-        function sync() {
-            var activeId = ids.find(function (id) { return state[id]; }) || null;
+        function update() {
+            var threshold = window.innerHeight * 0.35;
+            var activeId = null;
+            for (var i = 0; i < ids.length; i++) {
+                var el = document.getElementById(ids[i]);
+                if (el && el.getBoundingClientRect().top <= threshold) activeId = ids[i];
+            }
             links.forEach(function (l) {
                 l.classList.toggle('is-active', l.dataset.mediaSection === activeId);
             });
         }
 
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) { state[e.target.id] = e.isIntersecting; });
-            sync();
-        }, { rootMargin: '-30% 0px -60% 0px' });
-
-        ids.forEach(function (id) {
-            var el = document.getElementById(id);
-            if (el) io.observe(el);
-        });
+        window.addEventListener('scroll', update, { passive: true });
+        update();
     }());
     </script>
 </body>
