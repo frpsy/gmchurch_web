@@ -672,6 +672,7 @@ const CHURCH_DATA = {
             href: "media.html",
             items: [
                 { label: "교회 영상", href: "media.html" },
+                { label: "녹색교회",  href: "greenchurch.html" },
                 { label: "관련 기관", href: "links.html" }
             ]
         },
