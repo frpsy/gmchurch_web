@@ -75,7 +75,7 @@ img { display: block; max-width: 100%; }
     left: 0;
     padding: 0.6rem 1.2rem;
     background: var(--green-deep);
-    color: var(--white);
+    color: #fff;
     font-weight: 600;
     font-size: 0.9rem;
     text-decoration: none;
@@ -1718,7 +1718,7 @@ button:focus:not(:focus-visible) { outline: none; }
     content: "–";
     position: absolute;
     left: 0;
-    color: var(--border);
+    color: var(--green-mid);
 }
 
 /* Communion */
