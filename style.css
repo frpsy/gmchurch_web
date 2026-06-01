@@ -185,7 +185,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .dropdown {
     position: absolute;
     top: 100%; left: 0;
-    background: #fff;
+    background: var(--white);
     border-top: 2px solid var(--green-mid);
     border-radius: 0 0 var(--radius-sm) var(--radius-sm);
     min-width: 180px;
@@ -204,7 +204,7 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 0.65rem 1.25rem;
     font-size: 0.85rem;
     color: var(--text-muted);
-    border-bottom: 1px solid #f3f3f3;
+    border-bottom: 1px solid var(--border);
     transition: color 0.15s, background 0.15s, padding-left 0.15s;
 }
 .dropdown li:last-child a { border-bottom: none; }
@@ -2948,6 +2948,13 @@ footer {
     /* 페이지 히어로 — 라이트 전용 하드코딩 그라데이션을 다크 톤으로 대체 */
     .page-hero {
         background: linear-gradient(165deg, #1d3526 0%, var(--green-light) 42%, var(--cream) 100%);
+    }
+    /* 히어로 CTA 버튼 — 배경이 항상 흰색(#fff)이므로 텍스트·호버를 라이트 모드 값으로 고정 */
+    .btn-hero-primary {
+        color: #0a1f12;
+    }
+    .btn-hero-primary:hover {
+        background: #c8ddc9;
     }
 }
 
