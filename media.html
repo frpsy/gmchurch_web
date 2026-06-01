@@ -144,13 +144,18 @@
         var links = document.querySelectorAll('.gc-nav-link[data-media-section]');
         if (!links.length) return;
         var ids = Array.from(links).map(function (l) { return l.dataset.mediaSection; });
+        var els = ids.map(function (id) { return document.getElementById(id); });
+        /* section 요소의 padding-top(9rem 등)을 초기 1회 캐시 — 콘텐츠 시작점 보정용 */
+        var pads = els.map(function (el) {
+            return el ? parseFloat(window.getComputedStyle(el).paddingTop) || 0 : 0;
+        });
 
         function update() {
-            var threshold = window.innerHeight * 0.35;
+            var threshold = window.innerHeight * 0.40;
             var activeId = null;
-            for (var i = 0; i < ids.length; i++) {
-                var el = document.getElementById(ids[i]);
-                if (el && el.getBoundingClientRect().top <= threshold) activeId = ids[i];
+            for (var i = 0; i < els.length; i++) {
+                if (!els[i]) continue;
+                if (els[i].getBoundingClientRect().top + pads[i] <= threshold) activeId = ids[i];
             }
             links.forEach(function (l) {
                 l.classList.toggle('is-active', l.dataset.mediaSection === activeId);
