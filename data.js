@@ -269,6 +269,15 @@ const CHURCH_DATA = {
         }
     ],
 
+    // 평신도 임원진 — 주보(제1844호) 기준. category는 ministerSection.categories와 매칭
+    officers: [
+        { category: "교회위원", role: "신자회장",   members: ["이문희"] },
+        { category: "교회위원", role: "사제회장",   members: ["최명숙"] },
+        { category: "교회위원", role: "교회위원",   members: ["문운영", "박광식", "임경식", "나영숙", "박종미"] },
+        { category: "교회위원", role: "건축위원장", members: ["정순진"] },
+        { category: "사역자",   role: "희망터 총무", members: ["신효심"] }
+    ],
+
     bishop: {
         name: "김장환(엘리야)",
         title: "제7대 서울교구장 주교",
