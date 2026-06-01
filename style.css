@@ -19,6 +19,11 @@
     --text:         #1a1a1a;
     --text-muted:   #5a5a54;
     --border:       #e8e5dc;
+    /* 표면 위 제목 텍스트 — 모드별로 분기 (green-deep은 배경 전용으로 유지) */
+    --heading:      #0a1f12;
+    /* Skeleton 로더 — 모드 대응 */
+    --skeleton-base: #dbd8d0;
+    --skeleton-mid:  #c8c5bc;
     --red:          #b53737;
     /* Nav glass */
     --nav-glass:    rgba(10, 31, 18, 0.9);
@@ -417,7 +422,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .btn-hero-primary {
     display: inline-block;
     background: #fff;
-    color: var(--green-deep);
+    color: var(--heading);
     padding: 0.9rem 2rem;
     border-radius: 50px;
     font-size: 0.95rem;
@@ -536,7 +541,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .page-hero h1 {
     font-size: clamp(2.2rem, 4.5vw, 3.4rem);
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     letter-spacing: -0.025em;
     word-break: keep-all;
 }
@@ -576,7 +581,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .section-title {
     font-size: clamp(2rem, 3.8vw, 2.8rem);
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     letter-spacing: -0.03em;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -618,7 +623,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .card h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.7rem;
     letter-spacing: -0.01em;
 }
@@ -650,7 +655,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .info-card h3 {
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 1.25rem;
     padding-bottom: 0.85rem;
     border-bottom: 1px solid var(--border);
@@ -664,7 +669,7 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: 1.7;
 }
 .info-row strong {
-    color: var(--green-deep);
+    color: var(--heading);
     min-width: 64px;
     flex-shrink: 0;
     font-weight: 600;
@@ -683,7 +688,7 @@ button:focus:not(:focus-visible) { outline: none; }
     margin-top: 2.5rem;
 }
 .guide-banner p {
-    color: var(--green-deep);
+    color: var(--heading);
     font-size: 0.95rem;
     line-height: 1.85;
 }
@@ -699,7 +704,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .quote-block p {
     font-size: 0.98rem;
     font-style: italic;
-    color: var(--green-deep);
+    color: var(--heading);
     line-height: 1.85;
 }
 
@@ -724,7 +729,7 @@ button:focus:not(:focus-visible) { outline: none; }
     border-color: var(--green-soft);
 }
 .value-card .val-icon { font-size: 1.8rem; margin-bottom: 0.85rem; }
-.value-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
+.value-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--heading); margin-bottom: 0.5rem; }
 .value-card p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.8; }
 
 .philosophy-intro {
@@ -750,7 +755,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .philosophy-closing p {
     font-size: 1rem;
-    color: var(--green-deep);
+    color: var(--heading);
     line-height: 1.85;
     margin: 0;
     word-break: keep-all;
@@ -812,7 +817,7 @@ button:focus:not(:focus-visible) { outline: none; }
     cursor: zoom-in;
     display: block;
 }
-.clergy-name { font-size: 1.2rem; font-weight: 700; color: var(--green-deep); letter-spacing: -0.01em; }
+.clergy-name { font-size: 1.2rem; font-weight: 700; color: var(--heading); letter-spacing: -0.01em; }
 .clergy-title { font-size: 0.85rem; color: var(--green-mid); font-weight: 600; margin-top: 0.25rem; letter-spacing: 0.02em; word-break: keep-all; overflow-wrap: break-word; }
 .clergy-desc { font-size: 0.95rem; color: var(--text); line-height: 1.85; margin-top: 1rem; opacity: 0.85; }
 
@@ -926,7 +931,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .about-brief-lead {
     font-size: clamp(1.35rem, 2.8vw, 1.75rem);
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     letter-spacing: -0.025em;
     margin-bottom: 1.5rem;
     line-height: 1.45;
@@ -975,7 +980,7 @@ button:focus:not(:focus-visible) { outline: none; }
     padding-bottom: 0.15rem;
     transition: color 0.2s;
 }
-.about-brief-link:hover { color: var(--green-deep); }
+.about-brief-link:hover { color: var(--heading); }
 
 /* ── Logo Intro (clergy page) ────────────────────────────── */
 .logo-intro-grid {
@@ -1158,7 +1163,7 @@ button:focus:not(:focus-visible) { outline: none; }
 @media (prefers-reduced-motion: reduce) {
     .anglican-pillar-icon { transition: none; }
 }
-.anglican-pillar-title { font-size: 1rem; font-weight: 700; color: var(--green-deep); margin-bottom: 0.5rem; }
+.anglican-pillar-title { font-size: 1rem; font-weight: 700; color: var(--heading); margin-bottom: 0.5rem; }
 .anglican-pillar-desc { font-size: 0.85rem; line-height: 1.75; color: var(--text-muted); }
 .anglican-pillar-note {
     font-size: 0.82rem;
@@ -1267,7 +1272,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .mission-mark__num { flex-shrink: 0; width: 1.75rem; height: 1.75rem; background: var(--green-mid); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
 .mission-mark__body { flex: 1; min-width: 0; }
-.mission-mark__title { font-size: 0.95rem; font-weight: 700; color: var(--green-deep); margin: 0 0 0.25rem; }
+.mission-mark__title { font-size: 0.95rem; font-weight: 700; color: var(--heading); margin: 0 0 0.25rem; }
 .mission-mark__en { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin: 0; }
 
 /* Bank Card */
@@ -1280,7 +1285,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .bank-card .account {
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     letter-spacing: 0.02em;
     font-variant-numeric: tabular-nums;
 }
@@ -1411,7 +1416,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .newcomer-intro-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 1rem;
     letter-spacing: -0.01em;
 }
@@ -1443,7 +1448,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--green-deep);
+    color: var(--heading);
     padding-top: 0.15rem;
 }
 .newcomer-key-value {
@@ -1529,7 +1534,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .btn-next--primary {
     background: var(--green-deep);
-    border-color: var(--green-deep);
+    border-color: var(--heading);
     color: #fff;
 }
 .btn-next--primary:hover {
@@ -1578,7 +1583,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .newcomer-cta h3 {
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.75rem;
     letter-spacing: -0.01em;
 }
@@ -1611,7 +1616,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .newcomer-cta-link:hover {
     border-color: var(--green-mid);
-    color: var(--green-deep);
+    color: var(--heading);
     background: var(--green-light);
 }
 
@@ -1633,7 +1638,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .liturgy-card-title {
     font-size: 0.97rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.85rem;
 }
 .liturgy-list { list-style: none; padding: 0; }
@@ -1698,7 +1703,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .step-title {
     font-size: 0.97rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.55rem;
 }
 .step-list { list-style: none; padding: 0; }
@@ -1732,7 +1737,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .communion-card h3 {
     font-size: 0.97rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.85rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border);
@@ -1771,7 +1776,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .resource-title {
     font-size: 1.02rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.45rem;
     letter-spacing: -0.01em;
 }
@@ -1829,7 +1834,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .space-name {
     font-size: 1rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.45rem;
 }
 .space-en {
@@ -2204,7 +2209,7 @@ footer {
     transition: color 0.2s, gap 0.25s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 .community-detail-link:hover {
-    color: var(--green-deep);
+    color: var(--heading);
     gap: 0.55rem;
 }
 
@@ -2242,7 +2247,7 @@ footer {
 .emmaus-scripture {
     font-size: 1rem;
     line-height: 1.85;
-    color: var(--green-deep);
+    color: var(--heading);
     font-style: italic;
     margin-bottom: 1.25rem;
     border: none;
@@ -2293,7 +2298,7 @@ footer {
 .emmaus-stage-ko {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -2348,7 +2353,7 @@ footer {
 .nurture-part-title {
     font-size: 0.92rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--border);
@@ -2406,7 +2411,7 @@ footer {
 .placeholder-title {
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.75rem;
 }
 .placeholder-desc {
@@ -2459,7 +2464,7 @@ footer {
     text-align: center;
     word-break: keep-all;
 }
-.story-lead strong { color: var(--green-deep); }
+.story-lead strong { color: var(--heading); }
 
 .story-values {
     display: flex;
@@ -2495,7 +2500,7 @@ footer {
 .story-value-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.6rem;
     letter-spacing: -0.01em;
 }
@@ -2753,7 +2758,7 @@ footer {
 .links-card-name {
     font-size: 0.97rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
 }
 .links-card-desc {
     font-size: 0.82rem;
@@ -2772,13 +2777,13 @@ footer {
 
 /* ── Skeleton Loading ─────────────────────────────────── */
 @keyframes skeleton-pulse {
-    0%   { background-color: #dbd8d0; }
-    50%  { background-color: #c8c5bc; }
-    100% { background-color: #dbd8d0; }
+    0%   { background-color: var(--skeleton-base); }
+    50%  { background-color: var(--skeleton-mid); }
+    100% { background-color: var(--skeleton-base); }
 }
 
 .skeleton {
-    background-color: #dbd8d0;
+    background-color: var(--skeleton-base);
     border-radius: var(--radius-sm);
     color: transparent;
     user-select: none;
@@ -2788,7 +2793,7 @@ footer {
 .skeleton * { visibility: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
-    .skeleton { animation: none; background-color: #d4d1c8; }
+    .skeleton { animation: none; background-color: var(--skeleton-mid); }
 }
 
 /* ── Video Cards (media.html) ─────────────────────────── */
@@ -2869,7 +2874,7 @@ footer {
 .video-title {
     font-size: 1rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     line-height: 1.5;
     margin: 0;
 }
@@ -2915,24 +2920,34 @@ footer {
         --cream:        #111a13;
         --white:        #192216;
         /* Text — 따뜻한 크림 계열 */
-        --text:         #e4e0d4;
-        --text-muted:   #9a9a92;
+        --text:         #e6e2d6;
+        --text-muted:   #a4a89a;
+        /* 제목 — 어두운 서피스 위 밝은 녹빛 오프화이트 */
+        --heading:      #eaf2e8;
         /* Borders */
-        --border:       #2a3d2e;
-        /* Green scale — 다크 배경에서 가독성 확보 */
+        --border:       #2f4434;
+        /* Green scale — 다크 배경에서 가독성 확보
+           green-mid은 배지 배경(흰 글씨)으로도 쓰여 텍스트·배지 대비를 균형 조정 */
         --green-deep:   #0a1f12;
-        --green-mid:    #5a9168;
+        --green-mid:    #62a073;
         --green-light:  #1e3325;
-        --green-soft:   #2d4d35;
+        --green-soft:   #355a3e;
         /* Gold — 다크 배경 대비 밝게 조정 */
-        --gold:         #c9a97d;
-        --gold-bg:      #1e1b14;
+        --gold:         #d6ba8e;
+        --gold-bg:      #221d14;
         /* Nav */
         --nav-glass:    rgba(10, 31, 18, 0.95);
+        /* Skeleton */
+        --skeleton-base: #1c2a1f;
+        --skeleton-mid:  #243528;
         /* Shadows */
         --shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.40);
         --shadow-md:    0 3px 14px rgba(0, 0, 0, 0.50);
         --shadow-lg:    0 12px 40px rgba(0, 0, 0, 0.60);
+    }
+    /* 페이지 히어로 — 라이트 전용 하드코딩 그라데이션을 다크 톤으로 대체 */
+    .page-hero {
+        background: linear-gradient(165deg, #1d3526 0%, var(--green-light) 42%, var(--cream) 100%);
     }
 }
 
@@ -3031,7 +3046,7 @@ footer {
 .bishop-name {
     font-size: 1.35rem;
     font-weight: 700;
-    color: var(--green-deep);
+    color: var(--heading);
     margin-bottom: 0.2rem;
     letter-spacing: -0.01em;
 }
