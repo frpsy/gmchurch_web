@@ -3178,6 +3178,7 @@ footer {
 }
 .gc-page-nav .container {
     display: flex;
+    justify-content: center;
     gap: 0;
     overflow-x: auto;
     scrollbar-width: none;
