@@ -596,7 +596,7 @@ const CHURCH_DATA = {
                 items: [
                     { name: "성공회대학교",   url: "https://www.skhu.ac.kr/introMain/index.html", desc: "대한성공회가 설립한 4년제 대학교" },
                     { name: "여성선교센터",   url: "https://www.awmck.org",                        desc: "Anglican Women's Mission Center Korea" },
-                    { name: "대한성공회 G.F.S.", url: "https://www.gfskorea.org",                  desc: "Girls' Friendly Society — 대한성공회 여성청소년 선교 단체" }
+                    { name: "대한성공회 G.F.S.", url: "https://www.gfskorea.org",                  desc: "Girls' Friendly Society — 세계성공회에 속한 여성 선교 단체" }
                 ]
             },
             {
