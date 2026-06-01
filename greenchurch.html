@@ -543,23 +543,30 @@
     <script src="data.js?v=f505e46"></script>
     <script src="app.js?v=f505e46"></script>
     <script>
-    /* 섹션 내비게이션 활성 상태 표시 */
+    /* 섹션 내비게이션 활성 상태 표시 — 진입/이탈 모두 추적 */
     (function () {
         var links = document.querySelectorAll('.gc-nav-link[data-gc-section]');
-        var sections = Array.from(links).map(function (l) {
-            return document.getElementById(l.dataset.gcSection);
-        });
-        if (!('IntersectionObserver' in window) || !sections[0]) return;
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-                if (e.isIntersecting) {
-                    links.forEach(function (l) { l.classList.remove('is-active'); });
-                    var active = document.querySelector('.gc-nav-link[data-gc-section="' + e.target.id + '"]');
-                    if (active) active.classList.add('is-active');
-                }
+        if (!links.length || !('IntersectionObserver' in window)) return;
+        var ids = Array.from(links).map(function (l) { return l.dataset.gcSection; });
+        var state = {};
+        ids.forEach(function (id) { state[id] = false; });
+
+        function sync() {
+            var activeId = ids.find(function (id) { return state[id]; }) || null;
+            links.forEach(function (l) {
+                l.classList.toggle('is-active', l.dataset.gcSection === activeId);
             });
+        }
+
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { state[e.target.id] = e.isIntersecting; });
+            sync();
         }, { rootMargin: '-30% 0px -60% 0px' });
-        sections.forEach(function (s) { if (s) io.observe(s); });
+
+        ids.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) io.observe(el);
+        });
     }());
     </script>
 </body>
