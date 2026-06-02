@@ -601,15 +601,15 @@ const CHURCH_DATA = {
                 items: [
                     { name: "성공회대학교",   url: "https://www.skhu.ac.kr/introMain/index.html", desc: "대한성공회가 설립한 4년제 대학교" },
                     { name: "여성선교센터",   url: "https://awmck.org",                            desc: "Anglican Women's Mission Center Korea" },
-                    { name: "대한성공회 G.F.S.", url: "https://www.gfskorea.org",                  desc: "Girls' Friendly Society — 1875년 영국에서 시작된, 신앙 안에서 여성의 성장과 연대를 도모하는 성공회 여성 공동체" }
+                    { name: "대한성공회 G.F.S.", url: "https://www.gfskorea.org",                  desc: "Girls' Friendly Society — 1875년 영국에서 시작된, 신앙 안에서 여성의 성장과 연대를 도모하는 성공회 여성 공동체" },
+                    { name: "나눔의 집 협의회",   url: "https://skhnanum.modoo.at/",                                        desc: "성공회 나눔과 봉사 공동체 네트워크" }
                 ]
             },
             {
                 title: "수도 공동체",
                 items: [
                     { name: "성 프란시스 수도회", url: "https://naver.me/xB77Wcf2",                                          desc: "강원 춘천시 남면 한덕발산길 1190 (네이버 지도)", external: true },
-                    { name: "성가수도회",         url: "https://www.sister.or.kr",                                           desc: "대한성공회 성가수도회 공식 홈페이지" },
-                    { name: "나눔의 집 협의회",   url: "https://skhnanum.modoo.at/",                                        desc: "성공회 나눔과 봉사 공동체 네트워크" }
+                    { name: "성가수도회",         url: "https://www.sister.or.kr",                                           desc: "대한성공회 성가수도회 공식 홈페이지" }
                 ]
             },
             {
