@@ -602,7 +602,7 @@ const CHURCH_DATA = {
                     { name: "성공회대학교",   url: "https://www.skhu.ac.kr/introMain/index.html", desc: "대한성공회가 설립한 4년제 대학교" },
                     { name: "여성선교센터",   url: "https://awmck.org",                            desc: "Anglican Women's Mission Center Korea" },
                     { name: "대한성공회 G.F.S.", url: "https://www.gfskorea.org",                  desc: "Girls' Friendly Society — 1875년 영국에서 시작된, 신앙 안에서 여성의 성장과 연대를 도모하는 성공회 여성 공동체" },
-                    { name: "나눔의 집 협의회",   url: "https://skhnanum.modoo.at/",                                        desc: "성공회 나눔과 봉사 공동체 네트워크" }
+                    { name: "나눔의 집 협의회",   url: "https://ko.wikipedia.org/wiki/%EC%84%B1%EA%B3%B5%ED%9A%8C_%EB%82%98%EB%88%94%EC%9D%98%EC%A7%91%ED%98%91%EC%9D%98%ED%9A%8C", desc: "소외된 이웃의 인권을 보호하고 지역사회와 대안을 만드는 대표적인 사회선교 기관" }
                 ]
             },
             {
