@@ -571,6 +571,8 @@ button:focus:not(:focus-visible) { outline: none; }
     max-width: 560px;
     margin-left: auto; margin-right: auto;
     line-height: 1.7;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 /* ── Scroll Reveal ───────────────────────────────────────── */
@@ -727,6 +729,8 @@ button:focus:not(:focus-visible) { outline: none; }
     font-style: italic;
     color: var(--heading);
     line-height: 1.85;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 /* Philosophy values */
@@ -1841,6 +1845,8 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--heading);
     margin-bottom: 0.45rem;
     letter-spacing: -0.01em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 .resource-desc {
     font-size: 0.86rem;
@@ -1848,6 +1854,8 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: 1.75;
     margin-bottom: 1rem;
     flex-grow: 1;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 .resource-link { font-size: 0.84rem; font-weight: 700; letter-spacing: 0.01em; }
 @media (prefers-reduced-motion: reduce) {
@@ -2571,6 +2579,8 @@ footer {
     color: var(--heading);
     margin-bottom: 0.5rem;
     letter-spacing: -0.015em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 .story-value-text {
     font-size: 0.92rem;
