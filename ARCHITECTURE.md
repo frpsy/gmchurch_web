@@ -276,10 +276,10 @@ const CHURCH_DATA = {
   └ 문의하기           newcomer.html#contact            (JS)
 
 공동체  community.html
-  └ 광명 희망터        community.html#hopecenter        (JS)
-  └ 엠마우스 코스      community.html#emmaus            (JS)
-  └ 소그룹 모임        community.html#smallgroup        (JS)
-  └ 주일 애찬          community.html#agape             (JS)
+  └ 광명 희망터        hopecenter.html                  (상세 페이지로 직접 이동)
+  └ 엠마우스 코스      emmaus.html                      (상세 페이지로 직접 이동)
+  └ 소그룹 모임        smallgroup.html                  (상세 페이지로 직접 이동)
+  └ 주일 애찬          community.html#agape             (JS, 상세 페이지 없음)
   └ 헌금               giving.html
 
 미디어·자료  media.html
@@ -382,7 +382,10 @@ window DOMContentLoaded
       │
       └── MenuOverlay.init()          (모든 페이지)
             nav-menu-trigger 버튼으로 여는 전체 메뉴 + 검색 오버레이
-            CHURCH_DATA.navigation을 사이트맵으로 펼치고 라벨 실시간 검색
+            CHURCH_DATA.navigation을 사이트맵으로 펼침
+            검색 인덱스 = nav 라벨 + CHURCH_DATA 본문 자동 추출
+              + 정적 HTML 페이지(story·emmaus·greenchurch·hopecenter) 런타임 fetch 파싱
+            본문 일치 시 발췌 스니펫 표시, 첫 검색 시 정적 페이지 1회 로드
             
       └── App._handleHashScroll()
             window.location.hash 존재 시:

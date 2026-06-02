@@ -665,9 +665,9 @@ const CHURCH_DATA = {
             label: "공동체",
             href: "community.html",
             items: [
-                { label: "광명 희망터",   href: "community.html#hopecenter" },
-                { label: "엠마우스 코스", href: "community.html#emmaus" },
-                { label: "소그룹 모임",  href: "community.html#smallgroup" },
+                { label: "광명 희망터",   href: "hopecenter.html" },
+                { label: "엠마우스 코스", href: "emmaus.html" },
+                { label: "소그룹 모임",  href: "smallgroup.html" },
                 { label: "주일 애찬",    href: "community.html#agape" },
                 { label: "헌금",         href: "giving.html" }
             ]

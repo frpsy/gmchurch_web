@@ -3368,17 +3368,31 @@ footer {
 .menu-results-list { list-style: none; }
 .menu-results-list li a {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.3rem;
     padding: 0.8rem 0.75rem;
     border-bottom: 1px solid var(--border);
     transition: background 0.15s;
 }
 .menu-results-list li a:hover { background: var(--green-light); }
+.menu-result-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+}
 .menu-result-label { font-size: 0.95rem; color: var(--text); }
-.menu-result-label mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; border-radius: 3px; }
+mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; border-radius: 3px; }
 .menu-result-group { font-size: 0.78rem; color: var(--text-muted); flex-shrink: 0; }
+.menu-result-excerpt {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 .menu-results-empty { padding: 1.5rem 0.75rem; color: var(--text-muted); font-size: 0.9rem; text-align: center; }
 
 @media (max-width: 768px) {
