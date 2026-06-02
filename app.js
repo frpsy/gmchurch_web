@@ -256,10 +256,15 @@ const NavRenderer = {
                         <span class="nav-logo-sub">${CHURCH_DATA.info.subName}</span>
                     </span>
                 </a>
-                <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
                 <ul class="nav-menu" id="nav-menu">${items}</ul>
+                <div class="nav-actions">
+                    <button class="nav-menu-trigger" id="nav-menu-trigger" aria-label="전체 메뉴 보기 및 검색" aria-haspopup="dialog">
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm0-2a9 9 0 0 1 6.32 15.4l4.14 4.13-1.42 1.42-4.13-4.14A9 9 0 1 1 11 2z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
             </div>
         `;
 
@@ -1516,6 +1521,7 @@ const App = {
         ScrollProgress.init();
         BackToTop.init();
         PortraitLightbox.init();
+        MenuOverlay.init();
     },
 
     _scrollToHash(hash) {
@@ -1569,5 +1575,195 @@ const BackToTop = {
 
         window.addEventListener('scroll', onScroll, { passive: true });
         check();
+    }
+};
+
+/* ── MenuOverlay (전체 메뉴 보기 + 검색) ──────────────────────
+ * nav 트리거 버튼으로 여는 오버레이. CHURCH_DATA.navigation을 단일 소스로
+ * 사이트맵(전체 메뉴)을 펼치고, 상단 입력창에서 메뉴·하위항목을 실시간 검색한다. */
+const MenuOverlay = {
+    _index: null,
+    _overlay: null,
+    _input: null,
+    _sitemap: null,
+    _results: null,
+    _trigger: null,
+
+    init() {
+        this._trigger = document.getElementById('nav-menu-trigger');
+        if (!this._trigger) return;
+        this._buildIndex();
+        this._buildOverlay();
+        this._bindEvents();
+    },
+
+    // navigation 트리를 평탄화한 검색 인덱스 (상위 메뉴 + 하위 항목)
+    _buildIndex() {
+        const list = [];
+        CHURCH_DATA.navigation.forEach(top => {
+            list.push({ label: top.label, href: top.href, group: top.label, badge: null });
+            (top.items || []).forEach(sub => {
+                list.push({ label: sub.label, href: sub.href, group: top.label, badge: sub.badge || null });
+            });
+        });
+        this._index = list;
+    },
+
+    _badgeHtml(badge) {
+        return badge ? ` <span class="nav-badge">${badge}</span>` : '';
+    },
+
+    _sitemapHtml() {
+        return CHURCH_DATA.navigation.map(top => `
+            <div class="menu-sitemap-group">
+                <a class="menu-sitemap-title" href="${top.href}">${top.label}</a>
+                <ul class="menu-sitemap-list">
+                    ${(top.items || []).map(sub =>
+                        `<li><a href="${sub.href}">${sub.label}${this._badgeHtml(sub.badge)}</a></li>`
+                    ).join('')}
+                </ul>
+            </div>
+        `).join('');
+    },
+
+    _buildOverlay() {
+        const el = document.createElement('div');
+        el.id = 'menu-overlay';
+        el.className = 'menu-overlay';
+        el.setAttribute('role', 'dialog');
+        el.setAttribute('aria-modal', 'true');
+        el.setAttribute('aria-label', '전체 메뉴 및 검색');
+        el.setAttribute('aria-hidden', 'true');
+        el.innerHTML = `
+            <div class="menu-overlay-backdrop" data-close></div>
+            <div class="menu-overlay-panel">
+                <div class="menu-overlay-bar">
+                    <div class="menu-search-box">
+                        <svg class="menu-search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm0-2a9 9 0 0 1 6.32 15.4l4.14 4.13-1.42 1.42-4.13-4.14A9 9 0 1 1 11 2z" fill="currentColor"/></svg>
+                        <input id="menu-search-input" class="menu-search-input" type="search" inputmode="search"
+                               placeholder="메뉴·내용 검색" autocomplete="off" aria-label="메뉴 검색">
+                    </div>
+                    <button class="menu-overlay-close" data-close aria-label="닫기">
+                        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </button>
+                </div>
+                <div class="menu-overlay-scroll">
+                    <div class="menu-sitemap">${this._sitemapHtml()}</div>
+                    <div class="menu-results" hidden></div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(el);
+        this._overlay = el;
+        this._input   = el.querySelector('#menu-search-input');
+        this._sitemap = el.querySelector('.menu-sitemap');
+        this._results = el.querySelector('.menu-results');
+    },
+
+    _bindEvents() {
+        this._trigger.addEventListener('click', () => this.open());
+
+        this._overlay.addEventListener('click', (e) => {
+            if (e.target.closest('[data-close]')) { this.close(); return; }
+            const a = e.target.closest('a');
+            if (a) this._handleLinkClick(e, a);
+        });
+
+        this._input.addEventListener('input', () => this._search(this._input.value));
+
+        // Enter → 첫 결과로 이동
+        this._input.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter') return;
+            const first = this._results.querySelector('a');
+            if (!this._results.hidden && first) { e.preventDefault(); first.click(); }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this._overlay.classList.contains('is-open')) this.close();
+        });
+    },
+
+    // 오버레이 안에서 같은 페이지 앵커 클릭 시 스크롤 처리 (cross-page는 기본 이동)
+    _handleLinkClick(e, a) {
+        this.close();
+        const href = a.getAttribute('href') || '';
+        if (!href.includes('#')) return;
+        const [page, hash] = href.split('#');
+        const current = window.location.pathname.split('/').pop() || 'index.html';
+        if ((page === '' || page === current) && hash) {
+            e.preventDefault();
+            if (window.location.hash !== '#' + hash) history.pushState(null, '', '#' + hash);
+            NavRenderer._updateActive();
+            requestAnimationFrame(() => App._scrollToHash('#' + hash));
+        }
+    },
+
+    _escape(s) {
+        return s.replace(/[&<>"']/g, c => (
+            { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+        ));
+    },
+
+    // 검색어와 일치하는 부분을 <mark>로 강조 (라벨·검색어 모두 이스케이프)
+    _highlight(label, query) {
+        const i = label.toLowerCase().indexOf(query.toLowerCase());
+        if (i < 0) return this._escape(label);
+        return this._escape(label.slice(0, i))
+            + '<mark>' + this._escape(label.slice(i, i + query.length)) + '</mark>'
+            + this._escape(label.slice(i + query.length));
+    },
+
+    _search(raw) {
+        const q = raw.trim();
+        if (!q) {
+            this._results.hidden = true;
+            this._sitemap.hidden = false;
+            this._results.innerHTML = '';
+            return;
+        }
+        const ql = q.toLowerCase();
+        const hits = this._index.filter(item =>
+            item.label.toLowerCase().includes(ql) || item.group.toLowerCase().includes(ql)
+        );
+
+        this._sitemap.hidden = true;
+        this._results.hidden = false;
+
+        if (!hits.length) {
+            this._results.innerHTML = `<p class="menu-results-empty">'${this._escape(q)}'에 대한 결과가 없습니다.</p>`;
+            return;
+        }
+        this._results.innerHTML = `
+            <ul class="menu-results-list">
+                ${hits.map(item => `
+                    <li>
+                        <a href="${item.href}">
+                            <span class="menu-result-label">${this._highlight(item.label, q)}${this._badgeHtml(item.badge)}</span>
+                            <span class="menu-result-group">${this._escape(item.group)}</span>
+                        </a>
+                    </li>
+                `).join('')}
+            </ul>
+        `;
+    },
+
+    open() {
+        this._search('');
+        this._input.value = '';
+        this._overlay.classList.add('is-open');
+        this._overlay.setAttribute('aria-hidden', 'false');
+        this._trigger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+        // 트랜지션 시작 후 포커스 (모바일 키보드 자동 노출 방지 위해 약간 지연)
+        setTimeout(() => this._input.focus(), 60);
+    },
+
+    close() {
+        if (!this._overlay.classList.contains('is-open')) return;
+        this._overlay.classList.remove('is-open');
+        this._overlay.setAttribute('aria-hidden', 'true');
+        this._trigger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        this._trigger.focus();
     }
 };
