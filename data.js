@@ -591,9 +591,9 @@ const CHURCH_DATA = {
                 items: [
                     { name: "대한성공회 관구",   url: "https://anglicankr.church/",                                        desc: "대한성공회 공식 홈페이지" },
                     { name: "서울교구",           url: "https://seoul.anglican.kr/",                                        desc: "대한성공회 서울교구 공식 홈페이지" },
-                    { name: "서울주교좌성당",     url: "https://www.cathedral.or.kr/main/main.html",                        desc: "대한성공회 서울주교좌성당" },
+                    { name: "서울주교좌성당",     url: "https://www.cathedral.or.kr/",                                      desc: "대한성공회 서울주교좌성당" },
                     { name: "성공회신문",         url: "https://www.skhnews.or.kr/",                                        desc: "대한성공회 공식 신문" },
-                    { name: "성공회출판사",       url: "https://m.smartstore.naver.com/skhnews21",                          desc: "성공회 서적·자료 온라인 서점" }
+                    { name: "성공회출판사",       url: "https://smartstore.naver.com/skhnews21",                            desc: "성공회 서적·자료 온라인 서점" }
                 ]
             },
             {
@@ -607,9 +607,9 @@ const CHURCH_DATA = {
             {
                 title: "수도 공동체",
                 items: [
-                    { name: "성 프란시스 수도회", url: "https://naver.me/xB77Wcf2",                                          desc: "강원 춘천시 한덕발산길 1190 (네이버 지도)", external: true },
+                    { name: "성 프란시스 수도회", url: "https://naver.me/xB77Wcf2",                                          desc: "강원 춘천시 남면 한덕발산길 1190 (네이버 지도)", external: true },
                     { name: "성가수도회",         url: "https://www.sister.or.kr",                                           desc: "대한성공회 성가수도회 공식 홈페이지" },
-                    { name: "나눔의 집 협의회",   url: "https://skhnanum.tistory.com/m/",                                    desc: "성공회 나눔과 봉사 공동체 네트워크" }
+                    { name: "나눔의 집 협의회",   url: "https://skhnanum.modoo.at/",                                        desc: "성공회 나눔과 봉사 공동체 네트워크" }
                 ]
             },
             {
