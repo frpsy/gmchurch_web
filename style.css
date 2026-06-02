@@ -611,10 +611,11 @@ button:focus:not(:focus-visible) { outline: none; }
 .section-sub {
     font-size: 1rem;
     color: var(--text-muted);
-    max-width: 520px;
+    max-width: 680px;
     line-height: 1.75;
     word-break: keep-all;
     overflow-wrap: break-word;
+    text-wrap: balance;
 }
 .section-header { margin-bottom: 3.5rem; }
 
