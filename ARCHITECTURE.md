@@ -377,8 +377,12 @@ window DOMContentLoaded
       │     .reveal 클래스 요소들을 scroll 시 페이드인
       │     Intersection Observer 사용, 애니메이션 감소 설정 존중
       │
-      └── ScrollProgress.init()       (모든 페이지)
-            페이지 스크롤 진행도를 시각화 (막대 또는 스타일 적용)
+      ├── ScrollProgress.init()       (모든 페이지)
+      │     페이지 스크롤 진행도를 시각화 (막대 또는 스타일 적용)
+      │
+      └── MenuOverlay.init()          (모든 페이지)
+            nav-menu-trigger 버튼으로 여는 전체 메뉴 + 검색 오버레이
+            CHURCH_DATA.navigation을 사이트맵으로 펼치고 라벨 실시간 검색
             
       └── App._handleHashScroll()
             window.location.hash 존재 시:

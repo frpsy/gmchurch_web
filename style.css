@@ -164,7 +164,21 @@ button:focus:not(:focus-visible) { outline: none; }
 .nav-logo-name { font-size: 0.95rem; font-weight: 700; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
 .nav-logo-sub  { font-size: 0.65rem; color: rgba(255,255,255,0.9); letter-spacing: 0.04em; }
 
-.nav-menu { display: flex; list-style: none; height: 100%; align-items: center; }
+.nav-menu { display: flex; list-style: none; height: 100%; align-items: center; margin-left: auto; }
+
+/* 우측 액션 (전체 메뉴·검색 트리거 + 햄버거) */
+.nav-actions { display: flex; align-items: center; gap: 0.25rem; flex-shrink: 0; }
+.nav-menu-trigger {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px;
+    border: none; background: none; cursor: pointer;
+    color: rgba(255,255,255,0.85);
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+}
+.nav-menu-trigger:hover,
+.nav-menu-trigger:focus-visible { color: #fff; background: rgba(255,255,255,0.12); outline: none; }
+.nav-menu-trigger svg { display: block; }
 .nav-item { position: relative; height: 100%; display: flex; align-items: center; }
 
 .nav-link {
@@ -3221,4 +3235,168 @@ footer {
         padding: 0.75rem 0.5rem;
         font-size: 0.8rem;
     }
+}
+
+/* ── MenuOverlay (전체 메뉴 + 검색) ──────────────────────── */
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.22s var(--ease-out), visibility 0.22s var(--ease-out);
+}
+.menu-overlay.is-open { opacity: 1; visibility: visible; }
+
+.menu-overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 31, 18, 0.55);
+    backdrop-filter: blur(2px);
+}
+
+.menu-overlay-panel {
+    position: relative;
+    width: min(760px, 100%);
+    max-height: calc(100vh - var(--nav-h) - 1rem);
+    max-height: calc(100svh - var(--nav-h) - 1rem);
+    margin-top: calc(var(--nav-h) + 0.5rem);
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    transform: translateY(-12px);
+    transition: transform 0.22s var(--ease-out);
+}
+.menu-overlay.is-open .menu-overlay-panel { transform: translateY(0); }
+
+.menu-overlay-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+.menu-search-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.9rem;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    transition: border-color 0.18s;
+}
+.menu-search-box:focus-within { border-color: var(--green-mid); }
+.menu-search-icon { width: 18px; height: 18px; color: var(--text-muted); flex-shrink: 0; }
+.menu-search-input {
+    flex: 1;
+    border: none;
+    background: none;
+    font-size: 0.95rem;
+    color: var(--text);
+    font-family: inherit;
+}
+.menu-search-input:focus { outline: none; }
+.menu-search-input::placeholder { color: var(--text-muted); opacity: 0.7; }
+
+.menu-overlay-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; height: 40px;
+    flex-shrink: 0;
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: color 0.18s, background 0.18s;
+}
+.menu-overlay-close:hover,
+.menu-overlay-close:focus-visible { color: var(--green-deep); background: var(--green-light); outline: none; }
+
+.menu-overlay-scroll {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 1.25rem;
+}
+
+/* 사이트맵 (전체 메뉴) */
+/* display 지정이 [hidden]의 display:none을 덮어쓰므로 명시적 토글 */
+.menu-sitemap[hidden],
+.menu-results[hidden] { display: none; }
+.menu-sitemap {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem 1.25rem;
+}
+.menu-sitemap-title {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid var(--green-mid);
+    transition: color 0.15s;
+}
+.menu-sitemap-title:hover { color: var(--green-mid); }
+.menu-sitemap-list { list-style: none; }
+.menu-sitemap-list li a {
+    display: block;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    transition: color 0.15s, background 0.15s, padding-left 0.15s;
+}
+.menu-sitemap-list li a:hover {
+    color: var(--green-mid);
+    background: var(--green-light);
+    padding-left: 0.9rem;
+}
+
+/* 검색 결과 */
+.menu-results-list { list-style: none; }
+.menu-results-list li a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+}
+.menu-results-list li a:hover { background: var(--green-light); }
+.menu-result-label { font-size: 0.95rem; color: var(--text); }
+.menu-result-label mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; border-radius: 3px; }
+.menu-result-group { font-size: 0.78rem; color: var(--text-muted); flex-shrink: 0; }
+.menu-results-empty { padding: 1.5rem 0.75rem; color: var(--text-muted); font-size: 0.9rem; text-align: center; }
+
+@media (max-width: 768px) {
+    .menu-overlay-panel {
+        width: 100%;
+        height: calc(100vh - var(--nav-h));
+        height: calc(100svh - var(--nav-h));
+        max-height: none;
+        margin-top: var(--nav-h);
+        border-radius: 0;
+    }
+    .menu-sitemap { grid-template-columns: 1fr 1fr; gap: 1.25rem 1rem; }
+}
+@media (max-width: 460px) {
+    .menu-sitemap { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .menu-overlay,
+    .menu-overlay-panel { transition: none; }
+    .menu-overlay-panel { transform: none; }
 }
