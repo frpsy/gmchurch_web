@@ -609,7 +609,7 @@ const CHURCH_DATA = {
                 items: [
                     { name: "성 프란시스 수도회", url: "https://naver.me/xB77Wcf2",                                          desc: "강원 춘천시 남면 한덕발산길 1190 (네이버 지도)", external: true },
                     { name: "성가수도회",         url: "https://www.sister.or.kr",                                           desc: "대한성공회 성가수도회 공식 홈페이지" },
-                    { name: "나눔의 집 협의회",   url: "https://skhnanum.modoo.at/",                                        desc: "성공회 나눔과 봉사 공동체 네트워크" }
+                    { name: "나눔의 집 협의회",   url: "https://ko.wikipedia.org/wiki/성공회_나눔의집협의회",                desc: "성공회 나눔과 봉사 공동체 네트워크 (위키백과)" }
                 ]
             },
             {
