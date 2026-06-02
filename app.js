@@ -1579,8 +1579,9 @@ const BackToTop = {
 };
 
 /* ── MenuOverlay (전체 메뉴 보기 + 검색) ──────────────────────
- * nav 트리거 버튼으로 여는 오버레이. CHURCH_DATA.navigation을 단일 소스로
- * 사이트맵(전체 메뉴)을 펼치고, 상단 입력창에서 메뉴·하위항목을 실시간 검색한다. */
+ * nav 트리거 버튼으로 여는 오버레이. CHURCH_DATA.navigation으로 사이트맵을 펼치고,
+ * 상단 입력창에서 메뉴 라벨 + 페이지 본문(내용)을 함께 검색한다.
+ * 검색 인덱스 = nav 라벨 + CHURCH_DATA 본문 자동 추출 + 정적 HTML 페이지 런타임 파싱. */
 const MenuOverlay = {
     _index: null,
     _overlay: null,
@@ -1588,6 +1589,15 @@ const MenuOverlay = {
     _sitemap: null,
     _results: null,
     _trigger: null,
+    _staticLoaded: false,
+
+    // 본문이 data.js가 아닌 HTML에 직접 있는 정적 페이지 (런타임 fetch로 인덱싱)
+    _staticPages: [
+        { url: 'story.html',       group: '교회 이야기' },
+        { url: 'emmaus.html',      group: '엠마우스 코스' },
+        { url: 'greenchurch.html', group: '녹색교회' },
+        { url: 'hopecenter.html',  group: '광명 희망터' }
+    ],
 
     init() {
         this._trigger = document.getElementById('nav-menu-trigger');
@@ -1597,16 +1607,129 @@ const MenuOverlay = {
         this._bindEvents();
     },
 
-    // navigation 트리를 평탄화한 검색 인덱스 (상위 메뉴 + 하위 항목)
+    // 검색 인덱스: nav 라벨 + CHURCH_DATA 본문. href+label 기준으로 병합(본문은 합침)
     _buildIndex() {
-        const list = [];
+        const map = new Map();
+        const addItem = (item) => {
+            const key = item.href + '|' + item.label;
+            const ex = map.get(key);
+            if (ex) {
+                if (item.text) ex.text = (ex.text + ' ' + item.text).trim();
+                if (!ex.badge && item.badge) ex.badge = item.badge;
+            } else {
+                map.set(key, {
+                    label: item.label, href: item.href, group: item.group,
+                    badge: item.badge || null, text: item.text || ''
+                });
+            }
+        };
         CHURCH_DATA.navigation.forEach(top => {
-            list.push({ label: top.label, href: top.href, group: top.label, badge: null });
-            (top.items || []).forEach(sub => {
-                list.push({ label: sub.label, href: sub.href, group: top.label, badge: sub.badge || null });
-            });
+            addItem({ label: top.label, href: top.href, group: top.label });
+            (top.items || []).forEach(sub =>
+                addItem({ label: sub.label, href: sub.href, group: top.label, badge: sub.badge }));
         });
-        this._index = list;
+        this._extractContent().forEach(addItem);
+        this._index = Array.from(map.values());
+    },
+
+    // CHURCH_DATA 본문을 페이지#앵커에 매핑해 검색 항목으로 추출
+    _extractContent() {
+        const d = CHURCH_DATA;
+        const out = [];
+        const join = (...parts) => parts.flat().filter(Boolean).join(' ');
+        const add = (label, href, group, text) => { if (label) out.push({ label, href, group, text: text || '' }); };
+
+        // 교회 소개 (clergy.html)
+        if (d.anglican) {
+            const w = d.anglican.what;
+            add('성공회란?', 'clergy.html#what-is-anglican', '교회 소개',
+                join(w.paras, w.pillars.map(p => join(p.title, p.desc)), w.pillarNote,
+                     w.mission ? w.mission.marks.map(m => join(m.ko, m.en)) : []));
+            const k = d.anglican.korea;
+            add('대한성공회', 'clergy.html#ack', '교회 소개',
+                join(k.paras, k.highlights.map(h => h.text)));
+        }
+        (d.clergy || []).forEach(c => add(c.name, 'clergy.html#priest-section', '섬기는 이들',
+            join(c.title, c.desc, c.quote, c.bio && c.bio.ministryNote, c.bio && c.bio.roles)));
+        if (d.bishop) add(d.bishop.name, 'clergy.html#priest-section', '섬기는 이들',
+            join(d.bishop.title, d.bishop.desc));
+        if (d.philosophy) add('교회 철학', 'clergy.html#philosophy', '교회 소개',
+            join(d.philosophy.title, d.philosophy.intro,
+                 d.philosophy.values.map(v => join(v.title, v.desc)), d.philosophy.closing));
+        if (d.logo) add('로고 소개', 'clergy.html#logo-intro', '교회 소개',
+            join(d.logo.title, d.logo.subtitle, d.logo.desc, d.logo.colors, d.logo.history,
+                 d.logo.elements.map(e => join(e.label, e.desc))));
+        (d.press || []).forEach(p => add(p.title, 'clergy.html#press', '언론 보도', join(p.media, p.year)));
+
+        // 예배와 기도 (worship.html)
+        const wor = d.worship || {};
+        (wor.main || []).forEach(m => add(m.title, 'worship.html#' + m.id, '예배와 기도',
+            join(m.time, m.desc, m.detail, m.verse)));
+        (wor.resources || []).forEach(r => add(r.title, 'worship.html#resources', '예배 자료', r.desc));
+        if (wor.prayer) {
+            (wor.prayer.dailyOffice || []).forEach(o => add(o.title, 'worship.html#daily-office', '성무일도',
+                join(o.en, o.desc)));
+            const ic = wor.prayer.intercession;
+            if (ic) add(ic.title, 'worship.html#intercession', '예배와 기도', join(ic.en, ic.desc));
+        }
+        // 전례 공간 안내 (newcomer.html에서 렌더)
+        if (wor.spaceGuide) (wor.spaceGuide.items || []).forEach(s =>
+            add(s.name, 'newcomer.html#worship-space', '전례 공간 안내', join(s.en, s.desc)));
+
+        // 공동체 (community.html / smallgroup.html)
+        const com = d.community || {};
+        (com.groups || []).forEach(g => add(g.title, 'community.html#' + g.id, '공동체', join(g.desc, g.note)));
+        if (com.smallgroups) (com.smallgroups.groups || []).forEach(g =>
+            add(g.title, 'smallgroup.html#' + g.id, '소그룹 모임', join(g.en, g.schedule, g.desc, g.details)));
+
+        // 미디어 (media.html)
+        if (d.media) (d.media.videos || []).forEach(v => add(v.title, 'media.html#videos', '교회 영상',
+            join(v.category, v.desc)));
+
+        // 관련 기관 (links.html)
+        if (d.links) (d.links.groups || []).forEach(gr => (gr.items || []).forEach(it =>
+            add(it.name, 'links.html', '관련 기관', join(gr.title, it.desc))));
+
+        return out;
+    },
+
+    // 정적 HTML 페이지를 fetch해 섹션 단위로 인덱싱 (첫 검색 시 1회). 실패 시 무시.
+    async _loadStaticPages() {
+        if (this._staticLoaded) return;
+        this._staticLoaded = true;
+        const STRUCT = new Set(['main-content', 'main-nav', 'main-footer']);
+        await Promise.all(this._staticPages.map(async pg => {
+            try {
+                const res = await fetch(pg.url);
+                if (!res.ok) return;
+                const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+                const main = doc.getElementById('main-content');
+                if (!main) return;
+                let added = 0;
+                main.querySelectorAll('[id]').forEach(sec => {
+                    if (STRUCT.has(sec.id)) return;
+                    const heading = sec.querySelector('h1, h2, h3');
+                    const label = heading ? heading.textContent.trim() : '';
+                    if (!label) return;
+                    this._index.push({
+                        label, href: pg.url + '#' + sec.id, group: pg.group,
+                        badge: null, text: sec.textContent.replace(/\s+/g, ' ').trim()
+                    });
+                    added++;
+                });
+                if (!added) {
+                    const h = main.querySelector('h1');
+                    this._index.push({
+                        label: (h ? h.textContent : pg.group).trim(), href: pg.url, group: pg.group,
+                        badge: null, text: main.textContent.replace(/\s+/g, ' ').trim()
+                    });
+                }
+            } catch (_) { /* 네트워크 실패 시 정적 페이지만 건너뜀 */ }
+        }));
+        // 로드 완료 시점에 검색 중이면 결과 갱신
+        if (this._overlay.classList.contains('is-open') && this._input.value.trim()) {
+            this._search(this._input.value);
+        }
     },
 
     _badgeHtml(badge) {
@@ -1704,13 +1827,23 @@ const MenuOverlay = {
         ));
     },
 
-    // 검색어와 일치하는 부분을 <mark>로 강조 (라벨·검색어 모두 이스케이프)
-    _highlight(label, query) {
-        const i = label.toLowerCase().indexOf(query.toLowerCase());
-        if (i < 0) return this._escape(label);
-        return this._escape(label.slice(0, i))
-            + '<mark>' + this._escape(label.slice(i, i + query.length)) + '</mark>'
-            + this._escape(label.slice(i + query.length));
+    // 검색어와 일치하는 부분을 <mark>로 강조 (텍스트·검색어 모두 이스케이프)
+    _highlight(text, query) {
+        const i = text.toLowerCase().indexOf(query.toLowerCase());
+        if (i < 0) return this._escape(text);
+        return this._escape(text.slice(0, i))
+            + '<mark>' + this._escape(text.slice(i, i + query.length)) + '</mark>'
+            + this._escape(text.slice(i + query.length));
+    },
+
+    // 본문 일치 위치 주변을 발췌해 강조 (라벨/그룹 일치 시에는 미표시)
+    _excerpt(text, query) {
+        const i = text.toLowerCase().indexOf(query.toLowerCase());
+        if (i < 0) return '';
+        const start = Math.max(0, i - 30);
+        const end = Math.min(text.length, i + query.length + 60);
+        const slice = text.slice(start, end);
+        return (start > 0 ? '… ' : '') + this._highlight(slice, query) + (end < text.length ? ' …' : '');
     },
 
     _search(raw) {
@@ -1722,9 +1855,15 @@ const MenuOverlay = {
             return;
         }
         const ql = q.toLowerCase();
-        const hits = this._index.filter(item =>
-            item.label.toLowerCase().includes(ql) || item.group.toLowerCase().includes(ql)
-        );
+        const hits = [];
+        this._index.forEach(item => {
+            const inLabel = item.label.toLowerCase().includes(ql);
+            const inGroup = item.group.toLowerCase().includes(ql);
+            const inText  = !!item.text && item.text.toLowerCase().includes(ql);
+            if (inLabel || inGroup || inText) hits.push({ item, inLabel, inGroup, inText });
+        });
+        // 라벨 일치 우선, 다음 그룹 일치, 그다음 본문 일치
+        hits.sort((a, b) => (b.inLabel - a.inLabel) || (b.inGroup - a.inGroup));
 
         this._sitemap.hidden = true;
         this._results.hidden = false;
@@ -1735,19 +1874,25 @@ const MenuOverlay = {
         }
         this._results.innerHTML = `
             <ul class="menu-results-list">
-                ${hits.map(item => `
+                ${hits.slice(0, 40).map(({ item, inLabel, inGroup }) => {
+                    const excerpt = (!inLabel && !inGroup) ? this._excerpt(item.text, q) : '';
+                    return `
                     <li>
                         <a href="${item.href}">
-                            <span class="menu-result-label">${this._highlight(item.label, q)}${this._badgeHtml(item.badge)}</span>
-                            <span class="menu-result-group">${this._escape(item.group)}</span>
+                            <span class="menu-result-head">
+                                <span class="menu-result-label">${this._highlight(item.label, q)}${this._badgeHtml(item.badge)}</span>
+                                <span class="menu-result-group">${this._escape(item.group)}</span>
+                            </span>
+                            ${excerpt ? `<span class="menu-result-excerpt">${excerpt}</span>` : ''}
                         </a>
-                    </li>
-                `).join('')}
+                    </li>`;
+                }).join('')}
             </ul>
         `;
     },
 
     open() {
+        this._loadStaticPages();
         this._search('');
         this._input.value = '';
         this._overlay.classList.add('is-open');
