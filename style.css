@@ -29,7 +29,7 @@
     --nav-glass:    rgba(10, 31, 18, 0.9);
     /* Layout */
     --nav-h:        68px;
-    --section-pad:  9rem;
+    --section-pad:  7rem;
     --content-max:  1200px;
     --radius-sm:    8px;
     --radius-md:    14px;
@@ -42,6 +42,28 @@
     --ease-out:        cubic-bezier(0.2, 0.7, 0.3, 1);
     --hover-shadow:    0 12px 36px rgba(22, 61, 36, 0.13);
     --hover-shadow-sm: 0 8px 26px rgba(22, 61, 36, 0.10);
+    /* Type scale — 본문·컴포넌트 공통 (크기 난립 방지) */
+    --fs-label:  0.78rem;   /* 소형 라벨·캡션 */
+    --fs-sm:     0.9rem;    /* 보조 본문 */
+    --fs-body:   1rem;      /* 기본 본문 */
+    --fs-lead:   1.125rem;  /* 카드 제목 등 */
+    /* Line-height — 역할별 행간 */
+    --lh-tight:   1.2;      /* 큰 제목 */
+    --lh-heading: 1.45;     /* 중간 제목·리드 */
+    --lh-body:    1.75;     /* 기본 본문 */
+    --lh-relaxed: 1.9;      /* 장문 본문 */
+    /* Letter-spacing — uppercase 라벨 */
+    --ls-eyebrow: 0.2em;
+    --ls-label:   0.08em;
+    /* Spacing scale — 4px 기반 */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 2.5rem;
+    --space-8: 3.5rem;
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
@@ -592,10 +614,10 @@ button:focus:not(:focus-visible) { outline: none; }
 
 .section-eyebrow {
     font-size: 0.68rem;
-    letter-spacing: 0.30em;
+    letter-spacing: var(--ls-eyebrow);
     text-transform: uppercase;
     color: var(--green-mid);
-    margin-bottom: 1.1rem;
+    margin-bottom: var(--space-4);
     font-weight: 600;
     display: block;
 }
@@ -604,20 +626,22 @@ button:focus:not(:focus-visible) { outline: none; }
     font-weight: 700;
     color: var(--heading);
     letter-spacing: -0.03em;
-    margin-bottom: 1rem;
-    line-height: 1.2;
+    margin-bottom: var(--space-4);
+    line-height: var(--lh-tight);
     word-break: keep-all;
 }
 .section-sub {
-    font-size: 1rem;
+    font-size: var(--fs-body);
     color: var(--text-muted);
     max-width: 680px;
-    line-height: 1.75;
+    line-height: var(--lh-body);
     word-break: keep-all;
     overflow-wrap: break-word;
     text-wrap: balance;
 }
-.section-header { margin-bottom: 3.5rem; }
+.section-header { margin-bottom: var(--space-8); }
+/* 서브 문구가 없는 헤더는 본문과의 간격을 줄여 리듬 정돈 */
+.section-header:not(:has(.section-sub)) { margin-bottom: var(--space-6); }
 
 /* ── Grid ────────────────────────────────────────────────── */
 .grid {
@@ -645,11 +669,22 @@ button:focus:not(:focus-visible) { outline: none; }
     .card:hover { transform: none; }
 }
 .card h3 {
-    font-size: 1.1rem;
+    font-size: var(--fs-lead);
     font-weight: 700;
     color: var(--heading);
-    margin-bottom: 0.7rem;
+    margin-bottom: var(--space-3);
     letter-spacing: -0.01em;
+}
+/* 카드 본문 — 홈 예배 카드 등에서 인라인 스타일 대체 */
+.card-time {
+    font-weight: 700;
+    color: var(--green-mid);
+    margin-bottom: var(--space-2);
+}
+.card-desc {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-body);
 }
 .card-icon {
     font-size: 2.2rem;
@@ -677,28 +712,28 @@ button:focus:not(:focus-visible) { outline: none; }
     .info-card:hover { transform: none; }
 }
 .info-card h3 {
-    font-size: 1.15rem;
+    font-size: var(--fs-lead);
     font-weight: 700;
     color: var(--heading);
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.85rem;
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-3);
     border-bottom: 1px solid var(--border);
     letter-spacing: -0.01em;
 }
 .info-row {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 0.55rem;
-    font-size: 0.95rem;
-    line-height: 1.7;
+    gap: var(--space-4);
+    margin-bottom: var(--space-2);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-body);
 }
 .info-row strong {
     color: var(--heading);
     min-width: 64px;
     flex-shrink: 0;
     font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-label);
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
     padding-top: 0.1rem;
 }
@@ -713,8 +748,8 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .guide-banner p {
     color: var(--heading);
-    font-size: 0.95rem;
-    line-height: 1.85;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-relaxed);
 }
 
 /* Quote Block */
@@ -1000,14 +1035,14 @@ button:focus:not(:focus-visible) { outline: none; }
     font-weight: 700;
     color: var(--heading);
     letter-spacing: -0.025em;
-    margin-bottom: 1.5rem;
-    line-height: 1.45;
+    margin-bottom: var(--space-5);
+    line-height: var(--lh-heading);
 }
 .about-brief-desc {
-    font-size: 1rem;
-    line-height: 1.9;
+    font-size: var(--fs-body);
+    line-height: var(--lh-relaxed);
     color: var(--text);
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-6);
     word-break: keep-all;
     overflow-wrap: break-word;
 }
@@ -1029,10 +1064,10 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: 0.92rem;
 }
 .about-brief-facts strong {
-    min-width: 56px;
-    font-size: 0.75rem;
+    min-width: 64px;
+    font-size: var(--fs-label);
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--ls-label);
     color: var(--green-mid);
     text-transform: uppercase;
     flex-shrink: 0;
@@ -1048,6 +1083,13 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: color 0.2s;
 }
 .about-brief-link:hover { color: var(--heading); }
+
+/* ── Home page — 정렬 통일(센터) & 섹션 변형 ─────────────── */
+/* 배경 흰색 섹션 — HTML 인라인 style 대체 */
+.section--white { background: var(--white); }
+/* 홈은 히어로 센터 정렬에 맞춰 모든 섹션 헤더를 가운데로 통일 */
+.home .section-header { text-align: center; }
+.home .section-sub { margin-left: auto; margin-right: auto; }
 
 /* ── Logo Intro (clergy page) ────────────────────────────── */
 .logo-intro-grid {

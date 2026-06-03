@@ -479,7 +479,7 @@ const IndexRenderer = {
         if (sub)   sub.textContent   = vision;
 
         if (acts) acts.innerHTML = `
-            <a href="newcomer.html" class="btn-hero-primary">처음 오셨나요?</a>
+            <a href="newcomer.html" class="btn-hero-primary">처음 오신 분</a>
             <a href="worship.html" class="btn-outline">예배 안내</a>
         `;
 
@@ -490,22 +490,22 @@ const IndexRenderer = {
             <span class="hero-stat-divider" aria-hidden="true"></span>
             <div class="hero-stat"><span class="hero-stat-val">오전 11:00</span><span class="hero-stat-lbl">주일 예배</span></div>
             <span class="hero-stat-divider" aria-hidden="true"></span>
-            <div class="hero-stat"><span class="hero-stat-val">경기 광명시</span><span class="hero-stat-lbl">위치</span></div>
+            <div class="hero-stat"><span class="hero-stat-val">경기도 광명시</span><span class="hero-stat-lbl">위치</span></div>
         `;
     },
 
     _about() {
         const el = document.getElementById('about-brief-content');
         if (!el) return;
-        const { name, vision, established } = CHURCH_DATA.info;
+        const { name, established, diocese, aboutLead, aboutDesc } = CHURCH_DATA.info;
         el.innerHTML = `
             <div class="about-brief">
-                <p class="about-brief-lead">${vision}</p>
-                <p class="about-brief-desc">성공회 기도서를 따라 예배하며, 지역과 함께 살아가는 교회입니다.</p>
+                <p class="about-brief-lead">${aboutLead}</p>
+                <p class="about-brief-desc">${aboutDesc}</p>
                 <ul class="about-brief-facts">
                     <li><strong>이름</strong><span>${name}</span></li>
                     <li><strong>설립</strong><span>${established}</span></li>
-                    <li><strong>소속</strong><span>대한성공회 서울교구 서부교무구</span></li>
+                    <li><strong>소속</strong><span>${diocese}</span></li>
                 </ul>
                 <a href="clergy.html" class="about-brief-link">교회 소개 자세히 보기 →</a>
             </div>
@@ -518,8 +518,8 @@ const IndexRenderer = {
         el.innerHTML = CHURCH_DATA.worship.main.map(w => `
             <div class="card">
                 <h3>${w.title}</h3>
-                <p style="font-weight:700; color:var(--green-mid); margin-bottom:0.5rem;">${w.time}</p>
-                <p style="color:var(--text-muted); font-size:0.9rem;">${w.desc}</p>
+                <p class="card-time">${w.time}</p>
+                <p class="card-desc">${w.desc}</p>
             </div>
         `).join('');
         const guide = document.getElementById('worship-guide');
