@@ -497,7 +497,7 @@ const IndexRenderer = {
     _about() {
         const el = document.getElementById('about-brief-content');
         if (!el) return;
-        const { name, established, diocese, aboutLead, aboutDesc } = CHURCH_DATA.info;
+        const { name, established, diocese, aboutLead, aboutDesc, award } = CHURCH_DATA.info;
         el.innerHTML = `
             <div class="about-brief">
                 <p class="about-brief-lead">${aboutLead}</p>
@@ -507,6 +507,15 @@ const IndexRenderer = {
                     <li><strong>설립</strong><span>${established}</span></li>
                     <li><strong>소속</strong><span>${diocese}</span></li>
                 </ul>
+                ${award ? `
+                <a href="${award.href}" class="about-brief-award">
+                    <span class="about-brief-award-icon" aria-hidden="true">🌿</span>
+                    <span class="about-brief-award-body">
+                        <strong>${award.year} ${award.title}</strong>
+                        <span>${award.org}</span>
+                    </span>
+                    <span class="about-brief-award-arrow" aria-hidden="true">→</span>
+                </a>` : ''}
                 <a href="clergy.html" class="about-brief-link">교회 소개 자세히 보기 →</a>
             </div>
         `;

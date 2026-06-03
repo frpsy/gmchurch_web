@@ -1084,6 +1084,26 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .about-brief-link:hover { color: var(--heading); }
 
+/* 수상 배지 — facts 아래, 소개 링크 위 */
+.about-brief-award {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    background: var(--green-light);
+    border: 1px solid var(--green-soft);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.25rem;
+    margin-bottom: var(--space-5);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+}
+.about-brief-award:hover { background: #dce8dd; border-color: var(--green-mid); }
+.about-brief-award-icon { font-size: 1.25rem; flex-shrink: 0; }
+.about-brief-award-body { display: flex; flex-direction: column; gap: 0.1rem; flex: 1; text-align: left; }
+.about-brief-award-body strong { font-size: var(--fs-sm); font-weight: 700; color: var(--heading); }
+.about-brief-award-body span   { font-size: var(--fs-label); color: var(--text-muted); }
+.about-brief-award-arrow       { color: var(--green-mid); font-size: var(--fs-sm); flex-shrink: 0; }
+
 /* ── Home page — 정렬 통일(센터) & 섹션 변형 ─────────────── */
 /* 배경 흰색 섹션 — HTML 인라인 style 대체 */
 .section--white { background: var(--white); }
