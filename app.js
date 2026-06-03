@@ -515,8 +515,7 @@ const IndexRenderer = {
                         <span>${award.org}</span>
                     </span>
                     <span class="about-brief-award-arrow" aria-hidden="true">→</span>
-                </a>
-                ${award.newsUrl ? `<p class="about-brief-news-link"><a href="${award.newsUrl}" target="_blank" rel="noopener" class="link-plain-ext">관련 기사 보기 (CBS 노컷뉴스) ↗</a></p>` : ''}` : ''}
+                </a>` : ''}
                 <a href="clergy.html" class="about-brief-link">교회 소개 자세히 보기 →</a>
             </div>
         `;
