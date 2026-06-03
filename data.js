@@ -589,27 +589,27 @@ const CHURCH_DATA = {
             {
                 title: "대한성공회",
                 items: [
-                    { name: "대한성공회 관구",   url: "https://anglicankr.church/",                                        desc: "대한성공회 공식 홈페이지" },
-                    { name: "서울교구",           url: "https://seoul.anglican.kr/",                                        desc: "대한성공회 서울교구 공식 홈페이지" },
-                    { name: "서울주교좌성당",     url: "https://www.cathedral.or.kr/",                                      desc: "대한성공회 서울주교좌성당" },
-                    { name: "성공회신문",         url: "https://www.skhnews.or.kr/",                                        desc: "대한성공회 공식 신문" },
-                    { name: "성공회출판사",       url: "https://smartstore.naver.com/skhnews21",                            desc: "성공회 서적·자료 온라인 서점" }
+                    { name: "대한성공회",   url: "https://anglicankr.church/",                                        desc: "대한성공회 공식 홈페이지" },
+                    { name: "대한성공회 서울교구",           url: "https://seoul.anglican.kr/",                                        desc: "대한성공회 서울교구 공식 홈페이지" },
+                    { name: "대한성공회 서울주교좌성당",     url: "https://www.cathedral.or.kr/",                                      desc: "대한성공회 서울주교좌성당" },
+                    { name: "대한성공회 신문",         url: "https://www.skhnews.or.kr/",                                        desc: "대한성공회 공식 신문" },
+                    { name: "대한성공회 출판사",       url: "https://smartstore.naver.com/skhnews21",                            desc: "성공회 서적·자료 온라인 서점" }
                 ]
             },
             {
                 title: "교육·선교 기관",
                 items: [
-                    { name: "성공회대학교",   url: "https://www.skhu.ac.kr/introMain/index.html", desc: "대한성공회가 설립한 4년제 대학교" },
-                    { name: "여성선교센터",   url: "https://awmck.org",                            desc: "Anglican Women's Mission Center Korea" },
+                    { name: "성공회대학교",   url: "https://www.skhu.ac.kr/introMain/index.html", desc: "대한성공회가 한국에 설립하여 경영하고 있는 유일한 사립 종합대학교" },
+                    { name: "대한성공회 여성선교센터",   url: "http://www.awmck.org/",                            desc: "여성의 시각으로 선교 사명을 재정립하고 성평등한 교회 공동체를 만들기 위해 2016년에 설립된 대한성공회 관구 산하 기관" },
                     { name: "대한성공회 G.F.S.", url: "https://www.gfskorea.org",                  desc: "Girls' Friendly Society — 1875년 영국에서 시작된, 신앙 안에서 여성의 성장과 연대를 도모하는 성공회 여성 공동체" },
-                    { name: "나눔의 집 협의회",   url: "https://ko.wikipedia.org/wiki/%EC%84%B1%EA%B3%B5%ED%9A%8C_%EB%82%98%EB%88%94%EC%9D%98%EC%A7%91%ED%98%91%EC%9D%98%ED%9A%8C", desc: "소외된 이웃의 인권을 보호하고 지역사회와 대안을 만드는 대표적인 사회선교 기관" }
+                    { name: "성공회 나눔의 집 협의회",   url: "https://ko.wikipedia.org/wiki/%EC%84%B1%EA%B3%B5%ED%9A%8C_%EB%82%98%EB%88%94%EC%9D%98%EC%A7%91%ED%98%91%EC%9D%98%ED%9A%8C", desc: "소외된 이웃의 인권을 보호하고 지역사회와 대안을 만드는 대표적인 사회선교 기관" }
                 ]
             },
             {
                 title: "수도 공동체",
                 items: [
-                    { name: "성 프란시스 수도회", url: "https://naver.me/xB77Wcf2",                                          desc: "강원 춘천시 남면 한덕발산길 1190 (네이버 지도)", external: true },
-                    { name: "성가수도회",         url: "https://www.sister.or.kr",                                           desc: "대한성공회 성가수도회 공식 홈페이지" }
+                    { name: "대한성공회 성 프란시스 수도회(네이버 지도)", url: "https://naver.me/xB77Wcf2",                                          desc: "한국 개신교 역사상 사실상 사라졌던 수도원 전통을 이어받아 1993년에 설립된 대한성공회 유일의 남자 수도회", external: true },
+                    { name: "대한성공회 성가수도회",         url: "https://www.sister.or.kr",                                           desc: "1925년에 설립된 한국 기독교 역사상 최초의 자생(방인) 여성 수도회" }
                 ]
             },
             {
