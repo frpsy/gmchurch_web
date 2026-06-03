@@ -91,7 +91,7 @@ const CHURCH_DATA = {
         diocese: "대한성공회 서울교구 서부교무구",
         aboutLead: "광명에서 함께 기도하고 살아가는 성공회 공동체입니다.",
         aboutDesc: "성공회 기도서를 따라 예배하며, 지역과 함께 살아갑니다.",
-        award: { year: "2023", title: "녹색교회 선정", org: "기독교환경운동연대", href: "greenchurch.html" },
+        award: { year: "2023", title: "녹색교회 선정", org: "기독교환경운동연대", href: "greenchurch.html", newsUrl: "https://christian.nocutnews.co.kr/news/6000856" },
         established: "1990년 2월 11일",
         address: "경기도 광명시 아방리 2길 10",
         addressShort: "경기도 광명시 아방리 2길 10",
@@ -519,6 +519,13 @@ const CHURCH_DATA = {
     },
 
     press: [
+        {
+            year: "2023",
+            media: "CBS 크리스천노컷뉴스",
+            title: "올해 녹색교회로 선정된 광명교회 — 일회용품 제거·친환경 비누·텃밭 애찬·생태 산행·반려동물 축복식 실천",
+            date: "2023",
+            url: "https://christian.nocutnews.co.kr/news/6000856"
+        },
         {
             year: "2025",
             media: "성공회신문",
