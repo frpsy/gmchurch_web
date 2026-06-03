@@ -303,7 +303,7 @@ const CHURCH_DATA = {
         values: [
             {
                 icon: "🌿",
-                title: "녹색 교회",
+                title: "녹색교회",
                 desc: "생태와 환경 보전을 신앙의 과제로 삼고 실천합니다. 녹색교회·동물복지·환경보호 운동의 선두에서 모든 생명을 지킵니다. 채식주의(비건—우유와 계란까지 제외한)를 위한 애찬도 준비됩니다."
             },
             {
@@ -677,7 +677,7 @@ const CHURCH_DATA = {
             href: "media.html",
             items: [
                 { label: "교회 영상",     href: "media.html#videos" },
-                { label: "녹색 교회",     href: "media.html#green" },
+                { label: "녹색교회",     href: "media.html#green" },
                 { label: "관련 기관",     href: "media.html#links" }
             ]
         },
