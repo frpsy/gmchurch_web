@@ -599,7 +599,7 @@ const CHURCH_DATA = {
             {
                 title: "교육·선교 기관",
                 items: [
-                    { name: "성공회대학교",   url: "https://www.skhu.ac.kr/introMain/index.html", desc: "대한성공회가 한국에 설립하여 경영하고 있는 유일한 사립 종합대학교" },
+                    { name: "성공회대학교",   url: "https://www.skhu.ac.kr/introMain/index.html", desc: "대한성공회가 한국에 설립하여 경영하고 있는 사립 종합대학교" },
                     { name: "대한성공회 여성선교센터",   url: "http://www.awmck.org/",                            desc: "여성의 시각으로 선교 사명을 재정립하고 성평등한 교회 공동체를 만들기 위해 2016년에 설립된 대한성공회 관구 산하 기관" },
                     { name: "대한성공회 G.F.S.", url: "https://www.gfskorea.org",                  desc: "Girls' Friendly Society — 1875년 영국에서 시작된, 신앙 안에서 여성의 성장과 연대를 도모하는 성공회 여성 공동체" },
                     { name: "성공회 나눔의 집 협의회",   url: "https://ko.wikipedia.org/wiki/%EC%84%B1%EA%B3%B5%ED%9A%8C_%EB%82%98%EB%88%94%EC%9D%98%EC%A7%91%ED%98%91%EC%9D%98%ED%9A%8C", desc: "소외된 이웃의 인권을 보호하고 지역사회와 대안을 만드는 대표적인 사회선교 기관" }
