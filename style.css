@@ -1103,6 +1103,9 @@ button:focus:not(:focus-visible) { outline: none; }
 .about-brief-award-body strong { font-size: var(--fs-sm); font-weight: 700; color: var(--heading); }
 .about-brief-award-body span   { font-size: var(--fs-label); color: var(--text-muted); }
 .about-brief-award-arrow       { color: var(--green-mid); font-size: var(--fs-sm); flex-shrink: 0; }
+.about-brief-news-link { margin-bottom: var(--space-5); }
+.link-plain-ext { font-size: var(--fs-label); color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
+.link-plain-ext:hover { color: var(--green-mid); }
 
 /* ── Home page — 정렬 통일(센터) & 섹션 변형 ─────────────── */
 /* 배경 흰색 섹션 — HTML 인라인 style 대체 */
