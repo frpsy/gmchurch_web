@@ -124,7 +124,7 @@ const CHURCH_DATA = {
     what: {                         // 성공회란? 섹션
       eyebrow, title,
       paras: [String, String],
-      pillars: [{ icon, title, desc }],  // 성경·전통·이성 3기둥
+      pillars: [{ icon, title, desc }],  // 성서·이성·전통 3기둥
       pillarNote: String
     },
     korea: {                        // 대한성공회 섹션
