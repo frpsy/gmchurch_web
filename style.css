@@ -2183,7 +2183,11 @@ footer {
 /* ── Mobile ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
     :root {
-        --section-pad: 5rem;
+        --section-pad: 3.5rem;
+    }
+    .page-hero {
+        padding-top: calc(var(--nav-h) + 2.5rem);
+        padding-bottom: 2.5rem;
     }
 
     /* Nav */
