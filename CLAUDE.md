@@ -29,8 +29,7 @@
 | 파일 | 역할 | 렌더러 (app.js) |
 |---|---|---|
 | `index.html` | 홈 | IndexRenderer |
-| `clergy.html` | 교회 소개 | AnglicanRenderer, ClergyRenderer, PressRenderer |
-| `story.html` | 교회 이야기 (What We Cherish) | — (정적 HTML, data.js 미사용) |
+| `clergy.html` | 교회 소개 (교회 이야기 `#identity` 정적 HTML 포함) | AnglicanRenderer, ClergyRenderer, PressRenderer |
 | `worship.html` | 예배 | WorshipRenderer |
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
@@ -51,7 +50,7 @@
 
 ```
 교회 소개 (clergy.html)
-  성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(story.html) / 로고 소개 / 언론 보도
+  성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity) / 로고 소개 / 언론 보도
 
 예배 (worship.html)
   주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 전례독서 / 예배 자료

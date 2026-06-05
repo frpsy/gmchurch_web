@@ -1601,8 +1601,9 @@ const MenuOverlay = {
     _staticLoaded: false,
 
     // 본문이 data.js가 아닌 HTML에 직접 있는 정적 페이지 (런타임 fetch로 인덱싱)
+    // sections: 지정 시 해당 id 섹션만 인덱싱 (나머지는 nav 라벨로 이미 색인됨)
     _staticPages: [
-        { url: 'story.html',       group: '교회 이야기' },
+        { url: 'clergy.html',      group: '교회 이야기', sections: ['identity'] },
         { url: 'emmaus.html',      group: '엠마우스 코스' },
         { url: 'greenchurch.html', group: '녹색교회' },
         { url: 'hopecenter.html',  group: '광명 희망터' }
@@ -1717,6 +1718,7 @@ const MenuOverlay = {
                 let added = 0;
                 main.querySelectorAll('[id]').forEach(sec => {
                     if (STRUCT.has(sec.id)) return;
+                    if (pg.sections && !pg.sections.includes(sec.id)) return;
                     const heading = sec.querySelector('h1, h2, h3');
                     const label = heading ? heading.textContent.trim() : '';
                     if (!label) return;

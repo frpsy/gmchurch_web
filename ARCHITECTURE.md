@@ -17,8 +17,7 @@
 ```
 gmchurch_web/
 ├── index.html        메인 페이지
-├── clergy.html       교회 소개 (성공회·사제·철학·로고·언론·교회 이야기)
-├── story.html        교회 이야기 — What We Cherish (5대 정체성 서사)
+├── clergy.html       교회 소개 (성공회·사제·철학·교회 이야기·로고·언론)
 ├── worship.html      예배 안내 (예배 카드·감사성찬례란·순서·예배 자료)
 ├── newcomer.html     처음 오신 분 (환영·참여 안내·전례·전례 공간·영성체·문의)
 ├── community.html    공동체 (희망터·엠마우스·소그룹·주일 애찬)
@@ -256,7 +255,7 @@ const CHURCH_DATA = {
   └ 대한성공회         clergy.html#ack
   └ 섬기는 이들        clergy.html#priest-section       (JS)
   └ 교회 철학          clergy.html#philosophy
-  └ 교회 이야기        story.html
+  └ 교회 이야기        clergy.html#identity
   └ 로고 소개          clergy.html#logo-intro
   └ 언론 보도          clergy.html#press
 
@@ -427,6 +426,8 @@ window DOMContentLoaded
   #clergy-full   (id="priest" on 첫 카드)  ← ClergyRenderer._clergy()
 <section id="philosophy">
   #philosophy-full                          ← ClergyRenderer._philosophy()
+<section id="identity"> .story-values — 교회 이야기 5대 정체성 서사 블록 (정적 HTML)
+  01 전례 전통  02 평등 공동체  03 부활 신앙  04 밥상 공동체  05 약자·창조 돌봄
 <section id="logo-intro">
   #logo-content                             ← ClergyRenderer._logo()
 <section id="press">
@@ -474,16 +475,6 @@ window DOMContentLoaded
 <div class="page-hero">
 <section>  #community-full / #giving-full / #visit-full
    (community-full에 #agape 주일 애찬 카드 포함)
-```
-
-### story.html (교회 이야기 — What We Cherish)
-```html
-<div class="page-hero">                       교회 이야기
-<section id="welcome">  .story-lead 환영 문구
-<section id="identity"> .story-values — 5대 정체성 서사 블록
-   01 전례 전통  02 평등 공동체  03 부활 신앙  04 밥상 공동체  05 약자·창조 돌봄
-<section id="invite">   .newcomer-cta 초대
-※ 정적 HTML 페이지 (data.js 비의존), nav/footer는 공통 렌더러가 채움
 ```
 
 ---
@@ -543,7 +534,7 @@ window DOMContentLoaded
 | `.liturgy-checklist` / `.checklist-item` | 처음 오신 분 체크리스트 |
 | `.nav-badge` | 내비 하위 메뉴 상태 칩 (골드, 예: "임시") |
 | `.draft-banner` | 임시/초안 페이지 상단 안내 배너 (골드) |
-| `.story-values` / `.story-value` | 교회 이야기 5대 정체성 블록 (story.html) |
+| `.story-values` / `.story-value` | 교회 이야기 5대 정체성 블록 (clergy.html#identity, greenchurch.html) |
 | `.anglican-pillars` | 성공회 3기둥 카드 그리드 |
 | `.anglican-korea-inner` | 대한성공회 2단 레이아웃 |
 | `.logo-intro-grid` | 캔터베리 십자가 소개 그리드 |
@@ -611,7 +602,7 @@ window DOMContentLoaded
 3. `App.init()` 메서드에서 조건부로 렌더러 호출
    - 페이지별 렌더러는 해당 HTML 페이지에서만 실행 (예: `if (document.getElementById('media-full'))`)
 4. `data.js`의 `navigation` 배열에 새 메뉴 항목 추가
-5. 필요 시 media.html, story.html처럼 별도 대문 이미지 제공
+5. 필요 시 media.html처럼 별도 대문 이미지 제공
 6. ARCHITECTURE.md와 docs/ 작업 지시서 동기화
 
 ### Git 워크플로
