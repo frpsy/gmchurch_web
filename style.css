@@ -2578,7 +2578,7 @@ footer {
 }
 .placeholder-contact:hover { background: var(--green-mid); color: #fff; }
 
-/* ── 교회 이야기 (story.html) ────────────────────────────── */
+/* ── 교회 이야기 (clergy.html#identity, greenchurch.html) ─── */
 .draft-banner {
     max-width: 760px;
     margin: 0 auto 2.5rem;
