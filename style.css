@@ -1492,6 +1492,155 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--text-muted);
 }
 
+/* ── FAQ (faq.html) ─────────────────────────────────────── */
+.container--narrow { max-width: 820px; }
+
+.faq-lead {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-relaxed);
+    color: var(--text);
+    text-align: center;
+    word-break: keep-all;
+    margin: 0 auto 3rem;
+    max-width: 660px;
+}
+
+.faq-cat { margin-bottom: 3rem; }
+.faq-cat:last-child { margin-bottom: 0; }
+.faq-cat-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--heading);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--green-soft);
+}
+.faq-cat-icon { font-size: 1.2rem; line-height: 1; }
+
+.faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.faq-item[open] {
+    border-color: var(--green-mid);
+    box-shadow: var(--shadow-md);
+}
+.faq-item:hover { border-color: var(--green-soft); }
+
+.faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.4rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: var(--lh-heading);
+    color: var(--heading);
+    word-break: keep-all;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q:focus-visible {
+    outline: 2px solid var(--green-mid);
+    outline-offset: -2px;
+    border-radius: var(--radius-md);
+}
+.faq-q-text::before {
+    content: "Q";
+    display: inline-block;
+    color: var(--green-mid);
+    font-weight: 800;
+    margin-right: 0.5rem;
+}
+
+/* 펼침 표시(+/−) — 회전하는 십자 아이콘 */
+.faq-q-mark {
+    position: relative;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    transition: transform 0.25s var(--ease-out);
+}
+.faq-q-mark::before,
+.faq-q-mark::after {
+    content: "";
+    position: absolute;
+    background: var(--green-mid);
+    border-radius: 2px;
+}
+.faq-q-mark::before { top: 8px; left: 0; width: 18px; height: 2px; }
+.faq-q-mark::after  { left: 8px; top: 0; width: 2px; height: 18px; }
+.faq-item[open] .faq-q-mark { transform: rotate(135deg); }
+
+.faq-a {
+    padding: 0 1.4rem 1.3rem;
+    border-top: 1px solid var(--border);
+}
+.faq-a-text {
+    margin: 1rem 0 0;
+    font-size: var(--fs-body);
+    line-height: var(--lh-relaxed);
+    color: var(--text);
+    word-break: keep-all;
+}
+.faq-a-text a {
+    color: var(--green-mid);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.faq-a-text strong { color: var(--heading); }
+.faq-a-text em { font-style: normal; background: var(--gold-bg); padding: 0 0.2em; border-radius: 3px; }
+
+.faq-refs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 1rem 0 0;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--border);
+}
+.faq-refs-label {
+    font-size: var(--fs-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-right: 0.2rem;
+}
+.faq-ref {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: var(--fs-sm);
+    color: var(--green-mid);
+    background: var(--green-light);
+    border: 1px solid var(--green-soft);
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    line-height: 1.4;
+    transition: background 0.2s, color 0.2s;
+    word-break: keep-all;
+}
+.faq-ref:hover { background: var(--green-mid); color: #fff; border-color: var(--green-mid); }
+
+@media (max-width: 600px) {
+    .faq-q { padding: 1rem 1.1rem; font-size: 0.95rem; }
+    .faq-a { padding: 0 1.1rem 1.1rem; }
+}
+
 /* ── Liturgy Guide ──────────────────────────────────────── */
 /* ── Liturgical season colour tokens ──────────────────────── */
 :root { --season: var(--green-mid); --season-light: var(--green-light); }
