@@ -633,6 +633,133 @@ const CHURCH_DATA = {
         ]
     },
 
+    // 성공회에 대한 오해·궁금증 FAQ (faq.html, FaqRenderer)
+    // 답변은 대한성공회 공식 자료·세계성공회 문헌을 근거로 광명교회가 정리. refs는 출처 링크.
+    faq: {
+        badge: "가안",
+        eyebrow: "Frequently Asked Questions",
+        title: "자주 묻는 질문",
+        lead: "성공회를 처음 접하는 분들이 흔히 갖는 오해와 궁금증을 모았습니다. 각 답변에는 확인할 수 있는 출처를 함께 달았습니다.",
+        note: "아래 답변은 대한성공회의 공식 자료와 세계성공회 문헌을 바탕으로 광명교회가 정리한 안내입니다. 신학적 세부와 공식 입장은 교단 문헌을 우선합니다.",
+        categories: [
+            {
+                id: "identity",
+                title: "정체성과 뿌리",
+                icon: "✝️",
+                items: [
+                    {
+                        q: "성공회는 이단인가요?",
+                        a: "아닙니다. 성공회는 사도신경과 니케아 신경을 고백하는 정통 그리스도교 교회입니다. <strong>성서</strong>, <strong>신경</strong>, <strong>세례·성찬의 성사</strong>, <strong>역사적 주교제</strong>를 신앙의 기준으로 삼는 ‘시카고-램베스 사대강령’(1888) 위에 서 있으며, 전 세계 165개국 이상·약 8,500만 명이 함께하는 세계성공회 공동체(Anglican Communion)의 일원입니다.",
+                        refs: [
+                            { label: "시카고-램베스 사대강령 (세계성공회)", url: "https://www.anglicancommunion.org/the-chicago-lambeth-quadrilateral/" },
+                            { label: "Anglican Communion (Wikipedia)", url: "https://en.wikipedia.org/wiki/Anglican_Communion" }
+                        ]
+                    },
+                    {
+                        q: "천주교(가톨릭)인가요, 개신교인가요?",
+                        a: "둘 중 하나로 잘라 말하기 어렵습니다. 성공회는 16세기 잉글랜드 종교개혁에서 비롯되어, 가톨릭의 전례 전통과 개신교의 성서 중심 신앙을 함께 품는 <strong>‘중도의 길(Via Media)’</strong>을 걸어왔습니다. 교황의 수위권은 인정하지 않으며, 한국에서는 법적·통계적으로 개신교로 분류됩니다.",
+                        refs: [
+                            { label: "성서·이성·전통과 리처드 후커 (Via Media)", url: "https://liturgy.co.nz/scripture-tradition-reason-and-richard-hooker" },
+                            { label: "대한성공회 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C_%EC%84%B1%EA%B3%B5%ED%9A%8C" }
+                        ]
+                    },
+                    {
+                        q: "결국 영국 교회 아닌가요? 외국 교회인가요?",
+                        a: "1890년 영국 선교사 고요한(Charles John Corfe) 주교를 통해 시작되었지만, 대한성공회는 <strong>1993년 세계성공회의 독립 자치 관구</strong>가 된 한국 교회입니다. 캔터베리 대주교와는 상하 관계가 아니라 동등한 ‘교제와 일치’의 관계이며, 운영과 의사결정은 한국 교단이 자치적으로 합니다.",
+                        refs: [
+                            { label: "대한성공회의 역사 (공식)", url: "https://www.skh.or.kr/3" },
+                            { label: "대한성공회 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C_%EC%84%B1%EA%B3%B5%ED%9A%8C" }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "faith",
+                title: "신앙과 성사",
+                icon: "🕊",
+                items: [
+                    {
+                        q: "구원을 어떻게 이해하나요?",
+                        a: "구원은 사람이 조건을 채워 얻어내는 것이 아니라, <strong>예수 그리스도를 통해 하느님께서 거저 주시는 선물(은총)</strong>이라고 믿습니다. 성공회는 특정 교단 소속이나 정해진 ‘공식’을 구원의 잣대로 삼지 않으며, 성서를 구원에 필요한 모든 것을 담은 말씀으로 고백합니다.",
+                        refs: [
+                            { label: "시카고-램베스 사대강령 — 성서의 권위", url: "https://www.anglicancommunion.org/the-chicago-lambeth-quadrilateral/" }
+                        ]
+                    },
+                    {
+                        q: "성찬의 빵과 포도주를 어떻게 보나요?",
+                        a: "그리스도께서 성찬에 <strong>참으로 임재</strong>하신다고 믿되, 빵과 포도주의 실체 자체가 변한다는 로마 가톨릭의 <strong>화체설은 따르지 않습니다</strong>(성공회 신앙의 39개조 제28조). ‘어떻게’를 규정하기보다 그 신비를 믿음으로 받아 모십니다.",
+                        refs: [
+                            { label: "성공회 신앙의 39개조 — 성찬론", url: "https://namu.wiki/w/%EC%84%B1%EA%B3%B5%ED%9A%8C%2039%EA%B0%9C%20%EC%8B%A0%EC%A1%B0" }
+                        ]
+                    },
+                    {
+                        q: "다른 교회에서 받은 세례를 다시 받아야 하나요?",
+                        a: "아닙니다. <strong>삼위일체 하느님의 이름(성부·성자·성령)으로 물로 받은 세례</strong>라면, 교단과 관계없이 유효한 세례로 인정합니다. 천주교·개신교에서 세례를 받으셨다면 다시 받을 필요가 없습니다.",
+                        refs: [
+                            { label: "시카고-램베스 사대강령 — 세례 성사", url: "https://www.anglicancommunion.org/the-chicago-lambeth-quadrilateral/" },
+                            { label: "세례 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EC%84%B8%EB%A1%80" }
+                        ]
+                    },
+                    {
+                        q: "마리아와 성인을 숭배하나요?",
+                        a: "아닙니다. 성공회는 성모 마리아와 성인들을 <strong>신앙의 모범으로 공경(존경)</strong>하지만, 예배와 기도의 대상은 오직 삼위일체 하느님입니다. 성인을 신처럼 섬기거나 구원의 중개자로 삼지 않습니다.",
+                        refs: [
+                            { label: "성공회 신앙의 39개조 — 제22조", url: "https://namu.wiki/w/%EC%84%B1%EA%B3%B5%ED%9A%8C%2039%EA%B0%9C%20%EC%8B%A0%EC%A1%B0" }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "society",
+                title: "평등과 사회참여",
+                icon: "⚖️",
+                items: [
+                    {
+                        q: "성공회는 ‘좌파 교회’인가요?",
+                        a: "성공회의 사회 참여는 정당이나 이념이 아니라 <strong>신앙에서 나옵니다</strong>. 세계성공회가 공유하는 ‘성공회 선교정신(Five Marks of Mission)’의 네 번째가 <em>‘불의한 사회 구조를 변화시키는 것’</em>입니다. 대한성공회는 1970년대부터 빈민·산업 선교와 민주화운동에 함께했고, 성공회대학교는 인권과 평화의 가치를 이어왔습니다. 이는 특정 정파를 지지하는 것과는 다릅니다.",
+                        refs: [
+                            { label: "성공회 선교정신 — 다섯 표지 (세계성공회)", url: "https://www.anglicancommunion.org/five-marks-of-mission/" },
+                            { label: "성공회대학교 인권센터", url: "https://humanrights.skhu.ac.kr/" }
+                        ]
+                    },
+                    {
+                        q: "여성도 사제가 될 수 있나요? 성경적인가요?",
+                        a: "네. 대한성공회는 <strong>2001년 부산교구에서 첫 여성 사제(민병옥 카타리나)</strong>를 서품했습니다. 갈라디아서 3장 28절(‘남자도 여자도 그리스도 안에서 하나’)과 초대교회의 여성 지도자들(브리스길라 등)을 근거로, 성별이 성직의 자격을 가르지 않는다고 봅니다.",
+                        refs: [
+                            { label: "대한성공회 여성 사제 서품 20주년 (NEWS M)", url: "http://www.newsm.com/news/articleView.html?idxno=23398" },
+                            { label: "민병옥 사제 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EB%AF%BC%EB%B3%91%EC%98%A5" }
+                        ]
+                    },
+                    {
+                        q: "성공회는 동성애·동성결혼을 지지하나요?",
+                        a: "세계성공회 안에는 <strong>단일한 입장이 없습니다</strong>. 관구에 따라 동성결혼을 축복·허용하는 곳도 있고, 1998년 람베스 회의 결의(I.10)처럼 혼인을 남녀 간의 언약으로 보는 전통적 입장을 유지하는 곳도 있어 논의가 진행 중입니다. 대한성공회는 동성결혼을 공식 예식으로 시행하지는 않지만, <strong>성소수자를 정죄·배제하지 않으며 혐오와 차별에는 반대</strong>합니다(성소수자 사목 ‘길찾는교회’ 등). 광명교회는 ‘모든 생명을 환대하는 교회’로서, 찾아오시는 누구도 문 앞에서 돌려보내지 않습니다.",
+                        refs: [
+                            { label: "람베스 회의 1998 결의 I.10 (세계성공회)", url: "https://www.anglicancommunion.org/resources/document-library/lambeth-conference/1998/section-i-called-to-full-humanity/section-i10-human-sexuality" },
+                            { label: "교회 안의 성소수자 사목 (프레시안, 2024)", url: "https://www.pressian.com/pages/articles/2024091417214791589" }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "join",
+                title: "함께하기",
+                icon: "🤝",
+                items: [
+                    {
+                        q: "교파를 옮기거나 신앙을 새로 시작해야 하나요?",
+                        a: "꼭 그렇지 않습니다. 성공회는 다른 교단의 세례를 인정하므로, 천주교나 개신교에서 신앙생활을 해 오셨다면 그 여정을 존중합니다. 교적 이전 없이도 함께 예배하실 수 있으며, 자세한 안내는 <a href='newcomer.html'>처음 오신 분</a> 페이지를 참고해 주세요.",
+                        refs: []
+                    },
+                    {
+                        q: "성공회 예배(전례)는 천주교 미사처럼 어렵지 않나요?",
+                        a: "처음에는 낯설 수 있지만, 순서가 정해져 있어 오히려 따라가기 쉽습니다. 주보와 기도서가 모든 순서를 안내하고 옆자리 교우들이 도와드립니다. 미리 <a href='newcomer.html#worship-space'>전례 공간 안내</a>와 <a href='worship.html#eucharist-order'>감사성찬례 순서</a>를 보시면 한결 편안합니다.",
+                        refs: []
+                    }
+                ]
+            }
+        ]
+    },
+
     navigation: [
         {
             label: "교회 소개",
@@ -643,6 +770,7 @@ const CHURCH_DATA = {
                 { label: "섬기는 이들", href: "clergy.html#priest-section" },
                 { label: "교회 철학",  href: "clergy.html#philosophy" },
                 { label: "교회 이야기", href: "clergy.html#identity" },
+                { label: "자주 묻는 질문", href: "faq.html", badge: "가안" },
                 { label: "로고 소개",  href: "clergy.html#logo-intro" },
                 { label: "언론 보도",  href: "clergy.html#press" }
             ]

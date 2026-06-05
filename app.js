@@ -1392,6 +1392,53 @@ const PressRenderer = {
     }
 };
 
+/* ── FaqRenderer ─────────────────────────────────────────── */
+const FaqRenderer = {
+    render() {
+        const el = document.getElementById('faq-full');
+        if (!el || !CHURCH_DATA.faq) return;
+        const faq = CHURCH_DATA.faq;
+
+        const refsHtml = (refs) => (refs && refs.length)
+            ? `<p class="faq-refs"><span class="faq-refs-label">출처</span>${refs.map(r =>
+                  `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="faq-ref">${r.label} <span aria-hidden="true">↗</span></a>`
+              ).join('')}</p>`
+            : '';
+
+        const catsHtml = faq.categories.map(cat => `
+            <section class="faq-cat" aria-labelledby="faqcat-${cat.id}">
+                <h2 class="faq-cat-title" id="faqcat-${cat.id}">
+                    <span class="faq-cat-icon" aria-hidden="true">${cat.icon || ''}</span>${cat.title}
+                </h2>
+                <div class="faq-list">
+                    ${cat.items.map(item => `
+                        <details class="faq-item">
+                            <summary class="faq-q">
+                                <span class="faq-q-text">${item.q}</span>
+                                <span class="faq-q-mark" aria-hidden="true"></span>
+                            </summary>
+                            <div class="faq-a">
+                                <p class="faq-a-text">${item.a}</p>
+                                ${refsHtml(item.refs)}
+                            </div>
+                        </details>
+                    `).join('')}
+                </div>
+            </section>
+        `).join('');
+
+        el.innerHTML = `
+            ${faq.note ? `
+            <div class="draft-banner">
+                <span class="draft-banner-icon" aria-hidden="true">📝</span>
+                <p><strong>${faq.badge ? faq.badge + ' · ' : ''}</strong>${faq.note}</p>
+            </div>` : ''}
+            ${faq.lead ? `<p class="faq-lead">${faq.lead}</p>` : ''}
+            ${catsHtml}
+        `;
+    }
+};
+
 /* ── ScrollReveal ────────────────────────────────────────── */
 const ScrollReveal = {
     init() {
@@ -1523,6 +1570,7 @@ const App = {
         AnglicanRenderer.render();
         ClergyRenderer.render();
         PressRenderer.render();
+        FaqRenderer.render();
         MediaRenderer.render();
         LinksRenderer.render();
         this._handleHashScroll();
@@ -1699,6 +1747,11 @@ const MenuOverlay = {
         // 관련 기관 (links.html)
         if (d.links) (d.links.groups || []).forEach(gr => (gr.items || []).forEach(it =>
             add(it.name, 'links.html', '관련 기관', join(gr.title, it.desc))));
+
+        // 자주 묻는 질문 (faq.html) — 답변 본문에서 태그 제거 후 색인
+        if (d.faq) (d.faq.categories || []).forEach(cat => (cat.items || []).forEach(it =>
+            add(it.q, 'faq.html#faq', '자주 묻는 질문',
+                join(cat.title, (it.a || '').replace(/<[^>]+>/g, ' ')))));
 
         return out;
     },

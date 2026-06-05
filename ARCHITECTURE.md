@@ -18,6 +18,7 @@
 gmchurch_web/
 ├── index.html        메인 페이지
 ├── clergy.html       교회 소개 (성공회·사제·철학·교회 이야기·로고·언론)
+├── faq.html          자주 묻는 질문 (성공회 오해·궁금증 FAQ, 가안)
 ├── worship.html      예배 안내 (예배 카드·감사성찬례란·순서·예배 자료)
 ├── newcomer.html     처음 오신 분 (환영·참여 안내·전례·전례 공간·영성체·문의)
 ├── community.html    공동체 (희망터·엠마우스·소그룹·주일 애찬)
@@ -256,6 +257,7 @@ const CHURCH_DATA = {
   └ 섬기는 이들        clergy.html#priest-section       (JS)
   └ 교회 철학          clergy.html#philosophy
   └ 교회 이야기        clergy.html#identity
+  └ 자주 묻는 질문     faq.html                         (가안 badge)
   └ 로고 소개          clergy.html#logo-intro
   └ 언론 보도          clergy.html#press
 
@@ -434,6 +436,16 @@ window DOMContentLoaded
   #press-table                              ← PressRenderer.render()
 ```
 
+### faq.html
+```html
+<div class="page-hero">                       자주 묻는 질문 (FAQ)
+<section id="faq"> .container--narrow
+  #faq-full                                 ← FaqRenderer.render()
+     draft-banner(가안) + .faq-lead + .faq-cat × 4 (정체성·신앙·사회참여·함께하기)
+     각 항목 <details.faq-item> → .faq-q(summary) / .faq-a / .faq-refs(출처 링크)
+※ 콘텐츠는 CHURCH_DATA.faq (카테고리 4 · 질문 12 · 출처 링크 17)
+```
+
 ### media.html
 ```html
 <div class="page-hero">
@@ -535,6 +547,8 @@ window DOMContentLoaded
 | `.nav-badge` | 내비 하위 메뉴 상태 칩 (골드, 예: "임시") |
 | `.draft-banner` | 임시/초안 페이지 상단 안내 배너 (골드) |
 | `.story-values` / `.story-value` | 교회 이야기 5대 정체성 블록 (clergy.html#identity, greenchurch.html) |
+| `.faq-cat` / `.faq-item` / `.faq-q` / `.faq-a` / `.faq-refs` / `.faq-ref` | FAQ 카테고리·문답(`<details>`)·출처 링크 (faq.html) |
+| `.container--narrow` | 읽기 폭 제한 컨테이너 (max 820px, faq.html) |
 | `.anglican-pillars` | 성공회 3기둥 카드 그리드 |
 | `.anglican-korea-inner` | 대한성공회 2단 레이아웃 |
 | `.logo-intro-grid` | 캔터베리 십자가 소개 그리드 |

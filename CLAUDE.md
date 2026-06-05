@@ -30,6 +30,7 @@
 |---|---|---|
 | `index.html` | 홈 | IndexRenderer |
 | `clergy.html` | 교회 소개 (교회 이야기 `#identity` 정적 HTML 포함) | AnglicanRenderer, ClergyRenderer, PressRenderer |
+| `faq.html` | 자주 묻는 질문 (성공회 오해·궁금증, 가안) | FaqRenderer |
 | `worship.html` | 예배 | WorshipRenderer |
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
@@ -50,7 +51,7 @@
 
 ```
 교회 소개 (clergy.html)
-  성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity) / 로고 소개 / 언론 보도
+  성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity) / 자주 묻는 질문(faq.html, 가안) / 로고 소개 / 언론 보도
 
 예배 (worship.html)
   주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 전례독서 / 예배 자료
