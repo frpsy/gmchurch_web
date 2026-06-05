@@ -90,7 +90,7 @@ const CHURCH_DATA = {
         vision: "하느님 나라를 살아가는 사랑의 공동체",
         diocese: "대한성공회 서울교구 서부교무구",
         aboutLead: "성공회 기도서를 따라 예배하며, 생태 보전을 신앙의 과제로 삼는 광명의 녹색 교회입니다.",
-        aboutDesc: "주일 애찬에는 비건 음식도 몇 가지 함께 마련합니다.",
+        aboutDesc: "주일 애찬에는 비건 음식도 함께 마련합니다.",
         award: { year: "2023", title: "녹색교회 선정", org: "기독교환경운동연대", href: "greenchurch.html", newsUrl: "https://christian.nocutnews.co.kr/news/6000856" },
         established: "1990년 2월 11일",
         address: "경기도 광명시 아방리 2길 10",
@@ -308,7 +308,7 @@ const CHURCH_DATA = {
             {
                 icon: "🌿",
                 title: "녹색교회",
-                desc: "생태와 환경 보전을 신앙의 과제로 삼고 실천합니다. 녹색교회·동물복지·환경보호를 실천하며 생명을 돌봅니다. 주일 애찬에는 비건 음식도 몇 가지 함께 준비합니다."
+                desc: "생태와 환경 보전을 신앙의 과제로 삼고 실천합니다. 녹색교회·동물복지·환경보호를 실천하며 생명을 돌봅니다. 주일 애찬에는 비건 음식도 함께 준비합니다."
             },
             {
                 icon: "🤲",
@@ -477,7 +477,7 @@ const CHURCH_DATA = {
                 id: "agape",
                 title: "주일 애찬",
                 desc: "예배 후 함께 음식을 나누는 자리",
-                note: "비건 음식도 몇 가지 준비됩니다",
+                note: "비건 음식도 함께 준비됩니다",
                 footnote: "* 비건: 계란·우유도 포함하지 않는 완전 채식",
                 icon: "🍚"
             }
