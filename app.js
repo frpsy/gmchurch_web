@@ -26,14 +26,14 @@ function canterburyCrossSVG({ size = null, fill = '#ffffff', cls = '', label = n
 /* ── MapHelper ───────────────────────────────────────────── */
 const MapHelper = {
     // 네이버/카카오 iframe은 X-Frame-Options로 임베드 차단 → Google Maps output=embed 사용.
-    // API 키 불필요, 다크/라이트·모바일/PC 모두 정상 동작. 핀은 data.js geo 좌표로 고정.
+    // API 키 불필요, 다크/라이트·모바일/PC 모두 정상 동작.
+    // q= 에 도로명 주소 문자열을 사용: Google 지오코딩이 한국 도로명 주소로 정확한 위치 핀 지정.
     naverUrl:  "https://map.naver.com/p/search/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C%20%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
     kakaoUrl:  "https://map.kakao.com/link/search/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C%20%EA%B4%91%EB%AA%85%EA%B5%90%ED%9A%8C",
 
-    // data.js geo 좌표 기반 Google Maps 임베드 URL — 좌표 핀으로 정확한 위치 고정
     _embedSrc() {
-        const { latitude, longitude } = CHURCH_DATA.info.geo;
-        return `https://www.google.com/maps?q=${latitude},${longitude}&z=16&hl=ko&output=embed`;
+        const addr = encodeURIComponent(CHURCH_DATA.info.address);
+        return `https://www.google.com/maps?q=${addr}&z=17&hl=ko&output=embed`;
     },
 
     copyAddr(btn) {
