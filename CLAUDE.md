@@ -173,6 +173,15 @@ echo "Done: $TODAY"
 ### 주석
 - 한국어 사용, 꼭 필요한 경우만 (WHY 중심, WHAT 설명 금지)
 
+### 색상·다크모드 규칙 (모드·OS 무관 가독성 필수)
+> 사이트는 `@media (prefers-color-scheme: dark)`로 다크모드를 지원한다. **OS/브라우저 설정과 무관하게 모든 텍스트가 항상 읽혀야 한다.**
+
+- **색은 반드시 CSS 변수로** — 배경/텍스트 모두 `var(--white)`, `var(--cream)`, `var(--text)`, `var(--heading)`, `var(--green-light)` 등 다크모드에서 자동 전환되는 토큰을 쓴다. 이 변수들은 라이트/다크에서 짝을 이뤄 대비가 보장된다.
+- **하드코딩 색상(`#rrggbb`) 금지** — 특히 `background`에 밝은 hex(`#fff`, `#dce8dd`, 파스텔)를 직접 쓰면 다크모드에서 밝은 글자와 겹쳐 사라진다. 불가피하면 `@media (prefers-color-scheme: dark)` 블록에 다크 대응값을 **반드시 함께** 추가한다(예: `.btn-hero-primary`, `.page-hero`).
+- **`:hover`/`:focus` 상태도 검사** — 호버 시 배경만 밝은 hex로 바꾸는 패턴(`.about-brief-award:hover`)도 다크모드에서 글자가 사라진다. 상태 색도 변수 또는 다크 오버라이드로.
+- **JS로 주입하는 색 주의** — `app.js`가 `--season`/`--season-light`(전례력 절기색, `data.js`의 하드코딩 hex)를 `:root` 인라인 스타일로 주입한다. 인라인 변수는 미디어쿼리로 못 덮으므로, 그 변수를 쓰는 요소는 다크 블록에서 `background`/`color` **속성 자체**를 재선언(`color-mix(in srgb, var(--season) N%, var(--white)/(--heading))`)해 덮는다.
+- **대비 검증** — 새 색 조합은 본문 텍스트 기준 WCAG AA(4.5:1) 지향. 라이트·다크 양쪽에서 실제로 확인할 것.
+
 ### 금지 사항
 - HTML에 직접 콘텐츠 하드코딩 (data.js를 거쳐야 함)
 - nav에 링크 없이 새 페이지 추가
