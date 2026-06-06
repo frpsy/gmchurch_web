@@ -357,11 +357,11 @@ const IndexRenderer = {
         // 설립 연도만 추출 ("1990년 2월 11일" → "1990")
         const foundedYear = (established.match(/\d{4}/) || [established])[0];
         if (stats) stats.innerHTML = `
-            <div class="hero-stat"><span class="hero-stat-val">${foundedYear}</span><span class="hero-stat-lbl">설립</span></div>
+            <a href="clergy.html#identity" class="hero-stat hero-stat--link"><span class="hero-stat-val">${foundedYear}</span><span class="hero-stat-lbl">설립</span></a>
             <span class="hero-stat-divider" aria-hidden="true"></span>
-            <div class="hero-stat"><span class="hero-stat-val">오전 11:00</span><span class="hero-stat-lbl">주일 예배</span></div>
+            <a href="worship.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">오전 11:00</span><span class="hero-stat-lbl">주일 예배</span></a>
             <span class="hero-stat-divider" aria-hidden="true"></span>
-            <div class="hero-stat"><span class="hero-stat-val">경기도 광명시</span><span class="hero-stat-lbl">위치</span></div>
+            <a href="visit.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">경기도 광명시</span><span class="hero-stat-lbl">위치</span></a>
         `;
     },
 
