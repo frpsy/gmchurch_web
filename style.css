@@ -3246,6 +3246,22 @@ footer {
     .btn-hero-primary:hover {
         background: #c8ddc9;
     }
+    /* 전례력 절기색 — JS가 주입하는 밝은 절기색(s.colorLight)은 다크모드에 적응하지
+       않으므로, 절기 강조색을 어두운 서피스에 섞어 카드 배경을 어둡게 재계산한다.
+       (color-mix 미지원 시 기존 background 선언으로 자연 폴백) */
+    .liturgy-guide .communion-season {
+        background: color-mix(in srgb, var(--season) 14%, var(--white));
+    }
+    /* 절기색을 텍스트로 쓰는 요소 — 어두운 배경에서 가독성 확보 위해 밝게 보정 */
+    .liturgy-guide .section-eyebrow,
+    .liturgy-season-badge .season-name,
+    .liturgy-guide .resource-link {
+        color: color-mix(in srgb, var(--season) 50%, var(--heading));
+    }
+    /* 수상 배지 hover — 라이트 전용 하드코딩 배경 대신 어두운 톤으로 */
+    .about-brief-award:hover {
+        background: var(--green-soft);
+    }
 }
 
 /* ── Back To Top 버튼 (화이트 반투명, 아이콘 녹색) ───────────────── */
