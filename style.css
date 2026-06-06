@@ -1463,6 +1463,17 @@ button:focus:not(:focus-visible) { outline: none; }
 .bus-chip.bus-green { background: #3a7252; }
 
 /* ── Press List ─────────────────────────────────────────── */
+.press-category { margin-bottom: 1.8rem; }
+.press-category:last-child { margin-bottom: 0; }
+.press-category-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+}
 .press-list {
     list-style: none;
     background: var(--white);

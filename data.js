@@ -521,6 +521,7 @@ const CHURCH_DATA = {
     press: [
         {
             year: "2023",
+            category: "녹색교회",
             media: "CBS 크리스천노컷뉴스",
             title: "올해 녹색교회로 선정된 광명교회 — 일회용품 제거·친환경 비누·텃밭 애찬·생태 산행·반려동물 축복식 실천",
             date: "2023",
@@ -528,6 +529,7 @@ const CHURCH_DATA = {
         },
         {
             year: "2025",
+            category: "여성 성직",
             media: "성공회신문",
             title: "서울교구 최초 여성 총사제 민숙희 마가렛 사제 인터뷰",
             date: "2025",
@@ -535,6 +537,7 @@ const CHURCH_DATA = {
         },
         {
             year: "2021",
+            category: "여성 성직",
             media: "뉴스앤조이",
             title: "대한성공회 여성 사제 서품 20주년…여성 성직 역사는 교단 여성들의 투쟁기",
             date: "2021.09",
@@ -542,6 +545,7 @@ const CHURCH_DATA = {
         },
         {
             year: "2016",
+            category: "반려동물 목회",
             media: "뉴스앤조이",
             title: "개업 축복식도 하면서, 동물은 왜 안 되나? — 반려동물 축복식 집전한 민숙희 사제 인터뷰",
             date: "2016.10",
@@ -549,6 +553,7 @@ const CHURCH_DATA = {
         },
         {
             year: "2005",
+            category: "여성 성직",
             media: "여성신문",
             title: "대한성공회 서울교구 첫 여성성직자 민숙희, 김기리 부제",
             date: "2005.05",
