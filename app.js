@@ -1268,7 +1268,9 @@ const FaqRenderer = {
                                 <span class="faq-q-mark" aria-hidden="true"></span>
                             </summary>
                             <div class="faq-a">
-                                <p class="faq-a-text">${item.a}</p>
+                                ${(item.a || '').split('\n\n').map((para, i) =>
+                                    `<p class="${i === 0 ? 'faq-a-lead' : 'faq-a-text'}">${para}</p>`
+                                ).join('')}
                                 ${refsHtml(item.refs)}
                             </div>
                         </details>
