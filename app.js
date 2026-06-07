@@ -1458,33 +1458,38 @@ const SundaysRenderer = {
         const now  = new Date();
         const year = now.getFullYear();
         const mon  = now.getMonth();
-        const yearDates   = this._computeDates(year);
+        /* 교회력 연도 시작 연도: 대림절 전이면 전년도 대림절에서 시작 */
+        const adventThisYear = LiturgicalCalendar.adventStart(year);
+        const advYear = now < adventThisYear ? year - 1 : year;
+        const yearDates   = this._computeDates(advYear);
         const specialMap  = this._specialDates(year);
 
-        if (currentEl) currentEl.innerHTML = this._currentSeason(cs, yearDates, year);
+        if (currentEl) currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
         if (monthlyEl) monthlyEl.innerHTML  = this._monthly(year, mon, specialMap, cs);
-        if (seasonsEl) seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, year);
+        if (seasonsEl) seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
         if (specialEl) specialEl.innerHTML  = this._special(d.specialSundays);
     },
 
-    /* 해당 연도의 이동 절기 날짜 계산 */
-    _computeDates(year) {
-        const easter = LiturgicalCalendar.easterDate(year);
-        const add = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); return r; };
-        const fmt = d => `${d.getMonth() + 1}월 ${d.getDate()}일`;
+    /* 교회력 연도 시작 연도(advYear)를 기준으로 이동 절기 날짜 계산 */
+    _computeDates(advYear) {
+        const ny       = advYear + 1;           // 다음 달력 연도 (부활절·사순절 등이 속함)
+        const easter   = LiturgicalCalendar.easterDate(ny);
+        const add      = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); return r; };
+        const fmt      = d => `${d.getMonth() + 1}월 ${d.getDate()}일`;
         const ashWed    = add(easter, -46);
         const palmSun   = add(easter, -7);
         const pentecost = add(easter, 49);
-        const advent    = LiturgicalCalendar.adventStart(year);
+        const advent     = LiturgicalCalendar.adventStart(advYear);
+        const nextAdvent = LiturgicalCalendar.adventStart(ny);
         return {
-            advent:    `${fmt(advent)} ~ 12월 24일`,
-            christmas: '12월 25일 ~ 이듬해 1월 5일',
-            epiphany:  `1월 6일 ~ ${fmt(add(ashWed, -1))}`,
+            advent:    `${advYear}년 ${fmt(advent)} ~ 12월 24일`,
+            christmas: `${advYear}년 12월 25일 ~ ${ny}년 1월 5일`,
+            epiphany:  `${ny}년 1월 6일 ~ ${fmt(add(ashWed, -1))}`,
             lent:      `${fmt(ashWed)} ~ ${fmt(add(palmSun, -1))}`,
             holyweek:  `${fmt(palmSun)} ~ ${fmt(add(easter, -1))}`,
             easter:    `${fmt(easter)} ~ ${fmt(add(pentecost, -1))}`,
             pentecost: fmt(pentecost),
-            ordinary:  `${fmt(add(pentecost, 1))} ~ ${fmt(add(advent, -1))}`
+            ordinary:  `${fmt(add(pentecost, 1))} ~ ${fmt(add(nextAdvent, -1))}`
         };
     },
 
@@ -1527,7 +1532,7 @@ const SundaysRenderer = {
     },
 
     /* 현재 절기 강조 카드 */
-    _currentSeason(cs, dates, year) {
+    _currentSeason(cs, dates, advYear) {
         if (!cs) return '';
         const range = dates[cs.key] || '';
         return `
@@ -1536,7 +1541,7 @@ const SundaysRenderer = {
                     <p class="section-eyebrow" style="margin-bottom:0.4rem;">현재 절기 — ${cs.dateLabel}</p>
                     <p style="font-size:1.45rem; font-weight:700; color:var(--heading); margin:0 0 0.3rem;">${cs.symbol} ${cs.name}</p>
                     <p style="font-size:0.92rem; color:var(--text-muted);">${cs.note}</p>
-                    ${range ? `<p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${year}년 기준 &nbsp;·&nbsp; ${range}</p>` : ''}
+                    ${range ? `<p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${advYear}-${advYear + 1} 교회력 &nbsp;·&nbsp; ${range}</p>` : ''}
                 </div>
             </div>`;
     },
@@ -1607,7 +1612,7 @@ const SundaysRenderer = {
     },
 
     /* 교회력 절기 카드 그리드 — 대림절을 시작으로 시간순 배열 */
-    _seasons(seasons, cs, dates, year) {
+    _seasons(seasons, cs, dates, advYear) {
         const cards = seasons.map((s, i) => {
             const isCurrent = cs && cs.key === s.key;
             const range = dates[s.key];
@@ -1617,7 +1622,7 @@ const SundaysRenderer = {
                     <span class="resource-icon" aria-hidden="true">${s.symbol}</span>
                     <p class="resource-title">${s.name}<span class="resource-desc" style="font-weight:400; margin:0 0 0 0.4em;">${s.en}</span></p>
                     <p class="resource-desc" style="margin-bottom:0.35rem;">전례색 · ${s.colorName}</p>
-                    ${range ? `<p class="resource-desc" style="font-weight:600; color:var(--text); margin-bottom:0.4rem;">📅 ${year}년 · ${range}</p>` : ''}
+                    ${range ? `<p class="resource-desc" style="font-weight:600; color:var(--text); margin-bottom:0.4rem;">📅 ${range}</p>` : ''}
                     <p class="resource-desc">${s.desc}</p>
                     ${isCurrent ? `<p class="lit-current-tag">지금 이 절기입니다</p>` : ''}
                 </div>`;
