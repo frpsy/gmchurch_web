@@ -1887,8 +1887,18 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 0 1.4rem 1.3rem;
     border-top: 1px solid var(--border);
 }
-.faq-a-text {
+.faq-a-lead {
     margin: 1rem 0 0;
+    font-size: var(--fs-body);
+    font-weight: 600;
+    line-height: var(--lh-relaxed);
+    color: var(--heading);
+    word-break: keep-all;
+}
+.faq-a-lead a, .faq-a-lead strong { color: inherit; }
+.faq-a-lead em { font-style: normal; background: var(--gold-bg); padding: 0 0.2em; border-radius: 3px; }
+.faq-a-text {
+    margin: 0.55rem 0 0;
     font-size: var(--fs-body);
     line-height: var(--lh-relaxed);
     color: var(--text);
