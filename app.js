@@ -1503,6 +1503,8 @@ const SundaysRenderer = {
         };
         /* 가장 가까운 일요일 */
         const nearSun   = d => { const wd = d.getDay(); return wd <= 3 ? add(d, -wd) : add(d, 7 - wd); };
+        /* 기준일 당일 또는 그 이후 첫 일요일 */
+        const sunOnAfter = d => add(d, (7 - d.getDay()) % 7);
 
         const map = {};
         const set = (d, label) => { map[key(d)] = label; };
@@ -1517,8 +1519,8 @@ const SundaysRenderer = {
         /* 창조절: 9/1~10/4의 모든 주일 */
         let d = nthWd(year, 8, 0, 1);
         while (d <= new Date(year, 9, 4)) { set(d, '창조절'); d = add(d, 7); }
-        set(nearSun(new Date(year, 10, 1)), '모든 성인 주일');              // 11/1 인근 주일
-        set(add(advent, -7),                '왕이신 그리스도 주일');        // 대림절 직전 주일
+        set(sunOnAfter(new Date(year, 9, 30)), '모든 성인 주일');          // 10/30~11/5 사이 주일
+        set(add(advent, -7),         '왕이신 그리스도 주일');               // 대림절 직전 주일
         set(nearSun(new Date(year, 11, 1)), '에이즈 추모 주일');            // 12/1 인근 주일
 
         return map;
@@ -1531,7 +1533,7 @@ const SundaysRenderer = {
         return `
             <div class="container" style="padding-top:2rem; padding-bottom:0;">
                 <div class="sundays-season-hero">
-                    <p class="section-eyebrow" style="color:var(--season); margin-bottom:0.4rem;">현재 절기 — ${cs.dateLabel}</p>
+                    <p class="section-eyebrow" style="margin-bottom:0.4rem;">현재 절기 — ${cs.dateLabel}</p>
                     <p style="font-size:1.45rem; font-weight:700; color:var(--heading); margin:0 0 0.3rem;">${cs.symbol} ${cs.name}</p>
                     <p style="font-size:0.92rem; color:var(--text-muted);">${cs.note}</p>
                     ${range ? `<p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${year}년 기준 &nbsp;·&nbsp; ${range}</p>` : ''}
@@ -1563,17 +1565,20 @@ const SundaysRenderer = {
             const special = specialMap[key(date)];
             const season  = LiturgicalCalendar.compute(date);
 
-            /* 반투명 절기색 배경 (#rrggbbAA — CSS Color Level 4) */
-            const alpha = isSun ? '28' : '0C';
-            const bg    = `background:${season.color}${alpha};`;
-            const numColor = (isSun && !isToday) ? `style="color:${season.color}; font-weight:700;"` : '';
-
+            /* 셀 배경: 반투명 절기색(#rrggbbAA, CSS Color Level 4) — 주일은 더 진하게.
+               글자색은 변수(var) 기반이라 다크모드에서 자동 대비 확보. */
+            const alpha = isSun ? '2e' : '12';
             let cls = 'lit-cal-cell';
+            if (isSun)   cls += ' lit-cal-cell--sun';
             if (isToday) cls += ' lit-cal-cell--today';
 
+            const aria = special
+                ? ` aria-label="${n}일 ${special}" title="${special}"`
+                : ` aria-label="${n}일"`;
+
             cells.push(`
-                <div class="${cls}" style="${bg}">
-                    <span class="lit-cal-num" ${numColor}>${n}</span>
+                <div class="${cls}" style="background:${season.color}${alpha};"${aria}>
+                    <span class="lit-cal-num">${n}</span>
                     ${special ? `<span class="lit-cal-label">${special}</span>` : ''}
                 </div>`);
         }
@@ -1582,7 +1587,7 @@ const SundaysRenderer = {
             <div class="section-header">
                 <p class="section-eyebrow">Monthly Calendar</p>
                 <h2 class="section-title">이달의 교회력</h2>
-                <p class="section-sub">이달의 주일과 특별 절기를 확인하세요. 절기 전환이 있는 달은 날짜별로 배경 색이 달라집니다.</p>
+                <p class="section-sub">이달의 주일과 특별 절기를 한눈에 살펴보세요. 날짜의 배경 색은 그날의 전례색이며, 절기가 바뀌는 날부터 색이 달라집니다.</p>
             </div>
             <div class="lit-cal">
                 <div class="lit-cal-hd">
@@ -1593,29 +1598,35 @@ const SundaysRenderer = {
                     <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
                 </div>
                 <div class="lit-cal-grid">${cells.join('')}</div>
-            </div>`;
+            </div>
+            <ul class="lit-cal-legend" aria-label="달력 보는 법">
+                <li><span class="lit-cal-legend-dot lit-cal-legend-dot--today" aria-hidden="true"></span>오늘</li>
+                <li><span class="lit-cal-legend-dot lit-cal-legend-dot--sun" aria-hidden="true"></span>주일 (전례색 강조)</li>
+                <li><span class="lit-cal-legend-tag" aria-hidden="true">이름</span>특별 주일·절기</li>
+            </ul>`;
     },
 
-    /* 교회력 절기 카드 그리드 */
+    /* 교회력 절기 카드 그리드 — 대림절을 시작으로 시간순 배열 */
     _seasons(seasons, cs, dates, year) {
-        const cards = seasons.map(s => {
+        const cards = seasons.map((s, i) => {
             const isCurrent = cs && cs.key === s.key;
             const range = dates[s.key];
             return `
                 <div class="resource-card" style="border-top-color:${s.color};${isCurrent ? ' box-shadow:0 0 0 2px ' + s.color + ';' : ''}">
+                    <span class="lit-seq" style="border-color:${s.color};" aria-hidden="true">${i + 1}</span>
                     <span class="resource-icon" aria-hidden="true">${s.symbol}</span>
                     <p class="resource-title">${s.name}<span class="resource-desc" style="font-weight:400; margin:0 0 0 0.4em;">${s.en}</span></p>
-                    <p class="resource-desc" style="margin-bottom:0.35rem;">${s.colorName}</p>
-                    ${range ? `<p class="resource-desc" style="font-weight:600; color:var(--text); margin-bottom:0.4rem;">📅 ${year}년: ${range}</p>` : ''}
+                    <p class="resource-desc" style="margin-bottom:0.35rem;">전례색 · ${s.colorName}</p>
+                    ${range ? `<p class="resource-desc" style="font-weight:600; color:var(--text); margin-bottom:0.4rem;">📅 ${year}년 · ${range}</p>` : ''}
                     <p class="resource-desc">${s.desc}</p>
-                    ${isCurrent ? `<p style="font-size:0.78rem; font-weight:700; color:var(--season); margin-top:0.5rem;">◀ 현재 절기</p>` : ''}
+                    ${isCurrent ? `<p class="lit-current-tag">지금 이 절기입니다</p>` : ''}
                 </div>`;
         }).join('');
         return `
             <div class="section-header">
                 <p class="section-eyebrow">Liturgical Year</p>
                 <h2 class="section-title">교회력 절기</h2>
-                <p class="section-sub">성공회는 교회력(전례력)에 따라 그리스도의 생애와 사역을 한 해 동안 함께 기억합니다. 각 절기의 색은 기도서 전례색 기준입니다.</p>
+                <p class="section-sub">성공회는 교회력에 따라 그리스도의 생애를 한 해 동안 함께 기억합니다. 교회력의 새해는 1월이 아니라 대림절에 시작하며, 아래 ①~⑧의 순서로 이어집니다. 각 절기의 색은 기도서 전례색입니다.</p>
             </div>
             <div class="resource-grid">${cards}</div>`;
     },
