@@ -960,6 +960,8 @@ const CHURCH_DATA = {
                 { label: "어린이 예배",    href: "worship.html#children" },
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
                 { label: "절기와 전례독서", href: "sundays.html" },
+                { label: "이달의 교회력",  href: "worship.html#monthly" },
+                { label: "특별 주일",      href: "worship.html#special" },
                 { label: "성무일도",       href: "worship.html#daily-office" },
                 { label: "세계성공회 중보기도", href: "worship.html#intercession" },
                 { label: "예배 자료",      href: "worship.html#resources" }
