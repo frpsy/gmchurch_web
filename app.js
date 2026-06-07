@@ -432,106 +432,88 @@ const IndexRenderer = {
 /* ── WorshipRenderer ─────────────────────────────────────── */
 const WorshipRenderer = {
     render() {
-        const el = document.getElementById('worship-full');
-        if (!el) return;
-        const { main, guide, liturgicalSeason: s, resources, prayer } = CHURCH_DATA.worship;
+        const servicesEl  = document.getElementById('worship-services');
+        const eucharistEl = document.getElementById('worship-eucharist');
+        const resourcesEl = document.getElementById('worship-resources');
+        const prayerEl    = document.getElementById('worship-prayer');
+        if (!servicesEl && !eucharistEl && !resourcesEl && !prayerEl) return;
+        const w = CHURCH_DATA.worship;
+        if (servicesEl)  servicesEl.innerHTML  = this._services(w);
+        if (eucharistEl) eucharistEl.innerHTML = this._eucharist(w);
+        if (resourcesEl) resourcesEl.innerHTML = this._resources(w);
+        if (prayerEl)    prayerEl.innerHTML    = this._prayer(w);
+    },
 
-        el.innerHTML = `
-            <div class="grid" style="margin-bottom:2rem;">
+    _services({ main, guide, liturgicalSeason: s }) {
+        return `
+            <div class="worship-services-grid grid">
                 ${main.map(w => `
                     <div class="info-card" id="${w.id}">
                         <h3>${w.title}</h3>
                         <div class="info-row">
                             <strong>시간</strong>
-                            <span style="color:var(--green-mid); font-weight:700;">${w.time}</span>
+                            <span class="worship-time">${w.time}</span>
                         </div>
-                        <p style="margin-top:1rem; color:var(--text-muted); font-size:0.9rem; line-height:1.9;">${w.desc}</p>
+                        <p class="worship-card-desc">${w.desc}</p>
                         ${w.verse ? `
-                        <blockquote class="liturgy-inner-quote" style="margin-top:1.25rem; font-size:0.9rem;">
-                            "${w.verse}"<br><cite style="font-size:0.8rem; font-style:normal; color:var(--text-muted);">— ${w.verseRef}</cite>
+                        <blockquote class="liturgy-inner-quote worship-card-quote">
+                            "${w.verse}"<br><cite class="worship-card-cite">— ${w.verseRef}</cite>
                         </blockquote>
-                        <p style="margin-top:1rem; font-size:0.87rem; color:var(--text-muted); line-height:1.9;">${w.detail}</p>
+                        <p class="worship-card-detail">${w.detail}</p>
                         ` : ''}
                     </div>
                 `).join('')}
             </div>
             ${guide ? `<div class="guide-banner"><p>${guide}</p></div>` : ''}
-
             <div class="liturgy-guide">
-
                 <div class="liturgy-season-badge">
                     <span class="season-dot"></span>
                     ${s.symbol}&nbsp;${s.name}&nbsp;·&nbsp;<span class="season-name">${s.colorName}</span>
                     <span class="season-note">${s.note}</span>
                 </div>
+            </div>
+        `;
+    },
 
+    _eucharist({ eucharistIntro, eucharistIntroQuote, eucharistOrder }) {
+        return `
+            <div class="liturgy-guide">
                 <div class="liturgy-section">
                     <p class="section-eyebrow">Eucharist</p>
                     <h2 class="section-title">감사성찬례란?</h2>
-                    <p class="liturgy-body">성공회 주일 예배의 중심은 <strong>감사성찬례</strong>입니다. 천주교의 '미사', 개신교의 '성만찬'과 같은 예배로, 그리스도교 예배의 출발이자 핵심입니다.</p>
-                    <blockquote class="liturgy-inner-quote">
-                        감사성찬례는 예수님의 마지막 만찬에서 비롯되었으며, <strong>공동체가 함께 모여 말씀을 듣고 성찬을 나누는</strong> 시간입니다.
-                    </blockquote>
+                    <p class="liturgy-body">${eucharistIntro}</p>
+                    <blockquote class="liturgy-inner-quote">${eucharistIntroQuote}</blockquote>
                 </div>
-
-                <div class="liturgy-section" id="eucharist-order">
+                <div class="liturgy-section">
                     <p class="section-eyebrow">Order of Service</p>
                     <h2 class="section-title">감사성찬례 순서</h2>
-                    <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 기도서에 따른 감사성찬례는 크게 <strong>네 부분</strong>으로 구성됩니다.</p>
+                    <p class="liturgy-body liturgy-body--lead">성공회 기도서에 따른 감사성찬례는 크게 <strong>네 부분</strong>으로 구성됩니다.</p>
                     <div class="liturgy-steps">
-                        <div class="liturgy-step">
-                            <div class="step-num">1</div>
-                            <div class="step-body">
-                                <h4 class="step-title">입당예식</h4>
-                                <ul class="step-list">
-                                    <li>입당 성가와 함께 집전자가 입장합니다.</li>
-                                    <li>회중은 모두 일어나 하느님께 예배드릴 준비를 합니다.</li>
-                                    <li>죄를 고백하고 용서를 구합니다.</li>
-                                </ul>
+                        ${eucharistOrder.map((step, i) => `
+                            <div class="liturgy-step">
+                                <div class="step-num">${i + 1}</div>
+                                <div class="step-body">
+                                    <h4 class="step-title">${step.title}</h4>
+                                    <ul class="step-list">
+                                        ${step.items.map(item => `<li>${item}</li>`).join('')}
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="liturgy-step">
-                            <div class="step-num">2</div>
-                            <div class="step-body">
-                                <h4 class="step-title">말씀의 전례</h4>
-                                <ul class="step-list">
-                                    <li>구약 성서 봉독 · 시편 화답송 · 서신서 봉독</li>
-                                    <li>복음환호송(<em>"알렐루야, 알렐루야"</em>) 후 <strong>복음서 봉독</strong>과 설교</li>
-                                    <li>사도신경 또는 니케아 신경으로 신앙을 함께 고백합니다.</li>
-                                    <li>교회와 세상, 이웃과 자신을 위한 중보기도 — 회중은 <em>"주여, 우리의 기도를 들으소서"</em>로 응답합니다.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="liturgy-step">
-                            <div class="step-num">3</div>
-                            <div class="step-body">
-                                <h4 class="step-title">성찬의 전례</h4>
-                                <ul class="step-list">
-                                    <li>평화의 인사를 나눕니다.</li>
-                                    <li>빵과 포도주, 헌금을 봉헌하고 집전자가 <strong>빵과 포도주를 축성</strong>합니다.</li>
-                                    <li>주님의 기도 후 <strong>영성체</strong> — 그리스도의 몸과 피를 모십니다.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="liturgy-step">
-                            <div class="step-num">4</div>
-                            <div class="step-body">
-                                <h4 class="step-title">파송예식</h4>
-                                <ul class="step-list">
-                                    <li>감사 기도와 강복을 받습니다.</li>
-                                    <li><em>"나가서 주님의 복음을 전합시다 / 평화를 이룹시다 / 사랑을 나눕시다"</em></li>
-                                    <li>회중: <em>"그리스도의 이름으로. 아멘"</em> — 우리는 세상으로 파송되는 선교사가 됩니다.</li>
-                                </ul>
-                            </div>
-                        </div>
+                        `).join('')}
                     </div>
                 </div>
+            </div>
+        `;
+    },
 
-                ${resources && resources.length ? `
-                <div class="liturgy-section" id="resources">
+    _resources({ resources }) {
+        if (!resources || !resources.length) return '';
+        return `
+            <div class="liturgy-guide">
+                <div class="liturgy-section">
                     <p class="section-eyebrow">Worship Resources</p>
                     <h2 class="section-title">예배 자료</h2>
-                    <p class="liturgy-body" style="margin-bottom:1.5rem;">기도서·성가·성서를 온라인으로도 보실 수 있습니다.</p>
+                    <p class="liturgy-body liturgy-body--lead">기도서·성가·성서를 온라인으로도 보실 수 있습니다.</p>
                     <div class="resource-grid">
                         ${resources.map(r => `
                             <a class="resource-card" href="${r.url}" target="_blank" rel="noopener noreferrer">
@@ -543,43 +525,46 @@ const WorshipRenderer = {
                         `).join('')}
                     </div>
                 </div>
-                ` : ''}
+            </div>
+        `;
+    },
 
-                ${prayer ? `
-                <div class="liturgy-section" id="daily-office">
+    _prayer({ prayer }) {
+        if (!prayer) return '';
+        return `
+            <div class="liturgy-guide">
+                <div class="liturgy-section">
                     <p class="section-eyebrow">DIVINE OFFICE</p>
                     <h2 class="section-title">성무일도</h2>
                     ${(prayer.dailyOfficeIntro || []).map((p, i) => `
-                        <p class="liturgy-body"${i === prayer.dailyOfficeIntro.length - 1 ? ' style="margin-bottom:1.5rem;"' : ''}>${p}</p>
+                        <p class="liturgy-body${i === prayer.dailyOfficeIntro.length - 1 ? ' liturgy-body--lead' : ''}">${p}</p>
                     `).join('')}
                     <div class="resource-grid">
                         ${prayer.dailyOffice.map(o => `
                             <a class="resource-card" href="${o.url}" target="_blank" rel="noopener noreferrer">
                                 <span class="resource-icon" aria-hidden="true">${o.icon}</span>
                                 <h3 class="resource-title">${o.title}</h3>
-                                <p class="resource-desc" style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.4rem;">${o.en}</p>
+                                <p class="resource-desc resource-en">${o.en}</p>
                                 <p class="resource-desc">${o.desc}</p>
                                 <span class="resource-link">기도서 열기 <span aria-hidden="true">↗</span></span>
                             </a>
                         `).join('')}
                     </div>
                 </div>
-
                 <div class="liturgy-section" id="intercession">
                     <p class="section-eyebrow">Anglican Cycle of Prayer</p>
                     <h2 class="section-title">세계성공회 중보기도</h2>
-                    <p class="liturgy-body" style="margin-bottom:1.5rem;">세계성공회(Anglican Communion)는 날마다 특정 교구와 지역 교회를 위해 함께 기도하는 기도 달력을 발행합니다. 전 세계 165개 이상의 나라에 퍼져 있는 성공회 공동체와 하나로 이어지는 기도입니다.</p>
-                    <div class="resource-grid" style="--resource-cols:1;">
+                    <p class="liturgy-body liturgy-body--lead">세계성공회(Anglican Communion)는 날마다 특정 교구와 지역 교회를 위해 함께 기도하는 기도 달력을 발행합니다. 전 세계 165개 이상의 나라에 퍼져 있는 성공회 공동체와 하나로 이어지는 기도입니다.</p>
+                    <div class="resource-grid resource-grid--single">
                         <a class="resource-card" href="${prayer.intercession.url}" target="_blank" rel="noopener noreferrer">
                             <span class="resource-icon" aria-hidden="true">${prayer.intercession.icon}</span>
                             <h3 class="resource-title">${prayer.intercession.title}</h3>
-                            <p class="resource-desc" style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.4rem;">${prayer.intercession.en}</p>
+                            <p class="resource-desc resource-en">${prayer.intercession.en}</p>
                             <p class="resource-desc">${prayer.intercession.desc}</p>
                             <span class="resource-link">PDF 내려받기 <span aria-hidden="true">↗</span></span>
                         </a>
                     </div>
                 </div>
-                ` : ''}
             </div>
         `;
     }
