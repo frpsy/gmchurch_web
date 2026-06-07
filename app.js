@@ -1424,11 +1424,12 @@ const PortraitLightbox = {
 const SundaysRenderer = {
     render() {
         const currentEl    = document.getElementById('sundays-current');
-        const monthlyEl    = document.getElementById('sundays-monthly');
         const lectionaryEl = document.getElementById('sundays-lectionary');
         const seasonsEl    = document.getElementById('sundays-seasons');
-        const specialEl    = document.getElementById('sundays-special');
-        if (!currentEl && !monthlyEl && !lectionaryEl && !seasonsEl && !specialEl) return;
+        /* worship.html 의 교회력·특별 주일 */
+        const worshipCalEl = document.getElementById('worship-calendar');
+        const worshipSpEl  = document.getElementById('worship-special');
+        if (!currentEl && !lectionaryEl && !seasonsEl && !worshipCalEl && !worshipSpEl) return;
         const d = CHURCH_DATA.sundays;
         if (!d) return;
 
@@ -1440,39 +1441,57 @@ const SundaysRenderer = {
         /* 교회력 연도 시작 연도: 대림절 전이면 전년도 대림절에서 시작 */
         const adventThisYear = LiturgicalCalendar.adventStart(year);
         const advYear = now < adventThisYear ? year - 1 : year;
-        const yearDates   = this._computeDates(advYear);
-        const specialMap  = this._specialDates(year);
+        const yearDates  = this._computeDates(advYear);
+        const specialMap = this._specialDates(year);
 
-        if (currentEl) currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
-        if (monthlyEl) {
+        if (currentEl)    currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
+        if (lectionaryEl) lectionaryEl.innerHTML = this._lectionary();
+        if (seasonsEl)    seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
+        if (worshipCalEl) {
             this._calYear  = year;
             this._calMonth = mon;
-            monthlyEl.innerHTML = this._monthly(year, mon, specialMap);
-            this._bindCalNav(monthlyEl);
+            worshipCalEl.innerHTML = this._monthlyFull(year, mon, specialMap);
+            this._bindCalNav(worshipCalEl);
         }
-        if (lectionaryEl) lectionaryEl.innerHTML = this._lectionary();
-        if (seasonsEl) seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
-        if (specialEl) specialEl.innerHTML  = this._special(d.specialSundays);
+        if (worshipSpEl)  worshipSpEl.innerHTML = this._special(d.specialSundays);
     },
 
-    /* 전례독서 — 날짜별 성서 본문(구글 캘린더 아젠다). 교회력 페이지로 통합. */
+    /* 전례독서 — 이번 주 전례독서 참조를 카드로 표시 */
     _lectionary() {
+        const r = CHURCH_DATA.worship && CHURCH_DATA.worship.currentReadings;
+        const readingsHtml = r ? `
+            <div class="lectionary-card">
+                <div class="lectionary-card-head">
+                    <p class="lectionary-card-week">${r.week}</p>
+                    <p class="lectionary-card-meta">${r.year}&nbsp;·&nbsp;${r.date}</p>
+                </div>
+                <div class="lectionary-card-body">
+                    ${r.items.map(item => `
+                        <div class="lectionary-row">
+                            <span class="lectionary-role">${item.role}</span>
+                            <span class="lectionary-ref">${item.ref}</span>
+                        </div>`).join('')}
+                </div>
+                ${r.note ? `<p class="lectionary-card-note">${r.note}</p>` : ''}
+            </div>` : '';
         return `
             <div class="section-header">
                 <p class="section-eyebrow">Lectionary</p>
                 <h2 class="section-title">전례독서</h2>
-                <p class="section-sub">교회력 절기에 따라 정해진 <strong>날짜별 성서 본문</strong>입니다. 위 달력이 절기의 색을 보여준다면, 이곳에서는 그날 읽는 말씀을 확인합니다.</p>
+                <p class="section-sub">교회력 절기에 따라 정해진 날짜별 성서 본문입니다. 구약·시편·서신서·복음서 네 본문을 순서대로 봉독합니다.</p>
             </div>
-            <div class="lectionary-cal-wrap">
-                <iframe
-                    src="https://calendar.google.com/calendar/embed?src=anglican.kr_ep5i6qcm67gl19st7m0fd32l30%40group.calendar.google.com&ctz=Asia%2FSeoul&mode=AGENDA&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&hl=ko"
-                    class="lectionary-cal"
-                    frameborder="0"
-                    scrolling="no"
-                    title="전례독서 일정"
-                    loading="lazy"
-                ></iframe>
-            </div>`;
+            ${readingsHtml}`;
+    },
+
+    /* 이달의 교회력 — worship.html 용 헤더 포함 버전 */
+    _monthlyFull(year, month, specialMap) {
+        return `
+            <div class="section-header">
+                <p class="section-eyebrow">Monthly Calendar</p>
+                <h2 class="section-title">이달의 교회력</h2>
+                <p class="section-sub">이달의 주일과 특별 절기를 한눈에 살펴보세요. 날짜의 배경 색은 그날의 전례색입니다.</p>
+            </div>
+            <div class="lit-cal-wrap">${this._monthlyGrid(year, month, specialMap)}</div>`;
     },
 
     /* 교회력 연도 시작 연도(advYear)를 기준으로 이동 절기 날짜 계산 */

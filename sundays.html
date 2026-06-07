@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>절기와 특별 주일 — 대한성공회 광명교회</title>
-    <meta name="description" content="대한성공회 광명교회가 함께 지키는 교회력 절기와 전례독서, 특별 주일을 안내합니다.">
+    <title>절기와 전례독서 — 대한성공회 광명교회</title>
+    <meta name="description" content="대한성공회 광명교회가 함께 지키는 교회력 절기와 이번 주 전례독서를 안내합니다.">
     <meta name="theme-color" content="#163d24">
     <link rel="canonical" href="https://frpsy.github.io/gmchurch_web/sundays.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="대한성공회 광명교회">
     <meta property="og:locale" content="ko_KR">
-    <meta property="og:title" content="절기와 특별 주일 — 대한성공회 광명교회">
-    <meta property="og:description" content="교회력 절기와 성공회가 함께 지키는 특별 주일 안내.">
+    <meta property="og:title" content="절기와 전례독서 — 대한성공회 광명교회">
+    <meta property="og:description" content="교회력 절기와 이번 주 전례독서 안내.">
     <meta property="og:url" content="https://frpsy.github.io/gmchurch_web/sundays.html">
     <meta property="og:image" content="https://frpsy.github.io/gmchurch_web/og-image-v2.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="절기와 특별 주일 — 대한성공회 광명교회">
-    <meta name="twitter:description" content="교회력 절기와 성공회가 함께 지키는 특별 주일 안내.">
+    <meta name="twitter:title" content="절기와 전례독서 — 대한성공회 광명교회">
+    <meta name="twitter:description" content="교회력 절기와 이번 주 전례독서 안내.">
     <meta name="twitter:image" content="https://frpsy.github.io/gmchurch_web/og-image-v2.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -37,56 +37,36 @@
         <!-- ── Page Hero ─────────────────────────────────────── -->
         <div class="page-hero">
             <p class="section-eyebrow" style="display:block; margin-bottom:0.75rem;">Liturgical Calendar</p>
-            <h1>절기와 특별 주일</h1>
-            <p>교회력에 따라 그리스도의 생애를 함께 기억합니다. 절기와 전례독서, 특별 주일을 한곳에서 살펴보세요.</p>
+            <h1>절기와 전례독서</h1>
+            <p>교회력에 따라 그리스도의 생애를 함께 기억합니다. 절기의 의미와 이번 주 전례독서를 살펴보세요.</p>
         </div>
 
         <!-- ── 현재 절기 카드 ─────────────────────────────────── -->
         <div id="sundays-current"></div>
 
         <!-- ── 섹션 내비게이션 (sticky) ──────────────────────── -->
-        <nav class="gc-page-nav" aria-label="절기와 특별 주일 섹션 이동">
+        <nav class="gc-page-nav" aria-label="절기와 전례독서 섹션 이동">
             <div class="container">
-                <a href="#monthly" class="gc-nav-link" data-sundays-section="monthly">
-                    <span aria-hidden="true">🗓</span> 이달의 교회력
+                <a href="#seasons" class="gc-nav-link" data-sundays-section="seasons">
+                    <span aria-hidden="true">📅</span> 교회력 절기
                 </a>
                 <a href="#lectionary" class="gc-nav-link" data-sundays-section="lectionary">
                     <span aria-hidden="true">📖</span> 전례독서
                 </a>
-                <a href="#seasons" class="gc-nav-link" data-sundays-section="seasons">
-                    <span aria-hidden="true">📅</span> 교회력 절기
-                </a>
-                <a href="#special" class="gc-nav-link" data-sundays-section="special">
-                    <span aria-hidden="true">🌿</span> 특별 주일
-                </a>
             </div>
         </nav>
 
-        <!-- ── 섹션 1: 이달의 교회력 ─────────────────────────── -->
-        <section class="section" id="monthly">
-            <div class="container">
-                <div id="sundays-monthly"></div>
-            </div>
-        </section>
-
-        <!-- ── 섹션 2: 전례독서 (예배 페이지에서 통합) ──────────── -->
-        <section class="section gc-section-alt" id="lectionary">
-            <div class="container">
-                <div id="sundays-lectionary"></div>
-            </div>
-        </section>
-
-        <!-- ── 섹션 3: 교회력 절기 ───────────────────────────── -->
+        <!-- ── 섹션 1: 교회력 절기 ───────────────────────────── -->
         <section class="section" id="seasons">
             <div class="container">
                 <div id="sundays-seasons"></div>
             </div>
         </section>
 
-        <!-- ── 섹션 4: 특별 주일 ─────────────────────────────── -->
-        <section class="section gc-section-alt" id="special">
+        <!-- ── 섹션 2: 전례독서 ──────────────────────────────── -->
+        <section class="section gc-section-alt" id="lectionary">
             <div class="container">
-                <div id="sundays-special"></div>
+                <div id="sundays-lectionary"></div>
             </div>
         </section>
 
@@ -115,7 +95,7 @@
     (function () {
         var links = document.querySelectorAll('.gc-nav-link[data-sundays-section]');
         if (!links.length) return;
-        var ids = Array.from(links).map(function (l) { return l.dataset.sundaysSection; }); /* monthly, seasons, special */
+        var ids = Array.from(links).map(function (l) { return l.dataset.sundaysSection; });
         var els = ids.map(function (id) { return document.getElementById(id); });
         var pads = els.map(function (el) {
             return el ? parseFloat(window.getComputedStyle(el).paddingTop) || 0 : 0;

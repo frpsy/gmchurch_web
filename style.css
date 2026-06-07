@@ -2399,6 +2399,67 @@ button:focus:not(:focus-visible) { outline: none; }
     .lectionary-cal { height: 380px; }
 }
 
+/* 전례독서 카드 */
+.lectionary-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    max-width: 560px;
+}
+.lectionary-card-head {
+    background: color-mix(in srgb, var(--season, var(--green-dark)) 12%, var(--white));
+    padding: 1rem 1.25rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+}
+.lectionary-card-week {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 0 0 0.2rem;
+}
+.lectionary-card-meta {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+.lectionary-card-body {
+    padding: 0.5rem 0;
+}
+.lectionary-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.6rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+.lectionary-row:last-child { border-bottom: none; }
+.lectionary-role {
+    flex: 0 0 4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+.lectionary-ref {
+    font-size: 0.97rem;
+    color: var(--heading);
+    font-weight: 600;
+}
+.lectionary-card-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    padding: 0.6rem 1.25rem 0.85rem;
+    margin: 0;
+    border-top: 1px solid var(--border);
+}
+@media (prefers-color-scheme: dark) {
+    .lectionary-card-head {
+        background: color-mix(in srgb, var(--season, var(--green-dark)) 18%, var(--white));
+    }
+}
+
 /* Worship Space (전례 공간 안내) */
 .space-grid {
     display: grid;
