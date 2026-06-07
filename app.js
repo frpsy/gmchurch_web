@@ -1451,6 +1451,11 @@ const SundaysRenderer = {
     },
 
     _seasons(seasons) {
+        const cs = CHURCH_DATA.worship && CHURCH_DATA.worship.liturgicalSeason;
+        const banner = cs ? `
+            <div class="guide-banner" style="border-left-color:${cs.color}; margin-top:0; margin-bottom:2.5rem;">
+                <p><strong>${cs.symbol} 지금은 ${cs.name}입니다</strong> — ${cs.note}</p>
+            </div>` : '';
         const cards = seasons.map(s => `
             <div class="resource-card" style="border-top-color:${s.color};">
                 <span class="resource-icon" aria-hidden="true">${s.symbol}</span>
@@ -1465,6 +1470,7 @@ const SundaysRenderer = {
                 <h2 class="section-title">교회력 절기</h2>
                 <p class="section-sub">성공회는 교회력(전례력)에 따라 그리스도의 생애와 사역을 한 해 동안 함께 기억합니다. 각 절기의 색은 기도서 전례색 기준입니다.</p>
             </div>
+            ${banner}
             <div class="resource-grid">${cards}</div>`;
     },
 
