@@ -1465,7 +1465,12 @@ const SundaysRenderer = {
         const specialMap  = this._specialDates(year);
 
         if (currentEl) currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
-        if (monthlyEl) monthlyEl.innerHTML  = this._monthly(year, mon, specialMap, cs);
+        if (monthlyEl) {
+            this._calYear  = year;
+            this._calMonth = mon;
+            monthlyEl.innerHTML = this._monthly(year, mon, specialMap);
+            this._bindCalNav(monthlyEl);
+        }
         if (seasonsEl) seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
         if (specialEl) specialEl.innerHTML  = this._special(d.specialSundays);
     },
@@ -1546,41 +1551,45 @@ const SundaysRenderer = {
             </div>`;
     },
 
-    /* 월간 달력 */
-    _monthly(year, month, specialMap, cs) {
+    /* 월간 달력 — 정적 헤더 + 동적 그리드 래퍼 */
+    _monthly(year, month, specialMap) {
+        return `
+            <div class="section-header">
+                <p class="section-eyebrow">Monthly Calendar</p>
+                <h2 class="section-title">이달의 교회력</h2>
+                <p class="section-sub">이달의 주일과 특별 절기를 한눈에 살펴보세요. 날짜의 배경 색은 그날의 전례색이며, 절기가 바뀌는 날부터 색이 달라집니다.</p>
+            </div>
+            <div class="lit-cal-wrap">${this._monthlyGrid(year, month, specialMap)}</div>`;
+    },
+
+    /* 달력 그리드 — 전/다음 달 이동 시 이 부분만 교체 */
+    _monthlyGrid(year, month, specialMap) {
         const today      = new Date();
         const todayDate  = (today.getFullYear() === year && today.getMonth() === month) ? today.getDate() : -1;
         const monthLabel = new Date(year, month).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' });
         const daysInMon  = new Date(year, month + 1, 0).getDate();
-        const firstWd    = new Date(year, month, 1).getDay(); // 0=일
+        const firstWd    = new Date(year, month, 1).getDay();
         const key        = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        const monthSeason = LiturgicalCalendar.compute(new Date(year, month, 1));
+        const seasonLabel = monthSeason ? `${monthSeason.symbol} ${monthSeason.name}` : '';
 
-        const seasonLabel = cs ? `${cs.symbol} ${cs.name}` : '';
-
-        /* 빈 셀 */
         const cells = [];
         for (let i = 0; i < firstWd; i++) {
             cells.push('<div class="lit-cal-cell lit-cal-cell--empty"></div>');
         }
-
         for (let n = 1; n <= daysInMon; n++) {
-            const date  = new Date(year, month, n);
-            const isSun = date.getDay() === 0;
+            const date    = new Date(year, month, n);
+            const isSun   = date.getDay() === 0;
             const isToday = n === todayDate;
             const special = specialMap[key(date)];
             const season  = LiturgicalCalendar.compute(date);
-
-            /* 셀 배경: 반투명 절기색(#rrggbbAA, CSS Color Level 4) — 주일은 더 진하게.
-               글자색은 변수(var) 기반이라 다크모드에서 자동 대비 확보. */
-            const alpha = isSun ? '2e' : '12';
+            const alpha   = isSun ? '2e' : '12';
             let cls = 'lit-cal-cell';
             if (isSun)   cls += ' lit-cal-cell--sun';
             if (isToday) cls += ' lit-cal-cell--today';
-
             const aria = special
                 ? ` aria-label="${n}일 ${special}" title="${special}"`
                 : ` aria-label="${n}일"`;
-
             cells.push(`
                 <div class="${cls}" style="background:${season.color}${alpha};"${aria}>
                     <span class="lit-cal-num">${n}</span>
@@ -1589,14 +1598,13 @@ const SundaysRenderer = {
         }
 
         return `
-            <div class="section-header">
-                <p class="section-eyebrow">Monthly Calendar</p>
-                <h2 class="section-title">이달의 교회력</h2>
-                <p class="section-sub">이달의 주일과 특별 절기를 한눈에 살펴보세요. 날짜의 배경 색은 그날의 전례색이며, 절기가 바뀌는 날부터 색이 달라집니다.</p>
-            </div>
             <div class="lit-cal">
                 <div class="lit-cal-hd">
-                    <span class="lit-cal-hd-month">${monthLabel}</span>
+                    <div class="lit-cal-hd-nav">
+                        <button class="lit-cal-nav" data-cal-dir="-1" aria-label="이전 달">&#9664;</button>
+                        <span class="lit-cal-hd-month">${monthLabel}</span>
+                        <button class="lit-cal-nav" data-cal-dir="1" aria-label="다음 달">&#9654;</button>
+                    </div>
                     <span class="lit-cal-hd-season">${seasonLabel}</span>
                 </div>
                 <div class="lit-cal-wds">
@@ -1609,6 +1617,23 @@ const SundaysRenderer = {
                 <li><span class="lit-cal-legend-dot lit-cal-legend-dot--sun" aria-hidden="true"></span>주일 (전례색 강조)</li>
                 <li><span class="lit-cal-legend-tag" aria-hidden="true">이름</span>특별 주일·절기</li>
             </ul>`;
+    },
+
+    /* 전/다음 달 이동 — 이벤트 위임으로 re-render 없이 그리드만 교체 */
+    _bindCalNav(container) {
+        container.addEventListener('click', e => {
+            const btn = e.target.closest('[data-cal-dir]');
+            if (!btn) return;
+            const dir = parseInt(btn.dataset.calDir, 10);
+            let m = this._calMonth + dir;
+            let y = this._calYear;
+            if (m > 11) { m = 0; y++; }
+            if (m < 0)  { m = 11; y--; }
+            this._calYear  = y;
+            this._calMonth = m;
+            const wrap = container.querySelector('.lit-cal-wrap');
+            if (wrap) wrap.innerHTML = this._monthlyGrid(y, m, this._specialDates(y));
+        });
     },
 
     /* 교회력 절기 카드 그리드 — 대림절을 시작으로 시간순 배열 */
