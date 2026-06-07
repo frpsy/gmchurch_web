@@ -331,6 +331,18 @@ const CHURCH_DATA = {
 
     worship: {
         liturgicalSeason: LiturgicalCalendar.compute(),
+        currentReadings: {
+            week: "성령강림 후 제2주일",
+            year: "C년",
+            date: "2026년 6월 7일",
+            note: "대한성공회 공동 전례독서(RCL)에 따릅니다. 매주 갱신됩니다.",
+            items: [
+                { role: "구약", ref: "열왕기상 17:17-24" },
+                { role: "시편", ref: "시편 146" },
+                { role: "서신서", ref: "갈라디아서 1:11-24" },
+                { role: "복음서", ref: "누가복음 7:11-17" }
+            ]
+        },
         main: [
             {
                 id: "main",
@@ -947,7 +959,7 @@ const CHURCH_DATA = {
                 { label: "주일 감사성찬례", href: "worship.html#main" },
                 { label: "어린이 예배",    href: "worship.html#children" },
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
-                { label: "절기와 특별 주일", href: "sundays.html" },
+                { label: "절기와 전례독서", href: "sundays.html" },
                 { label: "성무일도",       href: "worship.html#daily-office" },
                 { label: "세계성공회 중보기도", href: "worship.html#intercession" },
                 { label: "예배 자료",      href: "worship.html#resources" }

@@ -262,10 +262,12 @@ const CHURCH_DATA = {
   └ 주일 감사성찬례    worship.html#main                (JS)
   └ 어린이 예배        worship.html#children            (JS)
   └ 감사성찬례 순서    worship.html#eucharist-order     (JS)
-  └ 절기와 특별 주일   sundays.html                     (교회력 허브 — 세부 섹션은 페이지 내 직접 접근)
+  └ 절기와 전례독서    sundays.html                     (교회력 절기·이번 주 전례독서)
   └ 성무일도           worship.html#daily-office        (JS)
   └ 세계성공회 중보기도 worship.html#intercession       (JS)
   └ 예배 자료          worship.html#resources           (JS)
+  ※ 이달의 교회력      worship.html#monthly             (JS — SundaysRenderer, worship-calendar div)
+  ※ 특별 주일          worship.html#special             (JS — SundaysRenderer, worship-special div)
 
 처음 오신 분  newcomer.html
   └ 인사말             newcomer.html#newcomer           (JS)
