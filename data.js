@@ -931,10 +931,7 @@ const CHURCH_DATA = {
                 { label: "대한성공회",  href: "clergy.html#ack" },
                 { label: "섬기는 이들", href: "clergy.html#priest-section" },
                 { label: "교회 철학",  href: "clergy.html#philosophy" },
-                { label: "교회 이야기", href: "clergy.html#identity" },
-                { label: "자주 묻는 질문", href: "faq.html", badge: "가안" },
-                { label: "로고 소개",  href: "clergy.html#logo-intro" },
-                { label: "언론 보도",  href: "clergy.html#press" }
+                { label: "교회 이야기", href: "clergy.html#identity" }
             ]
         },
         {
@@ -945,9 +942,10 @@ const CHURCH_DATA = {
                 { label: "어린이 예배",    href: "worship.html#children" },
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
                 { label: "전례독서",        href: "worship.html#lectionary" },
-                { label: "예배 자료",      href: "worship.html#resources" },
+                { label: "절기와 특별 주일", href: "sundays.html" },
                 { label: "성무일도",       href: "worship.html#daily-office" },
-                { label: "세계성공회 중보기도", href: "worship.html#intercession" }
+                { label: "세계성공회 중보기도", href: "worship.html#intercession" },
+                { label: "예배 자료",      href: "worship.html#resources" }
             ]
         },
         {
@@ -959,6 +957,7 @@ const CHURCH_DATA = {
                 { label: "성공회 전례란?", href: "newcomer.html#liturgy" },
                 { label: "전례 공간 안내", href: "newcomer.html#worship-space" },
                 { label: "영성체 안내",    href: "newcomer.html#communion" },
+                { label: "자주 묻는 질문", href: "faq.html", badge: "가안" },
                 { label: "문의하기",       href: "newcomer.html#contact" }
             ]
         },
@@ -970,17 +969,15 @@ const CHURCH_DATA = {
                 { label: "엠마우스 코스", href: "emmaus.html" },
                 { label: "소그룹 모임",  href: "smallgroup.html" },
                 { label: "주일 애찬",    href: "community.html#agape" },
-                { label: "헌금",         href: "giving.html" }
+                { label: "녹색교회",     href: "greenchurch.html" }
             ]
         },
         {
             label: "미디어·자료",
             href: "media.html",
             items: [
-                { label: "교회 영상",       href: "media.html#videos" },
-                { label: "녹색교회",       href: "media.html#green" },
-                { label: "관련 기관",       href: "media.html#links" },
-                { label: "절기와 특별 주일", href: "sundays.html" }
+                { label: "교회 영상", href: "media.html#videos" },
+                { label: "관련 기관", href: "media.html#links" }
             ]
         },
         {

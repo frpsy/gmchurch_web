@@ -257,15 +257,15 @@ const CHURCH_DATA = {
   └ 섬기는 이들        clergy.html#priest-section       (JS)
   └ 교회 철학          clergy.html#philosophy
   └ 교회 이야기        clergy.html#identity
-  └ 자주 묻는 질문     faq.html                         (가안 badge)
-  └ 로고 소개          clergy.html#logo-intro
-  └ 언론 보도          clergy.html#press
 
-예배  worship.html
+예배와 기도  worship.html
   └ 주일 감사성찬례    worship.html#main                (JS)
   └ 어린이 예배        worship.html#children            (JS)
   └ 감사성찬례 순서    worship.html#eucharist-order     (JS)
   └ 전례독서           worship.html#lectionary
+  └ 절기와 특별 주일   sundays.html                     (상세 페이지로 직접 이동)
+  └ 성무일도           worship.html#daily-office        (JS)
+  └ 세계성공회 중보기도 worship.html#intercession       (JS)
   └ 예배 자료          worship.html#resources           (JS)
 
 처음 오신 분  newcomer.html
@@ -274,6 +274,7 @@ const CHURCH_DATA = {
   └ 성공회 전례란?     newcomer.html#liturgy            (JS)
   └ 전례 공간 안내     newcomer.html#worship-space      (JS)  성수대·독서대·제대·성막·부활초
   └ 영성체 안내        newcomer.html#communion          (JS)
+  └ 자주 묻는 질문     faq.html                         (가안 badge)
   └ 문의하기           newcomer.html#contact            (JS)
 
 공동체  community.html
@@ -281,17 +282,17 @@ const CHURCH_DATA = {
   └ 엠마우스 코스      emmaus.html                      (상세 페이지로 직접 이동)
   └ 소그룹 모임        smallgroup.html                  (상세 페이지로 직접 이동)
   └ 주일 애찬          community.html#agape             (JS, 상세 페이지 없음)
-  └ 헌금               giving.html
+  └ 녹색교회           greenchurch.html                 (상세 페이지로 직접 이동)
 
 미디어·자료  media.html
-  └ 교회 영상          media.html
-  └ 관련 기관          links.html
+  └ 교회 영상          media.html#videos                (JS)
+  └ 관련 기관          media.html#links                 (JS)
 
 오시는 길  visit.html
   └ 주소·교통          visit.html#location              (JS)
   └ 주차 안내          visit.html#parking               (JS)
 
-※ Footer 전용 링크: giving.html(봉헌 안내), privacy.html(개인정보처리방침)
+※ Footer 전용 링크: giving.html(봉헌 안내), clergy.html#logo-intro(로고 소개), clergy.html#press(언론 보도), privacy.html(개인정보처리방침)
 ```
 
 ---
