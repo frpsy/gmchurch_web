@@ -771,6 +771,20 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: var(--lh-relaxed);
 }
 
+/* Sundays page — 현재 절기 강조 카드 */
+.sundays-season-hero {
+    background: var(--season-light);
+    border-left: 5px solid var(--season);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 1.75rem 2.25rem;
+    margin-bottom: 0;
+}
+@media (prefers-color-scheme: dark) {
+    .sundays-season-hero {
+        background: color-mix(in srgb, var(--season) 12%, var(--white));
+    }
+}
+
 /* Quote Block */
 .quote-block {
     background: var(--gold-bg);
