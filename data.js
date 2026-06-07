@@ -664,8 +664,8 @@ const CHURCH_DATA = {
                         q: "헨리 8세가 결혼(이혼)을 위해 만든 교단인가요?",
                         a: "결혼 문제는 계기였을 뿐, 본질은 <strong>왕위 계승 문제</strong>입니다. 헨리 8세는 에스파냐와의 동맹을 위해 형수 캐서린과 결혼했지만, 왕비가 딸(메리)만 낳고 더 이상 출산이 어려워지자 남성 후계자 없이 발생할 왕위 찬탈 내전을 크게 우려했습니다. 교황에게 결혼 무효를 요청했으나, 당시 교황이 캐서린의 친정인 에스파냐 군대에 사실상 포로 상태여서 거절할 수밖에 없었습니다. 결국 헨리 8세는 로마와 관계를 끊고 스스로 국교회의 수장이 되었으며, 유럽 전역에 퍼지던 종교개혁 세력이 이 결정을 적극 지지했습니다. 헨리 8세 본인은 '교황 없는 가톨릭' 정도를 원했지만, 이후 크랜머 대주교 등 개신교 인물들의 영향으로 <strong>'개신교 교리에 가톨릭 전통의 예배 형식'</strong>을 갖춘 오늘날의 성공회로 자리 잡았습니다.",
                         refs: [
-                            { label: "영국 종교개혁 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EC%98%81%EA%B5%AD_%EC%A2%85%EA%B5%90%EA%B0%9C%ED%98%81" },
-                            { label: "토마스 크랜머 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%ED%86%A0%EB%A7%88%EC%8A%A4_%ED%81%AC%EB%9E%9C%EB%A8%B8" }
+                            { label: "잉글랜드의 종교 개혁 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EC%9E%89%EA%B8%80%EB%9E%9C%EB%93%9C%EC%9D%98_%EC%A2%85%EA%B5%90_%EA%B0%9C%ED%98%81" },
+                            { label: "토머스 크랜머 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%ED%86%A0%EB%A8%B8%EC%8A%A4_%ED%81%AC%EB%9E%9C%EB%A8%B8" }
                         ]
                     },
                     {
@@ -739,7 +739,6 @@ const CHURCH_DATA = {
                         q: "여성도 사제가 될 수 있나요? 성경적인가요?",
                         a: "네. 대한성공회는 <strong>2001년 부산교구에서 첫 여성 사제(민병옥 카타리나)</strong>를 서품했습니다. 갈라디아서 3장 28절(‘남자도 여자도 그리스도 안에서 하나’)과 초대교회의 여성 지도자들(브리스길라 등)을 근거로, 성별이 성직의 자격을 가르지 않는다고 봅니다.",
                         refs: [
-                            { label: "대한성공회 여성 사제 서품 20주년 (NEWS M)", url: "http://www.newsm.com/news/articleView.html?idxno=23398" },
                             { label: "민병옥 사제 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EB%AF%BC%EB%B3%91%EC%98%A5" }
                         ]
                     },
@@ -747,8 +746,7 @@ const CHURCH_DATA = {
                         q: "성공회는 동성애·동성결혼을 지지하나요?",
                         a: "세계성공회 안에는 <strong>단일한 입장이 없습니다</strong>. 관구에 따라 동성결혼을 축복·허용하는 곳도 있고, 1998년 람베스 회의 결의(I.10)처럼 혼인을 남녀 간의 언약으로 보는 전통적 입장을 유지하는 곳도 있어 논의가 진행 중입니다. 대한성공회는 동성결혼을 공식 예식으로 시행하지는 않지만, <strong>성소수자를 정죄·배제하지 않으며 혐오와 차별에는 반대</strong>합니다(성소수자 사목 ‘길찾는교회’ 등). 광명교회는 ‘모든 생명을 환대하는 교회’로서, 찾아오시는 누구도 문 앞에서 돌려보내지 않습니다.",
                         refs: [
-                            { label: "람베스 회의 1998 결의 I.10 (세계성공회)", url: "https://www.anglicancommunion.org/resources/document-library/lambeth-conference/1998/section-i-called-to-full-humanity/section-i10-human-sexuality" },
-                            { label: "교회 안의 성소수자 사목 (프레시안, 2024)", url: "https://www.pressian.com/pages/articles/2024091417214791589" }
+                            { label: "람베스 회의 1998 결의 I.10 (세계성공회)", url: "https://www.anglicancommunion.org/resources/document-library/lambeth-conference/1998/section-i-called-to-full-humanity/section-i10-human-sexuality" }
                         ]
                     }
                 ]
