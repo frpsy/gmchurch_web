@@ -262,7 +262,7 @@ const CHURCH_DATA = {
   └ 주일 감사성찬례    worship.html#main                (JS)
   └ 어린이 예배        worship.html#children            (JS)
   └ 감사성찬례 순서    worship.html#eucharist-order     (JS)
-  └ 전례독서           worship.html#lectionary
+  └ 전례독서           sundays.html#lectionary          (교회력 페이지로 통합)
   └ 절기와 특별 주일   sundays.html                     (상세 페이지로 직접 이동)
   └ 성무일도           worship.html#daily-office        (JS)
   └ 세계성공회 중보기도 worship.html#intercession       (JS)

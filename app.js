@@ -304,7 +304,7 @@ const FooterRenderer = {
                     </div>
                     <div class="footer-col">
                         <h4>예배 자료</h4>
-                        <a href="worship.html#lectionary" class="footer-ext-link">전례독서</a>
+                        <a href="sundays.html#lectionary" class="footer-ext-link">전례독서</a>
                         ${resources.map(r => `<a href="${r.url}" target="_blank" rel="noopener" class="footer-ext-link">${r.title}</a>`).join('')}
                     </div>
                     <div class="footer-col">
@@ -524,22 +524,6 @@ const WorshipRenderer = {
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="liturgy-section" id="lectionary">
-                    <p class="section-eyebrow">Lectionary</p>
-                    <h2 class="section-title">전례독서</h2>
-                    <p class="liturgy-body" style="margin-bottom:1.5rem;">성공회 전례력에 따른 성서 본문을 확인하실 수 있습니다.</p>
-                    <div class="lectionary-cal-wrap">
-                        <iframe
-                            src="https://calendar.google.com/calendar/embed?src=anglican.kr_ep5i6qcm67gl19st7m0fd32l30%40group.calendar.google.com&ctz=Asia%2FSeoul&mode=AGENDA&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&hl=ko"
-                            class="lectionary-cal"
-                            frameborder="0"
-                            scrolling="no"
-                            title="전례독서 일정"
-                            loading="lazy"
-                        ></iframe>
                     </div>
                 </div>
 
@@ -1439,11 +1423,12 @@ const PortraitLightbox = {
 /* ── SundaysRenderer ─────────────────────────────────────── */
 const SundaysRenderer = {
     render() {
-        const currentEl  = document.getElementById('sundays-current');
-        const monthlyEl  = document.getElementById('sundays-monthly');
-        const seasonsEl  = document.getElementById('sundays-seasons');
-        const specialEl  = document.getElementById('sundays-special');
-        if (!currentEl && !monthlyEl && !seasonsEl && !specialEl) return;
+        const currentEl    = document.getElementById('sundays-current');
+        const monthlyEl    = document.getElementById('sundays-monthly');
+        const lectionaryEl = document.getElementById('sundays-lectionary');
+        const seasonsEl    = document.getElementById('sundays-seasons');
+        const specialEl    = document.getElementById('sundays-special');
+        if (!currentEl && !monthlyEl && !lectionaryEl && !seasonsEl && !specialEl) return;
         const d = CHURCH_DATA.sundays;
         if (!d) return;
 
@@ -1465,8 +1450,29 @@ const SundaysRenderer = {
             monthlyEl.innerHTML = this._monthly(year, mon, specialMap);
             this._bindCalNav(monthlyEl);
         }
+        if (lectionaryEl) lectionaryEl.innerHTML = this._lectionary();
         if (seasonsEl) seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
         if (specialEl) specialEl.innerHTML  = this._special(d.specialSundays);
+    },
+
+    /* 전례독서 — 날짜별 성서 본문(구글 캘린더 아젠다). 교회력 페이지로 통합. */
+    _lectionary() {
+        return `
+            <div class="section-header">
+                <p class="section-eyebrow">Lectionary</p>
+                <h2 class="section-title">전례독서</h2>
+                <p class="section-sub">교회력 절기에 따라 정해진 <strong>날짜별 성서 본문</strong>입니다. 위 달력이 절기의 색을 보여준다면, 이곳에서는 그날 읽는 말씀을 확인합니다.</p>
+            </div>
+            <div class="lectionary-cal-wrap">
+                <iframe
+                    src="https://calendar.google.com/calendar/embed?src=anglican.kr_ep5i6qcm67gl19st7m0fd32l30%40group.calendar.google.com&ctz=Asia%2FSeoul&mode=AGENDA&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&hl=ko"
+                    class="lectionary-cal"
+                    frameborder="0"
+                    scrolling="no"
+                    title="전례독서 일정"
+                    loading="lazy"
+                ></iframe>
+            </div>`;
     },
 
     /* 교회력 연도 시작 연도(advYear)를 기준으로 이동 절기 날짜 계산 */
@@ -1530,12 +1536,15 @@ const SundaysRenderer = {
         return map;
     },
 
-    /* 현재 절기 강조 카드 */
+    /* 현재 절기 강조: 전례력 색 리본 + 현재 절기 카드 */
     _currentSeason(cs, dates, advYear) {
         if (!cs) return '';
         const range = dates[cs.key] || '';
         return `
-            <div class="container" style="padding-top:2rem; padding-bottom:0;">
+            <div class="container season-ribbon-wrap" style="padding-top:1.75rem;">
+                ${this._ribbon(cs)}
+            </div>
+            <div class="container" style="padding-top:1.25rem; padding-bottom:0;">
                 <div class="sundays-season-hero">
                     <p class="section-eyebrow" style="margin-bottom:0.4rem;">현재 절기 — ${cs.dateLabel}</p>
                     <p style="font-size:1.45rem; font-weight:700; color:var(--heading); margin:0 0 0.3rem;">${cs.symbol} ${cs.name}</p>
@@ -1543,6 +1552,20 @@ const SundaysRenderer = {
                     ${range ? `<p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${advYear}-${advYear + 1} 교회력 &nbsp;·&nbsp; ${range}</p>` : ''}
                 </div>
             </div>`;
+    },
+
+    /* 전례력 색 리본 — 8개 절기 색을 교회력 순서로 띠처럼 펼치고, 현재 절기를 도드라지게 */
+    _ribbon(cs) {
+        const seasons = (CHURCH_DATA.sundays && CHURCH_DATA.sundays.seasons) || [];
+        if (!seasons.length) return '';
+        const curKey = cs.key;
+        const segs = seasons.map(s => {
+            const on = s.key === curKey;
+            return `<span class="season-ribbon-seg${on ? ' is-current' : ''}" style="--seg:${s.color};" title="${s.name} · 전례색 ${s.colorName}">${on ? `<span class="season-ribbon-mark" aria-hidden="true">${s.symbol}</span>` : ''}</span>`;
+        }).join('');
+        return `
+            <div class="season-ribbon" role="img" aria-label="전례력 절기 색 띠 — 현재 절기 ${cs.name}">${segs}</div>
+            <p class="season-ribbon-cap">교회력의 흐름 &middot; 지금은 <strong>${cs.symbol} ${cs.name}</strong></p>`;
     },
 
     /* 월간 달력 — 정적 헤더 + 동적 그리드 래퍼 */
@@ -1677,15 +1700,13 @@ const SundaysRenderer = {
 /* ── App bootstrap ───────────────────────────────────────── */
 const App = {
     init() {
-        /* 전례 테마 색 전역 주입 — 모든 페이지에서 CSS var(--theme) 연동 */
+        /* 사이트 대표 테마(--theme)는 녹색 고정(:root 기본값 사용). 절기색(--season)만
+           전례 요소(절기 페이지 리본·달력·전례 안내 배지 등)에 주입한다. */
         const cs = CHURCH_DATA.worship && CHURCH_DATA.worship.liturgicalSeason;
         if (cs) {
             const r = document.documentElement.style;
             r.setProperty('--season',       cs.color);
             r.setProperty('--season-light', cs.colorLight);
-            r.setProperty('--theme',        cs.color);
-            r.setProperty('--theme-light',  cs.colorLight);
-            r.setProperty('--theme-on',     cs.onColor || '#fff');
         }
 
         NavRenderer.render();
