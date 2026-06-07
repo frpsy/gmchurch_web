@@ -319,6 +319,8 @@ const FooterRenderer = {
                     <span>© ${new Date().getFullYear()} ${info.name}</span>
                     <nav class="footer-bottom-links" aria-label="하단 안내">
                         <a href="giving.html" class="footer-privacy-link">봉헌 안내</a>
+                        <a href="clergy.html#logo-intro" class="footer-privacy-link">로고 소개</a>
+                        <a href="clergy.html#press" class="footer-privacy-link">언론 보도</a>
                         <a href="privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
                     </nav>
                 </div>

@@ -35,12 +35,14 @@
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
 | `giving.html` | 헌금 | GivingRenderer |
-| `media.html` | 교회 영상 | MediaRenderer |
-| `links.html` | 관련 기관 | LinksRenderer |
+| `media.html` | 교회 영상·관련 기관 | MediaRenderer, LinksRenderer |
+| `links.html` | 관련 기관 (standalone) | LinksRenderer |
+| `sundays.html` | 절기와 특별 주일 (예배와 기도 메뉴) | SundaysRenderer |
 | `visit.html` | 오시는 길 | VisitRenderer |
 | `hopecenter.html` | 광명 희망터 상세 | — |
 | `emmaus.html` | 엠마우스 코스 상세 | — |
 | `smallgroup.html` | 소그룹 모임 상세 | — |
+| `greenchurch.html` | 녹색교회 상세 (공동체 메뉴) | — |
 | `privacy.html` | 개인정보처리방침 (noindex) | — |
 
 ---
@@ -51,25 +53,25 @@
 
 ```
 교회 소개 (clergy.html)
-  성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity) / 자주 묻는 질문(faq.html, 가안) / 로고 소개 / 언론 보도
+  성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity)
 
-예배 (worship.html)
-  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 전례독서 / 예배 자료
+예배와 기도 (worship.html)
+  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 전례독서 / 절기와 특별 주일(sundays.html) / 성무일도 / 세계성공회 중보기도 / 예배 자료
 
 처음 오신 분 (newcomer.html)
-  인사말 / 참여 안내 / 성공회 전례란? / 전례 공간 안내 / 영성체 안내 / 문의하기
+  인사말 / 참여 안내 / 성공회 전례란? / 전례 공간 안내 / 영성체 안내 / 자주 묻는 질문(faq.html, 가안) / 문의하기
 
 공동체 (community.html)
-  광명 희망터 / 엠마우스 코스 / 소그룹 모임 / 주일 애찬 / 헌금(giving.html)
+  광명 희망터 / 엠마우스 코스 / 소그룹 모임 / 주일 애찬 / 녹색교회(greenchurch.html)
 
 미디어·자료 (media.html)
-  교회 영상(media.html) / 관련 기관(links.html)
+  교회 영상 / 관련 기관
 
 오시는 길 (visit.html)
   주소·교통 / 주차 안내
 ```
 
-Footer 전용 링크: `giving.html`(봉헌 안내), `privacy.html`
+Footer 전용 링크: `giving.html`(봉헌 안내), `clergy.html#logo-intro`(로고 소개), `clergy.html#press`(언론 보도), `privacy.html`
 
 ---
 
