@@ -1438,6 +1438,54 @@ const PortraitLightbox = {
     }
 };
 
+/* ── SundaysRenderer ─────────────────────────────────────── */
+const SundaysRenderer = {
+    render() {
+        const seasonsEl = document.getElementById('sundays-seasons');
+        const specialEl = document.getElementById('sundays-special');
+        if (!seasonsEl && !specialEl) return;
+        const d = CHURCH_DATA.sundays;
+        if (!d) return;
+        if (seasonsEl) seasonsEl.innerHTML = this._seasons(d.seasons);
+        if (specialEl) specialEl.innerHTML = this._special(d.specialSundays);
+    },
+
+    _seasons(seasons) {
+        const cards = seasons.map(s => `
+            <div class="resource-card" style="border-top-color:${s.color};">
+                <span class="resource-icon" aria-hidden="true">${s.symbol}</span>
+                <p class="resource-title">${s.name}<span class="resource-desc" style="font-weight:400; margin:0 0 0 0.4em;">${s.en}</span></p>
+                <p class="resource-desc" style="margin-bottom:0.4rem;">${s.colorName}</p>
+                <p class="resource-desc" style="font-style:italic; margin-bottom:0.5rem;">${s.period}</p>
+                <p class="resource-desc">${s.desc}</p>
+            </div>`).join('');
+        return `
+            <div class="section-header">
+                <p class="section-eyebrow">Liturgical Year</p>
+                <h2 class="section-title">교회력 절기</h2>
+                <p class="section-sub">성공회는 교회력(전례력)에 따라 그리스도의 생애와 사역을 한 해 동안 함께 기억합니다. 각 절기의 색은 기도서 전례색 기준입니다.</p>
+            </div>
+            <div class="resource-grid">${cards}</div>`;
+    },
+
+    _special(sundays) {
+        const cards = sundays.map(s => `
+            <div class="info-card">
+                <p style="font-size:0.78rem; font-weight:700; letter-spacing:0.05em; color:var(--green-mid); text-transform:uppercase; margin-bottom:0.35rem;">${s.origin}</p>
+                <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.2rem;">${s.name}</h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:0.75rem;">${s.en} &middot; ${s.date}</p>
+                <p style="font-size:0.9rem; color:var(--text); line-height:1.7;">${s.desc}</p>
+            </div>`).join('');
+        return `
+            <div class="section-header">
+                <p class="section-eyebrow">Special Sundays</p>
+                <h2 class="section-title">특별 주일</h2>
+                <p class="section-sub">대한성공회와 세계교회가 함께 지키는 주요 주일과 절기입니다.</p>
+            </div>
+            <div class="grid">${cards}</div>`;
+    }
+};
+
 /* ── App bootstrap ───────────────────────────────────────── */
 const App = {
     init() {
@@ -1456,6 +1504,7 @@ const App = {
         FaqRenderer.render();
         MediaRenderer.render();
         LinksRenderer.render();
+        SundaysRenderer.render();
         this._handleHashScroll();
         ScrollReveal.init();
         ScrollProgress.init();
