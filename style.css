@@ -785,6 +785,80 @@ button:focus:not(:focus-visible) { outline: none; }
     }
 }
 
+/* ── 월간 교회력 달력 위젯 ─────────────────────────────── */
+.lit-cal {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    max-width: 560px;
+    margin: 0 auto;
+}
+.lit-cal-hd {
+    padding: 0.9rem 1.5rem;
+    background: var(--season);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.lit-cal-hd-month { font-size: 1rem; font-weight: 700; color: #fff; }
+.lit-cal-hd-season { font-size: 0.78rem; color: rgba(255,255,255,0.85); }
+.lit-cal-wds {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 1px solid var(--border);
+    background: var(--green-light);
+}
+.lit-cal-wds span {
+    text-align: center;
+    padding: 0.4rem 0;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+}
+.lit-cal-wds span:first-child { color: var(--heading); }
+.lit-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+.lit-cal-cell {
+    min-height: 56px;
+    padding: 0.3rem 0.35rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+.lit-cal-cell:nth-child(7n) { border-right: none; }
+.lit-cal-cell--empty { opacity: 0.35; }
+.lit-cal-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1;
+}
+.lit-cal-cell--today .lit-cal-num { background: var(--season); color: #fff; }
+.lit-cal-label {
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 700;
+    color: var(--season);
+    line-height: 1.3;
+    margin-top: 0.1rem;
+    word-break: keep-all;
+}
+@media (prefers-color-scheme: dark) {
+    .lit-cal-cell--today .lit-cal-num { color: #fff; }
+    .lit-cal-label { color: color-mix(in srgb, var(--season) 55%, white); }
+}
+@media (max-width: 480px) {
+    .lit-cal-cell { min-height: 42px; padding: 0.2rem 0.2rem; }
+    .lit-cal-num { width: 1.4rem; height: 1.4rem; font-size: 0.72rem; }
+    .lit-cal-label { font-size: 0.5rem; }
+}
+
 /* Quote Block */
 .quote-block {
     background: var(--gold-bg);
