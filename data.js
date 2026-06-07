@@ -91,7 +91,7 @@ const CHURCH_DATA = {
         diocese: "대한성공회 서울교구 서부교무구",
         aboutLead: "성공회 기도서를 따라 예배하며, 생태 보전을 신앙의 과제로 삼는 광명의 녹색 교회입니다.",
         aboutDesc: "주일 애찬에는 비건 음식도 함께 마련합니다.",
-        award: { year: "2023", title: "녹색교회 선정", org: "기독교환경운동연대", href: "greenchurch.html", newsUrl: "https://christian.nocutnews.co.kr/news/6000856" },
+        award: { year: "2023", title: "녹색교회 선정", org: "기독교환경운동연대", href: "greenchurch.html", newsUrl: "https://www.newsis.com/view/NISX20230515_0002303502" },
         established: "1990년 2월 11일",
         address: "경기도 광명시 아방리 2길 10",
         addressShort: "경기도 광명시 아방리 2길 10",
@@ -537,7 +537,7 @@ const CHURCH_DATA = {
             media: "CBS 크리스천노컷뉴스",
             title: "올해 녹색교회로 선정된 광명교회 — 일회용품 제거·친환경 비누·텃밭 애찬·생태 산행·반려동물 축복식 실천",
             date: "2023",
-            url: "https://christian.nocutnews.co.kr/news/6000856"
+            url: "https://mch.nocutnews.co.kr/news/6000856"
         },
         {
             year: "2025",
@@ -960,6 +960,8 @@ const CHURCH_DATA = {
                 { label: "어린이 예배",    href: "worship.html#children" },
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
                 { label: "절기와 전례독서", href: "sundays.html" },
+                { label: "이달의 교회력",  href: "worship.html#monthly" },
+                { label: "특별 주일",      href: "worship.html#special" },
                 { label: "성무일도",       href: "worship.html#daily-office" },
                 { label: "세계성공회 중보기도", href: "worship.html#intercession" },
                 { label: "예배 자료",      href: "worship.html#resources" }
