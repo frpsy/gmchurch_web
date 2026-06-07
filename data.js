@@ -765,6 +765,156 @@ const CHURCH_DATA = {
         ]
     },
 
+    sundays: {
+        seasons: [
+            {
+                key: "advent",
+                name: "대림절",
+                en: "Advent",
+                colorName: "자색",
+                color: "#6b4f8f",
+                symbol: "🕯️",
+                period: "성탄 4주 전 주일 ~ 성탄 전날",
+                desc: "주님의 오심을 기다리며 준비하는 시간. 교회력의 새해가 시작됩니다."
+            },
+            {
+                key: "christmas",
+                name: "성탄절",
+                en: "Christmas",
+                colorName: "백색·금색",
+                color: "#b8860b",
+                symbol: "⭐",
+                period: "12월 25일 ~ 1월 5일",
+                desc: "말씀이 사람이 되신 기쁨을 기념합니다. 성탄 후 12일간 이어집니다."
+            },
+            {
+                key: "epiphany",
+                name: "공현절 후",
+                en: "Epiphany",
+                colorName: "녹색",
+                color: "#3d6b4a",
+                symbol: "✨",
+                period: "1월 6일 ~ 재의 수요일 전날",
+                desc: "주님께서 세상에 드러나심. 공현절(주현절)과 주님의 세례 주일을 포함합니다."
+            },
+            {
+                key: "lent",
+                name: "사순절",
+                en: "Lent",
+                colorName: "자색",
+                color: "#6b4f8f",
+                symbol: "✝️",
+                period: "재의 수요일 ~ 성주간 전날 (40일)",
+                desc: "회개와 절제로 부활을 준비하는 시간. 재의 수요일에 시작됩니다."
+            },
+            {
+                key: "holyweek",
+                name: "성주간",
+                en: "Holy Week",
+                colorName: "적색",
+                color: "#c0390f",
+                symbol: "🌿",
+                period: "종려주일 ~ 성토요일",
+                desc: "주님의 수난을 묵상하는 한 주간. 종려주일·성목요일·성금요일·성토요일을 포함합니다."
+            },
+            {
+                key: "easter",
+                name: "부활절",
+                en: "Easter",
+                colorName: "백색·금색",
+                color: "#b8860b",
+                symbol: "🌅",
+                period: "부활주일 ~ 성령강림 전날 (50일)",
+                desc: "다시 살아나신 주님을 기리는 기쁨의 계절. 50일간 이어집니다."
+            },
+            {
+                key: "pentecost",
+                name: "성령강림절",
+                en: "Pentecost",
+                colorName: "적색",
+                color: "#c0390f",
+                symbol: "🔥",
+                period: "부활 후 50일째 주일",
+                desc: "성령께서 제자들에게 임하신 날을 기념합니다. 교회의 생일."
+            },
+            {
+                key: "ordinary",
+                name: "성령강림 후",
+                en: "Ordinary Time",
+                colorName: "녹색",
+                color: "#3d6b4a",
+                symbol: "🌿",
+                period: "성령강림 다음 주 ~ 대림절 전날",
+                desc: "그리스도인의 일상을 살아가는 긴 계절. 왕이신 그리스도 주일로 마무리됩니다."
+            }
+        ],
+        specialSundays: [
+            {
+                name: "주현절 (공현절)",
+                en: "Epiphany",
+                date: "1월 6일 또는 직후 주일",
+                origin: "세계성공회",
+                desc: "동방박사들의 방문을 통해 예수님이 온 세상에 드러나신 날. 공현절 후 첫 주일은 주님의 세례 주일로 기념합니다."
+            },
+            {
+                name: "세계기도일",
+                en: "World Day of Prayer",
+                date: "3월 첫째 금요일",
+                origin: "세계교회 (에큐메니컬)",
+                desc: "전 세계 그리스도인들이 함께 드리는 에큐메니컬 기도의 날. 매년 특정 나라의 여성들이 예식을 준비합니다."
+            },
+            {
+                name: "종려주일",
+                en: "Palm Sunday",
+                date: "성주간 첫날 (부활 7일 전)",
+                origin: "세계성공회",
+                desc: "예수님의 예루살렘 입성을 기념하며 종려가지를 들고 행진합니다. 성주간의 시작입니다."
+            },
+            {
+                name: "승천주일",
+                en: "Ascension Sunday",
+                date: "부활 후 40일째 또는 직후 주일",
+                origin: "세계성공회",
+                desc: "부활하신 주님께서 하늘에 오르신 사건을 기념합니다."
+            },
+            {
+                name: "환경주일",
+                en: "Environment Sunday",
+                date: "6월 첫째 주일",
+                origin: "KNCC · 대한성공회",
+                desc: "하나님의 창조세계를 돌보는 청지기 사명을 새기는 날. 1984년부터 한국교회가 함께 지킵니다."
+            },
+            {
+                name: "창조절",
+                en: "Season of Creation",
+                date: "9월 1일 ~ 10월 4일",
+                origin: "세계교회 · 대한성공회",
+                desc: "창조세계 보전을 위해 함께 기도하는 절기. 10월 4일 성 프란체스코 축일에 마무리됩니다."
+            },
+            {
+                name: "모든 성인의 날",
+                en: "All Saints' Day",
+                date: "11월 1일 또는 직후 주일",
+                origin: "세계성공회",
+                desc: "신앙의 선진들과 모든 성인을 기억하고 감사하는 날. 세상을 먼저 떠난 이들과의 연대를 고백합니다."
+            },
+            {
+                name: "왕이신 그리스도 주일",
+                en: "Christ the King",
+                date: "대림절 직전 주일",
+                origin: "세계성공회",
+                desc: "교회력의 마지막 주일. 그리스도의 왕권과 통치를 선포하며 한 해를 마무리합니다."
+            },
+            {
+                name: "세계에이즈 추모 주일",
+                en: "World AIDS Sunday",
+                date: "12월 1일 전후 주일",
+                origin: "세계성공회",
+                desc: "HIV/AIDS로 세상을 떠난 이들을 추모하고, 감염인·취약계층과 연대하는 날입니다."
+            }
+        ]
+    },
+
     navigation: [
         {
             label: "교회 소개",
@@ -820,9 +970,10 @@ const CHURCH_DATA = {
             label: "미디어·자료",
             href: "media.html",
             items: [
-                { label: "교회 영상",     href: "media.html#videos" },
-                { label: "녹색교회",     href: "media.html#green" },
-                { label: "관련 기관",     href: "media.html#links" }
+                { label: "교회 영상",       href: "media.html#videos" },
+                { label: "녹색교회",       href: "media.html#green" },
+                { label: "관련 기관",       href: "media.html#links" },
+                { label: "절기와 특별 주일", href: "sundays.html" }
             ]
         },
         {
