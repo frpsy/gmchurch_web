@@ -1441,36 +1441,81 @@ const PortraitLightbox = {
 /* ── SundaysRenderer ─────────────────────────────────────── */
 const SundaysRenderer = {
     render() {
+        const currentEl = document.getElementById('sundays-current');
         const seasonsEl = document.getElementById('sundays-seasons');
         const specialEl = document.getElementById('sundays-special');
-        if (!seasonsEl && !specialEl) return;
+        if (!currentEl && !seasonsEl && !specialEl) return;
         const d = CHURCH_DATA.sundays;
         if (!d) return;
-        if (seasonsEl) seasonsEl.innerHTML = this._seasons(d.seasons);
+
+        const cs = CHURCH_DATA.worship && CHURCH_DATA.worship.liturgicalSeason;
+        if (cs) {
+            document.documentElement.style.setProperty('--season', cs.color);
+            document.documentElement.style.setProperty('--season-light', cs.colorLight);
+        }
+
+        const year = new Date().getFullYear();
+        const dates = this._computeDates(year);
+
+        if (currentEl) currentEl.innerHTML = this._currentSeason(cs, dates, year);
+        if (seasonsEl) seasonsEl.innerHTML = this._seasons(d.seasons, cs, dates, year);
         if (specialEl) specialEl.innerHTML = this._special(d.specialSundays);
     },
 
-    _seasons(seasons) {
-        const cs = CHURCH_DATA.worship && CHURCH_DATA.worship.liturgicalSeason;
-        const banner = cs ? `
-            <div class="guide-banner" style="border-left-color:${cs.color}; margin-top:0; margin-bottom:2.5rem;">
-                <p><strong>${cs.symbol} 지금은 ${cs.name}입니다</strong> — ${cs.note}</p>
-            </div>` : '';
-        const cards = seasons.map(s => `
-            <div class="resource-card" style="border-top-color:${s.color};">
-                <span class="resource-icon" aria-hidden="true">${s.symbol}</span>
-                <p class="resource-title">${s.name}<span class="resource-desc" style="font-weight:400; margin:0 0 0 0.4em;">${s.en}</span></p>
-                <p class="resource-desc" style="margin-bottom:0.4rem;">${s.colorName}</p>
-                <p class="resource-desc" style="font-style:italic; margin-bottom:0.5rem;">${s.period}</p>
-                <p class="resource-desc">${s.desc}</p>
-            </div>`).join('');
+    _computeDates(year) {
+        const easter = LiturgicalCalendar.easterDate(year);
+        const add = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); return r; };
+        const fmt = d => `${d.getMonth() + 1}월 ${d.getDate()}일`;
+        const ashWed   = add(easter, -46);
+        const palmSun  = add(easter, -7);
+        const pentecost = add(easter, 49);
+        const advent   = LiturgicalCalendar.adventStart(year);
+        return {
+            advent:    `${fmt(advent)} ~ 12월 24일`,
+            christmas: `12월 25일 ~ 이듬해 1월 5일`,
+            epiphany:  `1월 6일 ~ ${fmt(add(ashWed, -1))}`,
+            lent:      `${fmt(ashWed)} ~ ${fmt(add(palmSun, -1))}`,
+            holyweek:  `${fmt(palmSun)} ~ ${fmt(add(easter, -1))}`,
+            easter:    `${fmt(easter)} ~ ${fmt(add(pentecost, -1))}`,
+            pentecost: fmt(pentecost),
+            ordinary:  `${fmt(add(pentecost, 1))} ~ ${fmt(add(advent, -1))}`
+        };
+    },
+
+    _currentSeason(cs, dates, year) {
+        if (!cs) return '';
+        const range = dates[cs.key] || '';
+        return `
+            <div class="container" style="padding-top:2rem; padding-bottom:0;">
+                <div class="sundays-season-hero">
+                    <p class="section-eyebrow" style="color:var(--season); margin-bottom:0.4rem;">현재 절기 — ${cs.dateLabel}</p>
+                    <p style="font-size:1.45rem; font-weight:700; color:var(--heading); margin:0 0 0.3rem;">${cs.symbol} ${cs.name}</p>
+                    <p style="font-size:0.92rem; color:var(--text-muted);">${cs.note}</p>
+                    ${range ? `<p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${year}년 기준 &nbsp;·&nbsp; ${range}</p>` : ''}
+                </div>
+            </div>`;
+    },
+
+    _seasons(seasons, cs, dates, year) {
+        const cards = seasons.map(s => {
+            const isCurrent = cs && cs.key === s.key;
+            const range = dates[s.key];
+            return `
+                <div class="resource-card" style="border-top-color:${s.color};${isCurrent ? ' box-shadow:0 0 0 2px ' + s.color + ';' : ''}">
+                    <span class="resource-icon" aria-hidden="true">${s.symbol}</span>
+                    <p class="resource-title">${s.name}<span class="resource-desc" style="font-weight:400; margin:0 0 0 0.4em;">${s.en}</span></p>
+                    <p class="resource-desc" style="margin-bottom:0.35rem;">${s.colorName}</p>
+                    ${range ? `<p class="resource-desc" style="font-weight:600; color:var(--text); margin-bottom:0.4rem;">📅 ${year}년: ${range}</p>` : ''}
+                    <p class="resource-desc">${s.desc}</p>
+                    ${isCurrent ? `<p style="font-size:0.78rem; font-weight:700; color:var(--season); margin-top:0.5rem;">◀ 현재 절기</p>` : ''}
+                </div>`;
+        }).join('');
         return `
             <div class="section-header">
                 <p class="section-eyebrow">Liturgical Year</p>
                 <h2 class="section-title">교회력 절기</h2>
                 <p class="section-sub">성공회는 교회력(전례력)에 따라 그리스도의 생애와 사역을 한 해 동안 함께 기억합니다. 각 절기의 색은 기도서 전례색 기준입니다.</p>
             </div>
-            ${banner}
             <div class="resource-grid">${cards}</div>`;
     },
 
