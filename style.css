@@ -10,6 +10,10 @@
     --green-mid:    #3a7252;
     --green-light:  #eef2ec;
     --green-soft:   #c4d6c8;
+    /* 전례 테마 — JS가 현재 절기 색으로 덮어씀. 기본값은 평시 녹색. */
+    --theme:        #3a7252;
+    --theme-light:  #eef2ec;
+    --theme-on:     #fff;     /* --theme 배경 위 텍스트 색 (금색 절기엔 어두운 값) */
     /* Accent — luminous amber gold */
     --gold:         #c09a60;
     --gold-bg:      #faf3e6;
@@ -112,7 +116,7 @@ img { display: block; max-width: 100%; }
 .skip-link:focus { top: 0; }
 
 :focus-visible {
-    outline: 3px solid var(--green-mid);
+    outline: 3px solid var(--theme);
     outline-offset: 3px;
     border-radius: 3px;
 }
@@ -226,7 +230,7 @@ button:focus:not(:focus-visible) { outline: none; }
     position: absolute;
     top: 100%; left: 0;
     background: var(--white);
-    border-top: 2px solid var(--green-mid);
+    border-top: 2px solid var(--theme);
     border-radius: 0 0 var(--radius-sm) var(--radius-sm);
     min-width: 180px;
     list-style: none;
@@ -249,7 +253,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .dropdown li:last-child a { border-bottom: none; }
 .dropdown li a:hover {
-    color: var(--green-mid);
+    color: var(--theme);
     background: var(--green-light);
     padding-left: 1.6rem;
 }
@@ -594,7 +598,7 @@ button:focus:not(:focus-visible) { outline: none; }
     padding-left: clamp(1.25rem, 5vw, 2.5rem);
     padding-right: clamp(1.25rem, 5vw, 2.5rem);
     text-align: center;
-    background: linear-gradient(165deg, #c8dbd0 0%, var(--green-light) 38%, var(--cream) 100%);
+    background: linear-gradient(165deg, color-mix(in srgb, var(--theme) 18%, var(--cream)) 0%, var(--theme-light) 40%, var(--cream) 100%);
     border-bottom: 1px solid var(--border);
 }
 .page-hero h1 {
@@ -630,12 +634,17 @@ button:focus:not(:focus-visible) { outline: none; }
 
 /* ── Sections ────────────────────────────────────────────── */
 .section { padding: var(--section-pad) 0; }
+/* 교회력 절기 연동 섹션 배경 — 라이트: --theme-light, 다크: --theme 틴트+dark surface */
+.section.gc-section-alt { background: var(--theme-light); }
+@media (prefers-color-scheme: dark) {
+    .section.gc-section-alt { background: color-mix(in srgb, var(--theme) 20%, var(--white)); }
+}
 
 .section-eyebrow {
     font-size: 0.68rem;
     letter-spacing: var(--ls-eyebrow);
     text-transform: uppercase;
-    color: var(--green-mid);
+    color: var(--theme);
     margin-bottom: var(--space-4);
     font-weight: 600;
     display: block;
@@ -679,7 +688,7 @@ button:focus:not(:focus-visible) { outline: none; }
     will-change: transform, opacity;
 }
 .card:hover {
-    border-color: var(--green-mid);
+    border-color: var(--theme);
     box-shadow: var(--hover-shadow);
     transform: translateY(-6px);
 }
@@ -697,7 +706,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* 카드 본문 — 홈 예배 카드 등에서 인라인 스타일 대체 */
 .card-time {
     font-weight: 700;
-    color: var(--green-mid);
+    color: var(--theme);
     margin-bottom: var(--space-2);
 }
 .card-desc {
@@ -722,7 +731,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease;
 }
 .info-card:hover {
-    border-color: var(--green-mid);
+    border-color: var(--theme);
     box-shadow: var(--hover-shadow-sm);
     transform: translateY(-4px);
 }
@@ -759,8 +768,8 @@ button:focus:not(:focus-visible) { outline: none; }
 
 /* Guide Banner */
 .guide-banner {
-    background: var(--green-light);
-    border-left: 4px solid var(--green-mid);
+    background: var(--theme-light);
+    border-left: 4px solid var(--theme);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: 1.6rem 2rem;
     margin-top: 2.5rem;
@@ -826,7 +835,7 @@ button:focus:not(:focus-visible) { outline: none; }
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     border-bottom: 1px solid var(--border);
-    background: var(--green-light);
+    background: var(--theme-light);
 }
 .lit-cal-wds span {
     text-align: center;
@@ -922,7 +931,7 @@ button:focus:not(:focus-visible) { outline: none; }
     width: 1.7rem;
     height: 1.7rem;
     border-radius: 50%;
-    border: 2px solid var(--green-mid);
+    border: 2px solid var(--theme);
     font-size: 0.82rem;
     font-weight: 700;
     color: var(--heading);
@@ -1017,7 +1026,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .minister-cat-title {
     font-size: 0.95rem;
     font-weight: 700;
-    color: var(--green-mid);
+    color: var(--theme);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin: 0 0 1.25rem;
@@ -1041,7 +1050,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .officer-card {
     background: var(--white);
     border: 1px solid var(--border);
-    border-top: 3px solid var(--green-mid);
+    border-top: 3px solid var(--theme);
     border-radius: var(--radius-lg);
     padding: 1.5rem 1.9rem;
     box-shadow: var(--shadow-md);
@@ -1061,7 +1070,7 @@ button:focus:not(:focus-visible) { outline: none; }
     width: 96px;
     font-size: 0.78rem;
     font-weight: 700;
-    color: var(--green-mid);
+    color: var(--theme);
     letter-spacing: 0.02em;
 }
 .officer-names {
@@ -1077,7 +1086,7 @@ button:focus:not(:focus-visible) { outline: none; }
     background: var(--white);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
-    border-top: 3px solid var(--green-mid);
+    border-top: 3px solid var(--theme);
     padding: 2.5rem 2rem;
     display: grid;
     grid-template-columns: auto 1fr;
@@ -1110,7 +1119,7 @@ button:focus:not(:focus-visible) { outline: none; }
     display: block;
 }
 .clergy-name { font-size: 1.2rem; font-weight: 700; color: var(--heading); letter-spacing: -0.01em; }
-.clergy-title { font-size: 0.85rem; color: var(--green-mid); font-weight: 600; margin-top: 0.25rem; letter-spacing: 0.02em; word-break: keep-all; overflow-wrap: break-word; }
+.clergy-title { font-size: 0.85rem; color: var(--theme); font-weight: 600; margin-top: 0.25rem; letter-spacing: 0.02em; word-break: keep-all; overflow-wrap: break-word; }
 .clergy-desc { font-size: 0.95rem; color: var(--text); line-height: 1.85; margin-top: 1rem; opacity: 0.85; }
 
 /* ── Clergy Bio Section ──────────────────────────────────── */
@@ -1120,7 +1129,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--green-mid);
+    color: var(--theme);
     margin: 0 0 0.75rem;
 }
 .bio-timeline { list-style: none; margin: 0; padding: 0; position: relative; }
@@ -1144,7 +1153,7 @@ button:focus:not(:focus-visible) { outline: none; }
     min-width: 38px;
     font-size: 0.72rem;
     font-weight: 700;
-    color: var(--green-mid);
+    color: var(--theme);
     font-variant-numeric: tabular-nums;
     flex-shrink: 0;
     padding-right: 0.5rem;
@@ -1156,7 +1165,7 @@ button:focus:not(:focus-visible) { outline: none; }
     height: 7px;
     border-radius: 50%;
     background: var(--white);
-    border: 2px solid var(--green-mid);
+    border: 2px solid var(--theme);
     flex-shrink: 0;
     margin: 0 0.6rem;
     position: relative;
@@ -1186,7 +1195,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .bio-roles { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .bio-role-tag {
     font-size: 0.78rem;
-    color: var(--green-mid);
+    color: var(--theme);
     background: var(--green-light);
     border: 1px solid var(--border);
     border-radius: 4px;
@@ -1198,7 +1207,7 @@ button:focus:not(:focus-visible) { outline: none; }
     gap: 0.9rem;
     align-items: flex-start;
     background: var(--cream);
-    border-left: 4px solid var(--green-mid);
+    border-left: 4px solid var(--theme);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     padding: 1rem 1.1rem;
     margin-top: 1.25rem;
@@ -1258,14 +1267,14 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: var(--ls-label);
-    color: var(--green-mid);
+    color: var(--theme);
     text-transform: uppercase;
     flex-shrink: 0;
 }
 .about-brief-facts span { color: var(--text); }
 .about-brief-link {
     display: inline-block;
-    color: var(--green-mid);
+    color: var(--theme);
     font-weight: 700;
     font-size: 0.95rem;
     border-bottom: 1px solid currentColor;
@@ -1287,15 +1296,15 @@ button:focus:not(:focus-visible) { outline: none; }
     text-decoration: none;
     transition: background 0.2s, border-color 0.2s;
 }
-.about-brief-award:hover { background: #dce8dd; border-color: var(--green-mid); }
+.about-brief-award:hover { background: #dce8dd; border-color: var(--theme); }
 .about-brief-award-icon { font-size: 1.25rem; flex-shrink: 0; }
 .about-brief-award-body { display: flex; flex-direction: column; gap: 0.1rem; flex: 1; text-align: left; }
 .about-brief-award-body strong { font-size: var(--fs-sm); font-weight: 700; color: var(--heading); }
 .about-brief-award-body span   { font-size: var(--fs-label); color: var(--text-muted); }
-.about-brief-award-arrow       { color: var(--green-mid); font-size: var(--fs-sm); flex-shrink: 0; }
+.about-brief-award-arrow       { color: var(--theme); font-size: var(--fs-sm); flex-shrink: 0; }
 .about-brief-news-link { margin-bottom: var(--space-5); }
 .link-plain-ext { font-size: var(--fs-label); color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
-.link-plain-ext:hover { color: var(--green-mid); }
+.link-plain-ext:hover { color: var(--theme); }
 
 /* ── Home page — 정렬 통일(센터) & 섹션 변형 ─────────────── */
 /* 배경 흰색 섹션 — HTML 인라인 style 대체 */
@@ -1338,7 +1347,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--green-mid);
+    color: var(--theme);
 }
 .logo-colors {
     margin-top: 0.5rem;
@@ -1375,7 +1384,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .logo-element-label {
     font-size: 0.78rem;
     font-weight: 700;
-    color: var(--green-mid);
+    color: var(--theme);
     margin-bottom: 0.3rem;
     letter-spacing: 0.02em;
 }
@@ -1408,7 +1417,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .logo-ref-num {
     font-size: 0.68rem;
     font-weight: 700;
-    color: var(--green-mid);
+    color: var(--theme);
     background: var(--green-light);
     border-radius: 50%;
     width: 1.4em;
@@ -1467,7 +1476,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease;
 }
 .anglican-pillar:hover {
-    border-color: var(--green-mid);
+    border-color: var(--theme);
     box-shadow: var(--hover-shadow-sm);
     transform: translateY(-4px);
 }
@@ -1494,7 +1503,7 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 0.9rem 1.1rem;
     background: var(--green-light);
     border-radius: var(--radius-sm);
-    border-left: 4px solid var(--green-mid);
+    border-left: 4px solid var(--theme);
 }
 
 /* Korea section — two-column layout */
@@ -1548,16 +1557,16 @@ button:focus:not(:focus-visible) { outline: none; }
     gap: 0.75rem;
     margin-top: 1.5rem;
     padding: 0.85rem 1.1rem;
-    border: 1px solid var(--green-mid);
+    border: 1px solid var(--theme);
     border-radius: 8px;
-    color: var(--green-mid);
+    color: var(--theme);
     text-decoration: none;
     transition: background 0.25s var(--ease-out), color 0.25s;
     width: 100%;
     box-sizing: border-box;
 }
 .iona-link-card--hover,
-.iona-link-card:hover { background: var(--green-mid); color: #fff; }
+.iona-link-card:hover { background: var(--theme); color: var(--theme-on); }
 .iona-link-card__text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .iona-link-card__label { font-size: 0.9rem; font-weight: 700; }
 .iona-link-card__desc  { font-size: 0.78rem; margin-top: 0.15rem; opacity: 0.8; }
@@ -1581,7 +1590,7 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 1rem 1.25rem;
     background: var(--green-light);
     border-radius: 8px;
-    border-left: 3px solid var(--green-mid);
+    border-left: 3px solid var(--theme);
     transition: box-shadow 0.3s ease, transform 0.3s var(--ease-out), opacity 0.6s ease;
 }
 .mission-mark:hover {
@@ -1592,7 +1601,7 @@ button:focus:not(:focus-visible) { outline: none; }
     .mission-mark { transition: box-shadow 0.25s; }
     .mission-mark:hover { transform: none; }
 }
-.mission-mark__num { flex-shrink: 0; width: 1.75rem; height: 1.75rem; background: var(--green-mid); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+.mission-mark__num { flex-shrink: 0; width: 1.75rem; height: 1.75rem; background: var(--theme); color: var(--theme-on); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
 .mission-mark__body { flex: 1; min-width: 0; }
 .mission-mark__title { font-size: 0.95rem; font-weight: 700; color: var(--heading); margin: 0 0 0.25rem; }
 .mission-mark__en { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin: 0; }
@@ -1611,7 +1620,7 @@ button:focus:not(:focus-visible) { outline: none; }
     letter-spacing: 0.02em;
     font-variant-numeric: tabular-nums;
 }
-.bank-card .sub { font-size: 0.85rem; color: var(--green-mid); margin-top: 0.35rem; }
+.bank-card .sub { font-size: 0.85rem; color: var(--theme); margin-top: 0.35rem; }
 
 /* ── Bus Chips ──────────────────────────────────────────── */
 .bus-list {
@@ -1685,7 +1694,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: color 0.2s;
     word-break: keep-all;
 }
-.press-link:hover { color: var(--green-mid); text-decoration: underline; }
+.press-link:hover { color: var(--theme); text-decoration: underline; }
 .press-meta {
     display: block;
     margin-top: 0.2rem;
@@ -1732,7 +1741,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 .faq-item[open] {
-    border-color: var(--green-mid);
+    border-color: var(--theme);
     box-shadow: var(--shadow-md);
 }
 .faq-item:hover { border-color: var(--green-soft); }
@@ -1753,14 +1762,14 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .faq-q::-webkit-details-marker { display: none; }
 .faq-q:focus-visible {
-    outline: 2px solid var(--green-mid);
+    outline: 2px solid var(--theme);
     outline-offset: -2px;
     border-radius: var(--radius-md);
 }
 .faq-q-text::before {
     content: "Q";
     display: inline-block;
-    color: var(--green-mid);
+    color: var(--theme);
     font-weight: 800;
     margin-right: 0.5rem;
 }
@@ -1777,7 +1786,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .faq-q-mark::after {
     content: "";
     position: absolute;
-    background: var(--green-mid);
+    background: var(--theme);
     border-radius: 2px;
 }
 .faq-q-mark::before { top: 8px; left: 0; width: 18px; height: 2px; }
@@ -1796,7 +1805,7 @@ button:focus:not(:focus-visible) { outline: none; }
     word-break: keep-all;
 }
 .faq-a-text a {
-    color: var(--green-mid);
+    color: var(--theme);
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 2px;
@@ -1826,7 +1835,7 @@ button:focus:not(:focus-visible) { outline: none; }
     align-items: center;
     gap: 0.25rem;
     font-size: var(--fs-sm);
-    color: var(--green-mid);
+    color: var(--theme);
     background: var(--green-light);
     border: 1px solid var(--green-soft);
     border-radius: 999px;
@@ -1835,7 +1844,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: background 0.2s, color 0.2s;
     word-break: keep-all;
 }
-.faq-ref:hover { background: var(--green-mid); color: #fff; border-color: var(--green-mid); }
+.faq-ref:hover { background: var(--theme); color: var(--theme-on); border-color: var(--theme); }
 
 @media (max-width: 600px) {
     .faq-q { padding: 1rem 1.1rem; font-size: 0.95rem; }
@@ -1941,7 +1950,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .newcomer-key-link {
     display: inline-block;
     margin-top: 0.25rem;
-    color: var(--green-mid);
+    color: var(--theme);
     font-size: 0.86rem;
     font-weight: 600;
     text-decoration: none;
@@ -2008,7 +2017,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .btn-next:hover {
     transform: translateY(-3px);
-    border-color: var(--green-mid);
+    border-color: var(--theme);
     box-shadow: var(--hover-shadow-sm);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2020,9 +2029,9 @@ button:focus:not(:focus-visible) { outline: none; }
     color: #fff;
 }
 .btn-next--primary:hover {
-    background: var(--green-mid);
-    border-color: var(--green-mid);
-    color: #fff;
+    background: var(--theme);
+    border-color: var(--theme);
+    color: var(--theme-on);
 }
 /* Dark CTA — 다크 패널 안에서 버튼 재정의 (전역 btn-next 불변) */
 .next-step-cta .btn-next {
@@ -2097,7 +2106,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 .newcomer-cta-link:hover {
-    border-color: var(--green-mid);
+    border-color: var(--theme);
     color: var(--heading);
     background: var(--green-light);
 }
@@ -2135,7 +2144,7 @@ button:focus:not(:focus-visible) { outline: none; }
     content: "·";
     position: absolute;
     left: 0.25rem;
-    color: var(--green-mid);
+    color: var(--theme);
     font-weight: 700;
     font-size: 1.2rem;
     line-height: 1.6;
@@ -2200,7 +2209,7 @@ button:focus:not(:focus-visible) { outline: none; }
     content: "–";
     position: absolute;
     left: 0;
-    color: var(--green-mid);
+    color: var(--theme);
 }
 
 /* Communion */
@@ -2245,7 +2254,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease;
 }
 .resource-card:hover {
-    border-color: var(--green-mid);
+    border-color: var(--theme);
     box-shadow: var(--hover-shadow-sm);
     transform: translateY(-5px);
 }
@@ -2327,7 +2336,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .space-en {
     font-size: 0.72rem;
     font-weight: 600;
-    color: var(--green-mid);
+    color: var(--theme);
     letter-spacing: 0.02em;
     margin-left: 0.3rem;
 }
@@ -2699,7 +2708,7 @@ footer {
     align-items: center;
     gap: 0.3rem;
     margin-top: 1.25rem;
-    color: var(--green-mid);
+    color: var(--theme);
     font-size: 0.85rem;
     font-weight: 700;
     transition: color 0.2s, gap 0.25s cubic-bezier(0.2, 0.7, 0.3, 1);
@@ -2730,14 +2739,14 @@ footer {
     background: var(--green-light);
     border-radius: var(--radius-md);
     padding: 2rem;
-    border-left: 4px solid var(--green-mid);
+    border-left: 4px solid var(--theme);
 }
 .emmaus-scripture-ref {
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--green-mid);
+    color: var(--theme);
     margin-bottom: 0.75rem;
 }
 .emmaus-scripture {
@@ -2771,7 +2780,7 @@ footer {
     border: 1px solid var(--border);
 }
 .emmaus-stage--featured {
-    border-color: var(--green-mid);
+    border-color: var(--theme);
     background: var(--white);
     box-shadow: 0 4px 20px rgba(46,125,50,0.08);
 }
@@ -2782,7 +2791,7 @@ footer {
     line-height: 1;
     margin-bottom: 0.5rem;
 }
-.emmaus-stage--featured .emmaus-stage-num { color: var(--green-mid); }
+.emmaus-stage--featured .emmaus-stage-num { color: var(--theme); }
 .emmaus-stage-en {
     font-size: 0.7rem;
     font-weight: 700;
@@ -2803,8 +2812,8 @@ footer {
 .emmaus-badge {
     font-size: 0.65rem;
     font-weight: 700;
-    background: var(--green-mid);
-    color: #fff;
+    background: var(--theme);
+    color: var(--theme-on);
     padding: 0.15rem 0.55rem;
     border-radius: 50px;
     letter-spacing: 0.03em;
@@ -2818,7 +2827,7 @@ footer {
 .emmaus-stage-note {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--green-mid);
+    color: var(--theme);
     padding-top: 0.75rem;
     border-top: 1px solid var(--border);
 }
@@ -2843,7 +2852,7 @@ footer {
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--green-mid);
+    color: var(--theme);
     margin-bottom: 0.4rem;
 }
 .nurture-part-title {
@@ -2876,7 +2885,7 @@ footer {
 .emmaus-join-icon { font-size: 2rem; margin-bottom: 1rem; }
 .emmaus-contact-link {
     display: block;
-    color: var(--green-mid);
+    color: var(--theme);
     font-size: 0.88rem;
     font-weight: 600;
     margin-top: 0.35rem;
@@ -2920,14 +2929,14 @@ footer {
     display: inline-block;
     margin-top: 1.75rem;
     padding: 0.7rem 1.75rem;
-    border: 1.5px solid var(--green-mid);
+    border: 1.5px solid var(--theme);
     border-radius: 50px;
-    color: var(--green-mid);
+    color: var(--theme);
     font-size: 0.88rem;
     font-weight: 600;
     transition: background 0.15s, color 0.15s;
 }
-.placeholder-contact:hover { background: var(--green-mid); color: #fff; }
+.placeholder-contact:hover { background: var(--theme); color: #fff; }
 
 /* ── 교회 이야기 (clergy.html#identity, greenchurch.html) ─── */
 .draft-banner {
@@ -2976,7 +2985,7 @@ footer {
     align-items: flex-start;
     background: var(--white);
     border: 1px solid var(--border);
-    border-left: 4px solid var(--green-mid);
+    border-left: 4px solid var(--theme);
     border-radius: var(--radius-md);
     padding: 1.6rem 1.8rem;
     will-change: transform, opacity;
@@ -2991,7 +3000,7 @@ footer {
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.08em;
-    color: var(--green-mid);
+    color: var(--theme);
     margin-bottom: 0.3rem;
 }
 .story-value-title {
@@ -3011,7 +3020,7 @@ footer {
     letter-spacing: -0.005em;
 }
 .story-value-text + .story-value-text { margin-top: 0.65rem; }
-.story-value-text a { color: var(--green-mid); font-weight: 600; }
+.story-value-text a { color: var(--theme); font-weight: 600; }
 .story-value-text a:hover { text-decoration: underline; text-underline-offset: 2px; }
 
 @media (max-width: 768px) {
@@ -3060,7 +3069,7 @@ footer {
     width: 44px;
     font-size: 0.7rem;
     font-weight: 700;
-    color: var(--green-mid);
+    color: var(--theme);
     letter-spacing: 0.02em;
     padding-top: 0.05rem;
 }
@@ -3125,16 +3134,16 @@ footer {
     padding: 0.15rem 0.5rem;
     font-size: 0.68rem;
     font-weight: 600;
-    color: var(--green-mid);
+    color: var(--theme);
     background: none;
-    border: 1px solid var(--green-mid);
+    border: 1px solid var(--theme);
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
     letter-spacing: 0.02em;
     line-height: 1.6;
 }
-.map-copy-btn:hover { background: var(--green-mid); color: #fff; }
+.map-copy-btn:hover { background: var(--theme); color: #fff; }
 
 /* Naver CTA */
 .map-btn--naver {
@@ -3197,7 +3206,7 @@ footer {
 .visit-detail-wrap { margin-top: 1.25rem; }
 
 .detail-link {
-    color: var(--green-mid);
+    color: var(--theme);
     font-weight: 700;
     font-size: 0.88rem;
 }
@@ -3228,7 +3237,7 @@ footer {
     font-weight: 700;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--green-mid);
+    color: var(--theme);
     margin-bottom: 1rem;
     padding-bottom: 0.6rem;
     border-bottom: 1px solid var(--border);
@@ -3252,7 +3261,7 @@ footer {
     transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
 }
 .links-card:hover {
-    border-color: var(--green-mid);
+    border-color: var(--theme);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
@@ -3274,7 +3283,7 @@ footer {
     color: var(--text-muted);
     transition: color 0.15s;
 }
-.links-card:hover .links-card-arrow { color: var(--green-mid); }
+.links-card:hover .links-card-arrow { color: var(--theme); }
 
 /* ── Skeleton Loading ─────────────────────────────────── */
 @keyframes skeleton-pulse {
@@ -3361,7 +3370,7 @@ footer {
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.06em;
-    color: var(--green-mid);
+    color: var(--theme);
     text-transform: uppercase;
 }
 .video-title {
@@ -3440,7 +3449,7 @@ footer {
     }
     /* 페이지 히어로 — 라이트 전용 하드코딩 그라데이션을 다크 톤으로 대체 */
     .page-hero {
-        background: linear-gradient(165deg, #1d3526 0%, var(--green-light) 42%, var(--cream) 100%);
+        background: linear-gradient(165deg, color-mix(in srgb, var(--theme) 22%, #0a1f12) 0%, var(--theme-light) 44%, var(--cream) 100%);
     }
     /* 히어로 CTA 버튼 — 배경이 항상 흰색(#fff)이므로 텍스트·호버를 라이트 모드 값으로 고정 */
     .btn-hero-primary {
@@ -3494,7 +3503,7 @@ footer {
     cursor: pointer;
 }
 #back-to-top:hover, #back-to-top:focus-visible {
-    background: var(--green-mid);
+    background: var(--theme);
     box-shadow: 0 6px 24px rgba(10,31,18,0.30);
     outline: none;
 }
@@ -3555,7 +3564,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+    background: linear-gradient(135deg, var(--green-deep), var(--theme));
     font-size: 2.5rem;
 }
 .bishop-card-body { min-width: 0; }
@@ -3568,7 +3577,7 @@ footer {
 }
 .bishop-title {
     font-size: 0.85rem;
-    color: var(--green-mid);
+    color: var(--theme);
     font-weight: 600;
     margin-bottom: 0.1rem;
 }
@@ -3660,14 +3669,14 @@ footer {
     white-space: nowrap;
 }
 .gc-nav-link.is-active {
-    color: var(--green-mid);
-    border-bottom-color: var(--green-mid);
+    color: var(--theme);
+    border-bottom-color: var(--theme);
 }
 /* 터치 기기에서 sticky-hover 오작동 방지 — 마우스 환경에서만 hover 적용 */
 @media (hover: hover) {
     .gc-nav-link:hover {
-        color: var(--green-mid);
-        border-bottom-color: var(--green-mid);
+        color: var(--theme);
+        border-bottom-color: var(--theme);
     }
 }
 @media (max-width: 640px) {
@@ -3736,7 +3745,7 @@ footer {
     border-radius: 50px;
     transition: border-color 0.18s;
 }
-.menu-search-box:focus-within { border-color: var(--green-mid); }
+.menu-search-box:focus-within { border-color: var(--theme); }
 .menu-search-icon { width: 18px; height: 18px; color: var(--text-muted); flex-shrink: 0; }
 .menu-search-input {
     flex: 1;
@@ -3787,10 +3796,10 @@ footer {
     color: var(--green-deep);
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
-    border-bottom: 2px solid var(--green-mid);
+    border-bottom: 2px solid var(--theme);
     transition: color 0.15s;
 }
-.menu-sitemap-title:hover { color: var(--green-mid); }
+.menu-sitemap-title:hover { color: var(--theme); }
 .menu-sitemap-list { list-style: none; }
 .menu-sitemap-list li a {
     display: block;
@@ -3801,7 +3810,7 @@ footer {
     transition: color 0.15s, background 0.15s, padding-left 0.15s;
 }
 .menu-sitemap-list li a:hover {
-    color: var(--green-mid);
+    color: var(--theme);
     background: var(--green-light);
     padding-left: 0.9rem;
 }
