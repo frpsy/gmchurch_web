@@ -204,11 +204,13 @@ git checkout -b claude/작업명 origin/main
 git add 파일명...   # 절대 git add -A 사용 금지 (환경변수 파일 등 포함 위험)
 git commit -m "타입: 설명"
 
-# 푸시 후 반드시 Draft PR 생성
+# 푸시 후 PR 생성 → 즉시 머지
 git push -u origin claude/작업명
 ```
 
 커밋 타입: `feat` / `fix` / `refactor` / `chore` / `docs`
+
+> **PR 정책**: PR 생성 후 별도 확인 없이 squash merge로 즉시 머지한다.
 
 ---
 
