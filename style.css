@@ -2324,6 +2324,17 @@ button:focus:not(:focus-visible) { outline: none; }
     border-bottom: 1px solid var(--border);
 }
 
+/* Worship page components */
+.worship-services-grid { margin-bottom: 2rem; }
+.worship-time          { color: var(--green-mid); font-weight: 700; }
+.worship-card-desc     { margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.9; }
+.worship-card-quote    { margin-top: 1.25rem; font-size: 0.9rem; }
+.worship-card-cite     { font-size: 0.8rem; font-style: normal; color: var(--text-muted); }
+.worship-card-detail   { margin-top: 1rem; font-size: 0.87rem; color: var(--text-muted); line-height: 1.9; }
+.liturgy-body--lead    { margin-bottom: 1.5rem; }
+.resource-en           { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+.resource-grid--single { --resource-cols: 1; grid-template-columns: 1fr; }
+
 /* Worship Resources */
 .resource-grid {
     display: grid;
