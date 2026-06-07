@@ -433,8 +433,6 @@ const WorshipRenderer = {
         const el = document.getElementById('worship-full');
         if (!el) return;
         const { main, guide, liturgicalSeason: s, resources, prayer } = CHURCH_DATA.worship;
-        document.documentElement.style.setProperty('--season', s.color);
-        document.documentElement.style.setProperty('--season-light', s.colorLight);
 
         el.innerHTML = `
             <div class="grid" style="margin-bottom:2rem;">
@@ -607,8 +605,6 @@ const NewcomerRenderer = {
         const el = document.getElementById('newcomer-full');
         if (!el) return;
         const { liturgicalSeason: s, spaceGuide } = CHURCH_DATA.worship;
-        document.documentElement.style.setProperty('--season', s.color);
-        document.documentElement.style.setProperty('--season-light', s.colorLight);
         const { info, clergy } = CHURCH_DATA;
         const primary = clergy[0] || {};
 
@@ -1450,10 +1446,6 @@ const SundaysRenderer = {
         if (!d) return;
 
         const cs = CHURCH_DATA.worship && CHURCH_DATA.worship.liturgicalSeason;
-        if (cs) {
-            document.documentElement.style.setProperty('--season', cs.color);
-            document.documentElement.style.setProperty('--season-light', cs.colorLight);
-        }
 
         const now  = new Date();
         const year = now.getFullYear();
@@ -1683,6 +1675,17 @@ const SundaysRenderer = {
 /* ── App bootstrap ───────────────────────────────────────── */
 const App = {
     init() {
+        /* 전례 테마 색 전역 주입 — 모든 페이지에서 CSS var(--theme) 연동 */
+        const cs = CHURCH_DATA.worship && CHURCH_DATA.worship.liturgicalSeason;
+        if (cs) {
+            const r = document.documentElement.style;
+            r.setProperty('--season',       cs.color);
+            r.setProperty('--season-light', cs.colorLight);
+            r.setProperty('--theme',        cs.color);
+            r.setProperty('--theme-light',  cs.colorLight);
+            r.setProperty('--theme-on',     cs.onColor || '#fff');
+        }
+
         NavRenderer.render();
         FooterRenderer.render();
         IndexRenderer.render();
