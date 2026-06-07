@@ -37,7 +37,7 @@
 | `giving.html` | 헌금 | GivingRenderer |
 | `media.html` | 교회 영상·관련 기관 | MediaRenderer, LinksRenderer |
 | `links.html` | 관련 기관 (standalone) | LinksRenderer |
-| `sundays.html` | 절기와 특별 주일 (예배와 기도 메뉴) | SundaysRenderer |
+| `sundays.html` | 교회력 허브 — 이달의 교회력·전례독서·절기·특별 주일 (예배와 기도 메뉴) | SundaysRenderer |
 | `visit.html` | 오시는 길 | VisitRenderer |
 | `hopecenter.html` | 광명 희망터 상세 | — |
 | `emmaus.html` | 엠마우스 코스 상세 | — |
@@ -56,7 +56,7 @@
   성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity)
 
 예배와 기도 (worship.html)
-  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 전례독서 / 절기와 특별 주일(sundays.html) / 성무일도 / 세계성공회 중보기도 / 예배 자료
+  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 전례독서(sundays.html#lectionary) / 절기와 특별 주일(sundays.html) / 성무일도 / 세계성공회 중보기도 / 예배 자료
 
 처음 오신 분 (newcomer.html)
   인사말 / 참여 안내 / 성공회 전례란? / 전례 공간 안내 / 영성체 안내 / 자주 묻는 질문(faq.html, 가안) / 문의하기

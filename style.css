@@ -794,6 +794,96 @@ button:focus:not(:focus-visible) { outline: none; }
     }
 }
 
+/* ── 전례력 색 리본 (절기 페이지 전용 강조) ───────────────
+   8개 절기 색을 교회력 순서대로 띠로 펼치고, 현재 절기 칸만
+   솟아오르며 광택이 흐른다. 색은 데이터(--seg)로 주입되어 절기마다 바뀐다. */
+.season-ribbon-wrap { text-align: center; }
+.season-ribbon {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 30px;
+    max-width: 620px;
+    margin: 0 auto;
+}
+.season-ribbon-seg {
+    position: relative;
+    flex: 1 1 0;
+    height: 16px;
+    border-radius: 3px;
+    background: linear-gradient(180deg,
+        color-mix(in srgb, var(--seg) 76%, #fff) 0%,
+        var(--seg) 55%,
+        color-mix(in srgb, var(--seg) 82%, #000) 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: height 0.35s cubic-bezier(.4, 0, .2, 1), flex-grow 0.35s;
+}
+.season-ribbon-seg:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+.season-ribbon-seg:last-child  { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+.season-ribbon-seg:hover { height: 24px; }
+.season-ribbon-seg.is-current {
+    flex-grow: 1.8;
+    height: 30px;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                0 5px 14px color-mix(in srgb, var(--seg) 55%, transparent);
+    z-index: 1;
+}
+/* 현재 절기를 가리키는 작은 ▼ 표식 */
+.season-ribbon-seg.is-current::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--seg);
+}
+/* 은은한 광택 스윕 */
+.season-ribbon-seg.is-current::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.5) 50%, transparent 70%);
+    background-size: 220% 100%;
+    animation: season-ribbon-sheen 3.6s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes season-ribbon-sheen {
+    0%        { background-position: 130% 0; }
+    60%, 100% { background-position: -30% 0; }
+}
+.season-ribbon-mark {
+    position: relative;
+    z-index: 2;
+    font-size: 0.85rem;
+    line-height: 1;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+}
+.season-ribbon-cap {
+    margin: 0.7rem 0 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+.season-ribbon-cap strong { color: var(--heading); font-weight: 700; }
+@media (prefers-reduced-motion: reduce) {
+    .season-ribbon-seg.is-current::after { animation: none; }
+    .season-ribbon-seg { transition: none; }
+}
+@media (max-width: 480px) {
+    .season-ribbon { height: 26px; gap: 2px; }
+    .season-ribbon-seg { height: 13px; }
+    .season-ribbon-seg.is-current { height: 26px; }
+    .season-ribbon-mark { font-size: 0.72rem; }
+}
+
 /* ── 월간 교회력 달력 위젯 ─────────────────────────────── */
 .lit-cal {
     border: 1px solid var(--border);
@@ -3447,9 +3537,11 @@ footer {
         --shadow-md:    0 3px 14px rgba(0, 0, 0, 0.50);
         --shadow-lg:    0 12px 40px rgba(0, 0, 0, 0.60);
     }
-    /* 페이지 히어로 — 라이트 전용 하드코딩 그라데이션을 다크 톤으로 대체 */
+    /* 페이지 히어로 — 라이트 전용 하드코딩 그라데이션을 다크 톤으로 대체.
+       (--theme-light는 항상 밝은 토큰이라 다크에서 밝은 띠가 생기므로, 어두운
+        서피스 틴트로 재계산한다.) */
     .page-hero {
-        background: linear-gradient(165deg, color-mix(in srgb, var(--theme) 22%, #0a1f12) 0%, var(--theme-light) 44%, var(--cream) 100%);
+        background: linear-gradient(165deg, color-mix(in srgb, var(--theme) 24%, #0a1f12) 0%, color-mix(in srgb, var(--theme) 16%, var(--white)) 48%, var(--cream) 100%);
     }
     /* 히어로 CTA 버튼 — 배경이 항상 흰색(#fff)이므로 텍스트·호버를 라이트 모드 값으로 고정 */
     .btn-hero-primary {
