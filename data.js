@@ -654,7 +654,7 @@ const CHURCH_DATA = {
                 items: [
                     {
                         q: "성공회는 이단인가요?",
-                        a: "아닙니다. 성공회는 사도신경과 니케아 신경을 고백하는 정통 그리스도교 교회입니다. <strong>성서</strong>, <strong>신경</strong>, <strong>세례·성찬의 성사</strong>, <strong>역사적 주교제</strong>를 신앙의 기준으로 삼는 ‘시카고-램베스 사대강령’(1888) 위에 서 있으며, 전 세계 165개국 이상·약 8,500만 명이 함께하는 세계성공회 공동체(Anglican Communion)의 일원입니다.",
+                        a: "16세기에 종교개혁으로 로마가톨릭을 믿던 서유럽은 분열됩니다. 독일과 북유럽은 종교개혁가 마르틴 루터를 따르는 루터교가 국가교회로 설립되었고, 스위스와 프랑스 일부, 스코틀랜드에는 쟝 깔뱅을 따르는 장로교가 생겼습니다. 잉글랜드는 국왕 헨리 8세가 로마 교황을 거부하고 스스로 국교회의 수장이 되면서 성공회가 생겨났습니다. 지금도 국왕이 교회의 수장이지만, 상징에 불과합니다. 현재 세계 185개국에 8천만 명의 신자들이 캔터베리 대주교와 상징적 관계를 맺고 자치하고 있습니다.",
                         refs: [
                             { label: "시카고-램베스 사대강령 (세계성공회)", url: "https://www.anglicancommunion.org/the-chicago-lambeth-quadrilateral/" },
                             { label: "Anglican Communion (Wikipedia)", url: "https://en.wikipedia.org/wiki/Anglican_Communion" }
