@@ -47,6 +47,9 @@
         <!-- ── 섹션 내비게이션 (sticky) ──────────────────────── -->
         <nav class="gc-page-nav" aria-label="절기와 특별 주일 섹션 이동">
             <div class="container">
+                <a href="#monthly" class="gc-nav-link" data-sundays-section="monthly">
+                    <span aria-hidden="true">🗓</span> 이달의 교회력
+                </a>
                 <a href="#seasons" class="gc-nav-link" data-sundays-section="seasons">
                     <span aria-hidden="true">📅</span> 교회력 절기
                 </a>
@@ -56,15 +59,22 @@
             </div>
         </nav>
 
-        <!-- ── 섹션 1: 교회력 절기 ───────────────────────────── -->
-        <section class="section" id="seasons">
+        <!-- ── 섹션 1: 이달의 교회력 ─────────────────────────── -->
+        <section class="section" id="monthly">
+            <div class="container">
+                <div id="sundays-monthly"></div>
+            </div>
+        </section>
+
+        <!-- ── 섹션 2: 교회력 절기 ───────────────────────────── -->
+        <section class="section" id="seasons" style="background:var(--green-light);">
             <div class="container">
                 <div id="sundays-seasons"></div>
             </div>
         </section>
 
-        <!-- ── 섹션 2: 특별 주일 ─────────────────────────────── -->
-        <section class="section" id="special" style="background:var(--green-light);">
+        <!-- ── 섹션 3: 특별 주일 ─────────────────────────────── -->
+        <section class="section" id="special">
             <div class="container">
                 <div id="sundays-special"></div>
             </div>
@@ -95,7 +105,7 @@
     (function () {
         var links = document.querySelectorAll('.gc-nav-link[data-sundays-section]');
         if (!links.length) return;
-        var ids = Array.from(links).map(function (l) { return l.dataset.sundaysSection; });
+        var ids = Array.from(links).map(function (l) { return l.dataset.sundaysSection; }); /* monthly, seasons, special */
         var els = ids.map(function (id) { return document.getElementById(id); });
         var pads = els.map(function (el) {
             return el ? parseFloat(window.getComputedStyle(el).paddingTop) || 0 : 0;

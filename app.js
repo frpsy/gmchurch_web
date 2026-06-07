@@ -1441,10 +1441,11 @@ const PortraitLightbox = {
 /* ── SundaysRenderer ─────────────────────────────────────── */
 const SundaysRenderer = {
     render() {
-        const currentEl = document.getElementById('sundays-current');
-        const seasonsEl = document.getElementById('sundays-seasons');
-        const specialEl = document.getElementById('sundays-special');
-        if (!currentEl && !seasonsEl && !specialEl) return;
+        const currentEl  = document.getElementById('sundays-current');
+        const monthlyEl  = document.getElementById('sundays-monthly');
+        const seasonsEl  = document.getElementById('sundays-seasons');
+        const specialEl  = document.getElementById('sundays-special');
+        if (!currentEl && !monthlyEl && !seasonsEl && !specialEl) return;
         const d = CHURCH_DATA.sundays;
         if (!d) return;
 
@@ -1454,25 +1455,30 @@ const SundaysRenderer = {
             document.documentElement.style.setProperty('--season-light', cs.colorLight);
         }
 
-        const year = new Date().getFullYear();
-        const dates = this._computeDates(year);
+        const now  = new Date();
+        const year = now.getFullYear();
+        const mon  = now.getMonth();
+        const yearDates   = this._computeDates(year);
+        const specialMap  = this._specialDates(year);
 
-        if (currentEl) currentEl.innerHTML = this._currentSeason(cs, dates, year);
-        if (seasonsEl) seasonsEl.innerHTML = this._seasons(d.seasons, cs, dates, year);
-        if (specialEl) specialEl.innerHTML = this._special(d.specialSundays);
+        if (currentEl) currentEl.innerHTML = this._currentSeason(cs, yearDates, year);
+        if (monthlyEl) monthlyEl.innerHTML  = this._monthly(year, mon, specialMap, cs);
+        if (seasonsEl) seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, year);
+        if (specialEl) specialEl.innerHTML  = this._special(d.specialSundays);
     },
 
+    /* 해당 연도의 이동 절기 날짜 계산 */
     _computeDates(year) {
         const easter = LiturgicalCalendar.easterDate(year);
         const add = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); return r; };
         const fmt = d => `${d.getMonth() + 1}월 ${d.getDate()}일`;
-        const ashWed   = add(easter, -46);
-        const palmSun  = add(easter, -7);
+        const ashWed    = add(easter, -46);
+        const palmSun   = add(easter, -7);
         const pentecost = add(easter, 49);
-        const advent   = LiturgicalCalendar.adventStart(year);
+        const advent    = LiturgicalCalendar.adventStart(year);
         return {
             advent:    `${fmt(advent)} ~ 12월 24일`,
-            christmas: `12월 25일 ~ 이듬해 1월 5일`,
+            christmas: '12월 25일 ~ 이듬해 1월 5일',
             epiphany:  `1월 6일 ~ ${fmt(add(ashWed, -1))}`,
             lent:      `${fmt(ashWed)} ~ ${fmt(add(palmSun, -1))}`,
             holyweek:  `${fmt(palmSun)} ~ ${fmt(add(easter, -1))}`,
@@ -1482,6 +1488,43 @@ const SundaysRenderer = {
         };
     },
 
+    /* 연도별 특별 주일·축일 날짜 → {YYYY-MM-DD: label} */
+    _specialDates(year) {
+        const easter    = LiturgicalCalendar.easterDate(year);
+        const add       = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); return r; };
+        const pentecost = add(easter, 49);
+        const advent    = LiturgicalCalendar.adventStart(year);
+        const key       = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        /* n번째 weekday: month=0-based, wd=0(일)~6(토), n=1~ */
+        const nthWd     = (y, m, wd, n) => {
+            const first = new Date(y, m, 1);
+            const off   = (7 + wd - first.getDay()) % 7;
+            return new Date(y, m, 1 + off + (n - 1) * 7);
+        };
+        /* 가장 가까운 일요일 */
+        const nearSun   = d => { const wd = d.getDay(); return wd <= 3 ? add(d, -wd) : add(d, 7 - wd); };
+
+        const map = {};
+        const set = (d, label) => { map[key(d)] = label; };
+
+        set(new Date(year, 0, 6),   '주현절');                             // 1/6
+        set(nthWd(year, 2, 5, 1),   '세계기도일');                         // 3월 첫째 금요일
+        set(add(easter, -7),         '종려주일');                           // 성주간 시작
+        set(easter,                  '부활주일');
+        set(add(easter, 42),         '승천주일');                           // easter+39=목요일, 주일 관행=+42
+        set(add(pentecost, 7),       '성삼위일체 주일');                    // 성령강림 다음 주일
+        set(nthWd(year, 5, 0, 1),   '환경주일');                           // 6월 첫째 주일
+        /* 창조절: 9/1~10/4의 모든 주일 */
+        let d = nthWd(year, 8, 0, 1);
+        while (d <= new Date(year, 9, 4)) { set(d, '창조절'); d = add(d, 7); }
+        set(nearSun(new Date(year, 10, 1)), '모든 성인 주일');              // 11/1 인근 주일
+        set(add(advent, -7),                '왕이신 그리스도 주일');        // 대림절 직전 주일
+        set(nearSun(new Date(year, 11, 1)), '에이즈 추모 주일');            // 12/1 인근 주일
+
+        return map;
+    },
+
+    /* 현재 절기 강조 카드 */
     _currentSeason(cs, dates, year) {
         if (!cs) return '';
         const range = dates[cs.key] || '';
@@ -1496,6 +1539,64 @@ const SundaysRenderer = {
             </div>`;
     },
 
+    /* 월간 달력 */
+    _monthly(year, month, specialMap, cs) {
+        const today      = new Date();
+        const todayDate  = (today.getFullYear() === year && today.getMonth() === month) ? today.getDate() : -1;
+        const monthLabel = new Date(year, month).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' });
+        const daysInMon  = new Date(year, month + 1, 0).getDate();
+        const firstWd    = new Date(year, month, 1).getDay(); // 0=일
+        const key        = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+        const seasonLabel = cs ? `${cs.symbol} ${cs.name}` : '';
+
+        /* 빈 셀 */
+        const cells = [];
+        for (let i = 0; i < firstWd; i++) {
+            cells.push('<div class="lit-cal-cell lit-cal-cell--empty"></div>');
+        }
+
+        for (let n = 1; n <= daysInMon; n++) {
+            const date  = new Date(year, month, n);
+            const isSun = date.getDay() === 0;
+            const isToday = n === todayDate;
+            const special = specialMap[key(date)];
+            const season  = LiturgicalCalendar.compute(date);
+
+            /* 반투명 절기색 배경 (#rrggbbAA — CSS Color Level 4) */
+            const alpha = isSun ? '28' : '0C';
+            const bg    = `background:${season.color}${alpha};`;
+            const numColor = (isSun && !isToday) ? `style="color:${season.color}; font-weight:700;"` : '';
+
+            let cls = 'lit-cal-cell';
+            if (isToday) cls += ' lit-cal-cell--today';
+
+            cells.push(`
+                <div class="${cls}" style="${bg}">
+                    <span class="lit-cal-num" ${numColor}>${n}</span>
+                    ${special ? `<span class="lit-cal-label">${special}</span>` : ''}
+                </div>`);
+        }
+
+        return `
+            <div class="section-header">
+                <p class="section-eyebrow">Monthly Calendar</p>
+                <h2 class="section-title">이달의 교회력</h2>
+                <p class="section-sub">이달의 주일과 특별 절기를 확인하세요. 절기 전환이 있는 달은 날짜별로 배경 색이 달라집니다.</p>
+            </div>
+            <div class="lit-cal">
+                <div class="lit-cal-hd">
+                    <span class="lit-cal-hd-month">${monthLabel}</span>
+                    <span class="lit-cal-hd-season">${seasonLabel}</span>
+                </div>
+                <div class="lit-cal-wds">
+                    <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+                </div>
+                <div class="lit-cal-grid">${cells.join('')}</div>
+            </div>`;
+    },
+
+    /* 교회력 절기 카드 그리드 */
     _seasons(seasons, cs, dates, year) {
         const cards = seasons.map(s => {
             const isCurrent = cs && cs.key === s.key;
@@ -1519,6 +1620,7 @@ const SundaysRenderer = {
             <div class="resource-grid">${cards}</div>`;
     },
 
+    /* 특별 주일 카드 그리드 */
     _special(sundays) {
         const cards = sundays.map(s => `
             <div class="info-card">
