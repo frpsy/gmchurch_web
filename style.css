@@ -1360,6 +1360,8 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     letter-spacing: -0.025em;
     margin-bottom: var(--space-5);
     line-height: var(--lh-heading);
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 .about-brief-desc {
     font-size: var(--fs-body);
