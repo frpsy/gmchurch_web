@@ -1413,10 +1413,9 @@ const SundaysRenderer = {
         const currentEl    = document.getElementById('sundays-current');
         const lectionaryEl = document.getElementById('sundays-lectionary');
         const seasonsEl    = document.getElementById('sundays-seasons');
-        /* worship.html 의 교회력·특별 주일 */
-        const worshipCalEl = document.getElementById('worship-calendar');
-        const worshipSpEl  = document.getElementById('worship-special');
-        if (!currentEl && !lectionaryEl && !seasonsEl && !worshipCalEl && !worshipSpEl) return;
+        const monthlyEl    = document.getElementById('sundays-monthly');
+        const specialEl    = document.getElementById('sundays-special');
+        if (!currentEl && !lectionaryEl && !seasonsEl && !monthlyEl && !specialEl) return;
         const d = CHURCH_DATA.sundays;
         if (!d) return;
 
@@ -1434,13 +1433,13 @@ const SundaysRenderer = {
         if (currentEl)    currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
         if (lectionaryEl) lectionaryEl.innerHTML = this._lectionary();
         if (seasonsEl)    seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
-        if (worshipCalEl) {
+        if (monthlyEl) {
             this._calYear  = year;
             this._calMonth = mon;
-            worshipCalEl.innerHTML = this._monthlyFull(year, mon, specialMap);
-            this._bindCalNav(worshipCalEl);
+            monthlyEl.innerHTML = this._monthlyFull(year, mon, specialMap);
+            this._bindCalNav(monthlyEl);
         }
-        if (worshipSpEl)  worshipSpEl.innerHTML = this._special(d.specialSundays);
+        if (specialEl)  specialEl.innerHTML = this._special(d.specialSundays);
     },
 
     /* 전례독서 — 이번 주 전례독서 참조를 카드로 표시 */
