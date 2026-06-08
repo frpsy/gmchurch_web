@@ -588,6 +588,14 @@ const CHURCH_DATA = {
             url: "https://mch.nocutnews.co.kr/news/6000856"
         },
         {
+            year: "2023",
+            category: "녹색교회",
+            media: "뉴시스",
+            title: "광명교회, 기독교환경운동연대 2023 녹색교회 선정",
+            date: "2023.05",
+            url: "https://mobile.newsis.com/view_amp.html?ar_id=NISX20230515_0002303502"
+        },
+        {
             year: "2025",
             category: "여성 성직",
             media: "성공회신문",
