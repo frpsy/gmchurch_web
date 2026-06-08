@@ -1635,15 +1635,26 @@ const SundaysRenderer = {
                 <div class="lit-cal-grid">${cells.join('')}</div>
             </div>
             <ul class="lit-cal-legend" aria-label="달력 보는 법">
-                <li><span class="lit-cal-legend-dot lit-cal-legend-dot--today" aria-hidden="true"></span>오늘</li>
+                <li data-cal-today role="button" tabindex="0" title="이번 달로 이동"><span class="lit-cal-legend-dot lit-cal-legend-dot--today" aria-hidden="true"></span>오늘</li>
                 <li><span class="lit-cal-legend-dot lit-cal-legend-dot--sun" aria-hidden="true"></span>주일 (전례색 강조)</li>
                 <li><span class="lit-cal-legend-tag" aria-hidden="true">이름</span>특별 주일·절기</li>
             </ul>`;
     },
 
-    /* 전/다음 달 이동 — 이벤트 위임으로 re-render 없이 그리드만 교체 */
+    /* 전/다음 달 이동 + 오늘 복귀 — 이벤트 위임으로 re-render 없이 그리드만 교체 */
     _bindCalNav(container) {
+        const goToMonth = (y, m) => {
+            this._calYear  = y;
+            this._calMonth = m;
+            const wrap = container.querySelector('.lit-cal-wrap');
+            if (wrap) wrap.innerHTML = this._monthlyGrid(y, m, this._specialDates(y));
+        };
         container.addEventListener('click', e => {
+            if (e.target.closest('[data-cal-today]')) {
+                const now = new Date();
+                goToMonth(now.getFullYear(), now.getMonth());
+                return;
+            }
             const btn = e.target.closest('[data-cal-dir]');
             if (!btn) return;
             const dir = parseInt(btn.dataset.calDir, 10);
@@ -1651,10 +1662,14 @@ const SundaysRenderer = {
             let y = this._calYear;
             if (m > 11) { m = 0; y++; }
             if (m < 0)  { m = 11; y--; }
-            this._calYear  = y;
-            this._calMonth = m;
-            const wrap = container.querySelector('.lit-cal-wrap');
-            if (wrap) wrap.innerHTML = this._monthlyGrid(y, m, this._specialDates(y));
+            goToMonth(y, m);
+        });
+        container.addEventListener('keydown', e => {
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('[data-cal-today]')) {
+                e.preventDefault();
+                const now = new Date();
+                goToMonth(now.getFullYear(), now.getMonth());
+            }
         });
     },
 

@@ -986,6 +986,9 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--text-muted);
 }
 .lit-cal-legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.lit-cal-legend li[data-cal-today] { cursor: pointer; border-radius: 0.25rem; }
+.lit-cal-legend li[data-cal-today]:hover,
+.lit-cal-legend li[data-cal-today]:focus-visible { color: var(--green-mid); outline: 2px solid var(--green-mid); outline-offset: 2px; }
 .lit-cal-legend-dot {
     width: 0.95rem;
     height: 0.95rem;
