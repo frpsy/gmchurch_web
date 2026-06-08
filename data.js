@@ -591,8 +591,8 @@ const CHURCH_DATA = {
             year: "2023",
             category: "녹색교회",
             media: "뉴시스",
-            title: "광명교회, 기독교환경운동연대 2023 녹색교회 선정",
-            date: "2023.05",
+            title: "NCCK, 올해 '녹색교회' 11곳 선정 — 광명교회(대한성공회) 등",
+            date: "2023.05.15",
             url: "https://mobile.newsis.com/view_amp.html?ar_id=NISX20230515_0002303502"
         },
         {
