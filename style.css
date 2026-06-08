@@ -3648,6 +3648,13 @@ footer {
     .about-brief-award:hover {
         background: var(--green-soft);
     }
+    /* 섹션 내 sticky 네비 — 라이트 흰 배경을 다크 서피스로 교체 */
+    .gc-page-nav {
+        background: rgba(17, 26, 19, 0.96);
+    }
+    /* 버스 노선 칩 — 어두운 배경에서 칩 색이 묻히지 않도록 밝게 조정 */
+    .bus-chip.bus-blue  { background: #4585c7; }
+    .bus-chip.bus-green { background: #4e9967; }
 }
 
 /* ── Back To Top 버튼 (화이트 반투명, 아이콘 녹색) ───────────────── */
