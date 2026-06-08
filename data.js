@@ -91,7 +91,7 @@ const CHURCH_DATA = {
         diocese: "대한성공회 서울교구 서부교무구",
         aboutLead: "성공회 기도서를 따라 예배하며, 생태 보전을 신앙의 과제로 삼는 광명의 녹색 교회입니다.",
         aboutDesc: "주일 애찬에는 비건 음식도 함께 마련합니다.",
-        award: { year: "2023", title: "녹색교회 선정", org: "기독교환경운동연대", href: "greenchurch.html", newsUrl: "https://www.newsis.com/view/NISX20230515_0002303502" },
+        award: { year: "2023", title: "녹색교회 선정", org: "기독교환경운동연대", href: "greenchurch.html#press", newsUrl: "https://www.newsis.com/view/NISX20230515_0002303502" },
         established: "1990년 2월 11일",
         address: "경기도 광명시 아방리 2길 10",
         addressShort: "경기도 광명시 아방리 2길 10",
