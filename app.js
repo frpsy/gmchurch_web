@@ -1570,10 +1570,10 @@ const SundaysRenderer = {
         const curKey = cs.key;
         const segs = seasons.map(s => {
             const on = s.key === curKey;
-            return `<a href="#season-${s.key}" class="season-ribbon-seg${on ? ' is-current' : ''}" style="--seg:${s.color};" title="${s.name} · 전례색 ${s.colorName}" aria-label="${s.name} 절기 상세로 이동">${on ? `<span class="season-ribbon-mark" aria-hidden="true">${s.symbol}</span>` : ''}</a>`;
+            return `<span class="season-ribbon-seg${on ? ' is-current' : ''}" style="--seg:${s.color};" title="${s.name} · 전례색 ${s.colorName}">${on ? `<span class="season-ribbon-mark" aria-hidden="true">${s.symbol}</span>` : ''}</span>`;
         }).join('');
         return `
-            <div class="season-ribbon" aria-label="전례력 절기 색 띠 — 현재 절기 ${cs.name}">${segs}</div>
+            <div class="season-ribbon" role="img" aria-label="전례력 절기 색 띠 — 현재 절기 ${cs.name}">${segs}</div>
             <p class="season-ribbon-cap">교회력의 흐름 &middot; 지금은 <strong>${cs.symbol} ${cs.name}</strong></p>`;
     },
 
@@ -1683,7 +1683,7 @@ const SundaysRenderer = {
             const isCurrent = cs && cs.key === s.key;
             const range = dates[s.key];
             return `
-                <div class="resource-card" id="season-${s.key}" style="border-top-color:${s.color};${isCurrent ? ' box-shadow:0 0 0 2px ' + s.color + ';' : ''}">
+                <div class="resource-card" style="border-top-color:${s.color};${isCurrent ? ' box-shadow:0 0 0 2px ' + s.color + ';' : ''}">
                     <span class="lit-seq" style="border-color:${s.color};" aria-hidden="true">${i + 1}</span>
                     <span class="resource-icon" aria-hidden="true">${s.symbol}</span>
                     <p class="resource-title">${s.name}<span class="resource-desc" style="font-weight:400; margin:0 0 0 0.4em;">${s.en}</span></p>
