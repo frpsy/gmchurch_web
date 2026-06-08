@@ -580,6 +580,14 @@ const CHURCH_DATA = {
 
     press: [
         {
+            year: "2018",
+            category: "목회·상담",
+            media: "국민일보",
+            title: "목회와 상담의 공통 원칙은 공감… 주님의 공감능력으로 아픈 마음 치유",
+            date: "2018.01",
+            url: "https://www.kmib.co.kr/article/view.asp?arcid=0923882885&code=23111211&sid1=min"
+        },
+        {
             year: "2023",
             category: "녹색교회",
             media: "CBS 크리스천노컷뉴스",
