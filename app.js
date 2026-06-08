@@ -1430,7 +1430,10 @@ const SundaysRenderer = {
         const yearDates  = this._computeDates(advYear);
         const specialMap = this._specialDates(year);
 
-        if (currentEl)    currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
+        if (currentEl) {
+            currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
+            this._bindRibbonPopover(currentEl.querySelector('.season-ribbon-wrap'));
+        }
         if (lectionaryEl) lectionaryEl.innerHTML = this._lectionary();
         if (seasonsEl)    seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
         if (monthlyEl) {
@@ -1570,11 +1573,49 @@ const SundaysRenderer = {
         const curKey = cs.key;
         const segs = seasons.map(s => {
             const on = s.key === curKey;
-            return `<span class="season-ribbon-seg${on ? ' is-current' : ''}" style="--seg:${s.color};" title="${s.name} · 전례색 ${s.colorName}">${on ? `<span class="season-ribbon-mark" aria-hidden="true">${s.symbol}</span>` : ''}</span>`;
+            return `<button class="season-ribbon-seg${on ? ' is-current' : ''}" style="--seg:${s.color};" data-season-key="${s.key}" aria-label="${s.name} 절기 정보" aria-expanded="false">${on ? `<span class="season-ribbon-mark" aria-hidden="true">${s.symbol}</span>` : ''}</button>`;
         }).join('');
         return `
-            <div class="season-ribbon" role="img" aria-label="전례력 절기 색 띠 — 현재 절기 ${cs.name}">${segs}</div>
-            <p class="season-ribbon-cap">교회력의 흐름 &middot; 지금은 <strong>${cs.symbol} ${cs.name}</strong></p>`;
+            <div class="season-ribbon" aria-label="전례력 절기 색 띠 — 현재 절기 ${cs.name}">${segs}</div>
+            <p class="season-ribbon-cap">교회력의 흐름 &middot; 지금은 <strong>${cs.symbol} ${cs.name}</strong></p>
+            <div class="season-pop" role="tooltip" hidden></div>`;
+    },
+
+    _bindRibbonPopover(wrap) {
+        if (!wrap) return;
+        const pop = wrap.querySelector('.season-pop');
+        if (!pop) return;
+        const seasons = (CHURCH_DATA.sundays && CHURCH_DATA.sundays.seasons) || [];
+        const seasonMap = Object.fromEntries(seasons.map(s => [s.key, s]));
+        let activeKey = null;
+
+        const close = () => {
+            pop.hidden = true;
+            activeKey = null;
+            wrap.querySelectorAll('.season-ribbon-seg').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        };
+
+        wrap.addEventListener('click', e => {
+            const btn = e.target.closest('.season-ribbon-seg');
+            if (!btn) { close(); return; }
+            const key = btn.dataset.seasonKey;
+            if (key === activeKey) { close(); return; }
+            const s = seasonMap[key];
+            if (!s) { close(); return; }
+            activeKey = key;
+            wrap.querySelectorAll('.season-ribbon-seg').forEach(b => b.setAttribute('aria-expanded', 'false'));
+            btn.setAttribute('aria-expanded', 'true');
+            pop.innerHTML = `
+                <div class="season-pop-bar" style="background:${s.color};"></div>
+                <p class="season-pop-title">${s.symbol} ${s.name}<span class="season-pop-en">${s.en}</span></p>
+                <p class="season-pop-meta">전례색 · ${s.colorName}</p>
+                <p class="season-pop-period">📅 ${s.period}</p>
+                <p class="season-pop-desc">${s.desc}</p>`;
+            pop.hidden = false;
+        });
+
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+        document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); }, { capture: true });
     },
 
     /* 월간 달력 — 정적 헤더 + 동적 그리드 래퍼 */
