@@ -1442,31 +1442,35 @@ const SundaysRenderer = {
         if (specialEl)  specialEl.innerHTML = this._special(d.specialSundays);
     },
 
-    /* 전례독서 — 이번 주 전례독서 참조를 카드로 표시 */
+    /* 전례독서 — 이번 주·다가오는 주 전례독서 참조를 카드로 표시 */
     _lectionary() {
-        const r = CHURCH_DATA.worship && CHURCH_DATA.worship.currentReadings;
-        const readingsHtml = r ? `
+        const w = CHURCH_DATA.worship;
+        const r = w && w.currentReadings;
+        const n = w && w.nextReadings;
+        const cardHtml = (data, label) => `
             <div class="lectionary-card">
                 <div class="lectionary-card-head">
-                    <p class="lectionary-card-week">${r.week}</p>
-                    <p class="lectionary-card-meta">${r.year}&nbsp;·&nbsp;${r.date}</p>
+                    <p class="lectionary-card-label">${label}</p>
+                    <p class="lectionary-card-week">${data.week}</p>
+                    <p class="lectionary-card-meta">${data.year}&nbsp;·&nbsp;${data.date}</p>
                 </div>
                 <div class="lectionary-card-body">
-                    ${r.items.map(item => `
+                    ${data.items.map(item => `
                         <div class="lectionary-row">
                             <span class="lectionary-role">${item.role}</span>
                             <span class="lectionary-ref">${item.ref}</span>
                         </div>`).join('')}
                 </div>
-                ${r.note ? `<p class="lectionary-card-note">${r.note}</p>` : ''}
-            </div>` : '';
+                ${data.note ? `<p class="lectionary-card-note">${data.note}</p>` : ''}
+            </div>`;
         return `
             <div class="section-header">
                 <p class="section-eyebrow">Lectionary</p>
                 <h2 class="section-title">전례독서</h2>
                 <p class="section-sub">교회력 절기에 따라 정해진 날짜별 성서 본문입니다. 구약·시편·서신서·복음서 네 본문을 순서대로 봉독합니다.</p>
             </div>
-            ${readingsHtml}`;
+            ${r ? cardHtml(r, '이번 주') : ''}
+            ${n ? cardHtml(n, '다가오는 주') : ''}`;
     },
 
     /* 이달의 교회력 — worship.html 용 헤더 포함 버전 */
