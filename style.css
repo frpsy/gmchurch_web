@@ -2431,6 +2431,15 @@ button:focus:not(:focus-visible) { outline: none; }
     overflow: hidden;
     max-width: 560px;
 }
+.lectionary-card + .lectionary-card { margin-top: 1rem; }
+.lectionary-card-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--green-mid);
+    margin: 0 0 0.35rem;
+    text-transform: uppercase;
+}
 .lectionary-card-head {
     background: color-mix(in srgb, var(--season, var(--green-dark)) 12%, var(--white));
     padding: 1rem 1.25rem 0.85rem;
