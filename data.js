@@ -996,12 +996,19 @@ const CHURCH_DATA = {
                 { label: "주일 감사성찬례", href: "worship.html#main" },
                 { label: "어린이 예배",    href: "worship.html#children" },
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
-                { label: "이달의 교회력",  href: "worship.html#monthly" },
-                { label: "절기와 전례독서", href: "sundays.html" },
-                { label: "특별 주일",      href: "worship.html#special" },
                 { label: "성무일도",       href: "worship.html#daily-office" },
                 { label: "세계성공회 중보기도", href: "worship.html#intercession" },
                 { label: "예배 자료",      href: "worship.html#resources" }
+            ]
+        },
+        {
+            label: "교회력",
+            href: "sundays.html",
+            items: [
+                { label: "이달의 교회력",  href: "sundays.html#monthly" },
+                { label: "전례독서",       href: "sundays.html#lectionary" },
+                { label: "절기 안내",      href: "sundays.html#seasons" },
+                { label: "특별 주일",      href: "sundays.html#special" }
             ]
         },
         {
