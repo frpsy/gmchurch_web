@@ -717,7 +717,6 @@ const CHURCH_DATA = {
     // 성공회에 대한 오해·궁금증 FAQ (faq.html, FaqRenderer)
     // 답변은 대한성공회 공식 자료·세계성공회 문헌을 근거로 광명교회가 정리. refs는 출처 링크.
     faq: {
-        badge: "가안",
         eyebrow: "Frequently Asked Questions",
         title: "자주 묻는 질문",
         lead: "성공회를 처음 접하는 분들이 흔히 갖는 오해와 궁금증을 모았습니다. 각 답변에는 확인할 수 있는 출처를 함께 달았습니다.",
@@ -1048,7 +1047,7 @@ const CHURCH_DATA = {
                 { label: "성공회 전례란?", href: "newcomer.html#liturgy" },
                 { label: "전례 공간 안내", href: "newcomer.html#worship-space" },
                 { label: "영성체 안내",    href: "newcomer.html#communion" },
-                { label: "자주 묻는 질문", href: "faq.html", badge: "가안" },
+                { label: "자주 묻는 질문", href: "faq.html" },
                 { label: "문의하기",       href: "newcomer.html#contact" }
             ]
         },

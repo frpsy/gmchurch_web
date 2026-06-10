@@ -3158,26 +3158,6 @@ footer {
 .placeholder-contact:hover { background: var(--theme); color: #fff; }
 
 /* ── 교회 이야기 (clergy.html#identity, greenchurch.html) ─── */
-.draft-banner {
-    max-width: 760px;
-    margin: 0 auto 2.5rem;
-    display: flex;
-    gap: 0.85rem;
-    align-items: flex-start;
-    background: var(--gold-bg);
-    border: 1px solid var(--gold);
-    border-left: 4px solid var(--gold);
-    border-radius: var(--radius-md);
-    padding: 1.1rem 1.4rem;
-}
-.draft-banner-icon { font-size: 1.1rem; line-height: 1.7; flex-shrink: 0; }
-.draft-banner p {
-    font-size: 0.86rem;
-    color: var(--text);
-    line-height: 1.8;
-    margin: 0;
-}
-.draft-banner strong { color: var(--gold); }
 
 .story-lead {
     max-width: 760px;

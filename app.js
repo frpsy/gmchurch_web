@@ -1274,11 +1274,7 @@ const FaqRenderer = {
         `).join('');
 
         el.innerHTML = `
-            ${faq.note ? `
-            <div class="draft-banner">
-                <span class="draft-banner-icon" aria-hidden="true">📝</span>
-                <p><strong>${faq.badge ? faq.badge + ' · ' : ''}</strong>${faq.note}</p>
-            </div>` : ''}
+            ${faq.note ? `<div class="guide-banner"><p>${faq.note}</p></div>` : ''}
             ${faq.lead ? `<p class="faq-lead">${faq.lead}</p>` : ''}
             ${catsHtml}
         `;
@@ -1297,7 +1293,6 @@ const ScrollReveal = {
             '.about-brief',
             '.guide-banner',
             '.story-lead',
-            '.draft-banner',
             '.newcomer-cta',
             '.liturgy-inner-quote',
             '.next-step-cta',
