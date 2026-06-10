@@ -31,6 +31,8 @@
     --red:          #b53737;
     /* Nav glass */
     --nav-glass:    rgba(10, 31, 18, 0.9);
+    /* 섹션 내 sticky 서브 네비 표면 — 모드별 분기 (다크에서 흰 배경 방지) */
+    --surface-nav:  rgba(255, 255, 255, 0.96);
     /* Layout */
     --nav-h:        68px;
     --section-pad:  7rem;
@@ -3641,6 +3643,7 @@ footer {
         --gold-bg:      #221d14;
         /* Nav */
         --nav-glass:    rgba(10, 31, 18, 0.95);
+        --surface-nav:  rgba(17, 26, 19, 0.96);
         /* Skeleton */
         --skeleton-base: #1c2a1f;
         --skeleton-mid:  #243528;
@@ -3677,10 +3680,6 @@ footer {
     /* 수상 배지 hover — 라이트 전용 하드코딩 배경 대신 어두운 톤으로 */
     .about-brief-award:hover {
         background: var(--green-soft);
-    }
-    /* 섹션 내 sticky 네비 — 라이트 흰 배경을 다크 서피스로 교체 */
-    .gc-page-nav {
-        background: rgba(17, 26, 19, 0.96);
     }
     /* 버스 노선 칩 — 어두운 배경에서 칩 색이 묻히지 않도록 밝게 조정 */
     .bus-chip.bus-blue  { background: #4585c7; }
@@ -3850,7 +3849,7 @@ footer {
     position: sticky;
     top: var(--nav-h);
     z-index: 900;
-    background: rgba(255,255,255,0.96);
+    background: var(--surface-nav);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
