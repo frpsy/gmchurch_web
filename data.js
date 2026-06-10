@@ -1042,11 +1042,11 @@ const CHURCH_DATA = {
         ]
     },
 
-    // 사진 게시판 (gallery.html) — 가안. 실제 교회 사진으로 교체 예정.
+    // 사진 게시판 (gallery.html) — 초안. 실제 교회 사진으로 교체 예정.
     photoGallery: {
-        intro: "광명교회 공동체의 예배, 나눔, 절기의 순간들입니다.",
-        badge: "임시",
-        note: "실제 교회 사진으로 교체할 샘플 이미지입니다.",
+        intro: "예배, 애찬, 절기 행사 등 광명교회 공동체의 순간들을 모았습니다.",
+        badge: "초안",
+        note: "샘플 이미지로 구성된 초안입니다. 실제 교회 사진으로 교체 예정입니다.",
         categories: ["전체", "예배", "공동체", "절기·행사", "교회 풍경"],
         photos: [
             {
@@ -1235,7 +1235,7 @@ const CHURCH_DATA = {
             href: "media.html",
             items: [
                 { label: "교회 영상",     href: "media.html#videos" },
-                { label: "사진 게시판",   href: "gallery.html", badge: "임시" },
+                { label: "사진 게시판",   href: "gallery.html", badge: "초안" },
                 { label: "관련 기관",     href: "media.html#links" }
             ]
         },
