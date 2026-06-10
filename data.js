@@ -1017,6 +1017,31 @@ const CHURCH_DATA = {
         ]
     },
 
+    bulletins: {
+        intro: "매주 주일 예배를 위한 주보를 PDF로 제공합니다. 최근 3개월치를 보관합니다.",
+        note: "PDF를 내려받으시면 예배 전에 미리 보실 수 있습니다.",
+        items: [
+            {
+                date: "2026-06-08",
+                label: "2026년 6월 8일",
+                season: "성령강림 후 제2주일",
+                file: ""
+            },
+            {
+                date: "2026-06-01",
+                label: "2026년 6월 1일",
+                season: "삼위일체 주일",
+                file: ""
+            },
+            {
+                date: "2026-05-25",
+                label: "2026년 5월 25일",
+                season: "성령강림주일 (펜테코스트)",
+                file: ""
+            }
+        ]
+    },
+
     navigation: [
         {
             label: "교회 소개",
@@ -1038,7 +1063,8 @@ const CHURCH_DATA = {
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
                 { label: "성무일도",       href: "worship.html#daily-office" },
                 { label: "세계성공회 중보기도", href: "worship.html#intercession" },
-                { label: "예배 자료",      href: "worship.html#resources" }
+                { label: "예배 자료",      href: "worship.html#resources" },
+                { label: "주일 주보",      href: "bulletin.html", badge: "임시" }
             ]
         },
         {
