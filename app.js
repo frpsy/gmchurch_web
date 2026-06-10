@@ -1434,11 +1434,32 @@ const SundaysRenderer = {
         if (specialEl)  specialEl.innerHTML = this._special(d.specialSundays);
     },
 
-    /* 전례독서 — 이번 주·다가오는 주 전례독서 참조를 카드로 표시 */
+    /* 전례독서 — 날짜 비교로 이번 주·다가오는 주·지난 주 라벨을 동적 계산 */
     _lectionary() {
         const w = CHURCH_DATA.worship;
         const r = w && w.currentReadings;
         const n = w && w.nextReadings;
+
+        // "YYYY년 M월 D일" → 로컬 자정 Date
+        const parseDate = s => {
+            const m = s && s.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
+            return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+        };
+        // 오늘 포함 가장 최근 일요일(로컬 자정)
+        const thisSunday = (() => {
+            const t = new Date();
+            const d = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+            d.setDate(d.getDate() - d.getDay());
+            return d;
+        })();
+        const lectionaryLabel = dateStr => {
+            const rd = parseDate(dateStr);
+            if (!rd) return '';
+            const diff = rd - thisSunday;
+            if (diff === 0) return '이번 주';
+            return diff < 0 ? '지난 주' : '다가오는 주';
+        };
+
         const cardHtml = (data, label) => `
             <div class="lectionary-card">
                 <div class="lectionary-card-head">
@@ -1461,8 +1482,8 @@ const SundaysRenderer = {
                 <h2 class="section-title">전례독서</h2>
                 <p class="section-sub">교회력 절기에 따라 정해진 날짜별 성서 본문입니다. 구약·시편·서신서·복음서 네 본문을 순서대로 봉독합니다.</p>
             </div>
-            ${r ? cardHtml(r, '이번 주') : ''}
-            ${n ? cardHtml(n, '다가오는 주') : ''}`;
+            ${r ? cardHtml(r, lectionaryLabel(r.date)) : ''}
+            ${n ? cardHtml(n, lectionaryLabel(n.date)) : ''}`;
     },
 
     /* 이달의 교회력 — worship.html 용 헤더 포함 버전 */
