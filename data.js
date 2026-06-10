@@ -753,6 +753,19 @@ const CHURCH_DATA = {
                         ]
                     },
                     {
+                        q: "톰 라이트·존 스토트 책으로 성공회를 처음 알게 됐는데, 왜 한국성공회는 느낌이 다른가요?",
+                        a: "성공회 안에는 신학 성향과 예배 스타일에 따라 크게 세 흐름이 공존합니다. <strong>저교회파(Low Church, 복음주의)</strong>는 성서의 권위와 설교를 중시하고, <strong>고교회파(High Church, 앵글로-가톨릭주의)</strong>는 초대교회 전승과 성사·전례를 강조하며, <strong>광교회파(Broad Church)</strong>는 이성·학문과 사회 참여를 중심에 둡니다.\n\n존 스토트(1921–2011)와 톰 라이트(N.T. Wright) 같은 영국 신학자들은 <strong>복음주의(저교회파) 전통</strong> 안에서 활동했습니다. 성서 중심의 설교와 개인 신앙을 강조하는 이 전통은 가톨릭적 의례 중심 예배와 분위기가 크게 다릅니다.\n\n대한성공회가 가톨릭처럼 느껴지는 이유는 <strong>1890년 첫 선교사들이 고교회파 계열</strong>이었기 때문입니다. 초대 주교 고요한(Charles Corfe)을 비롯한 선교사들은 19세기 영국에서 가톨릭의 역사적 전통과 전례를 회복하고자 일어난 <strong>'옥스퍼드 운동(Oxford Movement)'</strong>의 영향을 받았습니다. 이 뿌리로 인해 성당 건축·사제 제복·감사성찬례 형식이 가톨릭과 유사한 모습을 갖추게 되었습니다.\n\n그럼에도 저·고·광교회파 모두 '성서·전통·이성'의 세 기둥과 <strong>'중도의 길(Via Media)'</strong> 안에서 하나의 성공회를 이룹니다. 어떤 흐름으로 성공회를 처음 만나셨든, 같은 믿음의 공동체 안에 함께합니다.",
+                        refs: [
+                            { label: "고교회파 (위키백과)", url: "https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B5%90%ED%9A%8C%ED%8C%8C" },
+                            { label: "고교회와 저교회 (나무위키)", url: "https://namu.wiki/w/%EA%B3%A0%EA%B5%90%ED%9A%8C%EC%99%80%20%EC%A0%80%EA%B5%90%ED%9A%8C" },
+                            { label: "광교회파 (위키백과)", url: "https://ko.wikipedia.org/wiki/%EA%B4%91%EA%B5%90%ED%9A%8C%ED%8C%8C" },
+                            { label: "대한성공회 (위키백과)", url: "https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C%EC%84%B1%EA%B3%B5%ED%9A%8C" },
+                            { label: "옥스퍼드 운동 (위키백과)", url: "https://ko.wikipedia.org/wiki/%EC%98%A5%EC%8A%A4%ED%8D%BC%EB%93%9C_%EC%9A%B4%EB%8F%99" },
+                            { label: "존 스토트 (Wikipedia)", url: "https://en.wikipedia.org/wiki/John_Stott" },
+                            { label: "N.T. 라이트 (Wikipedia)", url: "https://en.wikipedia.org/wiki/N._T._Wright" }
+                        ]
+                    },
+                    {
                         q: "결국 영국 교회 아닌가요? 외국 교회인가요?",
                         a: "아닙니다. 대한성공회는 <strong>1993년 세계성공회로부터 독립 자치권을 인정받은 한국 교단</strong>입니다.\n\n1890년 영국 선교사 고요한(Charles Corfe) 주교가 설립했지만, 이후 한국화 과정을 거쳐 운영과 의사결정을 한국 교단이 자치적으로 합니다. 캔터베리 대주교와는 상하 관계가 아닌 동등한 ‘교제와 일치’의 관계입니다.",
                         refs: [
