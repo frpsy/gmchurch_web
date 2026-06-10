@@ -1445,17 +1445,18 @@ const SundaysRenderer = {
             const m = s && s.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
             return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
         };
-        // 오늘 포함 가장 최근 일요일(로컬 자정)
-        const thisSunday = (() => {
+        // 오늘이 일요일이면 오늘, 아니면 이번 주 돌아오는 일요일(로컬 자정)
+        const nextSunday = (() => {
             const t = new Date();
             const d = new Date(t.getFullYear(), t.getMonth(), t.getDate());
-            d.setDate(d.getDate() - d.getDay());
+            const day = d.getDay();
+            if (day !== 0) d.setDate(d.getDate() + (7 - day));
             return d;
         })();
         const lectionaryLabel = dateStr => {
             const rd = parseDate(dateStr);
             if (!rd) return '';
-            const diff = rd - thisSunday;
+            const diff = rd - nextSunday;
             if (diff === 0) return '이번 주';
             return diff < 0 ? '지난 주' : '다가오는 주';
         };
