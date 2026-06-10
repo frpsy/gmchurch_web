@@ -8,7 +8,7 @@
 | 배포 | GitHub Pages — `https://frpsy.github.io/gmchurch_web` |
 | 방식 | 빌드 없는 순수 정적 사이트 (HTML + CSS + Vanilla JS) |
 | 브랜치 전략 | 작업 브랜치 → PR → main 머지 → GitHub Pages 자동 배포 |
-| 현재 상태 | 2026년 5월 30일 (토) |
+| 현재 상태 | 2026년 6월 10일 |
 
 ---
 
@@ -21,17 +21,20 @@ gmchurch_web/
 ├── faq.html          자주 묻는 질문 (성공회 오해·궁금증 FAQ, 가안)
 ├── worship.html      예배 안내 (예배 카드·감사성찬례란·순서·예배 자료)
 ├── newcomer.html     처음 오신 분 (환영·참여 안내·전례·전례 공간·영성체·문의)
-├── community.html    공동체 (희망터·엠마우스·소그룹·주일 애찬)
+├── community.html    공동체 (희망터·엠마우스·소그룹·녹색교회)
+├── sundays.html      교회력 허브 (이달의 교회력·전례독서·절기·특별 주일)
 ├── emmaus.html       엠마우스 코스 상세 페이지
 ├── hopecenter.html   광명 희망터 상세 페이지
 ├── smallgroup.html   소그룹 모임 상세 페이지
+├── greenchurch.html  녹색교회 상세 페이지
+├── links.html        관련 기관 (standalone)
 ├── visit.html        오시는 길 (지도·교통·주차)
-├── giving.html       헌금 (봉헌 계좌)
-├── media.html        교회 영상 (유튜브 영상 소개)
+├── giving.html       헌금 (봉헌 계좌·영수증 안내)
+├── media.html        교회 영상·관련 기관
 ├── privacy.html      개인정보 처리방침 (noindex)
-├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA (487줄)
-├── app.js            렌더러 모음 + App bootstrap (1235줄)
-├── style.css         전체 스타일 (2543줄)
+├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA (1081줄)
+├── app.js            렌더러 모음 + App bootstrap (2211줄)
+├── style.css         전체 스타일 (4128줄)
 ├── favicon.svg       캔터베리 십자가 (짙은 녹색 배경 + 흰색 십자가)
 ├── apple-touch-icon.png
 ├── og-image-v2.png   소셜 공유 OG 이미지 (1200×630)
@@ -262,12 +265,15 @@ const CHURCH_DATA = {
   └ 주일 감사성찬례    worship.html#main                (JS)
   └ 어린이 예배        worship.html#children            (JS)
   └ 감사성찬례 순서    worship.html#eucharist-order     (JS)
-  └ 절기와 전례독서    sundays.html                     (교회력 절기·이번 주 전례독서)
   └ 성무일도           worship.html#daily-office        (JS)
   └ 세계성공회 중보기도 worship.html#intercession       (JS)
   └ 예배 자료          worship.html#resources           (JS)
-  ※ 이달의 교회력      worship.html#monthly             (JS — SundaysRenderer, worship-calendar div)
-  ※ 특별 주일          worship.html#special             (JS — SundaysRenderer, worship-special div)
+
+교회력  sundays.html
+  └ 이달의 교회력      sundays.html#monthly             (JS)
+  └ 전례독서           sundays.html#lectionary          (JS)
+  └ 절기 안내          sundays.html#seasons             (JS)
+  └ 특별 주일          sundays.html#special             (JS)
 
 처음 오신 분  newcomer.html
   └ 인사말             newcomer.html#newcomer           (JS)
@@ -282,7 +288,6 @@ const CHURCH_DATA = {
   └ 광명 희망터        hopecenter.html                  (상세 페이지로 직접 이동)
   └ 엠마우스 코스      emmaus.html                      (상세 페이지로 직접 이동)
   └ 소그룹 모임        smallgroup.html                  (상세 페이지로 직접 이동)
-  └ 주일 애찬          community.html#agape             (JS, 상세 페이지 없음)
   └ 녹색교회           greenchurch.html                 (상세 페이지로 직접 이동)
 
 미디어·자료  media.html
@@ -300,7 +305,7 @@ const CHURCH_DATA = {
 
 ## app.js 렌더러 구조
 
-총 1235줄, 12개의 렌더러 모듈 + 2개 유틸리티(ScrollReveal, ScrollProgress) + App 부트스트랩.
+총 2211줄, 16개의 렌더러 모듈 + 2개 유틸리티(ScrollReveal, ScrollProgress) + App 부트스트랩.
 
 ```
 window DOMContentLoaded
@@ -345,7 +350,10 @@ window DOMContentLoaded
       │
       ├── CommunityRenderer.render()  → #community-full (community.html)
       │     groups 카드 (id=각 그룹). detailUrl 있으면 '자세히 보기' 링크.
-      │     주일 애찬(id="agape")은 detailUrl 없이 친교 안내만 표시.
+      │     주일 애찬(id="agape")은 community.html#agape 앵커로 존재하나 nav에 없음.
+      │
+      ├── SmallGroupRenderer.render() → #smallgroup-full (smallgroup.html)
+      │     소그룹 모임 상세 콘텐츠. detailUrl 유무 확인 후 렌더.
       │
       ├── GivingRenderer.render()     → #giving-full (giving.html)
       │     id="offering" div 내 봉헌 계좌 카드
@@ -372,9 +380,20 @@ window DOMContentLoaded
       │     각 카드는 유튜브 링크로 이동
       │     video-channel-cta: 유튜브 채널 전체 보기 버튼
       │
+      ├── LinksRenderer.render()      → #links (media.html + links.html)
+      │     관련 기관 목록. media.html과 links.html 두 페이지에서 공유.
+      │
       ├── PressRenderer.render()      → #press-table (clergy.html)
       │     press-list: press 배열의 모든 기사
       │     각 항목: 연도 | 미디어 · 날짜 | 제목(링크)
+      │
+      ├── FaqRenderer.render()        → #faq-full (faq.html)
+      │     draft-banner(가안) + faq-cat × 4 (정체성·신앙·사회참여·함께하기)
+      │     각 항목: <details.faq-item> → .faq-q(summary) / .faq-a / .faq-refs(출처)
+      │
+      ├── SundaysRenderer.render()    → #sundays-full (sundays.html)
+      │     이달의 교회력(#monthly) · 전례독서(#lectionary) · 절기 안내(#seasons) · 특별 주일(#special)
+      │     ※ worship.html의 #worship-calendar / #worship-special 위젯도 담당
       │
       ├── ScrollReveal.init()         (모든 페이지)
       │     .reveal 클래스 요소들을 scroll 시 페이드인
@@ -499,20 +518,25 @@ window DOMContentLoaded
 
 ```css
 --green-deep:   #0a1f12   /* 주 브랜드 색 (nav, footer, 제목) */
---green-mid:    #3d6b4a
+--green-mid:    #3a7252
 --green-light:  #eef2ec
---green-soft:   #cdd9cf
---gold:         #8b7355
---gold-bg:      #f5efe3
+--green-soft:   #c4d6c8
+--gold:         #c09a60
+--gold-bg:      #faf3e6
 --cream:        #f7f4ed   /* 기본 배경 */
 --white:        #ffffff
 --text:         #1a1a1a
---text-muted:   #6b6b66
+--text-muted:   #4d4c46   /* WCAG AA(4.5:1) 충족 */
+--heading:      #0a1f12
 --border:       #e8e5dc
 --red:          #b53737
 --nav-glass:    rgba(10, 31, 18, 0.9)  /* 네비게이션 글래스 배경 */
+--surface-nav:  rgba(255, 255, 255, 0.96)
+--theme:        #3a7252   /* 현재 절기색 (JS가 --season 값으로 덮어씀) */
+--theme-light:  #eef2ec
+--theme-on:     #fff      /* --theme 배경 위 텍스트 */
 --nav-h:        68px
---section-pad:  9rem  (모바일: 5rem)
+--section-pad:  7rem
 --content-max:  1200px
 --radius-sm/md/lg: 8px / 14px / 20px
 ```

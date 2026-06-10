@@ -23,17 +23,20 @@ gmchurch_web/
 ├── faq.html          자주 묻는 질문 (성공회 오해·궁금증 FAQ, 가안)
 ├── worship.html      예배 안내 (예배 카드 · 감사성찬례 순서 · 예배 자료)
 ├── newcomer.html     처음 오신 분 (환영 · 참여 안내 · 전례 · 영성체 · 문의)
-├── community.html    공동체 (희망터 · 엠마우스 · 소그룹 · 주일 애찬)
+├── community.html    공동체 (희망터 · 엠마우스 · 소그룹 · 녹색교회)
+├── sundays.html      교회력 허브 (이달의 교회력 · 전례독서 · 절기 · 특별 주일)
 ├── emmaus.html       엠마우스 코스 상세 페이지
 ├── hopecenter.html   광명 희망터 상세 페이지
 ├── smallgroup.html   소그룹 모임 상세 페이지
-├── media.html        교회 영상 (유튜브 영상 소개)
+├── greenchurch.html  녹색교회 상세 페이지
+├── links.html        관련 기관 (standalone)
+├── media.html        교회 영상 · 관련 기관
 ├── visit.html        오시는 길 (지도 · 교통 · 주차)
 ├── giving.html       헌금 (봉헌 계좌 · 영수증 안내)
 ├── privacy.html      개인정보 처리방침 (noindex)
-├── data.js           ★ 단일 콘텐츠 소스 (487줄)
-├── app.js            렌더러 모음 + App bootstrap (1235줄)
-├── style.css         전체 스타일 (2543줄)
+├── data.js           ★ 단일 콘텐츠 소스 (1081줄)
+├── app.js            렌더러 모음 + App bootstrap (2211줄)
+├── style.css         전체 스타일 (4128줄)
 ├── favicon.svg       캔터베리 십자가 아이콘
 ├── apple-touch-icon.png
 ├── og-image-v2.png   소셜 공유 OG 이미지
@@ -52,7 +55,8 @@ gmchurch_web/
 - **자주 묻는 질문** (`faq.html`) — 성공회에 대한 흔한 오해와 궁금증(이단·교파·구원·여성 사제·동성애 등)을 출처와 함께 정리 (가안)
 - **예배 안내** (`worship.html`) — 주일 예배·어린이 예배, 감사성찬례 순서, 예배 자료 (기도서·성가·성서 온라인 링크)
 - **처음 오신 분** (`newcomer.html`) — 환영 인사, 참여 안내 체크리스트, 성공회 전례 소개, 전례 공간 안내, 영성체 안내
-- **공동체** (`community.html`) — 광명 희망터, 엠마우스 코스, 소그룹 모임, 주일 애찬 소개
+- **교회력** (`sundays.html`) — 이달의 교회력, 전례독서, 절기 안내, 특별 주일
+- **공동체** (`community.html`) — 광명 희망터, 엠마우스 코스, 소그룹 모임, 녹색교회 소개
 - **오시는 길** (`visit.html`) — Google Maps 지도, 대중교통, 주차 안내
 - **헌금** (`giving.html`) — 봉헌 계좌, 기부금 영수증 안내
 - **교회 영상** (`media.html`) — 성공회·신앙·공동체 관련 유튜브 영상 소개
