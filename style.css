@@ -3653,6 +3653,9 @@ footer {
         --green-mid:    #62a073;
         --green-light:  #1e3325;
         --green-soft:   #355a3e;
+        /* Theme — green-mid/green-light 값으로 자동 추종 */
+        --theme:        #62a073;
+        --theme-light:  #1e3325;
         /* Gold — 다크 배경 대비 밝게 조정 */
         --gold:         #d6ba8e;
         --gold-bg:      #221d14;

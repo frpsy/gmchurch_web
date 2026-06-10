@@ -58,7 +58,7 @@ const MapHelper = {
                     <div class="map-addr-row">
                         <span class="map-addr-tag">도로명</span>
                         <span class="map-addr-text">${addr}</span>
-                        <button class="map-copy-btn" data-copy="${addr}" onclick="MapHelper.copyAddr(this)" aria-label="도로명 주소 복사">복사</button>
+                        <button class="map-copy-btn" data-copy="${addr}" aria-label="도로명 주소 복사">복사</button>
                     </div>
                     <div class="map-addr-row">
                         <span class="map-addr-tag">지번</span>
@@ -925,9 +925,7 @@ const AnglicanRenderer = {
                     ${korea.paras.map(p => `<p class="anglican-para">${p}</p>`).join('')}
                     ${iona ? `
                     <a href="${iona.url}" target="_blank" rel="noopener noreferrer"
-                       class="iona-link-card"
-                       onmouseover="this.classList.add('iona-link-card--hover')"
-                       onmouseout="this.classList.remove('iona-link-card--hover')">
+                       class="iona-link-card">
                         <span style="font-size:1.2rem;" aria-hidden="true">⛵</span>
                         <span class="iona-link-card__text">
                             <span class="iona-link-card__label">${iona.label}</span>
@@ -938,9 +936,7 @@ const AnglicanRenderer = {
                     ` : ''}
                     ${korea.incheonLink ? `
                     <a href="${korea.incheonLink.url}" target="_blank" rel="noopener noreferrer"
-                       class="iona-link-card"
-                       onmouseover="this.classList.add('iona-link-card--hover')"
-                       onmouseout="this.classList.remove('iona-link-card--hover')">
+                       class="iona-link-card">
                         <span style="font-size:1.2rem;" aria-hidden="true">⛪</span>
                         <span class="iona-link-card__text">
                             <span class="iona-link-card__label">${korea.incheonLink.label}</span>
@@ -951,9 +947,7 @@ const AnglicanRenderer = {
                     ` : ''}
                     ${korea.cathedralLink ? `
                     <a href="${korea.cathedralLink.url}" target="_blank" rel="noopener noreferrer"
-                       class="iona-link-card"
-                       onmouseover="this.classList.add('iona-link-card--hover')"
-                       onmouseout="this.classList.remove('iona-link-card--hover')">
+                       class="iona-link-card">
                         <span style="font-size:1.2rem;" aria-hidden="true">🕊️</span>
                         <span class="iona-link-card__text">
                             <span class="iona-link-card__label">${korea.cathedralLink.label}</span>
@@ -1796,6 +1790,9 @@ const App = {
         BackToTop.init();
         PortraitLightbox.init();
         MenuOverlay.init();
+        document.addEventListener('click', e => {
+            if (e.target.matches('.map-copy-btn')) MapHelper.copyAddr(e.target);
+        });
     },
 
     _scrollToHash(hash) {
