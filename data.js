@@ -1042,6 +1042,136 @@ const CHURCH_DATA = {
         ]
     },
 
+    // 사진 게시판 (gallery.html) — 가안. 실제 교회 사진으로 교체 예정.
+    photoGallery: {
+        intro: "광명교회 공동체의 예배, 나눔, 절기의 순간들입니다.",
+        badge: "임시",
+        note: "실제 교회 사진으로 교체할 샘플 이미지입니다.",
+        categories: ["전체", "예배", "공동체", "절기·행사", "교회 풍경"],
+        photos: [
+            {
+                id: "p01",
+                title: "주일 성찬예배",
+                desc: "매주 주일, 공동체가 모여 성찬을 나눕니다.",
+                category: "예배",
+                date: "2025.03",
+                src: "https://picsum.photos/seed/gmc-worship1/900/600",
+                thumb: "https://picsum.photos/seed/gmc-worship1/480/320",
+                alt: "주일 성찬예배 모습"
+            },
+            {
+                id: "p02",
+                title: "어린이 예배",
+                desc: "어린이들이 함께 참여하는 주일 예배.",
+                category: "예배",
+                date: "2025.04",
+                src: "https://picsum.photos/seed/gmc-worship2/900/600",
+                thumb: "https://picsum.photos/seed/gmc-worship2/480/320",
+                alt: "어린이 예배 모습"
+            },
+            {
+                id: "p03",
+                title: "새벽 성무일도",
+                desc: "고요한 새벽, 시편과 기도로 하루를 엽니다.",
+                category: "예배",
+                date: "2025.02",
+                src: "https://picsum.photos/seed/gmc-worship3/900/600",
+                thumb: "https://picsum.photos/seed/gmc-worship3/480/320",
+                alt: "새벽 성무일도"
+            },
+            {
+                id: "p04",
+                title: "주일 애찬",
+                desc: "성찬예배 후 함께 나누는 식사.",
+                category: "공동체",
+                date: "2025.03",
+                src: "https://picsum.photos/seed/gmc-community1/900/600",
+                thumb: "https://picsum.photos/seed/gmc-community1/480/320",
+                alt: "주일 애찬 풍경"
+            },
+            {
+                id: "p05",
+                title: "엠마우스 코스",
+                desc: "신앙의 길을 함께 걷는 엠마우스 여정.",
+                category: "공동체",
+                date: "2024.11",
+                src: "https://picsum.photos/seed/gmc-community2/900/600",
+                thumb: "https://picsum.photos/seed/gmc-community2/480/320",
+                alt: "엠마우스 코스 모임"
+            },
+            {
+                id: "p06",
+                title: "소그룹 모임",
+                desc: "소그룹이 모여 말씀을 나누고 기도합니다.",
+                category: "공동체",
+                date: "2025.01",
+                src: "https://picsum.photos/seed/gmc-community3/900/600",
+                thumb: "https://picsum.photos/seed/gmc-community3/480/320",
+                alt: "소그룹 모임"
+            },
+            {
+                id: "p07",
+                title: "대림절 촛불 점화",
+                desc: "대림절 4주간, 촛불을 하나씩 밝히며 기다림을 삽니다.",
+                category: "절기·행사",
+                date: "2024.12",
+                src: "https://picsum.photos/seed/gmc-season1/900/600",
+                thumb: "https://picsum.photos/seed/gmc-season1/480/320",
+                alt: "대림절 촛불 점화"
+            },
+            {
+                id: "p08",
+                title: "부활절 새벽 예배",
+                desc: "해가 뜨기 전 모여 부활을 선포합니다.",
+                category: "절기·행사",
+                date: "2025.04",
+                src: "https://picsum.photos/seed/gmc-season2/900/600",
+                thumb: "https://picsum.photos/seed/gmc-season2/480/320",
+                alt: "부활절 새벽 예배"
+            },
+            {
+                id: "p09",
+                title: "세례식",
+                desc: "물과 성령으로 새로운 삶을 시작합니다.",
+                category: "절기·행사",
+                date: "2025.04",
+                src: "https://picsum.photos/seed/gmc-season3/900/600",
+                thumb: "https://picsum.photos/seed/gmc-season3/480/320",
+                alt: "세례식"
+            },
+            {
+                id: "p10",
+                title: "성탄절 예배",
+                desc: "말씀이 육신이 되어 우리 가운데 오심을 기억합니다.",
+                category: "절기·행사",
+                date: "2024.12",
+                src: "https://picsum.photos/seed/gmc-season4/900/600",
+                thumb: "https://picsum.photos/seed/gmc-season4/480/320",
+                alt: "성탄절 예배"
+            },
+            {
+                id: "p11",
+                title: "성전 내부",
+                desc: "캔터베리 십자가가 이끄는 예배 공간.",
+                category: "교회 풍경",
+                date: "2025.01",
+                src: "https://picsum.photos/seed/gmc-space1/900/600",
+                thumb: "https://picsum.photos/seed/gmc-space1/480/320",
+                alt: "성전 내부 모습"
+            },
+            {
+                id: "p12",
+                title: "교회 마당",
+                desc: "예배 전후 사람들이 모이는 공간.",
+                category: "교회 풍경",
+                date: "2025.03",
+                src: "https://picsum.photos/seed/gmc-space2/900/600",
+                thumb: "https://picsum.photos/seed/gmc-space2/480/320",
+                alt: "교회 마당"
+            }
+        ]
+    },
+
     navigation: [
         {
             label: "교회 소개",
@@ -1104,8 +1234,9 @@ const CHURCH_DATA = {
             label: "미디어·자료",
             href: "media.html",
             items: [
-                { label: "교회 영상", href: "media.html#videos" },
-                { label: "관련 기관", href: "media.html#links" }
+                { label: "교회 영상",     href: "media.html#videos" },
+                { label: "사진 게시판",   href: "gallery.html", badge: "임시" },
+                { label: "관련 기관",     href: "media.html#links" }
             ]
         },
         {
