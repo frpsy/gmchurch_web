@@ -980,6 +980,7 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
 }
 .lit-cal-cell:nth-child(7n) { border-right: none; }
 .lit-cal-cell--empty { opacity: 0.35; }
+.lit-cal-cell--past { opacity: 0.4; }
 /* 날짜 숫자 — 색은 항상 변수 기반(다크모드 자동 대비). 절기 구분은 배경 틴트로 표현 */
 .lit-cal-num {
     display: inline-flex;
