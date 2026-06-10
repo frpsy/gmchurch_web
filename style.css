@@ -4080,6 +4080,93 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     .menu-overlay-panel { transition: none; }
     .menu-overlay-panel { transform: none; }
 }
+/* ── Bulletin List ───────────────────────────────────────── */
+.bulletin-notice {
+    max-width: 640px;
+    margin-bottom: var(--space-6);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-body);
+}
+.bulletin-notice-sub {
+    margin-top: 0.4rem;
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+.bulletin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 720px;
+}
+.bulletin-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s var(--ease-out);
+}
+a.bulletin-row:hover {
+    border-color: var(--theme);
+    box-shadow: var(--shadow-sm);
+    transform: translateX(4px);
+}
+.bulletin-row--empty {
+    opacity: 0.6;
+    cursor: default;
+}
+.bulletin-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+.bulletin-date {
+    font-weight: 700;
+    color: var(--heading);
+    min-width: 9.5rem;
+    font-size: var(--fs-body);
+}
+.bulletin-season {
+    flex: 1;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+}
+.bulletin-dl {
+    flex-shrink: 0;
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--theme);
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--theme);
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+a.bulletin-row:hover .bulletin-dl {
+    background: var(--theme);
+    color: var(--theme-on);
+}
+.bulletin-dl--pending {
+    color: var(--text-muted);
+    border-color: var(--border);
+}
+@media (max-width: 540px) {
+    .bulletin-date { min-width: unset; }
+    .bulletin-season { display: none; }
+}
+@media (prefers-color-scheme: dark) {
+    .bulletin-row { background: var(--white); color: var(--text); }
+}
+@media (prefers-reduced-motion: reduce) {
+    a.bulletin-row { transition: border-color 0.2s, box-shadow 0.2s; }
+    a.bulletin-row:hover { transform: none; }
+}
+
 /* ── Print ────────────────────────────────────────────────
    감사성찬례 순서(worship.html) 등 본문 인쇄 대응.
    내비·푸터·오버레이·지도 등 화면 전용 요소를 제거하고

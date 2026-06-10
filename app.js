@@ -1396,6 +1396,45 @@ const PortraitLightbox = {
     }
 };
 
+/* ── BulletinRenderer ────────────────────────────────────── */
+const BulletinRenderer = {
+    render() {
+        const el = document.getElementById('bulletin-full');
+        if (!el) return;
+        const { intro, note, items } = CHURCH_DATA.bulletins;
+
+        const rows = items.map(b => {
+            const hasFile = b.file && b.file.trim();
+            if (hasFile) {
+                return `
+                <a href="${b.file}" target="_blank" rel="noopener noreferrer" class="bulletin-row" aria-label="${b.label} 주보 PDF 열기">
+                    <span class="bulletin-icon" aria-hidden="true">📋</span>
+                    <span class="bulletin-date">${b.label}</span>
+                    <span class="bulletin-season">${b.season}</span>
+                    <span class="bulletin-dl">PDF 열기</span>
+                </a>`;
+            }
+            return `
+                <div class="bulletin-row bulletin-row--empty" aria-label="${b.label} 주보 준비 중">
+                    <span class="bulletin-icon" aria-hidden="true">📋</span>
+                    <span class="bulletin-date">${b.label}</span>
+                    <span class="bulletin-season">${b.season}</span>
+                    <span class="bulletin-dl bulletin-dl--pending">준비 중</span>
+                </div>`;
+        }).join('');
+
+        el.innerHTML = `
+            <div class="bulletin-notice">
+                <p>${intro}</p>
+                <p class="bulletin-notice-sub">${note}</p>
+            </div>
+            <div class="bulletin-list" role="list">
+                ${rows}
+            </div>
+        `;
+    }
+};
+
 /* ── SundaysRenderer ─────────────────────────────────────── */
 const SundaysRenderer = {
     render() {
@@ -1812,6 +1851,7 @@ const App = {
         FaqRenderer.render();
         MediaRenderer.render();
         LinksRenderer.render();
+        BulletinRenderer.render();
         SundaysRenderer.render();
         this._handleHashScroll();
         ScrollReveal.init();
