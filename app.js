@@ -1203,6 +1203,107 @@ const MediaRenderer = {
     }
 };
 
+/* ── PhotoGalleryRenderer ────────────────────────────────── */
+const PhotoGalleryRenderer = {
+    render() {
+        const el = document.getElementById('gallery-full');
+        if (!el || !CHURCH_DATA.photoGallery) return;
+        const { intro, badge, note, categories, photos } = CHURCH_DATA.photoGallery;
+
+        el.innerHTML = `
+            ${badge ? `
+            <div class="draft-banner">
+                <span class="draft-badge">${badge}</span>${note}
+            </div>` : ''}
+            <div class="section-header">
+                <p class="section-eyebrow">Photo Gallery</p>
+                <h2 class="section-title">사진 게시판</h2>
+                <p class="section-sub">${intro}</p>
+            </div>
+            <div class="photo-filters" role="group" aria-label="사진 분류 필터">
+                ${categories.map((c, i) => `
+                    <button class="photo-filter-btn${i === 0 ? ' is-active' : ''}"
+                            data-filter="${c}" type="button">${c}</button>
+                `).join('')}
+            </div>
+            <div class="photo-grid" id="photo-grid-items">
+                ${photos.map(p => `
+                    <button class="photo-item"
+                            data-category="${p.category}"
+                            data-src="${p.src}"
+                            data-title="${p.title}"
+                            data-desc="${p.desc}"
+                            data-date="${p.date}"
+                            type="button"
+                            aria-label="${p.alt} 크게 보기">
+                        <img src="${p.thumb}" alt="${p.alt}" loading="lazy" width="480" height="320">
+                        <div class="photo-overlay" aria-hidden="true">
+                            <span class="photo-cat-badge">${p.category}</span>
+                            <p class="photo-caption">${p.title}</p>
+                            <p class="photo-date">${p.date}</p>
+                        </div>
+                    </button>
+                `).join('')}
+            </div>
+            <p class="photo-count" id="photo-count-text">${photos.length}장</p>
+        `;
+
+        const grid    = el.querySelector('#photo-grid-items');
+        const countEl = el.querySelector('#photo-count-text');
+
+        // 카테고리 필터
+        el.querySelectorAll('.photo-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                el.querySelectorAll('.photo-filter-btn')
+                  .forEach(b => b.classList.remove('is-active'));
+                btn.classList.add('is-active');
+                const filter = btn.dataset.filter;
+                let shown = 0;
+                grid.querySelectorAll('.photo-item').forEach(item => {
+                    const match = filter === '전체' || item.dataset.category === filter;
+                    item.style.display = match ? '' : 'none';
+                    if (match) shown++;
+                });
+                countEl.textContent = `${shown}장`;
+            });
+        });
+
+        // 라이트박스
+        const lb      = document.getElementById('gallery-lightbox');
+        if (!lb) return;
+        const lbImg   = lb.querySelector('.gallery-lb-img');
+        const lbTitle = lb.querySelector('.gallery-lb-title');
+        const lbDesc  = lb.querySelector('.gallery-lb-desc');
+        const lbDate  = lb.querySelector('.gallery-lb-date');
+        const lbClose = lb.querySelector('.gallery-lb-close');
+
+        const openLb = item => {
+            lbImg.src      = item.dataset.src;
+            lbImg.alt      = item.querySelector('img').alt;
+            lbTitle.textContent = item.dataset.title;
+            lbDesc.textContent  = item.dataset.desc;
+            lbDate.textContent  = item.dataset.date;
+            lb.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+            lbClose.focus();
+        };
+        const closeLb = () => {
+            lb.classList.remove('is-open');
+            document.body.style.overflow = '';
+        };
+
+        grid.addEventListener('click', e => {
+            const item = e.target.closest('.photo-item');
+            if (item) openLb(item);
+        });
+        lbClose.addEventListener('click', closeLb);
+        lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
+        });
+    }
+};
+
 /* ── PressRenderer ───────────────────────────────────────── */
 const PressRenderer = {
     render() {
@@ -1850,6 +1951,7 @@ const App = {
         PressRenderer.render();
         FaqRenderer.render();
         MediaRenderer.render();
+        PhotoGalleryRenderer.render();
         LinksRenderer.render();
         BulletinRenderer.render();
         SundaysRenderer.render();
