@@ -1655,16 +1655,19 @@ const SundaysRenderer = {
         for (let i = 0; i < firstWd; i++) {
             cells.push('<div class="lit-cal-cell lit-cal-cell--empty"></div>');
         }
+        const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
         for (let n = 1; n <= daysInMon; n++) {
             const date    = new Date(year, month, n);
             const isSun   = date.getDay() === 0;
             const isToday = n === todayDate;
+            const isPast  = date < todayStart;
             const special = specialMap[key(date)];
             const season  = LiturgicalCalendar.compute(date);
             const alpha   = isSun ? '2e' : '12';
             let cls = 'lit-cal-cell';
             if (isSun)   cls += ' lit-cal-cell--sun';
             if (isToday) cls += ' lit-cal-cell--today';
+            if (isPast)  cls += ' lit-cal-cell--past';
             const aria = special
                 ? ` aria-label="${n}일 ${special}" title="${special}"`
                 : ` aria-label="${n}일"`;
