@@ -1,0 +1,40 @@
+name: Sync Sunday Bulletins
+
+# bulletins/ 폴더에 PDF 파일이 push되면 자동으로 data.js를 갱신합니다.
+# - 13주(약 3개월) 초과 PDF 자동 삭제
+# - 절기명 자동 계산
+# - data.js bulletins.items 배열 자동 업데이트
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'bulletins/*.pdf'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync bulletin entries
+        run: node scripts/sync-bulletins.js
+
+      - name: Commit changes
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet && echo "변경 없음" || (
+            git add data.js bulletins/
+            git commit -m "chore: 주보 자동 등록 ($(date +%Y-%m-%d))"
+            git push
+          )

@@ -1504,6 +1504,15 @@ const BulletinRenderer = {
         if (!el) return;
         const { intro, note, items } = CHURCH_DATA.bulletins;
 
+        if (!items || items.length === 0) {
+            el.innerHTML = `
+                <div class="bulletin-notice">
+                    <p>${intro}</p>
+                    <p class="bulletin-notice-sub">아직 등록된 주보가 없습니다.</p>
+                </div>`;
+            return;
+        }
+
         const rows = items.map(b => {
             const hasFile = b.file && b.file.trim();
             if (hasFile) {

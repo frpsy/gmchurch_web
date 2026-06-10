@@ -1025,19 +1025,19 @@ const CHURCH_DATA = {
                 date: "2026-06-08",
                 label: "2026년 6월 8일",
                 season: "성령강림 후 제2주일",
-                file: ""
+                file: "bulletins/20260608.pdf"
             },
             {
                 date: "2026-06-01",
                 label: "2026년 6월 1일",
                 season: "삼위일체 주일",
-                file: ""
+                file: "bulletins/20260601.pdf"
             },
             {
                 date: "2026-05-25",
                 label: "2026년 5월 25일",
-                season: "성령강림주일 (펜테코스트)",
-                file: ""
+                season: "성령강림주일",
+                file: "bulletins/20260525.pdf"
             }
         ]
     },
