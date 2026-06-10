@@ -598,10 +598,6 @@ const NewcomerRenderer = {
                             <span class="newcomer-key-label">소요</span>
                             <span class="newcomer-key-value">약 1시간</span>
                         </div>
-                        <div class="newcomer-key-row">
-                            <span class="newcomer-key-label">복장</span>
-                            <span class="newcomer-key-value">단정한 평상복이면 충분합니다</span>
-                        </div>
                     </div>
                 </div>
 
