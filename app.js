@@ -1461,8 +1461,10 @@ const SundaysRenderer = {
             return diff < 0 ? '지난 주' : '다가오는 주';
         };
 
-        const cardHtml = (data, label) => `
-            <div class="lectionary-card">
+        const cardHtml = (data, label) => {
+            const isCurrent = label === '이번 주';
+            return `
+            <div class="lectionary-card${isCurrent ? ' lectionary-card--current' : ''}">
                 <div class="lectionary-card-head">
                     <p class="lectionary-card-label">${label}</p>
                     <p class="lectionary-card-week">${data.week}</p>
@@ -1477,14 +1479,21 @@ const SundaysRenderer = {
                 </div>
                 ${data.note ? `<p class="lectionary-card-note">${data.note}</p>` : ''}
             </div>`;
+        };
+
+        // 이번 주 카드를 먼저 표시
+        const cards = [r, n]
+            .filter(Boolean)
+            .map(d => ({ data: d, label: lectionaryLabel(d.date) }))
+            .sort((a, b) => (a.label === '이번 주' ? -1 : b.label === '이번 주' ? 1 : 0));
+
         return `
             <div class="section-header">
                 <p class="section-eyebrow">Lectionary</p>
                 <h2 class="section-title">전례독서</h2>
                 <p class="section-sub">교회력 절기에 따라 정해진 날짜별 성서 본문입니다. 구약·시편·서신서·복음서 네 본문을 순서대로 봉독합니다.</p>
             </div>
-            ${r ? cardHtml(r, lectionaryLabel(r.date)) : ''}
-            ${n ? cardHtml(n, lectionaryLabel(n.date)) : ''}`;
+            ${cards.map(c => cardHtml(c.data, c.label)).join('')}`;
     },
 
     /* 이달의 교회력 — worship.html 용 헤더 포함 버전 */
