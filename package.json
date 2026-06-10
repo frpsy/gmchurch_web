@@ -5,7 +5,8 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "bulletin:sync": "node scripts/sync-bulletins.js"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^2.1.0",
