@@ -2471,8 +2471,8 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
 }
 .lectionary-card + .lectionary-card { margin-top: 1rem; }
 .lectionary-card--current {
-    border: 2px solid var(--green-dark);
-    box-shadow: 0 2px 12px color-mix(in srgb, var(--green-dark) 18%, transparent);
+    border: 2px solid var(--green-mid);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--green-mid) 25%, transparent);
 }
 .lectionary-card-label {
     font-size: 0.72rem;
