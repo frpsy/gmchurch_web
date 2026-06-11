@@ -1498,14 +1498,10 @@ const BulletinRenderer = {
     render() {
         const el = document.getElementById('bulletin-full');
         if (!el) return;
-        const { intro, note, items } = CHURCH_DATA.bulletins;
+        const { note, items } = CHURCH_DATA.bulletins;
 
         if (!items || items.length === 0) {
-            el.innerHTML = `
-                <div class="bulletin-notice">
-                    <p>${intro}</p>
-                    <p class="bulletin-notice-sub">아직 등록된 주보가 없습니다.</p>
-                </div>`;
+            el.innerHTML = `<p class="bulletin-notice-sub">아직 등록된 주보가 없습니다.</p>`;
             return;
         }
 
@@ -1530,10 +1526,7 @@ const BulletinRenderer = {
         }).join('');
 
         el.innerHTML = `
-            <div class="bulletin-notice">
-                <p>${intro}</p>
-                <p class="bulletin-notice-sub">${note}</p>
-            </div>
+            <p class="bulletin-notice-sub">${note}</p>
             <div class="bulletin-list" role="list">
                 ${rows}
             </div>
