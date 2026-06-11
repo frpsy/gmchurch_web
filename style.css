@@ -4319,6 +4319,7 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     flex-direction: column;
     gap: 0.6rem;
     max-width: 720px;
+    margin: 0 auto;
 }
 .bulletin-row {
     display: flex;
