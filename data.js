@@ -615,8 +615,8 @@ const CHURCH_DATA = {
             year: "2025",
             category: "여성 성직",
             media: "성공회신문",
-            title: "서울교구 최초 여성 총사제 민숙희 마가렛 사제 인터뷰",
-            date: "2025",
+            title: "서울교구 최초 여성 총사제 민숙희 마가렛 사제, 부산교구 최초 여성 성직자 상임위원 심미경 아가타 사제 인터뷰",
+            date: "2025.02.20",
             url: "http://www.skhnews.or.kr/news/articleView.html?idxno=768"
         },
         {
