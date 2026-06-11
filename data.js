@@ -599,8 +599,8 @@ const CHURCH_DATA = {
             year: "2023",
             category: "녹색교회",
             media: "CBS 크리스천노컷뉴스",
-            title: "올해 녹색교회로 선정된 광명교회 — 일회용품 제거·친환경 비누·텃밭 애찬·생태 산행·반려동물 축복식 실천",
-            date: "2023",
+            title: "대한성공회, \"모든 교회를 녹색교회로!\" 교회력 '창조절' 전격 시행",
+            date: "2023.08.25",
             url: "https://mch.nocutnews.co.kr/news/6000856"
         },
         {
@@ -615,8 +615,8 @@ const CHURCH_DATA = {
             year: "2025",
             category: "여성 성직",
             media: "성공회신문",
-            title: "서울교구 최초 여성 총사제 민숙희 마가렛 사제 인터뷰",
-            date: "2025",
+            title: "서울교구 최초 여성 총사제 민숙희 마가렛 사제, 부산교구 최초 여성 성직자 상임위원 심미경 아가타 사제 인터뷰",
+            date: "2025.02.20",
             url: "http://www.skhnews.or.kr/news/articleView.html?idxno=768"
         },
         {
