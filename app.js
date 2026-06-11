@@ -1526,7 +1526,6 @@ const BulletinRenderer = {
         }).join('');
 
         el.innerHTML = `
-            <p class="bulletin-notice-sub">${note}</p>
             <div class="bulletin-list" role="list">
                 ${rows}
             </div>
