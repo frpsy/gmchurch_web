@@ -580,6 +580,14 @@ const CHURCH_DATA = {
 
     press: [
         {
+            year: "2026",
+            category: "정의·평화",
+            media: "에큐메니안",
+            title: "6월 민주항쟁 39주년 시민기념식, 성공회 서울주교좌성당서 열려 — 민숙희 마가렛 사제 추모 설교",
+            date: "2026.06.11",
+            url: "https://www.ecumenian.com/news/articleView.html?idxno=31441"
+        },
+        {
             year: "2018",
             category: "목회·상담",
             media: "국민일보",
