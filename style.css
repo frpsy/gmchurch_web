@@ -1359,7 +1359,7 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     text-align: center;
 }
 .about-brief-lead {
-    font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+    font-size: clamp(0.9rem, 1.6vw, 1.1rem);
     font-weight: 700;
     color: var(--heading);
     letter-spacing: -0.025em;
