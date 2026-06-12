@@ -32,10 +32,12 @@
 | `clergy.html` | 교회 소개 (교회 이야기 `#identity` 정적 HTML 포함) | AnglicanRenderer, ClergyRenderer, PressRenderer |
 | `faq.html` | 자주 묻는 질문 (성공회 오해·궁금증, 가안) | FaqRenderer |
 | `worship.html` | 예배 | WorshipRenderer |
+| `bulletin.html` | 주일 주보 (noindex, 예배와 기도 메뉴) | BulletinRenderer |
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
 | `giving.html` | 헌금 | GivingRenderer |
 | `media.html` | 교회 영상·관련 기관 | MediaRenderer, LinksRenderer |
+| `gallery.html` | 사진 게시판 (noindex, 미디어·자료 메뉴) | PhotoGalleryRenderer |
 | `links.html` | 관련 기관 (standalone) | LinksRenderer |
 | `sundays.html` | 교회력 허브 — 이달의 교회력·전례독서·절기·특별 주일 (교회력 메뉴) | SundaysRenderer |
 | `visit.html` | 오시는 길 | VisitRenderer |
@@ -56,7 +58,7 @@
   성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity)
 
 예배와 기도 (worship.html)
-  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일도 / 세계성공회 중보기도 / 예배 자료
+  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일도 / 세계성공회 중보기도 / 예배 자료 / 주일 주보(bulletin.html)
 
 교회력 (sundays.html)
   이달의 교회력 / 전례독서(sundays.html#lectionary) / 절기 안내(sundays.html#seasons) / 특별 주일(sundays.html#special)
@@ -68,7 +70,7 @@
   광명 희망터 / 엠마우스 코스 / 소그룹 모임 / 녹색교회(greenchurch.html)
 
 미디어·자료 (media.html)
-  교회 영상 / 관련 기관
+  교회 영상 / 사진 게시판(gallery.html) / 관련 기관
 
 오시는 길 (visit.html)
   주소·교통 / 주차 안내
