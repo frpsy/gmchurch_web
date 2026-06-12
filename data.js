@@ -1255,5 +1255,229 @@ const CHURCH_DATA = {
                 { label: "주차 안내", href: "visit.html#parking" }
             ]
         }
-    ]
+    ],
+
+    // ── UI strings (모든 렌더러 하드코딩 문자열 → 여기서 일원 관리)
+    ui: {
+        map: {
+            naverLabel: "네이버 길찾기",
+            kakaoLabel: "카카오 길찾기",
+            copyLabel: "복사",
+            roadLabel: "도로명",
+            jibunLabel: "지번",
+            iframeTitle: "대한성공회 광명교회 위치 — Google 지도"
+        },
+        nav: {
+            searchLabel: "전체 메뉴 보기 및 검색",
+            toggleLabel: "메뉴 열기",
+            langBtn: "ENG",
+            langBtnLabel: "Switch to English",
+            subMenuSuffix: " 하위 메뉴",
+            overlayLabel: "전체 메뉴 및 검색",
+            searchPlaceholder: "메뉴·내용 검색",
+            searchInputLabel: "메뉴 검색",
+            closeLabel: "닫기"
+        },
+        footer: {
+            established: "설립",
+            phone: "전화",
+            address: "주소",
+            resourcesHeading: "예배 자료",
+            lectionaryLink: "전례독서",
+            channelsHeading: "채널",
+            youtube: "유튜브 채널",
+            instagram: "인스타그램",
+            naverBlog: "네이버 블로그",
+            diocesan: "성공회 서울교구",
+            giving: "봉헌 안내",
+            logoIntro: "로고 소개",
+            press: "언론 보도",
+            privacy: "개인정보 처리방침",
+            timePrefix: "매주 일요일 "
+        },
+        index: {
+            btnNewcomer: "처음 오신 분",
+            btnWorship: "예배 안내",
+            statFounded: "설립",
+            statSunday: "주일 예배",
+            statSundayTime: "오전 11:00",
+            statLocation: "위치",
+            statLocationName: "경기도 광명시",
+            aboutName: "이름",
+            aboutFounded: "설립",
+            aboutDiocese: "소속",
+            aboutLink: "교회 소개 자세히 보기 →",
+            visitTitle: "광명교회로 오시는 길",
+            visitPhone: "전화",
+            visitDetailLink: "자세히 보기 →"
+        },
+        worship: {
+            timeLabel: "시간",
+            eucharistTitle: "감사성찬례란?",
+            eucharistOrderTitle: "감사성찬례 순서",
+            eucharistOrderLead: "성공회 기도서에 따른 감사성찬례는 크게 <strong>네 부분</strong>으로 구성됩니다.",
+            resourcesTitle: "예배 자료",
+            resourcesLead: "기도서·성가·성서를 온라인으로도 보실 수 있습니다.",
+            resourcesLink: "바로가기",
+            dailyOfficeTitle: "성무일도",
+            openLink: "기도서 열기",
+            intercessionTitle: "세계성공회 중보기도",
+            intercessionLead: "세계성공회(Anglican Communion)는 날마다 특정 교구와 지역 교회를 위해 함께 기도하는 기도 달력을 발행합니다. 전 세계 165개 이상의 나라에 퍼져 있는 성공회 공동체와 하나로 이어지는 기도입니다.",
+            intercessionPdfLink: "PDF 내려받기"
+        },
+        newcomer: {
+            welcomeTitle: "환영합니다",
+            welcomeBody: "광명교회에 오신 것을 환영합니다. 성공회 예배는 회중이 함께 기도하고 응답하는 전례 예배입니다. 처음에는 흐름이 낯설 수 있으니, 익숙하지 않은 부분은 편안히 지켜보셔도 좋습니다. 아래 안내가 예배의 흐름을 이해하시는 데 작은 도움이 되시기를 바라겠습니다.",
+            keyWorship: "예배",
+            keyWorshipValue: "<strong>주일 감사성찬례</strong> · 매주 일요일 오전 11:00",
+            keyLocation: "장소",
+            keyDuration: "소요",
+            keyDurationValue: "약 1시간",
+            firstVisitTitle: "참여 안내",
+            liturgyTitle: "성공회 전례란?",
+            spaceTitle: "전례 공간 안내",
+            communionTitle: "영성체 안내",
+            firstVisitLead: "처음 참석하실 때 알아두시면 도움이 되는 내용을 정리했습니다.",
+            firstVisitItems: [
+                "<strong>앉고 서는</strong> 순서가 있지만, 몸이 불편하시면 그대로 앉아 계셔도 됩니다.",
+                "<strong>주보</strong>에 예배 순서가 안내되어 있고, <strong>회중석의 기도서</strong>를 함께 펴고 응답하시면 됩니다.",
+                "회중이 함께 부르는 <strong>성가</strong>는 따라 부르지 않으셔도 괜찮습니다.",
+                "처음에는 낯설어도 한두 번 참여하시면 자연스럽게 익숙해지실 수 있습니다.",
+                "궁금하신 점은 옆자리 교우나 안내위원에게 편하게 물어보세요."
+            ],
+            liturgyIntro1: "성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 이어진 말씀의 전례와 성찬의 전례가 조화를 이루는 예배 전통을 400여 년간 지켜오고 있습니다.",
+            liturgyIntro2: "예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 편찬한 이 기도서는, 라틴어가 아닌 자국어로 예배를 드리도록 하여 <strong>모든 신자가 전례에 직접 참여</strong>할 수 있게 한 종교개혁의 중요한 유산입니다.",
+            liturgyCardTitle: "전례의 의미",
+            liturgyCardBody: "<strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말로, '공동체를 위해 수행하는 일'을 뜻합니다. 곧 전례는 <strong>그리스도인이 함께 드리고 함께 살아가는 신앙의 실천</strong>입니다.",
+            liturgyCardItems: [
+                "회중이 <strong>함께 기도하고 응답하는 대화 형식</strong>으로 진행됩니다.",
+                "모든 신자가 성직자와 함께 <strong>예배를 드리는 주체</strong>가 됩니다.",
+                "성서·성가집·기도서·주보를 함께 펴고 능동적으로 참여합니다."
+            ],
+            communionBaptizedTitle: "세례받으신 분",
+            communionBaptizedBody: "성공회의 성찬은 모든 그리스도인에게 열려 있습니다. 교파에 관계없이 <strong>세례받은 그리스도인이라면 누구나</strong> 그리스도의 몸과 피를 모실 수 있습니다.",
+            communionBaptizedItems: [
+                "제대 앞으로 나오신 후, 두 손을 펴서 빵을 받으십시오.",
+                "빵을 받으신 후, 포도주에 찍어 <strong>영하십시오</strong>.<br><small style=\"color:var(--text-muted); font-size:0.82em;\">영하다: 성체를 받아 모시다</small>",
+                "빵과 포도주를 받을 때 <em>\"아멘\"</em>으로 응답합니다.",
+                "성찬을 받는 방법이 궁금하시면 안내위원에게 문의해 주세요."
+            ],
+            communionUnbaptizedTitle: "아직 세례를 받지 않으신 분",
+            communionUnbaptizedBody: "<strong>제대 앞으로 나오시면 강복(축복)을 받으실 수 있습니다.</strong>",
+            communionUnbaptizedItems: [
+                "두 손을 가슴에 X자로 모으시면, 집전자가 머리에 손을 얹고 강복해 드립니다.",
+                "편안한 마음으로 나오세요. 이 시간은 하느님께서 여러분을 맞이하시는 자리입니다."
+            ],
+            contactTitle: "더 궁금하신 점이 있으신가요?",
+            contactBody: "성공회 예배나 광명교회에 대해 궁금하신 점이 있으시면 편하게 문의해 주세요.",
+            contactEmailSuffix: "사제에게 메일 보내기",
+            contactOffice: "교회 사무실"
+        },
+        community: {
+            detailLink: "자세히 보기"
+        },
+        smallgroup: {
+            scheduleLabel: "모임 일정"
+        },
+        giving: {
+            accountTitle: "봉헌 계좌",
+            holderPrefix: "예금주 "
+        },
+        visit: {
+            addressTitle: "주소와 연락처",
+            postalLabel: "우편번호",
+            phoneLabel: "전화",
+            faxLabel: "팩스",
+            trafficTitle: "교통·주차 안내",
+            carLabel: "승용차",
+            carDesc: "내비게이션에 <em>대한성공회 광명교회</em> 또는 위 주소를 검색해 주세요.",
+            busLabel: "버스",
+            busStop: "가까운 정류장: <strong>온신초등학교앞</strong>",
+            busNote: "서울역·구로디지털단지·목동 방면에서 접근 가능합니다.",
+            parkingLabel: "주차",
+            parkingDesc1: "교회 인근에 무료 주차가 가능합니다. 방문 전 교회 사무실(",
+            parkingDesc2: ")로 확인해 주세요.",
+            mapNote: "※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong>로 검색하시면 최단 경로 안내를 받으실 수 있습니다."
+        },
+        clergy: {
+            bishopSuffix: " 주교",
+            priestSuffix: " 사제",
+            bioMilestones: "주요 사목 이력",
+            bioRoles: "교단 내 소임",
+            bioExternal: "교회 밖 활동",
+            bioFirst: "최초",
+            bioSourcePrefix: "출처: ",
+            bioSourceFmt: "{author} 지음, {title}, {publisher} ({year})",
+            ministerEmpty: "준비 중입니다.",
+            foundedLabel: "창립"
+        },
+        media: {
+            videosTitle: "교회 영상",
+            channelLink: "유튜브 채널 전체 보기 ↗"
+        },
+        gallery: {
+            galleryTitle: "사진 게시판",
+            filterAll: "전체",
+            photoCount: "{n}장",
+            filterLabel: "사진 분류 필터",
+            enlargeLabel: "크게 보기"
+        },
+        bulletin: {
+            emptyMsg: "아직 등록된 주보가 없습니다.",
+            pdfLink: "PDF 열기",
+            pending: "준비 중"
+        },
+        sundays: {
+            currentSeasonLabel: "현재 절기",
+            churchYearLabel: "교회력",
+            ribbonCaption: "교회력의 흐름 &middot; 지금은",
+            ribbonAriaPrefix: "전례력 절기 색 띠 — 현재 절기 ",
+            seasonAriaLabel: "절기 정보",
+            seasonColorLabel: "전례색",
+            seasonCurrentTag: "지금 이 절기입니다",
+            seasonsTitle: "교회력 절기",
+            seasonsSub: "성공회는 교회력에 따라 그리스도의 생애를 한 해 동안 함께 기억합니다. 교회력의 새해는 1월이 아니라 대림절에 시작하며, 아래 ①~⑧의 순서로 이어집니다. 각 절기의 색은 기도서 전례색입니다.",
+            lectionaryTitle: "전례독서",
+            lectionarySub: "교회력 절기에 따라 정해진 날짜별 성서 본문입니다. 구약·시편·서신서·복음서 네 본문을 순서대로 봉독합니다.",
+            monthlyTitle: "이달의 교회력",
+            monthlySub: "이달의 주일과 특별 절기를 한눈에 살펴보세요. 날짜의 배경 색은 그날의 전례색입니다.",
+            monthlySub2: "이달의 주일과 특별 절기를 한눈에 살펴보세요. 날짜의 배경 색은 그날의 전례색이며, 절기가 바뀌는 날부터 색이 달라집니다.",
+            specialTitle: "특별 주일",
+            specialSub: "대한성공회와 세계교회가 함께 지키는 주요 주일과 절기입니다.",
+            thisWeek: "이번 주",
+            lastWeek: "지난 주",
+            comingWeek: "다가오는 주",
+            prevMonth: "이전 달",
+            nextMonth: "다음 달",
+            weekdays: ["일", "월", "화", "수", "목", "금", "토"],
+            calLocale: "ko-KR",
+            calRangeSep: " ~ ",
+            legendToday: "오늘",
+            legendSunday: "주일 (전례색 강조)",
+            legendSpecial: "특별 주일·절기",
+            specialDays: {
+                epiphany: "주현절",
+                worldDayOfPrayer: "세계기도일",
+                palmSunday: "종려주일",
+                easterSunday: "부활주일",
+                ascensionSunday: "승천주일",
+                trinitySunday: "성삼위일체 주일",
+                environmentSunday: "환경주일",
+                seasonOfCreation: "창조절",
+                allSaints: "모든 성인 주일",
+                christTheKing: "왕이신 그리스도 주일",
+                worldAids: "에이즈 추모 주일"
+            }
+        },
+        faq: {
+            refsLabel: "출처"
+        },
+        overlay: {
+            noResults: "'{q}'에 대한 결과가 없습니다."
+        },
+        global: {
+            backToTopLabel: "최상단으로 이동",
+            portraitLabel: "초상 확대 보기"
+        }
+    }
 };

@@ -198,6 +198,18 @@ button:focus:not(:focus-visible) { outline: none; }
 
 /* 우측 액션 (전체 메뉴·검색 트리거 + 햄버거) */
 .nav-actions { display: flex; align-items: center; gap: 0.25rem; flex-shrink: 0; }
+.nav-lang-btn {
+    display: flex; align-items: center; justify-content: center;
+    height: 30px; padding: 0 0.65rem;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: transparent; cursor: pointer;
+    color: rgba(255,255,255,0.85);
+    border-radius: 4px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
+    transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+.nav-lang-btn:hover,
+.nav-lang-btn:focus-visible { color: #fff; background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); outline: none; }
 .nav-menu-trigger {
     display: flex; align-items: center; justify-content: center;
     width: 40px; height: 40px;
