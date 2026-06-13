@@ -58,7 +58,7 @@
   성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity)
 
 예배와 기도 (worship.html)
-  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일도 / 세계성공회 중보기도 / 예배 자료 / 주일 주보(bulletin.html)
+  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일과 / 세계성공회 중보기도 / 예배 자료 / 주일 주보(bulletin.html)
 
 교회력 (sundays.html)
   이달의 교회력 / 전례독서(sundays.html#lectionary) / 절기 안내(sundays.html#seasons) / 특별 주일(sundays.html#special)

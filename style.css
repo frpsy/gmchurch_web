@@ -602,8 +602,8 @@ button:focus:not(:focus-visible) { outline: none; }
     padding-left: clamp(1.25rem, 5vw, 2.5rem);
     padding-right: clamp(1.25rem, 5vw, 2.5rem);
     text-align: center;
-    background: linear-gradient(165deg, color-mix(in srgb, var(--theme) 18%, var(--cream)) 0%, var(--theme-light) 40%, var(--cream) 100%);
-    border-bottom: 1px solid var(--border);
+    background: linear-gradient(165deg, color-mix(in srgb, var(--season, var(--theme)) 18%, var(--cream)) 0%, var(--theme-light) 40%, var(--cream) 100%);
+    border-bottom: 3px solid var(--season, var(--green-mid));
 }
 .page-hero h1 {
     font-size: clamp(2.2rem, 4.5vw, 3.4rem);
@@ -3889,7 +3889,7 @@ footer {
        (--theme-light는 항상 밝은 토큰이라 다크에서 밝은 띠가 생기므로, 어두운
         서피스 틴트로 재계산한다.) */
     .page-hero {
-        background: linear-gradient(165deg, color-mix(in srgb, var(--theme) 24%, #0a1f12) 0%, color-mix(in srgb, var(--theme) 16%, var(--white)) 48%, var(--cream) 100%);
+        background: linear-gradient(165deg, color-mix(in srgb, var(--season, var(--theme)) 24%, #0a1f12) 0%, color-mix(in srgb, var(--season, var(--theme)) 16%, var(--white)) 48%, var(--cream) 100%);
     }
     /* 히어로 CTA 버튼 — 배경이 항상 흰색(#fff)이므로 텍스트·호버를 라이트 모드 값으로 고정 */
     .btn-hero-primary {

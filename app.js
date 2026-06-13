@@ -358,13 +358,47 @@ const IndexRenderer = {
 
         // 설립 연도만 추출 ("1990년 2월 11일" → "1990")
         const foundedYear = (established.match(/\d{4}/) || [established])[0];
+        const countFrom = String(Math.max(0, parseInt(foundedYear, 10) - 15));
         if (stats) stats.innerHTML = `
-            <a href="clergy.html#identity" class="hero-stat hero-stat--link"><span class="hero-stat-val">${foundedYear}</span><span class="hero-stat-lbl">설립</span></a>
+            <a href="clergy.html#identity" class="hero-stat hero-stat--link"><span class="hero-stat-val" data-count-from="${countFrom}" data-count-to="${foundedYear}">${foundedYear}</span><span class="hero-stat-lbl">설립</span></a>
             <span class="hero-stat-divider" aria-hidden="true"></span>
             <a href="worship.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">오전 11:00</span><span class="hero-stat-lbl">주일 예배</span></a>
             <span class="hero-stat-divider" aria-hidden="true"></span>
             <a href="visit.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">경기도 광명시</span><span class="hero-stat-lbl">위치</span></a>
         `;
+        this._initStatCounter();
+    },
+
+    _initStatCounter() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const statsEl = document.getElementById('hero-stats');
+        if (!statsEl) return;
+        const counters = statsEl.querySelectorAll('[data-count-to]');
+        if (!counters.length) return;
+
+        const run = () => {
+            counters.forEach(el => {
+                const from = parseInt(el.dataset.countFrom || '0', 10);
+                const to   = parseInt(el.dataset.countTo, 10);
+                if (isNaN(to)) return;
+                const duration = 900;
+                const t0 = performance.now();
+                const tick = (now) => {
+                    const p = Math.min((now - t0) / duration, 1);
+                    el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3)));
+                    if (p < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+            });
+        };
+
+        const io = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                io.disconnect();
+                setTimeout(run, 750); // hero-stats 페이드인 (delay 0.72s)과 동기
+            }
+        }, { threshold: 0.1 });
+        io.observe(statsEl);
     },
 
     _about() {

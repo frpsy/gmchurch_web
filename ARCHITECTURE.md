@@ -265,7 +265,7 @@ const CHURCH_DATA = {
   └ 주일 감사성찬례    worship.html#main                (JS)
   └ 어린이 예배        worship.html#children            (JS)
   └ 감사성찬례 순서    worship.html#eucharist-order     (JS)
-  └ 성무일도           worship.html#daily-office        (JS)
+  └ 성무일과           worship.html#daily-office        (JS)
   └ 세계성공회 중보기도 worship.html#intercession       (JS)
   └ 예배 자료          worship.html#resources           (JS)
 
