@@ -152,7 +152,7 @@ P0 완료 후 위원회 검토 미팅 → 다음 항목으로 진행:
 - **P1-1**. 공지사항 페이지 (`news.html` + `CHURCH_DATA.news`)
 - **P1-2**. 주보 아카이브 (`bulletin.html` + 최근 12주 PDF)
 - **P1-3**. 메인 hero에 "처음 오셨나요?" CTA 4번째 버튼
-- **P1-4**. 평일 성무일도 시간표 (`CHURCH_DATA.worship.daily`)
+- **P1-4**. 평일 성무일과 시간표 (`CHURCH_DATA.worship.daily`)
 - **P1-5**. RCL 성서정과 표시 (Year A/B/C 자동 계산)
 
 ---
