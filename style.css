@@ -630,6 +630,7 @@ button:focus:not(:focus-visible) { outline: none; }
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    border-bottom: none; /* 사진 히어로는 보더 제거 — 색 대비로 인한 이질감 방지 */
 }
 .page-hero--photo::before {
     content: '';
