@@ -603,7 +603,6 @@ button:focus:not(:focus-visible) { outline: none; }
     padding-right: clamp(1.25rem, 5vw, 2.5rem);
     text-align: center;
     background: linear-gradient(165deg, color-mix(in srgb, var(--season, var(--theme)) 18%, var(--cream)) 0%, var(--theme-light) 40%, var(--cream) 100%);
-    border-bottom: 3px solid var(--season, var(--green-mid));
 }
 .page-hero h1 {
     font-size: clamp(2.2rem, 4.5vw, 3.4rem);
