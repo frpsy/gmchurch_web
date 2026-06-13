@@ -35,7 +35,7 @@
     --surface-nav:  rgba(255, 255, 255, 0.96);
     /* Layout */
     --nav-h:        68px;
-    --section-pad:  7rem;
+    --section-pad:  6rem;
     --content-max:  1200px;
     --radius-sm:    8px;
     --radius-md:    14px;
@@ -74,7 +74,7 @@
 
 /* ── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
 /* 부드러운 스크롤은 모션 민감 사용자에게는 비활성화 (전정기관 자극 방지) */
 @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
@@ -192,7 +192,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .nav-logo-text { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
 .nav-logo-name { font-size: 0.95rem; font-weight: 700; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
-.nav-logo-sub  { font-size: 0.65rem; color: rgba(255,255,255,0.9); letter-spacing: 0.04em; }
+.nav-logo-sub  { font-size: 0.7rem; color: rgba(255,255,255,0.9); letter-spacing: 0.04em; }
 
 .nav-menu { display: flex; list-style: none; height: 100%; align-items: center; margin-left: auto; }
 
@@ -597,7 +597,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .page-hero > :nth-child(4) { animation-delay: 0.50s; }
 
 .page-hero {
-    padding-top: calc(var(--nav-h) + 5rem);
+    padding-top: calc(var(--nav-h) + 4rem);
     padding-bottom: 4rem;
     padding-left: clamp(1.25rem, 5vw, 2.5rem);
     padding-right: clamp(1.25rem, 5vw, 2.5rem);
@@ -2101,7 +2101,7 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
 /* Newcomer CTA (page closing) */
 /* ── Next Step CTA ────────────────────────────────────────── */
 .next-step-cta {
-    padding: 6rem 0;
+    padding: var(--section-pad) 0;
     background: radial-gradient(ellipse 80% 60% at 50% 0%, #1e4530 0%, var(--green-deep) 65%);
     border-top: none;
 }
