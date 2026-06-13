@@ -323,7 +323,7 @@ button:focus:not(:focus-visible) { outline: none; }
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: left;
+    text-align: center;
     overflow: hidden;
     color: #fff;
 }
@@ -420,12 +420,12 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: clamp(0.95rem, 2.5vw, 1.15rem);
     opacity: 0.90;
     max-width: 520px;
-    margin: 0 0 2.5rem;
+    margin: 0 auto 2.5rem;
     text-shadow: 0 1px 10px rgba(0,0,0,0.20);
 }
 .hero-actions {
     display: flex; gap: 0.8rem;
-    justify-content: flex-start; flex-wrap: wrap;
+    justify-content: center; flex-wrap: wrap;
 }
 .btn-outline {
     display: inline-block;
@@ -562,11 +562,8 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 @media (max-width: 768px) {
-    /* 모바일 — 중앙 정렬 복원 */
-    .hero { text-align: center; }
-    .hero-sub { margin: 0 auto 2.2rem; }
     /* CTA — 세로 스택 시 동일 너비로 정렬 */
-    .hero-actions { flex-direction: column; align-items: center; gap: 0.7rem; justify-content: center; }
+    .hero-actions { flex-direction: column; align-items: center; gap: 0.7rem; }
     .hero-actions a { width: 100%; max-width: 300px; text-align: center; }
     .hero-label { letter-spacing: 0.18em; font-size: 0.66rem; }
 
