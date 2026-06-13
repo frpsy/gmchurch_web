@@ -1073,22 +1073,20 @@ const CHURCH_DATA = {
         ]
     },
 
-    // 사진 게시판 (gallery.html) — 초안. 실제 교회 사진으로 교체 예정.
+    // 사진 게시판 (gallery.html)
     photoGallery: {
         intro: "예배, 애찬, 절기 행사 등 광명교회 공동체의 순간들을 모았습니다.",
-        badge: "초안",
-        note: "샘플 이미지로 구성된 초안입니다. 실제 교회 사진으로 교체 예정입니다.",
         categories: ["전체", "예배", "공동체", "절기·행사", "교회 풍경"],
         photos: [
             {
                 id: "p01",
-                title: "주일 성찬예배",
-                desc: "매주 주일, 공동체가 모여 성찬을 나눕니다.",
+                title: "예배와 기도",
+                desc: "매주 주일, 공동체가 모여 말씀과 성찬을 나눕니다.",
                 category: "예배",
-                date: "2025.03",
-                src: "https://picsum.photos/seed/gmc-worship1/900/600",
-                thumb: "https://picsum.photos/seed/gmc-worship1/480/320",
-                alt: "주일 성찬예배 모습"
+                date: "2026.06",
+                src: "images/gallery/worship/예배와기도1.webp",
+                thumb: "images/gallery/worship/예배와기도1.webp",
+                alt: "광명교회 예배와 기도"
             },
             {
                 id: "p02",
@@ -1112,13 +1110,13 @@ const CHURCH_DATA = {
             },
             {
                 id: "p04",
-                title: "주일 애찬",
-                desc: "성찬예배 후 함께 나누는 식사.",
+                title: "공동체 모임",
+                desc: "함께 모여 말씀과 삶을 나누는 광명교회 공동체.",
                 category: "공동체",
-                date: "2025.03",
-                src: "https://picsum.photos/seed/gmc-community1/900/600",
-                thumb: "https://picsum.photos/seed/gmc-community1/480/320",
-                alt: "주일 애찬 풍경"
+                date: "2026.06",
+                src: "images/gallery/community/공동체1.webp",
+                thumb: "images/gallery/community/공동체1.webp",
+                alt: "광명교회 공동체 모임"
             },
             {
                 id: "p05",
@@ -1182,13 +1180,13 @@ const CHURCH_DATA = {
             },
             {
                 id: "p11",
-                title: "성전 내부",
-                desc: "캔터베리 십자가가 이끄는 예배 공간.",
+                title: "교회 내부 — 제단",
+                desc: "캔터베리 십자가와 제단이 있는 광명교회 성전.",
                 category: "교회 풍경",
-                date: "2025.01",
-                src: "https://picsum.photos/seed/gmc-space1/900/600",
-                thumb: "https://picsum.photos/seed/gmc-space1/480/320",
-                alt: "성전 내부 모습"
+                date: "2026.06",
+                src: "images/gallery/scenery/교회소개_교회내부_제단.webp",
+                thumb: "images/gallery/scenery/교회소개_교회내부_제단.webp",
+                alt: "광명교회 교회 내부 제단"
             },
             {
                 id: "p12",
