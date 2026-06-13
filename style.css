@@ -435,16 +435,16 @@ button:focus:not(:focus-visible) { outline: none; }
     padding: 0.68rem 1.75rem;
     border-radius: 6px;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.01em;
     transition: background 0.2s ease, border-color 0.2s ease,
                 transform 0.2s ease, box-shadow 0.2s ease;
 }
 .btn-outline:hover {
-    background: rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.18);
     border-color: rgba(255,255,255,0.85);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 28px rgba(192, 154, 96, 0.28);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(192, 154, 96, 0.22);
 }
 
 /* Hero — 실시간 예배 버튼 (히어로 외부 영역용) */
@@ -458,7 +458,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: 0.9rem;
     transition: background 0.2s, transform 0.2s;
 }
-.btn-live:hover { background: #9b1c1c; transform: translateY(-2px); }
+.btn-live:hover { background: #9b1c1c; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(155, 28, 28, 0.30); }
 
 /* Hero — solid primary CTA */
 .btn-hero-primary {
@@ -475,8 +475,8 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .btn-hero-primary:hover {
     background: var(--green-light);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 32px rgba(192, 154, 96, 0.28);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(192, 154, 96, 0.26);
 }
 
 /* Hero — 하단 스탯 스트립 */
@@ -2192,11 +2192,11 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     background: var(--white);
     border: 1px solid var(--border);
     color: var(--text);
-    transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease,
+    transition: transform 0.2s ease, box-shadow 0.2s ease,
                 border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 .btn-next:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     border-color: var(--theme);
     box-shadow: var(--hover-shadow-sm);
 }
@@ -2283,12 +2283,14 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .newcomer-cta-link:hover {
     border-color: var(--theme);
     color: var(--heading);
     background: var(--green-light);
+    box-shadow: var(--hover-shadow-sm);
+    transform: translateY(-1px);
 }
 
 .liturgy-section { margin-bottom: 3.5rem; }
@@ -3699,6 +3701,7 @@ footer {
     background: transparent;
     color: var(--text-muted);
     font-size: var(--fs-sm);
+    font-weight: 500;
     font-family: inherit;
     cursor: pointer;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
