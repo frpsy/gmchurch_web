@@ -650,7 +650,11 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .page-hero--worship   { background-image: url('images/gallery/worship/예배와기도1.webp'); }
-.page-hero--community { background-image: url('images/gallery/community/공동체1.webp'); }
+.page-hero--community {
+    background-image: url('images/gallery/community/공동체1.webp');
+    min-height: 420px;           /* 세로 여유 확보 — 두 사람이 모두 보이도록 */
+    background-position: center 40%;
+}
 .page-hero--clergy    { background-image: url('images/gallery/scenery/교회소개_교회내부_제단.webp'); }
 
 @media (prefers-color-scheme: dark) {
