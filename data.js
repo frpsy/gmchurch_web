@@ -466,8 +466,8 @@ const CHURCH_DATA = {
         ],
         prayer: {
             dailyOfficeIntro: [
-                "성무일도(聖務日課)는 정해진 시간에 드리는 교회의 공적 기도입니다. \"쉬지 말고 기도하십시오\"(1테살 5,17)라는 말씀을 따라, 초대교회와 수도원 전통에서 이어져 온 기도의 리듬입니다.",
-                "성공회 기도서는 하루의 흐름에 따른 네 가지 기도를 제공합니다. 시편과 성서 봉독, 찬가와 기도로 구성되며, 공동체나 개인이 매일 같은 기도문으로 하느님 앞에 하루를 열고 닫습니다.",
+                "성무일과(매일기도)는 정해진 시간에 드리는 교회의 공적 기도입니다. \"쉬지 말고 기도하십시오\"(1테살 5,17)라는 말씀을 따라, 초대교회와 수도원 전통에서 이어져 온 기도의 리듬입니다.",
+                "성공회 기도서는 하루의 흐름에 따른 네 가지 기도를 제공합니다. 시편과 성서 봉독, 송가와 기도로 구성되며, 공동체나 개인이 매일 같은 기도문으로 하느님 앞에 하루를 열고 닫습니다.",
                 "정해진 기도문을 날마다 되풀이하는 일은 단조로워 보일 수 있지만, 같은 말씀을 거듭 새기며 하루의 때를 거룩하게 구별하는 데 그 뜻이 있습니다. 아래 기도서를 따라 누구나 지금 함께 기도할 수 있습니다."
             ],
             dailyOffice: [
@@ -475,7 +475,7 @@ const CHURCH_DATA = {
                     icon: "🌅",
                     title: "아침기도",
                     en: "Morning Prayer",
-                    desc: "하루를 시작하며 드리는 기도입니다. 찬가·시편·성서 봉독·기도로 구성됩니다.",
+                    desc: "하루를 시작하며 드리는 기도입니다. 송가·시편·성서 봉독·기도로 구성됩니다.",
                     url: "https://dulkuka12.github.io/kbcp/morning-prayer.html"
                 },
                 {
@@ -489,7 +489,7 @@ const CHURCH_DATA = {
                     icon: "🌆",
                     title: "저녁기도",
                     en: "Evening Prayer",
-                    desc: "하루를 마감하며 감사와 참회로 드리는 기도입니다. 성모찬가(마그니피캇)를 포함하며, 빛이신 그리스도를 찬양합니다.",
+                    desc: "하루를 마감하며 감사와 참회로 드리는 기도입니다. 성모마리아 송가(마그니피캇)를 포함하며, 빛이신 그리스도를 찬양합니다.",
                     url: "https://dulkuka12.github.io/kbcp/evening-prayer.html"
                 },
                 {
@@ -500,6 +500,29 @@ const CHURCH_DATA = {
                     url: "https://dulkuka12.github.io/kbcp/compline-prayer.html"
                 }
             ],
+            bcp: {
+                eyebrow: "Book of Common Prayer & Hymnal",
+                title: "공동기도서와 성가",
+                sections: [
+                    {
+                        title: "공동기도서(Book of Common Prayer)란?",
+                        body: [
+                            "동방정교회, 로마가톨릭교회와 같이 성공회는 하나의 전례서(예배예식서)를 사용하는 '기도서의 교회'입니다. 성서, 기도서, 성가는 성공회 신앙생활의 세 기둥입니다.",
+                            "잉글랜드 종교개혁기에 토마스 크랜머 캔터베리 대주교가 성서와 개신교 교리에 입각해서 동서고금의 아름답고 훌륭한 기도문과 예식문들을 참고하면서도, 영국의 평민들(commoners) 모두가 가정에 두고 즐겨 사용하도록 편찬했습니다. 그래서 영문학상으로도 중요한 자료로 평가됩니다.",
+                            "전례력(교회력), 성찬예배, 세례성사와 병자·혼인·상장례 등 성사적 예식들, 성무일과(매일기도), 각종 기도문, 성무일과용 시편집으로 이뤄져 있습니다.",
+                            "세계성공회는 이를 바탕으로 각 나라별 특성과 시대변화를 반영한 공동기도서를 계속해서 만들어가고 있습니다. 뉴질랜드 기도서는 마오리 원주민들의 신앙을 잘 반영한 예로 꼽힙니다."
+                        ]
+                    },
+                    {
+                        title: "대한성공회 성가란?",
+                        body: [
+                            "한국 개신교는 모든 교단이 하나의 성경번역본과 하나의 찬송가를 쓰고 있지만, 외국은 각 교단 신학을 반영해 감리교·침례교·장로교 등이 각자 따로 만들어 씁니다.",
+                            "대한성공회 성가는 1903년 '셩회숑가'로 시작해서 1965·1990·2015년까지 개정을 거듭했습니다. 초대교회 동서방 교부들의 신앙이 담긴 노래들부터, 현대 가톨릭 성가와 한국 개신교 찬송가, 제3세계 성가, 복음성가를 두루 담았습니다.",
+                            "특히 한국예술종합학교 총장이었던 이건용의 창작곡들과 여러 국악, 한국 작곡가들의 곡이 애창되고 있습니다."
+                        ]
+                    }
+                ]
+            },
             intercession: {
                 icon: "🌍",
                 title: "세계성공회 중보기도 목록",
@@ -1079,13 +1102,13 @@ const CHURCH_DATA = {
             },
             {
                 id: "p03",
-                title: "새벽 성무일도",
+                title: "새벽 성무일과",
                 desc: "고요한 새벽, 시편과 기도로 하루를 엽니다.",
                 category: "예배",
                 date: "2025.02",
                 src: "https://picsum.photos/seed/gmc-worship3/900/600",
                 thumb: "https://picsum.photos/seed/gmc-worship3/480/320",
-                alt: "새벽 성무일도"
+                alt: "새벽 성무일과"
             },
             {
                 id: "p04",
@@ -1196,12 +1219,13 @@ const CHURCH_DATA = {
             label: "예배와 기도",
             href: "worship.html",
             items: [
-                { label: "주일 감사성찬례", href: "worship.html#main" },
-                { label: "어린이 예배",    href: "worship.html#children" },
-                { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
-                { label: "성무일도",       href: "worship.html#daily-office" },
-                { label: "예배 자료",      href: "worship.html#resources" },
-                { label: "주일 주보",      href: "bulletin.html" }
+                { label: "공동기도서와 성가", href: "worship.html#bcp-hymnal" },
+                { label: "주일 감사성찬례",  href: "worship.html#main" },
+                { label: "어린이 예배",     href: "worship.html#children" },
+                { label: "감사성찬례 순서",  href: "worship.html#eucharist-order" },
+                { label: "성무일과(매일기도)", href: "worship.html#daily-office" },
+                { label: "예배 자료",       href: "worship.html#resources" },
+                { label: "주일 주보",       href: "bulletin.html" }
             ]
         },
         {
