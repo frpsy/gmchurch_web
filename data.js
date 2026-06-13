@@ -584,7 +584,7 @@ const CHURCH_DATA = {
             category: "정의·평화",
             media: "에큐메니안",
             title: "6월 민주항쟁 39주년 시민기념식, 성공회 서울주교좌성당서 열려 — 민숙희 마가렛 사제 추모 설교",
-            date: "2026.06.11",
+            date: "2026.06",
             url: "https://www.ecumenian.com/news/articleView.html?idxno=31441"
         },
         {
@@ -600,7 +600,7 @@ const CHURCH_DATA = {
             category: "녹색교회",
             media: "CBS 크리스천노컷뉴스",
             title: "대한성공회, \"모든 교회를 녹색교회로!\" 교회력 '창조절' 전격 시행",
-            date: "2023.08.25",
+            date: "2023.08",
             url: "https://mch.nocutnews.co.kr/news/6000856"
         },
         {
@@ -608,7 +608,7 @@ const CHURCH_DATA = {
             category: "녹색교회",
             media: "뉴시스",
             title: "NCCK, 올해 '녹색교회' 11곳 선정 — 광명교회(대한성공회) 등",
-            date: "2023.05.15",
+            date: "2023.05",
             url: "https://mobile.newsis.com/view_amp.html?ar_id=NISX20230515_0002303502"
         },
         {
@@ -616,7 +616,7 @@ const CHURCH_DATA = {
             category: "여성 성직",
             media: "성공회신문",
             title: "서울교구 최초 여성 총사제 민숙희 마가렛 사제, 부산교구 최초 여성 성직자 상임위원 심미경 아가타 사제 인터뷰",
-            date: "2025.02.20",
+            date: "2025.02",
             url: "http://www.skhnews.or.kr/news/articleView.html?idxno=768"
         },
         {
