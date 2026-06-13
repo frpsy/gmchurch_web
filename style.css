@@ -649,7 +649,7 @@ button:focus:not(:focus-visible) { outline: none; }
     text-shadow: 0 1px 10px rgba(0,0,0,0.45);
 }
 
-.page-hero--worship   { background-image: url('images/gallery/worship/예배와기도1.webp'); }
+.page-hero--worship   { background-image: url('images/gallery/worship/야외성찬례.png'); }
 .page-hero--community {
     background-image: url('images/gallery/community/공동체1.webp');
     min-height: 420px;           /* 세로 여유 확보 — 두 사람이 모두 보이도록 */

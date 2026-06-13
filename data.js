@@ -1084,8 +1084,8 @@ const CHURCH_DATA = {
                 desc: "매주 주일, 공동체가 모여 말씀과 성찬을 나눕니다.",
                 category: "예배",
                 date: "2026.06",
-                src: "images/gallery/worship/예배와기도1.webp",
-                thumb: "images/gallery/worship/예배와기도1.webp",
+                src: "images/gallery/worship/야외성찬례.png",
+                thumb: "images/gallery/worship/야외성찬례.png",
                 alt: "광명교회 예배와 기도"
             },
             {
