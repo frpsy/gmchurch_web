@@ -1590,6 +1590,13 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
 }
 .anglican-para:last-child { margin-bottom: 0; }
 .anglican-body { margin: 0 auto 2.5rem; max-width: 760px; }
+.bcp-section-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 1.75rem 0 0.6rem;
+}
+.bcp-section-title:first-child { margin-top: 0; }
 
 /* Pillars (three-column card grid) */
 .anglican-pillars {

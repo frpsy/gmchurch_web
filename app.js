@@ -429,6 +429,27 @@ const IndexRenderer = {
     }
 };
 
+/* ── BcpRenderer ─────────────────────────────────────────── */
+const BcpRenderer = {
+    render() {
+        const el = document.getElementById('worship-bcp');
+        if (!el) return;
+        const bcp = CHURCH_DATA.worship && CHURCH_DATA.worship.prayer && CHURCH_DATA.worship.prayer.bcp;
+        if (!bcp) return;
+        el.innerHTML = `
+            <div class="section-header">
+                <p class="section-eyebrow">${bcp.eyebrow}</p>
+                <h2 class="section-title">${bcp.title}</h2>
+            </div>
+            <div class="anglican-body">
+                ${bcp.sections.map(sec => `
+                    <h3 class="bcp-section-title">${sec.title}</h3>
+                    ${sec.body.map(p => `<p class="anglican-para">${p}</p>`).join('')}
+                `).join('')}
+            </div>`;
+    }
+};
+
 /* ── WorshipRenderer ─────────────────────────────────────── */
 const WorshipRenderer = {
     render() {
@@ -535,7 +556,7 @@ const WorshipRenderer = {
             <div class="liturgy-guide">
                 <div class="liturgy-section">
                     <p class="section-eyebrow">DIVINE OFFICE</p>
-                    <h2 class="section-title">성무일도</h2>
+                    <h2 class="section-title">성무일과(매일기도)</h2>
                     ${(prayer.dailyOfficeIntro || []).map((p, i) => `
                         <p class="liturgy-body${i === prayer.dailyOfficeIntro.length - 1 ? ' liturgy-body--lead' : ''}">${p}</p>
                     `).join('')}
@@ -1937,6 +1958,7 @@ const App = {
         NavRenderer.render();
         FooterRenderer.render();
         IndexRenderer.render();
+        BcpRenderer.render();
         WorshipRenderer.render();
         NewcomerRenderer.render();
         CommunityRenderer.render();
@@ -2107,7 +2129,7 @@ const MenuOverlay = {
             join(m.time, m.desc, m.detail, m.verse)));
         (wor.resources || []).forEach(r => add(r.title, 'worship.html#resources', '예배 자료', r.desc));
         if (wor.prayer) {
-            (wor.prayer.dailyOffice || []).forEach(o => add(o.title, 'worship.html#daily-office', '성무일도',
+            (wor.prayer.dailyOffice || []).forEach(o => add(o.title, 'worship.html#daily-office', '성무일과(매일기도)',
                 join(o.en, o.desc)));
             const ic = wor.prayer.intercession;
             if (ic) add(ic.title, 'worship.html#intercession', '예배와 기도', join(ic.en, ic.desc));
