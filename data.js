@@ -1217,12 +1217,12 @@ const CHURCH_DATA = {
             label: "예배와 기도",
             href: "worship.html",
             items: [
-                { label: "공동기도서와 성가", href: "worship.html#bcp-hymnal" },
                 { label: "주일 감사성찬례",  href: "worship.html#main" },
                 { label: "어린이 예배",     href: "worship.html#children" },
                 { label: "감사성찬례 순서",  href: "worship.html#eucharist-order" },
                 { label: "성무일과(매일기도)", href: "worship.html#daily-office" },
                 { label: "예배 자료",       href: "worship.html#resources" },
+                { label: "공동기도서와 성가", href: "worship.html#bcp-hymnal" },
                 { label: "주일 주보",       href: "bulletin.html" }
             ]
         },
