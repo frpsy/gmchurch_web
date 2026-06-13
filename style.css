@@ -624,6 +624,44 @@ button:focus:not(:focus-visible) { outline: none; }
     overflow-wrap: break-word;
 }
 
+/* ── Page Hero — 사진 배경 변형 ────────────────────────────── */
+.page-hero--photo {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.page-hero--photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+        rgba(0,0,0,0.52) 0%,
+        rgba(0,0,0,0.38) 60%,
+        rgba(0,0,0,0.55) 100%);
+    z-index: 0;
+}
+.page-hero--photo > * { position: relative; z-index: 1; }
+.page-hero--photo h1,
+.page-hero--photo p,
+.page-hero--photo .section-eyebrow {
+    color: #fff;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.45);
+}
+
+.page-hero--worship   { background-image: url('images/gallery/worship/예배와기도1.webp'); }
+.page-hero--community { background-image: url('images/gallery/community/공동체1.webp'); }
+.page-hero--clergy    { background-image: url('images/gallery/scenery/교회소개_교회내부_제단.webp'); }
+
+@media (prefers-color-scheme: dark) {
+    .page-hero--photo::before {
+        background: linear-gradient(to bottom,
+            rgba(0,0,0,0.65) 0%,
+            rgba(0,0,0,0.50) 60%,
+            rgba(0,0,0,0.68) 100%);
+    }
+}
+
 /* ── Scroll Reveal ───────────────────────────────────────── */
 .reveal {
     opacity: 0;
