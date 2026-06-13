@@ -1200,7 +1200,6 @@ const CHURCH_DATA = {
                 { label: "어린이 예배",    href: "worship.html#children" },
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
                 { label: "성무일도",       href: "worship.html#daily-office" },
-                { label: "세계성공회 중보기도", href: "worship.html#intercession" },
                 { label: "예배 자료",      href: "worship.html#resources" },
                 { label: "주일 주보",      href: "bulletin.html" }
             ]
