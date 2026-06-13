@@ -1198,11 +1198,11 @@ const CHURCH_DATA = {
             items: [
                 { label: "주일 감사성찬례", href: "worship.html#main" },
                 { label: "어린이 예배",    href: "worship.html#children" },
-                { label: "주일 주보",      href: "bulletin.html", badge: "초안" },
                 { label: "감사성찬례 순서", href: "worship.html#eucharist-order" },
                 { label: "성무일도",       href: "worship.html#daily-office" },
                 { label: "세계성공회 중보기도", href: "worship.html#intercession" },
-                { label: "예배 자료",      href: "worship.html#resources" }
+                { label: "예배 자료",      href: "worship.html#resources" },
+                { label: "주일 주보",      href: "bulletin.html" }
             ]
         },
         {
@@ -1243,7 +1243,7 @@ const CHURCH_DATA = {
             href: "media.html",
             items: [
                 { label: "교회 영상",     href: "media.html#videos" },
-                { label: "사진 게시판",   href: "gallery.html", badge: "초안" },
+                { label: "사진 게시판",   href: "gallery.html" },
                 { label: "관련 기관",     href: "media.html#links" }
             ]
         },
