@@ -1639,6 +1639,23 @@ const BulletinRenderer = {
         });
     },
 
+    _createLightbox() {
+        const dlg = document.createElement('dialog');
+        dlg.id = 'bulletin-lb';
+        dlg.innerHTML = `
+            <div class="bulletin-lb-wrap">
+                <button class="bulletin-lb-close" aria-label="닫기">✕</button>
+                <img class="bulletin-lb-img" src="" alt="">
+            </div>`;
+        document.body.appendChild(dlg);
+        dlg.querySelector('.bulletin-lb-close').addEventListener('click', () => dlg.close());
+        dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && dlg.open) dlg.close();
+        }, { once: false });
+        return dlg;
+    },
+
     render() {
         const el = document.getElementById('bulletin-full');
         if (!el) return;
@@ -1647,6 +1664,14 @@ const BulletinRenderer = {
             el.innerHTML = `<p class="bulletin-empty">아직 등록된 주보가 없습니다.</p>`;
             return;
         }
+        const dlg = document.getElementById('bulletin-lb') || this._createLightbox();
+        el.addEventListener('click', e => {
+            const img = e.target.closest('.bulletin-page');
+            if (!img) return;
+            dlg.querySelector('.bulletin-lb-img').src = img.src;
+            dlg.querySelector('.bulletin-lb-img').alt = img.alt;
+            dlg.showModal();
+        });
         this._renderPage(el, items, 0);
     }
 };
