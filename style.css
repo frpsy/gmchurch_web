@@ -4389,14 +4389,93 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     .menu-overlay-panel { transition: none; }
     .menu-overlay-panel { transform: none; }
 }
-/* ── Bulletin Viewer ─────────────────────────────────────── */
-.bulletin-tabs {
+/* ── Bulletin List (accordion + pagination) ──────────────── */
+.bulletin-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    max-width: 800px;
 }
-.bulletin-tab {
+.bulletin-item {
+    border-bottom: 1px solid var(--border);
+}
+.bulletin-item:last-child { border-bottom: none; }
+
+.bulletin-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    transition: background 0.15s;
+}
+.bulletin-row:hover { background: var(--green-light); }
+.bulletin-row[aria-expanded="true"] {
+    background: var(--green-light);
+    border-bottom: 1px solid var(--border);
+}
+
+.bulletin-row-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.bulletin-row-date {
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--heading);
+    white-space: nowrap;
+}
+.bulletin-row-season {
+    font-size: var(--fs-label);
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+.bulletin-row-chevron {
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+}
+.bulletin-row[aria-expanded="true"] .bulletin-row-chevron {
+    transform: rotate(180deg);
+}
+
+.bulletin-drawer {
+    padding: 1.25rem 1.25rem 1.5rem;
+    background: var(--cream);
+}
+.bulletin-drawer[hidden] { display: none; }
+
+.bulletin-pages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.bulletin-page {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+
+.bulletin-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+.bulletin-pag-btn {
     padding: 0.45rem 1.1rem;
     border: 1px solid var(--border);
     border-radius: 999px;
@@ -4405,40 +4484,42 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     font-size: var(--fs-sm);
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
     font-family: inherit;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
-.bulletin-tab:hover,
-.bulletin-tab.is-active {
+.bulletin-pag-btn:hover:not(:disabled) {
     background: var(--theme);
     color: var(--theme-on);
     border-color: var(--theme);
 }
-.bulletin-week-meta {
+.bulletin-pag-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+.bulletin-pag-info {
     font-size: var(--fs-sm);
     color: var(--text-muted);
-    margin-bottom: 1.25rem;
+    min-width: 3rem;
+    text-align: center;
 }
-.bulletin-pages {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    max-width: 800px;
-}
-.bulletin-page {
-    width: 100%;
-    display: block;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-}
+
 .bulletin-empty {
     color: var(--text-muted);
     font-size: var(--fs-sm);
     padding: 2rem 0;
 }
+
 @media (prefers-color-scheme: dark) {
-    .bulletin-tab { background: var(--white); color: var(--text); }
+    .bulletin-row { background: var(--white); }
+    .bulletin-row:hover,
+    .bulletin-row[aria-expanded="true"] { background: var(--green-light); }
+    .bulletin-drawer { background: var(--cream); }
     .bulletin-page { border-color: var(--border); }
+    .bulletin-pag-btn { background: var(--white); color: var(--text); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .bulletin-row-chevron { transition: none; }
+    .bulletin-row { transition: none; }
 }
 
 /* ── Print ────────────────────────────────────────────────
