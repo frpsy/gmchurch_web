@@ -1552,43 +1552,65 @@ const PortraitLightbox = {
 const BulletinRenderer = {
     _PER_PAGE: 5,
 
-    _imagesHtml(item) {
+    _rowHtml(item, isLatest) {
+        const count = item.images ? item.images.length : 0;
+        return `
+            <button class="bulletin-row" aria-expanded="false" type="button">
+                <div class="bulletin-row-info">
+                    <div class="bulletin-row-top">
+                        <span class="bulletin-row-date">${item.label}</span>
+                        ${isLatest ? '<span class="bulletin-badge-new">이번 주</span>' : ''}
+                    </div>
+                    <div class="bulletin-row-meta">
+                        <span class="bulletin-row-season">${item.season}</span>
+                        ${count > 0 ? `<span class="bulletin-row-count">${count}면</span>` : ''}
+                    </div>
+                </div>
+                <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true">
+                    <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>`;
+    },
+
+    _drawerHtml(item) {
         if (!item.images || item.images.length === 0) {
-            return `<p class="bulletin-empty">주보가 준비 중입니다.</p>`;
+            return `<p class="bulletin-empty-inner">주보가 준비 중입니다.</p>`;
         }
-        return `<div class="bulletin-pages">${
-            item.images.map((src, i) =>
-                `<img src="${src}" alt="${item.label} ${i + 1}면" loading="lazy" class="bulletin-page">`
-            ).join('')
-        }</div>`;
+        const imgs = item.images.map((src, i) =>
+            `<img src="${src}" alt="${item.label} ${i + 1}면" loading="lazy" class="bulletin-page">`
+        ).join('');
+        const pdfBtn = item.pdf
+            ? `<a href="${item.pdf}" class="bulletin-pdf-btn" download>
+                   <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                       <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                   </svg>
+                   PDF 내려받기
+               </a>`
+            : '';
+        return `<div class="bulletin-pages">${imgs}</div>${pdfBtn}`;
     },
 
     _renderPage(el, items, page) {
-        const perPage = this._PER_PAGE;
+        const perPage    = this._PER_PAGE;
         const totalPages = Math.ceil(items.length / perPage);
-        const start = page * perPage;
-        const pageItems = items.slice(start, start + perPage);
+        const start      = page * perPage;
+        const pageItems  = items.slice(start, start + perPage);
 
-        const listHtml = pageItems.map((item) => `
+        const listHtml = pageItems.map((item, relIdx) => `
             <div class="bulletin-item">
-                <button class="bulletin-row" aria-expanded="false" type="button">
-                    <span class="bulletin-row-main">
-                        <span class="bulletin-row-date">${item.label}</span>
-                        <span class="bulletin-row-season">${item.season}</span>
-                    </span>
-                    <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
+                ${this._rowHtml(item, start + relIdx === 0)}
                 <div class="bulletin-drawer" hidden>
-                    ${this._imagesHtml(item)}
+                    ${this._drawerHtml(item)}
                 </div>
             </div>
         `).join('');
 
         const pagHtml = totalPages > 1 ? `
             <nav class="bulletin-pagination" aria-label="주보 목록 페이지">
-                <button class="bulletin-pag-btn" type="button" data-dir="-1"${page === 0 ? ' disabled' : ''}>이전</button>
+                <button class="bulletin-pag-btn" type="button" data-dir="-1"${page === 0 ? ' disabled' : ''}>← 이전</button>
                 <span class="bulletin-pag-info">${page + 1} / ${totalPages}</span>
-                <button class="bulletin-pag-btn" type="button" data-dir="1"${page >= totalPages - 1 ? ' disabled' : ''}>다음</button>
+                <button class="bulletin-pag-btn" type="button" data-dir="1"${page >= totalPages - 1 ? ' disabled' : ''}>다음 →</button>
             </nav>
         ` : '';
 
@@ -1621,12 +1643,10 @@ const BulletinRenderer = {
         const el = document.getElementById('bulletin-full');
         if (!el) return;
         const { items } = CHURCH_DATA.bulletins;
-
         if (!items || items.length === 0) {
             el.innerHTML = `<p class="bulletin-empty">아직 등록된 주보가 없습니다.</p>`;
             return;
         }
-
         this._renderPage(el, items, 0);
     }
 };
