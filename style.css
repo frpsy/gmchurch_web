@@ -4526,6 +4526,8 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     border: none;
     background: transparent;
     overflow: hidden;
+}
+#bulletin-lb[open] {
     display: flex;
     align-items: center;
     justify-content: center;
