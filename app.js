@@ -1268,7 +1268,7 @@ const PhotoGalleryRenderer = {
             </div>` : ''}
             <div class="section-header">
                 <p class="section-eyebrow">Photo Gallery</p>
-                <h2 class="section-title">사진 게시판</h2>
+                <h2 class="section-title">사진 갤러리</h2>
                 <p class="section-sub">${intro}</p>
             </div>
             <div class="photo-filters" role="group" aria-label="사진 분류 필터">

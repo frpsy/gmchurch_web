@@ -645,7 +645,8 @@ button:focus:not(:focus-visible) { outline: none; }
 
 .page-hero--worship   { background-image: url('images/gallery/worship/야외성찬례.png'); }
 .page-hero--community { background-image: url('images/gallery/community/공동체1.webp'); }
-.page-hero--clergy    { background-image: url('images/gallery/scenery/교회소개_교회내부_제단.webp'); background-position: 55% center; }
+.page-hero--clergy       { background-image: url('images/gallery/scenery/교회소개_교회내부_제단.webp'); background-position: 55% center; }
+.page-hero--greenchurch  { background-image: url('images/gallery/scenery/greenchurch-award-2023.jpg'); background-position: center 30%; }
 
 @media (prefers-color-scheme: dark) {
     .page-hero--photo::before {
