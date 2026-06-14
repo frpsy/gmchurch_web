@@ -1073,7 +1073,7 @@ const CHURCH_DATA = {
         ]
     },
 
-    // 사진 게시판 (gallery.html)
+    // 사진 갤러리 (gallery.html)
     photoGallery: {
         intro: "예배, 애찬, 절기 행사 등 광명교회 공동체의 순간들을 모았습니다.",
         categories: ["전체", "예배", "공동체", "절기·행사", "교회 풍경"],
@@ -1197,6 +1197,16 @@ const CHURCH_DATA = {
                 src: "https://picsum.photos/seed/gmc-space2/900/600",
                 thumb: "https://picsum.photos/seed/gmc-space2/480/320",
                 alt: "교회 마당"
+            },
+            {
+                id: "p13",
+                title: "2023년 녹색교회 선정",
+                desc: "NCCK·기독교환경운동연대로부터 2023년 녹색교회로 선정되었습니다.",
+                category: "교회 풍경",
+                date: "2023.05",
+                src: "images/gallery/scenery/greenchurch-award-2023.jpg",
+                thumb: "images/gallery/scenery/greenchurch-award-2023.jpg",
+                alt: "2023년 녹색교회 선정 상패"
             }
         ]
     },
@@ -1264,7 +1274,7 @@ const CHURCH_DATA = {
             href: "media.html",
             items: [
                 { label: "교회 영상",     href: "media.html#videos" },
-                { label: "사진 게시판",   href: "gallery.html" },
+                { label: "사진 갤러리",   href: "gallery.html" },
                 { label: "관련 기관",     href: "media.html#links" }
             ]
         },
