@@ -1278,23 +1278,32 @@ const PhotoGalleryRenderer = {
                 `).join('')}
             </div>
             <div class="photo-grid" id="photo-grid-items">
-                ${photos.map(p => `
-                    <button class="photo-item"
+                ${photos.map(p => {
+                    const isPending = p.thumb.includes('picsum');
+                    return `
+                    <button class="photo-item${isPending ? ' photo-item--pending' : ''}"
                             data-category="${p.category}"
                             data-src="${p.src}"
                             data-title="${p.title}"
                             data-desc="${p.desc}"
                             data-date="${p.date}"
+                            data-pending="${isPending}"
                             type="button"
-                            aria-label="${p.alt} 크게 보기">
-                        <img src="${p.thumb}" alt="${p.alt}" loading="lazy" width="480" height="320">
-                        <div class="photo-overlay" aria-hidden="true">
-                            <span class="photo-cat-badge">${p.category}</span>
-                            <p class="photo-caption">${p.title}</p>
-                            <p class="photo-date">${p.date}</p>
-                        </div>
-                    </button>
-                `).join('')}
+                            aria-label="${isPending ? p.title + ' (사진 준비 중)' : p.alt + ' 크게 보기'}">
+                        ${isPending
+                            ? `<div class="photo-placeholder" aria-hidden="true">
+                                <span class="photo-placeholder-label">${p.title}</span>
+                                <span class="photo-placeholder-badge">준비중</span>
+                               </div>`
+                            : `<img src="${p.thumb}" alt="${p.alt}" loading="lazy" width="480" height="320">
+                               <div class="photo-overlay" aria-hidden="true">
+                                   <span class="photo-cat-badge">${p.category}</span>
+                                   <p class="photo-caption">${p.title}</p>
+                                   <p class="photo-date">${p.date}</p>
+                               </div>`
+                        }
+                    </button>`;
+                }).join('')}
             </div>
             <p class="photo-count" id="photo-count-text">${photos.length}장</p>
         `;
@@ -1345,7 +1354,7 @@ const PhotoGalleryRenderer = {
 
         grid.addEventListener('click', e => {
             const item = e.target.closest('.photo-item');
-            if (item) openLb(item);
+            if (item && item.dataset.pending !== 'true') openLb(item);
         });
         lbClose.addEventListener('click', closeLb);
         lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
