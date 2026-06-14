@@ -3922,8 +3922,9 @@ footer {
     }
     /* 페이지 히어로 — 라이트 전용 하드코딩 그라데이션을 다크 톤으로 대체.
        (--theme-light는 항상 밝은 토큰이라 다크에서 밝은 띠가 생기므로, 어두운
-        서피스 틴트로 재계산한다.) */
-    .page-hero {
+        서피스 틴트로 재계산한다.) 사진 히어로(.page-hero--photo)는 제외:
+       background 단축속성이 background-image를 초기화하기 때문. */
+    .page-hero:not(.page-hero--photo) {
         background: linear-gradient(165deg, color-mix(in srgb, var(--season, var(--theme)) 24%, #0a1f12) 0%, color-mix(in srgb, var(--season, var(--theme)) 16%, var(--white)) 48%, var(--cream) 100%);
     }
     /* 히어로 CTA 버튼 — 배경이 항상 흰색(#fff)이므로 텍스트·호버를 라이트 모드 값으로 고정 */
