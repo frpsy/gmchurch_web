@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>미디어·자료 — 대한성공회 광명교회</title>
-    <meta name="description" content="대한성공회 광명교회의 유튜브 영상, 녹색교회 신앙 자료, 관련 기관 안내를 한곳에서 만나보세요.">
+    <meta name="description" content="대한성공회 광명교회의 영상 갤러리, 사진 갤러리, 녹색교회 신앙 자료, 관련 기관 안내를 한곳에서 만나보세요.">
     <meta name="theme-color" content="#163d24">
     <link rel="canonical" href="https://frpsy.github.io/gmchurch_web/media.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="대한성공회 광명교회">
     <meta property="og:locale" content="ko_KR">
     <meta property="og:title" content="미디어·자료 — 대한성공회 광명교회">
-    <meta property="og:description" content="교회 영상, 녹색교회 신앙 자료, 관련 기관 안내.">
+    <meta property="og:description" content="영상·사진 갤러리, 녹색교회 신앙 자료, 관련 기관 안내.">
     <meta property="og:url" content="https://frpsy.github.io/gmchurch_web/media.html">
     <meta property="og:image" content="https://frpsy.github.io/gmchurch_web/og-image-v2.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="미디어·자료 — 대한성공회 광명교회">
-    <meta name="twitter:description" content="교회 영상, 녹색교회 신앙 자료, 관련 기관 안내.">
+    <meta name="twitter:description" content="영상·사진 갤러리, 녹색교회 신앙 자료, 관련 기관 안내.">
     <meta name="twitter:image" content="https://frpsy.github.io/gmchurch_web/og-image-v2.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -38,14 +38,17 @@
         <div class="page-hero">
             <p class="section-eyebrow" style="display:block; margin-bottom:0.75rem;">Media</p>
             <h1>미디어·자료</h1>
-            <p>영상, 신앙 자료, 관련 기관을 한곳에서</p>
+            <p>영상, 사진, 신앙 자료를 한곳에서</p>
         </div>
 
         <!-- ── 섹션 내비게이션 (sticky) ──────────────────────── -->
         <nav class="gc-page-nav" aria-label="미디어·자료 섹션 이동">
             <div class="container">
                 <a href="#videos" class="gc-nav-link" data-media-section="videos">
-                    <span aria-hidden="true">📹</span> 교회 영상
+                    <span aria-hidden="true">🎬</span> 영상 갤러리
+                </a>
+                <a href="#gallery" class="gc-nav-link" data-media-section="gallery">
+                    <span aria-hidden="true">📸</span> 사진 갤러리
                 </a>
                 <a href="#green" class="gc-nav-link" data-media-section="green">
                     <span aria-hidden="true">🌿</span> 녹색교회
@@ -56,15 +59,36 @@
             </div>
         </nav>
 
-        <!-- ── 섹션 1: 교회 영상 ─────────────────────────────── -->
+        <!-- ── 섹션 1: 영상 갤러리 ────────────────────────────── -->
         <section class="section" id="videos">
             <div class="container">
                 <div id="media-full"></div>
             </div>
         </section>
 
-        <!-- ── 섹션 2: 녹색교회 ──────────────────────────────── -->
-        <section class="section" id="green" class="gc-section-alt">
+        <!-- ── 섹션 2: 사진 갤러리 ────────────────────────────── -->
+        <section class="section gc-section-alt" id="gallery">
+            <div class="container">
+
+                <div class="section-header">
+                    <p class="section-eyebrow">Photo Gallery</p>
+                    <h2 class="section-title">사진 갤러리</h2>
+                    <p class="section-sub">광명교회 공동체의 예배, 나눔, 절기의 순간들</p>
+                </div>
+
+                <div id="media-gallery-preview" class="photo-grid"></div>
+
+                <div class="video-channel-cta">
+                    <a href="gallery.html" class="video-channel-link">
+                        사진 갤러리 전체 보기 →
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ── 섹션 3: 녹색교회 ──────────────────────────────── -->
+        <section class="section" id="green">
             <div class="container">
 
                 <div class="section-header">
@@ -103,8 +127,8 @@
             </div>
         </section>
 
-        <!-- ── 섹션 3: 관련 기관 ─────────────────────────────── -->
-        <section class="section" id="links">
+        <!-- ── 섹션 4: 관련 기관 ─────────────────────────────── -->
+        <section class="section gc-section-alt" id="links">
             <div class="container" style="max-width:860px;">
 
                 <div class="section-header">
@@ -122,7 +146,7 @@
         <section class="section next-step-cta">
             <div class="container">
                 <p class="next-step-cta-eyebrow">광명교회를 더 알아보기</p>
-                <h2 class="next-step-cta-title">영상 너머의 교회를 직접 만나보세요</h2>
+                <h2 class="next-step-cta-title">미디어 너머의 교회를 직접 만나보세요</h2>
                 <p class="next-step-cta-desc">섬기는 이들과 공동체를 통해 신앙의 이야기를 경험할 수 있습니다.</p>
                 <div class="next-step-cta-actions">
                     <a href="newcomer.html" class="btn-next btn-next--primary"><span aria-hidden="true">🕊</span> 처음 오신 분</a>
@@ -139,6 +163,29 @@
     <script src="data.js?v=706fb94"></script>
     <script src="app.js?v=706fb94"></script>
     <script>
+    /* 사진 갤러리 미리보기 (최근 6장) */
+    (function () {
+        var el = document.getElementById('media-gallery-preview');
+        if (!el || !window.CHURCH_DATA || !CHURCH_DATA.photoGallery) return;
+        var photos = CHURCH_DATA.photoGallery.photos.slice(0, 6);
+        el.innerHTML = photos.map(function (p) {
+            var isPending = p.thumb.includes('picsum');
+            if (isPending) {
+                return '<div class="photo-item photo-item--pending">' +
+                    '<div class="photo-placeholder" aria-hidden="true">' +
+                    '<span class="photo-placeholder-label">' + p.title + '</span>' +
+                    '<span class="photo-placeholder-badge">준비중</span>' +
+                    '</div></div>';
+            }
+            return '<a class="photo-item" href="gallery.html" aria-label="' + p.alt + ' — 갤러리 보기">' +
+                '<img src="' + p.thumb + '" alt="' + p.alt + '" loading="lazy" width="480" height="320">' +
+                '<div class="photo-overlay" aria-hidden="true">' +
+                '<span class="photo-cat-badge">' + p.category + '</span>' +
+                '<p class="photo-caption">' + p.title + '</p>' +
+                '</div></a>';
+        }).join('');
+    }());
+
     /* 섹션 내비게이션 활성 상태 표시 — 스크롤 기반 */
     (function () {
         var links = document.querySelectorAll('.gc-nav-link[data-media-section]');

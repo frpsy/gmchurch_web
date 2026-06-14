@@ -1227,7 +1227,7 @@ const MediaRenderer = {
         el.innerHTML = `
             <div class="section-header">
                 <p class="section-eyebrow">YouTube</p>
-                <h2 class="section-title">교회 영상</h2>
+                <h2 class="section-title">영상 갤러리</h2>
                 <p class="section-sub">${intro}</p>
             </div>
             <div class="video-grid">
