@@ -332,24 +332,24 @@ const CHURCH_DATA = {
     worship: {
         liturgicalSeason: LiturgicalCalendar.compute(),
         currentReadings: {
-            week: "성령강림 후 제2주일",
+            week: "연중 제10주일 (성령강림 후 제2주일)",
             year: "A년",
             date: "2026년 6월 7일",
-            note: "대한성공회 공동 전례독서(RCL)에 따릅니다. 매주 갱신됩니다.",
+            note: "RCL 가해 연속 독서 트랙 · 대한성공회 공동 전례독서에 따릅니다.",
             items: [
-                { role: "구약", ref: "호세아 5:15-6:6" },
-                { role: "시편", ref: "시편 50:7-15" },
+                { role: "제1독서", ref: "창세기 12:1-9" },
+                { role: "시편", ref: "시편 33:1-12" },
                 { role: "서신서", ref: "로마서 4:13-25" },
                 { role: "복음서", ref: "마태복음 9:9-13, 18-26" }
             ]
         },
         nextReadings: {
-            week: "성령강림 후 제3주일",
+            week: "연중 제11주일 (성령강림 후 제3주일)",
             year: "A년",
             date: "2026년 6월 14일",
             items: [
-                { role: "구약", ref: "출애굽기 19:2-8" },
-                { role: "시편", ref: "시편 100" },
+                { role: "제1독서", ref: "창세기 18:1-15" },
+                { role: "시편", ref: "시편 116:1-2, 12-19" },
                 { role: "서신서", ref: "로마서 5:1-8" },
                 { role: "복음서", ref: "마태복음 9:35-10:8" }
             ]
