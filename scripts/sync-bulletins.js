@@ -78,23 +78,39 @@ const cutoff = new Date();
 cutoff.setDate(cutoff.getDate() - MAX_WEEKS * 7);
 cutoff.setHours(0, 0, 0, 0);
 
-// ── 1. 오래된 PDF 삭제 ────────────────────────────────────
-const allPdfs = fs.readdirSync(BULLETINS).filter(f => /^\d{8}\.pdf$/i.test(f));
-const valid   = new Set();
+// ── 1. JPG 파일 스캔 및 날짜별 그룹화 ────────────────────
+// 파일명 형식: YYYYMMDD_N.jpg (N = 1, 2, 3, 4…)
+const allJpgs = fs.readdirSync(BULLETINS).filter(f => /^\d{8}_\d+\.jpe?g$/i.test(f));
 
-for (const file of allPdfs) {
-    const ds = file.replace(/\.pdf$/i, '');
+const groups = new Map(); // dateStr → [filename, ...]
+for (const file of allJpgs) {
+    const ds = file.slice(0, 8);
+    if (!groups.has(ds)) groups.set(ds, []);
+    groups.get(ds).push(file);
+}
+
+// ── 2. 오래된 날짜 삭제 ───────────────────────────────────
+const valid = new Map();
+for (const [ds, files] of groups) {
     const fileDate = new Date(+ds.slice(0, 4), +ds.slice(4, 6) - 1, +ds.slice(6, 8));
     if (fileDate < cutoff) {
-        fs.unlinkSync(path.join(BULLETINS, file));
-        console.log(`  삭제: ${file}`);
+        files.forEach(f => {
+            fs.unlinkSync(path.join(BULLETINS, f));
+            console.log(`  삭제: ${f}`);
+        });
     } else {
-        valid.add(ds);
+        // 이미지를 번호 순으로 정렬
+        files.sort((a, b) => {
+            const na = +a.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
+            const nb = +b.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
+            return na - nb;
+        });
+        valid.set(ds, files);
     }
 }
 
-// ── 2. 신규 items 목록 구성 ───────────────────────────────
-const newItems = [...valid]
+// ── 3. 신규 items 목록 구성 ───────────────────────────────
+const newItems = [...valid.keys()]
     .sort((a, b) => b.localeCompare(a)) // 최신 순
     .map(ds => {
         const y  = +ds.slice(0, 4);
@@ -104,11 +120,11 @@ const newItems = [...valid]
             date:   `${ds.slice(0,4)}-${ds.slice(4,6)}-${ds.slice(6,8)}`,
             label:  `${y}년 ${mo}월 ${d}일`,
             season: sundayLabel(ds),
-            file:   `bulletins/${ds}.pdf`
+            images: valid.get(ds).map(f => `bulletins/${f}`)
         };
     });
 
-// ── 3. data.js items 배열 교체 ────────────────────────────
+// ── 4. data.js items 배열 교체 ────────────────────────────
 const src = fs.readFileSync(DATA_JS, 'utf8');
 
 const SECTION_OPEN  = '    bulletins: {\n';
@@ -133,14 +149,17 @@ if (iOpen === -1 || iClose === -1) {
 }
 
 const newItemsStr = newItems
-    .map(it => [
-        '            {',
-        `                date: "${it.date}",`,
-        `                label: "${it.label}",`,
-        `                season: "${it.season}",`,
-        `                file: "${it.file}"`,
-        '            }'
-    ].join('\n'))
+    .map(it => {
+        const imagesStr = it.images.map(img => `"${img}"`).join(', ');
+        return [
+            '            {',
+            `                date: "${it.date}",`,
+            `                label: "${it.label}",`,
+            `                season: "${it.season}",`,
+            `                images: [${imagesStr}]`,
+            '            }'
+        ].join('\n');
+    })
     .join(',\n');
 
 const newSection =
@@ -151,5 +170,5 @@ const newSection =
 fs.writeFileSync(DATA_JS, src.slice(0, bStart) + newSection + src.slice(bEnd), 'utf8');
 
 console.log(`\n주보 동기화 완료: ${newItems.length}건`);
-newItems.forEach(it => console.log(`  + ${it.label}  ${it.season}`));
+newItems.forEach(it => console.log(`  + ${it.label}  ${it.season}  (${it.images.length}장)`));
 if (newItems.length === 0) console.log('  (등록된 주보 없음)');

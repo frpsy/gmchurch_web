@@ -1550,41 +1550,51 @@ const PortraitLightbox = {
 
 /* ── BulletinRenderer ────────────────────────────────────── */
 const BulletinRenderer = {
+    _tabLabel(item) {
+        const d = new Date(item.date);
+        return `${d.getMonth() + 1}월 ${d.getDate()}일`;
+    },
+
+    _viewerHtml(item) {
+        const hasImages = item.images && item.images.length > 0;
+        const meta = `<p class="bulletin-week-meta">${item.season}</p>`;
+        if (!hasImages) {
+            return meta + `<p class="bulletin-empty">주보가 준비 중입니다.</p>`;
+        }
+        const imgs = item.images.map((src, i) =>
+            `<img src="${src}" alt="${item.label} ${i + 1}면" loading="lazy" class="bulletin-page">`
+        ).join('');
+        return meta + `<div class="bulletin-pages">${imgs}</div>`;
+    },
+
     render() {
         const el = document.getElementById('bulletin-full');
         if (!el) return;
-        const { note, items } = CHURCH_DATA.bulletins;
+        const { items } = CHURCH_DATA.bulletins;
 
         if (!items || items.length === 0) {
-            el.innerHTML = `<p class="bulletin-notice-sub">아직 등록된 주보가 없습니다.</p>`;
+            el.innerHTML = `<p class="bulletin-empty">아직 등록된 주보가 없습니다.</p>`;
             return;
         }
 
-        const rows = items.map(b => {
-            const hasFile = b.file && b.file.trim();
-            if (hasFile) {
-                return `
-                <a href="${b.file}" target="_blank" rel="noopener noreferrer" class="bulletin-row" aria-label="${b.label} 주보 PDF 열기">
-                    <span class="bulletin-icon" aria-hidden="true">📋</span>
-                    <span class="bulletin-date">${b.label}</span>
-                    <span class="bulletin-season">${b.season}</span>
-                    <span class="bulletin-dl">PDF 열기</span>
-                </a>`;
-            }
-            return `
-                <div class="bulletin-row bulletin-row--empty" aria-label="${b.label} 주보 준비 중">
-                    <span class="bulletin-icon" aria-hidden="true">📋</span>
-                    <span class="bulletin-date">${b.label}</span>
-                    <span class="bulletin-season">${b.season}</span>
-                    <span class="bulletin-dl bulletin-dl--pending">준비 중</span>
-                </div>`;
-        }).join('');
+        const tabs = items.map((item, i) =>
+            `<button class="bulletin-tab${i === 0 ? ' is-active' : ''}" data-idx="${i}" type="button" role="tab">${this._tabLabel(item)}</button>`
+        ).join('');
 
         el.innerHTML = `
-            <div class="bulletin-list" role="list">
-                ${rows}
-            </div>
+            <div class="bulletin-tabs" role="tablist">${tabs}</div>
+            <div class="bulletin-viewer">${this._viewerHtml(items[0])}</div>
         `;
+
+        const tabsEl = el.querySelector('.bulletin-tabs');
+        const viewerEl = el.querySelector('.bulletin-viewer');
+        tabsEl.addEventListener('click', e => {
+            const btn = e.target.closest('.bulletin-tab');
+            if (!btn) return;
+            tabsEl.querySelectorAll('.bulletin-tab').forEach(t => t.classList.remove('is-active'));
+            btn.classList.add('is-active');
+            viewerEl.innerHTML = this._viewerHtml(items[+btn.dataset.idx]);
+        });
     }
 };
 
