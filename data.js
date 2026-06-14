@@ -1053,10 +1053,10 @@ const CHURCH_DATA = {
         note: "예배 전에 미리 열어 두시면 도움이 됩니다.",
         items: [
             {
-                date: "2026-06-08",
-                label: "2026년 6월 8일",
-                season: "성령강림 후 제2주일",
-                images: ["bulletins/20260608_1.jpg", "bulletins/20260608_2.jpg", "bulletins/20260608_3.jpg", "bulletins/20260608_4.jpg"]
+                date: "2026-06-14",
+                label: "2026년 6월 14일",
+                season: "성령강림 후 제3주일",
+                images: ["bulletins/20260614_1.jpg", "bulletins/20260614_2.jpg", "bulletins/20260614_3.jpg", "bulletins/20260614_4.jpg"]
             }
         ]
     },
