@@ -2563,6 +2563,50 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     color: var(--heading);
     font-weight: 600;
 }
+/* 전례독서 이전/다음 네비게이션 */
+.lect-nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.85rem;
+    max-width: 560px;
+}
+.lect-nav-label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--heading);
+    text-align: center;
+    flex: 1;
+    padding: 0 0.5rem;
+}
+.lect-nav-btn {
+    padding: 0.38rem 0.9rem;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
+}
+.lect-nav-btn:hover:not(:disabled) {
+    border-color: var(--theme);
+    color: var(--heading);
+    box-shadow: var(--hover-shadow-sm);
+}
+.lect-nav-btn:disabled {
+    opacity: 0.32;
+    cursor: default;
+}
+.lectionary-loading {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 1rem 0;
+}
+
 .lectionary-card-note {
     font-size: 0.78rem;
     color: var(--text-muted);

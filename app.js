@@ -1615,7 +1615,7 @@ const SundaysRenderer = {
             currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
             this._bindRibbonPopover(currentEl.querySelector('.season-ribbon-wrap'));
         }
-        if (lectionaryEl) lectionaryEl.innerHTML = this._lectionary();
+        if (lectionaryEl) this._lectionaryAsync(lectionaryEl);
         if (seasonsEl)    seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
         if (monthlyEl) {
             this._calYear  = year;
@@ -1626,66 +1626,122 @@ const SundaysRenderer = {
         if (specialEl)  specialEl.innerHTML = this._special(d.specialSundays);
     },
 
-    /* 전례독서 — 날짜 비교로 이번 주·다가오는 주·지난 주 라벨을 동적 계산 */
-    _lectionary() {
-        const w = CHURCH_DATA.worship;
-        const r = w && w.currentReadings;
-        const n = w && w.nextReadings;
-
-        // "YYYY년 M월 D일" → 로컬 자정 Date
-        const parseDate = s => {
-            const m = s && s.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
-            return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
-        };
-        // 오늘이 일요일이면 오늘, 아니면 이번 주 돌아오는 일요일(로컬 자정)
-        const nextSunday = (() => {
-            const t = new Date();
-            const d = new Date(t.getFullYear(), t.getMonth(), t.getDate());
-            const day = d.getDay();
-            if (day !== 0) d.setDate(d.getDate() + (7 - day));
-            return d;
-        })();
-        const lectionaryLabel = dateStr => {
-            const rd = parseDate(dateStr);
-            if (!rd) return '';
-            const diff = rd - nextSunday;
-            if (diff === 0) return '이번 주';
-            return diff < 0 ? '지난 주' : '다가오는 주';
-        };
-
-        const cardHtml = (data, label) => {
-            const isCurrent = label === '이번 주';
-            return `
-            <div class="lectionary-card${isCurrent ? ' lectionary-card--current' : ''}">
-                <div class="lectionary-card-head">
-                    <p class="lectionary-card-label">${label}</p>
-                    <p class="lectionary-card-week">${data.week}</p>
-                    <p class="lectionary-card-meta">${data.year}&nbsp;·&nbsp;${data.date}</p>
-                </div>
-                <div class="lectionary-card-body">
-                    ${data.items.map(item => `
-                        <div class="lectionary-row">
-                            <span class="lectionary-role">${item.role}</span>
-                            <span class="lectionary-ref">${item.ref}</span>
-                        </div>`).join('')}
-                </div>
-                ${data.note ? `<p class="lectionary-card-note">${data.note}</p>` : ''}
-            </div>`;
-        };
-
-        // 이번 주 카드를 먼저 표시
-        const cards = [r, n]
-            .filter(Boolean)
-            .map(d => ({ data: d, label: lectionaryLabel(d.date) }))
-            .sort((a, b) => (a.label === '이번 주' ? -1 : b.label === '이번 주' ? 1 : 0));
-
-        return `
+    /* 전례독서 — RCL 가해 연속 독서 트랙 JSON에서 오늘 날짜 기준 자동 표시 */
+    async _lectionaryAsync(el) {
+        const header = `
             <div class="section-header">
                 <p class="section-eyebrow">Lectionary</p>
                 <h2 class="section-title">전례독서</h2>
                 <p class="section-sub">교회력 절기에 따라 정해진 날짜별 성서 본문입니다. 구약·시편·서신서·복음서 네 본문을 순서대로 봉독합니다.</p>
+            </div>`;
+        el.innerHTML = header + '<p class="lectionary-loading">불러오는 중…</p>';
+
+        let sundays;
+        try {
+            const res = await fetch('data/lectionary-year-a.json');
+            if (!res.ok) throw new Error('fetch ' + res.status);
+            sundays = (await res.json()).sundays;
+        } catch (_) {
+            el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryFallback()}</div>`;
+            return;
+        }
+
+        const idx = this._lectionaryFindIdx(sundays);
+        el.dataset.lectionaryIdx = idx;
+        el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryCardHtml(sundays, idx)}</div>`;
+        this._bindLectionaryNav(el, sundays);
+    },
+
+    _lectionaryFindIdx(sundays) {
+        const today = new Date();
+        const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        // 오늘이 일요일이면 오늘, 아니면 이번 주 지난 일요일
+        const thisSunday = new Date(todayDate);
+        const dow = todayDate.getDay();
+        if (dow !== 0) thisSunday.setDate(thisSunday.getDate() - dow);
+        const ms = thisSunday.getTime();
+
+        let best = 0, bestDiff = Infinity;
+        sundays.forEach((s, i) => {
+            const diff = Math.abs(new Date(s.date + 'T00:00:00').getTime() - ms);
+            if (diff < bestDiff) { bestDiff = diff; best = i; }
+        });
+        return best;
+    },
+
+    _lectionaryCardHtml(sundays, idx) {
+        const s = sundays[idx];
+        const d = new Date(s.date + 'T00:00:00');
+        const dateStr = d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+        const roles = ['제1독서', '시편', '서신서', '복음서'];
+        const refs  = [s.readings.firstReading, s.readings.psalm,
+                       s.readings.secondReading, s.readings.gospel];
+        const rows = roles.map((r, i) => `
+            <div class="lectionary-row">
+                <span class="lectionary-role">${r}</span>
+                <span class="lectionary-ref">${refs[i]}</span>
+            </div>`).join('');
+
+        const hasPrev = idx > 0;
+        const hasNext = idx < sundays.length - 1;
+
+        return `
+        <div class="lect-nav-row">
+            <button class="lect-nav-btn" id="lect-prev"
+                    ${hasPrev ? '' : 'disabled'} aria-label="이전 주일">‹ 이전</button>
+            <span class="lect-nav-label">${s.koreanName}</span>
+            <button class="lect-nav-btn" id="lect-next"
+                    ${hasNext ? '' : 'disabled'} aria-label="다음 주일">다음 ›</button>
+        </div>
+        <div class="lectionary-card lectionary-card--current" id="lect-card">
+            <div class="lectionary-card-head">
+                <p class="lectionary-card-label">가해(A년) · ${dateStr}</p>
+                <p class="lectionary-card-week">${s.koreanName}</p>
+                ${s.anglicanName ? `<p class="lectionary-card-meta">${s.anglicanName}</p>` : ''}
             </div>
-            ${cards.map(c => cardHtml(c.data, c.label)).join('')}`;
+            <div class="lectionary-card-body">${rows}</div>
+            <p class="lectionary-card-note">RCL 가해 연속 독서 트랙 · 대한성공회 공동 전례독서에 따릅니다.</p>
+        </div>`;
+    },
+
+    _bindLectionaryNav(el, sundays) {
+        const container = el.querySelector('.lect-nav-wrap');
+        if (!container) return;
+
+        const update = (newIdx) => {
+            el.dataset.lectionaryIdx = newIdx;
+            container.innerHTML = this._lectionaryCardHtml(sundays, newIdx);
+            this._bindLectionaryNav(el, sundays);
+        };
+        el.querySelector('#lect-prev')?.addEventListener('click', () => {
+            const i = parseInt(el.dataset.lectionaryIdx);
+            if (i > 0) update(i - 1);
+        });
+        el.querySelector('#lect-next')?.addEventListener('click', () => {
+            const i = parseInt(el.dataset.lectionaryIdx);
+            if (i < sundays.length - 1) update(i + 1);
+        });
+    },
+
+    _lectionaryFallback() {
+        const w = CHURCH_DATA.worship;
+        const r = w && w.currentReadings;
+        if (!r) return '<p>전례독서를 불러올 수 없습니다.</p>';
+        return `
+        <div class="lectionary-card lectionary-card--current">
+            <div class="lectionary-card-head">
+                <p class="lectionary-card-week">${r.week}</p>
+                <p class="lectionary-card-meta">${r.year} · ${r.date}</p>
+            </div>
+            <div class="lectionary-card-body">
+                ${r.items.map(it => `
+                <div class="lectionary-row">
+                    <span class="lectionary-role">${it.role}</span>
+                    <span class="lectionary-ref">${it.ref}</span>
+                </div>`).join('')}
+            </div>
+            ${r.note ? `<p class="lectionary-card-note">${r.note}</p>` : ''}
+        </div>`;
     },
 
     /* 이달의 교회력 — worship.html 용 헤더 포함 버전 */
