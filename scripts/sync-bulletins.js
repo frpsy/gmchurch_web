@@ -2,9 +2,9 @@
 import fs   from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import PDFDocument from 'pdfkit';
 
-// ── Liturgical season label (Korean Anglican) ─────────────
-// data.js의 LiturgicalCalendar와 동일한 알고리즘
+// ── 전례력 절기 레이블 ────────────────────────────────────────
 function easterDate(year) {
     const a = year % 19, b = Math.floor(year / 100), c = year % 100;
     const d = Math.floor(b / 4), e = b % 4;
@@ -30,6 +30,18 @@ function adventStart(year) {
     return addDays(dec25, -(dow === 0 ? 28 : dow + 21));
 }
 
+// 주님세례주일 = 1월 6일(주현절) 다음 첫 번째 일요일
+function baptismOfLord(year) {
+    const jan6 = new Date(year, 0, 6);
+    const dow = jan6.getDay();
+    return addDays(jan6, dow === 0 ? 7 : 7 - dow);
+}
+
+// 가/나/다해: Advent 2022 시작 → 가해, 2023 → 나해, 2024 → 다해, 순환
+function yearLabel(adventYear) {
+    return ['가', '나', '다'][((adventYear - 2022) % 3 + 3) % 3];
+}
+
 function sundayLabel(dateStr) {
     const y  = +dateStr.slice(0, 4);
     const mo = +dateStr.slice(4, 6) - 1;
@@ -41,33 +53,72 @@ function sundayLabel(dateStr) {
     const palmSun   = addDays(easter, -7);
     const pentecost = addDays(easter, 49);
     const advent    = adventStart(y);
-    const jan6      = new Date(y, 0, 6);
+    const ck        = addDays(advent, -7);   // 그리스도 왕 주일
+    const baptism   = baptismOfLord(y);      // 연중 제1주일
     const wk = (a, b) => Math.round((+a - +b) / 604800000);
 
-    if (date >= pentecost && date < advent) {
+    // 전례력 연도 레이블 (해당 날짜가 속하는 대림절 시작 연도 기준)
+    const advY = date >= advent ? y : y - 1;
+    const yLbl = yearLabel(advY);
+
+    // 성탄절 (12/25~)
+    if (mo === 11 && d >= 25) return '성탄절';
+
+    // 대림절
+    if (date >= advent) return `대림 제${wk(date, advent) + 1}주일`;
+
+    // 성령강림절 이후 연중 (삼위일체 주일 포함)
+    if (date >= pentecost) {
         const w = wk(date, pentecost);
-        if (w === 0) return '성령강림주일';
+        if (w === 0) return '성령강림 주일';
         if (w === 1) return '삼위일체 주일';
-        return `성령강림 후 제${w}주일`;
+        const weeksToGoCK = Math.round((+ck - +date) / 604800000);
+        if (weeksToGoCK === 0) return '그리스도 왕 주일';
+        return `${yLbl}해 연중 ${34 - weeksToGoCK}주일`;
     }
-    if (date >= easter && date < pentecost) {
+
+    // 부활절 ~ 성령강림
+    if (date >= easter) {
         const w = wk(date, easter);
-        if (w === 0) return '부활주일';
-        const ord = ['', '제2', '제3', '제4', '제5', '제6'];
+        if (w === 0) return '부활 주일';
+        const ord = ['', '제2', '제3', '제4', '제5', '제6', '제7'];
         return `부활절 후 ${ord[w] || w + '번째'}주일`;
     }
+
+    // 성주간
     if (date >= palmSun) return '성주간';
-    if (date >= ashWed)  return `사순절 제${wk(date, ashWed) + 1}주일`;
-    if (date >= jan6) {
-        const firstSun = addDays(jan6, (7 - jan6.getDay()) % 7);
-        return `주현절 후 제${wk(date, firstSun) + 1}주일`;
-    }
-    if (date >= advent) return `대림 제${wk(date, advent) + 1}주일`;
-    if (mo === 11 && d >= 25) return '성탄절';
+
+    // 사순절
+    if (date >= ashWed) return `사순 제${wk(date, ashWed)}주일`;
+
+    // 주현절 이후 연중 (사순절 전)
+    if (date >= baptism) return `${yLbl}해 연중 ${wk(date, baptism) + 1}주일`;
+
+    // 성탄절 후 (1/1~1/5, 12/26~12/31 등)
     return '성탄절 후 주일';
 }
 
-// ── 경로 설정 ─────────────────────────────────────────────
+// ── PDF 생성 ──────────────────────────────────────────────────
+async function generatePdf(imageFiles, outputPath) {
+    return new Promise((resolve, reject) => {
+        const doc    = new PDFDocument({ autoFirstPage: false, margin: 0 });
+        const stream = fs.createWriteStream(outputPath);
+        doc.pipe(stream);
+        for (const imgPath of imageFiles) {
+            doc.addPage({ size: 'A4' });
+            doc.image(imgPath, 0, 0, {
+                fit: [doc.page.width, doc.page.height],
+                align: 'center',
+                valign: 'center'
+            });
+        }
+        doc.end();
+        stream.on('finish', resolve);
+        stream.on('error', reject);
+    });
+}
+
+// ── 경로 설정 ─────────────────────────────────────────────────
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT      = path.resolve(__dirname, '..');
 const BULLETINS = path.join(ROOT, 'bulletins');
@@ -78,97 +129,122 @@ const cutoff = new Date();
 cutoff.setDate(cutoff.getDate() - MAX_WEEKS * 7);
 cutoff.setHours(0, 0, 0, 0);
 
-// ── 1. JPG 파일 스캔 및 날짜별 그룹화 ────────────────────
-// 파일명 형식: YYYYMMDD_N.jpg (N = 1, 2, 3, 4…)
-const allJpgs = fs.readdirSync(BULLETINS).filter(f => /^\d{8}_\d+\.jpe?g$/i.test(f));
+// ── 메인 (비동기) ─────────────────────────────────────────────
+(async () => {
+    // ── 1. JPG 스캔 및 날짜별 그룹화 ────────────────────────────
+    const allJpgs = fs.readdirSync(BULLETINS).filter(f => /^\d{8}_\d+\.jpe?g$/i.test(f));
 
-const groups = new Map(); // dateStr → [filename, ...]
-for (const file of allJpgs) {
-    const ds = file.slice(0, 8);
-    if (!groups.has(ds)) groups.set(ds, []);
-    groups.get(ds).push(file);
-}
-
-// ── 2. 오래된 날짜 삭제 ───────────────────────────────────
-const valid = new Map();
-for (const [ds, files] of groups) {
-    const fileDate = new Date(+ds.slice(0, 4), +ds.slice(4, 6) - 1, +ds.slice(6, 8));
-    if (fileDate < cutoff) {
-        files.forEach(f => {
-            fs.unlinkSync(path.join(BULLETINS, f));
-            console.log(`  삭제: ${f}`);
-        });
-    } else {
-        // 이미지를 번호 순으로 정렬
-        files.sort((a, b) => {
-            const na = +a.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
-            const nb = +b.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
-            return na - nb;
-        });
-        valid.set(ds, files);
+    const groups = new Map();
+    for (const file of allJpgs) {
+        const ds = file.slice(0, 8);
+        if (!groups.has(ds)) groups.set(ds, []);
+        groups.get(ds).push(file);
     }
-}
 
-// ── 3. 신규 items 목록 구성 ───────────────────────────────
-const newItems = [...valid.keys()]
-    .sort((a, b) => b.localeCompare(a)) // 최신 순
-    .map(ds => {
-        const y  = +ds.slice(0, 4);
-        const mo = +ds.slice(4, 6);
-        const d  = +ds.slice(6, 8);
-        return {
-            date:   `${ds.slice(0,4)}-${ds.slice(4,6)}-${ds.slice(6,8)}`,
-            label:  `${y}년 ${mo}월 ${d}일`,
-            season: sundayLabel(ds),
-            images: valid.get(ds).map(f => `bulletins/${f}`)
-        };
+    // ── 2. 오래된 날짜 삭제 (이미지 + PDF) ──────────────────────
+    const valid = new Map();
+    for (const [ds, files] of groups) {
+        const fileDate = new Date(+ds.slice(0, 4), +ds.slice(4, 6) - 1, +ds.slice(6, 8));
+        if (fileDate < cutoff) {
+            files.forEach(f => {
+                fs.unlinkSync(path.join(BULLETINS, f));
+                console.log(`  삭제: ${f}`);
+            });
+            const pdfFile = path.join(BULLETINS, `${ds}.pdf`);
+            if (fs.existsSync(pdfFile)) {
+                fs.unlinkSync(pdfFile);
+                console.log(`  삭제: ${ds}.pdf`);
+            }
+        } else {
+            files.sort((a, b) => {
+                const na = +a.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
+                const nb = +b.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
+                return na - nb;
+            });
+            valid.set(ds, files);
+        }
+    }
+
+    // ── 3. PDF 생성 (없는 경우만) ───────────────────────────────
+    for (const [ds, files] of valid) {
+        const pdfPath = path.join(BULLETINS, `${ds}.pdf`);
+        if (!fs.existsSync(pdfPath)) {
+            try {
+                await generatePdf(files.map(f => path.join(BULLETINS, f)), pdfPath);
+                console.log(`  PDF 생성: ${ds}.pdf`);
+            } catch (err) {
+                console.error(`  PDF 생성 실패 (${ds}):`, err.message);
+            }
+        }
+    }
+
+    // ── 4. items 목록 구성 ────────────────────────────────────────
+    const newItems = [...valid.keys()]
+        .sort((a, b) => b.localeCompare(a))
+        .map(ds => {
+            const y  = +ds.slice(0, 4);
+            const mo = +ds.slice(4, 6);
+            const d  = +ds.slice(6, 8);
+            const pdfPath = path.join(BULLETINS, `${ds}.pdf`);
+            return {
+                date:   `${ds.slice(0,4)}-${ds.slice(4,6)}-${ds.slice(6,8)}`,
+                label:  `${y}년 ${mo}월 ${d}일`,
+                season: sundayLabel(ds),
+                images: valid.get(ds).map(f => `bulletins/${f}`),
+                pdf:    fs.existsSync(pdfPath) ? `bulletins/${ds}.pdf` : null
+            };
+        });
+
+    // ── 5. data.js items 배열 교체 ───────────────────────────────
+    const src = fs.readFileSync(DATA_JS, 'utf8');
+
+    const SECTION_OPEN  = '    bulletins: {\n';
+    const SECTION_CLOSE = '    navigation: [\n';
+    const bStart = src.indexOf(SECTION_OPEN);
+    const bEnd   = src.indexOf(SECTION_CLOSE);
+
+    if (bStart === -1 || bEnd === -1) {
+        console.error('data.js에서 bulletins 섹션을 찾을 수 없습니다.');
+        process.exit(1);
+    }
+
+    const section = src.slice(bStart, bEnd);
+    const ITEMS_OPEN  = '        items: [\n';
+    const ITEMS_CLOSE = '\n        ]';
+    const iOpen  = section.indexOf(ITEMS_OPEN);
+    const iClose = section.indexOf(ITEMS_CLOSE, iOpen + ITEMS_OPEN.length);
+
+    if (iOpen === -1 || iClose === -1) {
+        console.error('bulletins.items 배열을 찾을 수 없습니다.');
+        process.exit(1);
+    }
+
+    const newItemsStr = newItems
+        .map(it => {
+            const imagesStr = it.images.map(img => `"${img}"`).join(', ');
+            const pdfLine   = it.pdf ? `,\n                pdf: "${it.pdf}"` : '';
+            return [
+                '            {',
+                `                date: "${it.date}",`,
+                `                label: "${it.label}",`,
+                `                season: "${it.season}",`,
+                `                images: [${imagesStr}]${pdfLine}`,
+                '            }'
+            ].join('\n');
+        })
+        .join(',\n');
+
+    const newSection =
+        section.slice(0, iOpen + ITEMS_OPEN.length) +
+        newItemsStr +
+        section.slice(iClose);
+
+    fs.writeFileSync(DATA_JS, src.slice(0, bStart) + newSection + src.slice(bEnd), 'utf8');
+
+    console.log(`\n주보 동기화 완료: ${newItems.length}건`);
+    newItems.forEach(it => {
+        const pdfMark = it.pdf ? ' [PDF]' : '';
+        console.log(`  + ${it.label}  ${it.season}  (${it.images.length}장)${pdfMark}`);
     });
-
-// ── 4. data.js items 배열 교체 ────────────────────────────
-const src = fs.readFileSync(DATA_JS, 'utf8');
-
-const SECTION_OPEN  = '    bulletins: {\n';
-const SECTION_CLOSE = '    navigation: [\n';
-const bStart = src.indexOf(SECTION_OPEN);
-const bEnd   = src.indexOf(SECTION_CLOSE);
-
-if (bStart === -1 || bEnd === -1) {
-    console.error('data.js에서 bulletins 섹션을 찾을 수 없습니다.');
-    process.exit(1);
-}
-
-const section = src.slice(bStart, bEnd);
-const ITEMS_OPEN  = '        items: [\n';
-const ITEMS_CLOSE = '\n        ]';
-const iOpen  = section.indexOf(ITEMS_OPEN);
-const iClose = section.indexOf(ITEMS_CLOSE, iOpen + ITEMS_OPEN.length);
-
-if (iOpen === -1 || iClose === -1) {
-    console.error('bulletins.items 배열을 찾을 수 없습니다.');
-    process.exit(1);
-}
-
-const newItemsStr = newItems
-    .map(it => {
-        const imagesStr = it.images.map(img => `"${img}"`).join(', ');
-        return [
-            '            {',
-            `                date: "${it.date}",`,
-            `                label: "${it.label}",`,
-            `                season: "${it.season}",`,
-            `                images: [${imagesStr}]`,
-            '            }'
-        ].join('\n');
-    })
-    .join(',\n');
-
-const newSection =
-    section.slice(0, iOpen + ITEMS_OPEN.length) +
-    newItemsStr +
-    section.slice(iClose);
-
-fs.writeFileSync(DATA_JS, src.slice(0, bStart) + newSection + src.slice(bEnd), 'utf8');
-
-console.log(`\n주보 동기화 완료: ${newItems.length}건`);
-newItems.forEach(it => console.log(`  + ${it.label}  ${it.season}  (${it.images.length}장)`));
-if (newItems.length === 0) console.log('  (등록된 주보 없음)');
+    if (newItems.length === 0) console.log('  (등록된 주보 없음)');
+})();

@@ -1055,8 +1055,9 @@ const CHURCH_DATA = {
             {
                 date: "2026-06-14",
                 label: "2026년 6월 14일",
-                season: "성령강림 후 제3주일",
-                images: ["bulletins/20260614_1.jpg", "bulletins/20260614_2.jpg", "bulletins/20260614_3.jpg", "bulletins/20260614_4.jpg"]
+                season: "가해 연중 11주일",
+                images: ["bulletins/20260614_1.jpg", "bulletins/20260614_2.jpg", "bulletins/20260614_3.jpg", "bulletins/20260614_4.jpg"],
+                pdf: "bulletins/20260614.pdf"
             }
         ]
     },

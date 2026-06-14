@@ -4389,27 +4389,26 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     .menu-overlay-panel { transition: none; }
     .menu-overlay-panel { transform: none; }
 }
-/* ── Bulletin List (accordion + pagination) ──────────────── */
+/* ── Bulletin (accordion list) ───────────────────────────── */
 .bulletin-list {
-    display: flex;
-    flex-direction: column;
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     overflow: hidden;
-    max-width: 800px;
+    box-shadow: var(--shadow-sm);
 }
-.bulletin-item {
-    border-bottom: 1px solid var(--border);
-}
+.bulletin-item { border-bottom: 1px solid var(--border); }
 .bulletin-item:last-child { border-bottom: none; }
 
 .bulletin-row {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 1.25rem;
-    background: var(--white);
+    gap: 0.85rem;
+    padding: 1.1rem 1.5rem;
+    background: transparent;
     border: none;
     cursor: pointer;
     font-family: inherit;
@@ -4417,55 +4416,112 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     transition: background 0.15s;
 }
 .bulletin-row:hover { background: var(--green-light); }
-.bulletin-row[aria-expanded="true"] {
-    background: var(--green-light);
-    border-bottom: 1px solid var(--border);
-}
+.bulletin-row[aria-expanded="true"] { background: var(--green-light); }
 
-.bulletin-row-main {
+.bulletin-row-info {
     flex: 1;
     min-width: 0;
     display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.bulletin-row-top {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
     flex-wrap: wrap;
 }
 .bulletin-row-date {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-body);
     font-weight: 700;
     color: var(--heading);
-    white-space: nowrap;
+    line-height: 1.3;
+}
+.bulletin-badge-new {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--theme-on);
+    background: var(--theme);
+    border-radius: 4px;
+    padding: 0.1rem 0.45rem;
+    vertical-align: middle;
+}
+.bulletin-row-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 .bulletin-row-season {
     font-size: var(--fs-label);
     color: var(--text-muted);
-    white-space: nowrap;
+}
+.bulletin-row-count {
+    font-size: var(--fs-label);
+    color: var(--text-muted);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.05rem 0.4rem;
+    font-variant-numeric: tabular-nums;
 }
 .bulletin-row-chevron {
     flex-shrink: 0;
     color: var(--text-muted);
-    transition: transform 0.2s;
+    transition: transform 0.22s var(--ease-out);
 }
 .bulletin-row[aria-expanded="true"] .bulletin-row-chevron {
     transform: rotate(180deg);
 }
 
 .bulletin-drawer {
-    padding: 1.25rem 1.25rem 1.5rem;
+    padding: 1.5rem 1.5rem 1.75rem;
     background: var(--cream);
+    border-top: 1px solid var(--border);
 }
 .bulletin-drawer[hidden] { display: none; }
+.bulletin-empty-inner {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    padding: 0.5rem 0;
+}
 
 .bulletin-pages {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    max-width: 680px;
+    margin: 0 auto;
 }
 .bulletin-page {
     width: 100%;
     display: block;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.bulletin-pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1.25rem;
+    padding: 0.5rem 1.1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--heading);
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.bulletin-pdf-btn:hover {
+    background: var(--theme);
+    border-color: var(--theme);
+    color: var(--theme-on);
 }
 
 .bulletin-pagination {
@@ -4473,10 +4529,10 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
 }
 .bulletin-pag-btn {
-    padding: 0.45rem 1.1rem;
+    padding: 0.45rem 1.25rem;
     border: 1px solid var(--border);
     border-radius: 999px;
     background: var(--white);
@@ -4485,41 +4541,47 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .bulletin-pag-btn:hover:not(:disabled) {
     background: var(--theme);
     color: var(--theme-on);
     border-color: var(--theme);
 }
-.bulletin-pag-btn:disabled {
-    opacity: 0.35;
-    cursor: default;
-}
+.bulletin-pag-btn:disabled { opacity: 0.35; cursor: default; }
 .bulletin-pag-info {
     font-size: var(--fs-sm);
     color: var(--text-muted);
-    min-width: 3rem;
+    min-width: 3.5rem;
     text-align: center;
 }
 
 .bulletin-empty {
+    text-align: center;
     color: var(--text-muted);
     font-size: var(--fs-sm);
-    padding: 2rem 0;
+    padding: 3rem 0;
 }
 
 @media (prefers-color-scheme: dark) {
-    .bulletin-row { background: var(--white); }
+    .bulletin-list { background: var(--white); }
     .bulletin-row:hover,
     .bulletin-row[aria-expanded="true"] { background: var(--green-light); }
     .bulletin-drawer { background: var(--cream); }
     .bulletin-page { border-color: var(--border); }
+    .bulletin-row-count { background: var(--green-light); }
+    .bulletin-pdf-btn { background: var(--white); color: var(--text); }
     .bulletin-pag-btn { background: var(--white); color: var(--text); }
 }
 @media (prefers-reduced-motion: reduce) {
-    .bulletin-row-chevron { transition: none; }
-    .bulletin-row { transition: none; }
+    .bulletin-row,
+    .bulletin-row-chevron,
+    .bulletin-pdf-btn,
+    .bulletin-pag-btn { transition: none; }
+}
+@media (max-width: 480px) {
+    .bulletin-row { padding: 1rem 1.1rem; }
+    .bulletin-drawer { padding: 1.1rem 1.1rem 1.5rem; }
 }
 
 /* ── Print ────────────────────────────────────────────────
