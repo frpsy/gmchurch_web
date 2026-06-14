@@ -4515,12 +4515,20 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
 
 /* ── Bulletin Lightbox ───────────────────────────────────── */
 #bulletin-lb {
+    position: fixed;
+    inset: 0;
+    margin: 0;
     padding: 0;
-    background: transparent;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     border: none;
-    overflow: visible;
-    max-width: none;
-    max-height: none;
+    background: transparent;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #bulletin-lb::backdrop {
     background: rgba(0, 0, 0, 0.88);
@@ -4529,20 +4537,20 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
 }
 .bulletin-lb-wrap {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
 }
 .bulletin-lb-img {
     display: block;
-    max-width: 92vw;
-    max-height: 90vh;
+    max-width: 96vw;
+    max-height: 96vh;
     object-fit: contain;
     border-radius: var(--radius-sm);
     box-shadow: 0 24px 72px rgba(0, 0, 0, 0.65);
 }
 .bulletin-lb-close {
-    position: absolute;
-    top: -0.9rem;
-    right: -0.9rem;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
     width: 2.2rem;
     height: 2.2rem;
     border-radius: 50%;
@@ -4557,6 +4565,7 @@ mark { background: var(--gold-bg); color: var(--green-deep); padding: 0 0.1em; b
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     transition: background 0.15s, transform 0.15s;
+    z-index: 1;
 }
 .bulletin-lb-close:hover { background: #fff; transform: scale(1.1); }
 
