@@ -1550,21 +1550,71 @@ const PortraitLightbox = {
 
 /* ── BulletinRenderer ────────────────────────────────────── */
 const BulletinRenderer = {
-    _tabLabel(item) {
-        const d = new Date(item.date);
-        return `${d.getMonth() + 1}월 ${d.getDate()}일`;
+    _PER_PAGE: 5,
+
+    _imagesHtml(item) {
+        if (!item.images || item.images.length === 0) {
+            return `<p class="bulletin-empty">주보가 준비 중입니다.</p>`;
+        }
+        return `<div class="bulletin-pages">${
+            item.images.map((src, i) =>
+                `<img src="${src}" alt="${item.label} ${i + 1}면" loading="lazy" class="bulletin-page">`
+            ).join('')
+        }</div>`;
     },
 
-    _viewerHtml(item) {
-        const hasImages = item.images && item.images.length > 0;
-        const meta = `<p class="bulletin-week-meta">${item.season}</p>`;
-        if (!hasImages) {
-            return meta + `<p class="bulletin-empty">주보가 준비 중입니다.</p>`;
-        }
-        const imgs = item.images.map((src, i) =>
-            `<img src="${src}" alt="${item.label} ${i + 1}면" loading="lazy" class="bulletin-page">`
-        ).join('');
-        return meta + `<div class="bulletin-pages">${imgs}</div>`;
+    _renderPage(el, items, page) {
+        const perPage = this._PER_PAGE;
+        const totalPages = Math.ceil(items.length / perPage);
+        const start = page * perPage;
+        const pageItems = items.slice(start, start + perPage);
+
+        const listHtml = pageItems.map((item) => `
+            <div class="bulletin-item">
+                <button class="bulletin-row" aria-expanded="false" type="button">
+                    <span class="bulletin-row-main">
+                        <span class="bulletin-row-date">${item.label}</span>
+                        <span class="bulletin-row-season">${item.season}</span>
+                    </span>
+                    <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="bulletin-drawer" hidden>
+                    ${this._imagesHtml(item)}
+                </div>
+            </div>
+        `).join('');
+
+        const pagHtml = totalPages > 1 ? `
+            <nav class="bulletin-pagination" aria-label="주보 목록 페이지">
+                <button class="bulletin-pag-btn" type="button" data-dir="-1"${page === 0 ? ' disabled' : ''}>이전</button>
+                <span class="bulletin-pag-info">${page + 1} / ${totalPages}</span>
+                <button class="bulletin-pag-btn" type="button" data-dir="1"${page >= totalPages - 1 ? ' disabled' : ''}>다음</button>
+            </nav>
+        ` : '';
+
+        el.innerHTML = `<div class="bulletin-list">${listHtml}</div>${pagHtml}`;
+
+        el.querySelectorAll('.bulletin-row').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const drawer = btn.nextElementSibling;
+                const isOpen = btn.getAttribute('aria-expanded') === 'true';
+                el.querySelectorAll('.bulletin-row[aria-expanded="true"]').forEach(other => {
+                    if (other !== btn) {
+                        other.setAttribute('aria-expanded', 'false');
+                        other.nextElementSibling.hidden = true;
+                    }
+                });
+                btn.setAttribute('aria-expanded', String(!isOpen));
+                drawer.hidden = isOpen;
+            });
+        });
+
+        el.querySelectorAll('.bulletin-pag-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this._renderPage(el, items, page + parseInt(btn.dataset.dir, 10));
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
     },
 
     render() {
@@ -1577,24 +1627,7 @@ const BulletinRenderer = {
             return;
         }
 
-        const tabs = items.map((item, i) =>
-            `<button class="bulletin-tab${i === 0 ? ' is-active' : ''}" data-idx="${i}" type="button" role="tab">${this._tabLabel(item)}</button>`
-        ).join('');
-
-        el.innerHTML = `
-            <div class="bulletin-tabs" role="tablist">${tabs}</div>
-            <div class="bulletin-viewer">${this._viewerHtml(items[0])}</div>
-        `;
-
-        const tabsEl = el.querySelector('.bulletin-tabs');
-        const viewerEl = el.querySelector('.bulletin-viewer');
-        tabsEl.addEventListener('click', e => {
-            const btn = e.target.closest('.bulletin-tab');
-            if (!btn) return;
-            tabsEl.querySelectorAll('.bulletin-tab').forEach(t => t.classList.remove('is-active'));
-            btn.classList.add('is-active');
-            viewerEl.innerHTML = this._viewerHtml(items[+btn.dataset.idx]);
-        });
+        this._renderPage(el, items, 0);
     }
 };
 
