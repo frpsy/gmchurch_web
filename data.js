@@ -1262,7 +1262,7 @@ const CHURCH_DATA = {
             label: "미디어·자료",
             href: "media.html",
             items: [
-                { label: "교회 영상",     href: "media.html#videos" },
+                { label: "영상 갤러리",   href: "media.html#videos" },
                 { label: "사진 갤러리",   href: "gallery.html" },
                 { label: "관련 기관",     href: "media.html#links" }
             ]
