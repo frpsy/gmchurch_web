@@ -1582,21 +1582,19 @@ const BulletinRenderer = {
     },
 
     _drawerHtml(item) {
+        const pdfSvg = `<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                       <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                   </svg>`;
+        const pdfBtn = item.pdf
+            ? `<a href="${item.pdf}" class="bulletin-pdf-btn" download>${pdfSvg} PDF 내려받기</a>`
+            : '';
         if (!item.images || item.images.length === 0) {
-            return `<p class="bulletin-empty-inner">주보가 준비 중입니다.</p>`;
+            return pdfBtn || `<p class="bulletin-empty-inner">주보가 준비 중입니다.</p>`;
         }
         const imgs = item.images.map((src, i) =>
             `<img src="${src}" alt="${item.label} ${i + 1}면" loading="lazy" class="bulletin-page">`
         ).join('');
-        const pdfBtn = item.pdf
-            ? `<a href="${item.pdf}" class="bulletin-pdf-btn" download>
-                   <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
-                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                       <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                   </svg>
-                   PDF 내려받기
-               </a>`
-            : '';
         return `<div class="bulletin-pages">${imgs}</div>${pdfBtn}`;
     },
 
