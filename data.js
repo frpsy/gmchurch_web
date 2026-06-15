@@ -1058,6 +1058,13 @@ const CHURCH_DATA = {
                 season: "가해 연중 11주일",
                 images: ["bulletins/20260614_1.jpg", "bulletins/20260614_2.jpg", "bulletins/20260614_3.jpg", "bulletins/20260614_4.jpg"],
                 pdf: "bulletins/20260614.pdf"
+            },
+            {
+                date: "2026-06-07",
+                label: "2026년 6월 7일",
+                season: "가해 연중 10주일",
+                images: [],
+                pdf: "bulletins/20260607.pdf"
             }
         ]
     },
