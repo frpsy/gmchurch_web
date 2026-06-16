@@ -29,8 +29,10 @@ gmchurch_web/
 ├── hopecenter.html   광명 희망터 상세 페이지
 ├── smallgroup.html   소그룹 모임 상세 페이지
 ├── greenchurch.html  녹색교회 상세 페이지
-├── links.html        관련 기관 (standalone)
-├── media.html        교회 영상 · 관련 기관
+├── links.html        관련 기관 상세 페이지
+├── media.html        미디어·자료 허브 (영상 · 사진 · 녹색교회 · 관련 기관 카드 링크)
+├── videos.html       영상 갤러리 상세 페이지
+├── gallery.html      사진 갤러리 상세 페이지 (noindex)
 ├── visit.html        오시는 길 (지도 · 교통 · 주차)
 ├── giving.html       헌금 (봉헌 계좌 · 영수증 안내)
 ├── privacy.html      개인정보 처리방침 (noindex)
@@ -59,7 +61,9 @@ gmchurch_web/
 - **공동체** (`community.html`) — 광명 희망터, 엠마우스 코스, 소그룹 모임, 녹색교회 소개
 - **오시는 길** (`visit.html`) — Google Maps 지도, 대중교통, 주차 안내
 - **헌금** (`giving.html`) — 봉헌 계좌, 기부금 영수증 안내
-- **교회 영상** (`media.html`) — 성공회·신앙·공동체 관련 유튜브 영상 소개
+- **미디어·자료** (`media.html`) — 영상·사진 갤러리, 녹색교회, 관련 기관으로 이어지는 허브
+- **영상 갤러리** (`videos.html`) — 성공회·신앙·공동체 관련 유튜브 영상 소개
+- **사진 갤러리** (`gallery.html`) — 예배·나눔·절기의 순간을 담은 사진 모음
 
 ## 콘텐츠 수정 방법
 

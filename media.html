@@ -41,104 +41,39 @@
             <p>영상, 사진, 신앙 자료를 한곳에서</p>
         </div>
 
-        <!-- ── 섹션 내비게이션 (sticky) ──────────────────────── -->
-        <nav class="gc-page-nav" aria-label="미디어·자료 섹션 이동">
+        <!-- ── 미디어 허브 카드 ──────────────────────────────── -->
+        <section class="section">
             <div class="container">
-                <a href="#videos" class="gc-nav-link" data-media-section="videos">
-                    <span aria-hidden="true">🎬</span> 영상 갤러리
-                </a>
-                <a href="#gallery" class="gc-nav-link" data-media-section="gallery">
-                    <span aria-hidden="true">📸</span> 사진 갤러리
-                </a>
-                <a href="#green" class="gc-nav-link" data-media-section="green">
-                    <span aria-hidden="true">🌿</span> 녹색교회
-                </a>
-                <a href="#links" class="gc-nav-link" data-media-section="links">
-                    <span aria-hidden="true">🔗</span> 관련 기관
-                </a>
-            </div>
-        </nav>
-
-        <!-- ── 섹션 1: 영상 갤러리 ────────────────────────────── -->
-        <section class="section" id="videos">
-            <div class="container">
-                <div id="media-full"></div>
-            </div>
-        </section>
-
-        <!-- ── 섹션 2: 사진 갤러리 ────────────────────────────── -->
-        <section class="section gc-section-alt" id="gallery">
-            <div class="container">
-
-                <div class="section-header">
-                    <p class="section-eyebrow">Photo Gallery</p>
-                    <h2 class="section-title">사진 갤러리</h2>
-                    <p class="section-sub">광명교회 공동체의 예배, 나눔, 절기의 순간들</p>
-                </div>
-
-                <div id="media-gallery-preview" class="photo-grid"></div>
-
-                <div class="video-channel-cta">
-                    <a href="gallery.html" class="video-channel-link">
-                        사진 갤러리 전체 보기 →
-                    </a>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ── 섹션 3: 녹색교회 ──────────────────────────────── -->
-        <section class="section" id="green">
-            <div class="container">
-
-                <div class="section-header">
-                    <p class="section-eyebrow">Green Church</p>
-                    <h2 class="section-title">녹색교회</h2>
-                    <p class="section-sub">
-                        광명교회는 생태와 환경 보전을 신앙의 과제로 삼습니다.
-                        기후위기에 응답하고, 비건 지향 식탁을 나누며, 모든 생명을 존중합니다.
-                    </p>
-                </div>
-
                 <div class="resource-grid">
-                    <a class="resource-card" href="greenchurch.html#climate"
+                    <a class="resource-card" href="videos.html"
                        style="border-top-color: var(--green-mid);">
-                        <span class="resource-icon" aria-hidden="true">🌍</span>
-                        <p class="resource-title">기후위기와 신앙의 응답</p>
-                        <p class="resource-desc">창조세계의 파괴는 신학적 위기입니다. 성공회 기후 선언과 한국 녹색교회 운동을 안내합니다.</p>
+                        <span class="resource-icon" aria-hidden="true">🎬</span>
+                        <p class="resource-title">영상 갤러리</p>
+                        <p class="resource-desc">성공회의 신앙과 예배, 광명교회 공동체 이야기를 담은 유튜브 영상.</p>
+                        <span class="resource-link" style="color:var(--green-mid);">영상 보기 →</span>
+                    </a>
+                    <a class="resource-card" href="gallery.html"
+                       style="border-top-color: var(--green-mid);">
+                        <span class="resource-icon" aria-hidden="true">📸</span>
+                        <p class="resource-title">사진 갤러리</p>
+                        <p class="resource-desc">예배와 나눔, 절기의 순간들을 담은 공동체 사진 모음.</p>
+                        <span class="resource-link" style="color:var(--green-mid);">사진 보기 →</span>
+                    </a>
+                    <a class="resource-card" href="greenchurch.html"
+                       style="border-top-color: var(--green-mid);">
+                        <span class="resource-icon" aria-hidden="true">🌿</span>
+                        <p class="resource-title">녹색교회</p>
+                        <p class="resource-desc">기후위기에 응답하고 모든 생명을 존중하는 신앙의 실천.</p>
                         <span class="resource-link" style="color:var(--green-mid);">자세히 보기 →</span>
                     </a>
-                    <a class="resource-card" href="greenchurch.html#vegan"
+                    <a class="resource-card" href="links.html"
                        style="border-top-color: var(--green-mid);">
-                        <span class="resource-icon" aria-hidden="true">🥦</span>
-                        <p class="resource-title">비건 지향 식탁</p>
-                        <p class="resource-desc">주일 애찬은 비건 지향 공동 식사입니다. 식단과 기후위기, 채식 실천의 신앙적 의미를 나눕니다.</p>
-                        <span class="resource-link" style="color:var(--green-mid);">자세히 보기 →</span>
-                    </a>
-                    <a class="resource-card" href="greenchurch.html#animals"
-                       style="border-top-color: var(--green-mid);">
-                        <span class="resource-icon" aria-hidden="true">🐾</span>
-                        <p class="resource-title">모든 생명 존중 — 동물복지</p>
-                        <p class="resource-desc">하나님이 지으신 피조물을 존중하는 신앙. 동물신학과 반려동물 축복식을 소개합니다.</p>
+                        <span class="resource-icon" aria-hidden="true">🔗</span>
+                        <p class="resource-title">관련 기관</p>
+                        <p class="resource-desc">대한성공회와 세계성공회의 기관·공동체 안내.</p>
                         <span class="resource-link" style="color:var(--green-mid);">자세히 보기 →</span>
                     </a>
                 </div>
-
-            </div>
-        </section>
-
-        <!-- ── 섹션 4: 관련 기관 ─────────────────────────────── -->
-        <section class="section gc-section-alt" id="links">
-            <div class="container" style="max-width:860px;">
-
-                <div class="section-header">
-                    <p class="section-eyebrow">Related Links</p>
-                    <h2 class="section-title">관련 기관</h2>
-                    <p class="section-sub">대한성공회와 세계성공회의 기관·공동체 안내.</p>
-                </div>
-
-                <div id="links-full"></div>
-
             </div>
         </section>
 
@@ -162,56 +97,5 @@
 
     <script src="data.js?v=bb87733"></script>
     <script src="app.js?v=bb87733"></script>
-    <script>
-    /* 사진 갤러리 미리보기 (최근 6장) */
-    (function () {
-        var el = document.getElementById('media-gallery-preview');
-        if (!el || !window.CHURCH_DATA || !CHURCH_DATA.photoGallery) return;
-        var photos = CHURCH_DATA.photoGallery.photos.slice(0, 6);
-        el.innerHTML = photos.map(function (p) {
-            var isPending = p.thumb.includes('picsum');
-            if (isPending) {
-                return '<div class="photo-item photo-item--pending">' +
-                    '<div class="photo-placeholder" aria-hidden="true">' +
-                    '<span class="photo-placeholder-label">' + p.title + '</span>' +
-                    '<span class="photo-placeholder-badge">준비중</span>' +
-                    '</div></div>';
-            }
-            return '<a class="photo-item" href="gallery.html" aria-label="' + p.alt + ' — 갤러리 보기">' +
-                '<img src="' + p.thumb + '" alt="' + p.alt + '" loading="lazy" width="480" height="320">' +
-                '<div class="photo-overlay" aria-hidden="true">' +
-                '<span class="photo-cat-badge">' + p.category + '</span>' +
-                '<p class="photo-caption">' + p.title + '</p>' +
-                '</div></a>';
-        }).join('');
-    }());
-
-    /* 섹션 내비게이션 활성 상태 표시 — 스크롤 기반 */
-    (function () {
-        var links = document.querySelectorAll('.gc-nav-link[data-media-section]');
-        if (!links.length) return;
-        var ids = Array.from(links).map(function (l) { return l.dataset.mediaSection; });
-        var els = ids.map(function (id) { return document.getElementById(id); });
-        /* section 요소의 padding-top(9rem 등)을 초기 1회 캐시 — 콘텐츠 시작점 보정용 */
-        var pads = els.map(function (el) {
-            return el ? parseFloat(window.getComputedStyle(el).paddingTop) || 0 : 0;
-        });
-
-        function update() {
-            var threshold = window.innerHeight * 0.40;
-            var activeId = null;
-            for (var i = 0; i < els.length; i++) {
-                if (!els[i]) continue;
-                if (els[i].getBoundingClientRect().top + pads[i] <= threshold) activeId = ids[i];
-            }
-            links.forEach(function (l) {
-                l.classList.toggle('is-active', l.dataset.mediaSection === activeId);
-            });
-        }
-
-        window.addEventListener('scroll', update, { passive: true });
-        update();
-    }());
-    </script>
 </body>
 </html>

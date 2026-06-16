@@ -2329,8 +2329,8 @@ const MenuOverlay = {
         if (com.smallgroups) (com.smallgroups.groups || []).forEach(g =>
             add(g.title, 'smallgroup.html#' + g.id, '소그룹 모임', join(g.en, g.schedule, g.desc, g.details)));
 
-        // 미디어 (media.html)
-        if (d.media) (d.media.videos || []).forEach(v => add(v.title, 'media.html#videos', '교회 영상',
+        // 미디어 (videos.html)
+        if (d.media) (d.media.videos || []).forEach(v => add(v.title, 'videos.html', '영상 갤러리',
             join(v.category, v.desc)));
 
         // 관련 기관 (links.html)
