@@ -23,6 +23,14 @@ function canterburyCrossSVG({ size = null, fill = '#ffffff', cls = '', label = n
     return `<svg viewBox="0 0 64 64"${dims}${klass}${a11y}><path d="${CANTERBURY_CROSS_PATH}" fill="${fill}" fill-rule="evenodd"/></svg>`;
 }
 
+// 사용자가 모션 최소화를 요청했는지 — 프로그램적 부드러운 스크롤을 즉시 이동으로 대체 (WCAG 2.3.3)
+function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+function scrollBehavior() {
+    return prefersReducedMotion() ? 'auto' : 'smooth';
+}
+
 /* ── MapHelper ───────────────────────────────────────────── */
 const MapHelper = {
     // 네이버/카카오 iframe은 X-Frame-Options로 임베드 차단 → Google Maps output=embed 사용.
@@ -2199,7 +2207,7 @@ const App = {
             .getPropertyValue('--nav-h')) || 64;
         window.scrollTo({
             top: el.getBoundingClientRect().top + window.scrollY - navH - 16,
-            behavior: 'smooth'
+            behavior: scrollBehavior()
         });
     },
 
@@ -2229,7 +2237,7 @@ const BackToTop = {
         btn.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>`;
         document.body.appendChild(btn);
 
-        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: scrollBehavior() }));
 
         let rafId = null;
         const check = () => {
@@ -2237,7 +2245,8 @@ const BackToTop = {
             const docH = document.documentElement.scrollHeight;
             const vpH = document.documentElement.clientHeight;
             const scrollable = docH - vpH;
-            btn.classList.toggle('visible', scrollable > 200 && window.scrollY / scrollable >= 0.7);
+            // 첫 화면(히어로)을 지나 스크롤하면 노출 — 바닥 근처에서야 뜨던 0.7 기준 개선
+            btn.classList.toggle('visible', scrollable > 400 && window.scrollY > vpH * 0.9);
         };
         const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(check); };
 
@@ -2478,6 +2487,22 @@ const MenuOverlay = {
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this._overlay.classList.contains('is-open')) this.close();
+        });
+
+        // 모달 포커스 트랩 — aria-modal 다이얼로그에서 Tab이 배경으로 새지 않도록 (WCAG 2.4.3)
+        this._overlay.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+            const focusables = Array.from(this._overlay.querySelectorAll(
+                'a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])'
+            )).filter(el => el.offsetParent !== null);  // 보이는 요소만 (숨긴 사이트맵/결과 제외)
+            if (!focusables.length) return;
+            const first = focusables[0];
+            const last  = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault(); last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault(); first.focus();
+            }
         });
     },
 
