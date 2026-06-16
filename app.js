@@ -1212,13 +1212,16 @@ const ClergyRenderer = {
         el.innerHTML = `
             ${introHtml}
             <div class="values-grid">
-                ${values.map(v => `
-                    <div class="value-card">
+                ${values.map(v => {
+                    const inner = `
                         <div class="val-icon">${v.icon}</div>
                         <h4>${v.title}</h4>
                         <p>${v.desc}</p>
-                    </div>
-                `).join('')}
+                        ${v.href && v.cta ? `<span class="value-card-cta">${v.cta} <span aria-hidden="true">→</span></span>` : ''}`;
+                    return v.href
+                        ? `<a class="value-card value-card--link" href="${v.href}">${inner}</a>`
+                        : `<div class="value-card">${inner}</div>`;
+                }).join('')}
             </div>
             ${closingHtml}
         `;

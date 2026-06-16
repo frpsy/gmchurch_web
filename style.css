@@ -1156,6 +1156,21 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
 .value-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--heading); margin-bottom: 0.5rem; }
 .value-card p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.8; }
 
+.value-card--link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+.value-card--link:hover { border-color: var(--green-mid); }
+.value-card-cta {
+    display: inline-block;
+    margin-top: 0.85rem;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--green-mid);
+}
+.value-card--link:hover .value-card-cta { color: var(--heading); }
+
 .philosophy-intro {
     max-width: 740px;
     margin: 0 auto 2.5rem;
