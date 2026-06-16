@@ -36,9 +36,10 @@
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
 | `giving.html` | 헌금 | GivingRenderer |
-| `media.html` | 교회 영상·관련 기관 | MediaRenderer, LinksRenderer |
-| `gallery.html` | 사진 게시판 (noindex, 미디어·자료 메뉴) | PhotoGalleryRenderer |
-| `links.html` | 관련 기관 (standalone) | LinksRenderer |
+| `media.html` | 미디어·자료 허브 (카드 링크만, 렌더러 없음) | — |
+| `videos.html` | 영상 갤러리 (미디어·자료 메뉴) | MediaRenderer |
+| `gallery.html` | 사진 갤러리 (noindex, 미디어·자료 메뉴) | PhotoGalleryRenderer |
+| `links.html` | 관련 기관 (미디어·자료 메뉴) | LinksRenderer |
 | `sundays.html` | 교회력 허브 — 이달의 교회력·전례독서·절기·특별 주일 (교회력 메뉴) | SundaysRenderer |
 | `visit.html` | 오시는 길 | VisitRenderer |
 | `hopecenter.html` | 광명 희망터 상세 | — |
@@ -69,8 +70,8 @@
 공동체 (community.html)
   광명 희망터 / 엠마우스 코스 / 소그룹 모임 / 녹색교회(greenchurch.html)
 
-미디어·자료 (media.html)
-  교회 영상 / 사진 게시판(gallery.html) / 관련 기관
+미디어·자료 (media.html, 허브 — 카드 링크만)
+  영상 갤러리(videos.html) / 사진 갤러리(gallery.html) / 녹색교회(greenchurch.html) / 관련 기관(links.html)
 
 오시는 길 (visit.html)
   주소·교통 / 주차 안내

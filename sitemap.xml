@@ -50,9 +50,15 @@
   </url>
   <url>
     <loc>https://frpsy.github.io/gmchurch_web/media.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://frpsy.github.io/gmchurch_web/videos.html</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://frpsy.github.io/gmchurch_web/smallgroup.html</loc>

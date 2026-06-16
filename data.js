@@ -1269,9 +1269,10 @@ const CHURCH_DATA = {
             label: "미디어·자료",
             href: "media.html",
             items: [
-                { label: "영상 갤러리",   href: "media.html#videos" },
+                { label: "영상 갤러리",   href: "videos.html" },
                 { label: "사진 갤러리",   href: "gallery.html" },
-                { label: "관련 기관",     href: "media.html#links" }
+                { label: "녹색교회",     href: "greenchurch.html" },
+                { label: "관련 기관",     href: "links.html" }
             ]
         },
         {

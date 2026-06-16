@@ -27,10 +27,12 @@ gmchurch_web/
 ├── hopecenter.html   광명 희망터 상세 페이지
 ├── smallgroup.html   소그룹 모임 상세 페이지
 ├── greenchurch.html  녹색교회 상세 페이지
-├── links.html        관련 기관 (standalone)
+├── links.html        관련 기관 상세 페이지
 ├── visit.html        오시는 길 (지도·교통·주차)
 ├── giving.html       헌금 (봉헌 계좌·영수증 안내)
-├── media.html        교회 영상·관련 기관
+├── media.html        미디어·자료 허브 (영상·사진·녹색교회·관련 기관 카드 링크)
+├── videos.html       영상 갤러리 상세 페이지
+├── gallery.html      사진 갤러리 상세 페이지 (noindex)
 ├── privacy.html      개인정보 처리방침 (noindex)
 ├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA (1081줄)
 ├── app.js            렌더러 모음 + App bootstrap (2211줄)
@@ -290,9 +292,11 @@ const CHURCH_DATA = {
   └ 소그룹 모임        smallgroup.html                  (상세 페이지로 직접 이동)
   └ 녹색교회           greenchurch.html                 (상세 페이지로 직접 이동)
 
-미디어·자료  media.html
-  └ 교회 영상          media.html#videos                (JS)
-  └ 관련 기관          media.html#links                 (JS)
+미디어·자료  media.html                                  (허브 — 카드 링크만, 렌더러 없음)
+  └ 영상 갤러리        videos.html                      (상세 페이지로 직접 이동)
+  └ 사진 갤러리        gallery.html                     (상세 페이지로 직접 이동)
+  └ 녹색교회           greenchurch.html                 (상세 페이지로 직접 이동)
+  └ 관련 기관          links.html                       (상세 페이지로 직접 이동)
 
 오시는 길  visit.html
   └ 주소·교통          visit.html#location              (JS)
@@ -374,14 +378,14 @@ window DOMContentLoaded
       │       _bioSection(bio) → 타임라인 + 소임 태그 + 교회 밖 활동 + 출처
       │     _philosophy() → #philosophy-full  (.values-grid)
       │
-      ├── MediaRenderer.render()      → #media-full (media.html)
+      ├── MediaRenderer.render()      → #media-full (videos.html)
       │     유튜브 영상 소개 섹션 헤더
       │     video-grid: 5개+ 영상 카드 (썸네일 + 카테고리 + 제목 + 설명)
       │     각 카드는 유튜브 링크로 이동
       │     video-channel-cta: 유튜브 채널 전체 보기 버튼
       │
-      ├── LinksRenderer.render()      → #links (media.html + links.html)
-      │     관련 기관 목록. media.html과 links.html 두 페이지에서 공유.
+      ├── LinksRenderer.render()      → #links-full (links.html)
+      │     관련 기관 목록.
       │
       ├── PressRenderer.render()      → #press-table (clergy.html)
       │     press-list: press 배열의 모든 기사
@@ -469,7 +473,15 @@ window DOMContentLoaded
 
 ### media.html
 ```html
+<div class="page-hero">                       미디어·자료 허브 — 렌더러 없음, 정적 카드 링크
+<section>
+  .resource-grid → .resource-card × 4         videos.html / gallery.html / greenchurch.html / links.html
+```
+
+### videos.html
+```html
 <div class="page-hero">
+<nav class="gc-page-nav">                     미디어·자료 페이지 이동 (영상/사진/녹색교회/관련 기관)
 <section>
   #media-full                               ← MediaRenderer.render()
     intro + 유튜브 채널 소개
@@ -634,7 +646,7 @@ window DOMContentLoaded
 ### 중복 ID 금지
 - `clergy.html` 섹션 태그에 `id="philosophy"` 이미 있음
 - `ClergyRenderer._philosophy()` 내부 div에 동일 ID 추가 금지
-- `media.html` 페이지 추가로 id="media-full" 사용
+- `videos.html` 페이지에서 id="media-full" 사용
 
 ### 새 페이지 렌더러 추가 시 유의사항
 1. `app.js`에 `const PageNameRenderer = { render() { ... } }` 정의
@@ -642,7 +654,7 @@ window DOMContentLoaded
 3. `App.init()` 메서드에서 조건부로 렌더러 호출
    - 페이지별 렌더러는 해당 HTML 페이지에서만 실행 (예: `if (document.getElementById('media-full'))`)
 4. `data.js`의 `navigation` 배열에 새 메뉴 항목 추가
-5. 필요 시 media.html처럼 별도 대문 이미지 제공
+5. 필요 시 greenchurch.html처럼 `page-hero--photo` 별도 대문 이미지 제공
 6. ARCHITECTURE.md와 docs/ 작업 지시서 동기화
 
 ### Git 워크플로
