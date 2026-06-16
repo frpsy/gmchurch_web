@@ -1088,8 +1088,8 @@ const CHURCH_DATA = {
                 desc: "매주 주일, 공동체가 모여 말씀과 성찬을 나눕니다.",
                 category: "예배",
                 date: "2026.06",
-                src: "images/gallery/worship/야외성찬례.png",
-                thumb: "images/gallery/worship/야외성찬례.png",
+                src: "images/gallery/worship/야외성찬례.webp",
+                thumb: "images/gallery/worship/야외성찬례-thumb.webp",
                 alt: "광명교회 예배와 기도"
             },
             {
@@ -1119,7 +1119,7 @@ const CHURCH_DATA = {
                 category: "공동체",
                 date: "2026.06",
                 src: "images/gallery/community/공동체1.webp",
-                thumb: "images/gallery/community/공동체1.webp",
+                thumb: "images/gallery/community/공동체1-thumb.webp",
                 alt: "광명교회 공동체 모임"
             },
             {
@@ -1189,7 +1189,7 @@ const CHURCH_DATA = {
                 category: "교회 풍경",
                 date: "2026.06",
                 src: "images/gallery/scenery/교회소개_교회내부_제단.webp",
-                thumb: "images/gallery/scenery/교회소개_교회내부_제단.webp",
+                thumb: "images/gallery/scenery/교회소개_교회내부_제단-thumb.webp",
                 alt: "광명교회 교회 내부 제단"
             },
             {
@@ -1208,8 +1208,8 @@ const CHURCH_DATA = {
                 desc: "NCCK·기독교환경운동연대로부터 2023년 녹색교회로 선정되었습니다.",
                 category: "교회 풍경",
                 date: "2023.05",
-                src: "images/gallery/scenery/greenchurch-award-2023.jpg",
-                thumb: "images/gallery/scenery/greenchurch-award-2023.jpg",
+                src: "images/gallery/scenery/greenchurch-award-2023.webp",
+                thumb: "images/gallery/scenery/greenchurch-award-2023-thumb.webp",
                 alt: "2023년 녹색교회 선정 상패"
             }
         ]
