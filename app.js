@@ -1254,6 +1254,27 @@ const MediaRenderer = {
     }
 };
 
+/* ── MediaHubRenderer ────────────────────────────────────── */
+/* 미디어·자료 허브(media.html)의 섹션 카드 — data.media.hub.cards 기준 */
+const MediaHubRenderer = {
+    render() {
+        const el = document.getElementById('media-hub');
+        if (!el || !CHURCH_DATA.media || !CHURCH_DATA.media.hub) return;
+        el.innerHTML = `
+            <div class="resource-grid">
+                ${CHURCH_DATA.media.hub.cards.map(c => `
+                    <a class="resource-card" href="${c.href}" style="border-top-color: var(--green-mid);">
+                        <span class="resource-icon" aria-hidden="true">${c.icon}</span>
+                        <p class="resource-title">${c.title}</p>
+                        <p class="resource-desc">${c.desc}</p>
+                        <span class="resource-link" style="color:var(--green-mid);">${c.action} →</span>
+                    </a>
+                `).join('')}
+            </div>
+        `;
+    }
+};
+
 /* ── PhotoGalleryRenderer ────────────────────────────────── */
 const PhotoGalleryRenderer = {
     render() {
@@ -2155,6 +2176,7 @@ const App = {
         PressRenderer.render();
         FaqRenderer.render();
         MediaRenderer.render();
+        MediaHubRenderer.render();
         PhotoGalleryRenderer.render();
         LinksRenderer.render();
         BulletinRenderer.render();

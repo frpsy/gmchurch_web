@@ -36,7 +36,7 @@
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
 | `giving.html` | 헌금 | GivingRenderer |
-| `media.html` | 미디어·자료 허브 (카드 링크만, 렌더러 없음) | — |
+| `media.html` | 미디어·자료 허브 (카드 링크) | MediaHubRenderer |
 | `videos.html` | 영상 갤러리 (미디어·자료 메뉴) | MediaRenderer |
 | `gallery.html` | 사진 갤러리 (noindex, 미디어·자료 메뉴) | PhotoGalleryRenderer |
 | `links.html` | 관련 기관 (미디어·자료 메뉴) | LinksRenderer |

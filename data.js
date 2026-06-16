@@ -671,6 +671,14 @@ const CHURCH_DATA = {
     liveUrl: "https://youtu.be/5tTJvrTX4aA",
 
     media: {
+        // 미디어·자료 허브(media.html) 카드 — MediaHubRenderer가 렌더
+        hub: {
+            cards: [
+                { icon: "🎬", title: "영상 갤러리", desc: "성공회의 신앙과 예배, 광명교회 공동체 이야기를 담은 유튜브 영상.", href: "videos.html",  action: "영상 보기" },
+                { icon: "📸", title: "사진 갤러리", desc: "예배와 나눔, 절기의 순간들을 담은 공동체 사진 모음.",            href: "gallery.html", action: "사진 보기" },
+                { icon: "🔗", title: "관련 기관",   desc: "대한성공회와 세계성공회의 기관·공동체 안내.",                   href: "links.html",   action: "자세히 보기" }
+            ]
+        },
         intro: "성공회의 신앙과 예배, 광명교회 공동체 이야기를 담은 영상입니다.",
         channelUrl: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
         videos: [
