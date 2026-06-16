@@ -1216,7 +1216,8 @@ const CHURCH_DATA = {
                 { label: "대한성공회",  href: "clergy.html#ack" },
                 { label: "섬기는 이들", href: "clergy.html#priest-section" },
                 { label: "교회 철학",  href: "clergy.html#philosophy" },
-                { label: "교회 이야기", href: "clergy.html#identity" }
+                { label: "교회 이야기", href: "clergy.html#identity" },
+                { label: "녹색교회",   href: "greenchurch.html" }
             ]
         },
         {
@@ -1261,8 +1262,7 @@ const CHURCH_DATA = {
             items: [
                 { label: "광명 희망터",   href: "hopecenter.html" },
                 { label: "엠마우스 코스", href: "emmaus.html" },
-                { label: "소그룹 모임",  href: "smallgroup.html" },
-                { label: "녹색교회",     href: "greenchurch.html" }
+                { label: "소그룹 모임",  href: "smallgroup.html" }
             ]
         },
         {
@@ -1271,7 +1271,6 @@ const CHURCH_DATA = {
             items: [
                 { label: "영상 갤러리",   href: "videos.html" },
                 { label: "사진 갤러리",   href: "gallery.html" },
-                { label: "녹색교회",     href: "greenchurch.html" },
                 { label: "관련 기관",     href: "links.html" }
             ]
         },

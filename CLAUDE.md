@@ -45,7 +45,7 @@
 | `hopecenter.html` | 광명 희망터 상세 | — |
 | `emmaus.html` | 엠마우스 코스 상세 | — |
 | `smallgroup.html` | 소그룹 모임 상세 | SmallGroupRenderer |
-| `greenchurch.html` | 녹색교회 상세 (공동체 메뉴) | — |
+| `greenchurch.html` | 녹색교회 상세 (교회 소개 메뉴) | — |
 | `privacy.html` | 개인정보처리방침 (noindex) | — |
 
 ---
@@ -56,7 +56,7 @@
 
 ```
 교회 소개 (clergy.html)
-  성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity)
+  성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity) / 녹색교회(greenchurch.html)
 
 예배와 기도 (worship.html)
   주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일과 / 세계성공회 중보기도 / 예배 자료 / 주일 주보(bulletin.html)
@@ -68,10 +68,10 @@
   인사말 / 참여 안내 / 성공회 전례란? / 전례 공간 안내 / 영성체 안내 / 자주 묻는 질문(faq.html) / 문의하기
 
 공동체 (community.html)
-  광명 희망터 / 엠마우스 코스 / 소그룹 모임 / 녹색교회(greenchurch.html)
+  광명 희망터 / 엠마우스 코스 / 소그룹 모임
 
 미디어·자료 (media.html, 허브 — 카드 링크만)
-  영상 갤러리(videos.html) / 사진 갤러리(gallery.html) / 녹색교회(greenchurch.html) / 관련 기관(links.html)
+  영상 갤러리(videos.html) / 사진 갤러리(gallery.html) / 관련 기관(links.html)
 
 오시는 길 (visit.html)
   주소·교통 / 주차 안내

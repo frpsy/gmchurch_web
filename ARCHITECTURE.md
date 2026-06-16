@@ -30,7 +30,7 @@ gmchurch_web/
 ├── links.html        관련 기관 상세 페이지
 ├── visit.html        오시는 길 (지도·교통·주차)
 ├── giving.html       헌금 (봉헌 계좌·영수증 안내)
-├── media.html        미디어·자료 허브 (영상·사진·녹색교회·관련 기관 카드 링크)
+├── media.html        미디어·자료 허브 (영상·사진·관련 기관 카드 링크)
 ├── videos.html       영상 갤러리 상세 페이지
 ├── gallery.html      사진 갤러리 상세 페이지 (noindex)
 ├── privacy.html      개인정보 처리방침 (noindex)
@@ -262,6 +262,7 @@ const CHURCH_DATA = {
   └ 섬기는 이들        clergy.html#priest-section       (JS)
   └ 교회 철학          clergy.html#philosophy
   └ 교회 이야기        clergy.html#identity
+  └ 녹색교회           greenchurch.html                 (상세 페이지로 직접 이동)
 
 예배와 기도  worship.html
   └ 주일 감사성찬례    worship.html#main                (JS)
@@ -290,12 +291,10 @@ const CHURCH_DATA = {
   └ 광명 희망터        hopecenter.html                  (상세 페이지로 직접 이동)
   └ 엠마우스 코스      emmaus.html                      (상세 페이지로 직접 이동)
   └ 소그룹 모임        smallgroup.html                  (상세 페이지로 직접 이동)
-  └ 녹색교회           greenchurch.html                 (상세 페이지로 직접 이동)
 
 미디어·자료  media.html                                  (허브 — 카드 링크만, 렌더러 없음)
   └ 영상 갤러리        videos.html                      (상세 페이지로 직접 이동)
   └ 사진 갤러리        gallery.html                     (상세 페이지로 직접 이동)
-  └ 녹색교회           greenchurch.html                 (상세 페이지로 직접 이동)
   └ 관련 기관          links.html                       (상세 페이지로 직접 이동)
 
 오시는 길  visit.html
@@ -475,13 +474,13 @@ window DOMContentLoaded
 ```html
 <div class="page-hero">                       미디어·자료 허브 — 렌더러 없음, 정적 카드 링크
 <section>
-  .resource-grid → .resource-card × 4         videos.html / gallery.html / greenchurch.html / links.html
+  .resource-grid → .resource-card × 3         videos.html / gallery.html / links.html
 ```
 
 ### videos.html
 ```html
 <div class="page-hero">
-<nav class="gc-page-nav">                     미디어·자료 페이지 이동 (영상/사진/녹색교회/관련 기관)
+<nav class="gc-page-nav">                     미디어·자료 페이지 이동 (영상/사진/관련 기관)
 <section>
   #media-full                               ← MediaRenderer.render()
     intro + 유튜브 채널 소개
