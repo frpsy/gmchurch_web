@@ -244,7 +244,9 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
     box-shadow: 0 8px 28px rgba(0,0,0,0.12);
 }
-.nav-item:hover .dropdown {
+/* 키보드 사용자도 상위 링크 포커스 시 하위 메뉴 접근 가능 (focus-within) */
+.nav-item:hover .dropdown,
+.nav-item:focus-within .dropdown {
     opacity: 1; visibility: visible; transform: translateY(0);
 }
 .dropdown li a {

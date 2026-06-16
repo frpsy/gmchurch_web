@@ -35,7 +35,7 @@ gmchurch_web/
 ├── gallery.html      사진 갤러리 상세 페이지 (noindex)
 ├── privacy.html      개인정보 처리방침 (noindex)
 ├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA (1081줄)
-├── app.js            렌더러 모음 + App bootstrap (2211줄)
+├── app.js            렌더러 모음 + App bootstrap (2588줄)
 ├── style.css         전체 스타일 (4128줄)
 ├── favicon.svg       캔터베리 십자가 (짙은 녹색 배경 + 흰색 십자가)
 ├── apple-touch-icon.png
@@ -292,7 +292,7 @@ const CHURCH_DATA = {
   └ 엠마우스 코스      emmaus.html                      (상세 페이지로 직접 이동)
   └ 소그룹 모임        smallgroup.html                  (상세 페이지로 직접 이동)
 
-미디어·자료  media.html                                  (허브 — 카드 링크만, 렌더러 없음)
+미디어·자료  media.html                                  (허브 — MediaHubRenderer가 카드 렌더)
   └ 영상 갤러리        videos.html                      (상세 페이지로 직접 이동)
   └ 사진 갤러리        gallery.html                     (상세 페이지로 직접 이동)
   └ 관련 기관          links.html                       (상세 페이지로 직접 이동)
@@ -308,7 +308,7 @@ const CHURCH_DATA = {
 
 ## app.js 렌더러 구조
 
-총 2211줄, 16개의 렌더러 모듈 + 2개 유틸리티(ScrollReveal, ScrollProgress) + App 부트스트랩.
+총 2588줄, 17개의 렌더러 모듈 + 2개 유틸리티(ScrollReveal, ScrollProgress) + App 부트스트랩.
 
 ```
 window DOMContentLoaded
@@ -382,6 +382,9 @@ window DOMContentLoaded
       │     video-grid: 5개+ 영상 카드 (썸네일 + 카테고리 + 제목 + 설명)
       │     각 카드는 유튜브 링크로 이동
       │     video-channel-cta: 유튜브 채널 전체 보기 버튼
+      │
+      ├── MediaHubRenderer.render()   → #media-hub (media.html)
+      │     data.media.hub.cards 기준 resource-grid (영상·사진·관련 기관 카드)
       │
       ├── LinksRenderer.render()      → #links-full (links.html)
       │     관련 기관 목록.
@@ -472,9 +475,11 @@ window DOMContentLoaded
 
 ### media.html
 ```html
-<div class="page-hero">                       미디어·자료 허브 — 렌더러 없음, 정적 카드 링크
+<div class="page-hero">                       미디어·자료 허브
 <section>
-  .resource-grid → .resource-card × 3         videos.html / gallery.html / links.html
+  #media-hub                                ← MediaHubRenderer.render()
+    .resource-grid → .resource-card × 3       videos.html / gallery.html / links.html
+※ 카드 콘텐츠는 CHURCH_DATA.media.hub.cards
 ```
 
 ### videos.html
