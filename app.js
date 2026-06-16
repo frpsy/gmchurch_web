@@ -1212,16 +1212,82 @@ const ClergyRenderer = {
         el.innerHTML = `
             ${introHtml}
             <div class="values-grid">
-                ${values.map(v => `
-                    <div class="value-card">
+                ${values.map(v => {
+                    const inner = `
                         <div class="val-icon">${v.icon}</div>
                         <h4>${v.title}</h4>
                         <p>${v.desc}</p>
-                    </div>
-                `).join('')}
+                        ${v.href && v.cta ? `<span class="value-card-cta">${v.cta} <span aria-hidden="true">→</span></span>` : ''}`;
+                    return v.href
+                        ? `<a class="value-card value-card--link" href="${v.href}">${inner}</a>`
+                        : `<div class="value-card">${inner}</div>`;
+                }).join('')}
             </div>
             ${closingHtml}
         `;
+    }
+};
+
+/* ── AboutNavRenderer — 교회 소개 섹션 둘러보기 + 순차 연결 흐름 ─── */
+const AboutNavRenderer = {
+    render() {
+        const host = document.getElementById('about-section-nav');
+        if (!host) return;
+        const about = (CHURCH_DATA.navigation || []).find(n => n.href === 'clergy.html');
+        if (!about || !about.items) return;
+        const cfg = CHURCH_DATA.aboutJourney || {};
+        const items = about.items;
+        const onPage = it => it.href.startsWith('clergy.html') && it.href.includes('#');
+        const anchorOf = it => it.href.split('#')[1];
+
+        // 1) sticky 섹션 내비게이션 — 스크롤 내내 하위 메뉴를 노출
+        host.innerHTML = `
+            <nav class="gc-page-nav" aria-label="${cfg.navLabel || '교회 소개 둘러보기'}">
+                <div class="container">
+                    ${items.map(it => onPage(it)
+                        ? `<a href="#${anchorOf(it)}" class="gc-nav-link" data-about-section="${anchorOf(it)}">${it.label}</a>`
+                        : `<a href="${it.href}" class="gc-nav-link gc-nav-link--ext">${it.label} <span aria-hidden="true">↗</span></a>`
+                    ).join('')}
+                </div>
+            </nav>`;
+
+        // 2) 섹션 끝마다 '다음' 연결 — 순차적으로 모든 하위 메뉴를 거치게
+        items.forEach((it, i) => {
+            const next = items[i + 1];
+            if (!onPage(it) || !next) return;
+            const section = document.getElementById(anchorOf(it));
+            if (!section) return;
+            const container = section.querySelector('.container') || section;
+            const a = document.createElement('a');
+            a.className = 'about-next';
+            a.href = next.href;
+            a.innerHTML =
+                `<span class="about-next-label">${cfg.nextLabel || '다음'}</span>` +
+                `<span class="about-next-target">${next.label}</span>` +
+                `<span class="about-next-arrow" aria-hidden="true">→</span>`;
+            container.appendChild(a);
+        });
+
+        this._bindSpy(host);
+    },
+
+    // 현재 보고 있는 섹션을 내비에서 강조 (greenchurch 섹션 내비와 동일 방식)
+    _bindSpy(host) {
+        const links = Array.from(host.querySelectorAll('.gc-nav-link[data-about-section]'));
+        if (!links.length) return;
+        const ids = links.map(l => l.dataset.aboutSection);
+        const els = ids.map(id => document.getElementById(id));
+        const pads = els.map(el => el ? parseFloat(getComputedStyle(el).paddingTop) || 0 : 0);
+        const update = () => {
+            const threshold = window.innerHeight * 0.40;
+            let activeId = null;
+            els.forEach((el, i) => {
+                if (el && el.getBoundingClientRect().top + pads[i] <= threshold) activeId = ids[i];
+            });
+            links.forEach(l => l.classList.toggle('is-active', l.dataset.aboutSection === activeId));
+        };
+        window.addEventListener('scroll', update, { passive: true });
+        update();
     }
 };
 
@@ -2181,6 +2247,7 @@ const App = {
         VisitRenderer.render();
         AnglicanRenderer.render();
         ClergyRenderer.render();
+        AboutNavRenderer.render();
         PressRenderer.render();
         FaqRenderer.render();
         MediaRenderer.render();

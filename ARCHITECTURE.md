@@ -375,7 +375,12 @@ window DOMContentLoaded
       │     _logo()       → #logo-content  (캔터베리 십자가 SVG + 설명)
       │     _clergy()     → #clergy-full   (주교 + 카테고리별 성직자 clergy-card / 임원진 officer-card)
       │       _bioSection(bio) → 타임라인 + 소임 태그 + 교회 밖 활동 + 출처
-      │     _philosophy() → #philosophy-full  (.values-grid)
+      │     _philosophy() → #philosophy-full  (.values-grid, 녹색교회 카드는 greenchurch.html 링크)
+      │
+      ├── AboutNavRenderer.render()   → clergy.html 전용
+      │     #about-section-nav → sticky 섹션 내비(gc-page-nav 재사용) + 스크롤 스파이
+      │     섹션 끝마다 .about-next 순차 연결('다음') — 마지막은 greenchurch.html로 유도
+      │     데이터원: navigation[0].items, aboutJourney
       │
       ├── MediaRenderer.render()      → #media-full (videos.html)
       │     유튜브 영상 소개 섹션 헤더
