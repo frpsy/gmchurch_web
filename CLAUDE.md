@@ -29,7 +29,7 @@
 | 파일 | 역할 | 렌더러 (app.js) |
 |---|---|---|
 | `index.html` | 홈 | IndexRenderer |
-| `clergy.html` | 교회 소개 (교회 이야기 `#identity` 정적 HTML 포함) | AnglicanRenderer, ClergyRenderer, PressRenderer |
+| `clergy.html` | 교회 소개 (교회 이야기 `#identity` 정적 HTML 포함) | AnglicanRenderer, ClergyRenderer, AboutNavRenderer, PressRenderer |
 | `faq.html` | 자주 묻는 질문 (성공회 오해·궁금증, 가안) | FaqRenderer |
 | `worship.html` | 예배 | WorshipRenderer |
 | `bulletin.html` | 주일 주보 (noindex, 예배와 기도 메뉴) | BulletinRenderer |

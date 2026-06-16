@@ -331,6 +331,12 @@ const CHURCH_DATA = {
         closing: "광명교회는 신앙과 일상, 사람과 이웃이 연결되는 열린 공동체입니다."
     },
 
+    // 교회 소개 페이지 — 섹션 둘러보기 내비 + 순차 연결 흐름
+    aboutJourney: {
+        navLabel: "교회 소개 둘러보기",
+        nextLabel: "다음"
+    },
+
     worship: {
         liturgicalSeason: LiturgicalCalendar.compute(),
         currentReadings: {
