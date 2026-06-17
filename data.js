@@ -1231,8 +1231,7 @@ const CHURCH_DATA = {
                 { label: "성공회란?",   href: "clergy.html#what-is-anglican" },
                 { label: "대한성공회",  href: "clergy.html#ack" },
                 { label: "섬기는 이들", href: "clergy.html#priest-section" },
-                { label: "교회 철학",  href: "clergy.html#philosophy" },
-                { label: "교회 이야기", href: "clergy.html#identity" },
+                { label: "교회 이야기", href: "clergy.html#philosophy" },
                 { label: "녹색교회",   href: "greenchurch.html" }
             ]
         },
