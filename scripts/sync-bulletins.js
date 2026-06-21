@@ -165,8 +165,23 @@ cutoff.setHours(0, 0, 0, 0);
         }
     }
 
-    // ── 3. PDF 생성 (없는 경우만) ───────────────────────────────
+    // PDF만 있는 항목 (JPG 없음) 추가 — 직접 업로드된 PDF
+    const allPdfs = fs.readdirSync(BULLETINS).filter(f => /^\d{8}\.pdf$/i.test(f));
+    for (const pdfFile of allPdfs) {
+        const ds = pdfFile.slice(0, 8);
+        if (valid.has(ds)) continue;
+        const fileDate = new Date(+ds.slice(0, 4), +ds.slice(4, 6) - 1, +ds.slice(6, 8));
+        if (fileDate < cutoff) {
+            fs.unlinkSync(path.join(BULLETINS, pdfFile));
+            console.log(`  삭제: ${pdfFile}`);
+        } else {
+            valid.set(ds, []);
+        }
+    }
+
+    // ── 3. PDF 생성 (이미지 있는 경우, 없는 경우만) ──────────────
     for (const [ds, files] of valid) {
+        if (files.length === 0) continue;
         const pdfPath = path.join(BULLETINS, `${ds}.pdf`);
         if (!fs.existsSync(pdfPath)) {
             try {
