@@ -1887,7 +1887,7 @@ const SundaysRenderer = {
             <div class="lectionary-card-head">
                 <p class="lectionary-card-label">가해(A년) · ${dateStr}</p>
                 <p class="lectionary-card-week">${s.koreanName}</p>
-                ${s.anglicanName ? `<p class="lectionary-card-meta">${s.anglicanName}</p>` : ''}
+                ${s.anglicanName && !s.anglicanName.includes('성령강림 후') ? `<p class="lectionary-card-meta">${s.anglicanName}</p>` : ''}
             </div>
             <div class="lectionary-card-body">${rows}</div>
             <p class="lectionary-card-note">RCL 가해 연속 독서 트랙 · 대한성공회 공동 전례독서에 따릅니다.</p>
