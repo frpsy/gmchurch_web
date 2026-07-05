@@ -1069,6 +1069,13 @@ const CHURCH_DATA = {
         note: "예배 전에 미리 열어 두시면 도움이 됩니다.",
         items: [
             {
+                date: "2026-07-05",
+                label: "2026년 7월 5일",
+                season: "가해 연중 14주일",
+                images: ["bulletins/20260705_1.jpg", "bulletins/20260705_2.jpg", "bulletins/20260705_3.jpg", "bulletins/20260705_4.jpg"],
+                pdf: "bulletins/20260705.pdf"
+            },
+            {
                 date: "2026-06-28",
                 label: "2026년 6월 28일",
                 season: "가해 연중 13주일",
