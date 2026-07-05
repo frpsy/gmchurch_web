@@ -2581,6 +2581,71 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     color: var(--heading);
     font-weight: 600;
 }
+/* 본문 참조 → 공동번역 성서 링크 */
+.lectionary-ref-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    color: var(--theme);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+.lectionary-ref-link:hover {
+    color: var(--heading);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.lectionary-ref-ico { font-size: 0.72em; opacity: 0.6; }
+
+/* 연속(A)·짝(B) 독서 트랙 토글 */
+.lect-track {
+    display: inline-flex;
+    gap: 0.25rem;
+    margin: 0.9rem 1.25rem 0;
+    padding: 0.25rem;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+}
+.lect-track-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    border: none;
+    border-radius: 50px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+}
+.lect-track-btn:hover:not(.is-active) { color: var(--heading); }
+.lect-track-btn.is-active {
+    background: var(--theme);
+    color: var(--theme-on);
+    box-shadow: var(--hover-shadow-sm);
+}
+.lect-track-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.05rem;
+    height: 1.05rem;
+    border-radius: 50%;
+    font-size: 0.68rem;
+    font-weight: 700;
+    background: color-mix(in srgb, currentColor 16%, transparent);
+}
+.lect-track-hint {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    margin: 0.5rem 1.25rem 0;
+    line-height: 1.5;
+}
 /* 전례독서 이전/다음 네비게이션 */
 .lect-nav-row {
     display: flex;

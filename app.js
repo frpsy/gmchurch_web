@@ -1816,13 +1816,14 @@ const SundaysRenderer = {
         if (specialEl)  specialEl.innerHTML = this._special(d.specialSundays);
     },
 
-    /* 전례독서 — RCL 가해 연속 독서 트랙 JSON에서 오늘 날짜 기준 자동 표시 */
+    /* 전례독서 — RCL 가해 JSON에서 오늘 날짜 기준 자동 표시.
+       연중 시기는 연속(A)·짝(B) 두 트랙을 토글로 오가며, 본문은 공동번역 성서로 연결 */
     async _lectionaryAsync(el) {
         const header = `
             <div class="section-header">
                 <p class="section-eyebrow">Lectionary</p>
                 <h2 class="section-title">전례독서</h2>
-                <p class="section-sub">교회력 절기에 따라 정해진 날짜별 성서 본문입니다. 구약·시편·서신서·복음서 네 본문을 순서대로 봉독합니다.</p>
+                <p class="section-sub">교회력에 따라 정해진 주일 성서 본문입니다. 제1독서·제2독서·복음을 봉독하며, 본문을 누르면 공동번역 성서가 열립니다.</p>
             </div>`;
         el.innerHTML = header + '<p class="lectionary-loading">불러오는 중…</p>';
 
@@ -1838,7 +1839,8 @@ const SundaysRenderer = {
 
         const idx = this._lectionaryFindIdx(sundays);
         el.dataset.lectionaryIdx = idx;
-        el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryCardHtml(sundays, idx)}</div>`;
+        el.dataset.lectionaryTrack = 'B';  // 짝 독서(현재 교회 관례)를 기본 표시
+        el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryCardHtml(sundays, idx, 'B')}</div>`;
         this._bindLectionaryNav(el, sundays);
     },
 
@@ -1859,18 +1861,71 @@ const SundaysRenderer = {
         return best;
     },
 
-    _lectionaryCardHtml(sundays, idx) {
+    /* 성서 본문 참조 → 공동번역(COG) 온라인 성서 URL. 첫 장·절로 이동 */
+    _bibleBooks: {
+        '창세':'gen','탈출':'exo','레위':'lev','민수':'num','신명기':'deu','신명':'deu',
+        '여호수아':'jos','판관기':'jdg','판관':'jdg','룻기':'rut',
+        '사무엘상':'1sa','사무엘하':'2sa','열왕기상':'1ki','열왕기하':'2ki',
+        '역대상':'1ch','역대하':'2ch','에즈라':'ezr','느헤미야':'neh','에스델':'est','에스더':'est',
+        '욥기':'job','시편':'psa','잠언':'pro','전도서':'ecc','아가':'sng',
+        '이사야':'isa','예레미야':'jer','애가':'lam','에스겔':'ezk','에제키엘':'ezk','다니엘':'dan',
+        '호세아':'hos','요엘':'jol','아모스':'amo','오바댜':'oba','요나':'jon','미가':'mic',
+        '나훔':'nam','하박국':'hab','스바냐':'zep','학개':'hag','스가랴':'zec','즈가리야':'zec','말라기':'mal',
+        '마태':'mat','마가':'mrk','누가':'luk','요한1서':'1jn','요한2서':'2jn','요한3서':'3jn',
+        '요한일서':'1jn','요한이서':'2jn','요한삼서':'3jn','요한':'jhn','사도행전':'act',
+        '로마':'rom','고린도전':'1co','고린도후':'2co','갈라디아':'gal','에베소':'eph',
+        '빌립보':'php','골로새':'col','데살로니가전서':'1th','데살로니가후서':'2th','살전':'1th','살후':'2th',
+        '디모데전서':'1ti','디모데후서':'2ti','디도':'tit','빌레몬':'phm','히브리':'heb',
+        '야고보':'jas','베드로전서':'1pe','베드로후서':'2pe','유다':'jud','묵시록':'rev','요한계시록':'rev'
+    },
+    _bibleUrl(ref) {
+        if (!ref) return null;
+        const r = ref.trim();
+        // 가장 긴 책 이름 접두사로 매칭 (요한1서 vs 요한, 신명기 vs 신명 등 구분)
+        let name = null;
+        for (const key in this._bibleBooks) {
+            if (r.startsWith(key) && (!name || key.length > name.length)) name = key;
+        }
+        if (!name) return null;
+        const m = r.slice(name.length).trim().match(/^(\d+)(?::(\d+))?/);
+        if (!m) return null;
+        let url = 'https://www.bskorea.or.kr/bible/korbibReadpage.php?version=COG'
+                + '&book=' + this._bibleBooks[name] + '&chap=' + m[1];
+        if (m[2]) url += '&sec=' + m[2];
+        return url;
+    },
+    _refLink(ref) {
+        const url = this._bibleUrl(ref);
+        if (!url) return `<span class="lectionary-ref">${ref}</span>`;
+        return `<a class="lectionary-ref lectionary-ref-link" href="${url}" target="_blank" rel="noopener noreferrer">${ref}<span class="lectionary-ref-ico" aria-hidden="true">↗</span></a>`;
+    },
+
+    _lectionaryCardHtml(sundays, idx, track) {
         const s = sundays[idx];
         const d = new Date(s.date + 'T00:00:00');
         const dateStr = d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
-        const roles = ['제1독서', '시편', '서신서', '복음서'];
-        const refs  = [s.readings.firstReading, s.readings.psalm,
-                       s.readings.secondReading, s.readings.gospel];
+
+        const hasB = !!s.readings.firstReadingB;
+        const useB = hasB && track === 'B';
+        const firstRef = useB ? s.readings.firstReadingB : s.readings.firstReadingA;
+
+        const roles = ['제1독서', '제2독서', '복음'];
+        const refs  = [firstRef, s.readings.secondReading, s.readings.gospel];
         const rows = roles.map((r, i) => `
             <div class="lectionary-row">
                 <span class="lectionary-role">${r}</span>
-                <span class="lectionary-ref">${refs[i]}</span>
+                ${this._refLink(refs[i])}
             </div>`).join('');
+
+        // 연중 시기 두 트랙 토글 (짝 독서가 있는 주일에만 노출)
+        const toggle = hasB ? `
+            <div class="lect-track" role="group" aria-label="독서 트랙 선택">
+                <button type="button" class="lect-track-btn ${useB ? '' : 'is-active'}" data-track="A"
+                        aria-pressed="${useB ? 'false' : 'true'}"><span class="lect-track-tag">A</span>연속 독서</button>
+                <button type="button" class="lect-track-btn ${useB ? 'is-active' : ''}" data-track="B"
+                        aria-pressed="${useB ? 'true' : 'false'}"><span class="lect-track-tag">B</span>짝 독서</button>
+            </div>
+            <p class="lect-track-hint">사제의 선택에 따라 두 트랙을 오가며 봉독합니다. 이번 주 본문은 주보를 확인해 주세요.</p>` : '';
 
         const hasPrev = idx > 0;
         const hasNext = idx < sundays.length - 1;
@@ -1889,8 +1944,9 @@ const SundaysRenderer = {
                 <p class="lectionary-card-week">${s.koreanName}</p>
                 ${s.anglicanName && !s.anglicanName.includes('성령강림 후') ? `<p class="lectionary-card-meta">${s.anglicanName}</p>` : ''}
             </div>
+            ${toggle}
             <div class="lectionary-card-body">${rows}</div>
-            <p class="lectionary-card-note">RCL 가해 연속 독서 트랙 · 대한성공회 공동 전례독서에 따릅니다.</p>
+            <p class="lectionary-card-note">본문을 누르면 공동번역 성서(대한성서공회)가 열립니다.</p>
         </div>`;
     },
 
@@ -1898,18 +1954,24 @@ const SundaysRenderer = {
         const container = el.querySelector('.lect-nav-wrap');
         if (!container) return;
 
-        const update = (newIdx) => {
-            el.dataset.lectionaryIdx = newIdx;
-            container.innerHTML = this._lectionaryCardHtml(sundays, newIdx);
+        const rerender = () => {
+            container.innerHTML = this._lectionaryCardHtml(
+                sundays, parseInt(el.dataset.lectionaryIdx), el.dataset.lectionaryTrack);
             this._bindLectionaryNav(el, sundays);
         };
         el.querySelector('#lect-prev')?.addEventListener('click', () => {
             const i = parseInt(el.dataset.lectionaryIdx);
-            if (i > 0) update(i - 1);
+            if (i > 0) { el.dataset.lectionaryIdx = i - 1; rerender(); }
         });
         el.querySelector('#lect-next')?.addEventListener('click', () => {
             const i = parseInt(el.dataset.lectionaryIdx);
-            if (i < sundays.length - 1) update(i + 1);
+            if (i < sundays.length - 1) { el.dataset.lectionaryIdx = i + 1; rerender(); }
+        });
+        container.querySelectorAll('.lect-track-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                el.dataset.lectionaryTrack = btn.dataset.track;
+                rerender();
+            });
         });
     },
 
@@ -1917,6 +1979,7 @@ const SundaysRenderer = {
         const w = CHURCH_DATA.worship;
         const r = w && w.currentReadings;
         if (!r) return '<p>전례독서를 불러올 수 없습니다.</p>';
+        const items = r.items.filter(it => it.role !== '시편');
         return `
         <div class="lectionary-card lectionary-card--current">
             <div class="lectionary-card-head">
@@ -1924,10 +1987,10 @@ const SundaysRenderer = {
                 <p class="lectionary-card-meta">${r.year} · ${r.date}</p>
             </div>
             <div class="lectionary-card-body">
-                ${r.items.map(it => `
+                ${items.map(it => `
                 <div class="lectionary-row">
                     <span class="lectionary-role">${it.role}</span>
-                    <span class="lectionary-ref">${it.ref}</span>
+                    ${this._refLink(it.ref)}
                 </div>`).join('')}
             </div>
             ${r.note ? `<p class="lectionary-card-note">${r.note}</p>` : ''}

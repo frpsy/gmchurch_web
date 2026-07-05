@@ -1,7 +1,7 @@
 {
   "year": "A",
-  "track": "complementary",
-  "note": "RCL 가해 주제 독서 트랙 (Complementary OT Track). 2025-11-30 ~ 2026-11-22.",
+  "track": "dual",
+  "note": "RCL 가해 전례독서. 연중(성령강림 후) 시기는 연속 독서(Track 1)와 짝 독서(Track 2)를 함께 수록하며, 본문 표기는 공동번역 성서를 따른다. 2025-11-30 ~ 2026-11-22.",
   "sundays": [
     {
       "date": "2025-11-30",
@@ -10,7 +10,7 @@
       "koreanName": "대림 제1주일",
       "anglicanName": "대림절 제1주일",
       "readings": {
-        "firstReading": "이사야 2:1-5",
+        "firstReadingA": "이사야 2:1-5",
         "psalm": "시편 122",
         "secondReading": "로마 13:11-14",
         "gospel": "마태 24:36-44"
@@ -23,7 +23,7 @@
       "koreanName": "대림 제2주일",
       "anglicanName": "대림절 제2주일",
       "readings": {
-        "firstReading": "이사야 11:1-10",
+        "firstReadingA": "이사야 11:1-10",
         "psalm": "시편 72:1-7, 18-19",
         "secondReading": "로마 15:4-13",
         "gospel": "마태 3:1-12"
@@ -36,7 +36,7 @@
       "koreanName": "대림 제3주일",
       "anglicanName": "대림절 제3주일",
       "readings": {
-        "firstReading": "이사야 35:1-10",
+        "firstReadingA": "이사야 35:1-10",
         "psalm": "시편 146:5-10",
         "secondReading": "야고보 5:7-10",
         "gospel": "마태 11:2-11"
@@ -49,7 +49,7 @@
       "koreanName": "대림 제4주일",
       "anglicanName": "대림절 제4주일",
       "readings": {
-        "firstReading": "이사야 7:10-16",
+        "firstReadingA": "이사야 7:10-16",
         "psalm": "시편 80:1-7, 17-19",
         "secondReading": "로마 1:1-7",
         "gospel": "마태 1:18-25"
@@ -62,7 +62,7 @@
       "koreanName": "성탄절 후 제1주일",
       "anglicanName": "성탄절 후 제1주일",
       "readings": {
-        "firstReading": "이사야 63:7-9",
+        "firstReadingA": "이사야 63:7-9",
         "psalm": "시편 148",
         "secondReading": "히브리 2:10-18",
         "gospel": "마태 2:13-23"
@@ -75,7 +75,7 @@
       "koreanName": "성탄절 후 제2주일",
       "anglicanName": "성탄절 후 제2주일",
       "readings": {
-        "firstReading": "예레미야 31:7-14",
+        "firstReadingA": "예레미야 31:7-14",
         "psalm": "시편 147:12-20",
         "secondReading": "에베소 1:3-14",
         "gospel": "요한 1:(1-9), 10-18"
@@ -88,7 +88,7 @@
       "koreanName": "주님 세례 주일",
       "anglicanName": "예수 세례 주일 (공현 후 제1주일)",
       "readings": {
-        "firstReading": "이사야 42:1-9",
+        "firstReadingA": "이사야 42:1-9",
         "psalm": "시편 29",
         "secondReading": "사도행전 10:34-43",
         "gospel": "마태 3:13-17"
@@ -101,7 +101,7 @@
       "koreanName": "공현 후 제2주일",
       "anglicanName": "주현절 후 제2주일",
       "readings": {
-        "firstReading": "이사야 49:1-7",
+        "firstReadingA": "이사야 49:1-7",
         "psalm": "시편 40:1-11",
         "secondReading": "고린도전 1:1-9",
         "gospel": "요한 1:29-42"
@@ -114,7 +114,7 @@
       "koreanName": "공현 후 제3주일",
       "anglicanName": "주현절 후 제3주일",
       "readings": {
-        "firstReading": "이사야 9:1-4",
+        "firstReadingA": "이사야 9:1-4",
         "psalm": "시편 27:1, 4-9",
         "secondReading": "고린도전 1:10-18",
         "gospel": "마태 4:12-23"
@@ -127,7 +127,7 @@
       "koreanName": "공현 후 제4주일",
       "anglicanName": "주현절 후 제4주일",
       "readings": {
-        "firstReading": "미가 6:1-8",
+        "firstReadingA": "미가 6:1-8",
         "psalm": "시편 15",
         "secondReading": "고린도전 1:18-31",
         "gospel": "마태 5:1-12"
@@ -140,7 +140,7 @@
       "koreanName": "공현 후 제5주일",
       "anglicanName": "주현절 후 제5주일",
       "readings": {
-        "firstReading": "이사야 58:1-9a (9b-12)",
+        "firstReadingA": "이사야 58:1-9a (9b-12)",
         "psalm": "시편 112:1-9 (10)",
         "secondReading": "고린도전 2:1-12 (13-16)",
         "gospel": "마태 5:13-20"
@@ -153,7 +153,7 @@
       "koreanName": "주님 거룩한 변모 주일",
       "anglicanName": "변모 주일 (공현 후 마지막 주일)",
       "readings": {
-        "firstReading": "탈출 24:12-18",
+        "firstReadingA": "탈출 24:12-18",
         "psalm": "시편 2",
         "secondReading": "베드로후서 1:16-21",
         "gospel": "마태 17:1-9"
@@ -166,7 +166,7 @@
       "koreanName": "사순 제1주일",
       "anglicanName": "사순절 제1주일",
       "readings": {
-        "firstReading": "창세 2:15-17; 3:1-7",
+        "firstReadingA": "창세 2:15-17; 3:1-7",
         "psalm": "시편 32",
         "secondReading": "로마 5:12-19",
         "gospel": "마태 4:1-11"
@@ -179,7 +179,7 @@
       "koreanName": "사순 제2주일",
       "anglicanName": "사순절 제2주일",
       "readings": {
-        "firstReading": "창세 12:1-4a",
+        "firstReadingA": "창세 12:1-4a",
         "psalm": "시편 121",
         "secondReading": "로마 4:1-5, 13-17",
         "gospel": "요한 3:1-17"
@@ -192,7 +192,7 @@
       "koreanName": "사순 제3주일",
       "anglicanName": "사순절 제3주일",
       "readings": {
-        "firstReading": "탈출 17:1-7",
+        "firstReadingA": "탈출 17:1-7",
         "psalm": "시편 95",
         "secondReading": "로마 5:1-11",
         "gospel": "요한 4:5-42"
@@ -205,7 +205,7 @@
       "koreanName": "사순 제4주일",
       "anglicanName": "사순절 제4주일",
       "readings": {
-        "firstReading": "사무엘상 16:1-13",
+        "firstReadingA": "사무엘상 16:1-13",
         "psalm": "시편 23",
         "secondReading": "에베소 5:8-14",
         "gospel": "요한 9:1-41"
@@ -218,7 +218,7 @@
       "koreanName": "사순 제5주일",
       "anglicanName": "사순절 제5주일",
       "readings": {
-        "firstReading": "에스겔 37:1-14",
+        "firstReadingA": "에스겔 37:1-14",
         "psalm": "시편 130",
         "secondReading": "로마 8:6-11",
         "gospel": "요한 11:1-45"
@@ -231,7 +231,7 @@
       "koreanName": "수난 주일 (종려 주일)",
       "anglicanName": "종려 주일·수난 주일",
       "readings": {
-        "firstReading": "이사야 50:4-9a",
+        "firstReadingA": "이사야 50:4-9a",
         "psalm": "시편 31:9-16",
         "secondReading": "빌립보 2:5-11",
         "gospel": "마태 26:14-27:66"
@@ -244,7 +244,7 @@
       "koreanName": "부활 주일",
       "anglicanName": "주님 부활 대축일",
       "readings": {
-        "firstReading": "사도행전 10:34-43",
+        "firstReadingA": "사도행전 10:34-43",
         "psalm": "시편 118:1-2, 14-24",
         "secondReading": "골로새 3:1-4",
         "gospel": "요한 20:1-18"
@@ -257,7 +257,7 @@
       "koreanName": "부활 제2주일",
       "anglicanName": "부활절 제2주일",
       "readings": {
-        "firstReading": "사도행전 2:14a, 22-32",
+        "firstReadingA": "사도행전 2:14a, 22-32",
         "psalm": "시편 16",
         "secondReading": "베드로전서 1:3-9",
         "gospel": "요한 20:19-31"
@@ -270,7 +270,7 @@
       "koreanName": "부활 제3주일",
       "anglicanName": "부활절 제3주일",
       "readings": {
-        "firstReading": "사도행전 2:14a, 36-41",
+        "firstReadingA": "사도행전 2:14a, 36-41",
         "psalm": "시편 116:1-4, 12-19",
         "secondReading": "베드로전서 1:17-23",
         "gospel": "누가 24:13-35"
@@ -283,7 +283,7 @@
       "koreanName": "부활 제4주일",
       "anglicanName": "부활절 제4주일",
       "readings": {
-        "firstReading": "사도행전 2:42-47",
+        "firstReadingA": "사도행전 2:42-47",
         "psalm": "시편 23",
         "secondReading": "베드로전서 2:19-25",
         "gospel": "요한 10:1-10"
@@ -296,7 +296,7 @@
       "koreanName": "부활 제5주일",
       "anglicanName": "부활절 제5주일",
       "readings": {
-        "firstReading": "사도행전 7:55-60",
+        "firstReadingA": "사도행전 7:55-60",
         "psalm": "시편 31:1-5, 15-16",
         "secondReading": "베드로전서 2:2-10",
         "gospel": "요한 14:1-14"
@@ -309,7 +309,7 @@
       "koreanName": "부활 제6주일",
       "anglicanName": "부활절 제6주일",
       "readings": {
-        "firstReading": "사도행전 17:22-31",
+        "firstReadingA": "사도행전 17:22-31",
         "psalm": "시편 66:8-20",
         "secondReading": "베드로전서 3:13-22",
         "gospel": "요한 14:15-21"
@@ -322,7 +322,7 @@
       "koreanName": "부활 제7주일",
       "anglicanName": "승천 후 주일",
       "readings": {
-        "firstReading": "사도행전 1:6-14",
+        "firstReadingA": "사도행전 1:6-14",
         "psalm": "시편 68:1-10, 32-35",
         "secondReading": "베드로전서 4:12-14; 5:6-11",
         "gospel": "요한 17:1-11"
@@ -335,7 +335,7 @@
       "koreanName": "성령강림 주일",
       "anglicanName": "성령강림절",
       "readings": {
-        "firstReading": "사도행전 2:1-21",
+        "firstReadingA": "사도행전 2:1-21",
         "psalm": "시편 104:24-34, 35b",
         "secondReading": "고린도전 12:3b-13",
         "gospel": "요한 20:19-23"
@@ -348,7 +348,7 @@
       "koreanName": "삼위일체 주일",
       "anglicanName": "성령강림 후 제1주일",
       "readings": {
-        "firstReading": "창세 1:1-2:4a",
+        "firstReadingA": "창세 1:1-2:4a",
         "psalm": "시편 8",
         "secondReading": "고린도후 13:11-13",
         "gospel": "마태 28:16-20"
@@ -361,7 +361,8 @@
       "koreanName": "연중 제10주일",
       "anglicanName": "성령강림 후 제2주일",
       "readings": {
-        "firstReading": "호세아 5:15-6:6",
+        "firstReadingA": "창세 12:1-9",
+        "firstReadingB": "호세아 5:15-6:6",
         "psalm": "시편 50:7-15",
         "secondReading": "로마 4:13-25",
         "gospel": "마태 9:9-13, 18-26"
@@ -374,7 +375,8 @@
       "koreanName": "연중 제11주일",
       "anglicanName": "성령강림 후 제3주일",
       "readings": {
-        "firstReading": "탈출 19:2-8a",
+        "firstReadingA": "창세 18:1-15",
+        "firstReadingB": "탈출 19:2-8a",
         "psalm": "시편 100",
         "secondReading": "로마 5:1-8",
         "gospel": "마태 9:35-10:8 (9-23)"
@@ -387,7 +389,8 @@
       "koreanName": "연중 제12주일",
       "anglicanName": "성령강림 후 제4주일",
       "readings": {
-        "firstReading": "예레미야 20:7-13",
+        "firstReadingA": "창세 21:8-21",
+        "firstReadingB": "예레미야 20:7-13",
         "psalm": "시편 69:7-10, 16-18",
         "secondReading": "로마 6:1-11",
         "gospel": "마태 10:24-39"
@@ -400,7 +403,8 @@
       "koreanName": "연중 제13주일",
       "anglicanName": "성령강림 후 제5주일",
       "readings": {
-        "firstReading": "예레미야 28:5-9",
+        "firstReadingA": "창세 22:1-14",
+        "firstReadingB": "예레미야 28:5-9",
         "psalm": "시편 89:1-4, 15-18",
         "secondReading": "로마 6:12-23",
         "gospel": "마태 10:40-42"
@@ -413,7 +417,8 @@
       "koreanName": "연중 제14주일",
       "anglicanName": "성령강림 후 제6주일",
       "readings": {
-        "firstReading": "스가랴 9:9-12",
+        "firstReadingA": "창세 24:34-38, 42-49, 58-67",
+        "firstReadingB": "스가랴 9:9-12",
         "psalm": "시편 145:8-14",
         "secondReading": "로마 7:15-25a",
         "gospel": "마태 11:16-19, 25-30"
@@ -426,7 +431,8 @@
       "koreanName": "연중 제15주일",
       "anglicanName": "성령강림 후 제7주일",
       "readings": {
-        "firstReading": "이사야 55:10-13",
+        "firstReadingA": "창세 25:19-34",
+        "firstReadingB": "이사야 55:10-13",
         "psalm": "시편 65:9-13",
         "secondReading": "로마 8:1-11",
         "gospel": "마태 13:1-9, 18-23"
@@ -439,7 +445,8 @@
       "koreanName": "연중 제16주일",
       "anglicanName": "성령강림 후 제8주일",
       "readings": {
-        "firstReading": "이사야 44:6-8",
+        "firstReadingA": "창세 28:10-19a",
+        "firstReadingB": "이사야 44:6-8",
         "psalm": "시편 86:11-17",
         "secondReading": "로마 8:12-25",
         "gospel": "마태 13:24-30, 36-43"
@@ -452,7 +459,8 @@
       "koreanName": "연중 제17주일",
       "anglicanName": "성령강림 후 제9주일",
       "readings": {
-        "firstReading": "열왕기상 3:5-12",
+        "firstReadingA": "창세 29:15-28",
+        "firstReadingB": "열왕기상 3:5-12",
         "psalm": "시편 119:129-136",
         "secondReading": "로마 8:26-39",
         "gospel": "마태 13:31-33, 44-52"
@@ -465,7 +473,8 @@
       "koreanName": "연중 제18주일",
       "anglicanName": "성령강림 후 제10주일",
       "readings": {
-        "firstReading": "이사야 55:1-5",
+        "firstReadingA": "창세 32:22-31",
+        "firstReadingB": "이사야 55:1-5",
         "psalm": "시편 145:8-9, 14-21",
         "secondReading": "로마 9:1-5",
         "gospel": "마태 14:13-21"
@@ -478,7 +487,8 @@
       "koreanName": "연중 제19주일",
       "anglicanName": "성령강림 후 제11주일",
       "readings": {
-        "firstReading": "열왕기상 19:9-18",
+        "firstReadingA": "창세 37:1-4, 12-28",
+        "firstReadingB": "열왕기상 19:9-18",
         "psalm": "시편 85:8-13",
         "secondReading": "로마 10:5-15",
         "gospel": "마태 14:22-33"
@@ -491,7 +501,8 @@
       "koreanName": "연중 제20주일",
       "anglicanName": "성령강림 후 제12주일",
       "readings": {
-        "firstReading": "이사야 56:1, 6-8",
+        "firstReadingA": "창세 45:1-15",
+        "firstReadingB": "이사야 56:1, 6-8",
         "psalm": "시편 67",
         "secondReading": "로마 11:1-2a, 29-32",
         "gospel": "마태 15:(10-20), 21-28"
@@ -504,7 +515,8 @@
       "koreanName": "연중 제21주일",
       "anglicanName": "성령강림 후 제13주일",
       "readings": {
-        "firstReading": "이사야 51:1-6",
+        "firstReadingA": "탈출 1:8-2:10",
+        "firstReadingB": "이사야 51:1-6",
         "psalm": "시편 138",
         "secondReading": "로마 12:1-8",
         "gospel": "마태 16:13-20"
@@ -517,7 +529,8 @@
       "koreanName": "연중 제22주일",
       "anglicanName": "성령강림 후 제14주일",
       "readings": {
-        "firstReading": "예레미야 15:15-21",
+        "firstReadingA": "탈출 3:1-15",
+        "firstReadingB": "예레미야 15:15-21",
         "psalm": "시편 26:1-8",
         "secondReading": "로마 12:9-21",
         "gospel": "마태 16:21-28"
@@ -530,7 +543,8 @@
       "koreanName": "연중 제23주일",
       "anglicanName": "성령강림 후 제15주일",
       "readings": {
-        "firstReading": "에스겔 33:7-11",
+        "firstReadingA": "탈출 12:1-14",
+        "firstReadingB": "에스겔 33:7-11",
         "psalm": "시편 119:33-40",
         "secondReading": "로마 13:8-14",
         "gospel": "마태 18:15-20"
@@ -543,7 +557,8 @@
       "koreanName": "연중 제24주일",
       "anglicanName": "성령강림 후 제16주일",
       "readings": {
-        "firstReading": "창세 50:15-21",
+        "firstReadingA": "탈출 14:19-31",
+        "firstReadingB": "창세 50:15-21",
         "psalm": "시편 103:1-7, 8-13",
         "secondReading": "로마 14:1-12",
         "gospel": "마태 18:21-35"
@@ -556,7 +571,8 @@
       "koreanName": "연중 제25주일",
       "anglicanName": "성령강림 후 제17주일",
       "readings": {
-        "firstReading": "요나 3:10-4:11",
+        "firstReadingA": "탈출 16:2-15",
+        "firstReadingB": "요나 3:10-4:11",
         "psalm": "시편 145:1-8",
         "secondReading": "빌립보 1:21-30",
         "gospel": "마태 20:1-16"
@@ -569,7 +585,8 @@
       "koreanName": "연중 제26주일",
       "anglicanName": "성령강림 후 제18주일",
       "readings": {
-        "firstReading": "에스겔 18:1-4, 25-32",
+        "firstReadingA": "탈출 17:1-7",
+        "firstReadingB": "에스겔 18:1-4, 25-32",
         "psalm": "시편 25:1-9",
         "secondReading": "빌립보 2:1-13",
         "gospel": "마태 21:23-32"
@@ -582,7 +599,8 @@
       "koreanName": "연중 제27주일",
       "anglicanName": "성령강림 후 제19주일",
       "readings": {
-        "firstReading": "이사야 5:1-7",
+        "firstReadingA": "탈출 20:1-4, 7-9, 12-20",
+        "firstReadingB": "이사야 5:1-7",
         "psalm": "시편 80:7-15",
         "secondReading": "빌립보 3:4b-14",
         "gospel": "마태 21:33-46"
@@ -595,7 +613,8 @@
       "koreanName": "연중 제28주일",
       "anglicanName": "성령강림 후 제20주일",
       "readings": {
-        "firstReading": "이사야 25:1-9",
+        "firstReadingA": "탈출 32:1-14",
+        "firstReadingB": "이사야 25:1-9",
         "psalm": "시편 23",
         "secondReading": "빌립보 4:1-9",
         "gospel": "마태 22:1-14"
@@ -608,7 +627,8 @@
       "koreanName": "연중 제29주일",
       "anglicanName": "성령강림 후 제21주일",
       "readings": {
-        "firstReading": "이사야 45:1-7",
+        "firstReadingA": "탈출 33:12-23",
+        "firstReadingB": "이사야 45:1-7",
         "psalm": "시편 96:1-9",
         "secondReading": "살전 1:1-10",
         "gospel": "마태 22:15-22"
@@ -621,7 +641,8 @@
       "koreanName": "연중 제30주일",
       "anglicanName": "성령강림 후 제22주일",
       "readings": {
-        "firstReading": "레위 19:1-2, 15-18",
+        "firstReadingA": "신명기 34:1-12",
+        "firstReadingB": "레위 19:1-2, 15-18",
         "psalm": "시편 1",
         "secondReading": "살전 2:1-8",
         "gospel": "마태 22:34-46"
@@ -634,7 +655,7 @@
       "koreanName": "모든 성인 주일",
       "anglicanName": "성령강림 후 제23주일 (모든 성인의 날)",
       "readings": {
-        "firstReading": "묵시록 7:9-17",
+        "firstReadingA": "묵시록 7:9-17",
         "psalm": "시편 34:1-10, 22",
         "secondReading": "요한1서 3:1-3",
         "gospel": "마태 5:1-12"
@@ -647,7 +668,8 @@
       "koreanName": "연중 제32주일",
       "anglicanName": "성령강림 후 제24주일",
       "readings": {
-        "firstReading": "아모스 5:18-24",
+        "firstReadingA": "여호수아 24:1-3a, 14-25",
+        "firstReadingB": "아모스 5:18-24",
         "psalm": "시편 70",
         "secondReading": "살전 4:13-18",
         "gospel": "마태 25:1-13"
@@ -660,7 +682,8 @@
       "koreanName": "연중 제33주일",
       "anglicanName": "성령강림 후 제25주일",
       "readings": {
-        "firstReading": "스바냐 1:7, 12-18",
+        "firstReadingA": "판관기 4:1-7",
+        "firstReadingB": "스바냐 1:7, 12-18",
         "psalm": "시편 90:1-8, 12",
         "secondReading": "살전 5:1-11",
         "gospel": "마태 25:14-30"
@@ -673,7 +696,7 @@
       "koreanName": "왕이신 그리스도 주일",
       "anglicanName": "온 누리의 임금이신 그리스도 대축일",
       "readings": {
-        "firstReading": "에스겔 34:11-16, 20-24",
+        "firstReadingA": "에스겔 34:11-16, 20-24",
         "psalm": "시편 100",
         "secondReading": "에베소 1:15-23",
         "gospel": "마태 25:31-46"
