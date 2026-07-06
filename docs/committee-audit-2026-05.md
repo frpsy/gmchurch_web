@@ -14,7 +14,7 @@
 
 - ✅ **데이터/렌더링/스타일 분리가 깔끔**: `data.js`(single source of truth) + `app.js`(렌더러) + `style.css`(스타일) 구조가 SOLID 원칙을 의식하고 작성됨
 - ✅ **전례력 자동 계산**: Meeus/Jones/Butcher 알고리즘으로 부활절 산출 → 8개 절기 자동 매핑은 한국 교회 홈페이지 중 드문 수준
-- ✅ **빌드 없는 정적 사이트**: Netlify 자동 배포, 비기술자도 `data.js`만 편집하면 콘텐츠 수정 가능
+- ✅ **빌드 없는 정적 사이트**: 비기술자도 `data.js`만 편집하면 콘텐츠 수정 가능
 - ✅ **CSS 변수 기반 디자인 토큰**: `--green-deep`, `--cream` 등 일관된 팔레트
 - ✅ **ARCHITECTURE.md 문서화 수준 우수**: 다른 개발자(또는 AI)가 즉시 작업 가능한 구조
 
@@ -84,14 +84,14 @@
 |Pretendard CDN preconnect          |✅  |`<link rel="preconnect">` 적용                        |
 |폰트 preload                         |✅  |preload + crossorigin 적용                                |
 |`font-display: swap`               |🔍  |Pretendard 기본값 확인 필요                                |
-|CSS·JS 미니파이                        |❌  |정적 사이트라 빌드 단계 없음 — Netlify asset optimization 켤 수 있음|
+|CSS·JS 미니파이                        |❌  |정적 사이트라 빌드 단계 없음 — 필요 시 배포 플랫폼의 asset optimization 활용 검토|
 |이미지 최적화                            |N/A|외부 Unsplash 이미지 1개만 사용 (hero)                       |
 |Hero 이미지 lazy load                 |❌  |LCP 이미지라 오히려 preload 권장                             |
 |Google Maps iframe `loading="lazy"`|✅  |app.js에 적용됨                                         |
-|캐시 헤더 (`_headers` Netlify)         |🔍  |Netlify 기본값 적용 중일 것                                 |
+|캐시 헤더                             |🔍  |GitHub Pages 기본값 적용 중                                 |
 |Service Worker (PWA)               |❌  |검토 가치 — 오프라인 주보 열람 등                                |
 
-**우선순위 ★★**: 폰트 preload 추가, Netlify asset optimization 활성화는 빠른 개선.
+**우선순위 ★★**: 폰트 preload 추가는 빠른 개선.
 
 ### 2.4 모바일·반응형
 
@@ -108,9 +108,9 @@
 
 |항목                    |상태 |비고                           |
 |----------------------|---|-----------------------------|
-|HTTPS                 |✅  |Netlify 자동                   |
+|HTTPS                 |✅  |GitHub Pages 자동               |
 |외부 링크 `rel="noopener"`|✅  |MapHelper에서 적용               |
-|CSP 헤더                |❌  |`_headers` 파일로 Netlify 설정 가능 |
+|CSP 헤더                |❌  |배포 플랫폼 설정 검토 필요 |
 |폼 제출                  |N/A|현재 폼 없음 (새가족 등록 폼 추가 시 검토)   |
 |환경변수 노출               |N/A|환경변수 자체 없음                   |
 |개인정보 처리방침 페이지         |✅  |`privacy.html` 작성 완료, 푸터 링크 추가   |
@@ -140,7 +140,7 @@
 |주보 아카이브        |❌ |★★★ |PDF 링크 모음이라도 시급                             |
 |설교 영상·원고       |❌ |★★  |유튜브 라이브 URL 1개만 있음                          |
 |교회 캘린더         |❌ |★★  |일정 공유 핵심                                    |
-|새가족 등록 폼       |❌ |★★  |Netlify Forms로 무빌드 구현 가능                    |
+|새가족 등록 폼       |❌ |★★  |외부 폼 서비스 연동 등 무빌드 구현 방식 검토                    |
 |사진 갤러리         |❌ |★   |                                            |
 |봉사부서·구역 안내     |❌ |★   |community.html에 통합 가능                       |
 |개인정보 처리방침      |✅ |★★★ |`privacy.html` 완료                            |
@@ -206,7 +206,7 @@
 **P0-2. robots.txt + sitemap.xml** (예상 15분)
 
 - 정적 파일로 작성. 6페이지만 등록
-- `Sitemap: https://gmchurchweb.netlify.app/sitemap.xml` robots.txt에 명시
+- `Sitemap: https://frpsy.github.io/gmchurch_web/sitemap.xml` robots.txt에 명시
 
 **P0-3. JSON-LD 구조화 데이터** (예상 30분)
 
@@ -245,7 +245,7 @@
 
 - `CHURCH_DATA.bulletins`: `[{ date, title, pdfUrl, thumbnail? }]`
 - 최근 12주 노출, 그 이상은 “더 보기”로 페이지네이션 또는 연도별 그룹
-- PDF는 Netlify에 `/bulletins/2026/2026-05-25.pdf` 식으로 저장
+- PDF는 저장소에 `/bulletins/2026/2026-05-25.pdf` 식으로 저장
 
 **P1-3. 메인 hero CTA 재구성**
 
@@ -265,7 +265,7 @@
 
 ### 4.3 중기 (Phase 2 — 1~3개월)
 
-- **새가족 등록 폼** (Netlify Forms 무빌드 구현)
+- **새가족 등록 폼** (외부 폼 서비스 연동 등 무빌드 구현)
 - **설교 아카이브** (유튜브 영상 임베드 + 원고)
 - **교회 캘린더** (Google Calendar embed 또는 자체 렌더)
 - **사진 갤러리**
@@ -313,5 +313,5 @@ docs/
 1. P0 작업 결과 검토 (1주 후)
 1. 주보·공지 PDF 업로드 워크플로 결정 (사제·간사 누가, 어떻게)
 1. 카카오톡 채널·교회 SNS 운영 주체
-1. 도메인 결정: `gmchurchweb.netlify.app` 유지 vs 커스텀 도메인(`gmchurch.kr` 등)
+1. 도메인 결정: `frpsy.github.io/gmchurch_web` 유지 vs 커스텀 도메인(`gmchurch.kr` 등)
 1. 새가족 등록 폼 도입 시 개인정보 처리방침 본격 작성
