@@ -1069,6 +1069,13 @@ const CHURCH_DATA = {
         note: "예배 전에 미리 열어 두시면 도움이 됩니다.",
         items: [
             {
+                date: "2026-07-12",
+                label: "2026년 7월 12일",
+                season: "맥추감사주일",
+                images: ["bulletins/20260712_1.jpg", "bulletins/20260712_2.jpg", "bulletins/20260712_3.jpg", "bulletins/20260712_4.jpg"],
+                pdf: "bulletins/20260712.pdf"
+            },
+            {
                 date: "2026-07-05",
                 label: "2026년 7월 5일",
                 season: "가해 연중 14주일",
