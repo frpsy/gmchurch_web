@@ -1837,11 +1837,38 @@ const SundaysRenderer = {
             return;
         }
 
+        // 주보 기준 실제 봉독 기록 병합 (파일이 없어도 표준 독서로 동작)
+        try {
+            const ovRes = await fetch('data/lectionary-overrides.json');
+            if (ovRes.ok) this._applyOverrides(sundays, (await ovRes.json()).sundays || {});
+        } catch (_) { /* 표준 독서 유지 */ }
+
         const idx = this._lectionaryFindIdx(sundays);
         el.dataset.lectionaryIdx = idx;
-        el.dataset.lectionaryTrack = 'B';  // 짝 독서(현재 교회 관례)를 기본 표시
-        el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryCardHtml(sundays, idx, 'B')}</div>`;
+        const track = sundays[idx].bulletinTrack || 'B';  // 주보 확인 트랙, 없으면 짝 독서 기본
+        el.dataset.lectionaryTrack = track;
+        el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryCardHtml(sundays, idx, track)}</div>`;
         this._bindLectionaryNav(el, sundays);
+    },
+
+    /* 주보에서 확인한 트랙·특별 주일 독서를 표준 목록 위에 덮어쓴다 */
+    _applyOverrides(sundays, overrides) {
+        sundays.forEach(s => {
+            const o = overrides[s.date];
+            if (!o) return;
+            if (o.track) s.bulletinTrack = o.track;
+            if (o.readings) {
+                s.bulletinReadings = true;
+                s.anglicanName = s.koreanName;           // 표준 주일명은 부제로 이동
+                if (o.koreanName) s.koreanName = o.koreanName;
+                s.readings = {
+                    firstReadingA: o.readings.firstReading,
+                    psalm: o.readings.psalm,
+                    secondReading: o.readings.secondReading,
+                    gospel: o.readings.gospel
+                };
+            }
+        });
     },
 
     _lectionaryFindIdx(sundays) {
@@ -1918,6 +1945,9 @@ const SundaysRenderer = {
             </div>`).join('');
 
         // 연중 시기 두 트랙 토글 (짝 독서가 있는 주일에만 노출)
+        const hint = s.bulletinTrack
+            ? `이 주일은 주보 기준으로 <strong>${s.bulletinTrack === 'A' ? '연속' : '짝'} 독서</strong>를 봉독합니다.`
+            : '사제의 선택에 따라 두 트랙을 오가며 봉독합니다. 이번 주 본문은 주보를 확인해 주세요.';
         const toggle = hasB ? `
             <div class="lect-track" role="group" aria-label="독서 트랙 선택">
                 <button type="button" class="lect-track-btn ${useB ? '' : 'is-active'}" data-track="A"
@@ -1925,7 +1955,7 @@ const SundaysRenderer = {
                 <button type="button" class="lect-track-btn ${useB ? 'is-active' : ''}" data-track="B"
                         aria-pressed="${useB ? 'true' : 'false'}"><span class="lect-track-tag">B</span>짝 독서</button>
             </div>
-            <p class="lect-track-hint">사제의 선택에 따라 두 트랙을 오가며 봉독합니다. 이번 주 본문은 주보를 확인해 주세요.</p>` : '';
+            <p class="lect-track-hint">${hint}</p>` : '';
 
         const hasPrev = idx > 0;
         const hasNext = idx < sundays.length - 1;
@@ -1946,7 +1976,7 @@ const SundaysRenderer = {
             </div>
             ${toggle}
             <div class="lectionary-card-body">${rows}</div>
-            <p class="lectionary-card-note">본문을 누르면 공동번역 성서(대한성서공회)가 열립니다.</p>
+            <p class="lectionary-card-note">${s.bulletinReadings ? '주보 기준 독서입니다. ' : ''}본문을 누르면 공동번역 성서(대한성서공회)가 열립니다.</p>
         </div>`;
     },
 
@@ -1959,13 +1989,19 @@ const SundaysRenderer = {
                 sundays, parseInt(el.dataset.lectionaryIdx), el.dataset.lectionaryTrack);
             this._bindLectionaryNav(el, sundays);
         };
+        const moveTo = i => {
+            el.dataset.lectionaryIdx = i;
+            // 이동한 주일의 주보 확인 트랙으로 초기화
+            el.dataset.lectionaryTrack = sundays[i].bulletinTrack || 'B';
+            rerender();
+        };
         el.querySelector('#lect-prev')?.addEventListener('click', () => {
             const i = parseInt(el.dataset.lectionaryIdx);
-            if (i > 0) { el.dataset.lectionaryIdx = i - 1; rerender(); }
+            if (i > 0) moveTo(i - 1);
         });
         el.querySelector('#lect-next')?.addEventListener('click', () => {
             const i = parseInt(el.dataset.lectionaryIdx);
-            if (i < sundays.length - 1) { el.dataset.lectionaryIdx = i + 1; rerender(); }
+            if (i < sundays.length - 1) moveTo(i + 1);
         });
         container.querySelectorAll('.lect-track-btn').forEach(btn => {
             btn.addEventListener('click', () => {

@@ -194,6 +194,17 @@ cutoff.setHours(0, 0, 0, 0);
     }
 
     // ── 4. items 목록 구성 ────────────────────────────────────────
+    // 특별 주일명(맥추감사주일 등)은 주보 기준 기록에서 가져온다
+    let seasonOverrides = {};
+    const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
+    if (fs.existsSync(OVERRIDES)) {
+        try {
+            seasonOverrides = JSON.parse(fs.readFileSync(OVERRIDES, 'utf8')).sundays || {};
+        } catch (err) {
+            console.error('  lectionary-overrides.json 파싱 실패:', err.message);
+        }
+    }
+
     const newItems = [...valid.keys()]
         .sort((a, b) => b.localeCompare(a))
         .map(ds => {
@@ -201,10 +212,12 @@ cutoff.setHours(0, 0, 0, 0);
             const mo = +ds.slice(4, 6);
             const d  = +ds.slice(6, 8);
             const pdfPath = path.join(BULLETINS, `${ds}.pdf`);
+            const dateKey = `${ds.slice(0,4)}-${ds.slice(4,6)}-${ds.slice(6,8)}`;
+            const ov = seasonOverrides[dateKey];
             return {
-                date:   `${ds.slice(0,4)}-${ds.slice(4,6)}-${ds.slice(6,8)}`,
+                date:   dateKey,
                 label:  `${y}년 ${mo}월 ${d}일`,
-                season: sundayLabel(ds),
+                season: (ov && ov.koreanName) || sundayLabel(ds),
                 images: valid.get(ds).map(f => `bulletins/${f}`),
                 pdf:    fs.existsSync(pdfPath) ? `bulletins/${ds}.pdf` : null
             };
