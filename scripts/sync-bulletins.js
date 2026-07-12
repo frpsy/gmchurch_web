@@ -3,6 +3,7 @@ import fs   from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import PDFDocument from 'pdfkit';
+import { resolveReadings, isToggleWeek, nextSundayKey, koreanDate } from './lib/lectionary.js';
 
 // ── 전례력 절기 레이블 ────────────────────────────────────────
 function easterDate(year) {
@@ -123,7 +124,41 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT      = path.resolve(__dirname, '..');
 const BULLETINS = path.join(ROOT, 'bulletins');
 const DATA_JS   = path.join(ROOT, 'data.js');
+const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
+const STANDARD  = path.join(ROOT, 'data', 'lectionary-year-a.json');
 const MAX_WEEKS = 13;
+
+// 지정한 마커 사이 구간을 통째로 교체 (data.js 손질용)
+function replaceRegion(text, startMarker, endMarker, replacement) {
+    const s = text.indexOf(startMarker);
+    if (s === -1) return null;
+    const e = text.indexOf(endMarker, s + startMarker.length);
+    if (e === -1) return null;
+    return text.slice(0, s) + replacement + text.slice(e);
+}
+
+// resolveReadings 결과 → data.js currentReadings/nextReadings 객체 문자열
+function readingsBlock(key, resolved, standardYear, withNote) {
+    const items = [
+        ['제1독서', resolved.first],
+        ['시편',    resolved.psalm],
+        ['서신서',  resolved.second],
+        ['복음',    resolved.gospel]
+    ].map(([role, ref]) => `                { role: "${role}", ref: "${ref}" }`).join(',\n');
+    const note = withNote
+        ? `\n            note: "주보 기준 · 대한성공회 공동 전례독서에 따릅니다.",`
+        : '';
+    return [
+        `        ${key}: {`,
+        `            week: "${resolved.week}",`,
+        `            year: "${standardYear}년",`,
+        `            date: "${koreanDate(resolved.date)}",${note}`,
+        `            items: [`,
+        items,
+        `            ]`,
+        `        },`
+    ].join('\n');
+}
 
 const cutoff = new Date();
 cutoff.setDate(cutoff.getDate() - MAX_WEEKS * 7);
@@ -195,11 +230,10 @@ cutoff.setHours(0, 0, 0, 0);
 
     // ── 4. items 목록 구성 ────────────────────────────────────────
     // 특별 주일명(맥추감사주일 등)은 주보 기준 기록에서 가져온다
-    let seasonOverrides = {};
-    const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
+    let overrides = {};
     if (fs.existsSync(OVERRIDES)) {
         try {
-            seasonOverrides = JSON.parse(fs.readFileSync(OVERRIDES, 'utf8')).sundays || {};
+            overrides = JSON.parse(fs.readFileSync(OVERRIDES, 'utf8')).sundays || {};
         } catch (err) {
             console.error('  lectionary-overrides.json 파싱 실패:', err.message);
         }
@@ -213,7 +247,7 @@ cutoff.setHours(0, 0, 0, 0);
             const d  = +ds.slice(6, 8);
             const pdfPath = path.join(BULLETINS, `${ds}.pdf`);
             const dateKey = `${ds.slice(0,4)}-${ds.slice(4,6)}-${ds.slice(6,8)}`;
-            const ov = seasonOverrides[dateKey];
+            const ov = overrides[dateKey];
             return {
                 date:   dateKey,
                 label:  `${y}년 ${mo}월 ${d}일`,
@@ -267,7 +301,51 @@ cutoff.setHours(0, 0, 0, 0);
         newItemsStr +
         section.slice(iClose);
 
-    fs.writeFileSync(DATA_JS, src.slice(0, bStart) + newSection + src.slice(bEnd), 'utf8');
+    let out = src.slice(0, bStart) + newSection + src.slice(bEnd);
+
+    // ── 6. 최신 주보 주간 → worship.currentReadings/nextReadings 자동 파생 ──
+    //    (표준 독서 위에 주보 기록 병합. 화면 fallback + 데이터 일관성 유지)
+    let standard = null;
+    if (fs.existsSync(STANDARD)) {
+        try {
+            standard = JSON.parse(fs.readFileSync(STANDARD, 'utf8'));
+        } catch (err) {
+            console.error('  lectionary-year-a.json 파싱 실패:', err.message);
+        }
+    }
+
+    if (standard && newItems.length > 0) {
+        const latest  = newItems[0].date;                    // 목록은 최신순 정렬
+        const current = resolveReadings(standard.sundays, overrides, latest);
+        const next    = resolveReadings(standard.sundays, overrides, nextSundayKey(latest));
+        const yr      = standard.year || 'A';
+
+        if (current && next) {
+            const block = readingsBlock('currentReadings', current, yr, true)
+                        + '\n' + readingsBlock('nextReadings', next, yr, false)
+                        + '\n';
+            const rewritten = replaceRegion(out,
+                '        currentReadings: {', '        main: [', block);
+            if (rewritten) out = rewritten;
+            else console.error('  ⚠️  worship 독서 구간을 찾지 못해 자동 파생을 건너뜁니다.');
+        }
+    }
+
+    fs.writeFileSync(DATA_JS, out, 'utf8');
+
+    // ── 7. 주보 주간 전례독서 커버리지 검증 ──────────────────────
+    //    이미지 주보가 있는데 트랙/시편 기록이 빠지면 화면·fallback이 어긋난다
+    const gaps = [];      // 트랙 자체가 없음 → 기본 B로 표시
+    const psalmGaps = []; // 트랙 A인데 시편 없음 → 표준(트랙 B 시편)과 어긋남
+    for (const it of newItems) {
+        if (!it.images.length) continue;                     // PDF 전용 항목은 제외
+        if (!standard) break;
+        const ov = overrides[it.date];
+        if (!isToggleWeek(standard.sundays, it.date)) continue;
+        if (ov && ov.readings) continue;                     // 특별 주일은 전체 지정됨
+        if (!ov || !ov.track) { gaps.push(it); continue; }
+        if (ov.track === 'A' && !ov.psalm) psalmGaps.push(it);
+    }
 
     console.log(`\n주보 동기화 완료: ${newItems.length}건`);
     newItems.forEach(it => {
@@ -275,4 +353,15 @@ cutoff.setHours(0, 0, 0, 0);
         console.log(`  + ${it.label}  ${it.season}  (${it.images.length}장)${pdfMark}`);
     });
     if (newItems.length === 0) console.log('  (등록된 주보 없음)');
+
+    if (gaps.length) {
+        console.log('\n⚠️  전례독서 트랙 미기록 (기본 짝 독서 B로 표시됨):');
+        gaps.forEach(it => console.log(
+            `   - ${it.date}  → 주보 예배 순서면 확인 후 data/lectionary-overrides.json에 "track" 기록`));
+    }
+    if (psalmGaps.length) {
+        console.log('\nℹ️  트랙 A 주간 시편 미기록 (표준 트랙 B 시편으로 표시됨):');
+        psalmGaps.forEach(it => console.log(
+            `   - ${it.date}  → 주보 성시가 표준과 다르면 "psalm" 추가`));
+    }
 })();

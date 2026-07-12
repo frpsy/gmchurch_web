@@ -1851,12 +1851,15 @@ const SundaysRenderer = {
         this._bindLectionaryNav(el, sundays);
     },
 
-    /* 주보에서 확인한 트랙·특별 주일 독서를 표준 목록 위에 덮어쓴다 */
+    /* 주보에서 확인한 트랙·시편·특별 주일 독서를 표준 목록 위에 덮어쓴다.
+       ⚠️ 병합 규칙은 scripts/lib/lectionary.js resolveReadings와 동일하게 유지할 것. */
     _applyOverrides(sundays, overrides) {
         sundays.forEach(s => {
             const o = overrides[s.date];
             if (!o) return;
             if (o.track) s.bulletinTrack = o.track;
+            // 트랙 A 주간은 표준 시편(트랙 B값)과 어긋나므로 주보 성시로 교체
+            if (o.psalm && !o.readings) s.readings.psalm = o.psalm;
             if (o.readings) {
                 s.bulletinReadings = true;
                 s.anglicanName = s.koreanName;           // 표준 주일명은 부제로 이동

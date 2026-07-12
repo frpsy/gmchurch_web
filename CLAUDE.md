@@ -174,16 +174,22 @@ echo "Done: $TODAY"
 
 ## 주보 등록 절차 (매주)
 
-> 주보가 전례독서의 **유일한 진실 원천**이다. 교회는 주마다 연속(A)/짝(B) 트랙을 오가며, 맥추감사주일 같은 특별 주일은 표준 달력에 없는 독서를 쓴다. 이미지 등록만 하고 끝내면 홈페이지 교회력과 어긋난다.
+> **표준(`data/lectionary-year-a.json`)이 기본, 주보 기록(`data/lectionary-overrides.json`)이 그 위에 덮인다.** 교회는 주마다 연속(A)/짝(B) 트랙을 오가고(RCL은 트랙에 따라 제1독서·시편이 다름), 맥추감사주일 같은 특별 주일은 표준에 없는 독서를 쓴다. **손으로 만질 곳은 overrides 하나뿐** — 나머지(특별 주일명, `worship.currentReadings`/`nextReadings` fallback)는 sync가 자동 파생한다.
+>
+> **추측 금지 — 주보 예배 순서면에 인쇄된 값만 기록한다.**
 
 1. 이미지 복사: `bulletins/YYYYMMDD_N.jpg` (표지부터 순서대로)
-2. **예배 순서면에서 실제 독서 확인** → `data/lectionary-overrides.json` 갱신
-   - 제1독서가 창세기·출애굽기 등 연속 서사면 `"track": "A"`, 예언서 등 복음 주제와 짝이면 `"track": "B"`
-   - 특별 주일(맥추감사주일 등)은 `koreanName` + `readings`(네 본문 전체) 지정
-3. **'다음 주일 봉사자' 표에서 다음 주 독서 확인** → 다음 주 항목도 미리 추가
-4. `node scripts/sync-bulletins.js` 실행 (PDF 생성 + data.js 갱신, 특별 주일명은 overrides에서 자동 반영)
-5. `npm test` (overrides 형식 검증 포함)
-6. 만료(13주 FIFO) 항목은 sync가 자동 삭제. overrides의 과거 항목은 그대로 둬도 무방
+2. **예배 순서면(주 본문·성시) 확인** → `data/lectionary-overrides.json`에 그 주 항목 추가
+   - 제1독서가 창세기·출애굽기 등 연속 서사면 `"track": "A"`, 예언서 등 복음과 짝이면 `"track": "B"`
+   - **트랙 A일 때 주보 성시가 표준과 다르면** `"psalm": "시편 N편"` 추가 (표준 단일 시편은 트랙 B값이라 A에선 어긋남)
+   - 특별 주일(맥추감사 등)은 `koreanName` + `readings`(네 본문 전체) 지정
+   - 주보가 시편 대신 층계성가를 부르면 시편 생략 가능(표준 지정 시편이 그대로 표시됨)
+3. `node scripts/sync-bulletins.js` 실행 → PDF 생성 + data.js 자동 갱신
+   - 끝에 **⚠️ 트랙 미기록 / ℹ️ 시편 미기록** 경고가 뜨면 해당 주 overrides를 보완
+4. `npm test` (병합·표기·overrides 형식 검증 포함)
+5. 만료(13주 FIFO) 항목은 sync가 자동 삭제. overrides의 과거 항목은 그대로 둬도 무방
+
+> ⚠️ 병합 규칙은 `scripts/lib/lectionary.js`(스크립트·테스트용)와 `app.js`의 `_applyOverrides`(브라우저용) 두 곳에 있다 — 빌드가 없어 공유 불가. 한쪽을 고치면 반드시 다른 쪽도 함께 고칠 것.
 
 ---
 
