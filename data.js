@@ -340,26 +340,26 @@ const CHURCH_DATA = {
     worship: {
         liturgicalSeason: LiturgicalCalendar.compute(),
         currentReadings: {
-            week: "가해 연중 12주일",
+            week: "맥추감사주일",
             year: "A년",
-            date: "2026년 6월 21일",
-            note: "RCL 가해 주제 독서 트랙 · 대한성공회 공동 전례독서에 따릅니다.",
+            date: "2026년 7월 12일",
+            note: "주보 기준 · 대한성공회 공동 전례독서에 따릅니다.",
             items: [
-                { role: "제1독서", ref: "예레미야 20:7-13" },
-                { role: "시편", ref: "시편 69:7-10, 16-18" },
-                { role: "서신서", ref: "로마 6:1-11" },
-                { role: "복음", ref: "마태 10:24-39" }
+                { role: "제1독서", ref: "신명 8:1-4" },
+                { role: "시편", ref: "시편 119편" },
+                { role: "서신서", ref: "히브리 11:32-40" },
+                { role: "복음", ref: "마태 6:25-34" }
             ]
         },
         nextReadings: {
-            week: "가해 연중 13주일",
+            week: "가해 연중 16주일",
             year: "A년",
-            date: "2026년 6월 28일",
+            date: "2026년 7월 19일",
             items: [
-                { role: "제1독서", ref: "예레미야 28:5-9" },
-                { role: "시편", ref: "시편 89:1-4, 15-18" },
-                { role: "서신서", ref: "로마 6:12-23" },
-                { role: "복음", ref: "마태 10:40-42" }
+                { role: "제1독서", ref: "창세 28:10-19" },
+                { role: "시편", ref: "시편 139:1-12, 23-24" },
+                { role: "서신서", ref: "로마 8:12-25" },
+                { role: "복음", ref: "마태 13:24-30, 36-43" }
             ]
         },
         main: [

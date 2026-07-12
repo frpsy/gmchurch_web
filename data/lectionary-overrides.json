@@ -1,0 +1,24 @@
+{
+  "note": "주보 기준 실제 봉독 기록. 표준 전례독서(lectionary-year-a.json) 위에 병합된다. 주보 등록 시 매주 갱신: 예배 순서면에서 이번 주를, '다음 주일 봉사자' 표에서 다음 주를 확인한다.",
+  "fields": {
+    "track": "그 주일에 봉독하는 제1독서 트랙 (A=연속 독서, B=짝 독서)",
+    "koreanName": "특별 주일명 (맥추감사주일 등, 표준 주일명과 다를 때만)",
+    "readings": "표준 독서와 다른 본문 전체 (특별 주일용: firstReading·psalm·secondReading·gospel)"
+  },
+  "sundays": {
+    "2026-06-14": { "track": "A" },
+    "2026-06-21": { "track": "B" },
+    "2026-06-28": { "track": "A" },
+    "2026-07-05": { "track": "B" },
+    "2026-07-12": {
+      "koreanName": "맥추감사주일",
+      "readings": {
+        "firstReading": "신명 8:1-4",
+        "psalm": "시편 119편",
+        "secondReading": "히브리 11:32-40",
+        "gospel": "마태 6:25-34"
+      }
+    },
+    "2026-07-19": { "track": "A" }
+  }
+}
