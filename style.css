@@ -119,6 +119,19 @@ img { display: block; max-width: 100%; }
 }
 .skip-link:focus { top: 0; }
 
+/* 화면에는 숨기고 스크린리더에만 노출 (구조용 헤딩 등) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 :focus-visible {
     outline: 3px solid var(--theme);
     outline-offset: 3px;
@@ -1153,7 +1166,7 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     border-color: var(--green-soft);
 }
 .value-card .val-icon { font-size: 1.8rem; margin-bottom: 0.85rem; }
-.value-card h4 { font-size: 0.98rem; font-weight: 700; color: var(--heading); margin-bottom: 0.5rem; }
+.value-card h3 { font-size: 0.98rem; font-weight: 700; color: var(--heading); margin-bottom: 0.5rem; }
 .value-card p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.8; }
 
 .value-card--link {
@@ -2776,7 +2789,7 @@ footer {
     gap: 3rem;
     margin-bottom: 3.5rem;
 }
-.footer-col h4 {
+.footer-col h2 {
     font-size: 0.74rem;
     font-weight: 700;
     color: rgba(255,255,255,0.62);  /* 섹션 제목 대비 상향 */

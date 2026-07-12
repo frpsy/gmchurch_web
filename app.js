@@ -295,7 +295,7 @@ const FooterRenderer = {
                         <p class="footer-brand-meta">설립 ${info.established}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
                     </div>
                     <div class="footer-col">
-                        <h4>${worshipNavLabel}</h4>
+                        <h2>${worshipNavLabel}</h2>
                         ${services.map(s => `
                         <div class="footer-service-row">
                             <span class="footer-service-label">${s.title}</span>
@@ -311,12 +311,12 @@ const FooterRenderer = {
                         </div>
                     </div>
                     <div class="footer-col">
-                        <h4>예배 자료</h4>
+                        <h2>예배 자료</h2>
                         <a href="sundays.html#lectionary" class="footer-ext-link">전례독서</a>
                         ${resources.map(r => `<a href="${r.url}" target="_blank" rel="noopener" class="footer-ext-link">${r.title}</a>`).join('')}
                     </div>
                     <div class="footer-col">
-                        <h4>채널</h4>
+                        <h2>채널</h2>
                         <a href="${sns.youtube}"           target="_blank" rel="noopener" class="footer-ext-link">유튜브 채널</a>
                         <a href="${sns.instagram}"         target="_blank" rel="noopener" class="footer-ext-link">인스타그램</a>
                         <a href="${sns['naver blog']}"     target="_blank" rel="noopener" class="footer-ext-link">네이버 블로그</a>
@@ -556,7 +556,7 @@ const WorshipRenderer = {
                             <div class="liturgy-step">
                                 <div class="step-num">${i + 1}</div>
                                 <div class="step-body">
-                                    <h4 class="step-title">${step.title}</h4>
+                                    <h3 class="step-title">${step.title}</h3>
                                     <ul class="step-list">
                                         ${step.items.map(item => `<li>${item}</li>`).join('')}
                                     </ul>
@@ -938,7 +938,7 @@ const AnglicanRenderer = {
                 ${what.pillars.map(p => `
                     <div class="anglican-pillar">
                         <div class="anglican-pillar-icon">${p.icon}</div>
-                        <h4 class="anglican-pillar-title">${p.title}</h4>
+                        <h3 class="anglican-pillar-title">${p.title}</h3>
                         <p class="anglican-pillar-desc">${p.desc}</p>
                     </div>
                 `).join('')}
@@ -957,7 +957,7 @@ const AnglicanRenderer = {
                         <div class="mission-mark">
                             <span class="mission-mark__num">${mk.num}</span>
                             <div class="mission-mark__body">
-                                <h4 class="mission-mark__title">${mk.ko}</h4>
+                                <h3 class="mission-mark__title">${mk.ko}</h3>
                                 <p class="mission-mark__en">${mk.en}</p>
                             </div>
                         </div>
@@ -1215,7 +1215,7 @@ const ClergyRenderer = {
                 ${values.map(v => {
                     const inner = `
                         <div class="val-icon">${v.icon}</div>
-                        <h4>${v.title}</h4>
+                        <h3>${v.title}</h3>
                         <p>${v.desc}</p>
                         ${v.href && v.cta ? `<span class="value-card-cta">${v.cta} <span aria-hidden="true">→</span></span>` : ''}`;
                     return v.href
@@ -1622,8 +1622,10 @@ const PortraitLightbox = {
         overlay.id = 'portrait-lightbox';
         overlay.setAttribute('role', 'dialog');
         overlay.setAttribute('aria-label', '초상 확대 보기');
+        overlay.setAttribute('aria-modal', 'true');
         const img = document.createElement('img');
         img.id = 'portrait-lightbox-img';
+        img.alt = '';
         overlay.appendChild(img);
         document.body.appendChild(overlay);
 
@@ -1831,7 +1833,9 @@ const SundaysRenderer = {
         try {
             const res = await fetch('data/lectionary-year-a.json');
             if (!res.ok) throw new Error('fetch ' + res.status);
-            sundays = (await res.json()).sundays;
+            const data = await res.json();
+            sundays = data.sundays;
+            this._lectionaryYear = data.year || 'A';
         } catch (_) {
             el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryFallback()}</div>`;
             return;
@@ -1893,19 +1897,21 @@ const SundaysRenderer = {
 
     /* 성서 본문 참조 → 공동번역(COG) 온라인 성서 URL. 첫 장·절로 이동 */
     _bibleBooks: {
-        '창세':'gen','탈출':'exo','레위':'lev','민수':'num','신명기':'deu','신명':'deu',
+        '창세':'gen','출애굽기':'exo','출애굽':'exo','탈출':'exo','레위':'lev','민수':'num','신명기':'deu','신명':'deu',
         '여호수아':'jos','판관기':'jdg','판관':'jdg','룻기':'rut',
         '사무엘상':'1sa','사무엘하':'2sa','열왕기상':'1ki','열왕기하':'2ki',
         '역대상':'1ch','역대하':'2ch','에즈라':'ezr','느헤미야':'neh','에스델':'est','에스더':'est',
         '욥기':'job','시편':'psa','잠언':'pro','전도서':'ecc','아가':'sng',
-        '이사야':'isa','예레미야':'jer','애가':'lam','에스겔':'ezk','에제키엘':'ezk','다니엘':'dan',
+        '이사야':'isa','예레미야':'jer','애가':'lam','에제키엘':'ezk','에스겔':'ezk','다니엘':'dan',
         '호세아':'hos','요엘':'jol','아모스':'amo','오바댜':'oba','요나':'jon','미가':'mic',
-        '나훔':'nam','하박국':'hab','스바냐':'zep','학개':'hag','스가랴':'zec','즈가리야':'zec','말라기':'mal',
-        '마태':'mat','마가':'mrk','누가':'luk','요한1서':'1jn','요한2서':'2jn','요한3서':'3jn',
+        '나훔':'nam','하박국':'hab','스바니야':'zep','스바냐':'zep','학개':'hag','즈가리야':'zec','스가랴':'zec','말라기':'mal',
+        '마태':'mat','마가':'mrk','마르코':'mrk','누가':'luk','루가':'luk','요한1서':'1jn','요한2서':'2jn','요한3서':'3jn',
         '요한일서':'1jn','요한이서':'2jn','요한삼서':'3jn','요한':'jhn','사도행전':'act',
-        '로마':'rom','고린도전':'1co','고린도후':'2co','갈라디아':'gal','에베소':'eph',
-        '빌립보':'php','골로새':'col','데살로니가전서':'1th','데살로니가후서':'2th','살전':'1th','살후':'2th',
-        '디모데전서':'1ti','디모데후서':'2ti','디도':'tit','빌레몬':'phm','히브리':'heb',
+        '로마':'rom','고린토전서':'1co','고린토전':'1co','고린도전':'1co','고린토후서':'2co','고린토후':'2co','고린도후':'2co',
+        '갈라디아':'gal','에페소':'eph','에베소':'eph',
+        '필립비':'php','빌립보':'php','골로사이':'col','골로새':'col',
+        '데살로니카전서':'1th','데살로니카후서':'2th','데살로니가전서':'1th','데살로니가후서':'2th','살전':'1th','살후':'2th',
+        '디모테오전서':'1ti','디모테오후서':'2ti','디모데전서':'1ti','디모데후서':'2ti','디도':'tit','빌레몬':'phm','필레몬':'phm','히브리':'heb',
         '야고보':'jas','베드로전서':'1pe','베드로후서':'2pe','유다':'jud','묵시록':'rev','요한계시록':'rev'
     },
     _bibleUrl(ref) {
@@ -1973,7 +1979,7 @@ const SundaysRenderer = {
         </div>
         <div class="lectionary-card lectionary-card--current" id="lect-card">
             <div class="lectionary-card-head">
-                <p class="lectionary-card-label">가해(A년) · ${dateStr}</p>
+                <p class="lectionary-card-label">${({A:'가해(A년)',B:'나해(B년)',C:'다해(C년)'})[this._lectionaryYear] || this._lectionaryYear} · ${dateStr}</p>
                 <p class="lectionary-card-week">${s.koreanName}</p>
                 ${s.anglicanName && !s.anglicanName.includes('성령강림 후') ? `<p class="lectionary-card-meta">${s.anglicanName}</p>` : ''}
             </div>
@@ -2091,7 +2097,7 @@ const SundaysRenderer = {
         const map = {};
         const set = (d, label) => { map[key(d)] = label; };
 
-        set(new Date(year, 0, 6),   '주현절');                             // 1/6
+        set(new Date(year, 0, 6),   '공현절');                             // 1/6
         set(nthWd(year, 2, 5, 1),   '세계기도일');                         // 3월 첫째 금요일
         set(add(easter, -7),         '종려주일');                           // 성주간 시작
         set(easter,                  '부활주일');
