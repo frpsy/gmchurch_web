@@ -78,7 +78,7 @@
         "firstReadingA": "예레미야 31:7-14",
         "psalm": "시편 147:12-20",
         "secondReading": "에베소 1:3-14",
-        "gospel": "요한 1:(1-9), 10-18"
+        "gospel": "요한 1:10-18"
       }
     },
     {
@@ -140,9 +140,9 @@
       "koreanName": "공현 후 제5주일",
       "anglicanName": "주현절 후 제5주일",
       "readings": {
-        "firstReadingA": "이사야 58:1-9a (9b-12)",
-        "psalm": "시편 112:1-9 (10)",
-        "secondReading": "고린도전 2:1-12 (13-16)",
+        "firstReadingA": "이사야 58:1-9상",
+        "psalm": "시편 112:1-9",
+        "secondReading": "고린도전 2:1-12",
         "gospel": "마태 5:13-20"
       }
     },
@@ -179,7 +179,7 @@
       "koreanName": "사순 제2주일",
       "anglicanName": "사순절 제2주일",
       "readings": {
-        "firstReadingA": "창세 12:1-4a",
+        "firstReadingA": "창세 12:1-4상",
         "psalm": "시편 121",
         "secondReading": "로마 4:1-5, 13-17",
         "gospel": "요한 3:1-17"
@@ -231,7 +231,7 @@
       "koreanName": "수난 주일 (종려 주일)",
       "anglicanName": "종려 주일·수난 주일",
       "readings": {
-        "firstReadingA": "이사야 50:4-9a",
+        "firstReadingA": "이사야 50:4-9상",
         "psalm": "시편 31:9-16",
         "secondReading": "빌립보 2:5-11",
         "gospel": "마태 26:14-27:66"
@@ -257,7 +257,7 @@
       "koreanName": "부활 제2주일",
       "anglicanName": "부활절 제2주일",
       "readings": {
-        "firstReadingA": "사도행전 2:14a, 22-32",
+        "firstReadingA": "사도행전 2:14상, 22-32",
         "psalm": "시편 16",
         "secondReading": "베드로전서 1:3-9",
         "gospel": "요한 20:19-31"
@@ -270,7 +270,7 @@
       "koreanName": "부활 제3주일",
       "anglicanName": "부활절 제3주일",
       "readings": {
-        "firstReadingA": "사도행전 2:14a, 36-41",
+        "firstReadingA": "사도행전 2:14상, 36-41",
         "psalm": "시편 116:1-4, 12-19",
         "secondReading": "베드로전서 1:17-23",
         "gospel": "누가 24:13-35"
@@ -336,8 +336,8 @@
       "anglicanName": "성령강림절",
       "readings": {
         "firstReadingA": "사도행전 2:1-21",
-        "psalm": "시편 104:24-34, 35b",
-        "secondReading": "고린도전 12:3b-13",
+        "psalm": "시편 104:24-34, 35하",
+        "secondReading": "고린도전 12:3하-13",
         "gospel": "요한 20:19-23"
       }
     },
@@ -348,7 +348,7 @@
       "koreanName": "삼위일체 주일",
       "anglicanName": "성령강림 후 제1주일",
       "readings": {
-        "firstReadingA": "창세 1:1-2:4a",
+        "firstReadingA": "창세 1:1-2:4상",
         "psalm": "시편 8",
         "secondReading": "고린도후 13:11-13",
         "gospel": "마태 28:16-20"
@@ -376,10 +376,10 @@
       "anglicanName": "성령강림 후 제3주일",
       "readings": {
         "firstReadingA": "창세 18:1-15",
-        "firstReadingB": "탈출 19:2-8a",
+        "firstReadingB": "탈출 19:2-8상",
         "psalm": "시편 100",
         "secondReading": "로마 5:1-8",
-        "gospel": "마태 9:35-10:8 (9-23)"
+        "gospel": "마태 9:35-10:8"
       }
     },
     {
@@ -420,7 +420,7 @@
         "firstReadingA": "창세 24:34-38, 42-49, 58-67",
         "firstReadingB": "즈가리야 9:9-12",
         "psalm": "시편 145:8-14",
-        "secondReading": "로마 7:15-25a",
+        "secondReading": "로마 7:15-25상",
         "gospel": "마태 11:16-19, 25-30"
       }
     },
@@ -445,7 +445,7 @@
       "koreanName": "연중 제16주일",
       "anglicanName": "성령강림 후 제8주일",
       "readings": {
-        "firstReadingA": "창세 28:10-19a",
+        "firstReadingA": "창세 28:10-19상",
         "firstReadingB": "이사야 44:6-8",
         "psalm": "시편 86:11-17",
         "secondReading": "로마 8:12-25",
@@ -504,8 +504,8 @@
         "firstReadingA": "창세 45:1-15",
         "firstReadingB": "이사야 56:1, 6-8",
         "psalm": "시편 67",
-        "secondReading": "로마 11:1-2a, 29-32",
-        "gospel": "마태 15:(10-20), 21-28"
+        "secondReading": "로마 11:1-2상, 29-32",
+        "gospel": "마태 15:21-28"
       }
     },
     {
@@ -602,7 +602,7 @@
         "firstReadingA": "탈출 20:1-4, 7-9, 12-20",
         "firstReadingB": "이사야 5:1-7",
         "psalm": "시편 80:7-15",
-        "secondReading": "빌립보 3:4b-14",
+        "secondReading": "빌립보 3:4하-14",
         "gospel": "마태 21:33-46"
       }
     },
@@ -668,7 +668,7 @@
       "koreanName": "연중 제32주일",
       "anglicanName": "성령강림 후 제24주일",
       "readings": {
-        "firstReadingA": "여호수아 24:1-3a, 14-25",
+        "firstReadingA": "여호수아 24:1-3상, 14-25",
         "firstReadingB": "아모스 5:18-24",
         "psalm": "시편 70",
         "secondReading": "살전 4:13-18",

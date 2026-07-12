@@ -49,6 +49,20 @@ describe('lectionary-overrides.json', () => {
         }
     });
 
+    it('psalm이 있으면 "시편"으로 시작한다', () => {
+        for (const [date, o] of entries) {
+            if (o.psalm) expect(o.psalm, `${date}의 psalm`).toMatch(/^시편/);
+        }
+    });
+
+    it('psalm 단독 지정은 track과 함께 온다 (트랙 A 시편 교정용)', () => {
+        for (const [date, o] of entries) {
+            if (o.psalm && !o.readings) {
+                expect(o.track, `${date}: psalm은 track과 함께`).toBeTruthy();
+            }
+        }
+    });
+
     it('각 항목은 track 또는 readings 중 하나 이상을 가진다', () => {
         for (const [date, o] of entries) {
             expect(o.track || o.readings, `${date}에 track/readings 없음`).toBeTruthy();
