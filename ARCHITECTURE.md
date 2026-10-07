@@ -143,10 +143,10 @@ const CHURCH_DATA = {
     }
   },
 
-  logo: {                           // 캔터베리 십자가 소개 (clergy.html)
-    eyebrow, title, desc,
-    colors: String
-    // letters 필드 없음 — ACGM 모노그램 → 캔터베리 십자가로 변경됨
+  logo: {                           // 로고 소개 (clergy.html#logo-intro)
+    eyebrow, title,
+    church: { name, subtitle, desc[], elements[{label,desc}], colors[{name,hex,desc}] },  // 교회 로고 '열린 빛'
+    anglican: { lead, title, subtitle, desc, history, elements[], refs[] }               // 세계성공회 상징(캔터베리 십자가)
   },
 
   ministerSection: {
@@ -374,7 +374,7 @@ window DOMContentLoaded
       │     _korea()   → #anglican-korea (2단 레이아웃: 텍스트 + 배지)
       │
       ├── ClergyRenderer.render()     → clergy.html 전용
-      │     _logo()       → #logo-content  (캔터베리 십자가 SVG + 설명)
+      │     _logo()       → #logo-content  (교회 로고 '열린 빛' + 세계성공회 상징 캔터베리 십자가)
       │     _clergy()     → #clergy-full   (주교 + 카테고리별 성직자 clergy-card / 임원진 officer-card)
       │       _bioSection(bio) → 타임라인 + 소임 태그 + 교회 밖 활동 + 출처
       │     _philosophy() → #philosophy-full  (.values-grid, 녹색교회 카드는 greenchurch.html 링크)
@@ -603,7 +603,9 @@ window DOMContentLoaded
 | `.container--narrow` | 읽기 폭 제한 컨테이너 (max 820px, faq.html) |
 | `.anglican-pillars` | 성공회 3기둥 카드 그리드 |
 | `.anglican-korea-inner` | 대한성공회 2단 레이아웃 |
-| `.logo-intro-grid` | 캔터베리 십자가 소개 그리드 |
+| `.logo-intro-grid` | 로고 소개 그리드 (마크 + 설명) |
+| `.logo-lockup` / `.logo-swatches` | 교회 로고 가로형 조합 / 로고 색 칩 |
+| `.logo-anglican` | 로고 소개 안 세계성공회 상징 단락 |
 | `.press-list` / `.press-item` | 언론 보도 리스트 |
 | `.bus-chip.bus-blue/green` | 버스 번호 칩 |
 | `.bank-card` | 봉헌 계좌 카드 |
