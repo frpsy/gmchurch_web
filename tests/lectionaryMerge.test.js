@@ -2,11 +2,11 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { resolveReadings, nextSundayKey, isToggleWeek, koreanDate } from '../scripts/lib/lectionary.js';
+import { resolveReadings, nextSundayKey, isToggleWeek, koreanDate, STANDARD_FILES, mergeStandards } from '../scripts/lib/lectionary.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const read = f => JSON.parse(readFileSync(join(__dirname, '..', 'data', f), 'utf-8'));
-const std = read('lectionary-year-a.json').sundays;
+const std = mergeStandards(STANDARD_FILES.map(read));
 const ov  = read('lectionary-overrides.json').sundays;
 
 // 병합 로직이 실제 주보와 일치하는지 — 예배 순서면에서 확인한 ground truth

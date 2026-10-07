@@ -1818,6 +1818,8 @@ const SundaysRenderer = {
         if (specialEl)  specialEl.innerHTML = this._special(d.specialSundays);
     },
 
+    _LECTIONARY_FILES: ['lectionary-year-a.json', 'lectionary-year-b.json'],
+
     /* 전례독서 — RCL 가해 JSON에서 오늘 날짜 기준 자동 표시.
        연중 시기는 연속(A)·짝(B) 두 트랙을 토글로 오가며, 본문은 공동번역 성서로 연결 */
     async _lectionaryAsync(el) {
@@ -1829,14 +1831,14 @@ const SundaysRenderer = {
             </div>`;
         el.innerHTML = header + '<p class="lectionary-loading">불러오는 중…</p>';
 
-        let sundays;
-        try {
-            const res = await fetch('data/lectionary-year-a.json');
-            if (!res.ok) throw new Error('fetch ' + res.status);
-            const data = await res.json();
-            sundays = data.sundays;
-            this._lectionaryYear = data.year || 'A';
-        } catch (_) {
+        // 연도별 파일을 날짜순 단일 목록으로 병합 — 대림절에 해가 바뀌어도 이어서 표시.
+        // ⚠️ scripts/lib/lectionary.js의 STANDARD_FILES·mergeStandards와 동일하게 유지할 것.
+        const results = await Promise.all(this._LECTIONARY_FILES.map(f =>
+            fetch('data/' + f).then(r => r.ok ? r.json() : null).catch(() => null)));
+        const sundays = results.filter(Boolean)
+            .flatMap(d => d.sundays.map(s => ({ ...s, year: d.year })))
+            .sort((a, b) => a.date.localeCompare(b.date));
+        if (!sundays.length) {
             el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryFallback()}</div>`;
             return;
         }
@@ -1979,7 +1981,7 @@ const SundaysRenderer = {
         </div>
         <div class="lectionary-card lectionary-card--current" id="lect-card">
             <div class="lectionary-card-head">
-                <p class="lectionary-card-label">${({A:'가해(A년)',B:'나해(B년)',C:'다해(C년)'})[this._lectionaryYear] || this._lectionaryYear} · ${dateStr}</p>
+                <p class="lectionary-card-label">${({A:'가해(A년)',B:'나해(B년)',C:'다해(C년)'})[s.year] || s.year} · ${dateStr}</p>
                 <p class="lectionary-card-week">${s.koreanName}</p>
                 ${s.anglicanName && !s.anglicanName.includes('성령강림 후') ? `<p class="lectionary-card-meta">${s.anglicanName}</p>` : ''}
             </div>

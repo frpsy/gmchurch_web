@@ -1,0 +1,709 @@
+{
+  "year": "B",
+  "track": "dual",
+  "note": "RCL 나해 전례독서. 연중(성령강림 후) 시기는 연속 독서(Track 1)와 짝 독서(Track 2)를 함께 수록하며, 본문 표기는 공동번역 성서의 책 이름을 따른다. 2026-11-29 ~ 2027-11-21.",
+  "sundays": [
+    {
+      "date": "2026-11-29",
+      "season": "advent",
+      "weekOrdinal": 1,
+      "koreanName": "대림 제1주일",
+      "anglicanName": "대림절 제1주일",
+      "readings": {
+        "firstReadingA": "이사야 64:1-9",
+        "psalm": "시편 80:1-7, 17-19",
+        "secondReading": "고린토전서 1:3-9",
+        "gospel": "마르코 13:24-37"
+      }
+    },
+    {
+      "date": "2026-12-06",
+      "season": "advent",
+      "weekOrdinal": 2,
+      "koreanName": "대림 제2주일",
+      "anglicanName": "대림절 제2주일",
+      "readings": {
+        "firstReadingA": "이사야 40:1-11",
+        "psalm": "시편 85:1-2, 8-13",
+        "secondReading": "베드로후서 3:8-15상",
+        "gospel": "마르코 1:1-8"
+      }
+    },
+    {
+      "date": "2026-12-13",
+      "season": "advent",
+      "weekOrdinal": 3,
+      "koreanName": "대림 제3주일",
+      "anglicanName": "대림절 제3주일",
+      "readings": {
+        "firstReadingA": "이사야 61:1-4, 8-11",
+        "psalm": "시편 126",
+        "secondReading": "데살로니카전서 5:16-24",
+        "gospel": "요한 1:6-8, 19-28"
+      }
+    },
+    {
+      "date": "2026-12-20",
+      "season": "advent",
+      "weekOrdinal": 4,
+      "koreanName": "대림 제4주일",
+      "anglicanName": "대림절 제4주일",
+      "readings": {
+        "firstReadingA": "사무엘하 7:1-11, 16",
+        "psalm": "시편 89:1-4, 19-26",
+        "secondReading": "로마 16:25-27",
+        "gospel": "루가 1:26-38"
+      }
+    },
+    {
+      "date": "2026-12-27",
+      "season": "christmas",
+      "weekOrdinal": 1,
+      "koreanName": "성탄절 후 제1주일",
+      "anglicanName": "성탄절 후 제1주일",
+      "readings": {
+        "firstReadingA": "이사야 61:10-62:3",
+        "psalm": "시편 148",
+        "secondReading": "갈라디아 4:4-7",
+        "gospel": "루가 2:22-40"
+      }
+    },
+    {
+      "date": "2027-01-03",
+      "season": "christmas",
+      "weekOrdinal": 2,
+      "koreanName": "성탄절 후 제2주일",
+      "anglicanName": "성탄절 후 제2주일",
+      "readings": {
+        "firstReadingA": "예레미야 31:7-14",
+        "psalm": "시편 147:12-20",
+        "secondReading": "에페소 1:3-14",
+        "gospel": "요한 1:10-18"
+      }
+    },
+    {
+      "date": "2027-01-10",
+      "season": "epiphany",
+      "weekOrdinal": 1,
+      "koreanName": "주님 세례 주일",
+      "anglicanName": "공현절 후 제1주일",
+      "readings": {
+        "firstReadingA": "창세 1:1-5",
+        "psalm": "시편 29",
+        "secondReading": "사도행전 19:1-7",
+        "gospel": "마르코 1:4-11"
+      }
+    },
+    {
+      "date": "2027-01-17",
+      "season": "epiphany",
+      "weekOrdinal": 2,
+      "koreanName": "공현 후 제2주일",
+      "anglicanName": "공현절 후 제2주일",
+      "readings": {
+        "firstReadingA": "사무엘상 3:1-10",
+        "psalm": "시편 139:1-6, 13-18",
+        "secondReading": "고린토전서 6:12-20",
+        "gospel": "요한 1:43-51"
+      }
+    },
+    {
+      "date": "2027-01-24",
+      "season": "epiphany",
+      "weekOrdinal": 3,
+      "koreanName": "공현 후 제3주일",
+      "anglicanName": "공현절 후 제3주일",
+      "readings": {
+        "firstReadingA": "요나 3:1-5, 10",
+        "psalm": "시편 62:5-12",
+        "secondReading": "고린토전서 7:29-31",
+        "gospel": "마르코 1:14-20"
+      }
+    },
+    {
+      "date": "2027-01-31",
+      "season": "epiphany",
+      "weekOrdinal": 4,
+      "koreanName": "공현 후 제4주일",
+      "anglicanName": "공현절 후 제4주일",
+      "readings": {
+        "firstReadingA": "신명기 18:15-20",
+        "psalm": "시편 111",
+        "secondReading": "고린토전서 8:1-13",
+        "gospel": "마르코 1:21-28"
+      }
+    },
+    {
+      "date": "2027-02-07",
+      "season": "epiphany",
+      "weekOrdinal": 5,
+      "koreanName": "주님 거룩한 변모 주일",
+      "anglicanName": "변모 주일 (공현 후 마지막 주일)",
+      "readings": {
+        "firstReadingA": "열왕기하 2:1-12",
+        "psalm": "시편 50:1-6",
+        "secondReading": "고린토후서 4:3-6",
+        "gospel": "마르코 9:2-9"
+      }
+    },
+    {
+      "date": "2027-02-14",
+      "season": "lent",
+      "weekOrdinal": 1,
+      "koreanName": "사순 제1주일",
+      "anglicanName": "사순절 제1주일",
+      "readings": {
+        "firstReadingA": "창세 9:8-17",
+        "psalm": "시편 25:1-10",
+        "secondReading": "베드로전서 3:18-22",
+        "gospel": "마르코 1:9-15"
+      }
+    },
+    {
+      "date": "2027-02-21",
+      "season": "lent",
+      "weekOrdinal": 2,
+      "koreanName": "사순 제2주일",
+      "anglicanName": "사순절 제2주일",
+      "readings": {
+        "firstReadingA": "창세 17:1-7, 15-16",
+        "psalm": "시편 22:23-31",
+        "secondReading": "로마 4:13-25",
+        "gospel": "마르코 8:31-38"
+      }
+    },
+    {
+      "date": "2027-02-28",
+      "season": "lent",
+      "weekOrdinal": 3,
+      "koreanName": "사순 제3주일",
+      "anglicanName": "사순절 제3주일",
+      "readings": {
+        "firstReadingA": "출애굽 20:1-17",
+        "psalm": "시편 19",
+        "secondReading": "고린토전서 1:18-25",
+        "gospel": "요한 2:13-22"
+      }
+    },
+    {
+      "date": "2027-03-07",
+      "season": "lent",
+      "weekOrdinal": 4,
+      "koreanName": "사순 제4주일",
+      "anglicanName": "사순절 제4주일",
+      "readings": {
+        "firstReadingA": "민수 21:4-9",
+        "psalm": "시편 107:1-3, 17-22",
+        "secondReading": "에페소 2:1-10",
+        "gospel": "요한 3:14-21"
+      }
+    },
+    {
+      "date": "2027-03-14",
+      "season": "lent",
+      "weekOrdinal": 5,
+      "koreanName": "사순 제5주일",
+      "anglicanName": "사순절 제5주일",
+      "readings": {
+        "firstReadingA": "예레미야 31:31-34",
+        "psalm": "시편 51:1-12",
+        "secondReading": "히브리 5:5-10",
+        "gospel": "요한 12:20-33"
+      }
+    },
+    {
+      "date": "2027-03-21",
+      "season": "holyweek",
+      "weekOrdinal": 6,
+      "koreanName": "수난 주일 (종려 주일)",
+      "anglicanName": "종려 주일·수난 주일",
+      "readings": {
+        "firstReadingA": "이사야 50:4-9상",
+        "psalm": "시편 31:9-16",
+        "secondReading": "필립비 2:5-11",
+        "gospel": "마르코 14:1-15:47"
+      }
+    },
+    {
+      "date": "2027-03-28",
+      "season": "easter",
+      "weekOrdinal": 1,
+      "koreanName": "부활 주일",
+      "anglicanName": "부활절 (Easter Day)",
+      "readings": {
+        "firstReadingA": "사도행전 10:34-43",
+        "psalm": "시편 118:1-2, 14-24",
+        "secondReading": "고린토전서 15:1-11",
+        "gospel": "요한 20:1-18"
+      }
+    },
+    {
+      "date": "2027-04-04",
+      "season": "easter",
+      "weekOrdinal": 2,
+      "koreanName": "부활 제2주일",
+      "anglicanName": "부활절 제2주일",
+      "readings": {
+        "firstReadingA": "사도행전 4:32-35",
+        "psalm": "시편 133",
+        "secondReading": "요한1서 1:1-2:2",
+        "gospel": "요한 20:19-31"
+      }
+    },
+    {
+      "date": "2027-04-11",
+      "season": "easter",
+      "weekOrdinal": 3,
+      "koreanName": "부활 제3주일",
+      "anglicanName": "부활절 제3주일",
+      "readings": {
+        "firstReadingA": "사도행전 3:12-19",
+        "psalm": "시편 4",
+        "secondReading": "요한1서 3:1-7",
+        "gospel": "루가 24:36하-48"
+      }
+    },
+    {
+      "date": "2027-04-18",
+      "season": "easter",
+      "weekOrdinal": 4,
+      "koreanName": "부활 제4주일",
+      "anglicanName": "부활절 제4주일",
+      "readings": {
+        "firstReadingA": "사도행전 4:5-12",
+        "psalm": "시편 23",
+        "secondReading": "요한1서 3:16-24",
+        "gospel": "요한 10:11-18"
+      }
+    },
+    {
+      "date": "2027-04-25",
+      "season": "easter",
+      "weekOrdinal": 5,
+      "koreanName": "부활 제5주일",
+      "anglicanName": "부활절 제5주일",
+      "readings": {
+        "firstReadingA": "사도행전 8:26-40",
+        "psalm": "시편 22:25-31",
+        "secondReading": "요한1서 4:7-21",
+        "gospel": "요한 15:1-8"
+      }
+    },
+    {
+      "date": "2027-05-02",
+      "season": "easter",
+      "weekOrdinal": 6,
+      "koreanName": "부활 제6주일",
+      "anglicanName": "부활절 제6주일",
+      "readings": {
+        "firstReadingA": "사도행전 10:44-48",
+        "psalm": "시편 98",
+        "secondReading": "요한1서 5:1-6",
+        "gospel": "요한 15:9-17"
+      }
+    },
+    {
+      "date": "2027-05-09",
+      "season": "easter",
+      "weekOrdinal": 7,
+      "koreanName": "부활 제7주일",
+      "anglicanName": "승천 후 주일",
+      "readings": {
+        "firstReadingA": "사도행전 1:15-17, 21-26",
+        "psalm": "시편 1",
+        "secondReading": "요한1서 5:9-13",
+        "gospel": "요한 17:6-19"
+      }
+    },
+    {
+      "date": "2027-05-16",
+      "season": "easter",
+      "weekOrdinal": 8,
+      "koreanName": "성령강림 주일",
+      "anglicanName": "성령강림절",
+      "readings": {
+        "firstReadingA": "사도행전 2:1-21",
+        "psalm": "시편 104:24-34, 35하",
+        "secondReading": "로마 8:22-27",
+        "gospel": "요한 15:26-27; 16:4하-15"
+      }
+    },
+    {
+      "date": "2027-05-23",
+      "season": "ordinary",
+      "weekOrdinal": 1,
+      "koreanName": "삼위일체 주일",
+      "anglicanName": "성령강림 후 제1주일",
+      "readings": {
+        "firstReadingA": "이사야 6:1-8",
+        "psalm": "시편 29",
+        "secondReading": "로마 8:12-17",
+        "gospel": "요한 3:1-17"
+      }
+    },
+    {
+      "date": "2027-05-30",
+      "season": "ordinary",
+      "weekOrdinal": 9,
+      "koreanName": "연중 제9주일",
+      "anglicanName": "성령강림 후 제2주일",
+      "readings": {
+        "firstReadingA": "사무엘상 3:1-10",
+        "firstReadingB": "신명기 5:12-15",
+        "psalm": "시편 81:1-10",
+        "secondReading": "고린토후서 4:5-12",
+        "gospel": "마르코 2:23-3:6"
+      }
+    },
+    {
+      "date": "2027-06-06",
+      "season": "ordinary",
+      "weekOrdinal": 10,
+      "koreanName": "연중 제10주일",
+      "anglicanName": "성령강림 후 제3주일",
+      "readings": {
+        "firstReadingA": "사무엘상 8:4-11, 16-20",
+        "firstReadingB": "창세 3:8-15",
+        "psalm": "시편 130",
+        "secondReading": "고린토후서 4:13-5:1",
+        "gospel": "마르코 3:20-35"
+      }
+    },
+    {
+      "date": "2027-06-13",
+      "season": "ordinary",
+      "weekOrdinal": 11,
+      "koreanName": "연중 제11주일",
+      "anglicanName": "성령강림 후 제4주일",
+      "readings": {
+        "firstReadingA": "사무엘상 15:34-16:13",
+        "firstReadingB": "에제키엘 17:22-24",
+        "psalm": "시편 92:1-4, 12-15",
+        "secondReading": "고린토후서 5:6-10, 14-17",
+        "gospel": "마르코 4:26-34"
+      }
+    },
+    {
+      "date": "2027-06-20",
+      "season": "ordinary",
+      "weekOrdinal": 12,
+      "koreanName": "연중 제12주일",
+      "anglicanName": "성령강림 후 제5주일",
+      "readings": {
+        "firstReadingA": "사무엘상 17:32-49",
+        "firstReadingB": "욥기 38:1-11",
+        "psalm": "시편 107:1-3, 23-32",
+        "secondReading": "고린토후서 6:1-13",
+        "gospel": "마르코 4:35-41"
+      }
+    },
+    {
+      "date": "2027-06-27",
+      "season": "ordinary",
+      "weekOrdinal": 13,
+      "koreanName": "연중 제13주일",
+      "anglicanName": "성령강림 후 제6주일",
+      "readings": {
+        "firstReadingA": "사무엘하 1:1, 17-27",
+        "firstReadingB": "애가 3:22-33",
+        "psalm": "시편 30",
+        "secondReading": "고린토후서 8:7-15",
+        "gospel": "마르코 5:21-43"
+      }
+    },
+    {
+      "date": "2027-07-04",
+      "season": "ordinary",
+      "weekOrdinal": 14,
+      "koreanName": "연중 제14주일",
+      "anglicanName": "성령강림 후 제7주일",
+      "readings": {
+        "firstReadingA": "사무엘하 5:1-5, 9-10",
+        "firstReadingB": "에제키엘 2:1-5",
+        "psalm": "시편 123",
+        "secondReading": "고린토후서 12:2-10",
+        "gospel": "마르코 6:1-13"
+      }
+    },
+    {
+      "date": "2027-07-11",
+      "season": "ordinary",
+      "weekOrdinal": 15,
+      "koreanName": "연중 제15주일",
+      "anglicanName": "성령강림 후 제8주일",
+      "readings": {
+        "firstReadingA": "사무엘하 6:1-5, 12하-19",
+        "firstReadingB": "아모스 7:7-15",
+        "psalm": "시편 85:8-13",
+        "secondReading": "에페소 1:3-14",
+        "gospel": "마르코 6:14-29"
+      }
+    },
+    {
+      "date": "2027-07-18",
+      "season": "ordinary",
+      "weekOrdinal": 16,
+      "koreanName": "연중 제16주일",
+      "anglicanName": "성령강림 후 제9주일",
+      "readings": {
+        "firstReadingA": "사무엘하 7:1-14상",
+        "firstReadingB": "예레미야 23:1-6",
+        "psalm": "시편 23",
+        "secondReading": "에페소 2:11-22",
+        "gospel": "마르코 6:30-34, 53-56"
+      }
+    },
+    {
+      "date": "2027-07-25",
+      "season": "ordinary",
+      "weekOrdinal": 17,
+      "koreanName": "연중 제17주일",
+      "anglicanName": "성령강림 후 제10주일",
+      "readings": {
+        "firstReadingA": "사무엘하 11:1-15",
+        "firstReadingB": "열왕기하 4:42-44",
+        "psalm": "시편 145:10-18",
+        "secondReading": "에페소 3:14-21",
+        "gospel": "요한 6:1-21"
+      }
+    },
+    {
+      "date": "2027-08-01",
+      "season": "ordinary",
+      "weekOrdinal": 18,
+      "koreanName": "연중 제18주일",
+      "anglicanName": "성령강림 후 제11주일",
+      "readings": {
+        "firstReadingA": "사무엘하 11:26-12:13상",
+        "firstReadingB": "출애굽 16:2-4, 9-15",
+        "psalm": "시편 78:23-29",
+        "secondReading": "에페소 4:1-16",
+        "gospel": "요한 6:24-35"
+      }
+    },
+    {
+      "date": "2027-08-08",
+      "season": "ordinary",
+      "weekOrdinal": 19,
+      "koreanName": "연중 제19주일",
+      "anglicanName": "성령강림 후 제12주일",
+      "readings": {
+        "firstReadingA": "사무엘하 18:5-9, 15, 31-33",
+        "firstReadingB": "열왕기상 19:4-8",
+        "psalm": "시편 34:1-8",
+        "secondReading": "에페소 4:25-5:2",
+        "gospel": "요한 6:35, 41-51"
+      }
+    },
+    {
+      "date": "2027-08-15",
+      "season": "ordinary",
+      "weekOrdinal": 20,
+      "koreanName": "연중 제20주일",
+      "anglicanName": "성령강림 후 제13주일",
+      "readings": {
+        "firstReadingA": "열왕기상 2:10-12; 3:3-14",
+        "firstReadingB": "잠언 9:1-6",
+        "psalm": "시편 34:9-14",
+        "secondReading": "에페소 5:15-20",
+        "gospel": "요한 6:51-58"
+      }
+    },
+    {
+      "date": "2027-08-22",
+      "season": "ordinary",
+      "weekOrdinal": 21,
+      "koreanName": "연중 제21주일",
+      "anglicanName": "성령강림 후 제14주일",
+      "readings": {
+        "firstReadingA": "열왕기상 8:22-30, 41-43",
+        "firstReadingB": "여호수아 24:1-2상, 14-18",
+        "psalm": "시편 34:15-22",
+        "secondReading": "에페소 6:10-20",
+        "gospel": "요한 6:56-69"
+      }
+    },
+    {
+      "date": "2027-08-29",
+      "season": "ordinary",
+      "weekOrdinal": 22,
+      "koreanName": "연중 제22주일",
+      "anglicanName": "성령강림 후 제15주일",
+      "readings": {
+        "firstReadingA": "아가 2:8-13",
+        "firstReadingB": "신명기 4:1-2, 6-9",
+        "psalm": "시편 15",
+        "secondReading": "야고보 1:17-27",
+        "gospel": "마르코 7:1-8, 14-15, 21-23"
+      }
+    },
+    {
+      "date": "2027-09-05",
+      "season": "ordinary",
+      "weekOrdinal": 23,
+      "koreanName": "연중 제23주일",
+      "anglicanName": "성령강림 후 제16주일",
+      "readings": {
+        "firstReadingA": "잠언 22:1-2, 8-9, 22-23",
+        "firstReadingB": "이사야 35:4-7상",
+        "psalm": "시편 146",
+        "secondReading": "야고보 2:1-10, 14-17",
+        "gospel": "마르코 7:24-37"
+      }
+    },
+    {
+      "date": "2027-09-12",
+      "season": "ordinary",
+      "weekOrdinal": 24,
+      "koreanName": "연중 제24주일",
+      "anglicanName": "성령강림 후 제17주일",
+      "readings": {
+        "firstReadingA": "잠언 1:20-33",
+        "firstReadingB": "이사야 50:4-9상",
+        "psalm": "시편 116:1-9",
+        "secondReading": "야고보 3:1-12",
+        "gospel": "마르코 8:27-38"
+      }
+    },
+    {
+      "date": "2027-09-19",
+      "season": "ordinary",
+      "weekOrdinal": 25,
+      "koreanName": "연중 제25주일",
+      "anglicanName": "성령강림 후 제18주일",
+      "readings": {
+        "firstReadingA": "잠언 31:10-31",
+        "firstReadingB": "예레미야 11:18-20",
+        "psalm": "시편 54",
+        "secondReading": "야고보 3:13-4:3, 7-8상",
+        "gospel": "마르코 9:30-37"
+      }
+    },
+    {
+      "date": "2027-09-26",
+      "season": "ordinary",
+      "weekOrdinal": 26,
+      "koreanName": "연중 제26주일",
+      "anglicanName": "성령강림 후 제19주일",
+      "readings": {
+        "firstReadingA": "에스델 7:1-6, 9-10; 9:20-22",
+        "firstReadingB": "민수 11:4-6, 10-16, 24-29",
+        "psalm": "시편 19:7-14",
+        "secondReading": "야고보 5:13-20",
+        "gospel": "마르코 9:38-50"
+      }
+    },
+    {
+      "date": "2027-10-03",
+      "season": "ordinary",
+      "weekOrdinal": 27,
+      "koreanName": "연중 제27주일",
+      "anglicanName": "성령강림 후 제20주일",
+      "readings": {
+        "firstReadingA": "욥기 1:1; 2:1-10",
+        "firstReadingB": "창세 2:18-24",
+        "psalm": "시편 8",
+        "secondReading": "히브리 1:1-4; 2:5-12",
+        "gospel": "마르코 10:2-16"
+      }
+    },
+    {
+      "date": "2027-10-10",
+      "season": "ordinary",
+      "weekOrdinal": 28,
+      "koreanName": "연중 제28주일",
+      "anglicanName": "성령강림 후 제21주일",
+      "readings": {
+        "firstReadingA": "욥기 23:1-9, 16-17",
+        "firstReadingB": "아모스 5:6-7, 10-15",
+        "psalm": "시편 90:12-17",
+        "secondReading": "히브리 4:12-16",
+        "gospel": "마르코 10:17-31"
+      }
+    },
+    {
+      "date": "2027-10-17",
+      "season": "ordinary",
+      "weekOrdinal": 29,
+      "koreanName": "연중 제29주일",
+      "anglicanName": "성령강림 후 제22주일",
+      "readings": {
+        "firstReadingA": "욥기 38:1-7",
+        "firstReadingB": "이사야 53:4-12",
+        "psalm": "시편 91:9-16",
+        "secondReading": "히브리 5:1-10",
+        "gospel": "마르코 10:35-45"
+      }
+    },
+    {
+      "date": "2027-10-24",
+      "season": "ordinary",
+      "weekOrdinal": 30,
+      "koreanName": "연중 제30주일",
+      "anglicanName": "성령강림 후 제23주일",
+      "readings": {
+        "firstReadingA": "욥기 42:1-6, 10-17",
+        "firstReadingB": "예레미야 31:7-9",
+        "psalm": "시편 126",
+        "secondReading": "히브리 7:23-28",
+        "gospel": "마르코 10:46-52"
+      }
+    },
+    {
+      "date": "2027-10-31",
+      "season": "ordinary",
+      "weekOrdinal": 31,
+      "koreanName": "연중 제31주일",
+      "anglicanName": "성령강림 후 제24주일",
+      "readings": {
+        "firstReadingA": "룻기 1:1-18",
+        "firstReadingB": "신명기 6:1-9",
+        "psalm": "시편 119:1-8",
+        "secondReading": "히브리 9:11-14",
+        "gospel": "마르코 12:28-34"
+      }
+    },
+    {
+      "date": "2027-11-07",
+      "season": "ordinary",
+      "weekOrdinal": 32,
+      "koreanName": "연중 제32주일",
+      "anglicanName": "성령강림 후 제25주일",
+      "readings": {
+        "firstReadingA": "룻기 3:1-5; 4:13-17",
+        "firstReadingB": "열왕기상 17:8-16",
+        "psalm": "시편 146",
+        "secondReading": "히브리 9:24-28",
+        "gospel": "마르코 12:38-44"
+      }
+    },
+    {
+      "date": "2027-11-14",
+      "season": "ordinary",
+      "weekOrdinal": 33,
+      "koreanName": "연중 제33주일",
+      "anglicanName": "성령강림 후 제26주일",
+      "readings": {
+        "firstReadingA": "사무엘상 1:4-20",
+        "firstReadingB": "다니엘 12:1-3",
+        "psalm": "시편 16",
+        "secondReading": "히브리 10:11-14, 19-25",
+        "gospel": "마르코 13:1-8"
+      }
+    },
+    {
+      "date": "2027-11-21",
+      "season": "ordinary",
+      "weekOrdinal": 34,
+      "koreanName": "왕이신 그리스도 주일",
+      "anglicanName": "성령강림 후 마지막 주일",
+      "readings": {
+        "firstReadingA": "사무엘하 23:1-7",
+        "firstReadingB": "다니엘 7:9-10, 13-14",
+        "psalm": "시편 93",
+        "secondReading": "묵시록 1:4하-8",
+        "gospel": "요한 18:33-37"
+      }
+    }
+  ]
+}

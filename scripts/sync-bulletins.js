@@ -3,7 +3,7 @@ import fs   from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import PDFDocument from 'pdfkit';
-import { resolveReadings, isToggleWeek, nextSundayKey, koreanDate } from './lib/lectionary.js';
+import { resolveReadings, isToggleWeek, nextSundayKey, koreanDate, STANDARD_FILES, mergeStandards } from './lib/lectionary.js';
 
 // ── 전례력 절기 레이블 ────────────────────────────────────────
 function easterDate(year) {
@@ -125,7 +125,6 @@ const ROOT      = path.resolve(__dirname, '..');
 const BULLETINS = path.join(ROOT, 'bulletins');
 const DATA_JS   = path.join(ROOT, 'data.js');
 const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
-const STANDARD  = path.join(ROOT, 'data', 'lectionary-year-a.json');
 const MAX_WEEKS = 13;
 
 // 지정한 마커 사이 구간을 통째로 교체 (data.js 손질용)
@@ -305,24 +304,27 @@ cutoff.setHours(0, 0, 0, 0);
 
     // ── 6. 최신 주보 주간 → worship.currentReadings/nextReadings 자동 파생 ──
     //    (표준 독서 위에 주보 기록 병합. 화면 fallback + 데이터 일관성 유지)
-    let standard = null;
-    if (fs.existsSync(STANDARD)) {
+    // 연도별 표준 파일을 날짜순 단일 목록으로 병합 (나해 등 연도 경계를 넘어 동작)
+    const standardFiles = [];
+    for (const f of STANDARD_FILES) {
+        const p = path.join(ROOT, 'data', f);
+        if (!fs.existsSync(p)) continue;
         try {
-            standard = JSON.parse(fs.readFileSync(STANDARD, 'utf8'));
+            standardFiles.push(JSON.parse(fs.readFileSync(p, 'utf8')));
         } catch (err) {
-            console.error('  lectionary-year-a.json 파싱 실패:', err.message);
+            console.error(`  ${f} 파싱 실패:`, err.message);
         }
     }
+    const standard = standardFiles.length ? mergeStandards(standardFiles) : null;
 
     if (standard && newItems.length > 0) {
         const latest  = newItems[0].date;                    // 목록은 최신순 정렬
-        const current = resolveReadings(standard.sundays, overrides, latest);
-        const next    = resolveReadings(standard.sundays, overrides, nextSundayKey(latest));
-        const yr      = standard.year || 'A';
+        const current = resolveReadings(standard, overrides, latest);
+        const next    = resolveReadings(standard, overrides, nextSundayKey(latest));
 
         if (current && next) {
-            const block = readingsBlock('currentReadings', current, yr, true)
-                        + '\n' + readingsBlock('nextReadings', next, yr, false)
+            const block = readingsBlock('currentReadings', current, current.year, true)
+                        + '\n' + readingsBlock('nextReadings', next, next.year, false)
                         + '\n';
             const rewritten = replaceRegion(out,
                 '        currentReadings: {', '        main: [', block);
@@ -341,7 +343,7 @@ cutoff.setHours(0, 0, 0, 0);
         if (!it.images.length) continue;                     // PDF 전용 항목은 제외
         if (!standard) break;
         const ov = overrides[it.date];
-        if (!isToggleWeek(standard.sundays, it.date)) continue;
+        if (!isToggleWeek(standard, it.date)) continue;
         if (ov && ov.readings) continue;                     // 특별 주일은 전체 지정됨
         if (!ov || !ov.track) { gaps.push(it); continue; }
         if (ov.track === 'A' && !ov.psalm) psalmGaps.push(it);
