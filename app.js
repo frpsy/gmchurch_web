@@ -159,6 +159,7 @@ const NavRenderer = {
         const closeMenu = () => {
             menu.classList.remove('open');
             toggle.setAttribute('aria-expanded', false);
+            toggle.setAttribute('aria-label', '메뉴 열기');
             menu.querySelectorAll('.nav-item.mobile-open').forEach(item => {
                 item.classList.remove('mobile-open');
                 const btn = item.querySelector('.nav-chevron');
@@ -179,6 +180,7 @@ const NavRenderer = {
             } else {
                 menu.classList.add('open');
                 toggle.setAttribute('aria-expanded', true);
+                toggle.setAttribute('aria-label', '메뉴 닫기');
             }
         });
 
