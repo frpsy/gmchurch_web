@@ -4,33 +4,44 @@
    ========================================================== */
 
 /* ── Variables ───────────────────────────────────────────── */
+/* 로고 워드마크 전용 세리프 — 로고 글자 11자만 담은 3KB 서브셋(고운바탕 Bold, OFL).
+   본문 서체(Pretendard)는 그대로이며, 서브셋에 없는 글자는 자동으로 다음 서체로 표시된다. */
+@font-face {
+    font-family: "BrandSerif";
+    src: url("fonts/brand-serif.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
+
 :root {
     /* Primary palette — refined forest green */
-    --green-deep:   #0a1f12;
-    --green-mid:    #3a7252;
-    --green-light:  #eef2ec;
-    --green-soft:   #c4d6c8;
+    --green-deep:   #1c4336;
+    --green-mid:    #2f6a52;
+    --green-light:  #ebeedf;
+    --green-soft:   #cfd5b0;
     /* 전례 테마 — JS가 현재 절기 색으로 덮어씀. 기본값은 평시 녹색. */
-    --theme:        #3a7252;
-    --theme-light:  #eef2ec;
+    --theme:        #2f6a52;
+    --theme-light:  #ebeedf;
     --theme-on:     #fff;     /* --theme 배경 위 텍스트 색 (금색 절기엔 어두운 값) */
     /* Accent — luminous amber gold */
-    --gold:         #c09a60;
-    --gold-bg:      #faf3e6;
+    --gold:         #b1b883;  /* 세이지 — 장식선·어두운 배경 위 강조 전용(밝은 배경 글자 금지) */
+    --gold-bg:      #f3f4e6;
+    --sage-ink:     #5a6430;  /* 밝은 배경 위 세이지 계열 글자 (AA 5.4:1) */
+    --font-brand:   "BrandSerif", "Pretendard", -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
     /* Neutrals */
-    --cream:        #f7f4ed;
+    --cream:        #f0ece4;
     --white:        #ffffff;
     --text:         #1a1a1a;
     --text-muted:   #4d4c46;  /* WCAG AA(4.5:1) 충족 — cream/white 배경 위 본문용 */
-    --border:       #e8e5dc;
+    --border:       #e2ded2;
     /* 표면 위 제목 텍스트 — 모드별로 분기 (green-deep은 배경 전용으로 유지) */
-    --heading:      #0a1f12;
+    --heading:      #163a2e;
     /* Skeleton 로더 — 모드 대응 */
     --skeleton-base: #dbd8d0;
     --skeleton-mid:  #c8c5bc;
     --red:          #b53737;
     /* Nav glass */
-    --nav-glass:    rgba(10, 31, 18, 0.9);
+    --nav-glass:    rgba(28, 67, 54, 0.92);
     /* 섹션 내 sticky 서브 네비 표면 — 모드별 분기 (다크에서 흰 배경 방지) */
     --surface-nav:  rgba(255, 255, 255, 0.96);
     /* Layout */
@@ -41,13 +52,13 @@
     --radius-md:    14px;
     --radius-lg:    20px;
     /* Shadows — lighter, less decorative */
-    --shadow-sm:    0 1px 3px rgba(10, 31, 18, 0.05);
-    --shadow-md:    0 3px 14px rgba(10, 31, 18, 0.07);
-    --shadow-lg:    0 12px 40px rgba(10, 31, 18, 0.10);
+    --shadow-sm:    0 1px 3px rgba(28, 67, 54, 0.06);
+    --shadow-md:    0 3px 14px rgba(28, 67, 54, 0.08);
+    --shadow-lg:    0 12px 40px rgba(28, 67, 54, 0.11);
     /* Motion — shared language for hover/reveal across all pages */
     --ease-out:        cubic-bezier(0.2, 0.7, 0.3, 1);
-    --hover-shadow:    0 12px 36px rgba(22, 61, 36, 0.13);
-    --hover-shadow-sm: 0 8px 26px rgba(22, 61, 36, 0.10);
+    --hover-shadow:    0 12px 36px rgba(28, 67, 54, 0.14);
+    --hover-shadow-sm: 0 8px 26px rgba(28, 67, 54, 0.11);
     /* Type scale — 본문·컴포넌트 공통 (크기 난립 방지) */
     --fs-label:  0.78rem;   /* 소형 라벨·캡션 */
     --fs-sm:     0.9rem;    /* 보조 본문 */
@@ -139,8 +150,14 @@ img { display: block; max-width: 100%; }
 }
 a:focus-visible,
 button:focus-visible {
-    outline: 2px solid var(--gold);
+    outline: 2px solid var(--theme);
     outline-offset: 4px;
+}
+/* 어두운 숲 녹 영역에서는 세이지 포커스 링 (밝은 배경에선 세이지가 3:1 미달) */
+.nav-header a:focus-visible, .nav-header button:focus-visible,
+footer a:focus-visible, footer button:focus-visible,
+.hero a:focus-visible, .next-step-cta a:focus-visible {
+    outline-color: var(--gold);
 }
 a:focus:not(:focus-visible),
 button:focus:not(:focus-visible) { outline: none; }
@@ -152,7 +169,7 @@ button:focus:not(:focus-visible) { outline: none; }
     width: 100%;
     height: 3px;
     background: linear-gradient(90deg, var(--gold), color-mix(in srgb, var(--gold) 75%, white));
-    box-shadow: 0 0 10px rgba(192, 154, 96, 0.55);
+    box-shadow: 0 0 10px rgba(177, 184, 131, 0.55);
     border-radius: 0 2px 2px 0;
     z-index: 1100;
     transform: scaleX(0);
@@ -171,7 +188,7 @@ button:focus:not(:focus-visible) { outline: none; }
     position: fixed;
     top: 0; left: 0; right: 0;
     height: var(--nav-h);
-    background: rgba(10, 31, 18, 0.82);
+    background: rgba(28, 67, 54, 0.86);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -179,7 +196,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: box-shadow 0.3s, background 0.3s;
 }
 .nav-header.scrolled {
-    background: rgba(10, 31, 18, 0.97);
+    background: rgba(24, 58, 47, 0.97);
     box-shadow: 0 4px 20px rgba(0,0,0,0.18);
 }
 
@@ -196,16 +213,26 @@ button:focus:not(:focus-visible) { outline: none; }
     flex-shrink: 0;
 }
 .nav-logo-mark {
-    width: 34px; height: 34px;
+    width: 26px; height: 35px;
     flex-shrink: 0; display: block;
+    color: #f0ece4;   /* 숲 녹 내비 위 크림 마크 (내비는 다크모드에서도 어두움) */
 }
 .nav-logo-mark svg {
     width: 100%; height: 100%; display: block;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.28));
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.22));
 }
-.nav-logo-text { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
-.nav-logo-name { font-size: 0.95rem; font-weight: 700; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
-.nav-logo-sub  { font-size: 0.7rem; color: rgba(255,255,255,0.9); letter-spacing: 0.04em; }
+.nav-logo-text { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.nav-logo-name {
+    font-family: var(--font-brand);
+    font-size: 1.04rem; font-weight: 700; letter-spacing: 0.01em;
+    color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+.nav-logo-sub {
+    font-family: var(--font-brand);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.34em;
+    color: #cdd2a8;   /* 밝은 세이지 — 반투명 내비가 밝은 본문 위에 있어도 4.6:1 */
+    margin-top: 0.1rem;
+}
 
 .nav-menu { display: flex; list-style: none; height: 100%; align-items: center; margin-left: auto; }
 
@@ -368,9 +395,9 @@ button:focus:not(:focus-visible) { outline: none; }
     z-index: 1;
     background: linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.45) 0%,
-        rgba(0, 0, 0, 0.15) 45%,
-        rgba(0, 0, 0, 0.65) 100%
+        rgba(8, 26, 20, 0.50) 0%,
+        rgba(8, 26, 20, 0.18) 45%,
+        rgba(8, 26, 20, 0.70) 100%
     );
 }
 
@@ -459,7 +486,7 @@ button:focus:not(:focus-visible) { outline: none; }
     background: rgba(255,255,255,0.18);
     border-color: rgba(255,255,255,0.85);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(192, 154, 96, 0.22);
+    box-shadow: 0 6px 20px rgba(177, 184, 131, 0.22);
 }
 
 /* Hero — 실시간 예배 버튼 (히어로 외부 영역용) */
@@ -478,7 +505,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* Hero — solid primary CTA */
 .btn-hero-primary {
     display: inline-block;
-    background: #fff;
+    background: #f6f4ee;
     color: var(--heading);
     padding: 0.68rem 1.75rem;
     border-radius: 6px;
@@ -489,9 +516,9 @@ button:focus:not(:focus-visible) { outline: none; }
     box-shadow: 0 4px 20px rgba(0,0,0,0.18);
 }
 .btn-hero-primary:hover {
-    background: var(--green-light);
+    background: #e3e7d2;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(192, 154, 96, 0.26);
+    box-shadow: 0 8px 24px rgba(177, 184, 131, 0.26);
 }
 
 /* Hero — 하단 스탯 스트립 */
@@ -504,7 +531,7 @@ button:focus:not(:focus-visible) { outline: none; }
     justify-content: center;
     gap: 0;
     padding: 1.1rem 1.5rem;
-    background: rgba(0,0,0,0.38);
+    background: rgba(13, 38, 30, 0.55);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255,255,255,0.10);
@@ -645,9 +672,9 @@ button:focus:not(:focus-visible) { outline: none; }
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom,
-        rgba(0,0,0,0.52) 0%,
-        rgba(0,0,0,0.38) 60%,
-        rgba(0,0,0,0.55) 100%);
+        rgba(8, 26, 20, 0.55) 0%,
+        rgba(8, 26, 20, 0.40) 60%,
+        rgba(8, 26, 20, 0.60) 100%);
     z-index: 0;
 }
 .page-hero--photo > * { position: relative; z-index: 1; }
@@ -1293,7 +1320,7 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     overflow: hidden;
     flex-shrink: 0;
     border: 3px solid rgba(58, 114, 82, 0.3);
-    box-shadow: 0 4px 14px rgba(10,31,18,0.10);
+    box-shadow: 0 4px 14px rgba(13, 33, 26, 0.10);
 }
 /* 사진 없을 때 그라디언트+이모지 폴백 */
 .clergy-avatar--fallback {
@@ -1490,7 +1517,7 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     text-decoration: none;
     transition: background 0.2s, border-color 0.2s;
 }
-.about-brief-award:hover { background: #dce8dd; border-color: var(--theme); }
+.about-brief-award:hover { background: #e3e7d2; border-color: var(--theme); }
 .about-brief-award-icon { font-size: 1.25rem; flex-shrink: 0; }
 .about-brief-award-body { display: flex; flex-direction: column; gap: 0.1rem; flex: 1; text-align: left; }
 .about-brief-award-body strong { font-size: var(--fs-sm); font-weight: 700; color: var(--heading); }
@@ -1522,7 +1549,7 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     width: 140px;
     height: 140px;
     border-radius: 20px;
-    background: #163d24;
+    background: var(--green-deep);
     box-shadow: var(--shadow-md);
     overflow: hidden;
     display: inline-flex;
@@ -2171,9 +2198,24 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
 /* Newcomer CTA (page closing) */
 /* ── Next Step CTA ────────────────────────────────────────── */
 .next-step-cta {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     padding: var(--section-pad) 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, #1e4530 0%, var(--green-deep) 65%);
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, #2a5a48 0%, var(--green-deep) 65%);
     border-top: none;
+}
+.next-step-cta::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: max(-60px, calc(50% - 640px));
+    bottom: -90px;
+    width: 320px;
+    aspect-ratio: 40 / 54;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 54'%3E%3Cpath fill='%23b1b883' d='M2 54V18.5C2 9.6 9.2 2.8 18.75 1.6L18.37 18.8H12.4v2.8h5.9L17.6 54ZM38 54V18.5C38 9.6 30.8 2.8 21.25 1.6L21.63 18.8H27.6v2.8h-5.9L22.4 54Z'/%3E%3C/svg%3E") center / contain no-repeat;
+    opacity: 0.08;
+    pointer-events: none;
 }
 .next-step-cta .container {
     display: flex;
@@ -2259,13 +2301,13 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
 .next-step-cta .btn-next--primary {
     background: var(--gold);
     border-color: var(--gold);
-    color: #fff;
+    color: #142c24;   /* 세이지 위 숲 녹 글자 (흰 글자는 대비 미달) */
 }
 .next-step-cta .btn-next--primary:hover {
     background: color-mix(in srgb, var(--gold) 78%, white);
     border-color: color-mix(in srgb, var(--gold) 78%, white);
-    color: #fff;
-    box-shadow: 0 8px 28px rgba(192,154,96,0.35);
+    color: #142c24;
+    box-shadow: 0 8px 28px rgba(177, 184, 131, 0.35);
 }
 
 @media (max-width: 560px) {
@@ -2792,7 +2834,7 @@ footer {
 .footer-col h2 {
     font-size: 0.74rem;
     font-weight: 700;
-    color: rgba(255,255,255,0.62);  /* 섹션 제목 대비 상향 */
+    color: var(--gold);  /* 세이지 — 숲 녹 위 6.5:1 */
     letter-spacing: 0.18em;
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -2806,25 +2848,28 @@ footer {
     margin-bottom: 1.1rem;
 }
 .footer-logo-mark {
-    width: 38px; height: 38px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.14);
+    width: 30px; height: 40px;
+    color: #f0ece4;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
 }
+.footer-logo-mark svg { width: 100%; height: 100%; display: block; }
 .footer-brand-name {
     display: block;
-    font-size: 0.95rem;
+    font-family: var(--font-brand);
+    font-size: 1.08rem;
     font-weight: 700;
     color: #fff;
     line-height: 1.3;
 }
 .footer-brand-sub {
     display: block;
+    font-family: var(--font-brand);
     font-size: 0.74rem;
-    color: rgba(255,255,255,0.65);
-    margin-top: 0.12rem;
+    font-weight: 700;
+    letter-spacing: 0.34em;
+    color: var(--gold);
+    margin-top: 0.18rem;
 }
 .footer-col .footer-brand-slogan {
     font-size: 0.84rem;
@@ -3740,7 +3785,7 @@ footer {
     font-size: 2.2rem;
     color: #fff;
     opacity: 0;
-    background: rgba(10, 31, 18, 0.45);
+    background: rgba(13, 33, 26, 0.45);
     transition: opacity 0.2s;
 }
 .video-card:hover .video-play-btn {
@@ -3819,7 +3864,7 @@ footer {
 .draft-badge {
     flex-shrink: 0;
     background: var(--gold);
-    color: #fff;
+    color: #142c24;
     font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: var(--ls-label);
@@ -3896,7 +3941,7 @@ footer {
 .photo-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(10,31,18,0.82) 0%, transparent 55%);
+    background: linear-gradient(to top, rgba(13, 33, 26, 0.82) 0%, transparent 55%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -3978,7 +4023,7 @@ footer {
     position: fixed;
     inset: 0;
     z-index: 900;
-    background: rgba(10,31,18,0.93);
+    background: rgba(13, 33, 26, 0.93);
     align-items: center;
     justify-content: center;
     padding: 2rem;
@@ -4067,33 +4112,34 @@ footer {
 @media (prefers-color-scheme: dark) {
     :root {
         /* Backgrounds — 짙은 숲 색 기반 다크 서피스 */
-        --cream:        #111a13;
-        --white:        #192216;
+        --cream:        #0f1b16;
+        --white:        #16241e;
         /* Text — 따뜻한 크림 계열 */
         --text:         #e6e2d6;
         --text-muted:   #a4a89a;
         /* 제목 — 어두운 서피스 위 밝은 녹빛 오프화이트 */
-        --heading:      #eaf2e8;
+        --heading:      #ecefe2;
         /* Borders */
-        --border:       #2f4434;
+        --border:       #2a4036;
         /* Green scale — 다크 배경에서 가독성 확보
            green-mid은 배지 배경(흰 글씨)으로도 쓰여 텍스트·배지 대비를 균형 조정 */
-        --green-deep:   #0a1f12;
-        --green-mid:    #62a073;
-        --green-light:  #1e3325;
-        --green-soft:   #355a3e;
+        --green-deep:   #142c24;   /* 페이지 바탕(#0f1b16)과 구분되는 어두운 숲 녹 띠 */
+        --green-mid:    #66a284;
+        --green-light:  #1b3029;
+        --green-soft:   #3b5a48;
         /* Theme — green-mid/green-light 값으로 자동 추종 */
-        --theme:        #62a073;
-        --theme-light:  #1e3325;
+        --theme:        #66a284;
+        --theme-light:  #1b3029;
         /* Gold — 다크 배경 대비 밝게 조정 */
-        --gold:         #d6ba8e;
-        --gold-bg:      #221d14;
+        --gold:         #c3c99a;
+        --gold-bg:      #1f2318;
+        --sage-ink:     #c3c99a;
         /* Nav */
-        --nav-glass:    rgba(10, 31, 18, 0.95);
-        --surface-nav:  rgba(17, 26, 19, 0.96);
+        --nav-glass:    rgba(13, 33, 26, 0.95);
+        --surface-nav:  rgba(15, 27, 22, 0.96);
         /* Skeleton */
-        --skeleton-base: #1c2a1f;
-        --skeleton-mid:  #243528;
+        --skeleton-base: #1a2a23;
+        --skeleton-mid:  #22352d;
         /* Shadows */
         --shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.40);
         --shadow-md:    0 3px 14px rgba(0, 0, 0, 0.50);
@@ -4104,14 +4150,14 @@ footer {
         서피스 틴트로 재계산한다.) 사진 히어로(.page-hero--photo)는 제외:
        background 단축속성이 background-image를 초기화하기 때문. */
     .page-hero:not(.page-hero--photo) {
-        background: linear-gradient(165deg, color-mix(in srgb, var(--season, var(--theme)) 24%, #0a1f12) 0%, color-mix(in srgb, var(--season, var(--theme)) 16%, var(--white)) 48%, var(--cream) 100%);
+        background: linear-gradient(165deg, color-mix(in srgb, var(--season, var(--theme)) 24%, #0c1d17) 0%, color-mix(in srgb, var(--season, var(--theme)) 16%, var(--white)) 48%, var(--cream) 100%);
     }
     /* 히어로 CTA 버튼 — 배경이 항상 흰색(#fff)이므로 텍스트·호버를 라이트 모드 값으로 고정 */
     .btn-hero-primary {
-        color: #0a1f12;
+        color: #163a2e;
     }
     .btn-hero-primary:hover {
-        background: #c8ddc9;
+        background: #e3e7d2;
     }
     /* 전례력 절기색 — JS가 주입하는 밝은 절기색(s.colorLight)은 다크모드에 적응하지
        않으므로, 절기 강조색을 어두운 서피스에 섞어 카드 배경을 어둡게 재계산한다.
@@ -4146,7 +4192,7 @@ footer {
     background: var(--green-deep);
     border: none;
     border-radius: 50%;
-    box-shadow: 0 4px 16px rgba(10,31,18,0.22);
+    box-shadow: 0 4px 16px rgba(13, 33, 26, 0.22);
     opacity: 0;
     transform: translateY(10px);
     will-change: transform, opacity;
@@ -4162,7 +4208,7 @@ footer {
 }
 #back-to-top:hover, #back-to-top:focus-visible {
     background: var(--theme);
-    box-shadow: 0 6px 24px rgba(10,31,18,0.30);
+    box-shadow: 0 6px 24px rgba(13, 33, 26, 0.30);
     outline: none;
 }
 #back-to-top svg {
@@ -4182,7 +4228,7 @@ footer {
     background: var(--white);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
-    border-top: 3px solid var(--gold);   /* 골드 상단 라인으로 주교 강조 */
+    border-top: 3px solid var(--gold);   /* 세이지 상단 라인으로 주교 강조 */
     box-shadow: var(--shadow-md);
 }
 .bishop-eyebrow {
@@ -4190,7 +4236,7 @@ footer {
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--sage-ink);
     margin-bottom: 1rem;
 }
 .bishop-card-inner {
@@ -4205,8 +4251,8 @@ footer {
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-    border: 3px solid rgba(192, 154, 96, 0.6);   /* 골드 링으로 주교 초상 강조 */
-    box-shadow: 0 6px 22px rgba(10,31,18,0.14);
+    border: 3px solid rgba(177, 184, 131, 0.6);   /* 세이지 링으로 주교 초상 강조 */
+    box-shadow: 0 6px 22px rgba(13, 33, 26, 0.14);
 }
 .bishop-portrait {
     width: 100%;
@@ -4268,7 +4314,7 @@ footer {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: rgba(10, 31, 18, 0.88);
+    background: rgba(13, 33, 26, 0.88);
     backdrop-filter: blur(6px);
     align-items: center;
     justify-content: center;
@@ -4394,7 +4440,7 @@ footer {
 .menu-overlay-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(10, 31, 18, 0.55);
+    background: rgba(13, 33, 26, 0.55);
     backdrop-filter: blur(2px);
 }
 

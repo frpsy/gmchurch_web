@@ -39,9 +39,10 @@ gmchurch_web/
 ├── data.js           ★ 단일 콘텐츠 소스 (1081줄)
 ├── app.js            렌더러 모음 + App bootstrap (2211줄)
 ├── style.css         전체 스타일 (4128줄)
-├── favicon.svg       캔터베리 십자가 아이콘
+├── favicon.svg       교회 로고 아이콘 ('열린 빛')
 ├── apple-touch-icon.png
-├── og-image-v2.png   소셜 공유 OG 이미지
+├── og-image-v3.png   소셜 공유 OG 이미지
+├── fonts/            로고 워드마크 서체 서브셋
 ├── robots.txt
 ├── sitemap.xml
 ├── docs/             위원회 audit 보고서 · 작업 지시서
