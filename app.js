@@ -1048,44 +1048,79 @@ const ClergyRenderer = {
     _logo() {
         const el = document.getElementById('logo-content');
         if (!el || !CHURCH_DATA.logo) return;
-        const { eyebrow, title, subtitle, desc, colors, history, elements, refs } = CHURCH_DATA.logo;
+        const { eyebrow, title, church, anglican } = CHURCH_DATA.logo;
+        const { info } = CHURCH_DATA;
 
-        const elementsHtml = elements ? `
+        const elementsHtml = list => list && list.length ? `
             <div class="logo-elements">
-                ${elements.map(e => `
+                ${list.map(e => `
                     <div class="logo-element-item">
                         <p class="logo-element-label">${e.label}</p>
                         <p class="logo-element-desc">${e.desc}</p>
                     </div>`).join('')}
             </div>` : '';
 
-        const refsHtml = refs && refs.length ? `
-            <ol class="logo-refs">
-                ${refs.map((r, i) => `<li class="logo-ref-item"><span class="logo-ref-num" aria-hidden="true">${i + 1}</span><span class="logo-ref-text">${r}</span></li>`).join('')}
-            </ol>` : '';
+        // 교회 로고 '열린 빛' — 시안과 같은 가로형 조합(마크 + 워드마크)
+        const churchHtml = church ? `
+            <div class="logo-intro-grid">
+                <div class="logo-display">
+                    <div class="logo-lockup" role="img" aria-label="${info.name} ${info.tagline} 로고">
+                        <span class="logo-lockup-mark">${archMarkSVG()}</span>
+                        <span class="logo-lockup-text" aria-hidden="true">
+                            <span class="logo-lockup-name">${info.name}</span>
+                            <span class="logo-lockup-tag">${info.tagline}</span>
+                        </span>
+                    </div>
+                    <p class="logo-subtitle">${church.subtitle} · ${church.name}</p>
+                    ${church.colors ? `
+                    <ul class="logo-swatches" aria-label="로고 색">
+                        ${church.colors.map(c => `
+                        <li class="logo-swatch">
+                            <span class="logo-swatch-chip" style="--chip:${c.hex}" aria-hidden="true"></span>
+                            <span><strong>${c.name}</strong> ${c.desc}</span>
+                        </li>`).join('')}
+                    </ul>` : ''}
+                </div>
+                <div class="logo-meaning">
+                    ${church.desc.map(d => `<p class="logo-desc">${d}</p>`).join('')}
+                    ${elementsHtml(church.elements)}
+                </div>
+            </div>` : '';
+
+        // 세계성공회 상징 — 캔터베리 십자가
+        const a = anglican;
+        const anglicanHtml = a ? `
+            <div class="logo-anglican">
+                <p class="section-eyebrow">${a.lead}</p>
+                <h3 class="logo-anglican-title">${a.title}</h3>
+                <div class="logo-intro-grid">
+                    <div class="logo-display">
+                        <div class="logo-badge logo-badge--sm">
+                            <svg viewBox="0 0 64 64" role="img" aria-label="캔터베리 십자가">
+                                <path d="${CANTERBURY_CROSS_PATH}" fill="#ffffff" fill-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <p class="logo-subtitle">${a.subtitle}</p>
+                    </div>
+                    <div class="logo-meaning">
+                        <p class="logo-desc">${a.desc}</p>
+                        ${a.history ? `<p class="logo-history">${a.history}</p>` : ''}
+                        ${elementsHtml(a.elements)}
+                    </div>
+                </div>
+                ${a.refs && a.refs.length ? `
+                <ol class="logo-refs">
+                    ${a.refs.map((r, i) => `<li class="logo-ref-item"><span class="logo-ref-num" aria-hidden="true">${i + 1}</span><span class="logo-ref-text">${r}</span></li>`).join('')}
+                </ol>` : ''}
+            </div>` : '';
 
         el.innerHTML = `
-            <div class="section-header">
+            <div class="section-header logo-head">
                 <p class="section-eyebrow">${eyebrow}</p>
                 <h2 class="section-title">${title}</h2>
             </div>
-            <div class="logo-intro-grid">
-                <div class="logo-display">
-                    <div class="logo-badge">
-                        <svg viewBox="0 0 64 64" role="img" aria-label="캔터베리 십자가">
-                            <path d="${CANTERBURY_CROSS_PATH}" fill="#ffffff" fill-rule="evenodd"/>
-                        </svg>
-                    </div>
-                    <p class="logo-subtitle">${subtitle}</p>
-                    <p class="logo-colors">${colors}</p>
-                </div>
-                <div class="logo-meaning">
-                    <p class="logo-desc">${desc}</p>
-                    ${history ? `<p class="logo-history">${history}</p>` : ''}
-                    ${elementsHtml}
-                </div>
-            </div>
-            ${refsHtml}
+            ${churchHtml}
+            ${anglicanHtml}
         `;
     },
 
@@ -2513,9 +2548,15 @@ const MenuOverlay = {
         if (d.philosophy) add('교회 철학', 'clergy.html#philosophy', '교회 소개',
             join(d.philosophy.title, d.philosophy.intro,
                  d.philosophy.values.map(v => join(v.title, v.desc)), d.philosophy.closing));
-        if (d.logo) add('로고 소개', 'clergy.html#logo-intro', '교회 소개',
-            join(d.logo.title, d.logo.subtitle, d.logo.desc, d.logo.colors, d.logo.history,
-                 d.logo.elements.map(e => join(e.label, e.desc))));
+        if (d.logo) {
+            const ch = d.logo.church || {}, an = d.logo.anglican || {};
+            add('로고 소개', 'clergy.html#logo-intro', '교회 소개',
+                join(d.logo.title, ch.name, ch.subtitle, ch.desc,
+                     (ch.elements || []).map(e => join(e.label, e.desc)),
+                     (ch.colors || []).map(c => join(c.name, c.desc)),
+                     an.title, an.subtitle, an.desc, an.history,
+                     (an.elements || []).map(e => join(e.label, e.desc))));
+        }
         (d.press || []).forEach(p => add(p.title, 'clergy.html#press', '언론 보도', join(p.media, p.year)));
 
         // 예배와 기도 (worship.html)

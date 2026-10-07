@@ -1555,6 +1555,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     max-width: 900px;
     margin: 0 auto;
 }
+.logo-head { max-width: 900px; margin-left: auto; margin-right: auto; }   /* 제목을 본문 폭에 맞춤 */
 .logo-display { text-align: center; }
 /* rect 없이 CSS만으로 배경 처리 — 단일 border-radius로 깔끔하게 클리핑 */
 .logo-badge {
@@ -1573,6 +1574,62 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     height: 100%;
 }
 
+/* 교회 로고 가로형 조합 — 시안처럼 숲 녹 바탕에 크림 마크 + 세리프 워드마크
+   (다크모드에서도 같은 브랜드 색 유지) */
+.logo-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.4rem 1.6rem;
+    border-radius: 16px;
+    background: #1c4336;
+    box-shadow: var(--shadow-md);
+}
+.logo-lockup-mark { width: 34px; height: 46px; color: #f0ece4; flex-shrink: 0; }
+.logo-lockup-mark svg { width: 100%; height: 100%; display: block; }
+.logo-lockup-text { display: flex; flex-direction: column; text-align: left; line-height: 1.25; }
+.logo-lockup-name {
+    font-family: var(--font-brand);
+    font-size: 1.25rem; font-weight: 700; letter-spacing: 0.01em;
+    color: #fff; white-space: nowrap;
+}
+.logo-lockup-tag {
+    font-family: var(--font-brand);
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.36em;
+    color: #b1b883; margin-top: 0.2rem;
+}
+.logo-swatches {
+    list-style: none;
+    margin: 1rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    width: fit-content;
+    text-align: left;
+}
+.logo-swatch { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: var(--text-muted); }
+.logo-swatch strong { color: var(--heading); font-weight: 700; margin-right: 0.15rem; }
+.logo-swatch-chip {
+    width: 1.5rem; height: 1.5rem; border-radius: 6px; flex-shrink: 0;
+    background: var(--chip);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);   /* 크림 칩이 밝은 배경에 묻히지 않게 */
+}
+.logo-badge--sm { width: 96px; height: 96px; border-radius: 16px; }
+
+/* 세계성공회 상징(캔터베리 십자가) — 교회 로고 아래 별도 단락 */
+.logo-anglican {
+    max-width: 900px;
+    margin: 3.5rem auto 0;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+}
+.logo-anglican-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 0.35rem 0 1.5rem;
+}
+
 
 .logo-subtitle {
     margin-top: 0.75rem;
@@ -1581,13 +1638,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--theme);
-}
-.logo-colors {
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    max-width: 200px;
 }
 .logo-desc {
     font-size: 1rem;
@@ -3123,7 +3173,6 @@ footer {
     /* Logo intro */
     .logo-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
     .logo-display { display: flex; flex-direction: column; align-items: center; }
-    .logo-colors { max-width: unset; text-align: center; }
     .logo-subtitle { text-align: center; }
     .logo-elements { grid-template-columns: 1fr; }
 
@@ -4196,6 +4245,8 @@ footer {
     .liturgy-guide .check-icon {
         color: color-mix(in srgb, var(--season) 50%, var(--heading));
     }
+    /* 로고 색 칩 — 숲 녹 칩이 어두운 바탕에 묻히지 않게 밝은 테두리 */
+    .logo-swatch-chip { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28); }
     /* 수상 배지 hover — 라이트 전용 하드코딩 배경 대신 어두운 톤으로 */
     .about-brief-award:hover {
         background: var(--green-soft);
@@ -4920,6 +4971,9 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
     .liturgy-section { margin-bottom: 2.25rem; }
     .anglican-body, .minister-category, .philosophy-intro { margin-bottom: 1.75rem; }
     .philosophy-closing, .logo-refs, .about-next, .emmaus-stages { margin-top: 1.75rem; }
+    .logo-anglican { margin-top: 2.25rem; padding-top: 1.75rem; }
+    .logo-lockup { padding: 1.1rem 1.25rem; }
+    .logo-lockup-name { font-size: 1.1rem; }
     .faq-lead, .faq-cat, .links-group { margin-bottom: 2rem; }
     .video-grid { margin-bottom: 1.75rem; }
     .newcomer-intro { margin-bottom: 1.75rem; }
