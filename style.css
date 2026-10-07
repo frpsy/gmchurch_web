@@ -4892,6 +4892,49 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
    감사성찬례 순서(worship.html) 등 본문 인쇄 대응.
    내비·푸터·오버레이·지도 등 화면 전용 요소를 제거하고
    잉크 절약을 위해 흰 배경·검정 텍스트로 단순화한다. */
+/* ── 모바일 세로 리듬 ─────────────────────────────────────────
+   데스크톱용 여백(섹션 96px·카드 40px·푸터 96px 등)이 모바일에 그대로 남아
+   여백이 겹겹이 쌓이던 문제(첫 화면→첫 카드 160px 등)를 한곳에서 정리한다.
+   기준: 섹션 40px · 섹션 제목 아래 24~28px · 카드 안쪽 24px · 블록 사이 28px */
+@media (max-width: 768px) {
+    :root { --section-pad: 2.5rem; }
+
+    /* 페이지 첫 화면과 바로 다음 섹션 — 하단·상단 여백이 겹치지 않게 */
+    .page-hero { padding-top: calc(var(--nav-h) + 2rem); padding-bottom: 1.75rem; }
+    .page-hero + .section { padding-top: 1.75rem; }
+    /* 섹션 맨 앞 블록의 위쪽 margin이 섹션 여백에 한 번 더 더해지지 않게 */
+    .section > .container > :first-child,
+    .section > .container > [id$="-full"] > :first-child { margin-top: 0; }
+    .guide-banner { margin-top: 1.25rem; }
+
+    .section-header { margin-bottom: 1.75rem; }
+    .section-header:not(:has(.section-sub)) { margin-bottom: 1.25rem; }
+
+    /* 카드 안쪽 여백 */
+    .card, .info-card, .bishop-card { padding: 1.5rem 1.25rem; }
+    .emmaus-stage, .emmaus-scripture-block { padding: 1.5rem 1.25rem; }
+    .bishop-card { margin-bottom: 1.75rem; }
+
+    /* 블록 사이 간격 */
+    .liturgy-guide { margin-top: 1.5rem; }
+    .liturgy-section { margin-bottom: 2.25rem; }
+    .anglican-body, .minister-category, .philosophy-intro { margin-bottom: 1.75rem; }
+    .philosophy-closing, .logo-refs, .about-next, .emmaus-stages { margin-top: 1.75rem; }
+    .faq-lead, .faq-cat, .links-group { margin-bottom: 2rem; }
+    .video-grid { margin-bottom: 1.75rem; }
+    .newcomer-intro { margin-bottom: 1.75rem; }
+    .newcomer-cta { margin-top: 2rem; }
+    .placeholder-wrap { margin: 2.5rem auto; }
+
+    /* 마무리 안내 띠 */
+    .next-step-cta { padding: 3rem 0; }
+    .next-step-cta-desc { margin-bottom: 1.5rem; }
+
+    /* 푸터 */
+    footer { padding: 2.5rem 0 2rem; }
+    .footer-inner { margin-bottom: 2rem; gap: 2rem; }
+}
+
 @media print {
     :root {
         --cream: #fff;
