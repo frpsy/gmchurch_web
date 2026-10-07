@@ -260,17 +260,16 @@ const CHURCH_DATA = {
   └ 성공회란?          clergy.html#what-is-anglican
   └ 대한성공회         clergy.html#ack
   └ 섬기는 이들        clergy.html#priest-section       (JS)
-  └ 교회 철학          clergy.html#philosophy
-  └ 교회 이야기        clergy.html#identity
+  └ 교회 이야기        clergy.html#philosophy   (철학 #philosophy + 이야기 #identity 섹션)
   └ 녹색교회           greenchurch.html                 (상세 페이지로 직접 이동)
 
 예배와 기도  worship.html
   └ 주일 감사성찬례    worship.html#main                (JS)
   └ 어린이 예배        worship.html#children            (JS)
   └ 감사성찬례 순서    worship.html#eucharist-order     (JS)
-  └ 성무일과           worship.html#daily-office        (JS)
-  └ 세계성공회 중보기도 worship.html#intercession       (JS)
+  └ 성무일과(매일기도) worship.html#daily-office        (JS)
   └ 예배 자료          worship.html#resources           (JS)
+  └ 공동기도서와 성가  worship.html#bcp-hymnal          (JS)
 
 교회력  sundays.html
   └ 이달의 교회력      sundays.html#monthly             (JS)

@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { STANDARD_FILES, mergeStandards } from '../scripts/lib/lectionary.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const read = f => JSON.parse(readFileSync(join(__dirname, '..', 'data', f), 'utf-8'));
@@ -9,8 +10,7 @@ const read = f => JSON.parse(readFileSync(join(__dirname, '..', 'data', f), 'utf
 // 주보 등록 시 매주 수기로 갱신하는 파일이므로 형식을 검증한다
 describe('lectionary-overrides.json', () => {
     const overrides = read('lectionary-overrides.json');
-    const base      = read('lectionary-year-a.json');
-    const baseDates = new Set(base.sundays.map(s => s.date));
+    const baseDates = new Set(mergeStandards(STANDARD_FILES.map(read)).map(s => s.date));
 
     it('sundays 객체가 존재한다', () => {
         expect(overrides.sundays).toBeTypeOf('object');
@@ -27,7 +27,7 @@ describe('lectionary-overrides.json', () => {
 
     it('모든 날짜가 표준 전례독서 목록에 존재한다', () => {
         for (const [date] of entries) {
-            expect(baseDates.has(date), `${date}가 lectionary-year-a.json에 없음`).toBe(true);
+            expect(baseDates.has(date), `${date}가 표준 전례독서 파일에 없음`).toBe(true);
         }
     });
 

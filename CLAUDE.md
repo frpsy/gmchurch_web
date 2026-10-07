@@ -19,7 +19,7 @@
 | 방식 | 바닐라 HTML + CSS + JS, 빌드 없음 |
 | 배포 | GitHub Pages (`main` 브랜치 자동 배포) |
 | 로드 순서 | `data.js` → `app.js` (CHURCH_DATA 전역 변수) |
-| 테스트 | `npm test` (Vitest, 60개) |
+| 테스트 | `npm test` (Vitest, 90개) |
 | CI | `cache-bust.yml` — main 머지 시 `?v=` 자동 갱신 |
 
 ---
@@ -56,10 +56,10 @@
 
 ```
 교회 소개 (clergy.html)
-  성공회란? / 대한성공회 / 섬기는 이들 / 교회 철학 / 교회 이야기(clergy.html#identity) / 녹색교회(greenchurch.html)
+  성공회란? / 대한성공회 / 섬기는 이들 / 교회 이야기(clergy.html#philosophy — 철학·이야기 두 섹션을 하나로) / 녹색교회(greenchurch.html)
 
 예배와 기도 (worship.html)
-  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일과 / 세계성공회 중보기도 / 예배 자료 / 주일 주보(bulletin.html)
+  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일과(매일기도) / 예배 자료 / 공동기도서와 성가 / 주일 주보(bulletin.html)
 
 교회력 (sundays.html)
   이달의 교회력 / 전례독서(sundays.html#lectionary) / 절기 안내(sundays.html#seasons) / 특별 주일(sundays.html#special)
@@ -174,7 +174,7 @@ echo "Done: $TODAY"
 
 ## 주보 등록 절차 (매주)
 
-> **표준(`data/lectionary-year-a.json`)이 기본, 주보 기록(`data/lectionary-overrides.json`)이 그 위에 덮인다.** 교회는 주마다 연속(A)/짝(B) 트랙을 오가고(RCL은 트랙에 따라 제1독서·시편이 다름), 맥추감사주일 같은 특별 주일은 표준에 없는 독서를 쓴다. **손으로 만질 곳은 overrides 하나뿐** — 나머지(특별 주일명, `worship.currentReadings`/`nextReadings` fallback)는 sync가 자동 파생한다.
+> **표준(`data/lectionary-year-a.json`·`lectionary-year-b.json` — 연도별 파일을 날짜순으로 이어 붙임)이 기본, 주보 기록(`data/lectionary-overrides.json`)이 그 위에 덮인다.** 교회는 주마다 연속(A)/짝(B) 트랙을 오가고(RCL은 트랙에 따라 제1독서·시편이 다름), 맥추감사주일 같은 특별 주일은 표준에 없는 독서를 쓴다. **손으로 만질 곳은 overrides 하나뿐** — 나머지(특별 주일명, `worship.currentReadings`/`nextReadings` fallback)는 sync가 자동 파생한다.
 >
 > **추측 금지 — 주보 예배 순서면에 인쇄된 값만 기록한다.**
 
@@ -190,6 +190,14 @@ echo "Done: $TODAY"
 5. 만료(13주 FIFO) 항목은 sync가 자동 삭제. overrides의 과거 항목은 그대로 둬도 무방
 
 > ⚠️ 병합 규칙은 `scripts/lib/lectionary.js`(스크립트·테스트용)와 `app.js`의 `_applyOverrides`(브라우저용) 두 곳에 있다 — 빌드가 없어 공유 불가. 한쪽을 고치면 반드시 다른 쪽도 함께 고칠 것.
+
+### 전례독서 연도 파일 추가 (매년 대림절 전)
+
+표준 독서는 교회력 1년(대림 제1주일 ~ 왕이신 그리스도 주일) 단위 파일이다. 가해(A) 2025-11-30~2026-11-22, 나해(B) 2026-11-29~2027-11-21이 있고, **다해(C)는 2027-11-28 대림 제1주일 전까지 추가**해야 전례독서가 멈추지 않는다.
+
+1. `data/lectionary-year-c.json` 작성 — 기존 파일과 같은 스키마·표기(공동번역 책 이름, `a/b`→`상/하`, 선택절 괄호 제거, 연중 시기 `firstReadingA`=연속·`firstReadingB`=짝, `psalm`=짝 독서 시편)
+2. 파일 목록 두 곳 갱신: `scripts/lib/lectionary.js`의 `STANDARD_FILES`, `app.js`의 `SundaysRenderer._LECTIONARY_FILES` (테스트가 두 목록 일치를 검사)
+3. `npm test` — 날짜 연속성(7일 간격)·필수 필드·표기 규칙 자동 검증
 
 ---
 
@@ -244,5 +252,5 @@ git push -u origin claude/작업명
 ## 깊은 참조
 
 - **`ARCHITECTURE.md`** — data.js 스키마 전체, 렌더러 상세 구조, CSS 변수·클래스 목록, 앵커 스크롤 로직
-- **`tests/`** — data 구조 검증 (churchData.test.js), 전례력 계산 (liturgicalCalendar.test.js)
+- **`tests/`** — data 구조 검증 (churchData.test.js), 전례력 계산 (liturgicalCalendar.test.js), 전례독서 병합·표기 (lectionaryMerge/Overrides.test.js), 연도 파일 연속성 (lectionaryYears.test.js)
 - **`docs/`** — 위원회 audit, 작업 지시서

@@ -1,4 +1,4 @@
-// 표준 전례독서(data/lectionary-year-a.json) 위에 주보 기록
+// 표준 전례독서(data/lectionary-year-*.json) 위에 주보 기록
 // (data/lectionary-overrides.json)을 병합해, 특정 주일에 실제로 봉독하는
 // 네 본문을 산출한다.
 //
@@ -6,6 +6,18 @@
 //    _lectionaryCardHtml의 트랙 선택 로직과 동일하게 유지해야 한다.
 //    (브라우저는 빌드가 없어 이 ESM을 직접 import하지 못하므로 로직이
 //     두 곳에 존재한다. 한쪽을 고치면 반드시 다른 쪽도 함께 고칠 것.)
+
+// 표준 전례독서 연도별 파일 (data/ 기준). 새 해(다해 등)를 추가할 때는
+// 이 목록과 app.js SundaysRenderer._LECTIONARY_FILES를 함께 갱신한다.
+export const STANDARD_FILES = ['lectionary-year-a.json', 'lectionary-year-b.json'];
+
+// 연도별 파일 내용([{year, sundays}])을 날짜순 단일 목록으로 합치고,
+// 각 주일에 소속 연도(year: 'A'|'B'|'C')를 기록한다.
+export function mergeStandards(files) {
+    return files
+        .flatMap(f => f.sundays.map(s => ({ ...s, year: f.year })))
+        .sort((a, b) => a.date.localeCompare(b.date));
+}
 
 // 주보에서 확인한 트랙·특별 주일 독서를 표준 주일 위에 병합해 실제 봉독 본문을 반환.
 // - 특별 주일(override.readings): 네 본문 전체 교체, 표준 주일명은 standardName으로 보존
@@ -19,6 +31,7 @@ export function resolveReadings(sundays, overrides, date) {
     if (o && o.readings) {
         return {
             date,
+            year: s.year,
             week: o.koreanName || s.koreanName,
             standardName: s.koreanName,
             track: null,
@@ -39,6 +52,7 @@ export function resolveReadings(sundays, overrides, date) {
         : s.readings.firstReadingA;
     return {
         date,
+        year: s.year,
         week: s.koreanName,
         standardName: s.koreanName,
         track,
