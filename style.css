@@ -2214,8 +2214,12 @@ button.season-ribbon-seg { border: none; padding: 0; font: inherit; cursor: poin
     width: 320px;
     aspect-ratio: 40 / 54;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 54'%3E%3Cpath fill='%23b1b883' d='M2 54V18.5C2 9.6 9.2 2.8 18.75 1.6L18.37 18.8H12.4v2.8h5.9L17.6 54ZM38 54V18.5C38 9.6 30.8 2.8 21.25 1.6L21.63 18.8H27.6v2.8h-5.9L22.4 54Z'/%3E%3C/svg%3E") center / contain no-repeat;
-    opacity: 0.08;
+    opacity: 0.05;
     pointer-events: none;
+    display: none;   /* 버튼·문단과 겹치면 가독성을 해치므로 여백이 충분한 넓은 화면에서만 */
+}
+@media (min-width: 1100px) {
+    .next-step-cta::before { display: block; }
 }
 .next-step-cta .container {
     display: flex;
