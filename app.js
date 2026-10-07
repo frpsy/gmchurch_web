@@ -15,12 +15,12 @@
  * viewBox 0 0 64 64, 중심 32,32. 흰색 단색 마크로 다크 배경 위에서 사용. */
 const CANTERBURY_CROSS_PATH = "M 25.6,23.2 C 25.4,14.56 22,8.22 20.8,4 Q 32,6.4 43.2,4 C 42,8.22 38.6,14.56 38.4,23.2 L 40.8,23.2 40.8,25.6 C 49.44,25.4 55.78,22 60,20.8 Q 57.6,32 60,43.2 C 55.78,42 49.44,38.6 40.8,38.4 L 40.8,40.8 38.4,40.8 C 38.6,49.44 42,55.78 43.2,60 Q 32,57.6 20.8,60 C 22,55.78 25.4,49.44 25.6,40.8 L 23.2,40.8 23.2,38.4 C 14.56,38.6 8.22,42 4,43.2 Q 6.4,32 4,20.8 C 8.22,22 14.56,25.4 23.2,25.6 L 23.2,23.2 25.6,23.2 Z M 28.9,32 a 3.1,3.1 0 1,0 6.2,0 a 3.1,3.1 0 1,0 -6.2,0 Z";
 
-// 십자가 SVG 마크업 (fill 색 지정 가능)
-function canterburyCrossSVG({ size = null, fill = '#ffffff', cls = '', label = null } = {}) {
-    const dims = size ? ` width="${size}" height="${size}"` : '';
-    const a11y = label ? ` role="img" aria-label="${label}"` : ' aria-hidden="true" focusable="false"';
+/* 교회 로고 '열린 빛' — 아치창 사이로 빛이 십자가로 열리는 형태.
+   좌·우 두 조각으로 그려 마스크/ID 없이 여러 곳에 인라인 재사용한다. */
+const ARCH_MARK_PATH = "M2 54V18.5C2 9.6 9.2 2.8 18.75 1.6L18.37 18.8H12.4v2.8h5.9L17.6 54ZM38 54V18.5C38 9.6 30.8 2.8 21.25 1.6L21.63 18.8H27.6v2.8h-5.9L22.4 54Z";
+function archMarkSVG({ fill = 'currentColor', cls = '' } = {}) {
     const klass = cls ? ` class="${cls}"` : '';
-    return `<svg viewBox="0 0 64 64"${dims}${klass}${a11y}><path d="${CANTERBURY_CROSS_PATH}" fill="${fill}" fill-rule="evenodd"/></svg>`;
+    return `<svg viewBox="0 0 40 54"${klass} aria-hidden="true" focusable="false"><path d="${ARCH_MARK_PATH}" fill="${fill}"/></svg>`;
 }
 
 // 사용자가 모션 최소화를 요청했는지 — 프로그램적 부드러운 스크롤을 즉시 이동으로 대체 (WCAG 2.3.3)
@@ -128,11 +128,11 @@ const NavRenderer = {
             <div class="container nav-inner">
                 <a href="index.html" class="nav-logo">
                     <span class="nav-logo-mark" aria-hidden="true">
-                        ${canterburyCrossSVG()}
+                        ${archMarkSVG()}
                     </span>
                     <span class="nav-logo-text">
                         <span class="nav-logo-name">${CHURCH_DATA.info.name}</span>
-                        <span class="nav-logo-sub">${CHURCH_DATA.info.subName}</span>
+                        <span class="nav-logo-sub">${CHURCH_DATA.info.tagline}</span>
                     </span>
                 </a>
                 <ul class="nav-menu" id="nav-menu">${items}</ul>
@@ -284,15 +284,15 @@ const FooterRenderer = {
                     <div class="footer-col">
                         <div class="footer-brand">
                             <span class="footer-logo-mark" aria-hidden="true">
-                                ${canterburyCrossSVG({ size: 26 })}
+                                ${archMarkSVG()}
                             </span>
                             <div>
                                 <strong class="footer-brand-name">${info.name}</strong>
-                                <span class="footer-brand-sub">${info.subName}</span>
+                                <span class="footer-brand-sub">${info.tagline}</span>
                             </div>
                         </div>
                         <p class="footer-brand-slogan">"${info.slogan}"</p>
-                        <p class="footer-brand-meta">설립 ${info.established}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
+                        <p class="footer-brand-meta">${info.subName} · 설립 ${info.established}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
                     </div>
                     <div class="footer-col">
                         <h2>${worshipNavLabel}</h2>

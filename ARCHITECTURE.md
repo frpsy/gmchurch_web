@@ -37,9 +37,10 @@ gmchurch_web/
 ├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA (1081줄)
 ├── app.js            렌더러 모음 + App bootstrap (2588줄)
 ├── style.css         전체 스타일 (4128줄)
-├── favicon.svg       캔터베리 십자가 (짙은 녹색 배경 + 흰색 십자가)
-├── apple-touch-icon.png
-├── og-image-v2.png   소셜 공유 OG 이미지 (1200×630)
+├── favicon.svg       교회 로고 '열린 빛' (숲 녹 배경 + 크림 아치 십자)
+├── apple-touch-icon.png  180×180 (scripts/brand/icon.html에서 생성)
+├── og-image-v3.png   소셜 공유 OG 이미지 1200×630 (scripts/brand/og.html에서 생성)
+├── fonts/            brand-serif.woff2 — 로고 워드마크 전용 3KB 서브셋 (고운바탕 Bold, OFL)
 ├── robots.txt
 ├── sitemap.xml
 ├── docs/             위원회 audit 보고서 · 작업 지시서
@@ -49,10 +50,12 @@ gmchurch_web/
 **스크립트 로드 순서**: 모든 HTML 공통 — `data.js` → `app.js`  
 `data.js`가 먼저 로드되어 `CHURCH_DATA` / `LiturgicalCalendar` 전역 변수를 정의하고, `app.js`가 이를 참조해 렌더링함.
 
-**로고(캔터베리 십자가) 단일 소스**: `app.js` 상단의 `CANTERBURY_CROSS_PATH` 상수 +
-`canterburyCrossSVG()` 헬퍼가 nav · footer · 로고 소개 · 지도 핀의 십자가를 공유함.
-트럼펫형(오목) 4팔 + 계단형 중앙 사각 + 중앙 점(`fill-rule="evenodd"` 구멍). favicon.svg도 동일 경로 사용.
-로고 디자인 변경 시 `CANTERBURY_CROSS_PATH` 1곳 + `favicon.svg` 1곳만 수정.
+**교회 로고 '열린 빛' 단일 소스**: `app.js` 상단의 `ARCH_MARK_PATH` + `archMarkSVG()`가 nav · footer 로고를 그린다
+(아치창 좌·우 두 조각 사이로 십자 빛이 열리는 형태, 마스크/ID 없이 인라인 재사용).
+워드마크(교회명 + `info.tagline`)는 `--font-brand`(BrandSerif 서브셋 → Pretendard 폴백). **교회명·부제 글자를 바꾸면
+`fonts/brand-serif.woff2` 서브셋을 다시 만들어야 한다** (없는 글자는 Pretendard로 표시되어 깨지지는 않음).
+favicon.svg · apple-touch-icon · OG 이미지는 작은 크기용으로 십자 틈을 넓힌 변형 경로를 쓴다 (`scripts/brand/`).
+캔터베리 십자가(`CANTERBURY_CROSS_PATH`)는 세계성공회 상징으로 로고 소개 섹션(`clergy.html#logo-intro`)에 남아 있다.
 
 ---
 
@@ -537,23 +540,26 @@ window DOMContentLoaded
 ### CSS 변수
 
 ```css
---green-deep:   #0a1f12   /* 주 브랜드 색 (nav, footer, 제목) */
---green-mid:    #3a7252
---green-light:  #eef2ec
---green-soft:   #c4d6c8
---gold:         #c09a60
---gold-bg:      #faf3e6
---cream:        #f7f4ed   /* 기본 배경 */
+/* 팔레트 '열린 빛': 숲 녹 #1c4336 · 세이지 #b1b883 · 크림 #f0ece4 */
+--green-deep:   #1c4336   /* 주 브랜드 색 (nav, footer, 어두운 띠) */
+--green-mid:    #2f6a52   /* 흰 글자 6.4:1, 크림 위 5.4:1 */
+--green-light:  #ebeedf
+--green-soft:   #cfd5b0
+--gold:         #b1b883   /* 이름은 유지, 값은 세이지 — 장식선·어두운 배경 위 강조 전용 (밝은 배경 글자 금지) */
+--gold-bg:      #f3f4e6
+--sage-ink:     #5a6430   /* 밝은 배경 위 세이지 계열 글자 */
+--font-brand:   "BrandSerif", "Pretendard", …   /* 로고 워드마크 전용 */
+--cream:        #f0ece4   /* 기본 배경 */
 --white:        #ffffff
 --text:         #1a1a1a
 --text-muted:   #4d4c46   /* WCAG AA(4.5:1) 충족 */
---heading:      #0a1f12
---border:       #e8e5dc
+--heading:      #163a2e
+--border:       #e2ded2
 --red:          #b53737
---nav-glass:    rgba(10, 31, 18, 0.9)  /* 네비게이션 글래스 배경 */
+--nav-glass:    rgba(28, 67, 54, 0.92)  /* 네비게이션 글래스 배경 */
 --surface-nav:  rgba(255, 255, 255, 0.96)
---theme:        #3a7252   /* 현재 절기색 (JS가 --season 값으로 덮어씀) */
---theme-light:  #eef2ec
+--theme:        #2f6a52   /* 사이트 대표 녹색 (고정 — 절기색은 --season) */
+--theme-light:  #ebeedf
 --theme-on:     #fff      /* --theme 배경 위 텍스트 */
 --nav-h:        68px
 --section-pad:  7rem

@@ -86,6 +86,7 @@ const CHURCH_DATA = {
     info: {
         name: "대한성공회 광명교회",
         subName: "성 디모테오 성당",
+        tagline: "녹색교회",          // 로고 워드마크 부제 (서체 서브셋 fonts/brand-serif.woff2에 포함된 글자만 사용)
         slogan: "모든 생명을 환대하는 교회",
         vision: "하느님 나라를 살아가는 사랑의 공동체",
         diocese: "대한성공회 서울교구 서부교무구",
