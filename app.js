@@ -1732,6 +1732,15 @@ const BulletinRenderer = {
         return `<div class="bulletin-pages">${imgs}</div>${pdfBtn}`;
     },
 
+    // 등록이 밀려도 지난 주보에 '이번 주'가 붙지 않도록 날짜로 확인 (주중 미리 올린 다음 주일 주보 포함)
+    _isThisWeek(dateStr) {
+        if (!dateStr) return false;
+        const d = new Date(dateStr + 'T00:00:00');
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        return Math.abs(d - today) < 7 * 86400000;
+    },
+
     _renderPage(el, items, page) {
         const perPage    = this._PER_PAGE;
         const totalPages = Math.ceil(items.length / perPage);
@@ -1740,7 +1749,7 @@ const BulletinRenderer = {
 
         const listHtml = pageItems.map((item, relIdx) => `
             <div class="bulletin-item">
-                ${this._rowHtml(item, start + relIdx === 0)}
+                ${this._rowHtml(item, start + relIdx === 0 && this._isThisWeek(item.date))}
                 <div class="bulletin-drawer" hidden>
                     ${this._drawerHtml(item)}
                 </div>

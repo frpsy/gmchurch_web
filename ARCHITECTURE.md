@@ -23,6 +23,7 @@ gmchurch_web/
 ├── newcomer.html     처음 오신 분 (환영·참여 안내·전례·전례 공간·영성체·문의)
 ├── community.html    공동체 (희망터·엠마우스·소그룹·녹색교회)
 ├── sundays.html      교회력 허브 (이달의 교회력·전례독서·절기·특별 주일)
+├── bulletin.html     주일 주보 (noindex, 이미지·PDF 목록)
 ├── emmaus.html       엠마우스 코스 상세 페이지
 ├── hopecenter.html   광명 희망터 상세 페이지
 ├── smallgroup.html   소그룹 모임 상세 페이지
@@ -273,6 +274,7 @@ const CHURCH_DATA = {
   └ 성무일과(매일기도) worship.html#daily-office        (JS)
   └ 예배 자료          worship.html#resources           (JS)
   └ 공동기도서와 성가  worship.html#bcp-hymnal          (JS)
+  └ 주일 주보          bulletin.html                    (상세 페이지로 직접 이동)
 
 교회력  sundays.html
   └ 이달의 교회력      sundays.html#monthly             (JS)
@@ -392,6 +394,13 @@ window DOMContentLoaded
       │
       ├── MediaHubRenderer.render()   → #media-hub (media.html)
       │     data.media.hub.cards 기준 resource-grid (영상·사진·관련 기관 카드)
+      │
+      ├── PhotoGalleryRenderer.render() → #gallery-full (gallery.html)
+      │     CHURCH_DATA.photoGallery 기준 카테고리별 사진 갤러리
+      │
+      ├── BulletinRenderer.render()   → #bulletin-full (bulletin.html)
+      │     CHURCH_DATA.bulletins 목록 (5개씩 페이지) · 행 클릭 시 이미지·PDF 펼침
+      │     '이번 주' 배지는 최신 항목이 오늘 ±7일 이내일 때만
       │
       ├── LinksRenderer.render()      → #links-full (links.html)
       │     관련 기관 목록.
