@@ -363,6 +363,10 @@ const CHURCH_DATA = {
     },
 
     worship: {
+        lectionaryError: {
+            description: "전례독서를 불러오지 못했습니다. 연결 상태를 확인한 뒤 다시 시도해 주세요.",
+            retry: "다시 불러오기"
+        },
         liturgicalSeason: LiturgicalCalendar.compute(),
         currentReadings: {
             week: "맥추감사주일",
@@ -1090,6 +1094,7 @@ const CHURCH_DATA = {
     },
 
     bulletins: {
+        labels: { thisWeek: "이번 주", latest: "최근 등록" },
         intro: "예배 순서와 공동체 소식을 담은 주간 주보입니다.",
         note: "예배 전에 미리 열어 두시면 도움이 됩니다.",
         items: [

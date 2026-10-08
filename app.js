@@ -184,6 +184,13 @@ const NavRenderer = {
             }
         });
 
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && menu.classList.contains('open')) {
+                closeMenu();
+                toggle.focus();
+            }
+        });
+
         menu.querySelectorAll('.nav-chevron').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1695,14 +1702,28 @@ const PortraitLightbox = {
 const BulletinRenderer = {
     _PER_PAGE: 5,
 
+    _isThisWeek(date, now = new Date()) {
+        // 해외 방문자에게도 교회 소재지의 주일~토요일을 기준으로 표시한다.
+        const parts = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit'
+        }).formatToParts(now);
+        const value = type => Number(parts.find(p => p.type === type).value);
+        const sunday = new Date(Date.UTC(value('year'), value('month') - 1, value('day')));
+        sunday.setUTCDate(sunday.getUTCDate() - sunday.getUTCDay());
+        const bulletinDate = Date.parse(date + 'T00:00:00Z');
+        return bulletinDate >= sunday.getTime() && bulletinDate < sunday.getTime() + 7 * 86400000;
+    },
+
     _rowHtml(item, isLatest) {
         const count = item.images ? item.images.length : 0;
+        const labels = CHURCH_DATA.bulletins.labels;
+        const badge = this._isThisWeek(item.date) ? labels.thisWeek : (isLatest ? labels.latest : '');
         return `
             <button class="bulletin-row" aria-expanded="false" type="button">
                 <div class="bulletin-row-info">
                     <div class="bulletin-row-top">
                         <span class="bulletin-row-date">${item.label}</span>
-                        ${isLatest ? '<span class="bulletin-badge-new">이번 주</span>' : ''}
+                        ${badge ? `<span class="bulletin-badge-new">${badge}</span>` : ''}
                     </div>
                     <div class="bulletin-row-meta">
                         <span class="bulletin-row-season">${item.season}</span>
@@ -1886,6 +1907,7 @@ const SundaysRenderer = {
             .sort((a, b) => a.date.localeCompare(b.date));
         if (!sundays.length) {
             el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryFallback()}</div>`;
+            el.querySelector('[data-lectionary-retry]').addEventListener('click', () => this._lectionaryAsync(el));
             return;
         }
 
@@ -2069,24 +2091,11 @@ const SundaysRenderer = {
     },
 
     _lectionaryFallback() {
-        const w = CHURCH_DATA.worship;
-        const r = w && w.currentReadings;
-        if (!r) return '<p>전례독서를 불러올 수 없습니다.</p>';
-        const items = r.items.filter(it => it.role !== '시편');
+        const message = CHURCH_DATA.worship.lectionaryError;
         return `
-        <div class="lectionary-card lectionary-card--current">
-            <div class="lectionary-card-head">
-                <p class="lectionary-card-week">${r.week}</p>
-                <p class="lectionary-card-meta">${r.year} · ${r.date}</p>
-            </div>
-            <div class="lectionary-card-body">
-                ${items.map(it => `
-                <div class="lectionary-row">
-                    <span class="lectionary-role">${it.role}</span>
-                    ${this._refLink(it.ref)}
-                </div>`).join('')}
-            </div>
-            ${r.note ? `<p class="lectionary-card-note">${r.note}</p>` : ''}
+        <div class="lectionary-card">
+            <p class="lectionary-card-note" role="status">${message.description}</p>
+            <button type="button" class="btn-next" data-lectionary-retry>${message.retry}</button>
         </div>`;
     },
 
