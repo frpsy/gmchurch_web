@@ -1586,14 +1586,16 @@ const FaqRenderer = {
    핵심 정보는 그대로 두고 보조 설명만 접어 스크롤 길이를 줄인다.
    본문 설명은 펼쳐 두고, 길고 보조적인 자료(이력·부가 설명·긴 목록)만 한 구역에 버튼 하나로 접는다
    — 짧은 항목까지 접으면 여러 번 눌러야 읽을 수 있어 오히려 불편하다.
-   text  : 앞의 keep개 자식만 보이고 나머지를 묶어 접음 (until-found → Ctrl+F로 찾으면 자동 펼침)
-   items : 목록·그리드의 앞 items개만 보이고 나머지 항목을 숨김 */
+   버튼은 항상 '보이는 부분 바로 아래 · 숨긴 부분 바로 위'에 두어, 눌러도 제자리에서 아래로 펼쳐진다.
+   text  : 앞의 keep개 자식만 보이고 나머지를 블록 안 .more-body로 묶음
+   items : 목록·그리드의 앞 items개만 보이고 나머지는 같은 클래스의 형제 컨테이너(.more-body)로 옮김
+   .more-body는 hidden="until-found" → Ctrl+F로 찾으면 브라우저가 자동으로 펼침 */
 const MoreToggle = {
     _TARGETS: [
-        { sel: '.clergy-card .bio-section', keep: 0, label: '주요 이력 자세히 보기' },
+        { sel: '.clergy-card .bio-section', keep: 0, label: '주요 이력 보기' },
         { sel: '#logo-content .logo-anglican', keep: 1, label: '캔터베리 십자가 설명 보기' },
-        { sel: '#worship-bcp .anglican-body', keep: 2 },
-        { sel: '#sundays-special .grid', items: 6 },
+        { sel: '#worship-bcp .anglican-body', keep: 2, label: '공동기도서와 성가 더 보기' },
+        { sel: '#sundays-special .grid', items: 6, label: '특별 주일 더 보기' },
     ],
     // 숨길 부분이 이보다 짧으면 버튼이 오히려 번거로우므로 접지 않음
     _MIN_HIDDEN_PX: 120,
@@ -1602,9 +1604,7 @@ const MoreToggle = {
     init() {
         this._TARGETS.forEach(t => {
             document.querySelectorAll(t.sel).forEach(el => {
-                if (el.dataset.moreReady) return;
-                if (t.items) this._setupItems(el, t);
-                else this._setupText(el, t);
+                if (!el.dataset.moreReady) this._setup(el, t);
             });
         });
         // 인쇄 시에는 모두 펼쳐서 출력
@@ -1613,76 +1613,52 @@ const MoreToggle = {
         });
     },
 
-    _hiddenHeight(nodes) {
-        return nodes.reduce((sum, n) => sum + n.getBoundingClientRect().height, 0);
-    },
-
-    _setupText(el, t) {
-        const rest = Array.from(el.children).slice(t.keep);
-        if (!rest.length || this._hiddenHeight(rest) < this._MIN_HIDDEN_PX) return;
-        const body = document.createElement('div');
-        body.className = 'more-body';
-        body.id = `more-${++this._seq}`;
-        rest.forEach(n => body.appendChild(n));
-        el.appendChild(body);
-        const btn = this._button(body.id, t.label || '자세히 보기', '접기');
-        el.appendChild(btn);
-        el.dataset.moreReady = '1';
-        this._targets(btn).forEach(n => {
-            n.addEventListener('beforematch', () => this._set(btn, true));
-        });
-        this._set(btn, false);
-    },
-
-    _setupItems(el, t) {
-        const rest = Array.from(el.children).slice(t.items);
+    _setup(el, t) {
+        const rest = Array.from(el.children).slice(t.items || t.keep);
         if (!rest.length) return;
-        el.id = el.id || `more-${++this._seq}`;
-        rest.forEach(n => n.classList.add('more-item'));
-        const btn = this._button(el.id, `${rest.length}개 더 보기`, '접기');
-        const wrap = document.createElement('div');
-        wrap.className = 'more-toggle-wrap';
-        wrap.appendChild(btn);
-        el.after(wrap);
+        if (rest.reduce((sum, n) => sum + n.getBoundingClientRect().height, 0) < this._MIN_HIDDEN_PX) return;
+
+        const body = document.createElement('div');
+        body.id = `more-${++this._seq}`;
+        const label = t.items ? `${t.label} (${rest.length})` : t.label;
+        const btn = this._button(body.id, label);
+        rest.forEach(n => body.appendChild(n));
+        if (t.items) {
+            // 그리드 배치를 그대로 쓰도록 원래 컨테이너의 클래스를 이어받는다
+            body.className = `${el.className} more-body`;
+            el.after(btn, body);
+        } else {
+            body.className = 'more-body';
+            el.append(btn, body);
+        }
         el.dataset.moreReady = '1';
+        body.addEventListener('beforematch', () => this._set(btn, true));
         this._set(btn, false);
     },
 
-    _button(controls, openLabel, closeLabel) {
+    _button(controls, openLabel) {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'more-toggle';
         btn.setAttribute('aria-controls', controls);
         btn.dataset.openLabel = openLabel;
-        btn.dataset.closeLabel = closeLabel;
         btn.addEventListener('click', () => {
-            const expand = btn.getAttribute('aria-expanded') !== 'true';
-            // 접을 때 버튼 위치가 화면에서 튀지 않도록 그만큼 스크롤 보정
+            // 버튼 위쪽 내용은 변하지 않지만, 브라우저 스크롤 보정으로 버튼이 밀리지 않게 제자리 고정
             const before = btn.getBoundingClientRect().top;
-            this._set(btn, expand);
-            if (!expand) {
-                const after = btn.getBoundingClientRect().top;
-                if (after !== before) window.scrollBy({ top: after - before, behavior: 'instant' });
-            }
+            this._set(btn, btn.getAttribute('aria-expanded') !== 'true');
+            const shift = btn.getBoundingClientRect().top - before;
+            if (shift) window.scrollBy({ top: shift, behavior: 'instant' });
         });
         return btn;
     },
 
-    // 버튼이 제어하는 숨김 대상들 (text: 묶음 div 하나, items: 넘친 항목들)
-    _targets(btn) {
-        const el = document.getElementById(btn.getAttribute('aria-controls'));
-        if (!el) return [];
-        return el.classList.contains('more-body') ? [el] : Array.from(el.querySelectorAll(':scope > .more-item'));
-    },
-
     _set(btn, expand) {
-        this._targets(btn).forEach(n => {
-            if (expand) n.removeAttribute('hidden');
-            else if (n.classList.contains('more-body')) n.setAttribute('hidden', 'until-found');
-            else n.hidden = true;
-        });
+        const body = document.getElementById(btn.getAttribute('aria-controls'));
+        if (!body) return;
+        if (expand) body.removeAttribute('hidden');
+        else body.setAttribute('hidden', 'until-found');
         btn.setAttribute('aria-expanded', String(expand));
-        btn.innerHTML = `<span>${expand ? btn.dataset.closeLabel : btn.dataset.openLabel}</span>`
+        btn.innerHTML = `<span>${expand ? '접기' : btn.dataset.openLabel}</span>`
             + '<svg class="more-toggle-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">'
             + '<path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     },
@@ -1690,7 +1666,8 @@ const MoreToggle = {
     // 앵커 이동 대상이 접힌 영역 안에 있으면 먼저 펼침
     reveal(target) {
         document.querySelectorAll('.more-toggle[aria-expanded="false"]').forEach(btn => {
-            if (this._targets(btn).some(n => n === target || n.contains(target))) this._set(btn, true);
+            const body = document.getElementById(btn.getAttribute('aria-controls'));
+            if (body && body.contains(target)) this._set(btn, true);
         });
     }
 };
