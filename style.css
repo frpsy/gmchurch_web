@@ -4943,6 +4943,29 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
    감사성찬례 순서(worship.html) 등 본문 인쇄 대응.
    내비·푸터·오버레이·지도 등 화면 전용 요소를 제거하고
    잉크 절약을 위해 흰 배경·검정 텍스트로 단순화한다. */
+/* ── PC 첫 화면(page-hero) 여백 균형 ──────────────────────────
+   히어로 하단 64px + 다음 섹션 상단 96px + 첫 블록 margin(40~64px)이 겹쳐
+   제목 아래 여백이 위쪽(약 80px)의 2~3배(155~222px)로 벌어지던 문제 정리.
+   모바일은 아래 '모바일 세로 리듬'에서 따로 다루므로 769px 이상에만 적용 */
+@media (min-width: 769px) {
+    .page-hero { padding-top: calc(var(--nav-h) + 3.5rem); padding-bottom: 2.5rem; }
+    .page-hero + .section { padding-top: 2.5rem; }
+    .page-hero + .section > .container > :first-child,
+    .page-hero + .section > .container > [id$="-full"] > :first-child { margin-top: 0; }
+}
+
+/* ── 좁은 PC·태블릿 가로(769~1099px) 내비 ──────────────────────
+   메뉴 7개를 데스크톱 간격 그대로 두면 1010px 아래에서 '오시는 길'과 검색 버튼이
+   화면 밖으로 잘리므로 간격을 줄이고, 더 좁으면 로고 글자를 숨겨 마크만 둔다 */
+@media (min-width: 769px) and (max-width: 1099px) {
+    .nav-link { padding: 0 0.7rem; font-size: 0.85rem; }
+    /* 마지막 메뉴 드롭다운이 화면 오른쪽 밖으로 나가지 않게 */
+    .nav-item:last-child .dropdown { left: auto; right: 0; }
+}
+@media (min-width: 769px) and (max-width: 959px) {
+    .nav-logo-text { display: none; }
+}
+
 /* ── 모바일 세로 리듬 ─────────────────────────────────────────
    데스크톱용 여백(섹션 96px·카드 40px·푸터 96px 등)이 모바일에 그대로 남아
    여백이 겹겹이 쌓이던 문제(첫 화면→첫 카드 160px 등)를 한곳에서 정리한다.
