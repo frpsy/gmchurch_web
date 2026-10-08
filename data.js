@@ -111,6 +111,48 @@ const CHURCH_DATA = {
         email: "bsyg2000@hanmail.net"
     },
 
+    // 홈(index.html) 전용 문구 — 예배 시간·위치 등 사실 정보는 info/worship에서 파생
+    home: {
+        heroActions: [
+            { label: "처음 오신 분", href: "newcomer.html", primary: true },
+            { label: "예배 안내",    href: "worship.html" }
+        ],
+        stats: { established: "설립", worship: "주일 예배", location: "위치" },
+        about: {
+            eyebrow: "About",
+            title: "광명교회",
+            facts: [
+                { label: "성당", key: "subName" },
+                { label: "소속", key: "diocese" }
+            ],
+            more: "교회 소개 자세히 보기"
+        },
+        worship: {
+            eyebrow: "Worship",
+            title: "예배 안내",
+            sub: "성공회 전례를 중심으로 드리는 주일 예배입니다.",
+            more: "예배 자세히 보기"
+        },
+        guide: {
+            eyebrow: "Welcome",
+            title: "처음 오셨나요?",
+            sub: "방문 전에 많이 궁금해하시는 내용을 모았습니다.",
+            cards: [
+                { icon: "🅿️", title: "주차 안내",      desc: "차량으로 오실 때 참고하실 주차 정보입니다.",              href: "visit.html#parking",       action: "주차 안내 보기" },
+                { icon: "🍞", title: "영성체 안내",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
+                { icon: "❓", title: "자주 묻는 질문", desc: "성공회와 예배에 관해 자주 받는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
+                { icon: "🤝", title: "공동체",         desc: "광명 희망터·엠마우스 코스·소그룹 모임을 소개합니다.",    href: "community.html",           action: "공동체 보기" }
+            ]
+        },
+        visit: {
+            eyebrow: "Visit",
+            title: "오시는 길",
+            sub: "광명교회로 초대합니다.",
+            phoneLabel: "전화",
+            more: "자세히 보기"
+        }
+    },
+
     anglican: {
         welcome: "광명교회를 찾아 주셔서 감사합니다. 성공회의 역사와 신앙, 광명교회가 걸어온 길을 소개합니다.",
         what: {
@@ -396,7 +438,8 @@ const CHURCH_DATA = {
                 id: "main",
                 title: "주일 감사성찬례",
                 time: "매주 일요일 오전 11:00",
-                desc: "성공회 전례의 중심인 감사성찬례(Eucharist)입니다. 말씀과 성찬 안에서 예수 그리스도를 만나는 시간이며, 세례받은 모든 그리스도인이 성체를 모실 수 있습니다. 반려동물과 함께 오신 분은 예배 후 신부님께 강복을 청할 수 있습니다."
+                desc: "성공회 전례의 중심인 감사성찬례(Eucharist)입니다. 말씀과 성찬 안에서 예수 그리스도를 만나는 시간이며, 세례받은 모든 그리스도인이 성체를 모실 수 있습니다. 반려동물과 함께 오신 분은 예배 후 신부님께 강복을 청할 수 있습니다.",
+                summary: "말씀과 성찬 안에서 예수 그리스도를 만나는 성공회 전례의 중심 예배입니다. 세례받은 모든 그리스도인이 성체를 모실 수 있습니다."
             },
             {
                 id: "children",

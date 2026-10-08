@@ -349,14 +349,27 @@ const FooterRenderer = {
 /* ── IndexRenderer ───────────────────────────────────────── */
 const IndexRenderer = {
     render() {
+        if (!document.getElementById('hero-title')) return;
         this._hero();
         this._about();
         this._worship();
+        this._guide();
         this._visit();
     },
 
+    _header(id, { eyebrow, title, sub }) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = `
+            <p class="section-eyebrow">${eyebrow}</p>
+            <h2 class="section-title">${title}</h2>
+            ${sub ? `<p class="section-sub">${sub}</p>` : ''}
+        `;
+    },
+
     _hero() {
-        const { name, slogan, vision, established } = CHURCH_DATA.info;
+        const { name, slogan, vision, established, addressDetail } = CHURCH_DATA.info;
+        const { heroActions, stats: lbl } = CHURCH_DATA.home;
 
         const label = document.getElementById('hero-label');
         const title = document.getElementById('hero-title');
@@ -368,20 +381,23 @@ const IndexRenderer = {
         if (title) title.textContent = slogan;
         if (sub)   sub.textContent   = vision;
 
-        if (acts) acts.innerHTML = `
-            <a href="newcomer.html" class="btn-hero-primary">처음 오신 분</a>
-            <a href="worship.html" class="btn-outline">예배 안내</a>
-        `;
+        if (acts) acts.innerHTML = heroActions.map(a =>
+            `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label}</a>`
+        ).join('');
 
         // 설립 연도만 추출 ("1990년 2월 11일" → "1990")
         const foundedYear = (established.match(/\d{4}/) || [established])[0];
         const countFrom = String(Math.max(0, parseInt(foundedYear, 10) - 15));
+        // 예배 시간이 바뀌면 worship.main만 고치면 되도록 시간 문구에서 파생 ("매주 일요일 오전 11:00" → "오전 11:00")
+        const mainTime = CHURCH_DATA.worship.main[0].time;
+        const worshipTime = (mainTime.match(/(오전|오후)\s*\d{1,2}:\d{2}/) || [mainTime])[0];
+        const location = `${addressDetail.sido} ${addressDetail.sigungu}`;
         if (stats) stats.innerHTML = `
-            <a href="clergy.html#identity" class="hero-stat hero-stat--link"><span class="hero-stat-val" data-count-from="${countFrom}" data-count-to="${foundedYear}">${foundedYear}</span><span class="hero-stat-lbl">설립</span></a>
+            <a href="clergy.html#identity" class="hero-stat hero-stat--link"><span class="hero-stat-val" data-count-from="${countFrom}" data-count-to="${foundedYear}">${foundedYear}</span><span class="hero-stat-lbl">${lbl.established}</span></a>
             <span class="hero-stat-divider" aria-hidden="true"></span>
-            <a href="worship.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">오전 11:00</span><span class="hero-stat-lbl">주일 예배</span></a>
+            <a href="worship.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">${worshipTime}</span><span class="hero-stat-lbl">${lbl.worship}</span></a>
             <span class="hero-stat-divider" aria-hidden="true"></span>
-            <a href="visit.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">경기도 광명시</span><span class="hero-stat-lbl">위치</span></a>
+            <a href="visit.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">${location}</span><span class="hero-stat-lbl">${lbl.location}</span></a>
         `;
         this._initStatCounter();
     },
@@ -421,7 +437,10 @@ const IndexRenderer = {
     _about() {
         const el = document.getElementById('about-brief-content');
         if (!el) return;
-        const { name, established, diocese, aboutLead, aboutDesc, award } = CHURCH_DATA.info;
+        const info = CHURCH_DATA.info;
+        const { aboutLead, aboutDesc, award } = info;
+        const about = CHURCH_DATA.home.about;
+        this._header('about-brief-header', about);
         el.innerHTML = `
             <div class="about-brief">
                 ${award ? `
@@ -436,11 +455,9 @@ const IndexRenderer = {
                 <p class="about-brief-lead">${aboutLead}</p>
                 <p class="about-brief-desc">${aboutDesc}</p>
                 <ul class="about-brief-facts">
-                    <li><strong>이름</strong><span>${name}</span></li>
-                    <li><strong>설립</strong><span>${established}</span></li>
-                    <li><strong>소속</strong><span>${diocese}</span></li>
+                    ${about.facts.map(f => `<li><strong>${f.label}</strong><span>${info[f.key]}</span></li>`).join('')}
                 </ul>
-                <a href="clergy.html" class="about-brief-link">교회 소개 자세히 보기 →</a>
+                <a href="clergy.html" class="about-brief-link">${about.more} →</a>
             </div>
         `;
     },
@@ -448,11 +465,14 @@ const IndexRenderer = {
     _worship() {
         const el = document.getElementById('worship-grid');
         if (!el) return;
+        const home = CHURCH_DATA.home.worship;
+        this._header('worship-header', home);
+        // 홈 카드는 요약(summary)만 — 전문은 worship.html에서
         el.innerHTML = CHURCH_DATA.worship.main.map(w => `
             <div class="card">
                 <h3>${w.title}</h3>
                 <p class="card-time">${w.time}</p>
-                <p class="card-desc">${w.desc}</p>
+                <p class="card-desc">${w.summary || w.desc}</p>
             </div>
         `).join('');
         const guide = document.getElementById('worship-guide');
@@ -463,18 +483,40 @@ const IndexRenderer = {
                 guide.hidden = true;
             }
         }
+        const more = document.getElementById('worship-more');
+        if (more) more.innerHTML = `<a href="worship.html" class="about-brief-link">${home.more} →</a>`;
+    },
+
+    _guide() {
+        const el = document.getElementById('home-guide-cards');
+        if (!el) return;
+        const g = CHURCH_DATA.home.guide;
+        this._header('home-guide-header', g);
+        el.innerHTML = `
+            <div class="resource-grid">
+                ${g.cards.map(c => `
+                    <a class="resource-card" href="${c.href}">
+                        <span class="resource-icon" aria-hidden="true">${c.icon}</span>
+                        <h3 class="resource-title">${c.title}</h3>
+                        <p class="resource-desc">${c.desc}</p>
+                        <span class="resource-link">${c.action} →</span>
+                    </a>
+                `).join('')}
+            </div>
+        `;
     },
 
     _visit() {
         const locationEl = document.getElementById('location-card');
         if (!locationEl) return;
         const { phone } = CHURCH_DATA.info;
+        const v = CHURCH_DATA.home.visit;
+        this._header('visit-header', v);
         locationEl.innerHTML = `
-            <h3>광명교회로 오시는 길</h3>
             ${MapHelper.html(true)}
-            <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" class="link-plain">${phone}</a></span></div>
+            <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}" class="link-plain">${phone}</a></span></div>
             <p class="visit-detail-wrap">
-                <a href="visit.html" class="detail-link">자세히 보기 →</a>
+                <a href="visit.html" class="detail-link">${v.more} →</a>
             </p>
         `;
     }
