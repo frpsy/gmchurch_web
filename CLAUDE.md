@@ -254,3 +254,4 @@ git push -u origin claude/작업명
 - **`ARCHITECTURE.md`** — data.js 스키마 전체, 렌더러 상세 구조, CSS 변수·클래스 목록, 앵커 스크롤 로직
 - **`tests/`** — data 구조 검증 (churchData.test.js), 전례력 계산 (liturgicalCalendar.test.js), 전례독서 병합·표기 (lectionaryMerge/Overrides.test.js), 연도 파일 연속성 (lectionaryYears.test.js)
 - **`docs/`** — 위원회 audit, 작업 지시서
+- **`AGENTS.md`** — ChatGPT 등 다른 AI용 규칙 요약 (이 파일이 원본. 규칙을 바꾸면 AGENTS.md 요약도 맞출 것) · 인계 안내문은 `docs/chatgpt-handoff.md`
