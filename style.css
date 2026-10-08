@@ -2163,6 +2163,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .liturgy-guide .step-num               { background: var(--season); }
 .liturgy-guide .resource-card          { border-top-color: var(--season); }
 .liturgy-guide .resource-link          { color: var(--season); }
+#home-guide .resource-card            { border-top-color: var(--theme); }
+#home-guide .resource-link            { color: var(--theme); }
 .liturgy-guide .space-item             { border-top-color: var(--season); }
 .liturgy-guide .communion-season       { border-top-color: var(--season); background: var(--season-light); }
 .liturgy-guide .check-icon             { color: var(--season); }

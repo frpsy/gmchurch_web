@@ -128,6 +128,15 @@ const CHURCH_DATA = {
     email: "bsyg2000@hanmail.net"
   },
 
+  home: {                           // index.html 전용 문구 (예배 시간·위치는 worship.main/info에서 파생)
+    heroActions: [{ label, href, primary? }],
+    stats: { established, worship, location },   // 히어로 수치 라벨
+    about:   { eyebrow, title, facts: [{ label, key }], more },  // key = info의 필드명
+    worship: { eyebrow, title, sub, more },     // 카드는 worship.main[].summary(없으면 desc)
+    guide:   { eyebrow, title, sub, cards: [{ icon, title, desc, href, action }] },
+    visit:   { eyebrow, title, sub, phoneLabel, more }
+  },
+
   anglican: {
     welcome: "…배너 문구…",
     what: {                         // 성공회란? 섹션
@@ -457,11 +466,13 @@ window DOMContentLoaded
 <header class="hero">
   #hero-title / #hero-sub                   ← IndexRenderer._hero()
 <section id="about-brief">
-  #about-brief-content                      ← IndexRenderer._about()
+  #about-brief-header / #about-brief-content           ← IndexRenderer._about()
 <section id="worship">
-  #worship-grid / #worship-guide            ← IndexRenderer._worship()
+  #worship-header / #worship-grid / #worship-guide / #worship-more ← IndexRenderer._worship()
+<section id="home-guide">
+  #home-guide-header / #home-guide-cards (resource-grid) ← IndexRenderer._guide()
 <section id="visit-preview">
-  #location-card                            ← IndexRenderer._visit()
+  #visit-header / #location-card                       ← IndexRenderer._visit()
 </main>
 <footer id="main-footer">                   ← FooterRenderer
 ```
