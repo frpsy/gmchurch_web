@@ -1895,6 +1895,9 @@ const BulletinRenderer = {
             btn.addEventListener('click', () => {
                 const drawer = btn.nextElementSibling;
                 const isOpen = btn.getAttribute('aria-expanded') === 'true';
+                // 위쪽에 펼쳐 둔 주보가 닫히면 그 높이만큼 내용이 당겨 올라가
+                // 누른 주보가 화면 밖으로 사라지므로, 누른 줄이 제자리에 남도록 보정한다
+                const before = btn.getBoundingClientRect().top;
                 el.querySelectorAll('.bulletin-row[aria-expanded="true"]').forEach(other => {
                     if (other !== btn) {
                         other.setAttribute('aria-expanded', 'false');
@@ -1903,6 +1906,8 @@ const BulletinRenderer = {
                 });
                 btn.setAttribute('aria-expanded', String(!isOpen));
                 drawer.hidden = isOpen;
+                const shift = btn.getBoundingClientRect().top - before;
+                if (shift) window.scrollBy({ top: shift, behavior: 'instant' });
             });
         });
 
