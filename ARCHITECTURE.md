@@ -400,7 +400,7 @@ window DOMContentLoaded
       │
       ├── BulletinRenderer.render()   → #bulletin-full (bulletin.html)
       │     CHURCH_DATA.bulletins 목록 (5개씩 페이지) · 행 클릭 시 이미지·PDF 펼침
-      │     '이번 주' 배지는 최신 항목이 오늘 ±7일 이내일 때만
+      │     '이번 주' 배지는 한국 시간 기준 이번 주 주보에만, 아니면 최신 항목에 '최근 등록'
       │
       ├── LinksRenderer.render()      → #links-full (links.html)
       │     관련 기관 목록.
@@ -416,6 +416,12 @@ window DOMContentLoaded
       ├── SundaysRenderer.render()    → #sundays-full (sundays.html)
       │     이달의 교회력(#monthly) · 전례독서(#lectionary) · 절기 안내(#seasons) · 특별 주일(#special)
       │     ※ worship.html의 #worship-calendar / #worship-special 위젯도 담당
+      │
+      ├── MoreToggle.init()           (긴 페이지 — clergy·greenchurch·worship·sundays·newcomer)
+      │     _TARGETS 목록의 블록에 '자세히 보기/접기' 버튼(.more-toggle)을 붙여 보조 설명을 접음
+      │     text 모드: 앞 keep개 자식만 보이고 나머지를 .more-body[hidden=until-found]로 묶음 (Ctrl+F로 찾으면 자동 펼침)
+      │     items 모드: 목록·그리드 앞 items개만 보이고 나머지 .more-item 숨김 + 'N개 더 보기'
+      │     숨길 부분이 120px 미만이면 접지 않음 · 앵커 이동(_scrollToHash)·인쇄 시 자동 펼침
       │
       ├── ScrollReveal.init()         (모든 페이지)
       │     .reveal 클래스 요소들을 scroll 시 페이드인
@@ -598,6 +604,7 @@ window DOMContentLoaded
 | `.bio-first` | '최초' 배지 |
 | `.bio-roles` / `.bio-role-tag` | 소임 태그 그룹 |
 | `.bio-source` | 출처 각주 |
+| `.more-toggle` / `.more-body` / `.more-item` | 긴 블록 접기·펼치기 버튼과 접힌 영역 (MoreToggle) |
 | `.liturgy-guide` | 전례 가이드 전체 래퍼 |
 | `.liturgy-season-badge` | 현재 절기 배지 (색·심볼·절기명) |
 | `.liturgy-steps` / `.liturgy-step` | 감사성찬례 4단계 |

@@ -4943,6 +4943,39 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
    감사성찬례 순서(worship.html) 등 본문 인쇄 대응.
    내비·푸터·오버레이·지도 등 화면 전용 요소를 제거하고
    잉크 절약을 위해 흰 배경·검정 텍스트로 단순화한다. */
+/* ── 접기·펼치기 (MoreToggle) ─────────────────────────────────
+   display를 지정한 항목(.info-card 등)도 확실히 숨기도록 명시 */
+.more-item[hidden],
+.more-body[hidden]:not([hidden="until-found"]) { display: none; }
+.more-toggle-wrap { display: flex; justify-content: center; margin-top: 1.5rem; }
+.more-toggle {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    min-height: 44px;   /* 터치 타깃 */
+    margin-top: 1rem;
+    padding: 0.5rem 1.15rem;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--heading);
+    font-size: 0.86rem; font-weight: 600; font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.more-toggle-wrap .more-toggle { margin-top: 0; }
+/* 이력 블록은 위 구분선 여백이 이미 있으므로 버튼 위 간격을 더하지 않음 */
+.bio-section > .more-toggle { margin-top: 0; }
+.more-toggle:hover { border-color: var(--theme); box-shadow: var(--hover-shadow-sm); }
+.more-toggle:focus-visible { outline: 2px solid var(--theme); outline-offset: 2px; }
+.more-toggle-icon { transition: transform 0.2s ease; flex-shrink: 0; }
+.more-toggle[aria-expanded="true"] .more-toggle-icon { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) {
+    .more-toggle, .more-toggle-icon { transition: none; }
+}
+@media print {
+    .more-toggle, .more-toggle-wrap { display: none !important; }
+    .more-item[hidden], .more-body[hidden] { display: block !important; content-visibility: visible !important; }
+}
+
 /* ── PC 첫 화면(page-hero) 여백 균형 ──────────────────────────
    히어로 하단 64px + 다음 섹션 상단 96px + 첫 블록 margin(40~64px)이 겹쳐
    제목 아래 여백이 위쪽(약 80px)의 2~3배(155~222px)로 벌어지던 문제 정리.

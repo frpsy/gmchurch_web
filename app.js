@@ -1582,6 +1582,122 @@ const FaqRenderer = {
 };
 
 /* ── ScrollReveal ────────────────────────────────────────── */
+/* ── 접기·펼치기 (긴 페이지 요약 보기) ─────────────────────────
+   핵심 정보는 그대로 두고 보조 설명만 접어 스크롤 길이를 줄인다.
+   text  : 앞의 keep개 자식만 보이고 나머지를 묶어 접음 (until-found → Ctrl+F로 찾으면 자동 펼침)
+   items : 목록·그리드의 앞 items개만 보이고 나머지 항목을 숨김 */
+const MoreToggle = {
+    _TARGETS: [
+        { sel: '#anglican-what > div:has(> .mission-marks)', keep: 1, label: '선교정신 다섯 가지 보기' },
+        { sel: '#identity .story-value-body', keep: 3 },
+        { sel: '.clergy-card .bio-section', keep: 0, label: '주요 이력 자세히 보기' },
+        { sel: '#logo-content .logo-anglican', keep: 1, label: '캔터베리 십자가 설명 보기' },
+        { sel: '#press-table', items: 3 },
+        { sel: '#climate .story-value-body, #vegan .story-value-body, #animals .story-value-body', keep: 3 },
+        { sel: '#worship-bcp .anglican-body', keep: 2 },
+        { sel: '#sundays-special .grid', items: 6 },
+        { sel: '#worship-space .space-grid', items: 3 },
+    ],
+    // 숨길 부분이 이보다 짧으면 버튼이 오히려 번거로우므로 접지 않음
+    _MIN_HIDDEN_PX: 120,
+    _seq: 0,
+
+    init() {
+        this._TARGETS.forEach(t => {
+            document.querySelectorAll(t.sel).forEach(el => {
+                if (el.dataset.moreReady) return;
+                if (t.items) this._setupItems(el, t);
+                else this._setupText(el, t);
+            });
+        });
+        // 인쇄 시에는 모두 펼쳐서 출력
+        window.addEventListener('beforeprint', () => {
+            document.querySelectorAll('.more-toggle[aria-expanded="false"]').forEach(b => this._set(b, true));
+        });
+    },
+
+    _hiddenHeight(nodes) {
+        return nodes.reduce((sum, n) => sum + n.getBoundingClientRect().height, 0);
+    },
+
+    _setupText(el, t) {
+        const rest = Array.from(el.children).slice(t.keep);
+        if (!rest.length || this._hiddenHeight(rest) < this._MIN_HIDDEN_PX) return;
+        const body = document.createElement('div');
+        body.className = 'more-body';
+        body.id = `more-${++this._seq}`;
+        rest.forEach(n => body.appendChild(n));
+        el.appendChild(body);
+        const btn = this._button(body.id, t.label || '자세히 보기', '접기');
+        el.appendChild(btn);
+        el.dataset.moreReady = '1';
+        this._targets(btn).forEach(n => {
+            n.addEventListener('beforematch', () => this._set(btn, true));
+        });
+        this._set(btn, false);
+    },
+
+    _setupItems(el, t) {
+        const rest = Array.from(el.children).slice(t.items);
+        if (!rest.length) return;
+        el.id = el.id || `more-${++this._seq}`;
+        rest.forEach(n => n.classList.add('more-item'));
+        const btn = this._button(el.id, `${rest.length}개 더 보기`, '접기');
+        const wrap = document.createElement('div');
+        wrap.className = 'more-toggle-wrap';
+        wrap.appendChild(btn);
+        el.after(wrap);
+        el.dataset.moreReady = '1';
+        this._set(btn, false);
+    },
+
+    _button(controls, openLabel, closeLabel) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'more-toggle';
+        btn.setAttribute('aria-controls', controls);
+        btn.dataset.openLabel = openLabel;
+        btn.dataset.closeLabel = closeLabel;
+        btn.addEventListener('click', () => {
+            const expand = btn.getAttribute('aria-expanded') !== 'true';
+            // 접을 때 버튼 위치가 화면에서 튀지 않도록 그만큼 스크롤 보정
+            const before = btn.getBoundingClientRect().top;
+            this._set(btn, expand);
+            if (!expand) {
+                const after = btn.getBoundingClientRect().top;
+                if (after !== before) window.scrollBy({ top: after - before, behavior: 'instant' });
+            }
+        });
+        return btn;
+    },
+
+    // 버튼이 제어하는 숨김 대상들 (text: 묶음 div 하나, items: 넘친 항목들)
+    _targets(btn) {
+        const el = document.getElementById(btn.getAttribute('aria-controls'));
+        if (!el) return [];
+        return el.classList.contains('more-body') ? [el] : Array.from(el.querySelectorAll(':scope > .more-item'));
+    },
+
+    _set(btn, expand) {
+        this._targets(btn).forEach(n => {
+            if (expand) n.removeAttribute('hidden');
+            else if (n.classList.contains('more-body')) n.setAttribute('hidden', 'until-found');
+            else n.hidden = true;
+        });
+        btn.setAttribute('aria-expanded', String(expand));
+        btn.innerHTML = `<span>${expand ? btn.dataset.closeLabel : btn.dataset.openLabel}</span>`
+            + '<svg class="more-toggle-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">'
+            + '<path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    },
+
+    // 앵커 이동 대상이 접힌 영역 안에 있으면 먼저 펼침
+    reveal(target) {
+        document.querySelectorAll('.more-toggle[aria-expanded="false"]').forEach(btn => {
+            if (this._targets(btn).some(n => n === target || n.contains(target))) this._set(btn, true);
+        });
+    }
+};
+
 const ScrollReveal = {
     init() {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -1753,15 +1869,6 @@ const BulletinRenderer = {
         return `<div class="bulletin-pages">${imgs}</div>${pdfBtn}`;
     },
 
-    // 등록이 밀려도 지난 주보에 '이번 주'가 붙지 않도록 날짜로 확인 (주중 미리 올린 다음 주일 주보 포함)
-    _isThisWeek(dateStr) {
-        if (!dateStr) return false;
-        const d = new Date(dateStr + 'T00:00:00');
-        const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        return Math.abs(d - today) < 7 * 86400000;
-    },
-
     _renderPage(el, items, page) {
         const perPage    = this._PER_PAGE;
         const totalPages = Math.ceil(items.length / perPage);
@@ -1770,7 +1877,7 @@ const BulletinRenderer = {
 
         const listHtml = pageItems.map((item, relIdx) => `
             <div class="bulletin-item">
-                ${this._rowHtml(item, start + relIdx === 0 && this._isThisWeek(item.date))}
+                ${this._rowHtml(item, start + relIdx === 0)}
                 <div class="bulletin-drawer" hidden>
                     ${this._drawerHtml(item)}
                 </div>
@@ -2421,6 +2528,7 @@ const App = {
         LinksRenderer.render();
         BulletinRenderer.render();
         SundaysRenderer.render();
+        MoreToggle.init();
         this._handleHashScroll();
         ScrollReveal.init();
         ScrollProgress.init();
@@ -2433,8 +2541,11 @@ const App = {
     },
 
     _scrollToHash(hash) {
-        const el = document.querySelector(hash);
+        // '#'만 있거나 선택자로 쓸 수 없는 해시(텍스트 조각 등)는 무시
+        let el = null;
+        try { el = hash && hash.length > 1 ? document.querySelector(hash) : null; } catch (e) { return; }
         if (!el) return;
+        MoreToggle.reveal(el);
         const navH = parseInt(getComputedStyle(document.documentElement)
             .getPropertyValue('--nav-h')) || 64;
         window.scrollTo({
