@@ -1584,19 +1584,16 @@ const FaqRenderer = {
 /* ── ScrollReveal ────────────────────────────────────────── */
 /* ── 접기·펼치기 (긴 페이지 요약 보기) ─────────────────────────
    핵심 정보는 그대로 두고 보조 설명만 접어 스크롤 길이를 줄인다.
+   본문 설명은 펼쳐 두고, 길고 보조적인 자료(이력·부가 설명·긴 목록)만 한 구역에 버튼 하나로 접는다
+   — 짧은 항목까지 접으면 여러 번 눌러야 읽을 수 있어 오히려 불편하다.
    text  : 앞의 keep개 자식만 보이고 나머지를 묶어 접음 (until-found → Ctrl+F로 찾으면 자동 펼침)
    items : 목록·그리드의 앞 items개만 보이고 나머지 항목을 숨김 */
 const MoreToggle = {
     _TARGETS: [
-        { sel: '#anglican-what > div:has(> .mission-marks)', keep: 1, label: '선교정신 다섯 가지 보기' },
-        { sel: '#identity .story-value-body', keep: 3 },
         { sel: '.clergy-card .bio-section', keep: 0, label: '주요 이력 자세히 보기' },
         { sel: '#logo-content .logo-anglican', keep: 1, label: '캔터베리 십자가 설명 보기' },
-        { sel: '#press-table', items: 3 },
-        { sel: '#climate .story-value-body, #vegan .story-value-body, #animals .story-value-body', keep: 3 },
         { sel: '#worship-bcp .anglican-body', keep: 2 },
         { sel: '#sundays-special .grid', items: 6 },
-        { sel: '#worship-space .space-grid', items: 3 },
     ],
     // 숨길 부분이 이보다 짧으면 버튼이 오히려 번거로우므로 접지 않음
     _MIN_HIDDEN_PX: 120,

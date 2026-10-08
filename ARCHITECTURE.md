@@ -417,7 +417,7 @@ window DOMContentLoaded
       │     이달의 교회력(#monthly) · 전례독서(#lectionary) · 절기 안내(#seasons) · 특별 주일(#special)
       │     ※ worship.html의 #worship-calendar / #worship-special 위젯도 담당
       │
-      ├── MoreToggle.init()           (긴 페이지 — clergy·greenchurch·worship·sundays·newcomer)
+      ├── MoreToggle.init()           (clergy 사제 이력·캔터베리 십자가 / worship 공동기도서와 성가 / sundays 특별 주일)
       │     _TARGETS 목록의 블록에 '자세히 보기/접기' 버튼(.more-toggle)을 붙여 보조 설명을 접음
       │     text 모드: 앞 keep개 자식만 보이고 나머지를 .more-body[hidden=until-found]로 묶음 (Ctrl+F로 찾으면 자동 펼침)
       │     items 모드: 목록·그리드 앞 items개만 보이고 나머지 .more-item 숨김 + 'N개 더 보기'
