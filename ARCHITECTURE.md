@@ -418,9 +418,10 @@ window DOMContentLoaded
       │     ※ worship.html의 #worship-calendar / #worship-special 위젯도 담당
       │
       ├── MoreToggle.init()           (clergy 사제 이력·캔터베리 십자가 / worship 공동기도서와 성가 / sundays 특별 주일)
-      │     _TARGETS 목록의 블록에 '자세히 보기/접기' 버튼(.more-toggle)을 붙여 보조 설명을 접음
-      │     text 모드: 앞 keep개 자식만 보이고 나머지를 .more-body[hidden=until-found]로 묶음 (Ctrl+F로 찾으면 자동 펼침)
-      │     items 모드: 목록·그리드 앞 items개만 보이고 나머지 .more-item 숨김 + 'N개 더 보기'
+      │     _TARGETS 목록의 블록에 토글 버튼(.more-toggle) 하나를 붙여 보조 설명을 접음
+      │     버튼은 항상 보이는 부분 바로 아래·숨긴 부분(.more-body) 바로 위 → 눌러도 제자리에서 아래로 펼침
+      │     text 모드: 앞 keep개 자식만 보이고 나머지를 블록 안 .more-body[hidden=until-found]로 묶음 (Ctrl+F로 찾으면 자동 펼침)
+      │     items 모드: 그리드 앞 items개만 보이고 나머지는 같은 클래스의 형제 컨테이너(.more-body)로 옮김
       │     숨길 부분이 120px 미만이면 접지 않음 · 앵커 이동(_scrollToHash)·인쇄 시 자동 펼침
       │
       ├── ScrollReveal.init()         (모든 페이지)
@@ -604,7 +605,7 @@ window DOMContentLoaded
 | `.bio-first` | '최초' 배지 |
 | `.bio-roles` / `.bio-role-tag` | 소임 태그 그룹 |
 | `.bio-source` | 출처 각주 |
-| `.more-toggle` / `.more-body` / `.more-item` | 긴 블록 접기·펼치기 버튼과 접힌 영역 (MoreToggle) |
+| `.more-toggle` / `.more-body` | 긴 블록 접기·펼치기 토글 버튼(콘텐츠 폭 가로 막대)과 접힌 영역 (MoreToggle) |
 | `.liturgy-guide` | 전례 가이드 전체 래퍼 |
 | `.liturgy-season-badge` | 현재 절기 배지 (색·심볼·절기명) |
 | `.liturgy-steps` / `.liturgy-step` | 감사성찬례 4단계 |
