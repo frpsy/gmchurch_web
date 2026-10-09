@@ -17,24 +17,24 @@
     /* Primary palette — refined forest green */
     --green-deep:   #173a2e;
     --green-mid:    #285a47;
-    --green-light:  #ebeedf;
-    --green-soft:   #cfd5b0;
+    --green-light:  #e7eee8;
+    --green-soft:   #c8d7c9;
     /* 전례 테마 — JS가 현재 절기 색으로 덮어씀. 기본값은 평시 녹색. */
     --theme:        #285a47;
-    --theme-light:  #ebeedf;
+    --theme-light:  #e7eee8;
     --theme-on:     #fff;     /* --theme 배경 위 텍스트 색 (금색 절기엔 어두운 값) */
     /* Accent — luminous amber gold */
-    --brand-sub:    #cdd2a8;  /* 로고 부제 — 항상 어두운 숲 녹 바탕 위(헤더·푸터·로고 소개) */
-    --gold:         #b1b883;  /* 세이지 — 장식선·어두운 배경 위 강조 전용(밝은 배경 글자 금지) */
-    --gold-bg:      #f3f4e6;
-    --sage-ink:     #5a6430;  /* 밝은 배경 위 세이지 계열 글자 (AA 5.4:1) */
+    --brand-sub:    #c4d4c0;  /* 로고 부제 — 항상 어두운 숲 녹 바탕 위(헤더·푸터·로고 소개) */
+    --gold:         #a8bd9f;  /* 세이지 — 장식선·어두운 배경 위 강조 전용(밝은 배경 글자 금지) */
+    --gold-bg:      #edf2ea;
+    --sage-ink:     #3f6046;  /* 밝은 배경 위 세이지 계열 글자 (AA 5.4:1) */
     --font-brand:   "BrandSerif", "Pretendard", -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
     /* Neutrals */
-    --cream:        #f0ece4;
+    --cream:        #f2f3ef;
     --white:        #ffffff;
     --text:         #1a1a1a;
     --text-muted:   #4d4c46;  /* WCAG AA(4.5:1) 충족 — cream/white 배경 위 본문용 */
-    --border:       #e2ded2;
+    --border:       #dde3dc;
     /* 표면 위 제목 텍스트 — 모드별로 분기 (green-deep은 배경 전용으로 유지) */
     --heading:      #112f25;
     /* Skeleton 로더 — 모드 대응 */
@@ -4237,9 +4237,9 @@ footer {
         --theme-light:  #1b3029;
         --theme-on:     #0f1b16;   /* 밝은 녹 위 어두운 글자 */
         /* Gold — 다크 배경 대비 밝게 조정 */
-        --gold:         #c3c99a;
-        --gold-bg:      #1f2318;
-        --sage-ink:     #c3c99a;
+        --gold:         #b5c9b0;
+        --gold-bg:      #19221c;
+        --sage-ink:     #b5c9b0;
         /* Nav */
         --nav-glass:    rgba(9, 26, 20, 0.96);
         --surface-nav:  rgba(15, 27, 22, 0.96);
