@@ -2593,6 +2593,10 @@ const TapFeedback = {
     init() {
         // iOS Safari는 touchstart 리스너가 있어야 :active가 즉시 적용된다
         document.addEventListener('touchstart', () => {}, { passive: true });
+        // 뒤로가기(bfcache) 복원 시 눌림 상태가 남지 않도록 페이지가 다시 보일 때 지운다
+        window.addEventListener('pageshow', () => {
+            document.querySelectorAll('.is-tapped').forEach(el => el.classList.remove('is-tapped'));
+        });
         document.addEventListener('click', e => {
             const card = e.target.closest('a.resource-card');
             if (!card || e.defaultPrevented || e.button !== 0) return;
