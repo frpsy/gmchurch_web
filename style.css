@@ -17,11 +17,11 @@
     /* Primary palette — refined forest green */
     --green-deep:   #173a2e;
     --green-mid:    #285a47;
-    --green-light:  #e4e8d8;
-    --green-soft:   #c4cba4;
+    --green-light:  #ebeedf;
+    --green-soft:   #cfd5b0;
     /* 전례 테마 — JS가 현재 절기 색으로 덮어씀. 기본값은 평시 녹색. */
     --theme:        #285a47;
-    --theme-light:  #e4e8d8;
+    --theme-light:  #ebeedf;
     --theme-on:     #fff;     /* --theme 배경 위 텍스트 색 (금색 절기엔 어두운 값) */
     /* Accent — luminous amber gold */
     --brand-sub:    #cdd2a8;  /* 로고 부제 — 항상 어두운 숲 녹 바탕 위(헤더·푸터·로고 소개) */
@@ -30,11 +30,11 @@
     --sage-ink:     #5a6430;  /* 밝은 배경 위 세이지 계열 글자 (AA 5.4:1) */
     --font-brand:   "BrandSerif", "Pretendard", -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
     /* Neutrals */
-    --cream:        #e9e5da;
-    --white:        #f7f5ee;
+    --cream:        #f0ece4;
+    --white:        #ffffff;
     --text:         #1a1a1a;
     --text-muted:   #4d4c46;  /* WCAG AA(4.5:1) 충족 — cream/white 배경 위 본문용 */
-    --border:       #d6d1c3;
+    --border:       #e2ded2;
     /* 표면 위 제목 텍스트 — 모드별로 분기 (green-deep은 배경 전용으로 유지) */
     --heading:      #112f25;
     /* Skeleton 로더 — 모드 대응 */
@@ -4217,8 +4217,8 @@ footer {
 @media (prefers-color-scheme: dark) {
     :root {
         /* Backgrounds — 짙은 숲 색 기반 다크 서피스 */
-        --cream:        #0b1511;
-        --white:        #111d18;
+        --cream:        #0f1b16;
+        --white:        #16241e;
         /* Text — 따뜻한 크림 계열 */
         --text:         #e6e2d6;
         --text-muted:   #a4a89a;
@@ -4230,19 +4230,19 @@ footer {
            green-mid은 배지 배경(흰 글씨)으로도 쓰여 텍스트·배지 대비를 균형 조정 */
         --green-deep:   #10241d;   /* 페이지 바탕(#0f1b16)과 구분되는 어두운 숲 녹 띠 */
         --green-mid:    #66a284;
-        --green-light:  #172821;
+        --green-light:  #1b3029;
         --green-soft:   #3b5a48;
         /* Theme — green-mid/green-light 값으로 자동 추종 */
         --theme:        #66a284;
-        --theme-light:  #172821;
-        --theme-on:     #0b1511;   /* 밝은 녹 위 어두운 글자 */
+        --theme-light:  #1b3029;
+        --theme-on:     #0f1b16;   /* 밝은 녹 위 어두운 글자 */
         /* Gold — 다크 배경 대비 밝게 조정 */
         --gold:         #c3c99a;
         --gold-bg:      #1f2318;
         --sage-ink:     #c3c99a;
         /* Nav */
         --nav-glass:    rgba(9, 26, 20, 0.96);
-        --surface-nav:  rgba(11, 21, 17, 0.96);
+        --surface-nav:  rgba(15, 27, 22, 0.96);
         /* Skeleton */
         --skeleton-base: #1a2a23;
         --skeleton-mid:  #22352d;
