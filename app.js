@@ -394,7 +394,7 @@ const IndexRenderer = {
     },
 
     _hero() {
-        const { name, slogan, vision, established, addressDetail } = CHURCH_DATA.info;
+        const { name, slogan, vision, addressDetail } = CHURCH_DATA.info;
         const { heroActions, stats: lbl } = CHURCH_DATA.home;
 
         const label = document.getElementById('hero-label');
@@ -413,51 +413,14 @@ const IndexRenderer = {
             `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label}</a>`
         ).join('');
 
-        // 설립 연도만 추출 ("1990년 2월 11일" → "1990")
-        const foundedYear = (established.match(/\d{4}/) || [established])[0];
-        const countFrom = String(Math.max(0, parseInt(foundedYear, 10) - 15));
         // 예배 시간이 바뀌면 worship.main만 고치면 되도록 시간 문구에서 파생 ("매주 일요일 오전 11:00" → "오전 11:00")
         const mainTime = CHURCH_DATA.worship.main[0].time;
         const worshipTime = (mainTime.match(/(오전|오후)\s*\d{1,2}:\d{2}/) || [mainTime])[0];
         const location = `${addressDetail.sido} ${addressDetail.sigungu}`;
         if (stats) stats.innerHTML = `
-            <a href="clergy.html#identity" class="hero-stat hero-stat--link"><span class="hero-stat-val" data-count-from="${countFrom}" data-count-to="${foundedYear}">${foundedYear}</span><span class="hero-stat-lbl">${lbl.established}</span></a>
             <a href="worship.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">${worshipTime}</span><span class="hero-stat-lbl">${lbl.worship}</span></a>
             <a href="visit.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">${location}</span><span class="hero-stat-lbl">${lbl.location}</span></a>
         `;
-        this._initStatCounter();
-    },
-
-    _initStatCounter() {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        const statsEl = document.getElementById('hero-stats');
-        if (!statsEl) return;
-        const counters = statsEl.querySelectorAll('[data-count-to]');
-        if (!counters.length) return;
-
-        const run = () => {
-            counters.forEach(el => {
-                const from = parseInt(el.dataset.countFrom || '0', 10);
-                const to   = parseInt(el.dataset.countTo, 10);
-                if (isNaN(to)) return;
-                const duration = 900;
-                const t0 = performance.now();
-                const tick = (now) => {
-                    const p = Math.min((now - t0) / duration, 1);
-                    el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3)));
-                    if (p < 1) requestAnimationFrame(tick);
-                };
-                requestAnimationFrame(tick);
-            });
-        };
-
-        const io = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                io.disconnect();
-                setTimeout(run, 750); // hero-stats 페이드인 (delay 0.72s)과 동기
-            }
-        }, { threshold: 0.1 });
-        io.observe(statsEl);
     },
 
     _about() {
