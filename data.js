@@ -111,6 +111,10 @@ const CHURCH_DATA = {
         email: "bsyg2000@hanmail.net"
     },
 
+    ui: {
+        copyAddress: { success: "복사됨", failure: "주소를 선택했습니다. 길게 눌러 복사해 주세요." }
+    },
+
     // 홈(index.html) 전용 문구 — 예배 시간·위치 등 사실 정보는 info/worship에서 파생
     home: {
         heroActions: [

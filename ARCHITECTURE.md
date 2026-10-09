@@ -128,6 +128,8 @@ const CHURCH_DATA = {
     email: "bsyg2000@hanmail.net"
   },
 
+  ui: { copyAddress: { success, failure } }, // 공통 동작 안내
+
   home: {                           // index.html 전용 문구 (예배 시간·위치는 worship.main/info에서 파생)
     heroActions: [{ label, href, primary? }],
     stats: { established, worship, location },   // 히어로 수치 라벨
@@ -602,7 +604,7 @@ window DOMContentLoaded
 | `.nav-header` | 고정 헤더 (--nav-glass), scroll 시 `.scrolled` |
 | `.nav-chevron` | 모바일 드롭다운 토글 화살표 버튼 (desktop: hidden) |
 | `.nav-item.mobile-open` | 모바일 드롭다운 열림 상태 |
-| `.hero` / `.hero-fallback` | Ken Burns 애니메이션 배경 (Unsplash 이미지) |
+| `.hero` / `.hero-fallback` | Ken Burns 애니메이션 배경 (교회 제단 사진) |
 | `.page-hero` | 서브 페이지 상단 헤더 |
 | `.section` / `.section-header` | 섹션 레이아웃 |
 | `.container` | 최대폭 1200px, 패딩 clamp |
