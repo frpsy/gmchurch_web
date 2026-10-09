@@ -148,10 +148,10 @@ const CHURCH_DATA = {
             title: "처음 오셨나요?",
             sub: "방문 전에 많이 궁금해하시는 내용을 모았습니다.",
             cards: [
-                { icon: "🅿️", title: "주차 안내",      desc: "교회 인근에 무료 주차가 가능합니다.",                     href: "visit.html#parking",       action: "주차 안내 보기" },
-                { icon: "🍞", title: "영성체 안내",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
-                { icon: "❓", title: "자주 묻는 질문", desc: "성공회와 예배에 관해 자주 받는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
-                { icon: "🤝", title: "공동체",         desc: "광명 희망터·엠마우스 코스·소그룹 모임을 소개합니다.",    href: "community.html",           action: "공동체 보기" }
+                { icon: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M10 16V8h3a2.5 2.5 0 0 1 0 5h-3\"/></svg>", title: "주차 안내",      desc: "교회 인근에 무료 주차가 가능합니다.",                     href: "visit.html#parking",       action: "주차 안내 보기" },
+                { icon: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\"><path d=\"M7 4h10v4a5 5 0 0 1-10 0V4z\"/><path d=\"M12 13v5M8 20h8\"/></svg>", title: "영성체 안내",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
+                { icon: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7\"/><path d=\"M12 17h.01\"/></svg>", title: "자주 묻는 질문", desc: "성공회와 예배에 관해 자주 받는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
+                { icon: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\"><circle cx=\"9\" cy=\"8\" r=\"3\"/><circle cx=\"17\" cy=\"9\" r=\"2.5\"/><path d=\"M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6\"/><path d=\"M15.5 13.3c.5-.2 1-.3 1.5-.3 2.2 0 4 1.8 4 4\"/></svg>", title: "공동체",         desc: "광명 희망터·엠마우스 코스·소그룹 모임을 소개합니다.",    href: "community.html",           action: "공동체 보기" }
             ]
         },
         visit: {
