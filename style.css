@@ -712,6 +712,44 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .page-hero--greenchurch  { background-image: url('images/gallery/scenery/greenchurch-award-2023.webp'); background-position: center 30%; }
 
+/* 히어로 좌·우 25% 메뉴 이동 영역 — 가운데 글자 영역은 건드리지 않는다 */
+.page-hero > .hero-nav {
+    position: absolute;
+    top: var(--nav-h);
+    bottom: 0;
+    width: 25%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    animation: none;
+    opacity: 1;
+    color: #fff;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.15s;
+}
+.hero-nav--prev { left: 0;  justify-content: flex-start; padding-left: 0.4rem; }
+.hero-nav--next { right: 0; justify-content: flex-end;   padding-right: 0.4rem; }
+.hero-nav svg {
+    width: 1.9rem;
+    height: 1.9rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.6;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));
+    transition: opacity 0.15s;
+}
+.hero-nav:active { background-color: rgba(255,255,255,0.1); }
+.hero-nav:active svg { opacity: 1; }
+.hero-nav:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+@media (hover: hover) {
+    .hero-nav:hover { background-color: rgba(255,255,255,0.06); }
+    .hero-nav:hover svg { opacity: 1; }
+}
+@media print { .hero-nav { display: none !important; } }
+
 @media (prefers-color-scheme: dark) {
     .page-hero--photo::before {
         background: linear-gradient(to bottom,

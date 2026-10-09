@@ -2610,6 +2610,27 @@ const TapFeedback = {
     }
 };
 
+// 메뉴 히어로 좌·우 25% 터치 영역 — 메뉴 순서(CHURCH_DATA.navigation)상 이전/다음 메뉴로 이동한다.
+// 첫 메뉴의 이전은 마지막으로, 마지막의 다음은 첫 메뉴로 이어진다.
+const HeroNav = {
+    init() {
+        const hero = document.querySelector('.page-hero--photo');
+        if (!hero) return;
+        const menu = CHURCH_DATA.navigation;
+        const page = location.pathname.split('/').pop() || 'index.html';
+        const i = menu.findIndex(m => m.href.split('#')[0] === page);
+        if (i < 0) return;
+        const prev = menu[(i - 1 + menu.length) % menu.length];
+        const next = menu[(i + 1) % menu.length];
+        const chevron = d => `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="${d}"/></svg>`;
+        const link = (dir, m, label, points) =>
+            `<a class="hero-nav hero-nav--${dir}" href="${m.href}" aria-label="${label}: ${m.label}">${chevron(points)}</a>`;
+        hero.insertAdjacentHTML('beforeend',
+            link('prev', prev, '이전 메뉴', '15 5 8 12 15 19') +
+            link('next', next, '다음 메뉴', '9 5 16 12 9 19'));
+    }
+};
+
 const App = {
     init() {
         /* 사이트 대표 테마(--theme)는 녹색 고정(:root 기본값 사용). 절기색(--season)만
@@ -2653,6 +2674,7 @@ const App = {
         PortraitLightbox.init();
         MenuOverlay.init();
         TapFeedback.init();
+        HeroNav.init();
         document.addEventListener('click', e => {
             if (e.target.matches('.map-copy-btn')) MapHelper.copyAddr(e.target);
         });
