@@ -693,7 +693,19 @@ button:focus:not(:focus-visible) { outline: none; }
 
 .page-hero--worship   { background-image: url('images/gallery/worship/야외성찬례.webp'); }
 .page-hero--community { background-image: url('images/gallery/community/공동체1.webp'); }
-.page-hero--clergy       { background-image: url('images/gallery/scenery/교회소개_교회내부_제단.webp'); background-position: 55% center; }
+/* 메뉴 상징 이미지(실제 교회 사진 아님) — 모바일은 경량 버전 */
+.page-hero--clergy   { background-image: url('images/hero/clergy.webp');   background-position: 40% center; }
+.page-hero--sundays  { background-image: url('images/hero/sundays.webp'); }
+.page-hero--newcomer { background-image: url('images/hero/newcomer.webp'); background-position: 60% center; }
+.page-hero--media    { background-image: url('images/hero/media.webp'); }
+.page-hero--visit    { background-image: url('images/hero/visit.webp');    background-position: center 60%; }
+@media (max-width: 768px) {
+    .page-hero--clergy   { background-image: url('images/hero/clergy-m.webp'); }
+    .page-hero--sundays  { background-image: url('images/hero/sundays-m.webp'); }
+    .page-hero--newcomer { background-image: url('images/hero/newcomer-m.webp'); }
+    .page-hero--media    { background-image: url('images/hero/media-m.webp'); }
+    .page-hero--visit    { background-image: url('images/hero/visit-m.webp'); }
+}
 .page-hero--greenchurch  { background-image: url('images/gallery/scenery/greenchurch-award-2023.webp'); background-position: center 30%; }
 
 @media (prefers-color-scheme: dark) {
