@@ -448,6 +448,13 @@ window DOMContentLoaded
       ├── ScrollProgress.init()       (모든 페이지)
       │     페이지 스크롤 진행도를 시각화 (막대 또는 스타일 적용)
       │
+      ├── TapFeedback.init()          (모든 페이지)
+      │     a.resource-card 탭 시 눌림 표시(.is-tapped) 후 140ms 뒤 이동 · 새 탭/수정키/동작 줄이기 설정은 기본 동작
+      │     pageshow(뒤로가기 복원)에서 .is-tapped 제거 · iOS :active용 touchstart 리스너
+      │
+      ├── HeroNav.init()              (.page-hero--photo가 있고 navigation 최상위 메뉴인 페이지)
+      │     히어로 좌·우 25%에 이전/다음 메뉴 링크(.hero-nav) 추가 — 메뉴 순서는 CHURCH_DATA.navigation, 양 끝은 순환
+      │
       └── MenuOverlay.init()          (모든 페이지)
             nav-menu-trigger 버튼으로 여는 전체 메뉴 + 검색 오버레이
             CHURCH_DATA.navigation을 사이트맵으로 펼침
@@ -576,26 +583,26 @@ window DOMContentLoaded
 ### CSS 변수
 
 ```css
-/* 팔레트 '열린 빛': 숲 녹 #1c4336 · 세이지 #b1b883 · 크림 #f0ece4 */
---green-deep:   #1c4336   /* 주 브랜드 색 (nav, footer, 어두운 띠) */
---green-mid:    #2f6a52   /* 흰 글자 6.4:1, 크림 위 5.4:1 */
---green-light:  #ebeedf
---green-soft:   #cfd5b0
---gold:         #b1b883   /* 이름은 유지, 값은 세이지 — 장식선·어두운 배경 위 강조 전용 (밝은 배경 글자 금지) */
---gold-bg:      #f3f4e6
---sage-ink:     #5a6430   /* 밝은 배경 위 세이지 계열 글자 */
+/* 팔레트: 숲 녹 #173a2e · 세이지 #a8bd9f · 크림 #f2f3ef (로고·OG 이미지 등 브랜드 에셋은 기존 #1c4336/#f0ece4 유지) */
+--green-deep:   #173a2e   /* 주 브랜드 색 (nav, footer, 어두운 띠) */
+--green-mid:    #285a47   /* 흰 글자 7.9:1, 크림 위 7.1:1 */
+--green-light:  #e7eee8
+--green-soft:   #c8d7c9
+--gold:         #a8bd9f   /* 이름은 유지, 값은 세이지 — 장식선·어두운 배경 위 강조 전용 (밝은 배경 글자 금지) */
+--gold-bg:      #edf2ea
+--sage-ink:     #3f6046   /* 밝은 배경 위 세이지 계열 글자 */
 --font-brand:   "BrandSerif", "Pretendard", …   /* 로고 워드마크 전용 */
---cream:        #f0ece4   /* 기본 배경 */
+--cream:        #f2f3ef   /* 기본 배경 */
 --white:        #ffffff
 --text:         #1a1a1a
 --text-muted:   #4d4c46   /* WCAG AA(4.5:1) 충족 */
---heading:      #163a2e
---border:       #e2ded2
+--heading:      #112f25
+--border:       #dde3dc
 --red:          #b53737
---nav-glass:    rgba(28, 67, 54, 0.92)  /* 네비게이션 글래스 배경 */
+--nav-glass:    rgba(23, 58, 46, 0.94)  /* 네비게이션 글래스 배경 */
 --surface-nav:  rgba(255, 255, 255, 0.96)
---theme:        #2f6a52   /* 사이트 대표 녹색 (고정 — 절기색은 --season) */
---theme-light:  #ebeedf
+--theme:        #285a47   /* 사이트 대표 녹색 (고정 — 절기색은 --season) */
+--theme-light:  #e7eee8
 --theme-on:     #fff      /* --theme 배경 위 텍스트 */
 --nav-h:        68px
 --section-pad:  7rem
@@ -655,6 +662,9 @@ window DOMContentLoaded
 | `.footer-inner` | 푸터 3단 그리드 |
 | `.footer-logo-mark` | 푸터 캔터베리 십자가 컨테이너 (38×38px, 흰색 SVG) |
 | `.reveal` | ScrollReveal 애니메이션 대상 (fade-in on scroll) |
+| `.hero-nav` / `.hero-nav--prev` / `--next` | 메뉴 히어로 좌·우 25% 이전/다음 메뉴 터치 영역 (HeroNav가 생성) |
+| `.is-tapped` | 카드 탭 직후 눌림 표시 (TapFeedback) |
+| `.page-hero--{clergy,worship,sundays,newcomer,community,media,visit}` | 메뉴별 상징 이미지 히어로 (`images/hero/*.webp`, 모바일은 `-m` 경량본). 글자 배치는 전부 `.page-hero--photo` 공통 규칙 |
 
 ### 반응형 브레이크포인트
 
