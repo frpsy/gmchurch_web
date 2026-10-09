@@ -1407,8 +1407,8 @@ const AboutNavRenderer = {
             <nav class="gc-page-nav" aria-label="${cfg.navLabel || '교회 소개 둘러보기'}">
                 <div class="container">
                     ${items.map(it => onPage(it)
-                        ? `<a href="#${anchorOf(it)}" class="gc-nav-link" data-about-section="${anchorOf(it)}">${it.label}</a>`
-                        : `<a href="${it.href}" class="gc-nav-link gc-nav-link--ext">${it.label} <span aria-hidden="true">↗</span></a>`
+                        ? `<a href="#${anchorOf(it)}" class="gc-nav-link" data-about-section="${anchorOf(it)}">${it.short || it.label}</a>`
+                        : `<a href="${it.href}" class="gc-nav-link gc-nav-link--ext">${it.short || it.label}</a>`
                     ).join('')}
                 </div>
             </nav>`;
