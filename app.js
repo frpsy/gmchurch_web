@@ -420,9 +420,7 @@ const IndexRenderer = {
         const location = `${addressDetail.sido} ${addressDetail.sigungu}`;
         if (stats) stats.innerHTML = `
             <a href="clergy.html#identity" class="hero-stat hero-stat--link"><span class="hero-stat-val" data-count-from="${countFrom}" data-count-to="${foundedYear}">${foundedYear}</span><span class="hero-stat-lbl">${lbl.established}</span></a>
-            <span class="hero-stat-divider" aria-hidden="true"></span>
             <a href="worship.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">${worshipTime}</span><span class="hero-stat-lbl">${lbl.worship}</span></a>
-            <span class="hero-stat-divider" aria-hidden="true"></span>
             <a href="visit.html" class="hero-stat hero-stat--link"><span class="hero-stat-val">${location}</span><span class="hero-stat-lbl">${lbl.location}</span></a>
         `;
         this._initStatCounter();
