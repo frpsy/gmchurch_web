@@ -725,7 +725,6 @@ button:focus:not(:focus-visible) { outline: none; }
     opacity: 1;
     color: #fff;
     -webkit-tap-highlight-color: transparent;
-    transition: background-color 0.15s;
 }
 .hero-nav--prev { left: 0;  justify-content: flex-start; padding-left: 0.4rem; }
 .hero-nav--next { right: 0; justify-content: flex-end;   padding-right: 0.4rem; }
@@ -741,11 +740,15 @@ button:focus:not(:focus-visible) { outline: none; }
     filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));
     transition: opacity 0.15s;
 }
-.hero-nav:active { background-color: rgba(255,255,255,0.1); }
-.hero-nav:active svg { opacity: 1; }
+/* 누를 때는 영역 전체가 아니라 화살표 주변에만 아주 옅게 표시한다 */
+.hero-nav:active svg {
+    opacity: 1;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.05);
+    box-shadow: 0 0 0 0.3rem rgba(255,255,255,0.05);
+}
 .hero-nav:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
 @media (hover: hover) {
-    .hero-nav:hover { background-color: rgba(255,255,255,0.06); }
     .hero-nav:hover svg { opacity: 1; }
 }
 @media print { .hero-nav { display: none !important; } }
