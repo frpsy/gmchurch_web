@@ -53,8 +53,8 @@ gmchurch_web/
 `data.js`가 먼저 로드되어 `CHURCH_DATA` / `LiturgicalCalendar` 전역 변수를 정의하고, `app.js`가 이를 참조해 렌더링함.
 
 **아이콘 팩 (`images/icons.svg`)**: 사이트의 모든 그림 아이콘은 이 스프라이트 하나로 통일한다 — **이모티콘 직접 사용 금지**(테스트 `tests/icons.test.js`가 검사).
-- 스타일: 24px 격자 · 1.6 선(글자색 `currentColor`) + 아이콘별 고유색 색면을 옅게 깐 듀오톤. 색면 농도는 `--ico-tint-o`(라이트 0.34, 다크 0.45), 색은 `--ico-tint`로 덮어쓸 수 있다.
-- 크기: `.ico`가 `1em`이라 아이콘 자리의 `font-size`가 곧 크기다. 장식용 아이콘 자리(`.story-value-icon`, `.resource-icon`, `.card-icon` 등)는 테마색 선.
+- 스타일: 24px 격자 · 1.35 가는 단색 선(글자색 `currentColor`)만 쓰는 미니멀 아이콘. 색면·다색 금지.
+- 크기: `.ico`가 `1em`이라 아이콘 자리의 `font-size`가 곧 크기다. 카드 속 큰 아이콘 자리(`.story-value-icon`, `.resource-icon`, `.card-icon` 등)는 가는 원 테두리 배지(1.7em) 안에 테마색 선으로 놓인다 — 규칙은 style.css 맨 끝.
 - 사용: `data.js`의 `icon`/`symbol` 값은 **심볼 이름**(예: `"church"`), `app.js`에서는 `icon('name')`, 정적 HTML에서는 `<svg class="ico" aria-hidden="true" focusable="false"><use href="images/icons.svg?v=…#name"/></svg>`.
 - 새 아이콘: 같은 스타일로 `<symbol id="이름">`을 추가한다(XML 주석 안에 `--` 금지 — 스프라이트 전체가 깨진다).
 - 목록(46개): `church`, `dove`, `map`, `people`, `hands-heart`, `leaf`, `palm`, `cross`, `book`, `books`, `calendar`, `candle`, `star`, `sparkle`, `sunrise`, `sun`, `sunset`, `moon`, `flame`, `bulb`, `pillar`, `mitre`, `cap`, `globe`, `scales`, `drop`, `chalice`, `tabernacle`, `music`, `sprout`, `bowl`, `dish`, `house`, `film`, `camera`, `link`, `footsteps`, `pen`, `veg`, `paw`, `leaf-fall`, `phone`, `mail`, `boat`, `parking`, `question`
@@ -670,7 +670,7 @@ window DOMContentLoaded
 | `.video-channel-cta` | 유튜브 채널 전체 보기 CTA 버튼 |
 | `.footer-inner` | 푸터 3단 그리드 |
 | `.footer-logo-mark` | 푸터 캔터베리 십자가 컨테이너 (38×38px, 흰색 SVG) |
-| `.ico` | 아이콘 팩 SVG (`images/icons.svg` 심볼, 1em 크기·글자색 선 + 듀오톤 색면) |
+| `.ico` | 아이콘 팩 SVG (`images/icons.svg` 심볼, 1em 크기·가는 단색 선) |
 | `.reveal` | ScrollReveal 애니메이션 대상 (fade-in on scroll) |
 | `.hero-nav` / `.hero-nav--prev` / `--next` | 메뉴 히어로 좌·우 17% 이전/다음 메뉴 터치 영역 (HeroNav가 생성) |
 | `.is-tapped` | 카드 탭 직후 눌림 표시 (TapFeedback) |
