@@ -402,6 +402,8 @@ const IndexRenderer = {
         const sub   = document.getElementById('hero-sub');
         const acts  = document.getElementById('hero-actions');
         const stats = document.getElementById('hero-stats');
+        const scrollLabel = document.getElementById('hero-scroll-label');
+        if (scrollLabel) scrollLabel.textContent = CHURCH_DATA.home.scrollLabel;
 
         if (label) label.textContent = name;
         if (title) title.textContent = slogan;

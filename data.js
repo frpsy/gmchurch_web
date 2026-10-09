@@ -117,6 +117,7 @@ const CHURCH_DATA = {
 
     // 홈(index.html) 전용 문구 — 예배 시간·위치 등 사실 정보는 info/worship에서 파생
     home: {
+        scrollLabel: "교회 알아보기",
         heroActions: [
             { label: "처음 오신 분", href: "newcomer.html", primary: true },
             { label: "예배 안내",    href: "worship.html" }
