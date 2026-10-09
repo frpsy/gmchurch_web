@@ -24,6 +24,7 @@
     --theme-light:  #ebeedf;
     --theme-on:     #fff;     /* --theme 배경 위 텍스트 색 (금색 절기엔 어두운 값) */
     /* Accent — luminous amber gold */
+    --brand-sub:    #cdd2a8;  /* 로고 부제 — 항상 어두운 숲 녹 바탕 위(헤더·푸터·로고 소개) */
     --gold:         #b1b883;  /* 세이지 — 장식선·어두운 배경 위 강조 전용(밝은 배경 글자 금지) */
     --gold-bg:      #f3f4e6;
     --sage-ink:     #5a6430;  /* 밝은 배경 위 세이지 계열 글자 (AA 5.4:1) */
@@ -230,7 +231,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .nav-logo-sub {
     font-family: var(--font-brand);
     font-size: 0.7rem; font-weight: 700; letter-spacing: 0.34em;
-    color: #cdd2a8;   /* 밝은 세이지 — 반투명 내비가 밝은 본문 위에 있어도 4.6:1 */
+    color: var(--brand-sub);   /* 밝은 세이지 — 반투명 내비가 밝은 본문 위에 있어도 4.6:1 */
     margin-top: 0.1rem;
 }
 
@@ -1582,13 +1583,13 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .logo-lockup {
     display: inline-flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 0.84rem;
     padding: 1.4rem 1.6rem;
     border-radius: 16px;
     background: #1c4336;
     box-shadow: var(--shadow-md);
 }
-.logo-lockup-mark { width: 34px; height: 46px; color: #f0ece4; flex-shrink: 0; }
+.logo-lockup-mark { width: 31px; height: 42px; color: #f0ece4; flex-shrink: 0; }
 .logo-lockup-mark svg { width: 100%; height: 100%; display: block; }
 .logo-lockup-text { display: flex; flex-direction: column; text-align: left; line-height: 1.25; }
 .logo-lockup-name {
@@ -1598,8 +1599,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .logo-lockup-tag {
     font-family: var(--font-brand);
-    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.36em;
-    color: #b1b883; margin-top: 0.2rem;
+    font-size: 0.84rem; font-weight: 700; letter-spacing: 0.34em;
+    color: var(--brand-sub); margin-top: 0.12rem;
 }
 .logo-swatches {
     list-style: none;
@@ -2950,7 +2951,7 @@ footer {
     font-weight: 700;
     letter-spacing: 0.34em;
     line-height: 1.2;
-    color: var(--gold);
+    color: var(--brand-sub);
     margin-top: 0.1rem;
 }
 .footer-col .footer-brand-slogan {
