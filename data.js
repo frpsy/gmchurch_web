@@ -137,12 +137,18 @@ const CHURCH_DATA = {
             sub: "성공회 전례를 중심으로 드리는 주일 예배입니다.",
             more: "예배 자세히 보기"
         },
+        thisSunday: {
+            title: "다가오는 주일",
+            labels: { season: "절기", first: "제1독서", second: "제2독서", gospel: "복음" },
+            more: "전례독서 전체 보기",
+            bulletin: "이번 주 주보 보기"
+        },
         guide: {
             eyebrow: "Welcome",
             title: "처음 오셨나요?",
             sub: "방문 전에 많이 궁금해하시는 내용을 모았습니다.",
             cards: [
-                { icon: "🅿️", title: "주차 안내",      desc: "차량으로 오실 때 참고하실 주차 정보입니다.",              href: "visit.html#parking",       action: "주차 안내 보기" },
+                { icon: "🅿️", title: "주차 안내",      desc: "교회 인근에 무료 주차가 가능합니다.",                     href: "visit.html#parking",       action: "주차 안내 보기" },
                 { icon: "🍞", title: "영성체 안내",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
                 { icon: "❓", title: "자주 묻는 질문", desc: "성공회와 예배에 관해 자주 받는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
                 { icon: "🤝", title: "공동체",         desc: "광명 희망터·엠마우스 코스·소그룹 모임을 소개합니다.",    href: "community.html",           action: "공동체 보기" }
@@ -443,7 +449,7 @@ const CHURCH_DATA = {
                 title: "주일 감사성찬례",
                 time: "매주 일요일 오전 11:00",
                 desc: "성공회 전례의 중심인 감사성찬례(Eucharist)입니다. 말씀과 성찬 안에서 예수 그리스도를 만나는 시간이며, 세례받은 모든 그리스도인이 성체를 모실 수 있습니다. 반려동물과 함께 오신 분은 예배 후 신부님께 강복을 청할 수 있습니다.",
-                summary: "말씀과 성찬 안에서 예수 그리스도를 만나는 성공회 전례의 중심 예배입니다. 세례받은 모든 그리스도인이 성체를 모실 수 있습니다."
+                summary: "말씀과 성찬 안에서 예수 그리스도를 만나는 성공회 전례의 중심 예배입니다. 세례받은 모든 그리스도인이 성체를 모실 수 있으며, 반려동물과 함께 오신 분은 예배 후 강복을 청할 수 있습니다."
             },
             {
                 id: "children",

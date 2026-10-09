@@ -135,6 +135,7 @@ const CHURCH_DATA = {
     stats: { established, worship, location },   // 히어로 수치 라벨
     about:   { eyebrow, title, facts: [{ label, key }], more },  // key = info의 필드명
     worship: { eyebrow, title, sub, more },     // 카드는 worship.main[].summary(없으면 desc)
+    thisSunday: { title, labels: { season, first, second, gospel }, more, bulletin },  // 다가오는 주일 카드
     guide:   { eyebrow, title, sub, cards: [{ icon, title, desc, href, action }] },
     visit:   { eyebrow, title, sub, phoneLabel, more }
   },
@@ -471,6 +472,7 @@ window DOMContentLoaded
   #about-brief-header / #about-brief-content           ← IndexRenderer._about()
 <section id="worship">
   #worship-header / #worship-grid / #worship-guide / #worship-more ← IndexRenderer._worship()
+  #this-sunday (info-card, 독서 파일 로드 실패 시 hidden) ← IndexRenderer._thisSunday() — SundaysRenderer._loadSundays() 재사용
 <section id="home-guide">
   #home-guide-header / #home-guide-cards (resource-grid) ← IndexRenderer._guide()
 <section id="visit-preview">
