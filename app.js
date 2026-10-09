@@ -868,7 +868,7 @@ const NewcomerRenderer = {
                     <h3>더 궁금하신 점이 있으신가요?</h3>
                     <p>성공회 예배나 광명교회에 대해 궁금하신 점이 있으시면 편하게 문의해 주세요.</p>
                     <div class="newcomer-cta-actions">
-                        ${primary.contact ? `<a href="mailto:${primary.contact}" class="newcomer-cta-link">${icon('mail')} ${primary.name} 사제에게 메일 보내기</a>` : ''}
+                        ${primary.contact ? `<a href="mailto:${primary.contact}" class="newcomer-cta-link">${icon('mail')} ${primary.name} 사제에게 메일</a>` : ''}
                         <a href="tel:${info.phone}" class="newcomer-cta-link">${icon('phone')} 교회 사무실 ${info.phone}</a>
                     </div>
                 </div>

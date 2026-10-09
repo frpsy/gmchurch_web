@@ -86,6 +86,8 @@
 
 /* ── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* 문단 끝 한 단어만 다음 줄로 떨어지는 현상 완화 (미지원 브라우저는 무시) */
+p, li, blockquote { text-wrap: pretty; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
 /* 부드러운 스크롤은 모션 민감 사용자에게는 비활성화 (전정기관 자극 방지) */
 @media (prefers-reduced-motion: no-preference) {
@@ -2523,6 +2525,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: var(--text);
     font-size: 0.9rem;
     font-weight: 600;
+    text-wrap: balance;
     text-decoration: none;
     transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
@@ -3704,6 +3707,7 @@ footer {
     color: var(--text);
     font-weight: 500;
     word-break: keep-all;
+    text-wrap: balance; /* 번지 숫자만 다음 줄로 떨어지지 않게 */
 }
 
 .map-actions {
