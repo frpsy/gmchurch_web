@@ -122,13 +122,14 @@ const CHURCH_DATA = {
             { label: "처음 오신 분", href: "newcomer.html", primary: true },
             { label: "예배 안내",    href: "worship.html" }
         ],
-        stats: { established: "설립", worship: "주일 예배", location: "위치" },
+        stats: { worship: "주일 감사성찬례", location: "오시는 길" },
         about: {
             eyebrow: "About",
             title: "광명교회",
             facts: [
                 { label: "성당", key: "subName" },
-                { label: "소속", key: "diocese" }
+                { label: "소속", key: "diocese" },
+                { label: "설립", key: "established" }
             ],
             more: "교회 소개 자세히 보기"
         },

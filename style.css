@@ -36,6 +36,9 @@
     --border:       #e2ded2;
     /* 표면 위 제목 텍스트 — 모드별로 분기 (green-deep은 배경 전용으로 유지) */
     --heading:      #163a2e;
+    /* 사진 위 고정 어두운 표면은 두 모드에서 같은 밝은 글자를 쓴다. */
+    --intro-on:     #f0ece4;
+    --intro-muted:  #d4d8c9;
     /* Skeleton 로더 — 모드 대응 */
     --skeleton-base: #dbd8d0;
     --skeleton-mid:  #c8c5bc;
@@ -525,16 +528,19 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 /* Hero — 하단 스탯 스트립 */
-/* 옅은 표면과 외곽선으로 세 정보를 묶되 사진보다 강조되지 않게 한다. */
+/* 사진 안의 방문 안내를 한 묶음으로 보여 첫 화면의 흐름을 유지한다. */
 .hero-stats {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     width: calc(100% - 2.5rem);
-    max-width: 680px;
-    margin: 1.25rem auto 0;
-    padding: 0.85rem 0.75rem;
-    background: var(--green-light);
-    border: 1px solid var(--green-soft);
+    max-width: 520px;
+    margin: 1rem auto 0;
+    padding: 0.6rem 0.75rem;
+    position: relative;
+    z-index: 2;
+    background: var(--green-deep);
+    background: color-mix(in srgb, var(--green-deep) 92%, transparent);
+    border: 1px solid color-mix(in srgb, var(--intro-on) 20%, transparent);
     border-radius: var(--radius-md);
     text-align: center;
 }
@@ -551,14 +557,14 @@ button:focus:not(:focus-visible) { outline: none; }
 .hero-stat-val {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--heading);
+    color: var(--intro-on);
     line-height: 1.5;
     overflow-wrap: anywhere;
 }
 .hero-stat-lbl {
     font-size: 0.75rem;
     font-weight: 400;
-    color: var(--text-muted);
+    color: var(--intro-muted);
     letter-spacing: 0;
 }
 .hero-stat--link {
@@ -567,10 +573,10 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: background 0.18s;
 }
 .hero-stat--link:hover {
-    background: var(--cream);
+    background: color-mix(in srgb, var(--intro-on) 10%, transparent);
 }
 .hero-stat--link:focus-visible {
-    outline: 2px solid var(--heading);
+    outline: 2px solid var(--intro-on);
     outline-offset: 2px;
 }
 .home #about-brief { padding-top: 1.75rem; }
@@ -582,13 +588,22 @@ button:focus:not(:focus-visible) { outline: none; }
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+
 }
 .home-intro .hero {
     flex: 1;
     min-height: 0;
-    padding: calc(var(--nav-h) + 2rem) 0 2rem;
+    padding: calc(var(--nav-h) + 1.5rem) 0 max(0.75rem, env(safe-area-inset-bottom, 0px));
+    flex-direction: column;
 }
+.home-intro .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 2rem;
+}
+.home-intro .hero-label { display: none; }
 .home-intro .hero-stats { flex-shrink: 0; margin-top: 1rem; }
 .home-intro .hero-scroll {
     display: flex;
@@ -598,16 +613,19 @@ button:focus:not(:focus-visible) { outline: none; }
     min-height: 44px;
     padding: 0.5rem 1rem;
     margin: 0.25rem auto;
-    color: var(--text-muted);
+    position: relative;
+    z-index: 2;
+    color: var(--intro-muted);
     font-size: 0.75rem;
     border-radius: var(--radius-sm);
 }
 .home-intro .hero-scroll:focus-visible {
-    outline: 2px solid var(--heading);
+    outline: 2px solid var(--intro-on);
     outline-offset: -2px;
 }
 @media (max-width: 768px) and (max-height: 700px) {
-    .home-intro .hero { padding-top: calc(var(--nav-h) + 1.25rem); padding-bottom: 1.25rem; }
+    .home-intro .hero { padding-top: calc(var(--nav-h) + 0.75rem); }
+    .home-intro .hero-content { padding-block: 1rem; }
     .home-intro .hero-label { margin-bottom: 0.75rem; }
     .home-intro .hero-sub { margin-bottom: 1.25rem; }
 }
@@ -5109,4 +5127,24 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
     font-size: 0.85rem;
     color: var(--text-muted);
     overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+    .home-intro .hero h1 { max-width: 10.5em; margin-inline: auto; text-wrap: balance; }
+    .home-intro .hero-actions {
+        flex-direction: row;
+        align-items: stretch;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        width: 100%;
+        max-width: 340px;
+        margin-inline: auto;
+    }
+    .home-intro .hero-actions a {
+        flex: 1 1 120px;
+        width: auto;
+        min-height: 48px;
+        max-width: none;
+        padding: 0.8rem 0.6rem;
+    }
 }
