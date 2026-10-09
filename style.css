@@ -721,6 +721,8 @@ button:focus:not(:focus-visible) { outline: none; }
 .section.gc-section-alt { background: var(--theme-light); }
 @media (prefers-color-scheme: dark) {
     .section.gc-section-alt { background: color-mix(in srgb, var(--theme) 20%, var(--white)); }
+    /* 녹색 틴트 배경 위 eyebrow(--theme)는 3.9:1 — 밝게 섞어 AA 확보 */
+    .section.gc-section-alt .section-eyebrow { color: color-mix(in srgb, var(--theme) 60%, var(--heading)); }
 }
 
 .section-eyebrow {
@@ -1156,10 +1158,10 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     font-size: 0.78rem;
     font-weight: 700;
     margin-top: 0.55rem;
-    color: var(--season);
+    color: var(--season-ink, var(--season));
 }
 /* 현재 절기 강조 텍스트 — 절기색 사용. 다크모드에선 밝게 보정해 가독 확보 */
-.sundays-season-hero .section-eyebrow { color: var(--season); }
+.sundays-season-hero .section-eyebrow { color: var(--season-ink, var(--season)); }
 @media (prefers-color-scheme: dark) {
     .sundays-season-hero .section-eyebrow,
     .lit-current-tag {
@@ -2156,18 +2158,18 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 :root { --season: var(--green-mid); --season-light: var(--green-light); }
 
 .liturgy-season-badge .season-dot      { background: var(--season); }
-.liturgy-season-badge .season-name     { color: var(--season); font-weight: 700; }
-.liturgy-guide .section-eyebrow        { color: var(--season); }
+.liturgy-season-badge .season-name     { color: var(--season-ink, var(--season)); font-weight: 700; }
+.liturgy-guide .section-eyebrow        { color: var(--season-ink, var(--season)); }
 .liturgy-guide .liturgy-inner-quote    { border-left-color: var(--season); }
 .liturgy-guide .liturgy-card           { border-left-color: var(--season); }
-.liturgy-guide .step-num               { background: var(--season); }
+.liturgy-guide .step-num               { background: var(--season); color: var(--season-on, #fff); }
 .liturgy-guide .resource-card          { border-top-color: var(--season); }
-.liturgy-guide .resource-link          { color: var(--season); }
+.liturgy-guide .resource-link          { color: var(--season-ink, var(--season)); }
 #home-guide .resource-card            { border-top-color: var(--theme); }
 #home-guide .resource-link            { color: var(--theme); }
 .liturgy-guide .space-item             { border-top-color: var(--season); }
 .liturgy-guide .communion-season       { border-top-color: var(--season); background: var(--season-light); }
-.liturgy-guide .check-icon             { color: var(--season); }
+.liturgy-guide .check-icon             { color: var(--season-ink, var(--season)); }
 
 .liturgy-guide {
     max-width: 760px;
@@ -2755,6 +2757,10 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: var(--theme-on);
     box-shadow: var(--hover-shadow-sm);
 }
+/* 선택 상태의 트랙 원(흰 글자)은 밝은 틴트 대신 어둡게 — 라이트 전용(다크는 글자가 어두움) */
+@media (prefers-color-scheme: light) {
+    .lect-track-btn.is-active .lect-track-tag { background: rgba(0, 0, 0, 0.18); }
+}
 .lect-track-tag {
     display: inline-flex;
     align-items: center;
@@ -2827,6 +2833,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     .lectionary-card-head {
         background: color-mix(in srgb, var(--season, var(--green-dark)) 18%, var(--white));
     }
+    /* 금색 절기 틴트 위에서도 AA 유지 */
+    .lectionary-card-label { color: color-mix(in srgb, var(--green-mid) 60%, var(--heading)); }
 }
 
 /* Worship Space (전례 공간 안내) */
@@ -3653,7 +3661,8 @@ footer {
 
 /* Naver CTA */
 .map-btn--naver {
-    background: #03c75a;
+    /* 네이버 초록(#03c75a)은 흰 글자 대비 2.25 — 같은 계열의 짙은 초록으로 AA(4.8:1) 확보 */
+    background: #00843a;
     color: #fff;
     border-color: transparent;
     font-size: 0.92rem;
@@ -3662,12 +3671,12 @@ footer {
     box-shadow: 0 2px 8px rgba(3,199,90,0.20);
 }
 .map-btn--naver:hover {
-    background: #00b350;
+    background: #00702f;
     box-shadow: 0 4px 14px rgba(3,199,90,0.32);
     border-color: transparent;
 }
-.map-btn--naver .map-btn-mark { background: rgba(255,255,255,0.20); color: #fff; }
-.map-btn--naver .map-btn-arrow { color: rgba(255,255,255,0.80); }
+.map-btn--naver .map-btn-mark { background: rgba(0,0,0,0.18); color: #fff; }
+.map-btn--naver .map-btn-arrow { color: #fff; }
 
 /* Kakao CTA */
 .map-btn--kakao {
@@ -3679,7 +3688,7 @@ footer {
     padding: 0.95rem 1.1rem;
 }
 .map-btn--kakao:hover { background: #fad900; border-color: #e8cc00; }
-.map-btn--kakao .map-btn-arrow { color: rgba(60,30,30,0.55); }
+.map-btn--kakao .map-btn-arrow { color: rgba(60,30,30,0.75); }
 
 /* Compact variant (index card) */
 .map-card--compact .map-preview { aspect-ratio: 400 / 180; }
