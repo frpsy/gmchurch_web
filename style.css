@@ -2695,16 +2695,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     }
 }
 .resource-card { -webkit-tap-highlight-color: transparent; }
-/* 누르는 즉시 반응하도록 짧은 전환으로 눌림 표시 */
-.resource-card:active,
-.resource-card.is-tapped {
-    background: var(--green-light);
-    border-color: var(--theme);
-    transform: scale(0.96);
-    transition: transform 0.1s ease-out, border-color 0.1s, background-color 0.1s;
-}
-.resource-card:active .resource-icon,
-.resource-card.is-tapped .resource-icon { transform: scale(0.9); }
 .resource-icon {
     font-size: 1.9rem;
     margin-bottom: 0.8rem;
@@ -5289,4 +5279,26 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     width: 0.9em;
     height: 0.9em;
     vertical-align: 0;
+}
+
+/* ── 터치 기기 탭 반응 ──────────────────────────────────────
+   hover의 떠오름·확대가 탭 뒤에 남아 카드가 튀고, 크기 변화(scale)는 스크롤 시작에도 걸려 버벅인다.
+   터치에서는 움직임을 없애고, 눌린 순간 색만 바로 바꾼다. */
+@media (hover: none) {
+    .card:hover, .card:hover .card-icon, .info-card:hover, .value-card:hover,
+    .anglican-pillar:hover, .anglican-pillar:hover .anglican-pillar-icon, .mission-mark:hover,
+    .btn-next:hover, .btn-live:hover, .btn-hero-primary:hover, .liturgy-step:hover, .map-btn:hover,
+    .links-card:hover, .video-card:hover, .photo-item:hover, .photo-item:hover img,
+    .about-next:hover, .about-next:hover .about-next-arrow, .bulletin-page:hover,
+    .iona-link-card:hover .iona-link-card__arrow {
+        transform: none;
+    }
+    a.resource-card:active, a.card:active, a.links-card:active, a.iona-link-card:active,
+    .video-card:active, .newcomer-cta-link:active, .about-next:active {
+        background-color: var(--green-light);
+        border-color: var(--theme);
+        transition: none;
+    }
+    /* 어두운 배경 위 버튼도 있어 배경색 대신 살짝 흐리게 */
+    .btn-next:active, .map-btn:active { opacity: 0.75; transition: none; }
 }
