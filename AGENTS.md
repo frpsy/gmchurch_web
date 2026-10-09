@@ -8,6 +8,7 @@
 
 - **대한성공회 광명교회** 홈페이지 — `https://frpsy.github.io/gmchurch_web/`
 - 바닐라 HTML + CSS + JS, **빌드 없음**. `main`에 머지되면 GitHub Pages가 자동 배포
+- **Netlify는 종료됨** — PR의 `netlify[bot]` 배포 미리보기 코멘트·링크는 무시한다 (미리보기는 로컬 서버로)
 - 콘텐츠는 전부 `data.js`의 `CHURCH_DATA` → `app.js`의 렌더러가 HTML의 빈 `<div id="…-full">`을 채움
 - 전례독서: `data/lectionary-year-a.json`(가해)·`lectionary-year-b.json`(나해) + 주보 기록 `data/lectionary-overrides.json`
 - 테스트: `npm test` (Vitest 90개). 로컬 미리보기: `python3 -m http.server 8000` → `http://localhost:8000`
