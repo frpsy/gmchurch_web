@@ -23,6 +23,18 @@ function archMarkSVG({ fill = 'currentColor', cls = '' } = {}) {
     return `<svg viewBox="0 0 40 54"${klass} aria-hidden="true" focusable="false"><path d="${ARCH_MARK_PATH}" fill="${fill}"/></svg>`;
 }
 
+/* 아이콘 팩 — images/icons.svg 심볼. 스프라이트 캐시는 app.js와 같은 ?v=로 함께 갱신한다 */
+let iconSprite = null;
+function icon(name) {
+    if (!/^[a-z][a-z-]*$/.test(name || '')) return name || '';
+    if (iconSprite === null) {
+        const s = typeof document !== 'undefined' && document.querySelector?.('script[src*="app.js"]');
+        const v = s && s.getAttribute('src').match(/\?v=([\w-]+)/);
+        iconSprite = 'images/icons.svg' + (v ? `?v=${v[1]}` : '');
+    }
+    return `<svg class="ico" aria-hidden="true" focusable="false"><use href="${iconSprite}#${name}"/></svg>`;
+}
+
 // 사용자가 모션 최소화를 요청했는지 — 프로그램적 부드러운 스크롤을 즉시 이동으로 대체 (WCAG 2.3.3)
 function prefersReducedMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -472,7 +484,7 @@ const IndexRenderer = {
             <div class="about-brief">
                 ${award ? `
                 <a href="${award.href}" class="about-brief-award">
-                    <span class="about-brief-award-icon" aria-hidden="true">🌿</span>
+                    <span class="about-brief-award-icon" aria-hidden="true">${icon('leaf')}</span>
                     <span class="about-brief-award-body">
                         <strong>${award.year} ${award.title}</strong>
                         <span>${award.org}</span>
@@ -541,7 +553,7 @@ const IndexRenderer = {
 
         el.innerHTML = `
             <h3>${t.title} · ${dateStr} ${s.koreanName}</h3>
-            <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.color};--season-ink:${season.ink || season.color}"><span class="season-dot"></span>${season.symbol}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">${season.colorName}</span></span></div>
+            <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.color};--season-ink:${season.ink || season.color}"><span class="season-dot"></span>${icon(season.symbol)}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">${season.colorName}</span></span></div>
             ${rows}
             <p class="visit-detail-wrap">
                 <a href="sundays.html#lectionary" class="detail-link">${t.more} →</a>
@@ -560,7 +572,7 @@ const IndexRenderer = {
             <div class="resource-grid">
                 ${g.cards.map(c => `
                     <a class="resource-card" href="${c.href}">
-                        <span class="resource-icon" aria-hidden="true">${c.icon}</span>
+                        <span class="resource-icon" aria-hidden="true">${icon(c.icon)}</span>
                         <h3 class="resource-title">${c.title}</h3>
                         <p class="resource-desc">${c.desc}</p>
                         <span class="resource-link">${c.action} →</span>
@@ -646,7 +658,7 @@ const WorshipRenderer = {
             <div class="liturgy-guide">
                 <div class="liturgy-season-badge">
                     <span class="season-dot"></span>
-                    ${s.symbol}&nbsp;${s.name}&nbsp;·&nbsp;<span class="season-name">${s.colorName}</span>
+                    ${icon(s.symbol)}&nbsp;${s.name}&nbsp;·&nbsp;<span class="season-name">${s.colorName}</span>
                     <span class="season-note">${s.note}</span>
                 </div>
             </div>
@@ -695,7 +707,7 @@ const WorshipRenderer = {
                     <div class="resource-grid">
                         ${resources.map(r => `
                             <a class="resource-card" href="${r.url}" target="_blank" rel="noopener noreferrer">
-                                <span class="resource-icon" aria-hidden="true">${r.icon}</span>
+                                <span class="resource-icon" aria-hidden="true">${icon(r.icon)}</span>
                                 <h3 class="resource-title">${r.title}</h3>
                                 <p class="resource-desc">${r.desc}</p>
                                 <span class="resource-link">바로가기 <span aria-hidden="true">↗</span></span>
@@ -720,7 +732,7 @@ const WorshipRenderer = {
                     <div class="resource-grid">
                         ${prayer.dailyOffice.map(o => `
                             <a class="resource-card" href="${o.url}" target="_blank" rel="noopener noreferrer">
-                                <span class="resource-icon" aria-hidden="true">${o.icon}</span>
+                                <span class="resource-icon" aria-hidden="true">${icon(o.icon)}</span>
                                 <h3 class="resource-title">${o.title}</h3>
                                 <p class="resource-desc resource-en">${o.en}</p>
                                 <p class="resource-desc">${o.desc}</p>
@@ -735,7 +747,7 @@ const WorshipRenderer = {
                     <p class="liturgy-body liturgy-body--lead">세계성공회(Anglican Communion)는 날마다 특정 교구와 지역 교회를 위해 함께 기도하는 기도 달력을 발행합니다. 전 세계 165개 이상의 나라에 퍼져 있는 성공회 공동체와 하나로 이어지는 기도입니다.</p>
                     <div class="resource-grid resource-grid--single">
                         <a class="resource-card" href="${prayer.intercession.url}" target="_blank" rel="noopener noreferrer">
-                            <span class="resource-icon" aria-hidden="true">${prayer.intercession.icon}</span>
+                            <span class="resource-icon" aria-hidden="true">${icon(prayer.intercession.icon)}</span>
                             <h3 class="resource-title">${prayer.intercession.title}</h3>
                             <p class="resource-desc resource-en">${prayer.intercession.en}</p>
                             <p class="resource-desc">${prayer.intercession.desc}</p>
@@ -816,7 +828,7 @@ const NewcomerRenderer = {
                     <div class="space-grid">
                         ${spaceGuide.items.map(item => `
                             <div class="space-item">
-                                <span class="space-icon" aria-hidden="true">${item.icon}</span>
+                                <span class="space-icon" aria-hidden="true">${icon(item.icon)}</span>
                                 <div class="space-text">
                                     <h3 class="space-name">${item.name} <span class="space-en">${item.en}</span></h3>
                                     <p class="space-desc">${item.desc}</p>
@@ -856,8 +868,8 @@ const NewcomerRenderer = {
                     <h3>더 궁금하신 점이 있으신가요?</h3>
                     <p>성공회 예배나 광명교회에 대해 궁금하신 점이 있으시면 편하게 문의해 주세요.</p>
                     <div class="newcomer-cta-actions">
-                        ${primary.contact ? `<a href="mailto:${primary.contact}" class="newcomer-cta-link"><span aria-hidden="true">✉️</span> ${primary.name} 사제에게 메일 보내기</a>` : ''}
-                        <a href="tel:${info.phone}" class="newcomer-cta-link"><span aria-hidden="true">📞</span> 교회 사무실 ${info.phone}</a>
+                        ${primary.contact ? `<a href="mailto:${primary.contact}" class="newcomer-cta-link">${icon('mail')} ${primary.name} 사제에게 메일 보내기</a>` : ''}
+                        <a href="tel:${info.phone}" class="newcomer-cta-link">${icon('phone')} 교회 사무실 ${info.phone}</a>
                     </div>
                 </div>
             </div>
@@ -874,7 +886,7 @@ const CommunityRenderer = {
             <div class="grid">
                 ${CHURCH_DATA.community.groups.map(g => `
                     <div class="card" id="${g.id}" style="text-align:center;">
-                        <div class="card-icon">${g.icon}</div>
+                        <div class="card-icon">${icon(g.icon)}</div>
                         <h3>${g.title}</h3>
                         <p style="color:var(--text-muted); font-size:0.9rem;">${g.desc}</p>
                         ${g.note ? `<p style="font-size:0.9rem; color:var(--text-muted); margin-top:0.5rem;">${g.note}</p>` : ''}
@@ -903,7 +915,7 @@ const SmallGroupRenderer = {
                 <div class="liturgy-section" id="${g.id}">
                     <div class="info-card info-card--wide">
                         <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
-                            <span style="font-size:2rem;" aria-hidden="true">${g.icon}</span>
+                            <span style="font-size:2rem;" aria-hidden="true">${icon(g.icon)}</span>
                             <div>
                                 <p class="section-eyebrow" style="margin-bottom:0.2rem;">${g.en}</p>
                                 <h2 style="margin:0; font-size:1.25rem;">${g.title}</h2>
@@ -1052,7 +1064,7 @@ const AnglicanRenderer = {
             <div class="anglican-pillars">
                 ${what.pillars.map(p => `
                     <div class="anglican-pillar">
-                        <div class="anglican-pillar-icon">${p.icon}</div>
+                        <div class="anglican-pillar-icon">${icon(p.icon)}</div>
                         <h3 class="anglican-pillar-title">${p.title}</h3>
                         <p class="anglican-pillar-desc">${p.desc}</p>
                     </div>
@@ -1100,7 +1112,7 @@ const AnglicanRenderer = {
                     ${iona ? `
                     <a href="${iona.url}" target="_blank" rel="noopener noreferrer"
                        class="iona-link-card">
-                        <span style="font-size:1.2rem;" aria-hidden="true">⛵</span>
+                        <span class="iona-link-card__icon" aria-hidden="true">${icon('boat')}</span>
                         <span class="iona-link-card__text">
                             <span class="iona-link-card__label">${iona.label}</span>
                             <span class="iona-link-card__desc">${iona.desc}</span>
@@ -1111,7 +1123,7 @@ const AnglicanRenderer = {
                     ${korea.incheonLink ? `
                     <a href="${korea.incheonLink.url}" target="_blank" rel="noopener noreferrer"
                        class="iona-link-card">
-                        <span style="font-size:1.2rem;" aria-hidden="true">⛪</span>
+                        <span class="iona-link-card__icon" aria-hidden="true">${icon('church')}</span>
                         <span class="iona-link-card__text">
                             <span class="iona-link-card__label">${korea.incheonLink.label}</span>
                             <span class="iona-link-card__desc">${korea.incheonLink.desc}</span>
@@ -1122,7 +1134,7 @@ const AnglicanRenderer = {
                     ${korea.cathedralLink ? `
                     <a href="${korea.cathedralLink.url}" target="_blank" rel="noopener noreferrer"
                        class="iona-link-card">
-                        <span style="font-size:1.2rem;" aria-hidden="true">🕊️</span>
+                        <span class="iona-link-card__icon" aria-hidden="true">${icon('dove')}</span>
                         <span class="iona-link-card__text">
                             <span class="iona-link-card__label">${korea.cathedralLink.label}</span>
                             <span class="iona-link-card__desc">${korea.cathedralLink.desc}</span>
@@ -1139,7 +1151,7 @@ const AnglicanRenderer = {
                     <ul class="korea-highlights">
                         ${korea.highlights.map(h => `
                             <li class="korea-highlight-item">
-                                <span class="korea-hl-icon">${h.icon}</span>
+                                <span class="korea-hl-icon">${icon(h.icon)}</span>
                                 <span>${h.text}</span>
                             </li>
                         `).join('')}
@@ -1247,7 +1259,7 @@ const ClergyRenderer = {
                 <div class="bishop-card-inner">
                     ${bishop.photo
                         ? `<div class="bishop-portrait-wrap"><img src="${bishop.photo}" alt="${bishop.name} 주교 초상" class="bishop-portrait" loading="lazy"></div>`
-                        : `<div class="bishop-portrait-wrap bishop-portrait-fallback" aria-hidden="true">🏛</div>`}
+                        : `<div class="bishop-portrait-wrap bishop-portrait-fallback" aria-hidden="true">${icon('mitre')}</div>`}
                     <div class="bishop-card-body">
                         <p class="bishop-name">${bishop.name} 주교</p>
                         <p class="bishop-title">${bishop.title}</p>
@@ -1271,7 +1283,7 @@ const ClergyRenderer = {
                         <div class="clergy-avatar${c.photo ? '' : ' clergy-avatar--fallback'}">
                             ${c.photo
                                 ? `<img src="${c.photo}" alt="${c.name} 사제" loading="lazy" class="clergy-avatar-img">`
-                                : '<span aria-hidden="true">✝️</span>'}
+                                : icon('cross')}
                         </div>
                         <div>
                             <div class="clergy-name">${c.name} 사제</div>
@@ -1281,10 +1293,10 @@ const ClergyRenderer = {
                             <p class="clergy-desc">${c.desc}</p>
                             ${c.bio ? this._bioSection(c.bio) : ''}
                             ${c.contact ? (c.contact.includes('@')
-                                ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">✉️ <a href="mailto:${c.contact}" style="color:inherit;">${c.contact}</a></p>`
-                                : `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">📞 <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>`) : ''}
-                            ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">📚 <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
-                            ${c.blogUrl ? `<p style="margin-top:0.4rem; font-size:0.83rem;">✍️ <a href="${c.blogUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">블로그 (네이버)</a></p>` : ''}
+                                ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">${icon('mail')} <a href="mailto:${c.contact}" style="color:inherit;">${c.contact}</a></p>`
+                                : `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">${icon('phone')} <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>`) : ''}
+                            ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">${icon('books')} <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
+                            ${c.blogUrl ? `<p style="margin-top:0.4rem; font-size:0.83rem;">${icon('pen')} <a href="${c.blogUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">블로그 (네이버)</a></p>` : ''}
                         </div>
                     </div>`;
                 }).join('')
@@ -1337,7 +1349,7 @@ const ClergyRenderer = {
                 <div class="bio-roles">${roles}</div>
                 ${externalRolesHtml}
                 <div class="bio-ministry-note">
-                    <span class="bio-ministry-icon">🕊</span>
+                    <span class="bio-ministry-icon">${icon('dove')}</span>
                     <p>${bio.ministryNote}</p>
                 </div>
                 ${bio.source ? `
@@ -1364,7 +1376,7 @@ const ClergyRenderer = {
             <div class="values-grid">
                 ${values.map(v => {
                     const inner = `
-                        <div class="val-icon">${v.icon}</div>
+                        <div class="val-icon">${icon(v.icon)}</div>
                         <h3>${v.title}</h3>
                         <p>${v.desc}</p>
                         ${v.href && v.cta ? `<span class="value-card-cta">${v.cta} <span aria-hidden="true">→</span></span>` : ''}`;
@@ -1488,7 +1500,7 @@ const MediaHubRenderer = {
             <div class="resource-grid">
                 ${CHURCH_DATA.media.hub.cards.map(c => `
                     <a class="resource-card" href="${c.href}" style="border-top-color: var(--green-mid);">
-                        <span class="resource-icon" aria-hidden="true">${c.icon}</span>
+                        <span class="resource-icon" aria-hidden="true">${icon(c.icon)}</span>
                         <p class="resource-title">${c.title}</p>
                         <p class="resource-desc">${c.desc}</p>
                         <span class="resource-link" style="color:var(--green-mid);">${c.action} →</span>
@@ -1658,7 +1670,7 @@ const FaqRenderer = {
         const catsHtml = faq.categories.map(cat => `
             <section class="faq-cat" aria-labelledby="faqcat-${cat.id}">
                 <h2 class="faq-cat-title" id="faqcat-${cat.id}">
-                    <span class="faq-cat-icon" aria-hidden="true">${cat.icon || ''}</span>${cat.title}
+                    <span class="faq-cat-icon" aria-hidden="true">${icon(cat.icon)}</span>${cat.title}
                 </h2>
                 <div class="faq-list">
                     ${cat.items.map(item => `
@@ -2381,7 +2393,7 @@ const SundaysRenderer = {
             <div class="container" style="padding-top:1.25rem; padding-bottom:0;">
                 <div class="sundays-season-hero">
                     <p class="section-eyebrow" style="margin-bottom:0.4rem;">현재 절기 — ${cs.dateLabel}</p>
-                    <p style="font-size:1.45rem; font-weight:700; color:var(--heading); margin:0 0 0.3rem;">${cs.symbol} ${cs.name}</p>
+                    <p style="font-size:1.45rem; font-weight:700; color:var(--heading); margin:0 0 0.3rem;">${icon(cs.symbol)} ${cs.name}</p>
                     <p style="font-size:0.92rem; color:var(--text-muted);">${cs.note}</p>
                     ${range ? `<p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${advYear}-${advYear + 1} 교회력 &nbsp;·&nbsp; ${range}</p>` : ''}
                 </div>
@@ -2395,11 +2407,11 @@ const SundaysRenderer = {
         const curKey = cs.key;
         const segs = seasons.map(s => {
             const on = s.key === curKey;
-            return `<button class="season-ribbon-seg${on ? ' is-current' : ''}" style="--seg:${s.color};" data-season-key="${s.key}" aria-label="${s.name} 절기 정보" aria-expanded="false">${on ? `<span class="season-ribbon-mark" aria-hidden="true">${s.symbol}</span>` : ''}</button>`;
+            return `<button class="season-ribbon-seg${on ? ' is-current' : ''}" style="--seg:${s.color};" data-season-key="${s.key}" aria-label="${s.name} 절기 정보" aria-expanded="false">${on ? `<span class="season-ribbon-mark" aria-hidden="true">${icon(s.symbol)}</span>` : ''}</button>`;
         }).join('');
         return `
             <div class="season-ribbon" aria-label="전례력 절기 색 띠 — 현재 절기 ${cs.name}">${segs}</div>
-            <p class="season-ribbon-cap">교회력의 흐름 &middot; 지금은 <strong>${cs.symbol} ${cs.name}</strong></p>
+            <p class="season-ribbon-cap">교회력의 흐름 &middot; 지금은 <strong>${icon(cs.symbol)} ${cs.name}</strong></p>
             <div class="season-pop" role="tooltip" hidden></div>`;
     },
 
@@ -2429,9 +2441,9 @@ const SundaysRenderer = {
             btn.setAttribute('aria-expanded', 'true');
             pop.innerHTML = `
                 <div class="season-pop-bar" style="background:${s.color};"></div>
-                <p class="season-pop-title">${s.symbol} ${s.name}<span class="season-pop-en">${s.en}</span></p>
+                <p class="season-pop-title">${icon(s.symbol)} ${s.name}<span class="season-pop-en">${s.en}</span></p>
                 <p class="season-pop-meta">전례색 · ${s.colorName}</p>
-                <p class="season-pop-period">📅 ${s.period}</p>
+                <p class="season-pop-period">${icon('calendar')} ${s.period}</p>
                 <p class="season-pop-desc">${s.desc}</p>`;
             pop.hidden = false;
         });
@@ -2460,7 +2472,7 @@ const SundaysRenderer = {
         const firstWd    = new Date(year, month, 1).getDay();
         const key        = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
         const monthSeason = LiturgicalCalendar.compute(new Date(year, month, 1));
-        const seasonLabel = monthSeason ? `${monthSeason.symbol} ${monthSeason.name}` : '';
+        const seasonLabel = monthSeason ? `${icon(monthSeason.symbol)} ${monthSeason.name}` : '';
 
         const cells = [];
         for (let i = 0; i < firstWd; i++) {
@@ -2551,10 +2563,10 @@ const SundaysRenderer = {
             return `
                 <div class="resource-card" style="border-top-color:${s.color};${isCurrent ? ' box-shadow:0 0 0 2px ' + s.color + ';' : ''}">
                     <span class="lit-seq" style="border-color:${s.color};" aria-hidden="true">${i + 1}</span>
-                    <span class="resource-icon" aria-hidden="true">${s.symbol}</span>
+                    <span class="resource-icon" aria-hidden="true">${icon(s.symbol)}</span>
                     <p class="resource-title">${s.name}<span class="resource-desc" style="font-weight:400; margin:0 0 0 0.4em;">${s.en}</span></p>
                     <p class="resource-desc" style="margin-bottom:0.35rem;">전례색 · ${s.colorName}</p>
-                    ${range ? `<p class="resource-desc" style="font-weight:600; color:var(--text); margin-bottom:0.4rem;">📅 ${range}</p>` : ''}
+                    ${range ? `<p class="resource-desc" style="font-weight:600; color:var(--text); margin-bottom:0.4rem;">${icon('calendar')} ${range}</p>` : ''}
                     <p class="resource-desc">${s.desc}</p>
                     ${isCurrent ? `<p class="lit-current-tag">지금 이 절기입니다</p>` : ''}
                 </div>`;
