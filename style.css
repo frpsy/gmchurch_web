@@ -629,7 +629,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 /* ── 아이콘 팩 (images/icons.svg) ──────────────────────────
-   선은 글자색(currentColor), 색면은 아이콘별 고유색을 옅게 깐 듀오톤.
+   가는 단색 선(글자색 currentColor)만 쓰는 미니멀 아이콘.
    크기는 부모 font-size(1em)를 따르므로 기존 아이콘 자리의 font-size가 그대로 크기가 된다. */
 .ico {
     width: 1em;
@@ -639,16 +639,12 @@ button:focus:not(:focus-visible) { outline: none; }
     flex-shrink: 0;
     overflow: visible;
 }
-@media (prefers-color-scheme: dark) {
-    .ico { --ico-tint-o: 0.45; }
-}
 /* 장식용 아이콘 자리는 테마색 선으로 통일 */
 .story-value-icon, .resource-icon, .card-icon, .anglican-pillar-icon, .korea-hl-icon,
 .space-icon, .placeholder-icon, .emmaus-join-icon, .bio-ministry-icon, .about-brief-award-icon,
 .faq-cat-icon, .val-icon, .iona-link-card__icon {
     color: var(--theme);
 }
-.story-value-icon .ico, .space-icon .ico { vertical-align: -0.1em; }
 .iona-link-card__icon { font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
 .season-ribbon-mark { color: #fff; }
 .bishop-portrait-fallback { color: #fff; }
@@ -5272,3 +5268,25 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
 
 /* 탭 지연(더블탭 확대 대기) 제거 */
 a, button, summary, [role="button"] { touch-action: manipulation; }
+
+/* ── 아이콘 배지 — 컴포넌트별 font-size 뒤에 두어 크기를 통일 ── */
+/* 카드 속 큰 아이콘은 가는 원 배지 안에 — 선 아이콘이 허공에 뜨지 않게 */
+.story-value-icon, .resource-icon, .card-icon, .anglican-pillar-icon,
+.space-icon, .placeholder-icon, .emmaus-join-icon, .val-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.7em;
+    height: 1.7em;
+    font-size: 1.6rem;
+    line-height: 1;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--theme) 22%, transparent);
+    background: color-mix(in srgb, var(--theme) 6%, var(--white));
+}
+.story-value-icon .ico, .resource-icon .ico, .card-icon .ico, .anglican-pillar-icon .ico,
+.space-icon .ico, .placeholder-icon .ico, .emmaus-join-icon .ico, .val-icon .ico {
+    width: 0.9em;
+    height: 0.9em;
+    vertical-align: 0;
+}
