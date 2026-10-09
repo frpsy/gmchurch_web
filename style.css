@@ -363,9 +363,8 @@ button:focus:not(:focus-visible) { outline: none; }
 /* ── Hero ────────────────────────────────────────────────── */
 .hero {
     position: relative;
-    height: 100vh;
-    height: 100svh;
-    min-height: 560px;
+    min-height: min(780px, 88svh);
+    padding: calc(var(--nav-h) + 4rem) 0 8rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -386,7 +385,7 @@ button:focus:not(:focus-visible) { outline: none; }
     inset: 0;
     z-index: 0;
     background:
-        var(--green-deep) url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=80')
+        var(--green-deep) url('images/gallery/scenery/교회소개_교회내부_제단.webp')
         center/cover no-repeat;
     animation: hero-kenburns 24s ease-in-out infinite;
     will-change: transform;
@@ -400,7 +399,7 @@ button:focus:not(:focus-visible) { outline: none; }
     background: linear-gradient(
         180deg,
         rgba(8, 26, 20, 0.50) 0%,
-        rgba(8, 26, 20, 0.18) 45%,
+        rgba(8, 26, 20, 0.50) 45%,
         rgba(8, 26, 20, 0.70) 100%
     );
 }
@@ -409,7 +408,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .hero-content {
     position: relative;
     z-index: 2;
-    padding-top: var(--nav-h);
+    padding-top: 0;
 }
 
 /* 콘텐츠 스태거 등장 — 위로 살짝 떠오르며 페이드 인 */
@@ -3161,7 +3160,11 @@ footer {
     .nav-link.active { box-shadow: none; }
 
     /* Hero */
-    .hero { min-height: 100vh; min-height: 100svh; }
+    .hero {
+        min-height: 0;
+        padding: calc(var(--nav-h) + 3rem) 0 8rem;
+    }
+    .hero-scroll { display: none; }
 
     /* Clergy Card — 초상만 가운데, bio 텍스트는 좌측 정렬 유지 */
     .clergy-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem 1.75rem; }
@@ -5096,4 +5099,12 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
     /* 접힌 FAQ·순서 항목도 인쇄 시 모두 펼침 */
     details > *:not(summary) { display: block; }
     a { color: #000; text-decoration: underline; }
+}
+
+/* 복사 결과를 화면과 보조기술에 함께 전달한다. */
+.map-copy-status {
+    margin: 0.5rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    overflow-wrap: anywhere;
 }

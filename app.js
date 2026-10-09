@@ -44,14 +44,37 @@ const MapHelper = {
         return `https://www.google.com/maps?q=${addr}&z=17&hl=ko&output=embed`;
     },
 
-    copyAddr(btn) {
+    async copyAddr(btn) {
         const addr = btn.dataset.copy;
-        if (!addr) return;
-        navigator.clipboard.writeText(addr).then(() => {
-            const prev = btn.textContent;
-            btn.textContent = '✓';
+        if (!addr || btn.disabled) return;
+        const prev = btn.dataset.copyLabel || btn.textContent;
+        btn.dataset.copyLabel = prev;
+        btn.disabled = true;
+        let status = btn.closest('.map-card').querySelector('[role="status"]');
+        if (!status) {
+            status = document.createElement('p');
+            status.className = 'map-copy-status';
+            status.setAttribute('role', 'status');
+            btn.closest('.map-card-addr').append(status);
+        }
+        status.textContent = "";
+        try {
+            await navigator.clipboard.writeText(addr);
+            btn.textContent = CHURCH_DATA.ui.copyAddress.success;
+            status.textContent = CHURCH_DATA.ui.copyAddress.success;
+        } catch (_) {
+            // 복사 권한이 없는 브라우저에서도 주소를 직접 복사할 수 있게 한다.
+            const text = btn.parentElement.querySelector('.map-addr-text');
+            const range = document.createRange();
+            range.selectNodeContents(text);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            status.textContent = CHURCH_DATA.ui.copyAddress.failure;
+        } finally {
+            btn.disabled = false;
             setTimeout(() => { btn.textContent = prev; }, 1800);
-        }).catch(() => {});
+        }
     },
 
     html(compact = false) {
@@ -140,7 +163,7 @@ const NavRenderer = {
                     <button class="nav-menu-trigger" id="nav-menu-trigger" aria-label="전체 메뉴 보기 및 검색" aria-haspopup="dialog">
                         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm0-2a9 9 0 0 1 6.32 15.4l4.14 4.13-1.42 1.42-4.13-4.14A9 9 0 1 1 11 2z" fill="currentColor"/></svg>
                     </button>
-                    <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+                    <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">
                         <span></span><span></span><span></span>
                     </button>
                 </div>
@@ -172,6 +195,9 @@ const NavRenderer = {
                 header.classList.toggle('scrolled', window.scrollY > 50);
             }, { passive: true });
         }
+
+        // 모바일에서 열었던 메뉴가 데스크톱 전환 후 다시 나타나는 것을 막는다.
+        window.matchMedia('(max-width: 768px)').addEventListener('change', closeMenu);
 
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();

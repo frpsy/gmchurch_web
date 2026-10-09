@@ -12,7 +12,7 @@
 | 저장소 | `frpsy/gmchurch_web` |
 | 배포 | GitHub Pages (main 브랜치 자동 배포) |
 | 기술 스택 | HTML5 · CSS3 · Vanilla JS (ES6+) |
-| 외부 의존 | Pretendard CDN · Google Maps iframe · Unsplash 이미지 1개 |
+| 외부 의존 | Pretendard CDN · Google Maps iframe |
 
 ## 파일 구조
 
