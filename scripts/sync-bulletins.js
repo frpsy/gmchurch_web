@@ -143,7 +143,7 @@ function readingsBlock(key, resolved, standardYear, withNote) {
         ['시편',    resolved.psalm],
         ['서신서',  resolved.second],
         ['복음',    resolved.gospel]
-    ].map(([role, ref]) => `                { role: "${role}", ref: "${ref}" }`).join(',\n');
+    ].filter(([, ref]) => ref).map(([role, ref]) => `                { role: "${role}", ref: "${ref}" }`).join(',\n');
     const note = withNote
         ? `\n            note: "주보 기준 · 대한성공회 공동 전례독서에 따릅니다.",`
         : '';
@@ -337,7 +337,7 @@ cutoff.setHours(0, 0, 0, 0);
 
     // ── 7. 주보 주간 전례독서 커버리지 검증 ──────────────────────
     //    이미지 주보가 있는데 트랙/시편 기록이 빠지면 화면·fallback이 어긋난다
-    const gaps = [];      // 트랙 자체가 없음 → 기본 B로 표시
+    const gaps = [];      // 트랙 자체가 없음 → 기본 A로 표시, 시편 생략
     const psalmGaps = []; // 트랙 A인데 시편 없음 → 표준(트랙 B 시편)과 어긋남
     for (const it of newItems) {
         if (!it.images.length) continue;                     // PDF 전용 항목은 제외
@@ -357,7 +357,7 @@ cutoff.setHours(0, 0, 0, 0);
     if (newItems.length === 0) console.log('  (등록된 주보 없음)');
 
     if (gaps.length) {
-        console.log('\n⚠️  전례독서 트랙 미기록 (기본 짝 독서 B로 표시됨):');
+        console.log('\n⚠️  전례독서 트랙 미기록 (기본 연속 독서 A로 표시, 시편 생략):');
         gaps.forEach(it => console.log(
             `   - ${it.date}  → 주보 예배 순서면 확인 후 data/lectionary-overrides.json에 "track" 기록`));
     }
