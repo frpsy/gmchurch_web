@@ -363,8 +363,8 @@ button:focus:not(:focus-visible) { outline: none; }
 /* ── Hero ────────────────────────────────────────────────── */
 .hero {
     position: relative;
-    min-height: min(780px, 88svh);
-    padding: calc(var(--nav-h) + 4rem) 0 8rem;
+    min-height: min(700px, 78svh);
+    padding: calc(var(--nav-h) + 4rem) 0 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -525,70 +525,51 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 /* Hero — 하단 스탯 스트립 */
+/* 사진과 본문 사이를 같은 표면으로 연결해 정보가 별도 배너처럼 튀지 않게 한다. */
 .hero-stats {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 180px));
     justify-content: center;
-    gap: 0;
-    padding: 1.1rem 1.5rem;
-    background: rgba(13, 38, 30, 0.55);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255,255,255,0.10);
-    flex-wrap: wrap;
+    padding: 1.5rem clamp(1.25rem, 5vw, 2.5rem);
+    background: var(--cream);
+    text-align: center;
 }
 .hero-stat {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.15rem;
-    padding: 0.25rem 2rem;
+    justify-content: center;
+    min-width: 0;
+    min-height: 48px;
+    gap: 0.2rem;
+    padding: 0.4rem 0.25rem;
 }
 .hero-stat-val {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.01em;
-    white-space: nowrap;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--heading);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
 }
 .hero-stat-lbl {
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.78);  /* 어두운 오버레이 위 대비 상향 */
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-.hero-stat-divider {
-    width: 1px;
-    height: 2.2rem;
-    background: linear-gradient(180deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0.35) 50%,
-        rgba(255,255,255,0) 100%);
-    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    letter-spacing: 0;
 }
 .hero-stat--link {
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     transition: background 0.18s;
-    cursor: pointer;
 }
-.hero-stat--link:hover,
+.hero-stat--link:hover {
+    background: var(--green-light);
+}
 .hero-stat--link:focus-visible {
-    background: rgba(255,255,255,0.12);
-    outline: none;
+    outline: 2px solid var(--heading);
+    outline-offset: 2px;
 }
-.hero-stat--link:hover .hero-stat-val,
-.hero-stat--link:focus-visible .hero-stat-val {
-    color: #fff;
-}
-.hero-stat--link:hover .hero-stat-lbl,
-.hero-stat--link:focus-visible .hero-stat-lbl {
-    color: rgba(255,255,255,1);
-}
+.home #about-brief { padding-top: 2rem; }
 
 /* Hero — 스크롤 인디케이터 */
 @keyframes hero-scroll-bounce {
@@ -597,7 +578,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .hero-scroll {
     position: absolute;
-    bottom: 5.5rem;
+    bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
@@ -612,12 +593,9 @@ button:focus:not(:focus-visible) { outline: none; }
     .hero-actions a { width: 100%; max-width: 300px; text-align: center; }
     .hero-label { letter-spacing: 0.18em; font-size: 0.66rem; }
 
-    .hero-stats { gap: 0; padding: 0.8rem 0.5rem; }
-    .hero-stat { padding: 0.2rem 0.7rem; }
+    .hero-stats { padding: 1.25rem 1rem; }
     .hero-stat-val { font-size: 0.82rem; }
-    .hero-stat-lbl { font-size: 0.68rem; }
-    .hero-stat-divider { height: 1.8rem; }
-    .hero-scroll { bottom: 5rem; }
+    .hero-stat-lbl { font-size: 0.72rem; }
     .btn-hero-primary { font-size: 0.92rem; }
 
     .hero-fallback { animation: none; transform: none; will-change: auto; }
@@ -3162,7 +3140,7 @@ footer {
     /* Hero */
     .hero {
         min-height: 0;
-        padding: calc(var(--nav-h) + 3rem) 0 8rem;
+        padding: calc(var(--nav-h) + 3rem) 0 3rem;
     }
     .hero-scroll { display: none; }
 
