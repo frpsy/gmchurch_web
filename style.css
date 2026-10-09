@@ -691,7 +691,15 @@ button:focus:not(:focus-visible) { outline: none; }
     text-shadow: 0 1px 10px rgba(0,0,0,0.45);
 }
 
-.page-hero--community { background-image: url('images/gallery/community/공동체1.webp'); }
+/* 실제 공동체 축복 사진을 바탕으로 보정한 이미지 — 사제의 손과 반려견에 초점 */
+.page-hero.page-hero--community {
+    background-image: url('images/hero/community-blessing.webp');
+    background-position: center 35%;
+    text-align: left;
+    padding-left: max(1.25rem, calc((100vw - var(--content-max)) / 2));
+}
+.page-hero--community > p { margin-left: 0; }
+
 /* 메뉴 상징 이미지(실제 교회 사진 아님) — 모바일은 경량 버전 */
 .page-hero--worship  { background-image: url('images/hero/worship.webp');  background-position: 30% center; }
 .page-hero--clergy   { background-image: url('images/hero/clergy.webp');   background-position: 40% center; }
@@ -700,6 +708,31 @@ button:focus:not(:focus-visible) { outline: none; }
 .page-hero--media    { background-image: url('images/hero/media.webp'); }
 .page-hero--visit    { background-image: url('images/hero/visit.webp');    background-position: center 60%; }
 @media (max-width: 768px) {
+    .page-hero.page-hero--community {
+        background-image: url('images/hero/community-blessing-m.webp');
+        background-position: 43% center;
+        height: 264px;
+        padding-top: calc(var(--nav-h) + 1rem);
+        padding-bottom: 1rem;
+    }
+    /* 좁은 화면에서도 제목이 얼굴을 가리지 않도록 왼쪽 여백에 배치한다. */
+    .page-hero--community .section-eyebrow {
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        margin-top: 0;
+        line-height: 1.6;
+    }
+    .page-hero--community h1 {
+        max-width: 42%;
+        font-size: 1.6rem;
+        line-height: 1.3;
+    }
+    .page-hero--community > p:not(.section-eyebrow) {
+        max-width: 42%;
+        font-size: 0.78rem;
+        line-height: 1.6;
+        margin-top: 0.7rem;
+    }
     .page-hero--worship  { background-image: url('images/hero/worship-m.webp'); }
     .page-hero--clergy   { background-image: url('images/hero/clergy-m.webp'); }
     .page-hero--sundays  { background-image: url('images/hero/sundays-m.webp'); }
