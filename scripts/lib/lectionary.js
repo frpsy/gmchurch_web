@@ -21,7 +21,8 @@ export function mergeStandards(files) {
 
 // 주보에서 확인한 트랙·특별 주일 독서를 표준 주일 위에 병합해 실제 봉독 본문을 반환.
 // - 특별 주일(override.readings): 네 본문 전체 교체, 표준 주일명은 standardName으로 보존
-// - 일반 주일: firstReading은 트랙으로 선택(주보 기록 우선, 없으면 짝 독서 B 기본)
+// - 일반 주일: firstReading은 트랙으로 선택(주보 기록 우선, 없으면 연속 독서 A 기본)
+//   트랙 미기록 주일은 표준 시편이 짝 독서(B)값이라 어긋나므로 시편을 비운다
 // date가 표준 목록에 없으면 null.
 export function resolveReadings(sundays, overrides, date) {
     const s = sundays.find(x => x.date === date);
@@ -46,10 +47,12 @@ export function resolveReadings(sundays, overrides, date) {
     // 일반 주일: 제1독서는 트랙으로 선택, 시편은 트랙 A일 때 표준(트랙 B값)과
     // 어긋나므로 주보 기록(o.psalm)이 있으면 우선한다.
     const hasB  = !!s.readings.firstReadingB;
-    const track = hasB ? ((o && o.track) || 'B') : null;
+    const track = hasB ? ((o && o.track) || 'A') : null;
     const first = (hasB && track === 'B')
         ? s.readings.firstReadingB
         : s.readings.firstReadingA;
+    const trackUnknown = hasB && !(o && o.track);
+    const psalm = (o && o.psalm) || (trackUnknown ? null : s.readings.psalm);
     return {
         date,
         year: s.year,
@@ -58,7 +61,7 @@ export function resolveReadings(sundays, overrides, date) {
         track,
         fromBulletin: !!(o && (o.track || o.psalm)),
         first,
-        psalm:  (o && o.psalm) || s.readings.psalm,
+        psalm,
         second: s.readings.secondReading,
         gospel: s.readings.gospel
     };

@@ -39,10 +39,12 @@ describe('resolveReadings: 표준+주보 병합', () => {
         expect(r.fromBulletin).toBe(true);
     });
 
-    it('기록이 없는 주간은 표준 짝 독서(B)를 기본으로 쓴다', () => {
+    it('기록이 없는 주간은 연속 독서(A)를 기본으로 쓰고 시편은 비운다', () => {
         const r = resolveReadings(std, ov, '2026-07-19'); // override 없음
         const s = std.find(x => x.date === '2026-07-19');
-        expect(r.first).toBe(s.readings.firstReadingB);
+        expect(r.first).toBe(s.readings.firstReadingA);
+        expect(r.track).toBe('A');
+        expect(r.psalm).toBeNull();   // 표준 시편은 짝 독서(B)값이라 A와 어긋남
         expect(r.fromBulletin).toBe(false);
     });
 
