@@ -3319,7 +3319,7 @@ footer {
 .emmaus-stage-num {
     font-size: 2.8rem;
     font-weight: 800;
-    color: #868f5c;   /* 세이지 — 흰 카드 위 3.4:1 */
+    color: var(--sage-ink);   /* 세이지 글자 토큰 — 라이트 5.4:1, 다크 자동 전환 */
     line-height: 1;
     margin-bottom: 0.5rem;
 }

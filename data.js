@@ -44,12 +44,12 @@ const LiturgicalCalendar = (() => {
     const SEASONS = {
         advent:    { key: "advent",    name: "대림절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", onColor: "#fff",     symbol: "🕯️", note: "주님의 오심을 기다리는 시간" },
         christmas: { key: "christmas", name: "성탄절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", ink: "#80600a", onColor: "#1a1a1a", symbol: "⭐",   note: "말씀이 사람이 되시다"   },
-        epiphany:  { key: "epiphany",  name: "공현절 후",    colorName: "녹색", color: "#3d6b4a", colorLight: "#eef2ec", onColor: "#fff",     symbol: "✨",   note: "주님이 세상에 드러나심" },
+        epiphany:  { key: "epiphany",  name: "공현절 후",    colorName: "녹색", color: "#2f6a52", colorLight: "#ebeedf", onColor: "#fff",     symbol: "✨",   note: "주님이 세상에 드러나심" },
         lent:      { key: "lent",      name: "사순절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", onColor: "#fff",     symbol: "✝️",  note: "회개와 절제의 시간"     },
         holyweek:  { key: "holyweek",  name: "성주간",       colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "🌿",   note: "주님의 수난을 묵상"     },
         easter:    { key: "easter",    name: "부활절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", ink: "#80600a", onColor: "#1a1a1a", symbol: "🌅",   note: "다시 살아나신 주님"     },
         pentecost: { key: "pentecost", name: "성령강림절",   colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "🔥",   note: "성령께서 임하시다"      },
-        ordinary:  { key: "ordinary",  name: "성령강림 후",  colorName: "녹색", color: "#3d6b4a", colorLight: "#eef2ec", onColor: "#fff",     symbol: "🌿",   note: "그리스도인의 일상"      }
+        ordinary:  { key: "ordinary",  name: "성령강림 후",  colorName: "녹색", color: "#2f6a52", colorLight: "#ebeedf", onColor: "#fff",     symbol: "🌿",   note: "그리스도인의 일상"      }
     };
 
     function compute(today = new Date()) {
@@ -1016,7 +1016,7 @@ const CHURCH_DATA = {
                 name: "공현절 후",
                 en: "Epiphany",
                 colorName: "녹색",
-                color: "#3d6b4a",
+                color: "#2f6a52",
                 symbol: "✨",
                 period: "1월 6일 ~ 재의 수요일 전날",
                 desc: "주님께서 세상에 자신을 드러내신 것을 기념합니다. 공현절과 주님의 세례 주일을 포함합니다."
@@ -1066,7 +1066,7 @@ const CHURCH_DATA = {
                 name: "성령강림 후",
                 en: "Ordinary Time",
                 colorName: "녹색",
-                color: "#3d6b4a",
+                color: "#2f6a52",
                 symbol: "🌿",
                 period: "성령강림 다음 주 ~ 대림절 전날",
                 desc: "그리스도인의 일상을 살아가는 긴 계절. 왕이신 그리스도 주일로 마무리됩니다."
