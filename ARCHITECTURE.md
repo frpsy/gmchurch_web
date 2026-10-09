@@ -131,6 +131,7 @@ const CHURCH_DATA = {
   ui: { copyAddress: { success, failure } }, // 공통 동작 안내
 
   home: {                           // index.html 전용 문구 (예배 시간·위치는 worship.main/info에서 파생)
+    scrollLabel,                     // 첫 화면에서 소개로 이동하는 링크 문구
     heroActions: [{ label, href, primary? }],
     stats: { established, worship, location },   // 히어로 수치 라벨
     about:   { eyebrow, title, facts: [{ label, key }], more },  // key = info의 필드명
@@ -604,6 +605,7 @@ window DOMContentLoaded
 | `.nav-header` | 고정 헤더 (--nav-glass), scroll 시 `.scrolled` |
 | `.nav-chevron` | 모바일 드롭다운 토글 화살표 버튼 (desktop: hidden) |
 | `.nav-item.mobile-open` | 모바일 드롭다운 열림 상태 |
+| `.home-intro` | 동적 화면 높이를 채우는 첫 화면, 정보 카드·소개 이동 링크 포함 |
 | `.hero` / `.hero-fallback` | Ken Burns 애니메이션 배경 (교회 제단 사진) |
 | `.page-hero` | 서브 페이지 상단 헤더 |
 | `.section` / `.section-header` | 섹션 레이아웃 |
