@@ -4553,6 +4553,19 @@ footer {
     color: var(--theme);
     border-bottom-color: var(--theme);
 }
+/* 탭별 구분색 — 지정하지 않은 페이지는 기본 테마색 그대로. 밑줄은 옅게, 활성 탭은 진하게 + 옅은 배경 */
+.gc-nav-link[class*="gc-nav-link--"]:not(.gc-nav-link--ext) {
+    border-bottom-color: color-mix(in srgb, var(--tab-accent) 35%, transparent);
+}
+.gc-nav-link[class*="gc-nav-link--"]:not(.gc-nav-link--ext).is-active {
+    color: var(--heading);
+    border-bottom-color: var(--tab-accent);
+    background: color-mix(in srgb, var(--tab-accent) 12%, var(--white));
+}
+.gc-nav-link--climate { --tab-accent: #3f86b5; }
+.gc-nav-link--vegan   { --tab-accent: #4f9a52; }
+.gc-nav-link--animals { --tab-accent: #c8862a; }
+.gc-nav-link--press   { --tab-accent: #8b6bb8; }
 /* 터치 기기에서 sticky-hover 오작동 방지 — 마우스 환경에서만 hover 적용 */
 @media (hover: hover) {
     .gc-nav-link:hover {
@@ -4562,9 +4575,10 @@ footer {
 }
 @media (max-width: 640px) {
     .gc-nav-link {
-        flex: 1;
+        flex: 1 1 0;
+        min-width: 0;
         justify-content: center;
-        padding: 0.75rem 0.5rem;
+        padding: 0.75rem 0.25rem;
         font-size: 0.8rem;
     }
 }
