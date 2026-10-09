@@ -188,7 +188,7 @@ button:focus:not(:focus-visible) { outline: none; }
     position: fixed;
     top: 0; left: 0; right: 0;
     height: var(--nav-h);
-    background: rgba(28, 67, 54, 0.86);
+    background: var(--nav-glass);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -535,7 +535,8 @@ button:focus:not(:focus-visible) { outline: none; }
     justify-content: center;
     gap: 0;
     padding: 1.1rem 1.5rem;
-    background: rgba(13, 38, 30, 0.55);
+    /* 상단 내비와 같은 유리 톤 — 사진 위 상·하단 띠의 명도 차이 방지 */
+    background: var(--nav-glass);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255,255,255,0.10);
