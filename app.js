@@ -2100,7 +2100,7 @@ const SundaysRenderer = {
 
         const idx = this._lectionaryFindIdx(sundays);
         el.dataset.lectionaryIdx = idx;
-        const track = sundays[idx].bulletinTrack || 'B';  // 주보 확인 트랙, 없으면 짝 독서 기본
+        const track = sundays[idx].bulletinTrack || 'A';  // 주보 확인 트랙, 없으면 연속 독서 기본
         el.dataset.lectionaryTrack = track;
         el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryCardHtml(sundays, idx, track)}</div>`;
         this._bindLectionaryNav(el, sundays);
@@ -2271,7 +2271,7 @@ const SundaysRenderer = {
         const moveTo = i => {
             el.dataset.lectionaryIdx = i;
             // 이동한 주일의 주보 확인 트랙으로 초기화
-            el.dataset.lectionaryTrack = sundays[i].bulletinTrack || 'B';
+            el.dataset.lectionaryTrack = sundays[i].bulletinTrack || 'A';
             rerender();
         };
         el.querySelector('#lect-prev')?.addEventListener('click', () => {
