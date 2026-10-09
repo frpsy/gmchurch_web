@@ -117,19 +117,17 @@ const CHURCH_DATA = {
 
     // 홈(index.html) 전용 문구 — 예배 시간·위치 등 사실 정보는 info/worship에서 파생
     home: {
-        scrollLabel: "교회 알아보기",
         heroActions: [
             { label: "처음 오신 분", href: "newcomer.html", primary: true },
             { label: "예배 안내",    href: "worship.html" }
         ],
-        stats: { worship: "주일 감사성찬례", location: "오시는 길" },
+        stats: { established: "설립", worship: "주일 예배", location: "위치" },
         about: {
             eyebrow: "About",
             title: "광명교회",
             facts: [
                 { label: "성당", key: "subName" },
-                { label: "소속", key: "diocese" },
-                { label: "설립", key: "established" }
+                { label: "소속", key: "diocese" }
             ],
             more: "교회 소개 자세히 보기"
         },
