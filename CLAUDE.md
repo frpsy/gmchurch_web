@@ -17,10 +17,12 @@
 | 항목 | 내용 |
 |---|---|
 | 방식 | 바닐라 HTML + CSS + JS, 빌드 없음 |
-| 배포 | GitHub Pages (`main` 브랜치 자동 배포) |
+| 배포 | GitHub Pages (`main` 브랜치 자동 배포) — **Netlify는 사용하지 않음** (아래 참고) |
 | 로드 순서 | `data.js` → `app.js` (CHURCH_DATA 전역 변수) |
 | 테스트 | `npm test` (Vitest, 90개) |
 | CI | `cache-bust.yml` — main 머지 시 `?v=` 자동 갱신 |
+
+> **Netlify 미사용**: 예전에 쓰던 Netlify는 종료되었다. PR에 `netlify[bot]`의 "Deploy Preview" 코멘트나 `deploy-preview-N--gmchurchweb.netlify.app` 링크가 보여도 **무시한다** — 확인·재시도·수정 대상이 아니고, 미리보기는 로컬(`python3 -m http.server 8000`)로 한다. 이 봇 알림만으로 PR 대응(푸시·코멘트)을 시작하지 않는다. (저장소에는 Netlify 설정 파일이 없다. 봇이 계속 뜨면 GitHub 쪽 Netlify 앱 연결을 해제해야 한다.)
 
 ---
 
