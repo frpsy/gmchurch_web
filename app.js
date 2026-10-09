@@ -528,9 +528,8 @@ const IndexRenderer = {
 
         const season = LiturgicalCalendar.compute(sun);
         const r = s.readings;
-        // 연중 시기 두 트랙 중 어느 것을 봉독할지는 주보로만 알 수 있으므로, 기록이 없으면 제1독서는 생략
-        const first = !r.firstReadingB ? r.firstReadingA
-            : s.bulletinTrack ? (s.bulletinTrack === 'A' ? r.firstReadingA : r.firstReadingB) : null;
+        // 연중 시기 두 트랙 중 어느 것인지는 주보로만 알 수 있으므로, 기록이 없으면 연속 독서(A) 기본
+        const first = (r.firstReadingB && s.bulletinTrack === 'B') ? r.firstReadingB : r.firstReadingA;
         const rows = [[t.labels.first, first], [t.labels.second, r.secondReading], [t.labels.gospel, r.gospel]]
             .filter(([, ref]) => ref)
             .map(([lbl, ref]) => `<div class="info-row"><strong>${lbl}</strong><span>${SundaysRenderer._refLink(ref)}</span></div>`)
