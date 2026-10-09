@@ -3706,6 +3706,11 @@ footer {
 /* ── Visit page utilities ────────────────────────────────── */
 .info-card--wide { max-width: 760px; margin-left: auto; margin-right: auto; }
 .info-card--wide + .info-card--wide { margin-top: 1.5rem; }
+/* 홈 예배 섹션 — 예배 카드 아래 다가오는 주일 카드 */
+.this-sunday { margin-top: 2rem; }
+.this-sunday .visit-detail-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.this-sunday .liturgy-season-badge { margin-bottom: var(--space-2); box-shadow: none; }
+.this-sunday .info-row strong { min-width: 72px; }
 
 .visit-contact { margin-top: 1.5rem; }
 

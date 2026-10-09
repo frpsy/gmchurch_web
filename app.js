@@ -379,6 +379,7 @@ const IndexRenderer = {
         this._hero();
         this._about();
         this._worship();
+        this._thisSunday();
         this._guide();
         this._visit();
     },
@@ -511,6 +512,44 @@ const IndexRenderer = {
         }
         const more = document.getElementById('worship-more');
         if (more) more.innerHTML = `<a href="worship.html" class="about-brief-link">${home.more} →</a>`;
+    },
+
+    /* 다가오는 주일(오늘이 주일이면 오늘) 전례 정보 — 독서 파일을 못 불러오면 블록을 숨긴다 */
+    async _thisSunday() {
+        const el = document.getElementById('this-sunday');
+        if (!el) return;
+        const sundays = await SundaysRenderer._loadSundays();
+        const t = CHURCH_DATA.home.thisSunday;
+        const today = new Date();
+        const sun = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (7 - today.getDay()) % 7);
+        const iso = `${sun.getFullYear()}-${String(sun.getMonth() + 1).padStart(2, '0')}-${String(sun.getDate()).padStart(2, '0')}`;
+        const s = sundays.find(x => x.date === iso);
+        if (!s) { el.hidden = true; return; }
+
+        const season = LiturgicalCalendar.compute(sun);
+        const r = s.readings;
+        // 연중 시기 두 트랙 중 어느 것을 봉독할지는 주보로만 알 수 있으므로, 기록이 없으면 제1독서는 생략
+        const first = !r.firstReadingB ? r.firstReadingA
+            : s.bulletinTrack ? (s.bulletinTrack === 'A' ? r.firstReadingA : r.firstReadingB) : null;
+        const rows = [[t.labels.first, first], [t.labels.second, r.secondReading], [t.labels.gospel, r.gospel]]
+            .filter(([, ref]) => ref)
+            .map(([lbl, ref]) => `<div class="info-row"><strong>${lbl}</strong><span>${SundaysRenderer._refLink(ref)}</span></div>`)
+            .join('');
+        const latest = (CHURCH_DATA.bulletins.items || [])[0];
+        const bulletin = latest && latest.date === iso
+            ? `<a href="bulletin.html" class="detail-link">${t.bulletin} →</a>` : '';
+        const dateStr = `${sun.getMonth() + 1}월 ${sun.getDate()}일`;
+
+        el.innerHTML = `
+            <h3>${t.title} · ${dateStr} ${s.koreanName}</h3>
+            <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.color};--season-ink:${season.ink || season.color}"><span class="season-dot"></span>${season.symbol}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">${season.colorName}</span></span></div>
+            ${rows}
+            <p class="visit-detail-wrap">
+                <a href="sundays.html#lectionary" class="detail-link">${t.more} →</a>
+                ${bulletin}
+            </p>
+        `;
+        el.hidden = false;
     },
 
     _guide() {
@@ -2052,24 +2091,12 @@ const SundaysRenderer = {
             </div>`;
         el.innerHTML = header + '<p class="lectionary-loading">불러오는 중…</p>';
 
-        // 연도별 파일을 날짜순 단일 목록으로 병합 — 대림절에 해가 바뀌어도 이어서 표시.
-        // ⚠️ scripts/lib/lectionary.js의 STANDARD_FILES·mergeStandards와 동일하게 유지할 것.
-        const results = await Promise.all(this._LECTIONARY_FILES.map(f =>
-            fetch('data/' + f).then(r => r.ok ? r.json() : null).catch(() => null)));
-        const sundays = results.filter(Boolean)
-            .flatMap(d => d.sundays.map(s => ({ ...s, year: d.year })))
-            .sort((a, b) => a.date.localeCompare(b.date));
+        const sundays = await this._loadSundays();
         if (!sundays.length) {
             el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryFallback()}</div>`;
             el.querySelector('[data-lectionary-retry]').addEventListener('click', () => this._lectionaryAsync(el));
             return;
         }
-
-        // 주보 기준 실제 봉독 기록 병합 (파일이 없어도 표준 독서로 동작)
-        try {
-            const ovRes = await fetch('data/lectionary-overrides.json');
-            if (ovRes.ok) this._applyOverrides(sundays, (await ovRes.json()).sundays || {});
-        } catch (_) { /* 표준 독서 유지 */ }
 
         const idx = this._lectionaryFindIdx(sundays);
         el.dataset.lectionaryIdx = idx;
@@ -2100,6 +2127,25 @@ const SundaysRenderer = {
                 };
             }
         });
+    },
+
+    /* 표준 독서(연도별 파일 병합) + 주보 기록(overrides). 실패 시 빈 배열 — 홈(IndexRenderer)도 사용 */
+    async _loadSundays() {
+        // 연도별 파일을 날짜순 단일 목록으로 병합 — 대림절에 해가 바뀌어도 이어서 표시.
+        // ⚠️ scripts/lib/lectionary.js의 STANDARD_FILES·mergeStandards와 동일하게 유지할 것.
+        const results = await Promise.all(this._LECTIONARY_FILES.map(f =>
+            fetch('data/' + f).then(r => r.ok ? r.json() : null).catch(() => null)));
+        const sundays = results.filter(Boolean)
+            .flatMap(d => d.sundays.map(s => ({ ...s, year: d.year })))
+            .sort((a, b) => a.date.localeCompare(b.date));
+        if (!sundays.length) return sundays;
+
+        // 주보 기준 실제 봉독 기록 병합 (파일이 없어도 표준 독서로 동작)
+        try {
+            const ovRes = await fetch('data/lectionary-overrides.json');
+            if (ovRes.ok) this._applyOverrides(sundays, (await ovRes.json()).sundays || {});
+        } catch (_) { /* 표준 독서 유지 */ }
+        return sundays;
     },
 
     _lectionaryFindIdx(sundays) {
