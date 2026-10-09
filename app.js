@@ -2552,6 +2552,9 @@ const App = {
             const r = document.documentElement.style;
             r.setProperty('--season',       cs.color);
             r.setProperty('--season-light', cs.colorLight);
+            // 금색 절기는 밝아서 글자색(ink)·위 글자색(onColor)을 따로 둔다 — WCAG AA
+            r.setProperty('--season-ink',   cs.ink || cs.color);
+            r.setProperty('--season-on',    cs.onColor || '#fff');
         }
 
         NavRenderer.render();
