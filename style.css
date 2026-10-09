@@ -2607,10 +2607,20 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: inherit;
     transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease;
 }
-.resource-card:hover {
+/* 터치 기기는 hover가 탭과 동시에 걸려 카드가 뜨며 어색하므로 마우스에서만 적용 */
+@media (hover: hover) {
+    .resource-card:hover {
+        border-color: var(--theme);
+        box-shadow: var(--hover-shadow-sm);
+        transform: translateY(-5px);
+    }
+}
+.resource-card { -webkit-tap-highlight-color: transparent; }
+/* 누르는 즉시 반응하도록 짧은 전환으로 눌림 표시 */
+.resource-card:active {
     border-color: var(--theme);
-    box-shadow: var(--hover-shadow-sm);
-    transform: translateY(-5px);
+    transform: scale(0.97);
+    transition: transform 0.08s ease-out, border-color 0.08s;
 }
 .resource-icon {
     font-size: 1.9rem;
@@ -2618,7 +2628,9 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     display: inline-block;
     transition: transform 0.35s var(--ease-out);
 }
-.resource-card:hover .resource-icon { transform: scale(1.12) translateY(-2px); }
+@media (hover: hover) {
+    .resource-card:hover .resource-icon { transform: scale(1.12) translateY(-2px); }
+}
 .resource-title {
     font-size: 1.02rem;
     font-weight: 700;
@@ -5153,3 +5165,6 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
     color: var(--text-muted);
     overflow-wrap: anywhere;
 }
+
+/* 탭 지연(더블탭 확대 대기) 제거 */
+a, button, summary, [role="button"] { touch-action: manipulation; }
