@@ -712,12 +712,12 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .page-hero--greenchurch  { background-image: url('images/gallery/scenery/greenchurch-award-2023.webp'); background-position: center 30%; }
 
-/* 히어로 좌·우 25% 메뉴 이동 영역 — 가운데 글자 영역은 건드리지 않는다 */
+/* 히어로 좌·우 20% 메뉴 이동 영역 — 가운데 글자 영역은 건드리지 않는다 */
 .page-hero > .hero-nav {
     position: absolute;
     top: var(--nav-h);
     bottom: 0;
-    width: 25%;
+    width: 20%;
     z-index: 2;
     display: flex;
     align-items: center;

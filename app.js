@@ -2610,7 +2610,7 @@ const TapFeedback = {
     }
 };
 
-// 메뉴 히어로 좌·우 25% 터치 영역 — 메뉴 순서(CHURCH_DATA.navigation)상 이전/다음 메뉴로 이동한다.
+// 메뉴 히어로 좌·우 20% 터치 영역 — 메뉴 순서(CHURCH_DATA.navigation)상 이전/다음 메뉴로 이동한다.
 // 첫 메뉴의 이전은 마지막으로, 마지막의 다음은 첫 메뉴로 이어진다.
 const HeroNav = {
     init() {
