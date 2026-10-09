@@ -2603,22 +2603,9 @@ const SundaysRenderer = {
 // 카드 탭 피드백 — 이동 전에 눌림 상태가 보이도록 짧게(140ms) 머문 뒤 이동한다.
 const TapFeedback = {
     init() {
-        // iOS Safari는 touchstart 리스너가 있어야 :active가 즉시 적용된다
+        // iOS Safari는 touchstart 리스너가 있어야 :active(눌림 표시)가 즉시 적용된다.
+        // 이동을 지연시키지 않는다 — 탭하면 바로 페이지로 간다.
         document.addEventListener('touchstart', () => {}, { passive: true });
-        // 뒤로가기(bfcache) 복원 시 눌림 상태가 남지 않도록 페이지가 다시 보일 때 지운다
-        window.addEventListener('pageshow', () => {
-            document.querySelectorAll('.is-tapped').forEach(el => el.classList.remove('is-tapped'));
-        });
-        document.addEventListener('click', e => {
-            const card = e.target.closest('a.resource-card');
-            if (!card || e.defaultPrevented || e.button !== 0) return;
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || card.target === '_blank') return;
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            e.preventDefault();
-            card.classList.add('is-tapped');
-            if (navigator.vibrate) navigator.vibrate(8);
-            setTimeout(() => { window.location.href = card.href; }, 140);
-        });
     }
 };
 
