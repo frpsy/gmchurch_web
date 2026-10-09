@@ -19,7 +19,7 @@
 | 방식 | 바닐라 HTML + CSS + JS, 빌드 없음 |
 | 배포 | GitHub Pages (`main` 브랜치 자동 배포) — **Netlify는 사용하지 않음** (아래 참고) |
 | 로드 순서 | `data.js` → `app.js` (CHURCH_DATA 전역 변수) |
-| 테스트 | `npm test` (Vitest, 90개) |
+| 테스트 | `npm test` (Vitest) |
 | CI | `cache-bust.yml` — main 머지 시 `?v=` 자동 갱신 |
 
 > **Netlify 미사용**: 예전에 쓰던 Netlify는 종료되었다. PR에 `netlify[bot]`의 "Deploy Preview" 코멘트나 `deploy-preview-N--gmchurchweb.netlify.app` 링크가 보여도 **무시한다** — 확인·재시도·수정 대상이 아니고, 미리보기는 로컬(`python3 -m http.server 8000`)로 한다. 이 봇 알림만으로 PR 대응(푸시·코멘트)을 시작하지 않는다. (저장소에는 Netlify 설정 파일이 없다. 봇이 계속 뜨면 GitHub 쪽 Netlify 앱 연결을 해제해야 한다.)
@@ -127,7 +127,8 @@ for f in *.html; do
   sed -i \
     "s/style\.css?v=[0-9A-Za-z_-]*/style.css?v=${TODAY}/g
      s/data\.js?v=[0-9A-Za-z_-]*/data.js?v=${TODAY}/g
-     s/app\.js?v=[0-9A-Za-z_-]*/app.js?v=${TODAY}/g" "$f"
+     s/app\.js?v=[0-9A-Za-z_-]*/app.js?v=${TODAY}/g
+     s/icons\.svg?v=[0-9A-Za-z_-]*/icons.svg?v=${TODAY}/g" "$f"
 done
 echo "Done: $TODAY"
 ```
@@ -207,6 +208,7 @@ echo "Done: $TODAY"
 
 ### 문체 (한국어 콘텐츠)
 - 정중하고 담백하게 — 과도한 수식어("아름다운", "따뜻한", "늘", "든든한") 지양
+- **이모티콘 직접 사용 금지** — 아이콘은 `images/icons.svg` 아이콘 팩만 쓴다(data.js는 심볼 이름, app.js는 `icon('name')`). 없는 아이콘은 같은 스타일로 심볼을 추가 (`ARCHITECTURE.md` 아이콘 팩 참고)
 - `draft-banner` 클래스 / `badge: "임시"` — 정식 전환 시 반드시 제거
 
 ### 주석

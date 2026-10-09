@@ -42,14 +42,14 @@ const LiturgicalCalendar = (() => {
     }
 
     const SEASONS = {
-        advent:    { key: "advent",    name: "대림절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", onColor: "#fff",     symbol: "🕯️", note: "주님의 오심을 기다리는 시간" },
-        christmas: { key: "christmas", name: "성탄절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", ink: "#80600a", onColor: "#1a1a1a", symbol: "⭐",   note: "말씀이 사람이 되시다"   },
-        epiphany:  { key: "epiphany",  name: "공현절 후",    colorName: "녹색", color: "#285a47", colorLight: "#e7eee8", onColor: "#fff",     symbol: "✨",   note: "주님이 세상에 드러나심" },
-        lent:      { key: "lent",      name: "사순절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", onColor: "#fff",     symbol: "✝️",  note: "회개와 절제의 시간"     },
-        holyweek:  { key: "holyweek",  name: "성주간",       colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "🌿",   note: "주님의 수난을 묵상"     },
-        easter:    { key: "easter",    name: "부활절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", ink: "#80600a", onColor: "#1a1a1a", symbol: "🌅",   note: "다시 살아나신 주님"     },
-        pentecost: { key: "pentecost", name: "성령강림절",   colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "🔥",   note: "성령께서 임하시다"      },
-        ordinary:  { key: "ordinary",  name: "성령강림 후",  colorName: "녹색", color: "#285a47", colorLight: "#e7eee8", onColor: "#fff",     symbol: "🌿",   note: "그리스도인의 일상"      }
+        advent:    { key: "advent",    name: "대림절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", onColor: "#fff",     symbol: "candle", note: "주님의 오심을 기다리는 시간" },
+        christmas: { key: "christmas", name: "성탄절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", ink: "#80600a", onColor: "#1a1a1a", symbol: "star",   note: "말씀이 사람이 되시다"   },
+        epiphany:  { key: "epiphany",  name: "공현절 후",    colorName: "녹색", color: "#285a47", colorLight: "#e7eee8", onColor: "#fff",     symbol: "sparkle",   note: "주님이 세상에 드러나심" },
+        lent:      { key: "lent",      name: "사순절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", onColor: "#fff",     symbol: "cross",  note: "회개와 절제의 시간"     },
+        holyweek:  { key: "holyweek",  name: "성주간",       colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "palm",   note: "주님의 수난을 묵상"     },
+        easter:    { key: "easter",    name: "부활절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", ink: "#80600a", onColor: "#1a1a1a", symbol: "sunrise",   note: "다시 살아나신 주님"     },
+        pentecost: { key: "pentecost", name: "성령강림절",   colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "flame",   note: "성령께서 임하시다"      },
+        ordinary:  { key: "ordinary",  name: "성령강림 후",  colorName: "녹색", color: "#285a47", colorLight: "#e7eee8", onColor: "#fff",     symbol: "leaf",   note: "그리스도인의 일상"      }
     };
 
     function compute(today = new Date()) {
@@ -148,10 +148,10 @@ const CHURCH_DATA = {
             title: "처음 오셨나요?",
             sub: "방문 전에 많이 궁금해하시는 내용을 모았습니다.",
             cards: [
-                { icon: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M10 16V8h3a2.5 2.5 0 0 1 0 5h-3\"/></svg>", title: "주차 안내",      desc: "교회 인근에 무료 주차가 가능합니다.",                     href: "visit.html#parking",       action: "주차 안내 보기" },
-                { icon: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\"><path d=\"M7 4h10v4a5 5 0 0 1-10 0V4z\"/><path d=\"M12 13v5M8 20h8\"/></svg>", title: "영성체 안내",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
-                { icon: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7\"/><path d=\"M12 17h.01\"/></svg>", title: "자주 묻는 질문", desc: "성공회와 예배에 관해 자주 받는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
-                { icon: "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" focusable=\"false\"><circle cx=\"9\" cy=\"8\" r=\"3\"/><circle cx=\"17\" cy=\"9\" r=\"2.5\"/><path d=\"M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6\"/><path d=\"M15.5 13.3c.5-.2 1-.3 1.5-.3 2.2 0 4 1.8 4 4\"/></svg>", title: "공동체",         desc: "광명 희망터·엠마우스 코스·소그룹 모임을 소개합니다.",    href: "community.html",           action: "공동체 보기" }
+                { icon: "parking", title: "주차 안내",      desc: "교회 인근에 무료 주차가 가능합니다.",                     href: "visit.html#parking",       action: "주차 안내 보기" },
+                { icon: "chalice", title: "영성체 안내",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
+                { icon: "question", title: "자주 묻는 질문", desc: "성공회와 예배에 관해 자주 받는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
+                { icon: "people", title: "공동체",         desc: "광명 희망터·엠마우스 코스·소그룹 모임을 소개합니다.",    href: "community.html",           action: "공동체 보기" }
             ]
         },
         visit: {
@@ -173,9 +173,9 @@ const CHURCH_DATA = {
                 "오늘날 성공회는 전 세계 165개국, 약 8,500만 명의 신자가 함께하는 세계 공동체입니다. 특정 교리를 강요하지 않으며, 한 지도자에게 권위를 집중시키지도 않습니다. <strong>말씀과 성찬을 중심으로 하는 공동 신앙</strong>을 원칙으로 삼습니다."
             ],
             pillars: [
-                { icon: "📖", title: "성서", desc: "하느님의 말씀인 성서는 신앙과 삶의 최고 권위입니다. 예배마다 구약·서신서·복음서를 함께 봉독합니다." },
-                { icon: "💡", title: "이성", desc: "하느님이 주신 이성으로 말씀을 해석하고, 그 신앙을 일상에서 실천합니다." },
-                { icon: "🏛", title: "전통", desc: "초대교회로부터 이어진 사도적 전통과 2,000년 공동체의 지혜를 신앙의 안내자로 삼습니다." }
+                { icon: "book", title: "성서", desc: "하느님의 말씀인 성서는 신앙과 삶의 최고 권위입니다. 예배마다 구약·서신서·복음서를 함께 봉독합니다." },
+                { icon: "bulb", title: "이성", desc: "하느님이 주신 이성으로 말씀을 해석하고, 그 신앙을 일상에서 실천합니다." },
+                { icon: "pillar", title: "전통", desc: "초대교회로부터 이어진 사도적 전통과 2,000년 공동체의 지혜를 신앙의 안내자로 삼습니다." }
             ],
             pillarNote: "16세기 신학자 리처드 후커(Richard Hooker)가 정립한 '세 기둥'입니다. 성서·이성·전통이 균형을 이룰 때 신앙이 온전해진다는 가르침입니다.",
             mission: {
@@ -201,10 +201,10 @@ const CHURCH_DATA = {
                 "일제강점기와 민주화 시기에도 사회적 책임을 이어왔으며, 오늘날에도 선교·교육·사회복지 분야에서 활동을 계속하고 있습니다."
             ],
             highlights: [
-                { icon: "⛪", text: "서울·부산·대전 3개 교구, 전국 200여 교회" },
-                { icon: "🎓", text: "성공회대학교 등 교육·사회 사업 운영" },
-                { icon: "🌐", text: "세계성공회공동체(Anglican Communion) 정식 회원 교회" },
-                { icon: "⚖️", text: "2001년 여성 사제 서품 시작, 사회 정의와 인권 옹호" }
+                { icon: "church", text: "서울·부산·대전 3개 교구, 전국 200여 교회" },
+                { icon: "cap", text: "성공회대학교 등 교육·사회 사업 운영" },
+                { icon: "globe", text: "세계성공회공동체(Anglican Communion) 정식 회원 교회" },
+                { icon: "scales", text: "2001년 여성 사제 서품 시작, 사회 정의와 인권 옹호" }
             ],
             ionaLink: {
                 label: "강화 아이오나 순례길",
@@ -383,24 +383,24 @@ const CHURCH_DATA = {
         ],
         values: [
             {
-                icon: "🌿",
+                icon: "leaf",
                 title: "녹색교회",
                 desc: "생태와 환경 보전을 신앙의 과제로 삼고 실천합니다. 녹색교회·동물복지·환경보호를 실천하며 생명을 돌봅니다. 주일 애찬에는 비건 음식도 함께 준비합니다.",
                 href: "greenchurch.html",
                 cta: "녹색교회 자세히 보기"
             },
             {
-                icon: "🤲",
+                icon: "hands-heart",
                 title: "열린 교회",
                 desc: "성소수자·장애인·이주노동자·어린이·노인·동물 등 사회적 소수자와 모든 생명에 열려 있습니다."
             },
             {
-                icon: "⚖️",
+                icon: "scales",
                 title: "평등한 교회",
                 desc: "성별·나이·지위에 관계없이 누구나 동등하게 예배에 참여하고 봉사합니다."
             },
             {
-                icon: "✝️",
+                icon: "cross",
                 title: "전례 중심",
                 desc: "성공회 기도서에 따른 전례와 성찬을 예배의 중심에 둡니다."
             }
@@ -502,31 +502,31 @@ const CHURCH_DATA = {
             intro: "성공회 성당에 처음 들어서면 낯선 공간과 물건들을 만나게 됩니다.",
             items: [
                 {
-                    icon: "💧",
+                    icon: "drop",
                     name: "성수대",
                     en: "Holy Water",
                     desc: "예배당 입구에 놓인 성수입니다. 세례를 통해 하느님의 백성이 되었음을 기억하며, 손끝에 적셔 십자 성호를 긋고 예배의 자리로 들어섭니다."
                 },
                 {
-                    icon: "📖",
+                    icon: "book",
                     name: "독서대",
                     en: "Ambo · Lectern",
                     desc: "하느님의 말씀을 봉독하고 설교를 선포하는 자리입니다. 구약·서신서·복음서가 이곳에서 회중에게 선포됩니다."
                 },
                 {
-                    icon: "🍞",
+                    icon: "chalice",
                     name: "제대",
                     en: "Altar",
                     desc: "감사성찬례의 중심이 되는 거룩한 식탁입니다. 빵과 포도주를 축성하여 그리스도의 몸과 피를 나누는, 예배의 가장 거룩한 자리입니다."
                 },
                 {
-                    icon: "⛪",
+                    icon: "tabernacle",
                     name: "성막",
                     en: "Tabernacle",
                     desc: "축성된 성체를 모셔 두는 곳입니다. 거동이 어려운 병자나 교우를 방문하여 성체를 나눌 때 이곳에 보관된 성체를 사용합니다."
                 },
                 {
-                    icon: "🕯️",
+                    icon: "candle",
                     name: "부활초",
                     en: "Paschal Candle",
                     desc: "부활하신 그리스도의 빛과 새 생명·영생의 소망을 상징합니다. 부활절에 새로 축복하여 밝히며, 세례와 장례 예식에서도 함께합니다."
@@ -535,19 +535,19 @@ const CHURCH_DATA = {
         },
         resources: [
             {
-                icon: "📖",
+                icon: "book",
                 title: "성공회 기도서",
                 desc: "공동기도서(BCP)입니다.",
                 url: "https://dulkuka12.github.io/kbcp/"
             },
             {
-                icon: "🎵",
+                icon: "music",
                 title: "성가집",
                 desc: "예배 성가를 온라인으로 볼 수 있습니다.",
                 url: "https://dulkuka12.github.io/khymn/"
             },
             {
-                icon: "✝️",
+                icon: "cross",
                 title: "공동번역 성서",
                 desc: "성공회 예배에서 봉독하는 공동번역 성서입니다.",
                 url: "https://bible.anglican.kr/"
@@ -561,28 +561,28 @@ const CHURCH_DATA = {
             ],
             dailyOffice: [
                 {
-                    icon: "🌅",
+                    icon: "sunrise",
                     title: "아침기도",
                     en: "Morning Prayer",
                     desc: "하루를 시작하며 드리는 기도입니다. 송가·시편·성서 봉독·기도로 구성됩니다.",
                     url: "https://dulkuka12.github.io/kbcp/morning-prayer.html"
                 },
                 {
-                    icon: "☀️",
+                    icon: "sun",
                     title: "낮기도",
                     en: "Noonday Prayer",
                     desc: "하루의 한가운데서 잠시 멈추어 드리는 짧은 기도입니다.",
                     url: "https://dulkuka12.github.io/kbcp/noonday-prayer.html"
                 },
                 {
-                    icon: "🌆",
+                    icon: "sunset",
                     title: "저녁기도",
                     en: "Evening Prayer",
                     desc: "하루를 마감하며 감사와 참회로 드리는 기도입니다. 성모마리아 송가(마그니피캇)를 포함하며, 빛이신 그리스도를 찬양합니다.",
                     url: "https://dulkuka12.github.io/kbcp/evening-prayer.html"
                 },
                 {
-                    icon: "🌙",
+                    icon: "moon",
                     title: "밤기도",
                     en: "Compline",
                     desc: "수도원 전통에서 비롯된 짧고 고요한 기도입니다. 잠자리에 들기 전 하루를 마감합니다.",
@@ -613,7 +613,7 @@ const CHURCH_DATA = {
                 ]
             },
             intercession: {
-                icon: "🌍",
+                icon: "globe",
                 title: "세계성공회 중보기도 목록",
                 en: "Anglican Cycle of Prayer",
                 desc: "전 세계 성공회 교구와 교회를 날마다 기억하며 기도합니다. 세계성공회가 공식 발행한 2023–2026년 기도 목록입니다.",
@@ -628,21 +628,21 @@ const CHURCH_DATA = {
                 id: "hopecenter",
                 title: "광명 희망터",
                 desc: "지역의 소외된 이웃과 함께하는 돌봄 사역",
-                icon: "🌱",
+                icon: "sprout",
                 detailUrl: "hopecenter.html"
             },
             {
                 id: "emmaus",
                 title: "엠마우스 코스",
                 desc: "그리스도교 신앙의 기초를 배우는 과정",
-                icon: "📖",
+                icon: "book",
                 detailUrl: "emmaus.html"
             },
             {
                 id: "smallgroup",
                 title: "소그룹 모임",
                 desc: "기도하고 이야기 나누는 작은 모임",
-                icon: "🤝",
+                icon: "people",
                 detailUrl: "smallgroup.html"
             },
             {
@@ -651,7 +651,7 @@ const CHURCH_DATA = {
                 desc: "예배 후 함께 음식을 나누는 자리",
                 note: "비건 음식도 함께 준비됩니다",
                 footnote: "* 비건: 계란·우유도 포함하지 않는 완전 채식",
-                icon: "🍚"
+                icon: "bowl"
             }
         ],
         smallgroups: {
@@ -659,7 +659,7 @@ const CHURCH_DATA = {
             groups: [
                 {
                     id: "parents",
-                    icon: "🏡",
+                    icon: "house",
                     title: "주일학교 양육자모임",
                     en: "Sunday School Parents",
                     schedule: "매월 셋째 주일 애찬 후",
@@ -784,9 +784,9 @@ const CHURCH_DATA = {
         // 미디어·자료 허브(media.html) 카드 — MediaHubRenderer가 렌더
         hub: {
             cards: [
-                { icon: "🎬", title: "영상 갤러리", desc: "성공회의 신앙과 예배, 광명교회 공동체 이야기를 담은 유튜브 영상.", href: "videos.html",  action: "영상 보기" },
-                { icon: "📸", title: "사진 갤러리", desc: "예배와 나눔, 절기의 순간들을 담은 공동체 사진 모음.",            href: "gallery.html", action: "사진 보기" },
-                { icon: "🔗", title: "관련 기관",   desc: "대한성공회와 세계성공회의 기관·공동체 안내.",                   href: "links.html",   action: "자세히 보기" }
+                { icon: "film", title: "영상 갤러리", desc: "성공회의 신앙과 예배, 광명교회 공동체 이야기를 담은 유튜브 영상.", href: "videos.html",  action: "영상 보기" },
+                { icon: "camera", title: "사진 갤러리", desc: "예배와 나눔, 절기의 순간들을 담은 공동체 사진 모음.",            href: "gallery.html", action: "사진 보기" },
+                { icon: "link", title: "관련 기관",   desc: "대한성공회와 세계성공회의 기관·공동체 안내.",                   href: "links.html",   action: "자세히 보기" }
             ]
         },
         intro: "성공회의 신앙과 예배, 광명교회 공동체 이야기를 담은 영상입니다.",
@@ -874,7 +874,7 @@ const CHURCH_DATA = {
             {
                 id: "identity",
                 title: "정체성과 뿌리",
-                icon: "✝️",
+                icon: "cross",
                 items: [
                     {
                         q: "성공회는 이단인가요?",
@@ -927,7 +927,7 @@ const CHURCH_DATA = {
             {
                 id: "faith",
                 title: "신앙과 성사",
-                icon: "🕊",
+                icon: "dove",
                 items: [
                     {
                         q: "구원을 어떻게 이해하나요?",
@@ -963,7 +963,7 @@ const CHURCH_DATA = {
             {
                 id: "society",
                 title: "평등과 사회참여",
-                icon: "⚖️",
+                icon: "scales",
                 items: [
                     {
                         q: "성공회는 ‘좌파 교회’인가요?",
@@ -992,7 +992,7 @@ const CHURCH_DATA = {
             {
                 id: "join",
                 title: "함께하기",
-                icon: "🤝",
+                icon: "people",
                 items: [
                     {
                         q: "교파를 옮기거나 신앙을 새로 시작해야 하나요?",
@@ -1017,7 +1017,7 @@ const CHURCH_DATA = {
                 en: "Advent",
                 colorName: "자색",
                 color: "#6b4f8f",
-                symbol: "🕯️",
+                symbol: "candle",
                 period: "성탄 4주 전 주일 ~ 성탄 전날",
                 desc: "주님의 오심을 기다리며 준비하는 시간. 교회력의 새해가 시작됩니다."
             },
@@ -1027,7 +1027,7 @@ const CHURCH_DATA = {
                 en: "Christmas",
                 colorName: "백색·금색",
                 color: "#b8860b",
-                symbol: "⭐",
+                symbol: "star",
                 period: "12월 25일 ~ 1월 5일",
                 desc: "말씀이 사람이 되신 기쁨을 기념합니다. 성탄 후 12일간 이어집니다."
             },
@@ -1037,7 +1037,7 @@ const CHURCH_DATA = {
                 en: "Epiphany",
                 colorName: "녹색",
                 color: "#2f6a52",
-                symbol: "✨",
+                symbol: "sparkle",
                 period: "1월 6일 ~ 재의 수요일 전날",
                 desc: "주님께서 세상에 자신을 드러내신 것을 기념합니다. 공현절과 주님의 세례 주일을 포함합니다."
             },
@@ -1047,7 +1047,7 @@ const CHURCH_DATA = {
                 en: "Lent",
                 colorName: "자색",
                 color: "#6b4f8f",
-                symbol: "✝️",
+                symbol: "cross",
                 period: "재의 수요일 ~ 성주간 전날",
                 desc: "회개와 절제로 부활을 준비하는 시간. 재의 수요일에 시작됩니다."
             },
@@ -1057,7 +1057,7 @@ const CHURCH_DATA = {
                 en: "Holy Week",
                 colorName: "적색",
                 color: "#c0390f",
-                symbol: "🌿",
+                symbol: "palm",
                 period: "종려주일 ~ 성토요일",
                 desc: "주님의 수난을 묵상하는 한 주간. 종려주일·성목요일·성금요일·성토요일을 포함합니다."
             },
@@ -1067,7 +1067,7 @@ const CHURCH_DATA = {
                 en: "Easter",
                 colorName: "백색·금색",
                 color: "#b8860b",
-                symbol: "🌅",
+                symbol: "sunrise",
                 period: "부활 주일 ~ 성령강림 주일 (50일)",
                 desc: "다시 살아나신 주님을 기리는 기쁨의 계절. 50일간 이어집니다."
             },
@@ -1077,7 +1077,7 @@ const CHURCH_DATA = {
                 en: "Pentecost",
                 colorName: "적색",
                 color: "#c0390f",
-                symbol: "🔥",
+                symbol: "flame",
                 period: "부활 후 50일째 주일",
                 desc: "성령께서 제자들에게 임하신 날을 기념합니다. 교회가 시작된 날입니다."
             },
@@ -1087,7 +1087,7 @@ const CHURCH_DATA = {
                 en: "Ordinary Time",
                 colorName: "녹색",
                 color: "#2f6a52",
-                symbol: "🌿",
+                symbol: "leaf",
                 period: "성령강림 다음 주 ~ 대림절 전날",
                 desc: "그리스도인의 일상을 살아가는 긴 계절. 왕이신 그리스도 주일로 마무리됩니다."
             }
