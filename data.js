@@ -684,6 +684,27 @@ const CHURCH_DATA = {
         receiptInfo: "기부금 영수증을 발급해 드립니다. 필요하신 분은 교회 사무실로 문의해 주세요."
     },
 
+    // 오시는 길(visit.html) — {phone}은 info.phone으로 치환
+    visit: {
+        locationTitle: "주소와 연락처",
+        transportTitle: "교통·주차 안내",
+        labels: { postal: "우편번호", phone: "전화", fax: "팩스", car: "승용차", bus: "버스", parking: "주차" },
+        car: "내비게이션에 <em>대한성공회 광명교회</em> 또는 위 주소를 검색해 주세요.",
+        bus: {
+            stopLabel: "가까운 정류장",
+            stop: "온신초등학교앞",
+            routes: [
+                { no: "505",  type: "blue" },
+                { no: "5627", type: "green" },
+                { no: "5633", type: "green" },
+                { no: "6637", type: "green" }
+            ],
+            note: "서울역·구로디지털단지·목동 방면에서 접근 가능합니다."
+        },
+        parking: "교회 인근에 무료 주차가 가능합니다. 방문 전 교회 사무실({phone})로 확인해 주세요.",
+        note: "※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong>로 검색하시면 최단 경로 안내를 받으실 수 있습니다."
+    },
+
     sns: {
         youtube: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
         instagram: "https://www.instagram.com/anglican_gm?igsh=MTdnbWRsdHF3OGVucw==",

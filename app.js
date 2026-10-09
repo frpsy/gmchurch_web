@@ -954,42 +954,42 @@ const VisitRenderer = {
     render() {
         const el = document.getElementById('visit-full');
         if (!el) return;
-        const { address, addressJibun, postalCode, phone, fax } = CHURCH_DATA.info;
+        const { postalCode, phone, fax } = CHURCH_DATA.info;
+        const v = CHURCH_DATA.visit;
+        const L = v.labels;
+        const tel = `<a href="tel:${phone}" class="link-plain">${phone}</a>`;
 
         el.innerHTML = `
             <div class="info-card info-card--wide" id="location">
-                <h3>주소와 연락처</h3>
+                <h3>${v.locationTitle}</h3>
                 ${MapHelper.html(false)}
                 <div class="visit-contact">
-                    <div class="info-row"><strong>우편번호</strong><span>${postalCode}</span></div>
-                    <div class="info-row"><strong>전화</strong><span><a href="tel:${phone}" class="link-plain">${phone}</a></span></div>
-                    <div class="info-row"><strong>팩스</strong><span>${fax}</span></div>
+                    <div class="info-row"><strong>${L.postal}</strong><span>${postalCode}</span></div>
+                    <div class="info-row"><strong>${L.phone}</strong><span>${tel}</span></div>
+                    <div class="info-row"><strong>${L.fax}</strong><span>${fax}</span></div>
                 </div>
             </div>
             <div class="info-card info-card--wide" id="parking">
-                <h3>교통·주차 안내</h3>
+                <h3>${v.transportTitle}</h3>
                 <div class="info-row">
-                    <strong>승용차</strong>
-                    <span>내비게이션에 <em>대한성공회 광명교회</em> 또는 위 주소를 검색해 주세요.</span>
+                    <strong>${L.car}</strong>
+                    <span>${v.car}</span>
                 </div>
                 <div class="info-row">
-                    <strong>버스</strong>
+                    <strong>${L.bus}</strong>
                     <span>
-                        가까운 정류장: <strong>온신초등학교앞</strong>
+                        ${v.bus.stopLabel}: <strong>${v.bus.stop}</strong>
                         <span class="bus-list">
-                            <span class="bus-chip bus-blue">505</span>
-                            <span class="bus-chip bus-green">5627</span>
-                            <span class="bus-chip bus-green">5633</span>
-                            <span class="bus-chip bus-green">6637</span>
+                            ${v.bus.routes.map(r => `<span class="bus-chip bus-${r.type}">${r.no}</span>`).join('')}
                         </span>
-                        <span class="bus-note">서울역·구로디지털단지·목동 방면에서 접근 가능합니다.</span>
+                        <span class="bus-note">${v.bus.note}</span>
                     </span>
                 </div>
                 <div class="info-row">
-                    <strong>주차</strong>
-                    <span>교회 인근에 무료 주차가 가능합니다. 방문 전 교회 사무실(<a href="tel:${phone}" class="link-plain">${phone}</a>)로 확인해 주세요.</span>
+                    <strong>${L.parking}</strong>
+                    <span>${v.parking.replace('{phone}', tel)}</span>
                 </div>
-                <p class="visit-note">※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong>로 검색하시면 최단 경로 안내를 받으실 수 있습니다.</p>
+                <p class="visit-note">${v.note}</p>
             </div>
         `;
     }

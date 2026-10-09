@@ -140,6 +140,11 @@ const CHURCH_DATA = {
     visit:   { eyebrow, title, sub, phoneLabel, more }
   },
 
+  visit: {                          // visit.html 교통·주차 문구 ({phone} → info.phone 치환)
+    locationTitle, transportTitle, labels: { postal, phone, fax, car, bus, parking },
+    car, bus: { stopLabel, stop, routes: [{ no, type: "blue"|"green" }], note }, parking, note
+  },
+
   anglican: {
     welcome: "…배너 문구…",
     what: {                         // 성공회란? 섹션
