@@ -644,7 +644,16 @@ button:focus:not(:focus-visible) { outline: none; }
     padding-left: clamp(1.25rem, 5vw, 2.5rem);
     padding-right: clamp(1.25rem, 5vw, 2.5rem);
     text-align: center;
+    /* 부제 줄 수와 무관하게 모든 메뉴 히어로 높이를 같게 맞춘다(콘텐츠가 더 길면 늘어남) */
+    min-height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: linear-gradient(165deg, color-mix(in srgb, var(--season, var(--theme)) 18%, var(--cream)) 0%, var(--theme-light) 40%, var(--cream) 100%);
+}
+@media (max-width: 768px) {
+    .page-hero { min-height: 316px; }
 }
 .page-hero h1 {
     font-size: clamp(2.2rem, 4.5vw, 3.4rem);
