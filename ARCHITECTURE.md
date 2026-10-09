@@ -619,7 +619,7 @@ window DOMContentLoaded
 | `.nav-chevron` | 모바일 드롭다운 토글 화살표 버튼 (desktop: hidden) |
 | `.nav-item.mobile-open` | 모바일 드롭다운 열림 상태 |
 | `.hero` / `.hero-fallback` | Ken Burns 애니메이션 배경 (Unsplash 이미지) |
-| `.page-hero` | 서브 페이지 상단 헤더 (높이 통일: PC `min-height` 360px · 모바일 316px, 내용은 세로 가운데 정렬) |
+| `.page-hero` | 서브 페이지 상단 헤더 (높이 통일: PC `min-height` 350px · 모바일 306px, 내용은 세로 가운데 정렬) |
 | `.section` / `.section-header` | 섹션 레이아웃 |
 | `.container` | 최대폭 1200px, 패딩 clamp |
 | `.grid` | auto-fit minmax(280px) 그리드 |
