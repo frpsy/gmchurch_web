@@ -2588,6 +2588,24 @@ const SundaysRenderer = {
 };
 
 /* ── App bootstrap ───────────────────────────────────────── */
+// 카드 탭 피드백 — 이동 전에 눌림 상태가 보이도록 짧게(140ms) 머문 뒤 이동한다.
+const TapFeedback = {
+    init() {
+        // iOS Safari는 touchstart 리스너가 있어야 :active가 즉시 적용된다
+        document.addEventListener('touchstart', () => {}, { passive: true });
+        document.addEventListener('click', e => {
+            const card = e.target.closest('a.resource-card');
+            if (!card || e.defaultPrevented || e.button !== 0) return;
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || card.target === '_blank') return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            e.preventDefault();
+            card.classList.add('is-tapped');
+            if (navigator.vibrate) navigator.vibrate(8);
+            setTimeout(() => { window.location.href = card.href; }, 140);
+        });
+    }
+};
+
 const App = {
     init() {
         /* 사이트 대표 테마(--theme)는 녹색 고정(:root 기본값 사용). 절기색(--season)만
@@ -2630,6 +2648,7 @@ const App = {
         BackToTop.init();
         PortraitLightbox.init();
         MenuOverlay.init();
+        TapFeedback.init();
         document.addEventListener('click', e => {
             if (e.target.matches('.map-copy-btn')) MapHelper.copyAddr(e.target);
         });

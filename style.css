@@ -2638,7 +2638,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     padding: 1.6rem 1.6rem 1.4rem;
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s var(--ease-out), opacity 0.6s ease, background-color 0.3s ease;
 }
 /* 터치 기기는 hover가 탭과 동시에 걸려 카드가 뜨며 어색하므로 마우스에서만 적용 */
 @media (hover: hover) {
@@ -2650,11 +2650,15 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .resource-card { -webkit-tap-highlight-color: transparent; }
 /* 누르는 즉시 반응하도록 짧은 전환으로 눌림 표시 */
-.resource-card:active {
+.resource-card:active,
+.resource-card.is-tapped {
+    background: var(--green-light);
     border-color: var(--theme);
-    transform: scale(0.97);
-    transition: transform 0.08s ease-out, border-color 0.08s;
+    transform: scale(0.96);
+    transition: transform 0.1s ease-out, border-color 0.1s, background-color 0.1s;
 }
+.resource-card:active .resource-icon,
+.resource-card.is-tapped .resource-icon { transform: scale(0.9); }
 .resource-icon {
     font-size: 1.9rem;
     margin-bottom: 0.8rem;
