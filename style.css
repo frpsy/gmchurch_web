@@ -683,7 +683,7 @@ button:focus:not(:focus-visible) { outline: none; }
     background: linear-gradient(165deg, color-mix(in srgb, var(--season, var(--theme)) 18%, var(--cream)) 0%, var(--theme-light) 40%, var(--cream) 100%);
 }
 @media (max-width: 768px) {
-    .page-hero { min-height: 306px; }
+    .page-hero { min-height: 291px; }
 }
 .page-hero h1 {
     font-size: clamp(2.2rem, 4.5vw, 3.4rem);
@@ -5142,7 +5142,7 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
     :root { --section-pad: 2.5rem; }
 
     /* 페이지 첫 화면과 바로 다음 섹션 — 하단·상단 여백이 겹치지 않게 */
-    .page-hero { padding-top: calc(var(--nav-h) + 2rem - 5px); padding-bottom: calc(1.75rem - 5px); }
+    .page-hero { padding-top: calc(var(--nav-h) + 1.5rem - 5px); padding-bottom: calc(1.25rem - 5px); }
     .page-hero + .section { padding-top: 1.75rem; }
     /* 섹션 맨 앞 블록의 위쪽 margin이 섹션 여백에 한 번 더 더해지지 않게 */
     .section > .container > :first-child,
