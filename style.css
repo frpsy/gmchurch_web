@@ -4574,25 +4574,17 @@ footer {
     transition: color 0.2s, border-color 0.2s;
     white-space: nowrap;
 }
-/* 모든 섹션 탭 공통 — 순서대로 구분색(청·녹·황토·보라·적갈). 밑줄은 옅게, 활성 탭은 진한 밑줄 + 옅은 배경 */
-.gc-page-nav .gc-nav-link:nth-child(5n+1) { --tab-accent: #3f86b5; }
-.gc-page-nav .gc-nav-link:nth-child(5n+2) { --tab-accent: #4f9a52; }
-.gc-page-nav .gc-nav-link:nth-child(5n+3) { --tab-accent: #c8862a; }
-.gc-page-nav .gc-nav-link:nth-child(5n+4) { --tab-accent: #8b6bb8; }
-.gc-page-nav .gc-nav-link:nth-child(5n+5) { --tab-accent: #c0603f; }
-.gc-nav-link {
-    border-bottom-color: color-mix(in srgb, var(--tab-accent, var(--theme)) 35%, transparent);
-}
+/* 모든 섹션 탭 공통 — 테마색 단일 톤. 활성 탭만 진한 밑줄 + 옅은 배경 */
 .gc-nav-link.is-active {
     color: var(--heading);
-    border-bottom-color: var(--tab-accent, var(--theme));
-    background: color-mix(in srgb, var(--tab-accent, var(--theme)) 12%, var(--white));
+    border-bottom-color: var(--theme);
+    background: color-mix(in srgb, var(--theme) 10%, var(--white));
 }
 /* 터치 기기에서 sticky-hover 오작동 방지 — 마우스 환경에서만 hover 적용 */
 @media (hover: hover) {
     .gc-nav-link:hover {
         color: var(--heading);
-        border-bottom-color: var(--tab-accent, var(--theme));
+        border-bottom-color: color-mix(in srgb, var(--theme) 45%, transparent);
     }
 }
 @media (max-width: 640px) {
