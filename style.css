@@ -1106,7 +1106,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border-radius: var(--radius-md);
     overflow: hidden;
     max-width: 560px;
-    margin: 0 auto;
 }
 .lit-cal-hd {
     padding: 0.9rem 1.5rem;
