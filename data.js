@@ -281,7 +281,7 @@ const CHURCH_DATA = {
             category: "성직자",
             name: "민숙희(마가렛)",
             title: "관할사제 · 서울교구 서부교무구 총사제",
-            photo: "priest-portrait.jpg",
+            photo: "images/clergy/priest-portrait.jpg",
             ordained: "2005년 서품",
             quote: "교회는 모든 이를 위해 존재해야 하며, 그 누구도 소외되어서는 안 됩니다.",
             desc: "성공회대학교 신학과(1988학번)를 졸업하고 2005년 사제로 서품되었습니다. 2025년 3월 서울교구 최초의 여성 총사제로 임명되었으며, 성평등과 생태 존중을 지향하며 광명교회를 섬기고 있습니다.",
@@ -322,7 +322,7 @@ const CHURCH_DATA = {
             category: "성직자",
             name: "이남호(사도요한)",
             title: "협동사제",
-            photo: "priest-portrait-2.jpg",
+            photo: "images/clergy/priest-portrait-2.jpg",
             ordained: "",
             quote: "목회와 상담의 공통 원칙은 공감이며, 타인의 아픔을 공감하는 것은 주님이 주시는 능력입니다.",
             desc: "문학, 신학, 상담심리, 동양철학을 두루 공부한 성공회 사제입니다. 35세에 늦깎이로 신학의 길에 들어서 사제 서품을 받았으며, 마포들음교회에서 상담센터를 운영하는 등 사목과 상담을 접목한 사역을 이어왔습니다. 현재 광명교회 협동사제로 섬기고 있습니다.",
@@ -370,7 +370,7 @@ const CHURCH_DATA = {
         title: "제7대 서울교구장 주교",
         diocese: "대한성공회 서울교구",
         ordained: "2024년 9월 26일 성품 및 승좌",
-        photo: "bishop-portrait.jpg",
+        photo: "images/clergy/bishop-portrait.jpg",
         desc: "대한성공회 제7대 서울교구장 주교로, 2024년 9월 26일 서울주교좌성당에서 성품식과 승좌식을 거쳐 취임했습니다. 1964년생으로, 서강대 불어불문학과를 졸업한 뒤 1995년 성공회 사목신학연구원을 마쳤으며, 1998년 사제 서품을 받았습니다. 오산세마대교회 관할사제, 서울교구 선교교육훈련국장, 대학로교회 관할사제 등을 지냈습니다. 취임사에서는 '사도성을 회복하는 성공회'를 강조하며 세계성공회 선교정신에 따라 교회와 세상을 위해 기도하고 복음을 선포하는 데 전념하겠다고 밝혔습니다.",
         note: "광명교회는 대한성공회 서울교구 소속 교회입니다."
     },
@@ -1200,8 +1200,8 @@ const CHURCH_DATA = {
                 desc: "매주 주일, 공동체가 모여 말씀과 성찬을 나눕니다.",
                 category: "예배",
                 date: "2026.06",
-                src: "images/gallery/worship/야외성찬례.webp",
-                thumb: "images/gallery/worship/야외성찬례-thumb.webp",
+                src: "images/gallery/worship/outdoor-eucharist.webp",
+                thumb: "images/gallery/worship/outdoor-eucharist-thumb.webp",
                 alt: "광명교회 예배와 기도"
             },
             {
@@ -1230,8 +1230,8 @@ const CHURCH_DATA = {
                 desc: "함께 모여 말씀과 삶을 나누는 광명교회 공동체.",
                 category: "공동체",
                 date: "2026.06",
-                src: "images/gallery/community/공동체1.webp",
-                thumb: "images/gallery/community/공동체1-thumb.webp",
+                src: "images/gallery/community/community-01.webp",
+                thumb: "images/gallery/community/community-01-thumb.webp",
                 alt: "광명교회 공동체 모임"
             },
             {
@@ -1300,8 +1300,8 @@ const CHURCH_DATA = {
                 desc: "캔터베리 십자가와 제단이 있는 광명교회 성전.",
                 category: "교회 풍경",
                 date: "2026.06",
-                src: "images/gallery/scenery/교회소개_교회내부_제단.webp",
-                thumb: "images/gallery/scenery/교회소개_교회내부_제단-thumb.webp",
+                src: "images/gallery/scenery/sanctuary-altar.webp",
+                thumb: "images/gallery/scenery/sanctuary-altar-thumb.webp",
                 alt: "광명교회 교회 내부 제단"
             },
             {

@@ -41,7 +41,7 @@ gmchurch_web/
 ├── style.css         전체 스타일 (4128줄)
 ├── favicon.svg       교회 로고 아이콘 ('열린 빛')
 ├── apple-touch-icon.png
-├── og-image-v3.png   소셜 공유 OG 이미지
+├── images/           brand/(OG 이미지) · clergy/(성직자 사진) · hero/(상단 이미지) · gallery/(카테고리별 사진) · icons.svg
 ├── fonts/            로고 워드마크 서체 서브셋
 ├── robots.txt
 ├── sitemap.xml
