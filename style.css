@@ -4217,7 +4217,7 @@ footer {
     display: none;
     position: fixed;
     inset: 0;
-    z-index: 900;
+    z-index: 9999; /* 고정 헤더(1000)에 닫기 버튼이 가려지지 않도록 #portrait-lightbox와 같은 층 */
     background: rgba(13, 33, 26, 0.93);
     align-items: center;
     justify-content: center;
