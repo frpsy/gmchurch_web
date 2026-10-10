@@ -1885,27 +1885,44 @@ const PortraitLightbox = {
         overlay.appendChild(img);
         document.body.appendChild(overlay);
 
-        const open = (src, alt) => {
-            img.src = src;
-            img.alt = alt;
+        const SELECTOR = '.clergy-avatar-img, .bishop-portrait';
+        // 마우스 전용이던 확대를 키보드·스크린리더로도 열 수 있게 한다 (화면 모양은 그대로)
+        document.querySelectorAll(SELECTOR).forEach(el => {
+            if (el.tagName !== 'IMG') return;
+            el.tabIndex = 0;
+            el.setAttribute('role', 'button');
+            el.setAttribute('aria-label', `${el.alt} 확대 보기`);
+        });
+        overlay.tabIndex = -1;
+
+        let opener = null;
+        const open = (el) => {
+            opener = el;
+            img.src = el.src;
+            img.alt = el.alt;
             overlay.classList.add('is-open');
             document.body.style.overflow = 'hidden';
+            overlay.focus();
         };
         const close = () => {
+            if (!overlay.classList.contains('is-open')) return;
             overlay.classList.remove('is-open');
             document.body.style.overflow = '';
+            if (opener) { opener.focus(); opener = null; }
         };
 
         overlay.addEventListener('click', close);
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') close();
+            if (e.key === 'Escape') { close(); return; }
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches(SELECTOR) && e.target.tagName === 'IMG') {
+                e.preventDefault();
+                open(e.target);
+            }
         });
 
         document.addEventListener('click', e => {
-            const el = e.target.closest('.clergy-avatar-img, .bishop-portrait');
-            if (el && el.tagName === 'IMG') {
-                open(el.src, el.alt);
-            }
+            const el = e.target.closest(SELECTOR);
+            if (el && el.tagName === 'IMG') open(el);
         });
     }
 };
