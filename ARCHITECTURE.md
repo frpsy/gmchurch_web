@@ -18,7 +18,7 @@
 gmchurch_web/
 ├── index.html        메인 페이지
 ├── clergy.html       교회 소개 (성공회·사제·철학·교회 이야기·로고·언론)
-├── faq.html          자주 묻는 질문 (성공회 오해·궁금증 FAQ, 가안)
+├── faq.html          자주 묻는 질문 (성공회 오해·궁금증 FAQ)
 ├── worship.html      예배 안내 (예배 카드·감사성찬례란·순서·예배 자료)
 ├── newcomer.html     처음 오신 분 (환영·참여 안내·전례·전례 공간·영성체·문의)
 ├── community.html    공동체 (희망터·엠마우스·소그룹·녹색교회)
@@ -315,7 +315,7 @@ const CHURCH_DATA = {
   └ 성공회 전례란?     newcomer.html#liturgy            (JS)
   └ 전례 공간 안내     newcomer.html#worship-space      (JS)  성수대·독서대·제대·성막·부활초
   └ 영성체 안내        newcomer.html#communion          (JS)
-  └ 자주 묻는 질문     faq.html                         (가안 badge)
+  └ 자주 묻는 질문     faq.html
   └ 문의하기           newcomer.html#contact            (JS)
 
 공동체  community.html
@@ -437,7 +437,7 @@ window DOMContentLoaded
       │     각 항목: 연도 | 미디어 · 날짜 | 제목(링크)
       │
       ├── FaqRenderer.render()        → #faq-full (faq.html)
-      │     draft-banner(가안) + faq-cat × 4 (정체성·신앙·사회참여·함께하기)
+      │     guide-banner(안내문) + faq-cat × 4 (정체성·신앙·사회참여·함께하기)
       │     각 항목: <details.faq-item> → .faq-q(summary) / .faq-a / .faq-refs(출처)
       │
       ├── SundaysRenderer.render()    → #sundays-full (sundays.html)
@@ -527,7 +527,7 @@ window DOMContentLoaded
 <div class="page-hero">                       자주 묻는 질문 (FAQ)
 <section id="faq"> .container--narrow
   #faq-full                                 ← FaqRenderer.render()
-     draft-banner(가안) + .faq-lead + .faq-cat × 4 (정체성·신앙·사회참여·함께하기)
+     guide-banner(안내문) + .faq-lead + .faq-cat × 4 (정체성·신앙·사회참여·함께하기)
      각 항목 <details.faq-item> → .faq-q(summary) / .faq-a / .faq-refs(출처 링크)
 ※ 콘텐츠는 CHURCH_DATA.faq (카테고리 4 · 질문 12 · 출처 링크 17)
 ```
