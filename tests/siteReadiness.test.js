@@ -25,7 +25,7 @@ describe('주보 날짜 안내', () => {
 
     it('오래된 최신 주보를 이번 주로 소개하지 않는다', () => {
         vi.useFakeTimers();
-        vi.setSystemTime(new Date('2026-10-08T00:00:00Z'));
+        vi.setSystemTime(new Date('2026-10-25T00:00:00Z'));
         const { BulletinRenderer, CHURCH_DATA } = loadRenderers();
         const html = BulletinRenderer._rowHtml(CHURCH_DATA.bulletins.items[0], true);
         expect(html).toContain('최근 등록');
@@ -35,7 +35,7 @@ describe('주보 날짜 안내', () => {
 
     it('실제 이번 주 주보에만 이번 주 표시를 붙인다', () => {
         vi.useFakeTimers();
-        vi.setSystemTime(new Date('2026-07-12T03:00:00Z'));
+        vi.setSystemTime(new Date('2026-10-04T03:00:00Z'));
         const { BulletinRenderer, CHURCH_DATA } = loadRenderers();
         expect(BulletinRenderer._rowHtml(CHURCH_DATA.bulletins.items[0], true)).toContain('이번 주');
     });
