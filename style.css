@@ -5159,6 +5159,8 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
 
     .section-header { margin-bottom: 1.75rem; }
     .section-header:not(:has(.section-sub)) { margin-bottom: 1.25rem; }
+    /* 이달의 교회력 — 모바일은 제목과 달력을 모두 가운데 정렬 */
+    #sundays-monthly .section-header { text-align: center; }
 
     /* 카드 안쪽 여백 */
     .card, .info-card, .bishop-card { padding: 1.5rem 1.25rem; }
