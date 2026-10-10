@@ -151,7 +151,7 @@ const CHURCH_DATA = {
                 { icon: "parking", title: "주차 안내",      desc: "교회 인근에 무료 주차가 가능합니다.",                     href: "visit.html#parking",       action: "주차 안내 보기" },
                 { icon: "chalice", title: "영성체 안내",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
                 { icon: "question", title: "자주 묻는 질문", desc: "성공회와 예배에 관해 자주 받는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
-                { icon: "people", title: "공동체",         desc: "광명 희망터·엠마우스 코스·소그룹 모임을 소개합니다.",    href: "community.html",           action: "공동체 보기" }
+                { icon: "book", title: "주일 주보",      desc: "이번 주 주보를 이미지와 PDF로 보실 수 있습니다.", href: "bulletin.html",           action: "주보 보기" }
             ]
         },
         visit: {
