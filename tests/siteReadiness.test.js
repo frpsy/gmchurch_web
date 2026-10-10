@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { createContext, runInContext } from 'node:vm';
 
 function loadRenderers(fetch = vi.fn()) {
@@ -60,5 +60,15 @@ describe('전례독서 로딩 실패', () => {
         expect(fetch).toHaveBeenCalledTimes(2);
         await retry();
         expect(fetch).toHaveBeenCalledTimes(4);
+    });
+});
+
+describe('글꼴 preload', () => {
+    it('Pretendard 글꼴 파일을 직접 preload하지 않는다', () => {
+        // dynamic-subset CSS가 조각 경로(packages/...)를 스스로 해석하므로 잘못된 주소는 404가 된다.
+        const pages = readdirSync(new URL('../', import.meta.url)).filter(f => f.endsWith('.html'));
+        const offenders = pages.filter(f =>
+            /rel="preload"[^>]*PretendardVariable[^>]*\.woff2/.test(readFileSync(new URL(`../${f}`, import.meta.url), 'utf8')));
+        expect(offenders).toEqual([]);
     });
 });

@@ -1594,7 +1594,10 @@ const PhotoGalleryRenderer = {
         const lbDate  = lb.querySelector('.gallery-lb-date');
         const lbClose = lb.querySelector('.gallery-lb-close');
 
+        // 닫은 뒤 키보드 사용자가 보던 사진으로 돌아오도록 연 항목을 기억한다.
+        let opener = null;
         const openLb = item => {
+            opener = item;
             lbImg.src      = item.dataset.src;
             lbImg.alt      = item.querySelector('img').alt;
             lbTitle.textContent = item.dataset.title;
@@ -1607,6 +1610,7 @@ const PhotoGalleryRenderer = {
         const closeLb = () => {
             lb.classList.remove('is-open');
             document.body.style.overflow = '';
+            if (opener) { opener.focus(); opener = null; }
         };
 
         grid.addEventListener('click', e => {
