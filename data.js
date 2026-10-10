@@ -920,7 +920,7 @@ const CHURCH_DATA = {
                         q: "결국 영국 교회 아닌가요? 외국 교회인가요?",
                         a: "아닙니다. 대한성공회는 <strong>1993년 세계성공회로부터 독립 자치권을 인정받은 한국 교단</strong>입니다.\n\n1890년 영국 선교사 고요한(Charles Corfe) 주교가 설립했지만, 이후 한국화 과정을 거쳐 운영과 의사결정을 한국 교단이 자치적으로 합니다. 캔터베리 대주교와는 상하 관계가 아닌 동등한 ‘교제와 일치’의 관계입니다.",
                         refs: [
-                            { label: "대한성공회의 역사 (공식)", url: "https://www.skh.or.kr/3" },
+                            { label: "사진으로 보는 대한성공회 약사 (대한성공회 관구)", url: "https://anglicankr.church/%ec%82%ac%ec%a7%84%ec%9c%bc%eb%a1%9c-%eb%b3%b4%eb%8a%94-%eb%8c%80%ed%95%9c%ec%84%b1%ea%b3%b5%ed%9a%8c-%ec%95%bd%ec%82%ac/" },
                             { label: "대한성공회 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C_%EC%84%B1%EA%B3%B5%ED%9A%8C" }
                         ]
                     }
