@@ -752,7 +752,7 @@ const CHURCH_DATA = {
             media: "성공회신문",
             title: "서울교구 최초 여성 총사제 민숙희 마가렛 사제, 부산교구 최초 여성 성직자 상임위원 심미경 아가타 사제 인터뷰",
             date: "2025.02",
-            url: "http://www.skhnews.or.kr/news/articleView.html?idxno=768"
+            url: "https://www.skhnews.or.kr/news/articleView.html?idxno=768"
         },
         {
             year: "2021",
