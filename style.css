@@ -749,7 +749,11 @@ button:focus:not(:focus-visible) { outline: none; }
     .page-hero--media    { background-image: url('images/hero/media-m.webp'); }
     .page-hero--visit    { background-image: url('images/hero/visit-m.webp'); }
 }
-.page-hero--greenchurch  { background-image: url('images/gallery/scenery/greenchurch-award-2023.webp'); background-position: center 30%; }
+/* 상패·촛불·인형이 모바일에서도 함께 보이도록 가로 구도의 보정본을 사용한다. */
+.page-hero--greenchurch { background-image: url('images/hero/greenchurch-award.webp'); background-position: center 65%; }
+@media (max-width: 768px) {
+    .page-hero--greenchurch { background-image: url('images/hero/greenchurch-award-m.webp'); background-position: center; }
+}
 
 /* 히어로 좌·우 17% 메뉴 이동 영역 — 가운데 글자 영역은 건드리지 않는다 */
 .page-hero > .hero-nav {
