@@ -1407,6 +1407,14 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: var(--theme);
     letter-spacing: 0.02em;
 }
+.officer-term {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0;
+}
 .officer-names {
     color: var(--heading);
     font-size: 0.98rem;

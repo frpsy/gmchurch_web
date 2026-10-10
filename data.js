@@ -356,13 +356,13 @@ const CHURCH_DATA = {
         }
     ],
 
-    // 평신도 임원진 — 이름(세례명) 형식, 교회위원은 가나다순. category는 ministerSection.categories와 매칭
+    // 평신도 임원진 — 이름(세례명) 형식, 교회위원은 가나다순. term은 선출직 임기(별정직·사역자는 생략). category는 ministerSection.categories와 매칭
     officers: [
-        { category: "교회위원", role: "신자회장",   members: ["이문희(니콜라)"] },
-        { category: "교회위원", role: "사제회장",   members: ["박종미(수산나)"] },
-        { category: "교회위원", role: "교회위원",   members: ["나영숙(엘리사벳)", "박경준(프란시스)", "박광식(암브로스)", "윤상돈(베드로)"] },
-        { category: "교회위원", role: "건축위원장", members: ["정순진"] },
-        { category: "교회위원", role: "희망터 총무", members: ["신효심"] },
+        { category: "교회위원", role: "신자회장",   term: "2026.9~2028.9", members: ["이문희(니콜라)"] },
+        { category: "교회위원", role: "사제회장",   term: "2026.9~2028.9", members: ["박종미(수산나)"] },
+        { category: "교회위원", role: "교회위원",   term: "2026.9~2028.9", members: ["나영숙(엘리사벳)", "박경준(프란시스)", "박광식(암브로스)", "윤상돈(베드로)"] },
+        { category: "교회위원", role: "건축위원장", members: ["정순진(디모데오)"] },
+        { category: "교회위원", role: "희망터 총무", members: ["신효심(베로니카)"] },
         { category: "사역자",   role: "신자 사역자", members: ["정동숙(엘리사벳)", "박종미(수산나)"] }
     ],
 

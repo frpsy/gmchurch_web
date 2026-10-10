@@ -1307,7 +1307,7 @@ const ClergyRenderer = {
                     <ul class="officer-list">
                         ${officers.map(o => `
                         <li class="officer-row">
-                            <span class="officer-role">${o.role}</span>
+                            <span class="officer-role">${o.role}${o.term ? `<span class="officer-term">${o.term}</span>` : ''}</span>
                             <span class="officer-names">${o.members.join(', ')}</span>
                         </li>`).join('')}
                     </ul>
