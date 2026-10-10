@@ -646,6 +646,11 @@ button:focus:not(:focus-visible) { outline: none; }
     color: var(--theme);
 }
 .iona-link-card__icon { font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
+/* 글줄 속 작은 아이콘은 글자보다 한 단계 가볍게 — 글자가 주인공 (대비는 3:1 이상 유지) */
+.btn-next .ico, .newcomer-cta-link .ico, .resource-desc .ico, .emmaus-contact-link .ico,
+.season-pop-period .ico, .clergy-card p > .ico, .lit-cal-hd-season .ico, .liturgy-season-badge .ico {
+    opacity: 0.8;
+}
 .season-ribbon-mark { color: #fff; }
 .bishop-portrait-fallback { color: #fff; }
 .emmaus-contact-link .ico { margin-right: 0.3rem; }
@@ -5271,8 +5276,9 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     font-size: 1.6rem;
     line-height: 1;
     border-radius: 50%;
-    border: 1px solid color-mix(in srgb, var(--theme) 22%, transparent);
-    background: color-mix(in srgb, var(--theme) 6%, var(--white));
+    /* 반투명 틴트 — 흰 카드·크림 구역·다크모드 어디서든 아래 배경이 비쳐 자연스럽게 섞인다 */
+    border: 1px solid color-mix(in srgb, var(--theme) 24%, transparent);
+    background: color-mix(in srgb, var(--theme) 7%, transparent);
 }
 .story-value-icon .ico, .resource-icon .ico, .card-icon .ico, .anglican-pillar-icon .ico,
 .space-icon .ico, .placeholder-icon .ico, .emmaus-join-icon .ico, .val-icon .ico {
