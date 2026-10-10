@@ -389,7 +389,7 @@ button:focus:not(:focus-visible) { outline: none; }
     inset: 0;
     z-index: 0;
     background:
-        var(--green-deep) url('images/hero.webp')
+        var(--green-deep) url('images/hero/home.webp')
         center/cover no-repeat;
     animation: hero-kenburns 24s ease-in-out infinite;
     will-change: transform;
