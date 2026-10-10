@@ -421,25 +421,26 @@ const CHURCH_DATA = {
         },
         liturgicalSeason: LiturgicalCalendar.compute(),
         currentReadings: {
-            week: "맥추감사주일",
+            week: "창조5주일",
             year: "A년",
-            date: "2026년 7월 12일",
+            date: "2026년 10월 4일",
             note: "주보 기준 · 대한성공회 공동 전례독서에 따릅니다.",
             items: [
-                { role: "제1독서", ref: "신명 8:1-4" },
-                { role: "시편", ref: "시편 119편" },
-                { role: "서신서", ref: "히브리 11:32-40" },
-                { role: "복음", ref: "마태 6:25-34" }
+                { role: "제1독서", ref: "레위 25:8-19" },
+                { role: "시편", ref: "시편 33편" },
+                { role: "서신서", ref: "디모테오전서 2:1-7" },
+                { role: "복음", ref: "루가 17:11-19" }
             ]
         },
         nextReadings: {
-            week: "연중 제16주일",
+            week: "연중 제28주일",
             year: "A년",
-            date: "2026년 7월 19일",
+            date: "2026년 10월 11일",
             items: [
-                { role: "제1독서", ref: "창세 28:10-19상" },
-                { role: "서신서", ref: "로마 8:12-25" },
-                { role: "복음", ref: "마태 13:24-30, 36-43" }
+                { role: "제1독서", ref: "출애굽 32:1-14" },
+                { role: "시편", ref: "시편 106편" },
+                { role: "서신서", ref: "필립비 4:1-9" },
+                { role: "복음", ref: "마태 22:1-14" }
             ]
         },
         main: [
@@ -1172,46 +1173,18 @@ const CHURCH_DATA = {
         note: "예배 전에 미리 열어 두시면 도움이 됩니다.",
         items: [
             {
+                date: "2026-10-04",
+                label: "2026년 10월 4일",
+                season: "창조5주일",
+                images: ["bulletins/20261004_1.jpg", "bulletins/20261004_2.jpg", "bulletins/20261004_3.jpg", "bulletins/20261004_4.jpg"],
+                pdf: "bulletins/20261004.pdf"
+            },
+            {
                 date: "2026-07-12",
                 label: "2026년 7월 12일",
                 season: "맥추감사주일",
                 images: ["bulletins/20260712_1.jpg", "bulletins/20260712_2.jpg", "bulletins/20260712_3.jpg", "bulletins/20260712_4.jpg"],
                 pdf: "bulletins/20260712.pdf"
-            },
-            {
-                date: "2026-07-05",
-                label: "2026년 7월 5일",
-                season: "가해 연중 14주일",
-                images: ["bulletins/20260705_1.jpg", "bulletins/20260705_2.jpg", "bulletins/20260705_3.jpg", "bulletins/20260705_4.jpg"],
-                pdf: "bulletins/20260705.pdf"
-            },
-            {
-                date: "2026-06-28",
-                label: "2026년 6월 28일",
-                season: "가해 연중 13주일",
-                images: ["bulletins/20260628_1.jpg", "bulletins/20260628_2.jpg", "bulletins/20260628_3.jpg", "bulletins/20260628_4.jpg"],
-                pdf: "bulletins/20260628.pdf"
-            },
-            {
-                date: "2026-06-21",
-                label: "2026년 6월 21일",
-                season: "가해 연중 12주일",
-                images: ["bulletins/20260621_1.jpg", "bulletins/20260621_2.jpg", "bulletins/20260621_3.jpg", "bulletins/20260621_4.jpg"],
-                pdf: "bulletins/20260621.pdf"
-            },
-            {
-                date: "2026-06-14",
-                label: "2026년 6월 14일",
-                season: "가해 연중 11주일",
-                images: ["bulletins/20260614_1.jpg", "bulletins/20260614_2.jpg", "bulletins/20260614_3.jpg", "bulletins/20260614_4.jpg"],
-                pdf: "bulletins/20260614.pdf"
-            },
-            {
-                date: "2026-06-07",
-                label: "2026년 6월 7일",
-                season: "가해 연중 10주일",
-                images: [],
-                pdf: "bulletins/20260607.pdf"
             }
         ]
     },

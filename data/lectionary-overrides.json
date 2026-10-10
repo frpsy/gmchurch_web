@@ -19,6 +19,16 @@
         "secondReading": "히브리 11:32-40",
         "gospel": "마태 6:25-34"
       }
-    }
+    },
+    "2026-10-04": {
+      "koreanName": "창조5주일",
+      "readings": {
+        "firstReading": "레위 25:8-19",
+        "psalm": "시편 33편",
+        "secondReading": "디모테오전서 2:1-7",
+        "gospel": "루가 17:11-19"
+      }
+    },
+    "2026-10-11": { "track": "A", "psalm": "시편 106편" }
   }
 }
