@@ -112,11 +112,8 @@
 
 /* ── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-/* 문단 끝 한 단어만 다음 줄로 떨어지는 현상 완화 (미지원 브라우저는 무시) */
-p, li, blockquote { text-wrap: pretty; }
-/* 제목·푸터 주소의 마지막 줄에 한두 글자만 남는 현상 방지 (미지원 브라우저는 무시) */
-h1, h2, h3, h4,
-.links-card-name, .iona-link-card__desc, .footer-addr-link { text-wrap: balance; }
+/* 본문에 text-wrap: pretty/balance를 걸지 않는다. keep-all 한글은 끊을 자리가 어절뿐이라,
+   Safari(WebKit)가 줄을 문단 단위로 다듬으면서 줄 끝이 일찍 끊겨 들쭉날쭉해진다. */
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
 /* 부드러운 스크롤은 모션 민감 사용자에게는 비활성화 (전정기관 자극 방지) */
 @media (prefers-reduced-motion: no-preference) {
@@ -888,7 +885,6 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: var(--lh-body);
     word-break: keep-all;
     overflow-wrap: break-word;
-    text-wrap: balance;
 }
 .section-header { margin-bottom: var(--space-8); }
 /* 서브 문구가 없는 헤더는 본문과의 간격을 줄여 리듬 정돈 */
@@ -3369,7 +3365,7 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .hero h1 { font-size: 2rem; text-wrap: balance; }
+    .hero h1 { font-size: 2rem; }
     .hero-actions { flex-direction: column; align-items: center; }
     .btn-live, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
 }
