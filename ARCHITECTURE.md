@@ -302,8 +302,10 @@ const CHURCH_DATA = {
   └ 성무일과(매일기도) worship.html#daily-office        (JS)
   └ 예배 자료          worship.html#resources           (JS)
   └ 공동기도서와 성가  worship.html#bcp-hymnal          (JS)
+
+주보·소식  bulletin.html
   ├ 주일 주보          bulletin.html                    (상세 페이지로 직접 이동)
-  └ 교회 소식          news.html
+  └ 교회 소식          news.html                        (상세 페이지로 직접 이동)
 
 교회력  sundays.html
   └ 이달의 교회력      sundays.html#monthly             (JS)

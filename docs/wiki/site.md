@@ -23,7 +23,7 @@
 | visit | 오시는 길(지도·버스 505, 5627, 5633, 6637 `온신초등학교앞`·무료 주차) | |
 | giving | 헌금 안내(계좌, 분기별 재정 공개, 기부금 영수증은 사무실 문의) | |
 | privacy | 개인정보 처리방침(시행 2026-05-29, 책임자 관할사제) | noindex |
-메뉴: 교회 소개 / 예배와 기도(주일 주보, 교회 소식 포함) / 교회력 / 처음 오신 분 / 공동체 / 미디어·자료 / 오시는 길. 푸터에 봉헌, 로고 소개, 언론 보도, 개인정보.
+메뉴: 교회 소개 / 예배와 기도 / **주보·소식**(주일 주보, 교회 소식 — 2026-10-11 예배와 기도에서 분리, 상위 메뉴 8개) / 교회력 / 처음 오신 분 / 공동체 / 미디어·자료 / 오시는 길. 푸터에 봉헌, 로고 소개, 언론 보도, 개인정보.
 
 ## 데이터 (`data.js` `CHURCH_DATA` 최상위 키)
 `info, ui, home, anglican, logo, ministerSection, clergy, officers, bishop, philosophy, aboutJourney, worship, community, giving, visit, sns, press, liveUrl, media, links, faq, sundays, bulletins, photoGallery, navigation`. 콘텐츠는 여기에만 두고 HTML에 직접 쓰지 않는다. `LiturgicalCalendar.compute()`가 오늘의 절기·색을 계산한다.

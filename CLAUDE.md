@@ -34,8 +34,8 @@
 | `clergy.html` | 교회 소개 (교회 이야기 `#identity` 정적 HTML 포함) | AnglicanRenderer, ClergyRenderer, AboutNavRenderer, PressRenderer |
 | `faq.html` | 자주 묻는 질문 (성공회 오해·궁금증) | FaqRenderer |
 | `worship.html` | 예배 | WorshipRenderer |
-| `bulletin.html` | 주일 주보 (noindex, 예배와 기도 메뉴) | BulletinRenderer |
-| `news.html` | 교회 소식 — 주보 교회소식 날짜별 목록 (noindex, 예배와 기도 메뉴) | NewsRenderer |
+| `bulletin.html` | 주일 주보 (noindex, 주보·소식 메뉴) | BulletinRenderer |
+| `news.html` | 교회 소식 — 주보 교회소식 날짜별 목록 (noindex, 주보·소식 메뉴) | NewsRenderer |
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
 | `giving.html` | 헌금 | GivingRenderer |
@@ -62,7 +62,10 @@
   성공회란? / 대한성공회 / 섬기는 이들 / 교회 이야기(clergy.html#philosophy — 철학·이야기 두 섹션을 하나로) / 녹색교회(greenchurch.html)
 
 예배와 기도 (worship.html)
-  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일과(매일기도) / 예배 자료 / 공동기도서와 성가 / 주일 주보(bulletin.html) / 교회 소식(news.html)
+  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일과(매일기도) / 예배 자료 / 공동기도서와 성가
+
+주보·소식 (bulletin.html)
+  주일 주보(bulletin.html) / 교회 소식(news.html)
 
 교회력 (sundays.html)
   이달의 교회력 / 전례독서(sundays.html#lectionary) / 절기 안내(sundays.html#seasons) / 특별 주일(sundays.html#special)
