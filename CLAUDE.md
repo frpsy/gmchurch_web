@@ -35,7 +35,7 @@
 | `faq.html` | 자주 묻는 질문 (성공회 오해·궁금증) | FaqRenderer |
 | `worship.html` | 예배 | WorshipRenderer |
 | `bulletin.html` | 주일 주보 (noindex, 예배와 기도 메뉴) | BulletinRenderer |
-| `news.html` | 교회 소식 — 주보 교회소식 날짜별 게시판 (noindex, 예배와 기도 메뉴) | NewsRenderer |
+| `news.html` | 교회 소식 — 주보 교회소식 날짜별 목록 (noindex, 예배와 기도 메뉴) | NewsRenderer |
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
 | `giving.html` | 헌금 | GivingRenderer |
