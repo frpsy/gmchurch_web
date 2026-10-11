@@ -1,6 +1,6 @@
 # 광명교회 웹사이트 — Claude 작업 기준
 
-> **작업 흐름**: 이 파일 확인 → 작업 전 검증 → 구현 → 커밋 전 검증 → 푸시
+> **작업 흐름**: 이 파일 확인 → (내용 작업이면) `docs/wiki/README.md`에서 관련 문서 확인 → 작업 전 검증 → 구현 → 커밋 전 검증 → 푸시
 
 ---
 
@@ -287,5 +287,6 @@ git push -u origin claude/작업명
 
 - **`ARCHITECTURE.md`** — data.js 스키마 전체, 렌더러 상세 구조, CSS 변수·클래스 목록, 앵커 스크롤 로직
 - **`tests/`** — data 구조 검증 (churchData.test.js), 전례력 계산 (liturgicalCalendar.test.js), 전례독서 병합·표기 (lectionaryMerge/Overrides.test.js), 연도 파일 연속성 (lectionaryYears.test.js)
+- **`docs/wiki/`** — 홈페이지 전체를 학습해 정리한 **Claude용 위키**(교회 개요·예배/전례·사역·사이트 구조·운영 흐름). 소개 문구, 소식, FAQ, 주보 작업 전에 읽고, 새로 확인한 사실과 사이트 변경은 같은 PR에서 위키에 반영한다. 원본은 `data.js`이며 충돌하면 `data.js`가 맞다
 - **`docs/`** — 위원회 audit, 작업 지시서, 교회 용어·표기 용어집(`church-glossary.md`)
 - **`AGENTS.md`** — ChatGPT 등 다른 AI용 규칙 요약 (이 파일이 원본. 규칙을 바꾸면 AGENTS.md 요약도 맞출 것) · 인계 안내문은 `docs/chatgpt-handoff.md`
