@@ -2072,6 +2072,36 @@ const BulletinRenderer = {
     }
 };
 
+/* ── NewsRenderer ────────────────────────────────────────── */
+const NewsRenderer = {
+    _bodyHtml(body) {
+        return body.split('\n').map(line => `<p>${line}</p>`).join('');
+    },
+
+    render() {
+        const el = document.getElementById('news-full');
+        if (!el) return;
+        const { items, newsIntro, newsEmpty } = CHURCH_DATA.bulletins;
+        const weeks = items.filter(item => item.news && item.news.length);
+        if (weeks.length === 0) {
+            el.innerHTML = `<p class="news-empty">${newsEmpty}</p>`;
+            return;
+        }
+        el.innerHTML = `<p class="news-intro">${newsIntro}</p>` + weeks.map(item => `
+            <section class="news-week" aria-labelledby="news-${item.date}">
+                <h2 class="news-week-title" id="news-${item.date}">${item.label}
+                    <span class="news-week-season">${item.season}</span></h2>
+                <div class="news-list">
+                    ${item.news.map(n => `
+                    <article class="news-item">
+                        <h3 class="news-item-title">${n.title}</h3>
+                        <div class="news-item-body">${this._bodyHtml(n.body)}</div>
+                    </article>`).join('')}
+                </div>
+            </section>`).join('');
+    }
+};
+
 /* ── SundaysRenderer ─────────────────────────────────────── */
 const SundaysRenderer = {
     render() {
@@ -2685,6 +2715,7 @@ const App = {
         PhotoGalleryRenderer.render();
         LinksRenderer.render();
         BulletinRenderer.render();
+        NewsRenderer.render();
         SundaysRenderer.render();
         MoreToggle.init();
         this._handleHashScroll();

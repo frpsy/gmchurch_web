@@ -35,6 +35,7 @@
 | `faq.html` | 자주 묻는 질문 (성공회 오해·궁금증) | FaqRenderer |
 | `worship.html` | 예배 | WorshipRenderer |
 | `bulletin.html` | 주일 주보 (noindex, 예배와 기도 메뉴) | BulletinRenderer |
+| `news.html` | 교회 소식 — 주보 교회소식 주별 모음 (noindex, 예배와 기도 메뉴) | NewsRenderer |
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
 | `giving.html` | 헌금 | GivingRenderer |
@@ -61,7 +62,7 @@
   성공회란? / 대한성공회 / 섬기는 이들 / 교회 이야기(clergy.html#philosophy — 철학·이야기 두 섹션을 하나로) / 녹색교회(greenchurch.html)
 
 예배와 기도 (worship.html)
-  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일과(매일기도) / 예배 자료 / 공동기도서와 성가 / 주일 주보(bulletin.html)
+  주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일과(매일기도) / 예배 자료 / 공동기도서와 성가 / 주일 주보(bulletin.html) / 교회 소식(news.html)
 
 교회력 (sundays.html)
   이달의 교회력 / 전례독서(sundays.html#lectionary) / 절기 안내(sundays.html#seasons) / 특별 주일(sundays.html#special)
@@ -187,10 +188,11 @@ echo "Done: $TODAY"
    - **트랙 A일 때 주보 성시가 표준과 다르면** `"psalm": "시편 N편"` 추가 (표준 단일 시편은 트랙 B값이라 A에선 어긋남)
    - 특별 주일(맥추감사 등)은 `koreanName` + `readings`(네 본문 전체) 지정
    - 주보가 시편 대신 층계성가를 부르면 시편 생략 가능(표준 지정 시편이 그대로 표시됨)
-3. `node scripts/sync-bulletins.js` 실행 → PDF 생성 + data.js 자동 갱신
-   - 끝에 **⚠️ 트랙 미기록 / ℹ️ 시편 미기록** 경고가 뜨면 해당 주 overrides를 보완
-4. `npm test` (병합·표기·overrides 형식 검증 포함)
-5. 만료(13주 FIFO) 항목은 sync가 자동 삭제. overrides의 과거 항목은 그대로 둬도 무방
+3. **주보 4면 '교회소식' 란** → `data/bulletin-news.json`의 `weeks`에 그 주 항목 추가 (`{ title, body }`, 줄바꿈은 `\n`). 인쇄된 문구만 옮기고, 통계·헌금 명단 등 개인 이름 나열란은 옮기지 않는다
+4. `node scripts/sync-bulletins.js` 실행 → PDF 생성 + data.js 자동 갱신
+   - 끝에 **⚠️ 트랙 미기록 / ℹ️ 시편 미기록 / ℹ️ 교회소식 미기록** 경고가 뜨면 해당 주 기록을 보완
+5. `npm test` (병합·표기·overrides·교회소식 형식 검증 포함)
+6. 만료(13주 FIFO) 항목(교회소식 포함)은 sync가 자동 삭제. overrides의 과거 항목은 그대로 둬도 무방
 
 > ⚠️ 병합 규칙은 `scripts/lib/lectionary.js`(스크립트·테스트용)와 `app.js`의 `_applyOverrides`(브라우저용) 두 곳에 있다 — 빌드가 없어 공유 불가. 한쪽을 고치면 반드시 다른 쪽도 함께 고칠 것.
 

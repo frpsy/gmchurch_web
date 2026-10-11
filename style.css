@@ -5316,3 +5316,33 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     /* 어두운 배경 위 버튼도 있어 배경색 대신 살짝 흐리게 */
     .btn-next:active, .map-btn:active { opacity: 0.75; transition: none; }
 }
+
+/* ── 교회 소식 (news.html) ── */
+.news-intro { color: var(--text-muted); margin-bottom: 2rem; }
+.news-empty { color: var(--text-muted); }
+.news-week { margin-bottom: 3rem; }
+.news-week:last-child { margin-bottom: 0; }
+.news-week-title {
+    font-size: 1.25rem;
+    color: var(--heading);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--border);
+}
+.news-week-season {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+}
+.news-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.news-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 1.1rem 1.4rem;
+}
+.news-item-title { font-size: 1.05rem; color: var(--heading); margin-bottom: 0.4rem; }
+.news-item-body p { color: var(--text); line-height: 1.75; margin: 0; }
+.news-item-body p + p { margin-top: 0.25rem; }
