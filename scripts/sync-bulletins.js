@@ -127,6 +127,7 @@ const DATA_JS   = path.join(ROOT, 'data.js');
 const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
 const NEWS      = path.join(ROOT, 'data', 'bulletin-news.json');
 // 보관 규칙: 최근 4개 주보 이내이면서 4주(28일) 넘게 지나지 않은 것만 남긴다.
+// 단, 가장 최근 주보 한 건은 기간이 지나도 남겨 목록이 비지 않게 한다.
 // 새 주보가 없어도 날짜만 지나면 삭제되도록, 매일 도는 워크플로가 이 스크립트를 실행한다.
 const MAX_BULLETINS = 4;
 const MAX_AGE_DAYS  = 28;
@@ -182,9 +183,8 @@ function readingsBlock(key, resolved, standardYear, withNote) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const ageDays = ds => Math.round((today - new Date(+ds.slice(0, 4), +ds.slice(4, 6) - 1, +ds.slice(6, 8))) / 86400000);
-    const keep = new Set([...allDates].sort((a, b) => b.localeCompare(a))
-        .slice(0, MAX_BULLETINS)
-        .filter(ds => ageDays(ds) <= MAX_AGE_DAYS));
+    const recent = [...allDates].sort((a, b) => b.localeCompare(a)).slice(0, MAX_BULLETINS);
+    const keep = new Set(recent.filter((ds, i) => i === 0 || ageDays(ds) <= MAX_AGE_DAYS));
 
     const valid = new Map();
     for (const ds of allDates) {

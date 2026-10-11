@@ -4,7 +4,7 @@ name: Sync Sunday Bulletins
 # 실행 시점
 # - bulletins/ 에 이미지가 push될 때: 새 주보 등록(PDF 생성, 절기명·전례독서 자동 계산)
 # - 매일 03:00(한국시간): 새 주보가 없어도 4주 넘게 지난 주보·교회소식을 자동 삭제
-# 보관 규칙: 최근 4개 주보 이내, 4주(28일) 이내 (scripts/sync-bulletins.js)
+# 보관 규칙: 최근 4개 주보 이내, 4주(28일) 이내. 가장 최근 1건은 기간이 지나도 남김 (scripts/sync-bulletins.js)
 # 파일명 형식: YYYYMMDD_1.jpg, YYYYMMDD_2.jpg ... (주보 페이지 순서대로)
 
 on:
