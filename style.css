@@ -131,6 +131,7 @@ body {
     word-break: keep-all;
     overflow-wrap: break-word;
 }
+button, input, select, textarea { font-family: inherit; }
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 
@@ -476,7 +477,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .hero-label {
     display: block;
     font-size: var(--fs-label);
-    letter-spacing: 0.24em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.82);
     font-weight: 500;
@@ -586,7 +587,7 @@ button:focus:not(:focus-visible) { outline: none; }
     white-space: nowrap;
 }
 .hero-stat-lbl {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 500;
     color: rgba(255,255,255,0.78);  /* 어두운 오버레이 위 대비 상향 */
     letter-spacing: 0.1em;
@@ -640,12 +641,11 @@ button:focus:not(:focus-visible) { outline: none; }
     /* CTA — 세로 스택 시 동일 너비로 정렬 */
     .hero-actions { flex-direction: column; align-items: center; gap: 0.7rem; }
     .hero-actions a { width: 100%; max-width: 300px; text-align: center; }
-    .hero-label { letter-spacing: 0.18em; font-size: 0.66rem; }
 
     .hero-stats { gap: 0; padding: 0.8rem 0.5rem; }
     .hero-stat { padding: 0.2rem 0.7rem; }
     .hero-stat-val { font-size: var(--fs-md); }
-    .hero-stat-lbl { font-size: 0.68rem; }
+    .hero-stat-lbl { font-size: 0.75rem; }
     .hero-stat-divider { height: 1.8rem; }
     .hero-scroll { bottom: 5rem; }
     .btn-hero-primary { font-size: var(--fs-sm); }
@@ -727,6 +727,13 @@ button:focus:not(:focus-visible) { outline: none; }
     line-height: 1.7;
     word-break: keep-all;
     overflow-wrap: break-word;
+}
+
+/* 서브 히어로 eyebrow — .page-hero p 크기를 의도적으로 따르는 라벨(부제와는 자간·대문자·굵기로 구분) */
+.page-hero .section-eyebrow {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
 }
 
 /* ── Page Hero — 사진 배경 변형 ────────────────────────────── */
@@ -853,7 +860,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .section-eyebrow {
-    font-size: 0.68rem;
+    font-size: var(--fs-label);
     letter-spacing: var(--ls-eyebrow);
     text-transform: uppercase;
     color: var(--theme);
@@ -923,7 +930,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .card-desc {
     color: var(--text-muted);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-desc);
     line-height: var(--lh-body);
 }
 .card-icon {
@@ -1126,7 +1133,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     .season-ribbon { height: 26px; gap: 2px; }
     .season-ribbon-seg { height: 13px; }
     .season-ribbon-seg.is-current { height: 26px; }
-    .season-ribbon-mark { font-size: 0.72rem; }
+    .season-ribbon-mark { font-size: var(--fs-label); }
 }
 
 /* ── 월간 교회력 달력 위젯 ─────────────────────────────── */
@@ -1213,7 +1220,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .lit-cal-label {
     display: block;
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--heading);
     line-height: 1.25;
@@ -1251,7 +1258,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .lit-cal-legend-dot--today { box-shadow: inset 0 0 0 2px var(--season); }
 .lit-cal-legend-dot--sun   { background: color-mix(in srgb, var(--season) 28%, transparent); }
 .lit-cal-legend-tag {
-    font-size: 0.6rem;
+    font-size: 0.72rem;
     font-weight: 700;
     color: var(--heading);
     border: 1px solid var(--border);
@@ -1262,7 +1269,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 @media (max-width: 480px) {
     .lit-cal-cell { min-height: 46px; padding: 0.2rem 0.2rem; }
     .lit-cal-num { width: 1.5rem; height: 1.5rem; font-size: var(--fs-label); }
-    .lit-cal-label { font-size: 0.62rem; }   /* 8.8px → 9.9px, 좁은 칸에서도 한 단어는 들어감 */
+    .lit-cal-label { font-size: 0.7rem; }   /* 8.8px → 9.9px, 좁은 칸에서도 한 단어는 들어감 */
     .lit-cal-legend { gap: 0.75rem; font-size: var(--fs-label); }
 }
 
@@ -1309,7 +1316,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     font-size: var(--fs-body);
     font-style: italic;
     color: var(--heading);
-    line-height: 1.85;
+    line-height: 1.9;
     word-break: keep-all;
     overflow-wrap: break-word;
 }
@@ -1361,7 +1368,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .philosophy-intro p {
     font-size: 1.05rem;
     color: var(--text);
-    line-height: 1.85;
+    line-height: 1.9;
     margin-bottom: 0.75rem;
     word-break: keep-all;
 }
@@ -1377,7 +1384,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .philosophy-closing p {
     font-size: var(--fs-body);
     color: var(--heading);
-    line-height: 1.85;
+    line-height: 1.9;
     margin: 0;
     word-break: keep-all;
 }
@@ -1397,7 +1404,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .minister-category:first-child .minister-cat-title { margin-top: 0; }
 .minister-cat-note {
     color: var(--text-muted);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-desc);
     line-height: 1.65;
     margin: -0.5rem 0 1.25rem;
 }
@@ -1437,7 +1444,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .officer-term {
     display: block;
     margin-top: 0.15rem;
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 500;
     color: var(--text);
     letter-spacing: 0;
@@ -1489,12 +1496,12 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .clergy-name { font-size: 1.2rem; font-weight: 700; color: var(--heading); letter-spacing: -0.01em; }
 .clergy-title { font-size: var(--fs-md); color: var(--theme); font-weight: 600; margin-top: 0.25rem; letter-spacing: 0.02em; word-break: keep-all; overflow-wrap: break-word; }
-.clergy-desc { font-size: var(--fs-body); color: var(--text); line-height: 1.85; margin-top: 1rem; opacity: 0.85; }
+.clergy-desc { font-size: var(--fs-body); color: var(--text); line-height: 1.9; margin-top: 1rem; opacity: 0.85; }
 
 /* ── Clergy Bio Section ──────────────────────────────────── */
 .bio-section { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: left; }
 .bio-label {
-    font-size: 0.7rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -1520,7 +1527,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .bio-year {
     min-width: 38px;
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     color: var(--theme);
     font-variant-numeric: tabular-nums;
@@ -1542,14 +1549,14 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .bio-text {
     flex: 1;
-    font-size: var(--fs-sm);
+    font-size: var(--fs-desc);
     line-height: 1.7;
     color: var(--text);
 }
 .bio-first {
     display: inline-flex;
     align-items: center;
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 800;
     letter-spacing: 0.04em;
     color: #fff;
@@ -1584,7 +1591,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .bio-ministry-icon { font-size: var(--fs-lead); flex-shrink: 0; margin-top: 0.1rem; }
 .bio-ministry-note p { font-size: var(--fs-sm); line-height: 1.8; color: var(--text); margin: 0; }
 .bio-source {
-    font-size: var(--fs-label);
+    font-size: var(--fs-md);
     color: var(--text-muted);
     margin-top: 1.25rem;
     padding-top: 1rem;
@@ -1604,7 +1611,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: var(--heading);
     letter-spacing: -0.025em;
     margin-bottom: var(--space-5);
-    line-height: var(--lh-heading);
+    line-height: var(--lh-snug);
     word-break: keep-all;
     overflow-wrap: break-word;
 }
@@ -1771,7 +1778,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 
 .logo-subtitle {
     margin-top: 0.75rem;
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -1784,7 +1791,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     margin-bottom: 1.25rem;
 }
 .logo-history {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-desc);
     line-height: 1.9;
     color: var(--text);
     opacity: 0.85;
@@ -1810,7 +1817,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     letter-spacing: 0.02em;
 }
 .logo-element-desc {
-    font-size: var(--fs-md);
+    font-size: var(--fs-desc);
     line-height: 1.65;
     color: var(--text);
     opacity: 0.85;
@@ -1831,7 +1838,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     display: flex;
     gap: 0.6rem;
     align-items: flex-start;
-    font-size: var(--fs-label);
+    font-size: var(--fs-md);
     color: var(--text-muted);
     line-height: 1.7;
 }
@@ -1881,7 +1888,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .anglican-para:last-child { margin-bottom: 0; }
 .anglican-body { margin: 0 auto 2.5rem; max-width: 760px; }
 .bcp-section-title {
-    font-size: 1.05rem;
+    font-size: var(--fs-body);
     font-weight: 700;
     color: var(--heading);
     margin: 1.75rem 0 0.6rem;
@@ -1923,9 +1930,9 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     .anglican-pillar-icon { transition: none; }
 }
 .anglican-pillar-title { font-size: var(--fs-body); font-weight: 700; color: var(--heading); margin-bottom: 0.5rem; }
-.anglican-pillar-desc { font-size: var(--fs-md); line-height: 1.75; color: var(--text-muted); }
+.anglican-pillar-desc { font-size: var(--fs-desc); line-height: 1.75; color: var(--text-muted); }
 .anglican-pillar-note {
-    font-size: var(--fs-md);
+    font-size: var(--fs-desc);
     color: var(--text-muted);
     line-height: 1.7;
     padding: 0.9rem 1.1rem;
@@ -1997,7 +2004,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .iona-link-card:hover { background: var(--theme); color: var(--theme-on); }
 .iona-link-card__text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .iona-link-card__label { font-size: var(--fs-sm); font-weight: 700; }
-.iona-link-card__desc  { font-size: var(--fs-label); margin-top: 0.15rem; }
+.iona-link-card__desc  { font-size: var(--fs-md); margin-top: 0.15rem; }
 .iona-link-card__arrow {
     flex-shrink: 0;
     font-size: var(--fs-body);
@@ -2032,7 +2039,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .mission-mark__num { flex-shrink: 0; width: 1.75rem; height: 1.75rem; background: var(--theme); color: var(--theme-on); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--fs-label); font-weight: 700; }
 .mission-mark__body { flex: 1; min-width: 0; }
 .mission-mark__title { font-size: var(--fs-body); font-weight: 700; color: var(--heading); margin: 0 0 0.25rem; }
-.mission-mark__en { font-size: var(--fs-md); color: var(--text-muted); font-style: italic; margin: 0; }
+.mission-mark__en { font-size: var(--fs-desc); color: var(--text-muted); font-style: italic; margin: 0; }
 
 /* Bank Card */
 .bank-card {
@@ -2103,7 +2110,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     flex-shrink: 0;
     background: var(--green-deep);
     color: #fff;
-    font-size: 0.7rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
@@ -2184,7 +2191,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     list-style: none;
     font-weight: 600;
     font-size: var(--fs-body);
-    line-height: var(--lh-heading);
+    line-height: var(--lh-snug);
     color: var(--heading);
     word-break: keep-all;
 }
@@ -2333,7 +2340,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     flex-shrink: 0;
 }
 .season-note {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     color: var(--text-muted);
     font-weight: 400;
     margin-left: 0.25rem;
@@ -2357,7 +2364,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .newcomer-intro-body {
     font-size: var(--fs-body);
     color: var(--text);
-    line-height: 1.95;
+    line-height: 1.9;
     margin-bottom: 0.85rem;
 }
 .newcomer-key-facts {
@@ -2433,7 +2440,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     text-align: center;
 }
 .next-step-cta-eyebrow {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2543,7 +2550,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .newcomer-cta > p {
     font-size: var(--fs-body);
     color: var(--text-muted);
-    line-height: 1.85;
+    line-height: 1.9;
     max-width: 520px;
     margin: 0 auto 1.5rem;
 }
@@ -2580,7 +2587,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .liturgy-body {
     font-size: var(--fs-body);
     color: var(--text);
-    line-height: 1.95;
+    line-height: 1.9;
     margin-bottom: 1.1rem;
 }
 .liturgy-card {
@@ -2601,7 +2608,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .liturgy-list li {
     font-size: var(--fs-sm);
     color: var(--text);
-    line-height: 1.85;
+    line-height: 1.9;
     padding: 0.2rem 0 0.2rem 1.2rem;
     position: relative;
 }
@@ -2666,7 +2673,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .step-list li {
     font-size: var(--fs-sm);
     color: var(--text-muted);
-    line-height: 1.85;
+    line-height: 1.9;
     padding-left: 1rem;
     position: relative;
 }
@@ -2702,10 +2709,10 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 /* Worship page components */
 .worship-services-grid { margin-bottom: 2rem; }
 .worship-time          { color: var(--green-mid); font-weight: 700; }
-.worship-card-desc     { margin-top: 1rem; color: var(--text-muted); font-size: var(--fs-sm); line-height: 1.9; }
+.worship-card-desc     { margin-top: 1rem; color: var(--text-muted); font-size: var(--fs-desc); line-height: 1.9; }
 .worship-card-quote    { margin-top: 1.25rem; font-size: var(--fs-sm); }
 .worship-card-cite     { font-size: var(--fs-label); font-style: normal; color: var(--text-muted); }
-.worship-card-detail   { margin-top: 1rem; font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.9; }
+.worship-card-detail   { margin-top: 1rem; font-size: var(--fs-desc); color: var(--text-muted); line-height: 1.9; }
 .liturgy-body--lead    { margin-bottom: 1.5rem; }
 .resource-en           { font-size: var(--fs-label); color: var(--text-muted); margin-bottom: 0.4rem; }
 .resource-grid--single { --resource-cols: 1; grid-template-columns: 1fr; }
@@ -2748,7 +2755,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     .resource-card:hover .resource-icon { transform: scale(1.12) translateY(-2px); }
 }
 .resource-title {
-    font-size: 1.02rem;
+    font-size: var(--fs-body);
     font-weight: 700;
     color: var(--heading);
     margin-bottom: 0.45rem;
@@ -2757,7 +2764,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     overflow-wrap: break-word;
 }
 .resource-desc {
-    font-size: var(--fs-md);
+    font-size: var(--fs-desc);
     color: var(--text-muted);
     line-height: 1.75;
     margin-bottom: 1rem;
@@ -2805,7 +2812,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     box-shadow: 0 4px 16px color-mix(in srgb, var(--green-mid) 25%, transparent);
 }
 .lectionary-card-label {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.05em;
     color: var(--green-mid);
@@ -2911,12 +2918,12 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     width: 1.05rem;
     height: 1.05rem;
     border-radius: 50%;
-    font-size: 0.68rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     background: color-mix(in srgb, currentColor 16%, transparent);
 }
 .lect-track-hint {
-    font-size: 0.76rem;
+    font-size: var(--fs-label);
     color: var(--text-muted);
     margin: 0.5rem 1.25rem 0;
     line-height: 1.5;
@@ -3005,16 +3012,16 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     margin-bottom: 0.45rem;
 }
 .space-en {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 600;
     color: var(--theme);
     letter-spacing: 0.02em;
     margin-left: 0.3rem;
 }
 .space-desc {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-desc);
     color: var(--text-muted);
-    line-height: 1.8;
+    line-height: 1.75;
 }
 
 /* Checklist */
@@ -3057,7 +3064,7 @@ footer {
     font-size: var(--fs-label);
     font-weight: 700;
     color: var(--gold);  /* 세이지 — 숲 녹 위 6.5:1 */
-    letter-spacing: 0.18em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     margin-bottom: 1rem;
 }
@@ -3103,7 +3110,7 @@ footer {
     margin: 0 0 0.85rem;
 }
 .footer-col .footer-brand-meta {
-    font-size: var(--fs-label);
+    font-size: var(--fs-md);
     color: rgba(255,255,255,0.68);
     line-height: 1.9;
     margin: 0;
@@ -3141,7 +3148,7 @@ footer {
     align-items: flex-start;
 }
 .footer-info-label {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -3347,9 +3354,9 @@ footer {
     .newcomer-intro-title { font-size: 1.3rem; }
     .newcomer-key-facts { padding: 1.1rem 1.1rem; gap: 0.6rem; }
     .newcomer-key-row { gap: 0.7rem; font-size: var(--fs-sm); }
-    .newcomer-key-label { min-width: 38px; font-size: 0.7rem; }
+    .newcomer-key-label { min-width: 38px; font-size: var(--fs-label); }
     .newcomer-cta { padding: 1.75rem 1.4rem; }
-    .newcomer-cta h3 { font-size: 1.05rem; }
+    .newcomer-cta h3 { font-size: var(--fs-body); }
     .newcomer-cta-link { width: 100%; max-width: 320px; justify-content: center; }
 
     /* Footer */
@@ -3366,11 +3373,11 @@ footer {
 @media (max-width: 390px) {
     .clergy-card { padding: 1.75rem 1.25rem; }
     .bio-timeline::before { left: 38px; }
-    .bio-year { min-width: 34px; font-size: 0.72rem; }
+    .bio-year { min-width: 34px; font-size: var(--fs-label); }
 }
 
 @media (max-width: 480px) {
-    .hero h1 { font-size: 1.75rem; }
+    .hero h1 { font-size: 2rem; text-wrap: balance; }
     .hero-actions { flex-direction: column; align-items: center; }
     .btn-live, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
 }
@@ -3419,7 +3426,7 @@ footer {
     border-left: 4px solid var(--theme);
 }
 .emmaus-scripture-ref {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -3428,7 +3435,7 @@ footer {
 }
 .emmaus-scripture {
     font-size: var(--fs-body);
-    line-height: 1.85;
+    line-height: 1.9;
     color: var(--heading);
     font-style: italic;
     margin-bottom: 1.25rem;
@@ -3436,9 +3443,9 @@ footer {
     padding: 0;
 }
 .emmaus-scripture-caption {
-    font-size: var(--fs-md);
+    font-size: var(--fs-desc);
     color: var(--text-muted);
-    line-height: 1.8;
+    line-height: 1.75;
 }
 
 /* Stage cards */
@@ -3470,7 +3477,7 @@ footer {
 }
 .emmaus-stage--featured .emmaus-stage-num { color: var(--theme); }
 .emmaus-stage-en {
-    font-size: 0.7rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -3487,7 +3494,7 @@ footer {
     gap: 0.5rem;
 }
 .emmaus-badge {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     background: var(--theme);
     color: var(--theme-on);
@@ -3496,9 +3503,9 @@ footer {
     letter-spacing: 0.03em;
 }
 .emmaus-stage-desc {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-desc);
     color: var(--text-muted);
-    line-height: 1.8;
+    line-height: 1.75;
     margin-bottom: 1rem;
 }
 .emmaus-stage-note {
@@ -3533,7 +3540,7 @@ footer {
     margin-bottom: 0.4rem;
 }
 .nurture-part-title {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-body);
     font-weight: 700;
     color: var(--heading);
     margin-bottom: 1rem;
@@ -3547,7 +3554,7 @@ footer {
 .nurture-sessions li {
     font-size: var(--fs-md);
     color: var(--text-muted);
-    line-height: 1.85;
+    line-height: 1.9;
 }
 
 /* Join section */
@@ -3656,14 +3663,14 @@ footer {
 }
 .story-value-body { min-width: 0; }
 .story-value-num {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.08em;
     color: var(--theme);
     margin-bottom: 0.3rem;
 }
 .story-value-title {
-    font-size: 1.05rem;
+    font-size: var(--fs-body);
     font-weight: 700;
     color: var(--heading);
     margin-bottom: 0.5rem;
@@ -3672,7 +3679,7 @@ footer {
     overflow-wrap: break-word;
 }
 .story-value-text {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-desc);
     color: var(--text);
     line-height: 1.75;
     word-break: keep-all;
@@ -3729,7 +3736,7 @@ footer {
 .map-addr-tag {
     flex-shrink: 0;
     width: 44px;
-    font-size: 0.7rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     color: var(--theme);
     letter-spacing: 0.02em;
@@ -3905,10 +3912,10 @@ footer {
 /* ── Links page ──────────────────────────────────────────── */
 .links-group { margin-bottom: 3rem; }
 .links-group-title {
-    font-size: 0.72rem;
+    font-size: var(--fs-lead);
     font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--theme);
     margin-bottom: 1rem;
     padding-bottom: 0.6rem;
@@ -3943,7 +3950,7 @@ footer {
     color: var(--heading);
 }
 .links-card-desc {
-    font-size: var(--fs-md);
+    font-size: var(--fs-desc);
     color: var(--text-muted);
     line-height: 1.6;
 }
@@ -4039,7 +4046,7 @@ footer {
     flex: 1;
 }
 .video-category {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.06em;
     color: var(--theme);
@@ -4049,11 +4056,11 @@ footer {
     font-size: var(--fs-body);
     font-weight: 700;
     color: var(--heading);
-    line-height: 1.5;
+    line-height: var(--lh-snug);
     margin: 0;
 }
 .video-desc {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-desc);
     color: var(--text-muted);
     line-height: 1.75;
     margin: 0;
@@ -4474,7 +4481,7 @@ footer {
     box-shadow: var(--shadow-md);
 }
 .bishop-eyebrow {
-    font-size: 0.7rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -4533,8 +4540,8 @@ footer {
     margin-bottom: 0.85rem;
 }
 .bishop-desc {
-    font-size: var(--fs-sm);
-    line-height: 1.85;
+    font-size: var(--fs-desc);
+    line-height: 1.9;
     color: var(--text);
     opacity: 0.85;
 }
@@ -4901,7 +4908,7 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
 }
 .bulletin-badge-new {
     display: inline-block;
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: 0.03em;
     color: var(--theme-on);
@@ -5348,7 +5355,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-intro, .news-empty { max-width: 760px; margin: 0 auto 1rem; font-size: var(--fs-label); color: var(--text-muted); }
 .news-post { max-width: 40rem; }
 .news-post + .news-post { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
-.news-post-title { font-size: var(--fs-body); line-height: 1.4; color: var(--heading); margin: 0 0 0.4rem; }
+.news-post-title { font-size: var(--fs-body); line-height: var(--lh-snug); color: var(--heading); margin: 0 0 0.4rem; }
 .news-post p { margin: 0; line-height: 1.8; color: var(--text); }
 .news-post p + p { margin-top: 0.3rem; }
 .news-post-meta { margin: 0.5rem 0 0; display: grid; gap: 0.3rem; }
