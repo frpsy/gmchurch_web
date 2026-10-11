@@ -125,6 +125,7 @@ const ROOT      = path.resolve(__dirname, '..');
 const BULLETINS = path.join(ROOT, 'bulletins');
 const DATA_JS   = path.join(ROOT, 'data.js');
 const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
+const NEWS      = path.join(ROOT, 'data', 'bulletin-news.json');
 const MAX_WEEKS = 13;
 
 // 지정한 마커 사이 구간을 통째로 교체 (data.js 손질용)
@@ -238,6 +239,15 @@ cutoff.setHours(0, 0, 0, 0);
         }
     }
 
+    let newsByWeek = {};
+    if (fs.existsSync(NEWS)) {
+        try {
+            newsByWeek = JSON.parse(fs.readFileSync(NEWS, 'utf8')).weeks || {};
+        } catch (err) {
+            console.error('  bulletin-news.json 파싱 실패:', err.message);
+        }
+    }
+
     const newItems = [...valid.keys()]
         .sort((a, b) => b.localeCompare(a))
         .map(ds => {
@@ -252,7 +262,8 @@ cutoff.setHours(0, 0, 0, 0);
                 label:  `${y}년 ${mo}월 ${d}일`,
                 season: (ov && ov.koreanName) || sundayLabel(ds),
                 images: valid.get(ds).map(f => `bulletins/${f}`),
-                pdf:    fs.existsSync(pdfPath) ? `bulletins/${ds}.pdf` : null
+                pdf:    fs.existsSync(pdfPath) ? `bulletins/${ds}.pdf` : null,
+                news:   newsByWeek[dateKey] || []
             };
         });
 
@@ -284,12 +295,15 @@ cutoff.setHours(0, 0, 0, 0);
         .map(it => {
             const imagesStr = it.images.map(img => `"${img}"`).join(', ');
             const pdfLine   = it.pdf ? `,\n                pdf: "${it.pdf}"` : '';
+            const newsLine  = it.news.length
+                ? `,\n                news: [\n${it.news.map(n => `                    { title: ${JSON.stringify(n.title)}, body: ${JSON.stringify(n.body)} }`).join(',\n')}\n                ]`
+                : '';
             return [
                 '            {',
                 `                date: "${it.date}",`,
                 `                label: "${it.label}",`,
                 `                season: "${it.season}",`,
-                `                images: [${imagesStr}]${pdfLine}`,
+                `                images: [${imagesStr}]${pdfLine}${newsLine}`,
                 '            }'
             ].join('\n');
         })
@@ -360,6 +374,12 @@ cutoff.setHours(0, 0, 0, 0);
         console.log('\n⚠️  전례독서 트랙 미기록 (기본 연속 독서 A로 표시, 시편 생략):');
         gaps.forEach(it => console.log(
             `   - ${it.date}  → 주보 예배 순서면 확인 후 data/lectionary-overrides.json에 "track" 기록`));
+    }
+    const newsGaps = newItems.filter(it => it.news.length === 0);
+    if (newsGaps.length) {
+        console.log('\nℹ️  교회소식 미기록 (교회 소식 페이지에 표시되지 않음):');
+        newsGaps.forEach(it => console.log(
+            `   - ${it.date}  → 주보 '교회소식' 란을 data/bulletin-news.json에 추가`));
     }
     if (psalmGaps.length) {
         console.log('\nℹ️  트랙 A 주간 시편 미기록 (표준 트랙 B 시편으로 표시됨):');

@@ -54,7 +54,7 @@ git push -u origin 작업자/작업명
 | 작업 | 어디를 | 참고 |
 |---|---|---|
 | 문구·일정·연락처 수정 | `data.js` | 해당 키 검색 후 수정 |
-| 매주 주보 등록 | `bulletins/YYYYMMDD_N.jpg` + `data/lectionary-overrides.json` | `CLAUDE.md` "주보 등록 절차" |
+| 매주 주보 등록 | `bulletins/YYYYMMDD_N.jpg` + `data/lectionary-overrides.json` + `data/bulletin-news.json`(교회소식) | `CLAUDE.md` "주보 등록 절차" |
 | 다해(C년) 전례독서 | `data/lectionary-year-c.json` + 목록 두 곳 | **2027-11-28 대림 제1주일 전까지** |
 | 메뉴 추가·변경 | `data.js` → `navigation` | 아래 nav 검증 명령 실행 |
 | 아이콘 | `images/icons.svg` (아이콘 팩) | 이모티콘 금지 — data.js엔 심볼 이름, app.js는 `icon('name')` |
