@@ -659,6 +659,14 @@ window DOMContentLoaded
 | `.bio-source` | 출처 각주 |
 | `.more-toggle` / `.more-body` | 긴 블록 접기·펼치기 토글 버튼(콘텐츠 폭 가로 막대)과 접힌 영역 (MoreToggle) |
 | `.liturgy-guide` | 전례 가이드 전체 래퍼 |
+| `.section--tight-bottom` | 아래 패딩을 줄인 섹션(단독 섹션 뒤에 이어지는 섹션 앞) |
+| `.text-note` | 본문 아래 작은 보조 설명 문단 |
+| `.prose-list` | 불릿 있는 본문 목록 |
+| `.privacy-doc` `.privacy-lead` `.privacy-h2` `.privacy-list` `.privacy-foot` | 개인정보처리방침 본문 |
+| `.container--read` `.container--narrow` | 읽기 폭 760px / 820px 컨테이너 |
+| `.section-title--sub` | 소제목 h2(1.3rem) |
+| `.nowrap` | 줄바꿈 금지 구간(날짜 등) |
+| `.section.gc-section-alt` | 교차 띠 배경(emmaus·greenchurch) |
 | `.liturgy-season-badge` | 현재 절기 배지 (색·심볼·절기명) |
 | `.liturgy-steps` / `.liturgy-step` | 감사성찬례 4단계 |
 | `.communion-grid` / `.communion-card` | 영성체 안내 카드 |

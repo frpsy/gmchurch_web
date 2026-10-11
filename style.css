@@ -859,7 +859,8 @@ button:focus:not(:focus-visible) { outline: none; }
 @media (prefers-color-scheme: dark) {
     .section.gc-section-alt { background: color-mix(in srgb, var(--theme) 20%, var(--white)); }
     /* 녹색 틴트 배경 위 eyebrow(--theme)는 3.9:1 — 밝게 섞어 AA 확보 */
-    .section.gc-section-alt .section-eyebrow { color: color-mix(in srgb, var(--theme) 60%, var(--heading)); }
+    .section.gc-section-alt .section-eyebrow,
+    .section.gc-section-alt a:not(.btn) { color: color-mix(in srgb, var(--theme) 60%, var(--heading)); }
 }
 
 .section-eyebrow {
@@ -1201,7 +1202,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .lit-cal-cell:nth-child(7n) { border-right: none; }
 .lit-cal-cell--empty { opacity: 0.35; }
 .lit-cal-cell--past .lit-cal-num,
-.lit-cal-cell--past .lit-cal-label { color: var(--text-muted); }   /* opacity .4는 대비 2.2:1이라 글자색 단계로 구분 */
+.lit-cal-cell--past .lit-cal-label { color: color-mix(in srgb, var(--text-muted) 85%, var(--cream)); }   /* opacity .4는 대비 2.2:1이라 글자색 단계로 구분(5:1 이상 유지) */
 /* 날짜 숫자 — 색은 항상 변수 기반(다크모드 자동 대비). 절기 구분은 배경 틴트로 표현 */
 .lit-cal-num {
     display: inline-flex;
@@ -1272,7 +1273,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 @media (max-width: 480px) {
     .lit-cal-cell { min-height: 46px; padding: 0.2rem 0.2rem; }
     .lit-cal-num { width: 1.5rem; height: 1.5rem; font-size: var(--fs-label); }
-    .lit-cal-label { font-size: 0.7rem; }   /* 8.8px → 9.9px, 좁은 칸에서도 한 단어는 들어감 */
+    .lit-cal-label { font-size: 0.7rem; }   /* 11.2px, 좁은 칸에서도 한 단어는 들어감 */
     .lit-cal-legend { gap: 0.75rem; font-size: var(--fs-label); }
 }
 
@@ -1846,7 +1847,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     line-height: 1.7;
 }
 .logo-ref-num {
-    font-size: 0.68rem;
+    font-size: var(--fs-label);
     font-weight: 700;
     color: var(--theme);
     background: var(--green-light);
@@ -3940,6 +3941,7 @@ footer {
     font-size: var(--fs-body);
     font-weight: 700;
     color: var(--heading);
+    padding-right: 1.5rem;   /* 우상단 ↗ 아이콘과 겹치지 않게 */
 }
 .links-card-desc {
     font-size: var(--fs-desc);
@@ -5379,3 +5381,10 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .privacy-list li { margin-bottom: 0.5rem; }
 .privacy-foot { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: var(--fs-md); color: var(--text-muted); }
 .privacy-doc a { color: var(--theme); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+/* 최종 검수 보정 — 두 단계 안쪽 전례 안내의 가장자리 margin, 소제목 */
+.section .container > :first-child > .liturgy-guide:first-child { margin-top: 0; }
+.section .liturgy-section:last-child { margin-bottom: 0; }
+.section-title--sub { font-size: 1.3rem; }
+.liturgy-section .info-card h2.section-title--sub { margin: 0; }
+.nowrap { white-space: nowrap; }

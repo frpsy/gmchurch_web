@@ -552,7 +552,7 @@ const IndexRenderer = {
         const dateStr = `${sun.getMonth() + 1}월 ${sun.getDate()}일`;
 
         el.innerHTML = `
-            <h3>${t.title} · ${dateStr} ${s.koreanName}</h3>
+            <h3>${t.title} · <span class="nowrap">${dateStr}</span> ${s.koreanName}</h3>
             <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.color};--season-ink:${season.ink || season.color}"><span class="season-dot"></span>${icon(season.symbol)}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">${season.colorName}</span></span></div>
             ${rows}
             <p class="visit-detail-wrap">
@@ -918,7 +918,7 @@ const SmallGroupRenderer = {
                             <span style="font-size:2rem;" aria-hidden="true">${icon(g.icon)}</span>
                             <div>
                                 <p class="section-eyebrow" style="margin-bottom:0.2rem;">${g.en}</p>
-                                <h2 style="margin:0; font-size:1.3rem;">${g.title}</h2>
+                                <h2 class="section-title--sub">${g.title}</h2>
                             </div>
                         </div>
                         <div class="info-row" style="margin-bottom:1.25rem;">
@@ -1076,7 +1076,7 @@ const AnglicanRenderer = {
             <div style="margin-top:3rem; padding-top:2.5rem; border-top:1px solid var(--border);">
                 <div class="section-header" style="margin-bottom:1.5rem;">
                     <p class="section-eyebrow">${m.eyebrow}</p>
-                    <h2 class="section-title" style="font-size:1.3rem;">${m.title}</h2>
+                    <h2 class="section-title section-title--sub">${m.title}</h2>
                     <p class="section-sub" style="font-style:italic; color:var(--text-muted);">${m.intro}</p>
                 </div>
                 <div class="mission-marks">
