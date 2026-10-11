@@ -32,4 +32,9 @@ describe('bulletin-news.json', () => {
             expect(item.news || []).toEqual(news.weeks[item.date] || []);
         }
     });
+
+    it('주보는 최근 4주까지만 보관한다 (sync 보관 규칙)', () => {
+        expect(CHURCH_DATA.bulletins.items.length).toBeLessThanOrEqual(4);
+        expect(entries.length).toBeLessThanOrEqual(4);
+    });
 });
