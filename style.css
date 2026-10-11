@@ -3321,7 +3321,7 @@ footer {
     .nav-link.active { box-shadow: none; }
 
     /* Hero */
-    .hero { min-height: 100vh; min-height: 100svh; }
+    .hero { min-height: 100vh; min-height: max(100svh, 560px); }
 
     /* Clergy Card — 초상만 가운데, bio 텍스트는 좌측 정렬 유지 */
     .clergy-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem 1.75rem; }
@@ -4728,6 +4728,7 @@ footer {
 }
 .menu-search-box {
     flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -4741,6 +4742,7 @@ footer {
 .menu-search-icon { width: 18px; height: 18px; color: var(--text-muted); flex-shrink: 0; }
 .menu-search-input {
     flex: 1;
+    min-width: 0;
     border: none;
     background: none;
     font-size: var(--fs-body);   /* iOS 확대 방지(16px) */
@@ -5168,10 +5170,18 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
    모바일은 아래 '모바일 세로 리듬'에서 따로 다루므로 769px 이상에만 적용 */
 @media (min-width: 769px) {
     .page-hero { padding-top: calc(var(--nav-h) + 3.5rem - 5px); padding-bottom: calc(2.5rem - 5px); }
-    .page-hero + .section { padding-top: 2.5rem; }
+    .page-hero + .section,
+    .gc-page-nav + .section { padding-top: 2.5rem; }
     .page-hero + .section > .container > :first-child,
-    .page-hero + .section > .container > [id$="-full"] > :first-child { margin-top: 0; }
+    .page-hero + .section > .container > [id$="-full"] > :first-child,
+    .gc-page-nav + .section > .container > :first-child { margin-top: 0; }
 }
+
+/* 섹션 가장자리 블록의 margin은 섹션 여백(--section-pad)에 한 번 더 더해지지 않게 */
+.section > .container > :first-child,
+.section > .container > [id$="-full"] > :first-child { margin-top: 0; }
+.section > .container > :last-child,
+.section > .container > :last-child > :last-child { margin-bottom: 0; }
 
 /* ── 좁은 PC·태블릿 가로(769~1099px) 내비 ──────────────────────
    메뉴 7개를 데스크톱 간격 그대로 두면 1010px 아래에서 '오시는 길'과 검색 버튼이
@@ -5194,7 +5204,8 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
 
     /* 페이지 첫 화면과 바로 다음 섹션 — 하단·상단 여백이 겹치지 않게 */
     .page-hero { padding-top: calc(var(--nav-h) + 1.5rem - 5px); padding-bottom: calc(1.25rem - 5px); }
-    .page-hero + .section { padding-top: 1.75rem; }
+    .page-hero + .section,
+    .gc-page-nav + .section { padding-top: 1.75rem; }
     /* 섹션 맨 앞 블록의 위쪽 margin이 섹션 여백에 한 번 더 더해지지 않게 */
     .section > .container > :first-child,
     .section > .container > [id$="-full"] > :first-child { margin-top: 0; }
