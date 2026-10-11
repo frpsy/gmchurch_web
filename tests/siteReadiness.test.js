@@ -41,14 +41,20 @@ describe('주보 날짜 안내', () => {
     });
 });
 
-describe('교회 소식 게시판', () => {
-    it('소식이 있는 주보 한 주가 한 줄이며, 최신이 가장 큰 번호를 갖는다', () => {
+describe('교회 소식', () => {
+    it('소식이 있는 주보만 최신 순으로 나열한다', () => {
         const { NewsRenderer, CHURCH_DATA } = loadRenderers();
-        const posts = NewsRenderer._posts();
-        const weeks = CHURCH_DATA.bulletins.items.filter(item => item.news && item.news.length);
-        expect(posts).toHaveLength(weeks.length);
-        expect(posts[0].no).toBe(weeks.length);
-        expect(posts[posts.length - 1].no).toBe(1);
+        const expected = CHURCH_DATA.bulletins.items.filter(item => item.news && item.news.length);
+        expect(NewsRenderer._weeks().map(item => item.date)).toEqual(expected.map(item => item.date));
+    });
+
+    it('"라벨 : 값" 줄은 항목표로, 나머지는 문단으로 그린다', () => {
+        const { NewsRenderer } = loadRenderers();
+        const html = NewsRenderer._postHtml({ title: '모임', body: '안내 문장\n일시 : 10월 18일 오후 2시 30분\n장소 : 간석교회' });
+        expect(html).toContain('<p>안내 문장</p>');
+        expect(html).toContain('<dt>일시</dt><dd>10월 18일 오후 2시 30분</dd>');
+        expect(html).toContain('<dt>장소</dt><dd>간석교회</dd>');
+        expect(html.match(/<dl /g)).toHaveLength(1);
     });
 });
 

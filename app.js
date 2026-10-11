@@ -2074,54 +2074,96 @@ const BulletinRenderer = {
 
 /* ── NewsRenderer ────────────────────────────────────────── */
 const NewsRenderer = {
-    _newsHtml(news) {
-        return news.map(n => `
-            <article class="board-news">
-                <h3 class="board-news-title">${n.title}</h3>
-                ${n.body.split('\n').map(line => `<p>${line}</p>`).join('')}
-            </article>`).join('');
+    // "일시 : …"처럼 라벨이 짧은 줄은 항목표로 보여 일정·장소를 한눈에 찾게 한다
+    _META_LINE: /^([가-힣]{1,4}) : (.+)$/,
+
+    _postHtml(post) {
+        const blocks = [];
+        let meta = [];
+        const flush = () => {
+            if (meta.length) blocks.push(`<dl class="news-post-meta">${meta.join('')}</dl>`);
+            meta = [];
+        };
+        post.body.split('\n').forEach(line => {
+            const m = line.match(this._META_LINE);
+            if (m) {
+                meta.push(`<div><dt>${m[1]}</dt><dd>${m[2]}</dd></div>`);
+            } else {
+                flush();
+                blocks.push(`<p>${line}</p>`);
+            }
+        });
+        flush();
+        return `<article class="news-post"><h3 class="news-post-title">${post.title}</h3>${blocks.join('')}</article>`;
     },
 
-    // 주보 한 주가 게시글 한 줄이다. 최대 4주라 페이지를 나누지 않으며, 번호는 최신이 가장 크다
-    _posts() {
-        const weeks = CHURCH_DATA.bulletins.items.filter(item => item.news && item.news.length);
-        return weeks.map((item, i) => ({ ...item, no: weeks.length - i }));
+    _weeks() {
+        return CHURCH_DATA.bulletins.items.filter(item => item.news && item.news.length);
+    },
+
+    _rowHtml(item, isLatest, isOpen) {
+        const labels = CHURCH_DATA.bulletins.labels;
+        const badge = BulletinRenderer._isThisWeek(item.date) ? labels.thisWeek : (isLatest ? labels.latest : '');
+        return `
+            <button class="bulletin-row" type="button" id="news-btn-${item.date}"
+                    aria-expanded="${isOpen}" aria-controls="news-${item.date}">
+                <div class="bulletin-row-info">
+                    <div class="bulletin-row-top">
+                        <span class="bulletin-row-date">${item.label}</span>
+                        ${badge ? `<span class="bulletin-badge-new">${badge}</span>` : ''}
+                    </div>
+                    <div class="bulletin-row-meta">
+                        <span class="bulletin-row-season">${item.season}</span>
+                        <span class="bulletin-row-count">${item.news.length}건</span>
+                    </div>
+                </div>
+                <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true">
+                    <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>`;
     },
 
     render() {
         const el = document.getElementById('news-full');
         if (!el) return;
-        const posts = this._posts();
-        if (posts.length === 0) {
+        const weeks = this._weeks();
+        if (weeks.length === 0) {
             el.innerHTML = `<p class="news-empty">${CHURCH_DATA.bulletins.newsEmpty}</p>`;
             return;
         }
-        const rows = posts.map((post, i) => `
-            <li class="board-item">
-                <button class="board-row" type="button" aria-expanded="${i === 0}">
-                    <span class="board-no">${post.no}</span>
-                    <span class="board-title">${post.label} 교회소식 <span class="board-count">${post.news.length}건</span></span>
-                    <span class="board-date">${post.season}</span>
-                </button>
-                <div class="board-body"${i === 0 ? '' : ' hidden'}>${this._newsHtml(post.news)}</div>
-            </li>`).join('');
+        // 공유한 링크(#news-날짜)로 들어오면 그 주를, 아니면 최신 주를 펼친다
+        const wanted = weeks.findIndex(item => `#news-${item.date}` === location.hash);
+        const openIdx = wanted === -1 ? 0 : wanted;
 
         el.innerHTML = `
             <p class="news-intro">${CHURCH_DATA.bulletins.newsIntro}</p>
-            <div class="board-head" aria-hidden="true">
-                <span class="board-no">번호</span><span class="board-title">날짜</span><span class="board-date">주일</span>
-            </div>
-            <ul class="board-list">${rows}</ul>`;
+            <div class="bulletin-list">${weeks.map((item, i) => `
+                <div class="bulletin-item" id="news-item-${item.date}">
+                    ${this._rowHtml(item, i === 0, i === openIdx)}
+                    <div class="bulletin-drawer" id="news-${item.date}" role="region"
+                         aria-labelledby="news-btn-${item.date}"${i === openIdx ? '' : ' hidden'}>
+                        ${item.news.map(post => this._postHtml(post)).join('')}
+                    </div>
+                </div>`).join('')}
+            </div>`;
 
-        el.querySelectorAll('.board-row').forEach(btn => {
+        el.querySelectorAll('.bulletin-row').forEach(btn => {
             btn.addEventListener('click', () => {
+                const drawer = btn.nextElementSibling;
                 const isOpen = btn.getAttribute('aria-expanded') === 'true';
-                el.querySelectorAll('.board-row[aria-expanded="true"]').forEach(other => {
-                    other.setAttribute('aria-expanded', 'false');
-                    other.nextElementSibling.hidden = true;
+                // 위쪽 주가 닫히며 누른 줄이 밀려 사라지지 않게 제자리에 고정한다
+                const before = btn.getBoundingClientRect().top;
+                el.querySelectorAll('.bulletin-row[aria-expanded="true"]').forEach(other => {
+                    if (other !== btn) {
+                        other.setAttribute('aria-expanded', 'false');
+                        other.nextElementSibling.hidden = true;
+                    }
                 });
                 btn.setAttribute('aria-expanded', String(!isOpen));
-                btn.nextElementSibling.hidden = isOpen;
+                drawer.hidden = isOpen;
+                const shift = btn.getBoundingClientRect().top - before;
+                if (shift) window.scrollBy({ top: shift, behavior: 'instant' });
+                if (!isOpen) history.replaceState(null, '', `#${drawer.id}`);
             });
         });
     }
