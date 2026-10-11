@@ -1176,7 +1176,7 @@ const CHURCH_DATA = {
             {
                 date: "2026-10-11",
                 label: "2026년 10월 11일",
-                season: "가해 연중 28주일",
+                season: "광명교회 축성 감사성찬례",
                 images: ["bulletins/20261011_1.jpg", "bulletins/20261011_2.jpg", "bulletins/20261011_3.jpg", "bulletins/20261011_4.jpg"],
                 pdf: "bulletins/20261011.pdf"
             },
