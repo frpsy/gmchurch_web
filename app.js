@@ -888,8 +888,8 @@ const CommunityRenderer = {
                     <div class="card" id="${g.id}" style="text-align:center;">
                         <div class="card-icon">${icon(g.icon)}</div>
                         <h3>${g.title}</h3>
-                        <p style="color:var(--text-muted); font-size:0.9rem;">${g.desc}</p>
-                        ${g.note ? `<p style="font-size:0.9rem; color:var(--text-muted); margin-top:0.5rem;">${g.note}</p>` : ''}
+                        <p style="color:var(--text-muted); font-size:var(--fs-desc);">${g.desc}</p>
+                        ${g.note ? `<p style="font-size:var(--fs-desc); color:var(--text-muted); margin-top:0.5rem;">${g.note}</p>` : ''}
                         ${g.footnote ? `<p class="community-card-note">${g.footnote}</p>` : ''}
                         ${g.detailUrl ? `<a href="${g.detailUrl}" class="community-detail-link"><span>자세히 보기</span><span aria-hidden="true">→</span></a>` : ''}
                     </div>
@@ -918,16 +918,16 @@ const SmallGroupRenderer = {
                             <span style="font-size:2rem;" aria-hidden="true">${icon(g.icon)}</span>
                             <div>
                                 <p class="section-eyebrow" style="margin-bottom:0.2rem;">${g.en}</p>
-                                <h2 style="margin:0; font-size:1.25rem;">${g.title}</h2>
+                                <h2 style="margin:0; font-size:1.3rem;">${g.title}</h2>
                             </div>
                         </div>
                         <div class="info-row" style="margin-bottom:1.25rem;">
                             <strong>모임 일정</strong>
                             <span style="color:var(--green-mid); font-weight:600;">${g.schedule}</span>
                         </div>
-                        <p style="color:var(--text-muted); font-size:0.92rem; line-height:1.9; margin-bottom:1.25rem;">${g.desc}</p>
+                        <p style="color:var(--text-muted); font-size:var(--fs-desc); line-height:var(--lh-relaxed); margin-bottom:1.25rem;">${g.desc}</p>
                         ${g.details && g.details.length ? `
-                        <ul style="margin:0; padding-left:1.2rem; color:var(--text-muted); font-size:0.9rem; line-height:2;">
+                        <ul style="margin:0; padding-left:1.2rem; color:var(--text-muted); font-size:var(--fs-desc); line-height:var(--lh-relaxed);">
                             ${g.details.map(d => `<li>${d}</li>`).join('')}
                         </ul>` : ''}
                     </div>
@@ -949,12 +949,12 @@ const GivingRenderer = {
             <div class="info-card" id="offering" style="max-width:640px; margin:0 auto;">
                 <h3>봉헌 계좌</h3>
                 <div class="bank-card">
-                    <p style="font-size:0.8rem; color:var(--green-mid); margin-bottom:0.3rem;">${bankName}</p>
+                    <p style="font-size:var(--fs-md); color:var(--green-mid); margin-bottom:0.3rem;">${bankName}</p>
                     <p class="account">${bank}</p>
                     <p class="sub">예금주 ${holder}</p>
                 </div>
-                <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.8;" id="report">${report}</p>
-                ${receiptInfo ? `<p style="margin-top:0.8rem; font-size:0.88rem; color:var(--text-muted); line-height:1.8; padding-top:0.8rem; border-top:1px solid var(--border);">${receiptInfo.replace(/\. (?=\S)/g, '.<br>')}</p>` : ''}
+                <p style="font-size:var(--fs-desc); color:var(--text-muted); line-height:1.8;" id="report">${report}</p>
+                ${receiptInfo ? `<p style="margin-top:0.8rem; font-size:var(--fs-desc); color:var(--text-muted); line-height:1.8; padding-top:0.8rem; border-top:1px solid var(--border);">${receiptInfo.replace(/\. (?=\S)/g, '.<br>')}</p>` : ''}
             </div>
         `;
     }
@@ -1076,7 +1076,7 @@ const AnglicanRenderer = {
             <div style="margin-top:3rem; padding-top:2.5rem; border-top:1px solid var(--border);">
                 <div class="section-header" style="margin-bottom:1.5rem;">
                     <p class="section-eyebrow">${m.eyebrow}</p>
-                    <h2 class="section-title" style="font-size:1.4rem;">${m.title}</h2>
+                    <h2 class="section-title" style="font-size:1.3rem;">${m.title}</h2>
                     <p class="section-sub" style="font-style:italic; color:var(--text-muted);">${m.intro}</p>
                 </div>
                 <div class="mission-marks">
@@ -1288,15 +1288,15 @@ const ClergyRenderer = {
                         <div>
                             <div class="clergy-name">${c.name} 사제</div>
                             <div class="clergy-title">${c.title}</div>
-                            ${c.ordained ? `<div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">${c.ordained}</div>` : ''}
+                            ${c.ordained ? `<div style="font-size:var(--fs-label); color:var(--text-muted); margin-top:0.2rem;">${c.ordained}</div>` : ''}
                             ${c.quote ? `<div class="quote-block"><p>"${c.quote}"</p></div>` : ''}
                             <p class="clergy-desc">${c.desc}</p>
                             ${c.bio ? this._bioSection(c.bio) : ''}
                             ${c.contact ? (c.contact.includes('@')
-                                ? `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">${icon('mail')} <a href="mailto:${c.contact}" style="color:inherit;">${c.contact}</a></p>`
-                                : `<p style="margin-top:1rem; font-size:0.83rem; color:var(--green-mid);">${icon('phone')} <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>`) : ''}
-                            ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:0.83rem;">${icon('books')} <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
-                            ${c.blogUrl ? `<p style="margin-top:0.4rem; font-size:0.83rem;">${icon('pen')} <a href="${c.blogUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">블로그 (네이버)</a></p>` : ''}
+                                ? `<p style="margin-top:1rem; font-size:var(--fs-md); color:var(--green-mid);">${icon('mail')} <a href="mailto:${c.contact}" style="color:inherit;">${c.contact}</a></p>`
+                                : `<p style="margin-top:1rem; font-size:var(--fs-md); color:var(--green-mid);">${icon('phone')} <a href="tel:${c.contact}" style="color:inherit;">${c.contact}</a></p>`) : ''}
+                            ${c.kyoboUrl ? `<p style="margin-top:0.6rem; font-size:var(--fs-md);">${icon('books')} <a href="${c.kyoboUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">저서 보기 (알라딘)</a></p>` : ''}
+                            ${c.blogUrl ? `<p style="margin-top:0.4rem; font-size:var(--fs-md);">${icon('pen')} <a href="${c.blogUrl}" target="_blank" rel="noopener" style="color:var(--green-mid); font-weight:600;">블로그 (네이버)</a></p>` : ''}
                         </div>
                     </div>`;
                 }).join('')
@@ -2543,8 +2543,8 @@ const SundaysRenderer = {
                 <div class="sundays-season-hero">
                     <p class="section-eyebrow" style="margin-bottom:0.4rem;">현재 절기 — ${cs.dateLabel}</p>
                     <p style="font-size:1.45rem; font-weight:700; color:var(--heading); margin:0 0 0.3rem;">${icon(cs.symbol)} ${cs.name}</p>
-                    <p style="font-size:0.92rem; color:var(--text-muted);">${cs.note}</p>
-                    ${range ? `<p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${advYear}-${advYear + 1} 교회력 &nbsp;·&nbsp; ${range}</p>` : ''}
+                    <p style="font-size:var(--fs-desc); color:var(--text-muted);">${cs.note}</p>
+                    ${range ? `<p style="font-size:var(--fs-md); color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${advYear}-${advYear + 1} 교회력 &nbsp;·&nbsp; ${range}</p>` : ''}
                 </div>
             </div>`;
     },
@@ -2733,10 +2733,10 @@ const SundaysRenderer = {
     _special(sundays) {
         const cards = sundays.map(s => `
             <div class="info-card">
-                <p style="font-size:0.78rem; font-weight:700; letter-spacing:0.05em; color:var(--green-mid); text-transform:uppercase; margin-bottom:0.35rem;">${s.origin}</p>
+                <p style="font-size:var(--fs-label); font-weight:700; letter-spacing:0.05em; color:var(--green-mid); text-transform:uppercase; margin-bottom:0.35rem;">${s.origin}</p>
                 <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.2rem;">${s.name}</h3>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:0.75rem;">${s.en} &middot; ${s.date}</p>
-                <p style="font-size:0.9rem; color:var(--text); line-height:1.7;">${s.desc}</p>
+                <p style="font-size:var(--fs-md); color:var(--text-muted); margin-bottom:0.75rem;">${s.en} &middot; ${s.date}</p>
+                <p style="font-size:var(--fs-desc); color:var(--text); line-height:1.7;">${s.desc}</p>
             </div>`).join('');
         return `
             <div class="section-header">

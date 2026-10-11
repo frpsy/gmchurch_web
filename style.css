@@ -2138,7 +2138,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 
 /* ── FAQ (faq.html) ─────────────────────────────────────── */
-.container--narrow { max-width: 820px; }
+.container--narrow { max-width: var(--content-narrow); }
+.container--read { max-width: var(--content-read); }
 
 .faq-lead {
     font-size: var(--fs-lead);
@@ -3401,6 +3402,9 @@ footer {
     color: var(--heading);
     gap: 0.55rem;
 }
+/* 카드 높이가 같은 행에서 '자세히 보기' 링크가 같은 높이에 놓이도록 하단 정렬 */
+#community-full .card { display: flex; flex-direction: column; align-items: center; }
+#community-full .card .community-detail-link { margin-top: auto; padding-top: 1.4rem; align-self: center; }   /* auto margin은 기존 1rem 간격을 대체하므로 padding으로 보존 */
 
 /* ── Emmaus page ─────────────────────────────────────────── */
 .emmaus-intro-grid {
@@ -5373,3 +5377,17 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-post-meta div { display: grid; grid-template-columns: 3rem 1fr; gap: 0.5rem; line-height: 1.7; }
 .news-post-meta dt { font-weight: 600; color: var(--text-muted); }
 .news-post-meta dd { margin: 0; color: var(--text); }
+
+/* ── 공용 보조 클래스 (인라인 style 대체) ───────────────────── */
+.section--tight-bottom { padding-bottom: var(--space-8); }
+.text-note { font-size: var(--fs-md); color: var(--text-muted); }
+.prose-list { margin: 0.75rem 0 0.75rem 1.2rem; font-size: var(--fs-desc); line-height: var(--lh-relaxed); color: var(--text); }
+
+/* 개인정보처리방침 */
+.privacy-doc { max-width: var(--content-read); margin: 0 auto; line-height: var(--lh-relaxed); }
+.privacy-lead { margin-bottom: 1.5rem; color: var(--text-muted); }
+.privacy-h2 { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; color: var(--heading); }
+.privacy-list { margin: 0.75rem 0 1rem 1.25rem; color: var(--text-muted); }
+.privacy-list li { margin-bottom: 0.5rem; }
+.privacy-foot { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: var(--fs-md); color: var(--text-muted); }
+.privacy-doc a { color: var(--theme); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
