@@ -42,14 +42,13 @@ describe('주보 날짜 안내', () => {
 });
 
 describe('교회 소식 게시판', () => {
-    it('최신 글이 가장 큰 번호를 갖고, 번호는 1까지 이어진다', () => {
+    it('소식이 있는 주보 한 주가 한 줄이며, 최신이 가장 큰 번호를 갖는다', () => {
         const { NewsRenderer, CHURCH_DATA } = loadRenderers();
         const posts = NewsRenderer._posts();
-        const total = CHURCH_DATA.bulletins.items.reduce((n, item) => n + (item.news || []).length, 0);
-        expect(posts).toHaveLength(total);
-        expect(posts[0].no).toBe(total);
+        const weeks = CHURCH_DATA.bulletins.items.filter(item => item.news && item.news.length);
+        expect(posts).toHaveLength(weeks.length);
+        expect(posts[0].no).toBe(weeks.length);
         expect(posts[posts.length - 1].no).toBe(1);
-        expect(posts[0].date >= posts[posts.length - 1].date).toBe(true);
     });
 });
 

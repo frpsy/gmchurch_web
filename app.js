@@ -2074,47 +2074,44 @@ const BulletinRenderer = {
 
 /* ── NewsRenderer ────────────────────────────────────────── */
 const NewsRenderer = {
-    _PER_PAGE: 10,
-
-    _bodyHtml(body) {
-        return body.split('\n').map(line => `<p>${line}</p>`).join('');
+    _newsHtml(news) {
+        return news.map(n => `
+            <article class="board-news">
+                <h3 class="board-news-title">${n.title}</h3>
+                ${n.body.split('\n').map(line => `<p>${line}</p>`).join('')}
+            </article>`).join('');
     },
 
-    // 주별 소식을 최신 주 순으로 펼쳐 게시글 한 줄씩으로 만들고, 번호는 최신이 가장 크다
+    // 주보 한 주가 게시글 한 줄이다. 최대 13주라 페이지를 나누지 않으며, 번호는 최신이 가장 크다
     _posts() {
-        const posts = CHURCH_DATA.bulletins.items.flatMap(item =>
-            (item.news || []).map(n => ({ ...n, date: item.date, label: item.label })));
-        return posts.map((post, i) => ({ ...post, no: posts.length - i }));
+        const weeks = CHURCH_DATA.bulletins.items.filter(item => item.news && item.news.length);
+        return weeks.map((item, i) => ({ ...item, no: weeks.length - i }));
     },
 
-    _renderPage(el, posts, page) {
-        const perPage    = this._PER_PAGE;
-        const totalPages = Math.ceil(posts.length / perPage);
-        const pagePosts  = posts.slice(page * perPage, (page + 1) * perPage);
-
-        const rows = pagePosts.map(post => `
+    render() {
+        const el = document.getElementById('news-full');
+        if (!el) return;
+        const posts = this._posts();
+        if (posts.length === 0) {
+            el.innerHTML = `<p class="news-empty">${CHURCH_DATA.bulletins.newsEmpty}</p>`;
+            return;
+        }
+        const rows = posts.map((post, i) => `
             <li class="board-item">
-                <button class="board-row" type="button" aria-expanded="false">
+                <button class="board-row" type="button" aria-expanded="${i === 0}">
                     <span class="board-no">${post.no}</span>
-                    <span class="board-title">${post.title}</span>
-                    <span class="board-date">${post.label}</span>
+                    <span class="board-title">${post.label} 교회소식 <span class="board-count">${post.news.length}건</span></span>
+                    <span class="board-date">${post.season}</span>
                 </button>
-                <div class="board-body" hidden>${this._bodyHtml(post.body)}</div>
+                <div class="board-body"${i === 0 ? '' : ' hidden'}>${this._newsHtml(post.news)}</div>
             </li>`).join('');
-
-        const pagHtml = totalPages > 1 ? `
-            <nav class="bulletin-pagination" aria-label="교회 소식 페이지">
-                <button class="bulletin-pag-btn" type="button" data-dir="-1"${page === 0 ? ' disabled' : ''}>← 이전</button>
-                <span class="bulletin-pag-info">${page + 1} / ${totalPages}</span>
-                <button class="bulletin-pag-btn" type="button" data-dir="1"${page >= totalPages - 1 ? ' disabled' : ''}>다음 →</button>
-            </nav>` : '';
 
         el.innerHTML = `
             <p class="news-intro">${CHURCH_DATA.bulletins.newsIntro}</p>
             <div class="board-head" aria-hidden="true">
-                <span class="board-no">번호</span><span class="board-title">제목</span><span class="board-date">주보</span>
+                <span class="board-no">번호</span><span class="board-title">날짜</span><span class="board-date">주일</span>
             </div>
-            <ul class="board-list">${rows}</ul>${pagHtml}`;
+            <ul class="board-list">${rows}</ul>`;
 
         el.querySelectorAll('.board-row').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -2127,24 +2124,6 @@ const NewsRenderer = {
                 btn.nextElementSibling.hidden = isOpen;
             });
         });
-
-        el.querySelectorAll('.bulletin-pag-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                this._renderPage(el, posts, page + parseInt(btn.dataset.dir, 10));
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-    },
-
-    render() {
-        const el = document.getElementById('news-full');
-        if (!el) return;
-        const posts = this._posts();
-        if (posts.length === 0) {
-            el.innerHTML = `<p class="news-empty">${CHURCH_DATA.bulletins.newsEmpty}</p>`;
-            return;
-        }
-        this._renderPage(el, posts, 0);
     }
 };
 
