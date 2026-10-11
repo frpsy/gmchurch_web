@@ -158,6 +158,7 @@ img { display: block; max-width: 100%; }
     transition: top var(--dur-fast);
 }
 .skip-link:focus { top: 0; }
+.skip-link:focus-visible { outline-color: #fff; outline-offset: -4px; }
 
 /* 화면에는 숨기고 스크린리더에만 노출 (구조용 헤딩 등) */
 .sr-only {
@@ -175,7 +176,6 @@ img { display: block; max-width: 100%; }
 :focus-visible {
     outline: 3px solid var(--theme);
     outline-offset: 3px;
-    border-radius: 3px;
 }
 a:focus-visible,
 button:focus-visible {
@@ -275,7 +275,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: color var(--dur), background var(--dur);
 }
 .nav-menu-trigger:hover,
-.nav-menu-trigger:focus-visible { color: #fff; background: rgba(255,255,255,0.12); outline: none; }
+.nav-menu-trigger:focus-visible { color: #fff; background: rgba(255,255,255,0.12); outline-offset: 2px; }
 .nav-menu-trigger svg { display: block; }
 .nav-item { position: relative; height: 100%; display: flex; align-items: center; }
 
@@ -331,6 +331,7 @@ button:focus:not(:focus-visible) { outline: none; }
     background: var(--green-light);
     padding-left: 1.6rem;
 }
+.dropdown li a:focus-visible { outline-color: var(--theme); outline-offset: -3px; }
 
 /* 메뉴 배지 (임시/준비중 등 상태 표시) */
 .nav-badge {
@@ -609,7 +610,6 @@ button:focus:not(:focus-visible) { outline: none; }
 .hero-stat--link:hover,
 .hero-stat--link:focus-visible {
     background: rgba(255,255,255,0.12);
-    outline: none;
 }
 .hero-stat--link:hover .hero-stat-val,
 .hero-stat--link:focus-visible .hero-stat-val {
@@ -1158,13 +1158,14 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     cursor: pointer;
     padding: 0.5rem 0.75rem;   /* 손가락 터치 영역 확보 */
     border-radius: var(--radius-sm);
-    opacity: 0.7;
+    opacity: 0.9;
     transition: opacity var(--dur-fast), background var(--dur-fast);
     line-height: 1;
     flex-shrink: 0;
 }
 .lit-cal-nav:hover,
-.lit-cal-nav:focus-visible { opacity: 1; background: rgba(255,255,255,0.18); outline: none; }
+.lit-cal-nav:focus-visible { opacity: 1; background: rgba(255,255,255,0.18); }
+.lit-cal-nav:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
 .lit-cal-wds {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -1189,7 +1190,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .lit-cal-cell:nth-child(7n) { border-right: none; }
 .lit-cal-cell--empty { opacity: 0.35; }
-.lit-cal-cell--past { opacity: 0.4; }
+.lit-cal-cell--past .lit-cal-num,
+.lit-cal-cell--past .lit-cal-label { color: var(--text-muted); }   /* opacity .4는 대비 2.2:1이라 글자색 단계로 구분 */
 /* 날짜 숫자 — 색은 항상 변수 기반(다크모드 자동 대비). 절기 구분은 배경 틴트로 표현 */
 .lit-cal-num {
     display: inline-flex;
@@ -2864,7 +2866,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     text-decoration: underline;
     text-underline-offset: 3px;
 }
-.lectionary-ref-ico { font-size: 0.72em; opacity: 0.6; }
+.lectionary-ref-ico { font-size: 0.72em; }
 
 /* 연속(A)·짝(B) 독서 트랙 토글 */
 .lect-track {
@@ -3564,8 +3566,10 @@ footer {
     font-size: var(--fs-sm);
     font-weight: 600;
     margin-top: 0.35rem;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
 }
-.emmaus-contact-link:hover { text-decoration: underline; text-underline-offset: 2px; }
 
 /* Reference list */
 .reference-list {
@@ -3675,7 +3679,8 @@ footer {
     letter-spacing: -0.005em;
 }
 .story-value-text + .story-value-text { margin-top: 0.65rem; }
-.story-value-text a { color: var(--theme); font-weight: 600; }
+.story-value-text a,
+.logo-ref-text a { color: var(--theme); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
 .story-value-text a:hover { text-decoration: underline; text-underline-offset: 2px; }
 
 @media (max-width: 768px) {
@@ -3704,6 +3709,7 @@ footer {
     border: 0;
     display: block;
 }
+.map-embed:focus-visible { outline: 2px solid var(--theme); outline-offset: -2px; }
 
 .map-card-addr {
     padding: 1.1rem 1.25rem;
@@ -3873,8 +3879,10 @@ footer {
     color: var(--theme);
     font-weight: 700;
     font-size: var(--fs-sm);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
 }
-.detail-link:hover { text-decoration: underline; }
 
 .link-plain { color: inherit; }
 .link-plain:hover { text-decoration: underline; }
@@ -4017,7 +4025,7 @@ footer {
     font-size: 2.2rem;
     color: #fff;
     opacity: 0;
-    background: rgba(13, 33, 26, 0.45);
+    background: rgba(13, 33, 26, 0.6);
     transition: opacity var(--dur);
 }
 .video-card:hover .video-play-btn {
@@ -4156,8 +4164,8 @@ footer {
 .photo-item:focus-visible {
     transform: translateY(-4px);
     box-shadow: var(--hover-shadow-sm);
-    outline: none;
 }
+.photo-item:focus-visible { outline-offset: 2px; }
 .photo-item img {
     width: 100%;
     height: 100%;
@@ -4173,7 +4181,7 @@ footer {
 .photo-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(13, 33, 26, 0.82) 0%, transparent 55%);
+    background: linear-gradient(to top, rgba(13, 33, 26, 0.88) 0%, transparent 65%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -4188,7 +4196,7 @@ footer {
 .photo-cat-badge {
     font-size: var(--fs-label);
     font-weight: 600;
-    color: var(--green-soft);
+    color: rgba(255, 255, 255, 0.9);   /* 오버레이는 항상 어두우므로 모드와 무관하게 고정 */
     letter-spacing: var(--ls-label);
     margin-bottom: 0.3rem;
 }
@@ -4200,7 +4208,7 @@ footer {
 }
 .photo-date {
     font-size: var(--fs-label);
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.85);
     margin-top: 0.2rem;
 }
 .photo-count {
@@ -4320,8 +4328,8 @@ footer {
     background: rgba(255,255,255,0.15);
     color: #fff;
     border-color: rgba(255,255,255,0.7);
-    outline: none;
 }
+.gallery-lb-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 @media (max-width: 768px) {
     .photo-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -4409,7 +4417,7 @@ footer {
     .logo-swatch-chip { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28); }
     /* 수상 배지 hover — 라이트 전용 하드코딩 배경 대신 어두운 톤으로 */
     .about-brief-award:hover {
-        background: var(--green-soft);
+        background: var(--green-light);
     }
     /* 버스 노선 칩 — 어두운 배경에서 칩 색이 묻히지 않도록 밝게 조정 */
     .bus-chip { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22); }  /* 어두운 바탕과 칩 경계 */
@@ -4444,7 +4452,6 @@ footer {
 #back-to-top:hover, #back-to-top:focus-visible {
     background: var(--theme);
     box-shadow: 0 6px 24px rgba(13, 33, 26, 0.30);
-    outline: none;
 }
 #back-to-top svg {
     width: 20px;
@@ -4751,7 +4758,7 @@ footer {
     transition: color var(--dur), background var(--dur);
 }
 .menu-overlay-close:hover,
-.menu-overlay-close:focus-visible { color: var(--heading); background: var(--green-light); outline: none; }
+.menu-overlay-close:focus-visible { color: var(--heading); background: var(--green-light); }
 
 .menu-overlay-scroll {
     overflow-y: auto;
