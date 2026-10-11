@@ -1201,8 +1201,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .lit-cal-cell:nth-child(7n) { border-right: none; }
 .lit-cal-cell--empty { opacity: 0.35; }
-.lit-cal-cell--past .lit-cal-num,
-.lit-cal-cell--past .lit-cal-label { color: color-mix(in srgb, var(--text-muted) 85%, var(--cream)); }   /* opacity .4는 대비 2.2:1이라 글자색 단계로 구분(5:1 이상 유지) */
+.lit-cal-cell--past .lit-cal-num { color: color-mix(in srgb, var(--text-muted) 85%, var(--cream)); }
+.lit-cal-cell--past .lit-cal-label { color: var(--text-muted); }   /* opacity .4는 대비 2.2:1이라 글자색 단계로 구분. 절기 틴트 위 라벨은 4.5:1 확보를 위해 --text-muted 그대로 */
 /* 날짜 숫자 — 색은 항상 변수 기반(다크모드 자동 대비). 절기 구분은 배경 틴트로 표현 */
 .lit-cal-num {
     display: inline-flex;
