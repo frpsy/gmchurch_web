@@ -1209,13 +1209,6 @@ const CHURCH_DATA = {
                     { title: "서부교무구 어머니연합회 기도모임 안내", body: "일시 : 10월 18일 오후 2시 30분\n장소 : 간석교회\n말씀 : 이명근 사제" },
                     { title: "관할사제 일정", body: "7일 총사제회의 (양이재 주교관)" }
                 ]
-            },
-            {
-                date: "2026-07-12",
-                label: "2026년 7월 12일",
-                season: "맥추감사주일",
-                images: ["bulletins/20260712_1.jpg", "bulletins/20260712_2.jpg", "bulletins/20260712_3.jpg", "bulletins/20260712_4.jpg"],
-                pdf: "bulletins/20260712.pdf"
             }
         ]
     },
