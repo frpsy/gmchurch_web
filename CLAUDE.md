@@ -20,7 +20,7 @@
 | 배포 | GitHub Pages (`main` 브랜치 자동 배포) — **Netlify는 사용하지 않음** (아래 참고) |
 | 로드 순서 | `data.js` → `app.js` (CHURCH_DATA 전역 변수) |
 | 테스트 | `npm test` (Vitest) |
-| CI | `cache-bust.yml` — main 머지 시 `?v=` 자동 갱신 |
+| CI | `cache-bust.yml` — main 머지 시 `?v=` 자동 갱신 · `bulletin-sync.yml` — 주보 이미지 push 시 + 매일 03:00(KST) 주보·교회소식 갱신/만료 삭제 |
 
 > **Netlify 미사용**: 예전에 쓰던 Netlify는 종료되었다. PR에 `netlify[bot]`의 "Deploy Preview" 코멘트나 `deploy-preview-N--gmchurchweb.netlify.app` 링크가 보여도 **무시한다** — 확인·재시도·수정 대상이 아니고, 미리보기는 로컬(`python3 -m http.server 8000`)로 한다. 이 봇 알림만으로 PR 대응(푸시·코멘트)을 시작하지 않는다. (저장소에는 Netlify 설정 파일이 없다. 봇이 계속 뜨면 GitHub 쪽 Netlify 앱 연결을 해제해야 한다.)
 
@@ -192,7 +192,7 @@ echo "Done: $TODAY"
 4. `node scripts/sync-bulletins.js` 실행 → PDF 생성 + data.js 자동 갱신
    - 끝에 **⚠️ 트랙 미기록 / ℹ️ 시편 미기록 / ℹ️ 교회소식 미기록** 경고가 뜨면 해당 주 기록을 보완
 5. `npm test` (병합·표기·overrides·교회소식 형식 검증 포함)
-6. **최근 4주만 보관(FIFO)** — 5번째로 오래된 주보와 이미지·PDF·교회소식은 sync가 자동 삭제. 다시 필요하면 이미지를 `bulletins/`에 되돌려 놓고 sync. overrides의 과거 항목은 그대로 둬도 무방
+6. **보관 규칙: 최근 4개 주보 이내 + 4주(28일) 이내** — 넘긴 주보의 이미지·PDF·교회소식은 sync가 삭제한다. 새 주보를 안 올려도 `bulletin-sync.yml`이 매일 03:00(KST) 실행되어 자동 삭제·커밋한다(수동 실행: Actions > Sync Sunday Bulletins > Run workflow). 다시 필요하면 이미지를 `bulletins/`에 되돌려 놓고 sync. overrides의 과거 항목은 그대로 둬도 무방
 
 > ⚠️ 병합 규칙은 `scripts/lib/lectionary.js`(스크립트·테스트용)와 `app.js`의 `_applyOverrides`(브라우저용) 두 곳에 있다 — 빌드가 없어 공유 불가. 한쪽을 고치면 반드시 다른 쪽도 함께 고칠 것.
 

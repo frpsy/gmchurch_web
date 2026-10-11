@@ -126,8 +126,10 @@ const BULLETINS = path.join(ROOT, 'bulletins');
 const DATA_JS   = path.join(ROOT, 'data.js');
 const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
 const NEWS      = path.join(ROOT, 'data', 'bulletin-news.json');
-// 가장 최근 N주만 보관한다 (N주보를 넘기는 오래된 주보·교회소식은 자동 삭제)
+// 보관 규칙: 최근 4개 주보 이내이면서 4주(28일) 넘게 지나지 않은 것만 남긴다.
+// 새 주보가 없어도 날짜만 지나면 삭제되도록, 매일 도는 워크플로가 이 스크립트를 실행한다.
 const MAX_BULLETINS = 4;
+const MAX_AGE_DAYS  = 28;
 
 // 지정한 마커 사이 구간을 통째로 교체 (data.js 손질용)
 function replaceRegion(text, startMarker, endMarker, replacement) {
@@ -173,11 +175,16 @@ function readingsBlock(key, resolved, standardYear, withNote) {
         groups.get(ds).push(file);
     }
 
-    // ── 2. 최근 MAX_BULLETINS주만 남기고 삭제 (이미지 + PDF) ─────
+    // ── 2. 보관 규칙을 넘긴 주보 삭제 (이미지 + PDF) ─────────────
     // PDF만 있는 항목(직접 업로드된 PDF)도 같은 기준으로 센다
     const allPdfs = fs.readdirSync(BULLETINS).filter(f => /^\d{8}\.pdf$/i.test(f));
     const allDates = new Set([...groups.keys(), ...allPdfs.map(f => f.slice(0, 8))]);
-    const keep = new Set([...allDates].sort((a, b) => b.localeCompare(a)).slice(0, MAX_BULLETINS));
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const ageDays = ds => Math.round((today - new Date(+ds.slice(0, 4), +ds.slice(4, 6) - 1, +ds.slice(6, 8))) / 86400000);
+    const keep = new Set([...allDates].sort((a, b) => b.localeCompare(a))
+        .slice(0, MAX_BULLETINS)
+        .filter(ds => ageDays(ds) <= MAX_AGE_DAYS));
 
     const valid = new Map();
     for (const ds of allDates) {
