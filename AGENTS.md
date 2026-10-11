@@ -24,7 +24,7 @@ npm test                                      # 반드시 통과
 git add 수정한파일...                          # git add -A 금지
 git commit -m "fix: 무엇을 왜 고쳤는지"         # 타입: feat/fix/refactor/chore/docs
 git push -u origin 작업자/작업명
-# → PR 생성 → squash merge (저장소 정책: 확인 없이 즉시 머지)
+# → PR 생성 → squash merge (저장소 정책: 작업이 끝나면 커밋·푸시·PR·머지를 묻지 않고 자동으로 진행)
 ```
 
 - 커밋 메시지·PR 본문·코드 주석은 **한국어**. 주석은 "왜"만 짧게.
