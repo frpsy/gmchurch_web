@@ -70,11 +70,13 @@
     --fs-sm:     0.9rem;    /* 보조 본문 */
     --fs-body:   1rem;      /* 기본 본문 */
     --fs-lead:   1.125rem;  /* 카드 제목 등 */
+    --fs-desc:   0.95rem;   /* 문장형 카드·목록 설명 (15.2px, 내비용 --fs-sm과 분리) */
     /* Line-height — 역할별 행간 */
     --lh-tight:   1.2;      /* 큰 제목 */
     --lh-heading: 1.45;     /* 중간 제목·리드 */
     --lh-body:    1.75;     /* 기본 본문 */
     --lh-relaxed: 1.9;      /* 장문 본문 */
+    --lh-snug:    1.55;     /* 여러 줄 제목·리드 */
     /* Letter-spacing — uppercase 라벨 */
     --ls-eyebrow: 0.2em;
     --ls-label:   0.08em;
@@ -87,6 +89,25 @@
     --space-6: 2rem;
     --space-7: 2.5rem;
     --space-8: 3.5rem;
+    --space-4h: 1.25rem;
+    --space-6h: 1.75rem;
+    /* 읽기 폭 */
+    --content-narrow: 820px;
+    --content-read:   760px;
+    /* 모드와 무관하게 고정인 색 — 항상 어두운/밝은 면 위에 얹는 글자·호버용 */
+    --ink-on-light: #173a2e;   /* 항상 흰 버튼 위 글자 */
+    --ink-on-sage:  #142c24;   /* 세이지(--gold) 위 글자 */
+    --brand-mid:    #285a47;   /* 항상 어두운 띠 위 그라데이션 */
+    --green-hover:  #e3e7d2;   /* 밝은 버튼·배지 호버 */
+    --red-hover:    #9b1c1c;
+    /* 어두운 면 위 흰 글자 투명도 3단계 */
+    --on-dark-1: rgba(255, 255, 255, 0.92);
+    --on-dark-2: rgba(255, 255, 255, 0.78);
+    --on-dark-3: rgba(255, 255, 255, 0.70);
+    /* 컴포넌트 규격 */
+    --radius-xs: 4px;
+    --lift-1: -2px;   /* 작은 컨트롤 hover 이동 */
+    --lift-2: -4px;   /* 카드 hover 이동 */
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
@@ -204,7 +225,6 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: box-shadow var(--dur-slow), background var(--dur-slow);
 }
 .nav-header.scrolled {
-    background: rgba(24, 58, 47, 0.97);
     box-shadow: 0 4px 20px rgba(0,0,0,0.18);
 }
 
@@ -340,7 +360,7 @@ button:focus:not(:focus-visible) { outline: none; }
     white-space: nowrap;
     transition: background var(--dur);
 }
-.btn-nav-live:hover { background: #9b1c1c; }
+.btn-nav-live:hover { background: var(--red-hover); }
 
 /* Dropdown chevron (mobile-only toggle) */
 .nav-chevron {
@@ -512,7 +532,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: var(--fs-sm);
     transition: background var(--dur), transform var(--dur);
 }
-.btn-live:hover { background: #9b1c1c; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(155, 28, 28, 0.30); }
+.btn-live:hover { background: var(--red-hover); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(155, 28, 28, 0.30); }
 
 /* Hero — solid primary CTA */
 .btn-hero-primary {
@@ -528,7 +548,7 @@ button:focus:not(:focus-visible) { outline: none; }
     box-shadow: 0 4px 20px rgba(0,0,0,0.18);
 }
 .btn-hero-primary:hover {
-    background: #e3e7d2;
+    background: var(--green-hover);
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(177, 184, 131, 0.26);
 }
@@ -1645,7 +1665,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     text-decoration: none;
     transition: background var(--dur), border-color var(--dur);
 }
-.about-brief-award:hover { background: #e3e7d2; border-color: var(--theme); }
+.about-brief-award:hover { background: var(--green-hover); border-color: var(--theme); }
 .about-brief-award-icon { font-size: 1.25rem; flex-shrink: 0; }
 .about-brief-award-body { display: flex; flex-direction: column; gap: 0.1rem; flex: 1; text-align: left; }
 .about-brief-award-body strong { font-size: var(--fs-sm); font-weight: 700; color: var(--heading); }
@@ -2385,7 +2405,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     isolation: isolate;
     overflow: hidden;
     padding: var(--section-pad) 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, #2a5a48 0%, var(--green-deep) 65%);
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--brand-mid) 0%, var(--green-deep) 65%);
     border-top: none;
 }
 .next-step-cta::before {
@@ -2488,12 +2508,12 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .next-step-cta .btn-next--primary {
     background: var(--gold);
     border-color: var(--gold);
-    color: #142c24;   /* 세이지 위 숲 녹 글자 (흰 글자는 대비 미달) */
+    color: var(--ink-on-sage);   /* 세이지 위 숲 녹 글자 (흰 글자는 대비 미달) */
 }
 .next-step-cta .btn-next--primary:hover {
     background: color-mix(in srgb, var(--gold) 78%, white);
     border-color: color-mix(in srgb, var(--gold) 78%, white);
-    color: #142c24;
+    color: var(--ink-on-sage);
     box-shadow: 0 8px 28px rgba(177, 184, 131, 0.35);
 }
 
@@ -2791,7 +2811,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     text-transform: uppercase;
 }
 .lectionary-card-head {
-    background: color-mix(in srgb, var(--season, var(--green-dark)) 12%, var(--white));
+    background: color-mix(in srgb, var(--season, var(--theme)) 12%, var(--white));
     padding: 1rem 1.25rem 0.85rem;
     border-bottom: 1px solid var(--border);
 }
@@ -2952,7 +2972,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 @media (prefers-color-scheme: dark) {
     .lectionary-card-head {
-        background: color-mix(in srgb, var(--season, var(--green-dark)) 18%, var(--white));
+        background: color-mix(in srgb, var(--season, var(--theme)) 18%, var(--white));
     }
     /* 금색 절기 틴트 위에서도 AA 유지 */
     .lectionary-card-label { color: color-mix(in srgb, var(--green-mid) 60%, var(--heading)); }
@@ -4076,7 +4096,7 @@ footer {
 .draft-badge {
     flex-shrink: 0;
     background: var(--gold);
-    color: #142c24;
+    color: var(--ink-on-sage);
     font-size: var(--fs-label);
     font-weight: 700;
     letter-spacing: var(--ls-label);
@@ -4367,10 +4387,10 @@ footer {
     }
     /* 히어로 CTA 버튼 — 배경이 항상 흰색(#fff)이므로 텍스트·호버를 라이트 모드 값으로 고정 */
     .btn-hero-primary {
-        color: #163a2e;
+        color: var(--ink-on-light);
     }
     .btn-hero-primary:hover {
-        background: #e3e7d2;
+        background: var(--green-hover);
     }
     /* 전례력 절기색 — JS가 주입하는 밝은 절기색(s.colorLight)은 다크모드에 적응하지
        않으므로, 절기 강조색을 어두운 서피스에 섞어 카드 배경을 어둡게 재계산한다.

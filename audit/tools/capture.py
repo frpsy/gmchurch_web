@@ -11,8 +11,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGES = ["index","clergy","faq","worship","bulletin","news","newcomer","community","giving",
          "media","videos","gallery","links","sundays","visit","hopecenter","emmaus","smallgroup",
          "greenchurch","privacy"]
-WIDTHS = [360, 390, 768, 1024, 1440]
-DARK_WIDTHS = [390, 1440]
+WIDTHS = [int(x) for x in os.environ.get("CAP_WIDTHS", "360,390,768,1024,1440").split(",") if x]
+DARK_WIDTHS = [int(x) for x in os.environ.get("CAP_DARK", "390,1440").split(",") if x]
+if os.environ.get("CAP_PAGES"):
+    PAGES = os.environ["CAP_PAGES"].split(",")
 SHOT_DIR = os.path.join(ROOT, "screenshots", LABEL)
 os.makedirs(SHOT_DIR, exist_ok=True)
 os.makedirs(os.path.join(ROOT, "metrics"), exist_ok=True)
