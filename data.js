@@ -422,26 +422,26 @@ const CHURCH_DATA = {
         },
         liturgicalSeason: LiturgicalCalendar.compute(),
         currentReadings: {
-            week: "창조5주일",
-            year: "A년",
-            date: "2026년 10월 4일",
-            note: "주보 기준 · 대한성공회 공동 전례독서에 따릅니다.",
-            items: [
-                { role: "제1독서", ref: "레위 25:8-19" },
-                { role: "시편", ref: "시편 33편" },
-                { role: "서신서", ref: "디모테오전서 2:1-7" },
-                { role: "복음", ref: "루가 17:11-19" }
-            ]
-        },
-        nextReadings: {
             week: "연중 제28주일",
             year: "A년",
             date: "2026년 10월 11일",
+            note: "주보 기준 · 대한성공회 공동 전례독서에 따릅니다.",
             items: [
                 { role: "제1독서", ref: "출애굽 32:1-14" },
                 { role: "시편", ref: "시편 106편" },
                 { role: "서신서", ref: "필립비 4:1-9" },
                 { role: "복음", ref: "마태 22:1-14" }
+            ]
+        },
+        nextReadings: {
+            week: "연중 제29주일",
+            year: "A년",
+            date: "2026년 10월 18일",
+            items: [
+                { role: "제1독서", ref: "출애굽 33:12-23" },
+                { role: "시편", ref: "시편 99편" },
+                { role: "서신서", ref: "데살로니카전서 1:1-10" },
+                { role: "복음", ref: "마태 22:15-22" }
             ]
         },
         main: [
@@ -1173,6 +1173,13 @@ const CHURCH_DATA = {
         intro: "예배 순서와 공동체 소식을 담은 주간 주보입니다.",
         note: "예배 전에 미리 열어 두시면 도움이 됩니다.",
         items: [
+            {
+                date: "2026-10-11",
+                label: "2026년 10월 11일",
+                season: "가해 연중 28주일",
+                images: ["bulletins/20261011_1.jpg", "bulletins/20261011_2.jpg", "bulletins/20261011_3.jpg", "bulletins/20261011_4.jpg"],
+                pdf: "bulletins/20261011.pdf"
+            },
             {
                 date: "2026-10-04",
                 label: "2026년 10월 4일",
