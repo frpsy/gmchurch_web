@@ -27,6 +27,11 @@ describe('bulletin-news.json', () => {
         }
     });
 
+    it('약어는 점으로 구분해 적는다 (G.F.S.)', () => {
+        const text = JSON.stringify(news.weeks);
+        expect(text).not.toMatch(/\bGFS\b/);
+    });
+
     it('data.js 주보 항목의 news가 이 파일과 일치한다 (sync 누락 방지)', () => {
         for (const item of CHURCH_DATA.bulletins.items) {
             expect(item.news || []).toEqual(news.weeks[item.date] || []);
