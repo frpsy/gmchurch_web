@@ -114,6 +114,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 /* 본문에 text-wrap: pretty/balance를 걸지 않는다. keep-all 한글은 끊을 자리가 어절뿐이라,
    Safari(WebKit)가 줄을 문단 단위로 다듬으면서 줄 끝이 일찍 끊겨 들쭉날쭉해진다. */
+/* 짧은 제목·카드 이름·푸터 주소만 예외: 마지막 줄에 한두 글자만 남는 현상 방지(본문 p·li는 제외) */
+h1, h2, h3, h4,
+.links-card-name, .iona-link-card__desc, .footer-addr-link { text-wrap: balance; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
 /* 부드러운 스크롤은 모션 민감 사용자에게는 비활성화 (전정기관 자극 방지) */
 @media (prefers-reduced-motion: no-preference) {
