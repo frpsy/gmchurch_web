@@ -1,0 +1,917 @@
+{
+ "community@360": {
+  "scrollWidth": 360,
+  "clientWidth": 360,
+  "hScroll": false,
+  "bodyFont": "Pretendard, -apple-system, BlinkMacSystemFont, \"Noto Sans KR\", \"Segoe UI\", \"Apple SD Gothic Neo\", sans-serif",
+  "pretendardLoaded": true,
+  "styles": {
+   "h1": [
+    {
+     "style": {
+      "fs": "35.2px",
+      "lh": "40.48px",
+      "fw": "700",
+      "ls": "-0.704px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   "h2": [
+    {
+     "style": {
+      "fs": "24px",
+      "lh": "42px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.sr-only \"공동체 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "24px",
+      "lh": "30px",
+      "fw": "800",
+      "ls": "-0.48px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.next-step-cta-title \"예배와 창조세계 돌봄으로 이어집니다\""
+     ]
+    }
+   ],
+   "h3": [
+    {
+     "style": {
+      "fs": "18px",
+      "lh": "31.5px",
+      "fw": "700",
+      "ls": "-0.18px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "h3 \"광명 희망터\"",
+      "h3 \"엠마우스 코스\"",
+      "h3 \"소그룹 모임\""
+     ]
+    }
+   ],
+   "h4": [],
+   "h5": [],
+   "h6": [],
+   "p": [
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.84px",
+      "fw": "600",
+      "ls": "3.04px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.section-eyebrow \"Community\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"이웃과 함께 신앙과 삶을 나눕니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p \"지역의 소외된 이웃과 함께하는 돌봄 사역\"",
+      "p \"그리스도교 신앙의 기초를 배우는 과정\"",
+      "p \"기도하고 이야기 나누는 작은 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.community-card-note \"* 비건: 계란·우유도 포함하지 않는 완전 채식\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "2.7456px",
+      "ff": "Pretendard",
+      "color": "rgb(168, 189, 159)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-eyebrow \"함께하는 신앙\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.7)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-desc \"공동체의 삶은 주일 예배에서 시작하고, 녹색교회의 실천\""
+     ]
+    }
+   ],
+   "li": [],
+   "a": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.hero-nav \"\"",
+      "a.hero-nav \"\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(20, 44, 36)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.btn-next \"예배 안내\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.88)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.btn-next \"녹색교회\"",
+      "a.btn-next \"헌금 안내\""
+     ]
+    }
+   ],
+   "button": [],
+   "th": [],
+   "td": [],
+   "small": [],
+   ".section-title": [],
+   ".page-hero h1": [
+    {
+     "style": {
+      "fs": "35.2px",
+      "lh": "40.48px",
+      "fw": "700",
+      "ls": "-0.704px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   ".card": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "div.card \"광명 희망터\n                       \"",
+      "div.card \"엠마우스 코스\n                      \"",
+      "div.card \"소그룹 모임\n                       \""
+     ]
+    }
+   ],
+   ".btn": []
+  },
+  "overflow": [],
+  "overflowCount": 0,
+  "brokenImgs": [
+   null
+  ],
+  "consoleErrors": []
+ },
+ "community@1024": {
+  "scrollWidth": 1024,
+  "clientWidth": 1024,
+  "hScroll": false,
+  "bodyFont": "Pretendard, -apple-system, BlinkMacSystemFont, \"Noto Sans KR\", \"Segoe UI\", \"Apple SD Gothic Neo\", sans-serif",
+  "pretendardLoaded": true,
+  "styles": {
+   "h1": [
+    {
+     "style": {
+      "fs": "46.08px",
+      "lh": "52.992px",
+      "fw": "700",
+      "ls": "-0.9216px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   "h2": [
+    {
+     "style": {
+      "fs": "24px",
+      "lh": "42px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.sr-only \"공동체 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "30.72px",
+      "lh": "38.4px",
+      "fw": "800",
+      "ls": "-0.6144px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.next-step-cta-title \"예배와 창조세계 돌봄으로 이어집니다\""
+     ]
+    }
+   ],
+   "h3": [
+    {
+     "style": {
+      "fs": "18px",
+      "lh": "31.5px",
+      "fw": "700",
+      "ls": "-0.18px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "h3 \"광명 희망터\"",
+      "h3 \"엠마우스 코스\"",
+      "h3 \"소그룹 모임\""
+     ]
+    }
+   ],
+   "h4": [],
+   "h5": [],
+   "h6": [],
+   "p": [
+    {
+     "style": {
+      "fs": "17.6px",
+      "lh": "29.92px",
+      "fw": "600",
+      "ls": "3.52px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.section-eyebrow \"Community\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "17.6px",
+      "lh": "29.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"이웃과 함께 신앙과 삶을 나눕니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p \"지역의 소외된 이웃과 함께하는 돌봄 사역\"",
+      "p \"그리스도교 신앙의 기초를 배우는 과정\"",
+      "p \"기도하고 이야기 나누는 작은 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.community-card-note \"* 비건: 계란·우유도 포함하지 않는 완전 채식\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "2.7456px",
+      "ff": "Pretendard",
+      "color": "rgb(168, 189, 159)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-eyebrow \"함께하는 신앙\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.7)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-desc \"공동체의 삶은 주일 예배에서 시작하고, 녹색교회의 실천\""
+     ]
+    }
+   ],
+   "li": [],
+   "a": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.hero-nav \"\"",
+      "a.hero-nav \"\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(20, 44, 36)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.btn-next \"예배 안내\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.88)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.btn-next \"녹색교회\"",
+      "a.btn-next \"헌금 안내\""
+     ]
+    }
+   ],
+   "button": [],
+   "th": [],
+   "td": [],
+   "small": [],
+   ".section-title": [],
+   ".page-hero h1": [
+    {
+     "style": {
+      "fs": "46.08px",
+      "lh": "52.992px",
+      "fw": "700",
+      "ls": "-0.9216px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   ".card": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "div.card \"광명 희망터\n                       \"",
+      "div.card \"엠마우스 코스\n                      \"",
+      "div.card \"소그룹 모임\n                       \""
+     ]
+    }
+   ],
+   ".btn": []
+  },
+  "overflow": [],
+  "overflowCount": 0,
+  "brokenImgs": [
+   null
+  ],
+  "consoleErrors": []
+ },
+ "community@1440": {
+  "scrollWidth": 1440,
+  "clientWidth": 1440,
+  "hScroll": false,
+  "bodyFont": "Pretendard, -apple-system, BlinkMacSystemFont, \"Noto Sans KR\", \"Segoe UI\", \"Apple SD Gothic Neo\", sans-serif",
+  "pretendardLoaded": true,
+  "styles": {
+   "h1": [
+    {
+     "style": {
+      "fs": "54.4px",
+      "lh": "62.56px",
+      "fw": "700",
+      "ls": "-1.088px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   "h2": [
+    {
+     "style": {
+      "fs": "24px",
+      "lh": "42px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.sr-only \"공동체 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "33.6px",
+      "lh": "42px",
+      "fw": "800",
+      "ls": "-0.672px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.next-step-cta-title \"예배와 창조세계 돌봄으로 이어집니다\""
+     ]
+    }
+   ],
+   "h3": [
+    {
+     "style": {
+      "fs": "18px",
+      "lh": "31.5px",
+      "fw": "700",
+      "ls": "-0.18px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "h3 \"광명 희망터\"",
+      "h3 \"엠마우스 코스\"",
+      "h3 \"소그룹 모임\""
+     ]
+    }
+   ],
+   "h4": [],
+   "h5": [],
+   "h6": [],
+   "p": [
+    {
+     "style": {
+      "fs": "17.6px",
+      "lh": "29.92px",
+      "fw": "600",
+      "ls": "3.52px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.section-eyebrow \"Community\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "17.6px",
+      "lh": "29.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"이웃과 함께 신앙과 삶을 나눕니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p \"지역의 소외된 이웃과 함께하는 돌봄 사역\"",
+      "p \"그리스도교 신앙의 기초를 배우는 과정\"",
+      "p \"기도하고 이야기 나누는 작은 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.community-card-note \"* 비건: 계란·우유도 포함하지 않는 완전 채식\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "2.7456px",
+      "ff": "Pretendard",
+      "color": "rgb(168, 189, 159)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-eyebrow \"함께하는 신앙\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.7)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-desc \"공동체의 삶은 주일 예배에서 시작하고, 녹색교회의 실천\""
+     ]
+    }
+   ],
+   "li": [],
+   "a": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.hero-nav \"\"",
+      "a.hero-nav \"\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(20, 44, 36)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.btn-next \"예배 안내\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.88)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.btn-next \"녹색교회\"",
+      "a.btn-next \"헌금 안내\""
+     ]
+    }
+   ],
+   "button": [],
+   "th": [],
+   "td": [],
+   "small": [],
+   ".section-title": [],
+   ".page-hero h1": [
+    {
+     "style": {
+      "fs": "54.4px",
+      "lh": "62.56px",
+      "fw": "700",
+      "ls": "-1.088px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   ".card": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "div.card \"광명 희망터\n                       \"",
+      "div.card \"엠마우스 코스\n                      \"",
+      "div.card \"소그룹 모임\n                       \""
+     ]
+    }
+   ],
+   ".btn": []
+  },
+  "overflow": [],
+  "overflowCount": 0,
+  "brokenImgs": [
+   null
+  ],
+  "consoleErrors": []
+ }
+}

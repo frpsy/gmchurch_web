@@ -1,0 +1,3039 @@
+{
+ "community@390": {
+  "scrollWidth": 390,
+  "clientWidth": 390,
+  "hScroll": false,
+  "bodyFont": "Pretendard, -apple-system, BlinkMacSystemFont, \"Noto Sans KR\", \"Segoe UI\", \"Apple SD Gothic Neo\", sans-serif",
+  "pretendardLoaded": true,
+  "styles": {
+   "h1": [
+    {
+     "style": {
+      "fs": "35.2px",
+      "lh": "40.48px",
+      "fw": "700",
+      "ls": "-0.704px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   "h2": [
+    {
+     "style": {
+      "fs": "24px",
+      "lh": "42px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.sr-only \"공동체 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "24px",
+      "lh": "30px",
+      "fw": "800",
+      "ls": "-0.48px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.next-step-cta-title \"예배와 창조세계 돌봄으로 이어집니다\""
+     ]
+    }
+   ],
+   "h3": [
+    {
+     "style": {
+      "fs": "18px",
+      "lh": "31.5px",
+      "fw": "700",
+      "ls": "-0.18px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "h3 \"광명 희망터\"",
+      "h3 \"엠마우스 코스\"",
+      "h3 \"소그룹 모임\""
+     ]
+    }
+   ],
+   "h4": [],
+   "h5": [],
+   "h6": [],
+   "p": [
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.84px",
+      "fw": "600",
+      "ls": "3.04px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.section-eyebrow \"Community\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"이웃과 함께 신앙과 삶을 나눕니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p \"지역의 소외된 이웃과 함께하는 돌봄 사역\"",
+      "p \"그리스도교 신앙의 기초를 배우는 과정\"",
+      "p \"기도하고 이야기 나누는 작은 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.community-card-note \"* 비건: 계란·우유도 포함하지 않는 완전 채식\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "2.7456px",
+      "ff": "Pretendard",
+      "color": "rgb(168, 189, 159)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-eyebrow \"함께하는 신앙\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.7)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-desc \"공동체의 삶은 주일 예배에서 시작하고, 녹색교회의 실천\""
+     ]
+    }
+   ],
+   "li": [],
+   "a": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.hero-nav \"\"",
+      "a.hero-nav \"\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(20, 44, 36)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.btn-next \"예배 안내\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.88)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.btn-next \"녹색교회\"",
+      "a.btn-next \"헌금 안내\""
+     ]
+    }
+   ],
+   "button": [],
+   "th": [],
+   "td": [],
+   "small": [],
+   ".section-title": [],
+   ".page-hero h1": [
+    {
+     "style": {
+      "fs": "35.2px",
+      "lh": "40.48px",
+      "fw": "700",
+      "ls": "-0.704px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   ".card": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "div.card \"광명 희망터\n                       \"",
+      "div.card \"엠마우스 코스\n                      \"",
+      "div.card \"소그룹 모임\n                       \""
+     ]
+    }
+   ],
+   ".btn": []
+  },
+  "overflow": [],
+  "overflowCount": 0,
+  "brokenImgs": [
+   null
+  ],
+  "consoleErrors": []
+ },
+ "clergy@390": {
+  "scrollWidth": 390,
+  "clientWidth": 390,
+  "hScroll": false,
+  "bodyFont": "Pretendard, -apple-system, BlinkMacSystemFont, \"Noto Sans KR\", \"Segoe UI\", \"Apple SD Gothic Neo\", sans-serif",
+  "pretendardLoaded": true,
+  "styles": {
+   "h1": [
+    {
+     "style": {
+      "fs": "35.2px",
+      "lh": "40.48px",
+      "fw": "700",
+      "ls": "-0.704px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"교회 소개\""
+     ]
+    }
+   ],
+   "h2": [
+    {
+     "style": {
+      "fs": "32px",
+      "lh": "38.4px",
+      "fw": "700",
+      "ls": "-0.96px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 7,
+     "examples": [
+      "h2.section-title \"성공회란?\"",
+      "h2.section-title \"대한성공회\"",
+      "h2.section-title \"섬기는 이들\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "20.8px",
+      "lh": "24.96px",
+      "fw": "700",
+      "ls": "-0.624px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.section-title \"성공회 선교정신\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "24px",
+      "lh": "30px",
+      "fw": "800",
+      "ls": "-0.48px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.next-step-cta-title \"예배에서 직접 만나요\""
+     ]
+    }
+   ],
+   "h3": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 12,
+     "examples": [
+      "h3.anglican-pillar-title \"성서\"",
+      "h3.anglican-pillar-title \"이성\"",
+      "h3.anglican-pillar-title \"전통\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "700",
+      "ls": "0.96px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "h3.minister-cat-title \"성직자\"",
+      "h3.minister-cat-title \"사역자\"",
+      "h3.minister-cat-title \"교회위원\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "700",
+      "ls": "-0.24px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "h3.story-value-title \"전례 전통과 깊이 있는 영성\"",
+      "h3.story-value-title \"모두가 선교의 주체인 평등한 공동체\"",
+      "h3.story-value-title \"부활을 고백하는 사도적 신앙\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "20.8px",
+      "lh": "36.4px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h3.logo-anglican-title \"캔터베리 십자가\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "0.7488px",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "h3.press-category-title \"정의·평화\"",
+      "h3.press-category-title \"목회·상담\"",
+      "h3.press-category-title \"녹색교회\""
+     ]
+    }
+   ],
+   "h4": [],
+   "h5": [],
+   "h6": [],
+   "p": [
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.84px",
+      "fw": "600",
+      "ls": "3.04px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.section-eyebrow \"About the Church\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"성공회와 광명교회, 우리가 지향하는 신앙을 안내합니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.9)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"광명교회를 찾아 주셔서 감사합니다. 성공회의 역사와 신\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "600",
+      "ls": "2.496px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 9,
+     "examples": [
+      "p.section-eyebrow \"Anglican Church\"",
+      "p.section-eyebrow \"Five Marks of Mission\"",
+      "p.section-eyebrow \"Anglican Church of Korea\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 9,
+     "examples": [
+      "p.anglican-para \"성공회(聖公會)는 '거룩하고 공번된 교회'라는 뜻입니다\"",
+      "p.anglican-para \"오늘날 성공회는 전 세계 165개국, 약 8,500만 \"",
+      "p.anglican-para \"1890년, 영국 성공회 선교사 찰스 존 코프(Char\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "p.anglican-pillar-desc \"하느님의 말씀인 성서는 신앙과 삶의 최고 권위입니다. \"",
+      "p.anglican-pillar-desc \"하느님이 주신 이성으로 말씀을 해석하고, 그 신앙을 일\"",
+      "p.anglican-pillar-desc \"초대교회로부터 이어진 사도적 전통과 2,000년 공동체\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p.anglican-pillar-note \"16세기 신학자 리처드 후커(Richard Hooker\"",
+      "p.anglican-pillar-note \"성공회선교정신(The Five Marks of Miss\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p.section-sub \"성공회는 그리스도를 따르는 선교 공동체로서, ‘교회의 \"",
+      "p.section-sub \"함께 교회를 섬기는 이들을 소개합니다.\"",
+      "p.section-sub \"정의와 평등, 생명을 실천하는 공동체를 지향합니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "1.4976px",
+      "ff": "Pretendard",
+      "color": "rgb(63, 96, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.bishop-eyebrow \"Diocese of Seoul\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "21.6px",
+      "lh": "37.8px",
+      "fw": "700",
+      "ls": "-0.216px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.bishop-name \"김장환(엘리야) 주교\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.bishop-title \"제7대 서울교구장 주교\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p.bishop-ordained \"2024년 9월 26일 성품 및 승좌\"",
+      "p.bishop-note \"광명교회는 대한성공회 서울교구 소속 교회입니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "28.88px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p.bishop-desc \"대한성공회 제7대 서울교구장 주교로, 2024년 9월 \"",
+      "p.logo-history \"1867년 영국 캔터베리 성 어거스틴 수도원 터 발굴 \""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "p \"\"교회는 모든 이를 위해 존재해야 하며, 그 누구도 소\"",
+      "p \"\"목회와 상담의 공통 원칙은 공감이며, 타인의 아픔을 \"",
+      "p \"광명교회는 신앙과 일상, 사람과 이웃이 연결되는 열린 \""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "1.248px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p.bio-label \"주요 사목 이력\"",
+      "p.bio-label \"교단 내 소임\"",
+      "p.bio-label \"교회 밖 활동\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p \"대한성공회 최초로 반려동물 축복식을 시작해 오랫동안 이\"",
+      "p \"부제 시절 '사람에 대한 이해가 부족하다'는 자각이 상\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "21.76px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.bio-source \"출처: 대한성공회 전국여성성직자회 지음, 《여성들이 함\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"bsyg2000@hanmail.net\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p \"저서 보기 (알라딘)\"",
+      "p \"블로그 (네이버)\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.08px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.minister-cat-note \"모든 세례받은 신자는 일상을 살아가는 사제직으로 교회와\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16.8px",
+      "lh": "31.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p \"광명교회는 모든 존재가 존중받는 공동체, 모든 이가 참\"",
+      "p \"우리는 생명을 가리지 않고 환영합니다. 장애인, 성소수\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "p \"생태와 환경 보전을 신앙의 과제로 삼고 실천합니다. 녹\"",
+      "p \"성소수자·장애인·이주노동자·어린이·노인·동물 등 사회적\"",
+      "p \"성별·나이·지위에 관계없이 누구나 동등하게 예배에 참여\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "0.9984px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p.story-value-num \"01\"",
+      "p.story-value-num \"02\"",
+      "p.story-value-num \"03\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "400",
+      "ls": "-0.076px",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 9,
+     "examples": [
+      "p.story-value-text \"광명교회의 예배에는 고대 교회로부터 이어진 전례 전통이\"",
+      "p.story-value-text \"전례 공간의 의미는 전례 공간 안내를,\n        \"",
+      "p.story-value-text \"성별·나이·지위에 관계없이 모든 교우가 동등하게 예배에\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "1.4976px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p.logo-subtitle \"Open Light · 열린 빛\"",
+      "p.logo-subtitle \"Canterbury Cross\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "0.2496px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "p.logo-element-label \"아치창\"",
+      "p.logo-element-label \"십자가 모양의 빛\"",
+      "p.logo-element-label \"아래로 넓어지는 빛줄기\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.08px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "p.logo-element-desc \"예배당의 창이자 문입니다. 하느님께 나아가는 자리이며,\"",
+      "p.logo-element-desc \"그려 넣은 십자가가 아니라 열린 틈으로 드러나는 십자가\"",
+      "p.logo-element-desc \"위에서 내려온 빛이 아래로 갈수록 넓게 퍼집니다. 받은\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "2.7456px",
+      "ff": "Pretendard",
+      "color": "rgb(168, 189, 159)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-eyebrow \"다음 단계\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.7)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-desc \"광명교회의 이야기가 마음에 닿으셨나요? 주일 감사성찬례\""
+     ]
+    }
+   ],
+   "li": [
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "23.04px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "li.korea-highlight-item \"서울·부산·대전 3개 교구, 전국 200여 교회\"",
+      "li.korea-highlight-item \"성공회대학교 등 교육·사회 사업 운영\"",
+      "li.korea-highlight-item \"세계성공회공동체(Anglican Communion) 정\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 31,
+     "examples": [
+      "li.bio-milestone \"1988\n                \n        \"",
+      "li.bio-milestone \"1998\n                \n        \"",
+      "li.bio-milestone \"2005\n                \n        \""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "li.logo-swatch \"숲 녹색 생명과 창조세계\"",
+      "li.logo-swatch \"세이지 새싹과 자람\"",
+      "li.logo-swatch \"크림 빛과 환대\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.12px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "li.logo-ref-item \"1Canterbury Cathedral Museum, \"",
+      "li.logo-ref-item \"2The Anglican Communion Office\"",
+      "li.logo-ref-item \"3대한성공회, 《성공회 예식서》, 성공회출판사, 200\""
+     ]
+    }
+   ],
+   "a": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.hero-nav \"\"",
+      "a.hero-nav \"\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "a.gc-nav-link \"성공회\"",
+      "a.gc-nav-link \"대한성공회\"",
+      "a.gc-nav-link \"섬기는 이들\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.gc-nav-link \"녹색교회\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "a.about-next \"다음대한성공회→\"",
+      "a.about-next \"다음섬기는 이들→\"",
+      "a.about-next \"다음교회 이야기→\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "a.iona-link-card \"강화 아이오나 순례길\n                  \"",
+      "a.iona-link-card \"인천 내동교회와 랜디스 박사의 삶\n           \"",
+      "a.iona-link-card \"서울 정동 서울주교좌성당과 6.10민주항쟁 진원지\n  \""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a \"bsyg2000@hanmail.net\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a \"저서 보기 (알라딘)\"",
+      "a \"블로그 (네이버)\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.value-card \"녹색교회\n                        생\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "600",
+      "ls": "-0.076px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "a \"전례 공간 안내\"",
+      "a \"처음 오신 분 안내\"",
+      "a \"주일 애찬\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "22.32px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "a.press-link \"6월 민주항쟁 39주년 시민기념식, 성공회 서울주교좌성\"",
+      "a.press-link \"목회와 상담의 공통 원칙은 공감… 주님의 공감능력으로 \"",
+      "a.press-link \"대한성공회, \"모든 교회를 녹색교회로!\" 교회력 '창조\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(20, 44, 36)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.btn-next \"예배 안내\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.88)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.btn-next \"처음 오신 분\"",
+      "a.btn-next \"오시는 길\""
+     ]
+    }
+   ],
+   "button": [
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "normal",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "button.more-toggle \"주요 이력 보기\"",
+      "button.more-toggle \"주요 이력 보기\"",
+      "button.more-toggle \"캔터베리 십자가 설명 보기\""
+     ]
+    }
+   ],
+   "th": [],
+   "td": [],
+   "small": [],
+   ".section-title": [
+    {
+     "style": {
+      "fs": "32px",
+      "lh": "38.4px",
+      "fw": "700",
+      "ls": "-0.96px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 7,
+     "examples": [
+      "h2.section-title \"성공회란?\"",
+      "h2.section-title \"대한성공회\"",
+      "h2.section-title \"섬기는 이들\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "20.8px",
+      "lh": "24.96px",
+      "fw": "700",
+      "ls": "-0.624px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.section-title \"성공회 선교정신\""
+     ]
+    }
+   ],
+   ".page-hero h1": [
+    {
+     "style": {
+      "fs": "35.2px",
+      "lh": "40.48px",
+      "fw": "700",
+      "ls": "-0.704px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"교회 소개\""
+     ]
+    }
+   ],
+   ".card": [],
+   ".btn": []
+  },
+  "overflow": [],
+  "overflowCount": 0,
+  "brokenImgs": [
+   null
+  ],
+  "consoleErrors": []
+ },
+ "privacy@390": {
+  "scrollWidth": 390,
+  "clientWidth": 390,
+  "hScroll": false,
+  "bodyFont": "Pretendard, -apple-system, BlinkMacSystemFont, \"Noto Sans KR\", \"Segoe UI\", \"Apple SD Gothic Neo\", sans-serif",
+  "pretendardLoaded": true,
+  "styles": {
+   "h1": [
+    {
+     "style": {
+      "fs": "35.2px",
+      "lh": "40.48px",
+      "fw": "700",
+      "ls": "-0.704px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"개인정보 처리방침\""
+     ]
+    }
+   ],
+   "h2": [
+    {
+     "style": {
+      "fs": "20.8px",
+      "lh": "39.52px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 7,
+     "examples": [
+      "h2.privacy-h2 \"1. 개인정보의 수집 및 이용 목적\"",
+      "h2.privacy-h2 \"2. 외부 서비스 연결\"",
+      "h2.privacy-h2 \"3. 폰트 제공 서비스\""
+     ]
+    }
+   ],
+   "h3": [],
+   "h4": [],
+   "h5": [],
+   "h6": [],
+   "p": [
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"시행일: 2026년 5월 29일\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.privacy-lead \"대한성공회 광명교회(이하 \"교회\")는 이용자의 개인정보\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "p \"본 웹사이트는 방문자에게 교회 정보를 안내하는 정적 사\"",
+      "p \"본 사이트는 아래 외부 서비스로의 링크를 제공합니다. \"",
+      "p \"Google Maps 지도는 페이지에 삽입된 ifram\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "25.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.privacy-foot \"시행일: 2026년 5월 29일\n            \""
+     ]
+    }
+   ],
+   "li": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 6,
+     "examples": [
+      "li \"네이버 지도 — 오시는 길 길찾기 (네이버(주) 개인정\"",
+      "li \"카카오맵 — 오시는 길 길찾기 (카카오(주) 개인정보처\"",
+      "li \"YouTube — 주일 예배 실시간 스트리밍 (Goog\""
+     ]
+    }
+   ],
+   "a": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a \"Google 개인정보처리방침\""
+     ]
+    }
+   ],
+   "button": [],
+   "th": [],
+   "td": [],
+   "small": [],
+   ".section-title": [],
+   ".page-hero h1": [
+    {
+     "style": {
+      "fs": "35.2px",
+      "lh": "40.48px",
+      "fw": "700",
+      "ls": "-0.704px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"개인정보 처리방침\""
+     ]
+    }
+   ],
+   ".card": [],
+   ".btn": []
+  },
+  "overflow": [],
+  "overflowCount": 0,
+  "brokenImgs": [
+   null
+  ],
+  "consoleErrors": []
+ },
+ "community@1024": {
+  "scrollWidth": 1024,
+  "clientWidth": 1024,
+  "hScroll": false,
+  "bodyFont": "Pretendard, -apple-system, BlinkMacSystemFont, \"Noto Sans KR\", \"Segoe UI\", \"Apple SD Gothic Neo\", sans-serif",
+  "pretendardLoaded": true,
+  "styles": {
+   "h1": [
+    {
+     "style": {
+      "fs": "46.08px",
+      "lh": "52.992px",
+      "fw": "700",
+      "ls": "-0.9216px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   "h2": [
+    {
+     "style": {
+      "fs": "24px",
+      "lh": "42px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.sr-only \"공동체 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "30.72px",
+      "lh": "38.4px",
+      "fw": "800",
+      "ls": "-0.6144px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.next-step-cta-title \"예배와 창조세계 돌봄으로 이어집니다\""
+     ]
+    }
+   ],
+   "h3": [
+    {
+     "style": {
+      "fs": "18px",
+      "lh": "31.5px",
+      "fw": "700",
+      "ls": "-0.18px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "h3 \"광명 희망터\"",
+      "h3 \"엠마우스 코스\"",
+      "h3 \"소그룹 모임\""
+     ]
+    }
+   ],
+   "h4": [],
+   "h5": [],
+   "h6": [],
+   "p": [
+    {
+     "style": {
+      "fs": "17.6px",
+      "lh": "29.92px",
+      "fw": "600",
+      "ls": "3.52px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.section-eyebrow \"Community\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "17.6px",
+      "lh": "29.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"이웃과 함께 신앙과 삶을 나눕니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p \"지역의 소외된 이웃과 함께하는 돌봄 사역\"",
+      "p \"그리스도교 신앙의 기초를 배우는 과정\"",
+      "p \"기도하고 이야기 나누는 작은 모임\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.community-card-note \"* 비건: 계란·우유도 포함하지 않는 완전 채식\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "2.7456px",
+      "ff": "Pretendard",
+      "color": "rgb(168, 189, 159)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-eyebrow \"함께하는 신앙\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.7)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-desc \"공동체의 삶은 주일 예배에서 시작하고, 녹색교회의 실천\""
+     ]
+    }
+   ],
+   "li": [],
+   "a": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.hero-nav \"\"",
+      "a.hero-nav \"\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\"",
+      "a.community-detail-link \"자세히 보기→\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(20, 44, 36)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.btn-next \"예배 안내\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.88)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.btn-next \"녹색교회\"",
+      "a.btn-next \"헌금 안내\""
+     ]
+    }
+   ],
+   "button": [],
+   "th": [],
+   "td": [],
+   "small": [],
+   ".section-title": [],
+   ".page-hero h1": [
+    {
+     "style": {
+      "fs": "46.08px",
+      "lh": "52.992px",
+      "fw": "700",
+      "ls": "-0.9216px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"공동체\""
+     ]
+    }
+   ],
+   ".card": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "div.card \"광명 희망터\n                       \"",
+      "div.card \"엠마우스 코스\n                      \"",
+      "div.card \"소그룹 모임\n                       \""
+     ]
+    }
+   ],
+   ".btn": []
+  },
+  "overflow": [],
+  "overflowCount": 0,
+  "brokenImgs": [
+   null
+  ],
+  "consoleErrors": []
+ },
+ "clergy@1024": {
+  "scrollWidth": 1024,
+  "clientWidth": 1024,
+  "hScroll": false,
+  "bodyFont": "Pretendard, -apple-system, BlinkMacSystemFont, \"Noto Sans KR\", \"Segoe UI\", \"Apple SD Gothic Neo\", sans-serif",
+  "pretendardLoaded": true,
+  "styles": {
+   "h1": [
+    {
+     "style": {
+      "fs": "46.08px",
+      "lh": "52.992px",
+      "fw": "700",
+      "ls": "-0.9216px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"교회 소개\""
+     ]
+    }
+   ],
+   "h2": [
+    {
+     "style": {
+      "fs": "38.912px",
+      "lh": "46.6944px",
+      "fw": "700",
+      "ls": "-1.16736px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 7,
+     "examples": [
+      "h2.section-title \"성공회란?\"",
+      "h2.section-title \"대한성공회\"",
+      "h2.section-title \"섬기는 이들\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "20.8px",
+      "lh": "24.96px",
+      "fw": "700",
+      "ls": "-0.624px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.section-title \"성공회 선교정신\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "30.72px",
+      "lh": "38.4px",
+      "fw": "800",
+      "ls": "-0.6144px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.next-step-cta-title \"예배에서 직접 만나요\""
+     ]
+    }
+   ],
+   "h3": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 12,
+     "examples": [
+      "h3.anglican-pillar-title \"성서\"",
+      "h3.anglican-pillar-title \"이성\"",
+      "h3.anglican-pillar-title \"전통\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "700",
+      "ls": "0.96px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "h3.minister-cat-title \"성직자\"",
+      "h3.minister-cat-title \"사역자\"",
+      "h3.minister-cat-title \"교회위원\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "700",
+      "ls": "-0.24px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "h3.story-value-title \"전례 전통과 깊이 있는 영성\"",
+      "h3.story-value-title \"모두가 선교의 주체인 평등한 공동체\"",
+      "h3.story-value-title \"부활을 고백하는 사도적 신앙\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "20.8px",
+      "lh": "36.4px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h3.logo-anglican-title \"캔터베리 십자가\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "0.7488px",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "h3.press-category-title \"정의·평화\"",
+      "h3.press-category-title \"목회·상담\"",
+      "h3.press-category-title \"녹색교회\""
+     ]
+    }
+   ],
+   "h4": [],
+   "h5": [],
+   "h6": [],
+   "p": [
+    {
+     "style": {
+      "fs": "17.6px",
+      "lh": "29.92px",
+      "fw": "600",
+      "ls": "3.52px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.section-eyebrow \"About the Church\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "17.6px",
+      "lh": "29.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"성공회와 광명교회, 우리가 지향하는 신앙을 안내합니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.9)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"광명교회를 찾아 주셔서 감사합니다. 성공회의 역사와 신\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "600",
+      "ls": "2.496px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 9,
+     "examples": [
+      "p.section-eyebrow \"Anglican Church\"",
+      "p.section-eyebrow \"Five Marks of Mission\"",
+      "p.section-eyebrow \"Anglican Church of Korea\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 9,
+     "examples": [
+      "p.anglican-para \"성공회(聖公會)는 '거룩하고 공번된 교회'라는 뜻입니다\"",
+      "p.anglican-para \"오늘날 성공회는 전 세계 165개국, 약 8,500만 \"",
+      "p.anglican-para \"1890년, 영국 성공회 선교사 찰스 존 코프(Char\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "p.anglican-pillar-desc \"하느님의 말씀인 성서는 신앙과 삶의 최고 권위입니다. \"",
+      "p.anglican-pillar-desc \"하느님이 주신 이성으로 말씀을 해석하고, 그 신앙을 일\"",
+      "p.anglican-pillar-desc \"초대교회로부터 이어진 사도적 전통과 2,000년 공동체\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p.anglican-pillar-note \"16세기 신학자 리처드 후커(Richard Hooker\"",
+      "p.anglican-pillar-note \"성공회선교정신(The Five Marks of Miss\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p.section-sub \"성공회는 그리스도를 따르는 선교 공동체로서, ‘교회의 \"",
+      "p.section-sub \"함께 교회를 섬기는 이들을 소개합니다.\"",
+      "p.section-sub \"정의와 평등, 생명을 실천하는 공동체를 지향합니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "1.4976px",
+      "ff": "Pretendard",
+      "color": "rgb(63, 96, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.bishop-eyebrow \"Diocese of Seoul\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "21.6px",
+      "lh": "37.8px",
+      "fw": "700",
+      "ls": "-0.216px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.bishop-name \"김장환(엘리야) 주교\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.bishop-title \"제7대 서울교구장 주교\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p.bishop-ordained \"2024년 9월 26일 성품 및 승좌\"",
+      "p.bishop-note \"광명교회는 대한성공회 서울교구 소속 교회입니다.\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "28.88px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p.bishop-desc \"대한성공회 제7대 서울교구장 주교로, 2024년 9월 \"",
+      "p.logo-history \"1867년 영국 캔터베리 성 어거스틴 수도원 터 발굴 \""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "p \"\"교회는 모든 이를 위해 존재해야 하며, 그 누구도 소\"",
+      "p \"\"목회와 상담의 공통 원칙은 공감이며, 타인의 아픔을 \"",
+      "p \"광명교회는 신앙과 일상, 사람과 이웃이 연결되는 열린 \""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "1.248px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p.bio-label \"주요 사목 이력\"",
+      "p.bio-label \"교단 내 소임\"",
+      "p.bio-label \"교회 밖 활동\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p \"대한성공회 최초로 반려동물 축복식을 시작해 오랫동안 이\"",
+      "p \"부제 시절 '사람에 대한 이해가 부족하다'는 자각이 상\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "21.76px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.bio-source \"출처: 대한성공회 전국여성성직자회 지음, 《여성들이 함\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"bsyg2000@hanmail.net\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p \"저서 보기 (알라딘)\"",
+      "p \"블로그 (네이버)\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.08px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.minister-cat-note \"모든 세례받은 신자는 일상을 살아가는 사제직으로 교회와\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16.8px",
+      "lh": "31.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p \"광명교회는 모든 존재가 존중받는 공동체, 모든 이가 참\"",
+      "p \"우리는 생명을 가리지 않고 환영합니다. 장애인, 성소수\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "p \"생태와 환경 보전을 신앙의 과제로 삼고 실천합니다. 녹\"",
+      "p \"성소수자·장애인·이주노동자·어린이·노인·동물 등 사회적\"",
+      "p \"성별·나이·지위에 관계없이 누구나 동등하게 예배에 참여\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "0.9984px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "p.story-value-num \"01\"",
+      "p.story-value-num \"02\"",
+      "p.story-value-num \"03\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "400",
+      "ls": "-0.076px",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 9,
+     "examples": [
+      "p.story-value-text \"광명교회의 예배에는 고대 교회로부터 이어진 전례 전통이\"",
+      "p.story-value-text \"전례 공간의 의미는 전례 공간 안내를,\n        \"",
+      "p.story-value-text \"성별·나이·지위에 관계없이 모든 교우가 동등하게 예배에\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "1.4976px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "p.logo-subtitle \"Open Light · 열린 빛\"",
+      "p.logo-subtitle \"Canterbury Cross\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "0.2496px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "p.logo-element-label \"아치창\"",
+      "p.logo-element-label \"십자가 모양의 빛\"",
+      "p.logo-element-label \"아래로 넓어지는 빛줄기\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "25.08px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "p.logo-element-desc \"예배당의 창이자 문입니다. 하느님께 나아가는 자리이며,\"",
+      "p.logo-element-desc \"그려 넣은 십자가가 아니라 열린 틈으로 드러나는 십자가\"",
+      "p.logo-element-desc \"위에서 내려온 빛이 아래로 갈수록 넓게 퍼집니다. 받은\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "12.48px",
+      "lh": "21.84px",
+      "fw": "700",
+      "ls": "2.7456px",
+      "ff": "Pretendard",
+      "color": "rgb(168, 189, 159)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-eyebrow \"다음 단계\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.7)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.next-step-cta-desc \"광명교회의 이야기가 마음에 닿으셨나요? 주일 감사성찬례\""
+     ]
+    }
+   ],
+   "li": [
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "23.04px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "li.korea-highlight-item \"서울·부산·대전 3개 교구, 전국 200여 교회\"",
+      "li.korea-highlight-item \"성공회대학교 등 교육·사회 사업 운영\"",
+      "li.korea-highlight-item \"세계성공회공동체(Anglican Communion) 정\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 31,
+     "examples": [
+      "li.bio-milestone \"1988\n                \n        \"",
+      "li.bio-milestone \"1998\n                \n        \"",
+      "li.bio-milestone \"2005\n                \n        \""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "li.logo-swatch \"숲 녹색 생명과 창조세계\"",
+      "li.logo-swatch \"세이지 새싹과 자람\"",
+      "li.logo-swatch \"크림 빛과 환대\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.12px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "li.logo-ref-item \"1Canterbury Cathedral Museum, \"",
+      "li.logo-ref-item \"2The Anglican Communion Office\"",
+      "li.logo-ref-item \"3대한성공회, 《성공회 예식서》, 성공회출판사, 200\""
+     ]
+    }
+   ],
+   "a": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.hero-nav \"\"",
+      "a.hero-nav \"\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "a.gc-nav-link \"성공회\"",
+      "a.gc-nav-link \"대한성공회\"",
+      "a.gc-nav-link \"섬기는 이들\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "a.gc-nav-link \"녹색교회\"",
+      "a \"저서 보기 (알라딘)\"",
+      "a \"블로그 (네이버)\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 4,
+     "examples": [
+      "a.about-next \"다음대한성공회→\"",
+      "a.about-next \"다음섬기는 이들→\"",
+      "a.about-next \"다음교회 이야기→\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "a.iona-link-card \"강화 아이오나 순례길\n                  \"",
+      "a.iona-link-card \"인천 내동교회와 랜디스 박사의 삶\n           \"",
+      "a.iona-link-card \"서울 정동 서울주교좌성당과 6.10민주항쟁 진원지\n  \""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "23.8px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a \"bsyg2000@hanmail.net\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "28px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.value-card \"녹색교회\n                        생\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "15.2px",
+      "lh": "26.6px",
+      "fw": "600",
+      "ls": "-0.076px",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 5,
+     "examples": [
+      "a \"전례 공간 안내\"",
+      "a \"처음 오신 분 안내\"",
+      "a \"주일 애찬\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "22.32px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "a.press-link \"6월 민주항쟁 39주년 시민기념식, 성공회 서울주교좌성\"",
+      "a.press-link \"목회와 상담의 공통 원칙은 공감… 주님의 공감능력으로 \"",
+      "a.press-link \"대한성공회, \"모든 교회를 녹색교회로!\" 교회력 '창조\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(20, 44, 36)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a.btn-next \"예배 안내\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "25.2px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgba(255, 255, 255, 0.88)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 2,
+     "examples": [
+      "a.btn-next \"처음 오신 분\"",
+      "a.btn-next \"오시는 길\""
+     ]
+    }
+   ],
+   "button": [
+    {
+     "style": {
+      "fs": "14.4px",
+      "lh": "normal",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 3,
+     "examples": [
+      "button.more-toggle \"주요 이력 보기\"",
+      "button.more-toggle \"주요 이력 보기\"",
+      "button.more-toggle \"캔터베리 십자가 설명 보기\""
+     ]
+    }
+   ],
+   "th": [],
+   "td": [],
+   "small": [],
+   ".section-title": [
+    {
+     "style": {
+      "fs": "38.912px",
+      "lh": "46.6944px",
+      "fw": "700",
+      "ls": "-1.16736px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 7,
+     "examples": [
+      "h2.section-title \"성공회란?\"",
+      "h2.section-title \"대한성공회\"",
+      "h2.section-title \"섬기는 이들\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "20.8px",
+      "lh": "24.96px",
+      "fw": "700",
+      "ls": "-0.624px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h2.section-title \"성공회 선교정신\""
+     ]
+    }
+   ],
+   ".page-hero h1": [
+    {
+     "style": {
+      "fs": "46.08px",
+      "lh": "52.992px",
+      "fw": "700",
+      "ls": "-0.9216px",
+      "ff": "Pretendard",
+      "color": "rgb(255, 255, 255)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"교회 소개\""
+     ]
+    }
+   ],
+   ".card": [],
+   ".btn": []
+  },
+  "overflow": [],
+  "overflowCount": 0,
+  "brokenImgs": [
+   null
+  ],
+  "consoleErrors": []
+ },
+ "privacy@1024": {
+  "scrollWidth": 1024,
+  "clientWidth": 1024,
+  "hScroll": false,
+  "bodyFont": "Pretendard, -apple-system, BlinkMacSystemFont, \"Noto Sans KR\", \"Segoe UI\", \"Apple SD Gothic Neo\", sans-serif",
+  "pretendardLoaded": true,
+  "styles": {
+   "h1": [
+    {
+     "style": {
+      "fs": "46.08px",
+      "lh": "52.992px",
+      "fw": "700",
+      "ls": "-0.9216px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"개인정보 처리방침\""
+     ]
+    }
+   ],
+   "h2": [
+    {
+     "style": {
+      "fs": "20.8px",
+      "lh": "39.52px",
+      "fw": "700",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 7,
+     "examples": [
+      "h2.privacy-h2 \"1. 개인정보의 수집 및 이용 목적\"",
+      "h2.privacy-h2 \"2. 외부 서비스 연결\"",
+      "h2.privacy-h2 \"3. 폰트 제공 서비스\""
+     ]
+    }
+   ],
+   "h3": [],
+   "h4": [],
+   "h5": [],
+   "h6": [],
+   "p": [
+    {
+     "style": {
+      "fs": "17.6px",
+      "lh": "29.92px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p \"시행일: 2026년 5월 29일\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.privacy-lead \"대한성공회 광명교회(이하 \"교회\")는 이용자의 개인정보\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(26, 26, 26)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 8,
+     "examples": [
+      "p \"본 웹사이트는 방문자에게 교회 정보를 안내하는 정적 사\"",
+      "p \"본 사이트는 아래 외부 서비스로의 링크를 제공합니다. \"",
+      "p \"Google Maps 지도는 페이지에 삽입된 ifram\""
+     ]
+    },
+    {
+     "style": {
+      "fs": "13.6px",
+      "lh": "25.84px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "p.privacy-foot \"시행일: 2026년 5월 29일\n            \""
+     ]
+    }
+   ],
+   "li": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "400",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(77, 76, 70)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 6,
+     "examples": [
+      "li \"네이버 지도 — 오시는 길 길찾기 (네이버(주) 개인정\"",
+      "li \"카카오맵 — 오시는 길 길찾기 (카카오(주) 개인정보처\"",
+      "li \"YouTube — 주일 예배 실시간 스트리밍 (Goog\""
+     ]
+    }
+   ],
+   "a": [
+    {
+     "style": {
+      "fs": "16px",
+      "lh": "30.4px",
+      "fw": "600",
+      "ls": "normal",
+      "ff": "Pretendard",
+      "color": "rgb(40, 90, 71)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "a \"Google 개인정보처리방침\""
+     ]
+    }
+   ],
+   "button": [],
+   "th": [],
+   "td": [],
+   "small": [],
+   ".section-title": [],
+   ".page-hero h1": [
+    {
+     "style": {
+      "fs": "46.08px",
+      "lh": "52.992px",
+      "fw": "700",
+      "ls": "-0.9216px",
+      "ff": "Pretendard",
+      "color": "rgb(17, 47, 37)",
+      "wb": "keep-all",
+      "ow": "break-word"
+     },
+     "count": 1,
+     "examples": [
+      "h1 \"개인정보 처리방침\""
+     ]
+    }
+   ],
+   ".card": [],
+   ".btn": []
+  },
+  "overflow": [],
+  "overflowCount": 0,
+  "brokenImgs": [
+   null
+  ],
+  "consoleErrors": []
+ }
+}

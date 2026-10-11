@@ -90,7 +90,7 @@ const CHURCH_DATA = {
         slogan: "모든 생명을 환대하는 교회",
         vision: "하느님 나라를 살아가는 사랑의 공동체",
         diocese: "대한성공회 서울교구 서부교무구",
-        aboutLead: "성공회 기도서를 따라 예배하며, 생태 보전을 신앙의 과제로 삼는 광명의 녹색 교회입니다.",
+        aboutLead: "성공회 기도서를 따라 예배하며, 생태 보전을 신앙의 과제로 삼는 광명의 녹색교회입니다.",
         aboutDesc: "주일 애찬에는 비건 음식도 함께 마련합니다.",
         award: { year: "2023", title: "녹색교회 선정", org: "기독교환경운동연대", href: "greenchurch.html#press", newsUrl: "https://www.newsis.com/view/NISX20230515_0002303502" },
         established: "1990년 2월 11일",
@@ -189,7 +189,7 @@ const CHURCH_DATA = {
                     { num: "04", ko: "불의한 사회를 변화시키기 위해 노력합니다.", en: "To seek to transform unjust structures of society" },
                     { num: "05", ko: "창조질서를 보존하며, 지구생명의 회복과 유지에 헌신합니다.", en: "To strive to safeguard the integrity of creation and sustain and renew the life of the earth" }
                 ],
-                note: "성공회선교정신(The Five Marks of Mission)은 세계성공회협의회(Anglican Consultative Council)와 람베스회의(Lambeth Conference)를 통해 확인된 세계성공회의 공통된 선교원칙입니다."
+                note: "성공회 선교정신(The Five Marks of Mission)은 세계성공회협의회(Anglican Consultative Council)와 람베스 회의(Lambeth Conference)를 통해 확인된 세계성공회의 공통된 선교원칙입니다."
             }
         },
         korea: {
@@ -703,7 +703,7 @@ const CHURCH_DATA = {
             note: "서울역·구로디지털단지·목동 방면에서 접근 가능합니다."
         },
         parking: "교회 인근에 무료 주차가 가능합니다. 방문 전 교회 사무실({phone})로 확인해 주세요.",
-        note: "※ 카카오맵·네이버지도에서 <strong>대한성공회 광명교회</strong>로 검색하시면 최단 경로 안내를 받으실 수 있습니다."
+        note: "※ 카카오맵·네이버 지도에서 <strong>대한성공회 광명교회</strong>로 검색하시면 최단 경로 안내를 받으실 수 있습니다."
     },
 
     sns: {
@@ -1172,7 +1172,7 @@ const CHURCH_DATA = {
         labels: { thisWeek: "이번 주", latest: "최근 등록" },
         intro: "예배 순서와 공동체 소식을 담은 주간 주보입니다.",
         note: "예배 전에 미리 열어 두시면 도움이 됩니다.",
-        newsIntro: "최근 4주 분의 교회소식을 보관합니다.",
+        newsIntro: "최근 4주분의 교회소식을 보관합니다.",
         newsEmpty: "등록된 교회소식이 없습니다.",
         items: [
             {
