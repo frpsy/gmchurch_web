@@ -1199,8 +1199,8 @@ const CHURCH_DATA = {
 
     // 사진 갤러리 (gallery.html)
     photoGallery: {
-        intro: "예배, 애찬, 절기 행사 등 광명교회 공동체의 순간들을 모았습니다.",
-        categories: ["전체", "예배", "공동체", "절기·행사", "교회 풍경"],
+        intro: "예배, 공동체 모임, 교회 풍경 등 광명교회의 순간들을 모았습니다.",
+        categories: ["전체", "예배", "공동체", "교회 풍경"],
         photos: [
             {
                 id: "p01",
@@ -1213,26 +1213,6 @@ const CHURCH_DATA = {
                 alt: "광명교회 예배와 기도"
             },
             {
-                id: "p02",
-                title: "어린이 예배",
-                desc: "어린이들이 함께 참여하는 주일 예배.",
-                category: "예배",
-                date: "2025.04",
-                src: "https://picsum.photos/seed/gmc-worship2/900/600",
-                thumb: "https://picsum.photos/seed/gmc-worship2/480/320",
-                alt: "어린이 예배 모습"
-            },
-            {
-                id: "p03",
-                title: "새벽 성무일과",
-                desc: "고요한 새벽, 시편과 기도로 하루를 엽니다.",
-                category: "예배",
-                date: "2025.02",
-                src: "https://picsum.photos/seed/gmc-worship3/900/600",
-                thumb: "https://picsum.photos/seed/gmc-worship3/480/320",
-                alt: "새벽 성무일과"
-            },
-            {
                 id: "p04",
                 title: "공동체 모임",
                 desc: "함께 모여 말씀과 삶을 나누는 광명교회 공동체.",
@@ -1243,66 +1223,6 @@ const CHURCH_DATA = {
                 alt: "광명교회 공동체 모임"
             },
             {
-                id: "p05",
-                title: "엠마우스 코스",
-                desc: "신앙의 길을 함께 걷는 엠마우스 여정.",
-                category: "공동체",
-                date: "2024.11",
-                src: "https://picsum.photos/seed/gmc-community2/900/600",
-                thumb: "https://picsum.photos/seed/gmc-community2/480/320",
-                alt: "엠마우스 코스 모임"
-            },
-            {
-                id: "p06",
-                title: "소그룹 모임",
-                desc: "소그룹이 모여 말씀을 나누고 기도합니다.",
-                category: "공동체",
-                date: "2025.01",
-                src: "https://picsum.photos/seed/gmc-community3/900/600",
-                thumb: "https://picsum.photos/seed/gmc-community3/480/320",
-                alt: "소그룹 모임"
-            },
-            {
-                id: "p07",
-                title: "대림절 촛불 점화",
-                desc: "대림절 4주간, 촛불을 하나씩 밝히며 기다림을 삽니다.",
-                category: "절기·행사",
-                date: "2024.12",
-                src: "https://picsum.photos/seed/gmc-season1/900/600",
-                thumb: "https://picsum.photos/seed/gmc-season1/480/320",
-                alt: "대림절 촛불 점화"
-            },
-            {
-                id: "p08",
-                title: "부활절 새벽 예배",
-                desc: "해가 뜨기 전 모여 부활을 선포합니다.",
-                category: "절기·행사",
-                date: "2025.04",
-                src: "https://picsum.photos/seed/gmc-season2/900/600",
-                thumb: "https://picsum.photos/seed/gmc-season2/480/320",
-                alt: "부활절 새벽 예배"
-            },
-            {
-                id: "p09",
-                title: "세례식",
-                desc: "물과 성령으로 새로운 삶을 시작합니다.",
-                category: "절기·행사",
-                date: "2025.04",
-                src: "https://picsum.photos/seed/gmc-season3/900/600",
-                thumb: "https://picsum.photos/seed/gmc-season3/480/320",
-                alt: "세례식"
-            },
-            {
-                id: "p10",
-                title: "성탄절 예배",
-                desc: "말씀이 육신이 되어 우리 가운데 오심을 기억합니다.",
-                category: "절기·행사",
-                date: "2024.12",
-                src: "https://picsum.photos/seed/gmc-season4/900/600",
-                thumb: "https://picsum.photos/seed/gmc-season4/480/320",
-                alt: "성탄절 예배"
-            },
-            {
                 id: "p11",
                 title: "교회 내부 — 제단",
                 desc: "캔터베리 십자가와 제단이 있는 광명교회 성전.",
@@ -1311,16 +1231,6 @@ const CHURCH_DATA = {
                 src: "images/gallery/scenery/sanctuary-altar.webp",
                 thumb: "images/gallery/scenery/sanctuary-altar-thumb.webp",
                 alt: "광명교회 교회 내부 제단"
-            },
-            {
-                id: "p12",
-                title: "교회 마당",
-                desc: "예배 전후 사람들이 모이는 공간.",
-                category: "교회 풍경",
-                date: "2025.03",
-                src: "https://picsum.photos/seed/gmc-space2/900/600",
-                thumb: "https://picsum.photos/seed/gmc-space2/480/320",
-                alt: "교회 마당"
             },
             {
                 id: "p13",
