@@ -2077,14 +2077,45 @@ const NewsRenderer = {
     // "일시 : …"처럼 라벨이 짧은 줄은 항목표로 보여 일정·장소를 한눈에 찾게 한다
     _META_LINE: /^([가-힣]{1,4}) : (.+)$/,
 
-    _postHtml(post) {
+    // 교회 관례에 따라 일요일은 '주일'로 쓴다
+    _WEEKDAYS: ['주일', '월', '화', '수', '목', '금', '토'],
+
+    _weekday(year, month, day) {
+        const d = new Date(Date.UTC(year, month - 1, day));
+        // 31일 같은 없는 날짜는 다음 달로 넘어가므로 걸러낸다
+        return d.getUTCMonth() === month - 1 && d.getUTCDate() === day ? this._WEEKDAYS[d.getUTCDay()] : null;
+    },
+
+    _weekdayOf(date) {
+        const [y, m, d] = date.split('-').map(Number);
+        return this._weekday(y, m, d);
+    },
+
+    // 소식 본문의 날짜에 요일이 없으면 보여 줄 때 붙인다. 월이 없는 `15일`은 주보 날짜의 달(이미 지났으면
+    // 다음 달)로, 월이 있으면 주보 날짜에서 가장 가까운 앞날로 해석한다. 요일이 이미 있으면 그대로 둔다.
+    _withWeekdays(text, bulletinDate) {
+        if (!bulletinDate) return text;
+        const [by, bm, bd] = bulletinDate.split('-').map(Number);
+        return text.replace(/(?<![\d가-힣])(?<!지난 )(?:(\d{1,2})월 )?(\d{1,2})일(?!\s*\()/g, (all, month, day) => {
+            let m = month ? Number(month) : bm;
+            let y = by;
+            const d = Number(day);
+            if (!month && d < bd) m += 1;
+            if (m > 12) { m -= 12; y += 1; }
+            if (month && m < bm - 6) y += 1;
+            const weekday = this._weekday(y, m, d);
+            return weekday ? `${all}(${weekday})` : all;
+        });
+    },
+
+    _postHtml(post, bulletinDate) {
         const blocks = [];
         let meta = [];
         const flush = () => {
             if (meta.length) blocks.push(`<dl class="news-post-meta">${meta.join('')}</dl>`);
             meta = [];
         };
-        post.body.split('\n').forEach(line => {
+        this._withWeekdays(post.body, bulletinDate).split('\n').forEach(line => {
             const m = line.match(this._META_LINE);
             if (m) {
                 meta.push(`<div><dt>${m[1]}</dt><dd>${m[2]}</dd></div>`);
@@ -2109,7 +2140,7 @@ const NewsRenderer = {
                     aria-expanded="${isOpen}" aria-controls="news-${item.date}">
                 <div class="bulletin-row-info">
                     <div class="bulletin-row-top">
-                        <span class="bulletin-row-date">${item.label}</span>
+                        <span class="bulletin-row-date">${item.label}(${this._weekdayOf(item.date)})</span>
                         ${badge ? `<span class="bulletin-badge-new">${badge}</span>` : ''}
                     </div>
                     <div class="bulletin-row-meta">
@@ -2142,7 +2173,7 @@ const NewsRenderer = {
                     ${this._rowHtml(item, i === 0, i === openIdx)}
                     <div class="bulletin-drawer" id="news-${item.date}" role="region"
                          aria-labelledby="news-btn-${item.date}"${i === openIdx ? '' : ' hidden'}>
-                        ${item.news.map(post => this._postHtml(post)).join('')}
+                        ${item.news.map(post => this._postHtml(post, item.date)).join('')}
                     </div>
                 </div>`).join('')}
             </div>`;

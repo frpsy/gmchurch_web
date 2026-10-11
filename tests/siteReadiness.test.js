@@ -48,6 +48,43 @@ describe('교회 소식', () => {
         expect(NewsRenderer._weeks().map(item => item.date)).toEqual(expected.map(item => item.date));
     });
 
+    it('요일이 없는 날짜에 요일을 붙이고, 있는 요일은 그대로 둔다', () => {
+        const { NewsRenderer } = loadRenderers();
+        const w = text => NewsRenderer._withWeekdays(text, '2026-10-11');
+        expect(w('15일 월례회의')).toBe('15일(목) 월례회의');
+        expect(w('10월 25일에 바자회')).toBe('10월 25일(주일)에 바자회');
+        expect(w('25일까지 신청')).toBe('25일(주일)까지 신청');
+        expect(w('(축성일은 12일입니다)')).toBe('(축성일은 12일(월)입니다)');
+        expect(w('10월 17일(토) 오전 11시')).toBe('10월 17일(토) 오전 11시');
+        expect(w('8일 (목) 설명회')).toBe('8일 (목) 설명회');
+        expect(w('지난 7일에 열렸습니다')).toBe('지난 7일에 열렸습니다');
+        expect(w('11월과 12월 둘째 주일')).toBe('11월과 12월 둘째 주일');
+        expect(w('31일 마감')).toBe('31일(토) 마감');
+        expect(NewsRenderer._withWeekdays('30일 모임', '2026-02-27')).toBe('30일 모임');
+    });
+
+    it('연말·연초에 걸친 날짜도 해를 넘겨 계산한다', () => {
+        const { NewsRenderer } = loadRenderers();
+        expect(NewsRenderer._withWeekdays('1월 3일 신년예배', '2026-12-27')).toBe('1월 3일(주일) 신년예배');
+        expect(NewsRenderer._withWeekdays('5일 모임', '2026-12-27')).toBe('5일(화) 모임');
+    });
+
+    it('본문에 이미 적힌 요일이 실제 요일과 맞는다 (주보 오기 점검)', () => {
+        const { NewsRenderer, CHURCH_DATA } = loadRenderers();
+        const explicit = /(?:(\d{1,2})월 )?(\d{1,2})일\s*\((주일|일|월|화|수|목|금|토)\)/g;
+        for (const item of CHURCH_DATA.bulletins.items) {
+            const [by, bm, bd] = item.date.split('-').map(Number);
+            for (const post of item.news || []) {
+                for (const m of post.body.matchAll(explicit)) {
+                    const month = m[1] ? Number(m[1]) : (Number(m[2]) < bd ? bm + 1 : bm);
+                    const expected = NewsRenderer._weekday(by + (month > 12 ? 1 : 0), ((month - 1) % 12) + 1, Number(m[2]));
+                    const printed = m[3] === '일' ? '주일' : m[3];
+                    expect(printed, `${item.date} ${post.title}: ${m[0]}`).toBe(expected);
+                }
+            }
+        }
+    });
+
     it('"라벨 : 값" 줄은 항목표로, 나머지는 문단으로 그린다', () => {
         const { NewsRenderer } = loadRenderers();
         const html = NewsRenderer._postHtml({ title: '모임', body: '안내 문장\n일시 : 10월 18일 오후 2시 30분\n장소 : 간석교회' });
