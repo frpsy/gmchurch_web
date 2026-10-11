@@ -2082,7 +2082,7 @@ const NewsRenderer = {
             </article>`).join('');
     },
 
-    // 주보 한 주가 게시글 한 줄이다. 최대 13주라 페이지를 나누지 않으며, 번호는 최신이 가장 크다
+    // 주보 한 주가 게시글 한 줄이다. 최대 4주라 페이지를 나누지 않으며, 번호는 최신이 가장 크다
     _posts() {
         const weeks = CHURCH_DATA.bulletins.items.filter(item => item.news && item.news.length);
         return weeks.map((item, i) => ({ ...item, no: weeks.length - i }));

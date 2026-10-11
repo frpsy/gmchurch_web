@@ -126,7 +126,8 @@ const BULLETINS = path.join(ROOT, 'bulletins');
 const DATA_JS   = path.join(ROOT, 'data.js');
 const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
 const NEWS      = path.join(ROOT, 'data', 'bulletin-news.json');
-const MAX_WEEKS = 13;
+// 가장 최근 N주만 보관한다 (N주보를 넘기는 오래된 주보·교회소식은 자동 삭제)
+const MAX_BULLETINS = 4;
 
 // 지정한 마커 사이 구간을 통째로 교체 (data.js 손질용)
 function replaceRegion(text, startMarker, endMarker, replacement) {
@@ -160,10 +161,6 @@ function readingsBlock(key, resolved, standardYear, withNote) {
     ].join('\n');
 }
 
-const cutoff = new Date();
-cutoff.setDate(cutoff.getDate() - MAX_WEEKS * 7);
-cutoff.setHours(0, 0, 0, 0);
-
 // ── 메인 (비동기) ─────────────────────────────────────────────
 (async () => {
     // ── 1. JPG 스캔 및 날짜별 그룹화 ────────────────────────────
@@ -176,11 +173,16 @@ cutoff.setHours(0, 0, 0, 0);
         groups.get(ds).push(file);
     }
 
-    // ── 2. 오래된 날짜 삭제 (이미지 + PDF) ──────────────────────
+    // ── 2. 최근 MAX_BULLETINS주만 남기고 삭제 (이미지 + PDF) ─────
+    // PDF만 있는 항목(직접 업로드된 PDF)도 같은 기준으로 센다
+    const allPdfs = fs.readdirSync(BULLETINS).filter(f => /^\d{8}\.pdf$/i.test(f));
+    const allDates = new Set([...groups.keys(), ...allPdfs.map(f => f.slice(0, 8))]);
+    const keep = new Set([...allDates].sort((a, b) => b.localeCompare(a)).slice(0, MAX_BULLETINS));
+
     const valid = new Map();
-    for (const [ds, files] of groups) {
-        const fileDate = new Date(+ds.slice(0, 4), +ds.slice(4, 6) - 1, +ds.slice(6, 8));
-        if (fileDate < cutoff) {
+    for (const ds of allDates) {
+        const files = groups.get(ds) || [];
+        if (!keep.has(ds)) {
             files.forEach(f => {
                 fs.unlinkSync(path.join(BULLETINS, f));
                 console.log(`  삭제: ${f}`);
@@ -190,28 +192,14 @@ cutoff.setHours(0, 0, 0, 0);
                 fs.unlinkSync(pdfFile);
                 console.log(`  삭제: ${ds}.pdf`);
             }
-        } else {
-            files.sort((a, b) => {
-                const na = +a.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
-                const nb = +b.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
-                return na - nb;
-            });
-            valid.set(ds, files);
+            continue;
         }
-    }
-
-    // PDF만 있는 항목 (JPG 없음) 추가 — 직접 업로드된 PDF
-    const allPdfs = fs.readdirSync(BULLETINS).filter(f => /^\d{8}\.pdf$/i.test(f));
-    for (const pdfFile of allPdfs) {
-        const ds = pdfFile.slice(0, 8);
-        if (valid.has(ds)) continue;
-        const fileDate = new Date(+ds.slice(0, 4), +ds.slice(4, 6) - 1, +ds.slice(6, 8));
-        if (fileDate < cutoff) {
-            fs.unlinkSync(path.join(BULLETINS, pdfFile));
-            console.log(`  삭제: ${pdfFile}`);
-        } else {
-            valid.set(ds, []);
-        }
+        files.sort((a, b) => {
+            const na = +a.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
+            const nb = +b.replace(/^\d{8}_(\d+)\.jpe?g$/i, '$1');
+            return na - nb;
+        });
+        valid.set(ds, files);
     }
 
     // ── 3. PDF 생성 (이미지 있는 경우, 없는 경우만) ──────────────
@@ -240,9 +228,12 @@ cutoff.setHours(0, 0, 0, 0);
     }
 
     let newsByWeek = {};
+    let newsNote = '';
     if (fs.existsSync(NEWS)) {
         try {
-            newsByWeek = JSON.parse(fs.readFileSync(NEWS, 'utf8')).weeks || {};
+            const parsed = JSON.parse(fs.readFileSync(NEWS, 'utf8'));
+            newsByWeek = parsed.weeks || {};
+            newsNote = parsed.note || '';
         } catch (err) {
             console.error('  bulletin-news.json 파싱 실패:', err.message);
         }
@@ -266,6 +257,17 @@ cutoff.setHours(0, 0, 0, 0);
                 news:   newsByWeek[dateKey] || []
             };
         });
+
+    // 보관하지 않는 주보의 교회소식은 원본 파일에서도 지운다 (data.js와 같은 기준)
+    const keptNews = Object.fromEntries(
+        newItems.filter(it => it.news.length).map(it => [it.date, it.news]));
+    if (fs.existsSync(NEWS) && JSON.stringify(keptNews) !== JSON.stringify(
+        Object.fromEntries(Object.entries(newsByWeek).sort(([a], [b]) => b.localeCompare(a))))) {
+        const weeksJson = Object.entries(keptNews).map(([date, list]) =>
+            `    ${JSON.stringify(date)}: [\n${list.map(n => `      ${JSON.stringify(n)}`).join(',\n')}\n    ]`).join(',\n');
+        fs.writeFileSync(NEWS, `{\n  "note": ${JSON.stringify(newsNote)},\n  "weeks": {\n${weeksJson}\n  }\n}\n`);
+        console.log('  bulletin-news.json: 보관 기간이 지난 주 정리');
+    }
 
     // ── 5. data.js items 배열 교체 ───────────────────────────────
     const src = fs.readFileSync(DATA_JS, 'utf8');
