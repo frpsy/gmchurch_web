@@ -5322,7 +5322,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-empty { color: var(--text-muted); }
 .board-head, .board-row {
     display: grid;
-    grid-template-columns: 3.5rem 1fr 9rem;
+    grid-template-columns: 3.5rem 1fr 13rem;
     align-items: center;
     gap: 0.75rem;
     padding: 0.85rem 1rem;
@@ -5357,8 +5357,11 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     background: var(--cream);
     border-top: 1px dashed var(--border);
 }
-.board-body p { margin: 0; line-height: 1.75; color: var(--text); }
-.board-body p + p { margin-top: 0.25rem; }
+.board-count { font-size: 0.85rem; font-weight: 400; color: var(--text-muted); margin-left: 0.35rem; }
+.board-news + .board-news { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px dashed var(--border); }
+.board-news-title { font-size: 1rem; color: var(--heading); margin: 0 0 0.35rem; }
+.board-news p { margin: 0; line-height: 1.75; color: var(--text); }
+.board-news p + p { margin-top: 0.25rem; }
 @media (max-width: 640px) {
     .board-head { display: none; }
     .board-row { grid-template-columns: 2.25rem 1fr; }

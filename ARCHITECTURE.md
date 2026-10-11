@@ -430,7 +430,7 @@ window DOMContentLoaded
       ├── BulletinRenderer.render()   → #bulletin-full (bulletin.html)
       │     CHURCH_DATA.bulletins 목록 (5개씩 페이지) · 행 클릭 시 이미지·PDF 펼침
       ├── NewsRenderer.render()       → #news-full (news.html)
-      │     bulletins.items[].news(sync가 data/bulletin-news.json에서 합침)를 게시판 목록으로 렌더 (번호·제목·주보 날짜, 10건씩 페이지, 제목 클릭 시 본문 펼침)
+      │     bulletins.items[].news(sync가 data/bulletin-news.json에서 합침)를 게시판 목록으로 렌더 (주보 한 주 = 한 줄, 날짜 클릭 시 그날 소식 펼침, 최신 주는 기본 펼침)
       │     '이번 주' 배지는 한국 시간 기준 이번 주 주보에만, 아니면 최신 항목에 '최근 등록'
       │
       ├── LinksRenderer.render()      → #links-full (links.html)
