@@ -6,7 +6,7 @@ function loadRenderers(fetch = vi.fn()) {
     const context = createContext({ window: { addEventListener() {} }, fetch, Date });
     runInContext(readFileSync(new URL('../data.js', import.meta.url), 'utf8'), context);
     runInContext(readFileSync(new URL('../app.js', import.meta.url), 'utf8'), context);
-    return runInContext('({ BulletinRenderer, SundaysRenderer, CHURCH_DATA })', context);
+    return runInContext('({ BulletinRenderer, NewsRenderer, SundaysRenderer, CHURCH_DATA })', context);
 }
 
 afterEach(() => vi.useRealTimers());
@@ -38,6 +38,18 @@ describe('주보 날짜 안내', () => {
         const { BulletinRenderer, CHURCH_DATA } = loadRenderers();
         vi.setSystemTime(new Date(`${CHURCH_DATA.bulletins.items[0].date}T03:00:00Z`));
         expect(BulletinRenderer._rowHtml(CHURCH_DATA.bulletins.items[0], true)).toContain('이번 주');
+    });
+});
+
+describe('교회 소식 게시판', () => {
+    it('최신 글이 가장 큰 번호를 갖고, 번호는 1까지 이어진다', () => {
+        const { NewsRenderer, CHURCH_DATA } = loadRenderers();
+        const posts = NewsRenderer._posts();
+        const total = CHURCH_DATA.bulletins.items.reduce((n, item) => n + (item.news || []).length, 0);
+        expect(posts).toHaveLength(total);
+        expect(posts[0].no).toBe(total);
+        expect(posts[posts.length - 1].no).toBe(1);
+        expect(posts[0].date >= posts[posts.length - 1].date).toBe(true);
     });
 });
 

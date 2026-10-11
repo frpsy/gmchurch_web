@@ -5317,32 +5317,51 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     .btn-next:active, .map-btn:active { opacity: 0.75; transition: none; }
 }
 
-/* ── 교회 소식 (news.html) ── */
-.news-intro { color: var(--text-muted); margin-bottom: 2rem; }
+/* ── 교회 소식 게시판 (news.html) ── */
+.news-intro { color: var(--text-muted); margin-bottom: 1.5rem; }
 .news-empty { color: var(--text-muted); }
-.news-week { margin-bottom: 3rem; }
-.news-week:last-child { margin-bottom: 0; }
-.news-week-title {
-    font-size: 1.25rem;
-    color: var(--heading);
-    margin-bottom: 1rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 2px solid var(--border);
+.board-head, .board-row {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr 9rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
 }
-.news-week-season {
-    font-size: 0.9rem;
-    font-weight: 500;
+.board-head {
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--text-muted);
-    margin-left: 0.5rem;
+    border-top: 2px solid var(--heading);
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
 }
-.news-list { display: flex; flex-direction: column; gap: 0.75rem; }
-.news-item {
+.board-list { list-style: none; margin: 0; padding: 0; }
+.board-item { border-bottom: 1px solid var(--border); }
+.board-row {
+    width: 100%;
     background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    padding: 1.1rem 1.4rem;
+    border: 0;
+    text-align: left;
+    font: inherit;
+    color: var(--text);
+    cursor: pointer;
 }
-.news-item-title { font-size: 1.05rem; color: var(--heading); margin-bottom: 0.4rem; }
-.news-item-body p { color: var(--text); line-height: 1.75; margin: 0; }
-.news-item-body p + p { margin-top: 0.25rem; }
+.board-row:hover, .board-row[aria-expanded="true"] { background: var(--cream); }
+.board-row:focus-visible { outline: 2px solid var(--theme); outline-offset: -2px; }
+.board-no, .board-date { font-size: 0.9rem; color: var(--text-muted); }
+.board-no { text-align: center; }
+.board-head .board-no, .board-head .board-date { font-size: inherit; }
+.board-title { font-weight: 600; color: var(--heading); }
+.board-body {
+    padding: 1rem 1.25rem 1.25rem 4.75rem;
+    background: var(--cream);
+    border-top: 1px dashed var(--border);
+}
+.board-body p { margin: 0; line-height: 1.75; color: var(--text); }
+.board-body p + p { margin-top: 0.25rem; }
+@media (max-width: 640px) {
+    .board-head { display: none; }
+    .board-row { grid-template-columns: 2.25rem 1fr; }
+    .board-date { grid-column: 2; }
+    .board-body { padding-left: 1.25rem; }
+}

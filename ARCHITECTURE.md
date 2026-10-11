@@ -24,7 +24,7 @@ gmchurch_web/
 ├── community.html    공동체 (희망터·엠마우스·소그룹·녹색교회)
 ├── sundays.html      교회력 허브 (이달의 교회력·전례독서·절기·특별 주일)
 ├── bulletin.html     주일 주보 (noindex, 이미지·PDF 목록)
-├── news.html         교회 소식 (noindex, 주보 교회소식 주별 모음)
+├── news.html         교회 소식 게시판 (noindex, 주보 교회소식 모음)
 ├── emmaus.html       엠마우스 코스 상세 페이지
 ├── hopecenter.html   광명 희망터 상세 페이지
 ├── smallgroup.html   소그룹 모임 상세 페이지
@@ -430,7 +430,7 @@ window DOMContentLoaded
       ├── BulletinRenderer.render()   → #bulletin-full (bulletin.html)
       │     CHURCH_DATA.bulletins 목록 (5개씩 페이지) · 행 클릭 시 이미지·PDF 펼침
       ├── NewsRenderer.render()       → #news-full (news.html)
-      │     bulletins.items[].news(주별 교회소식, sync가 data/bulletin-news.json에서 합침)를 주 단위로 나열
+      │     bulletins.items[].news(sync가 data/bulletin-news.json에서 합침)를 게시판 목록으로 렌더 (번호·제목·주보 날짜, 10건씩 페이지, 제목 클릭 시 본문 펼침)
       │     '이번 주' 배지는 한국 시간 기준 이번 주 주보에만, 아니면 최신 항목에 '최근 등록'
       │
       ├── LinksRenderer.render()      → #links-full (links.html)
