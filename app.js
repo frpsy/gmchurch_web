@@ -2074,31 +2074,77 @@ const BulletinRenderer = {
 
 /* ── NewsRenderer ────────────────────────────────────────── */
 const NewsRenderer = {
+    _PER_PAGE: 10,
+
     _bodyHtml(body) {
         return body.split('\n').map(line => `<p>${line}</p>`).join('');
+    },
+
+    // 주별 소식을 최신 주 순으로 펼쳐 게시글 한 줄씩으로 만들고, 번호는 최신이 가장 크다
+    _posts() {
+        const posts = CHURCH_DATA.bulletins.items.flatMap(item =>
+            (item.news || []).map(n => ({ ...n, date: item.date, label: item.label })));
+        return posts.map((post, i) => ({ ...post, no: posts.length - i }));
+    },
+
+    _renderPage(el, posts, page) {
+        const perPage    = this._PER_PAGE;
+        const totalPages = Math.ceil(posts.length / perPage);
+        const pagePosts  = posts.slice(page * perPage, (page + 1) * perPage);
+
+        const rows = pagePosts.map(post => `
+            <li class="board-item">
+                <button class="board-row" type="button" aria-expanded="false">
+                    <span class="board-no">${post.no}</span>
+                    <span class="board-title">${post.title}</span>
+                    <span class="board-date">${post.label}</span>
+                </button>
+                <div class="board-body" hidden>${this._bodyHtml(post.body)}</div>
+            </li>`).join('');
+
+        const pagHtml = totalPages > 1 ? `
+            <nav class="bulletin-pagination" aria-label="교회 소식 페이지">
+                <button class="bulletin-pag-btn" type="button" data-dir="-1"${page === 0 ? ' disabled' : ''}>← 이전</button>
+                <span class="bulletin-pag-info">${page + 1} / ${totalPages}</span>
+                <button class="bulletin-pag-btn" type="button" data-dir="1"${page >= totalPages - 1 ? ' disabled' : ''}>다음 →</button>
+            </nav>` : '';
+
+        el.innerHTML = `
+            <p class="news-intro">${CHURCH_DATA.bulletins.newsIntro}</p>
+            <div class="board-head" aria-hidden="true">
+                <span class="board-no">번호</span><span class="board-title">제목</span><span class="board-date">주보</span>
+            </div>
+            <ul class="board-list">${rows}</ul>${pagHtml}`;
+
+        el.querySelectorAll('.board-row').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const isOpen = btn.getAttribute('aria-expanded') === 'true';
+                el.querySelectorAll('.board-row[aria-expanded="true"]').forEach(other => {
+                    other.setAttribute('aria-expanded', 'false');
+                    other.nextElementSibling.hidden = true;
+                });
+                btn.setAttribute('aria-expanded', String(!isOpen));
+                btn.nextElementSibling.hidden = isOpen;
+            });
+        });
+
+        el.querySelectorAll('.bulletin-pag-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this._renderPage(el, posts, page + parseInt(btn.dataset.dir, 10));
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
     },
 
     render() {
         const el = document.getElementById('news-full');
         if (!el) return;
-        const { items, newsIntro, newsEmpty } = CHURCH_DATA.bulletins;
-        const weeks = items.filter(item => item.news && item.news.length);
-        if (weeks.length === 0) {
-            el.innerHTML = `<p class="news-empty">${newsEmpty}</p>`;
+        const posts = this._posts();
+        if (posts.length === 0) {
+            el.innerHTML = `<p class="news-empty">${CHURCH_DATA.bulletins.newsEmpty}</p>`;
             return;
         }
-        el.innerHTML = `<p class="news-intro">${newsIntro}</p>` + weeks.map(item => `
-            <section class="news-week" aria-labelledby="news-${item.date}">
-                <h2 class="news-week-title" id="news-${item.date}">${item.label}
-                    <span class="news-week-season">${item.season}</span></h2>
-                <div class="news-list">
-                    ${item.news.map(n => `
-                    <article class="news-item">
-                        <h3 class="news-item-title">${n.title}</h3>
-                        <div class="news-item-body">${this._bodyHtml(n.body)}</div>
-                    </article>`).join('')}
-                </div>
-            </section>`).join('');
+        this._renderPage(el, posts, 0);
     }
 };
 
