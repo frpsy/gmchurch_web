@@ -2125,7 +2125,7 @@ const NewsRenderer = {
             }
         });
         flush();
-        return `<article class="news-post"><h3 class="news-post-title">${post.title}</h3>${blocks.join('')}</article>`;
+        return `<article class="news-post"><h2 class="news-post-title">${post.title}</h2>${blocks.join('')}</article>`;
     },
 
     _weeks() {
@@ -2544,7 +2544,7 @@ const SundaysRenderer = {
                     <p class="section-eyebrow" style="margin-bottom:0.4rem;">현재 절기 — ${cs.dateLabel}</p>
                     <p style="font-size:1.45rem; font-weight:700; color:var(--heading); margin:0 0 0.3rem;">${icon(cs.symbol)} ${cs.name}</p>
                     <p style="font-size:var(--fs-desc); color:var(--text-muted);">${cs.note}</p>
-                    ${range ? `<p style="font-size:var(--fs-md); color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${advYear}-${advYear + 1} 교회력 &nbsp;·&nbsp; ${range}</p>` : ''}
+                    ${range ? `<p style="font-size:var(--fs-md); color:var(--text-muted); margin-top:0.75rem; padding-top:0.65rem; border-top:1px solid var(--border);">${advYear}-${advYear + 1} 교회력&nbsp;·&nbsp;${range}</p>` : ''}
                 </div>
             </div>`;
     },

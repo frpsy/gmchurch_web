@@ -38,7 +38,7 @@ gmchurch_web/
 ├── privacy.html      개인정보 처리방침 (noindex)
 ├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA (1081줄)
 ├── app.js            렌더러 모음 + App bootstrap (2588줄)
-├── style.css         전체 스타일 (4128줄)
+├── style.css         전체 스타일 (5382줄)
 ├── images/icons.svg  ★ 아이콘 팩 — 사이트 전체 아이콘 SVG 스프라이트 (이모티콘 대신 사용)
 ├── favicon.svg       교회 로고 '열린 빛' (숲 녹 배경 + 크림 아치 십자)
 ├── apple-touch-icon.png  180×180 (scripts/brand/icon.html에서 생성)
@@ -620,10 +620,20 @@ window DOMContentLoaded
 --theme-light:  #e7eee8
 --theme-on:     #fff      /* --theme 배경 위 텍스트 */
 --nav-h:        68px
---section-pad:  7rem
+--section-pad:  6rem   /* ≤768px 2.5rem */
 --content-max:  1200px
---radius-sm/md/lg: 8px / 14px / 20px
+--radius-xs/sm/md/lg: 4px / 8px / 14px / 20px
+--fs-label/md/sm/body/lead: 12.48 / 13.6 / 14.4 / 16 / 18px   /* 라벨 하한은 12.48px */
+--fs-desc:      0.95rem   /* 문장형 카드·목록 설명 15.2px (내비용 --fs-sm과 분리) */
+--lh-tight/snug/body/relaxed: 1.2 / 1.55 / 1.75 / 1.9   /* 큰 제목 / 여러 줄 제목·리드 / 본문 / 장문 */
+--space-4h/6h:  1.25rem / 1.75rem
+--content-read/narrow: 760px / 820px
+--ink-on-light/--ink-on-sage/--brand-mid/--green-hover/--red-hover   /* 모드와 무관한 고정색 */
+--on-dark-1/2/3: rgba(255,255,255,.92/.78/.70)
+--lift-1/2:     -2px / -4px   /* hover 이동 */
 ```
+
+디자인 기준(글자 크기·간격·색·포커스 링 규칙)은 `audit/03-design-spec.md` 참고.
 
 ### 주요 클래스 목록
 
@@ -634,7 +644,7 @@ window DOMContentLoaded
 | `.nav-chevron` | 모바일 드롭다운 토글 화살표 버튼 (desktop: hidden) |
 | `.nav-item.mobile-open` | 모바일 드롭다운 열림 상태 |
 | `.hero` / `.hero-fallback` | Ken Burns 애니메이션 배경 (Unsplash 이미지) |
-| `.page-hero` | 서브 페이지 상단 헤더 (높이 통일: PC `min-height` 350px · 모바일 306px, 내용은 세로 가운데 정렬) |
+| `.page-hero` | 서브 페이지 상단 헤더 (높이 통일: PC `min-height` 350px · 모바일 291px, 내용은 세로 가운데 정렬) |
 | `.section` / `.section-header` | 섹션 레이아웃 |
 | `.container` | 최대폭 1200px, 패딩 clamp |
 | `.grid` | auto-fit minmax(280px) 그리드 |
