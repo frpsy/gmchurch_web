@@ -192,7 +192,7 @@ echo "Done: $TODAY"
 4. `node scripts/sync-bulletins.js` 실행 → PDF 생성 + data.js 자동 갱신
    - 끝에 **⚠️ 트랙 미기록 / ℹ️ 시편 미기록 / ℹ️ 교회소식 미기록** 경고가 뜨면 해당 주 기록을 보완
 5. `npm test` (병합·표기·overrides·교회소식 형식 검증 포함)
-6. **보관 규칙: 최근 4개 주보 이내 + 4주(28일) 이내** — 넘긴 주보의 이미지·PDF·교회소식은 sync가 삭제한다. 새 주보를 안 올려도 `bulletin-sync.yml`이 매일 03:00(KST) 실행되어 자동 삭제·커밋한다(수동 실행: Actions > Sync Sunday Bulletins > Run workflow). 다시 필요하면 이미지를 `bulletins/`에 되돌려 놓고 sync. overrides의 과거 항목은 그대로 둬도 무방
+6. **보관 규칙: 최근 4개 주보 이내 + 4주(28일) 이내(가장 최근 1건은 기간이 지나도 보관)** — 넘긴 주보의 이미지·PDF·교회소식은 sync가 삭제한다. 새 주보를 안 올려도 `bulletin-sync.yml`이 매일 03:00(KST) 실행되어 자동 삭제·커밋한다(수동 실행: Actions > Sync Sunday Bulletins > Run workflow). 다시 필요하면 이미지를 `bulletins/`에 되돌려 놓고 sync. overrides의 과거 항목은 그대로 둬도 무방
 
 > ⚠️ 병합 규칙은 `scripts/lib/lectionary.js`(스크립트·테스트용)와 `app.js`의 `_applyOverrides`(브라우저용) 두 곳에 있다 — 빌드가 없어 공유 불가. 한쪽을 고치면 반드시 다른 쪽도 함께 고칠 것.
 
