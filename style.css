@@ -522,7 +522,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .btn-outline:hover {
     background: rgba(255,255,255,0.18);
     border-color: rgba(255,255,255,0.85);
-    transform: translateY(-2px);
+    transform: translateY(var(--lift-1));
     box-shadow: 0 6px 20px rgba(177, 184, 131, 0.22);
 }
 
@@ -537,7 +537,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: var(--fs-sm);
     transition: background var(--dur), transform var(--dur);
 }
-.btn-live:hover { background: var(--red-hover); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(155, 28, 28, 0.30); }
+.btn-live:hover { background: var(--red-hover); transform: translateY(var(--lift-1)); box-shadow: 0 6px 18px rgba(155, 28, 28, 0.30); }
 
 /* Hero — solid primary CTA */
 .btn-hero-primary {
@@ -554,7 +554,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .btn-hero-primary:hover {
     background: var(--green-hover);
-    transform: translateY(-2px);
+    transform: translateY(var(--lift-1));
     box-shadow: 0 8px 24px rgba(177, 184, 131, 0.26);
 }
 
@@ -915,7 +915,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .card:hover {
     border-color: var(--theme);
     box-shadow: var(--hover-shadow);
-    transform: translateY(-6px);
+    transform: translateY(var(--lift-2));
 }
 @media (prefers-reduced-motion: reduce) {
     .card { transition: border-color var(--dur-slow), box-shadow var(--dur-slow); }
@@ -958,7 +958,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .info-card:hover {
     border-color: var(--theme);
     box-shadow: var(--hover-shadow-sm);
-    transform: translateY(-4px);
+    transform: translateY(var(--lift-2));
 }
 @media (prefers-reduced-motion: reduce) {
     .info-card { transition: border-color var(--dur-slow), box-shadow var(--dur-slow); }
@@ -1343,7 +1343,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
                 border-color var(--dur-slow);
 }
 .value-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(var(--lift-1));
     box-shadow: var(--shadow-md);
     border-color: var(--green-soft);
 }
@@ -1919,7 +1919,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .anglican-pillar:hover {
     border-color: var(--theme);
     box-shadow: var(--hover-shadow-sm);
-    transform: translateY(-4px);
+    transform: translateY(var(--lift-2));
 }
 @media (prefers-reduced-motion: reduce) {
     .anglican-pillar { transition: border-color var(--dur-slow), box-shadow var(--dur-slow); }
@@ -2036,7 +2036,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .mission-mark:hover {
     box-shadow: var(--hover-shadow-sm);
-    transform: translateY(-3px);
+    transform: translateY(var(--lift-2));
 }
 @media (prefers-reduced-motion: reduce) {
     .mission-mark { transition: box-shadow var(--dur-slow); }
@@ -2492,7 +2492,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
                 border-color var(--dur) ease, background var(--dur) ease, color var(--dur) ease;
 }
 .btn-next:hover {
-    transform: translateY(-2px);
+    transform: translateY(var(--lift-1));
     border-color: var(--theme);
     box-shadow: var(--hover-shadow-sm);
 }
@@ -2586,7 +2586,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: var(--heading);
     background: var(--green-light);
     box-shadow: var(--hover-shadow-sm);
-    transform: translateY(-1px);
+    transform: translateY(var(--lift-1));
 }
 
 .liturgy-section { margin-bottom: 3.5rem; }
@@ -2653,7 +2653,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .liturgy-step:hover {
     border-color: var(--green-soft);
     box-shadow: var(--hover-shadow-sm);
-    transform: translateY(-3px);
+    transform: translateY(var(--lift-2));
 }
 @media (prefers-reduced-motion: reduce) {
     .liturgy-step { transition: border-color var(--dur-slow), box-shadow var(--dur-slow); }
@@ -2666,7 +2666,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     display: flex; align-items: center; justify-content: center;
     font-size: var(--fs-md);
     font-weight: 700;
-    color: #fff;
+    color: var(--theme-on);
 }
 .step-body { flex: 1; min-width: 0; }
 .step-title {
@@ -2747,7 +2747,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     .resource-card:hover {
         border-color: var(--theme);
         box-shadow: var(--hover-shadow-sm);
-        transform: translateY(-5px);
+        transform: translateY(var(--lift-2));
     }
 }
 .resource-card { -webkit-tap-highlight-color: transparent; }
@@ -3777,7 +3777,7 @@ footer {
     text-decoration: none;
 }
 .map-btn:hover {
-    transform: translateY(-1px);
+    transform: translateY(var(--lift-1));
     box-shadow: var(--shadow-md);
     border-color: var(--green-soft);
 }
@@ -3941,7 +3941,7 @@ footer {
 .links-card:hover {
     border-color: var(--theme);
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+    transform: translateY(var(--lift-1));
 }
 .links-card-name {
     font-size: var(--fs-body);
@@ -4004,7 +4004,7 @@ footer {
     transition: transform var(--dur), box-shadow var(--dur);
 }
 .video-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(var(--lift-2));
     box-shadow: var(--shadow-md);
 }
 .video-thumb {
@@ -4169,7 +4169,7 @@ footer {
 }
 .photo-item:hover,
 .photo-item:focus-visible {
-    transform: translateY(-4px);
+    transform: translateY(var(--lift-2));
     box-shadow: var(--hover-shadow-sm);
 }
 .photo-item:focus-visible { outline-offset: 2px; }
@@ -4672,7 +4672,7 @@ footer {
 }
 .about-next:hover {
     border-color: var(--green-mid);
-    transform: translateY(-2px);
+    transform: translateY(var(--lift-1));
     box-shadow: var(--shadow-md);
 }
 .about-next-label { color: var(--text-muted); font-weight: 500; }
