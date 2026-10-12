@@ -317,6 +317,23 @@ const NavRenderer = {
 };
 
 /* ── FooterRenderer ──────────────────────────────────────── */
+// 정적 HTML의 연락처는 data.js(info)에서 채운다 — 번호·주소를 한 곳에서만 고치기 위함
+const ContactBinder = {
+    render() {
+        const info = CHURCH_DATA.info;
+        document.querySelectorAll('[data-contact]').forEach(el => {
+            const kind = el.dataset.contact;
+            if (kind === 'email') el.setAttribute('href', `mailto:${info.email}`);
+            if (kind === 'phone') el.setAttribute('href', `tel:${info.phone}`);
+            const text = kind === 'email' ? info.email
+                : kind === 'phone' ? info.phone
+                : `${info.phone} / ${info.email}`;
+            const target = el.querySelector('[data-contact-text]') || el;
+            target.textContent = text;
+        });
+    }
+};
+
 const FooterRenderer = {
     render() {
         const footer = document.getElementById('main-footer');
@@ -2795,6 +2812,7 @@ const App = {
 
         NavRenderer.render();
         FooterRenderer.render();
+        ContactBinder.render();
         IndexRenderer.render();
         BcpRenderer.render();
         WorshipRenderer.render();
