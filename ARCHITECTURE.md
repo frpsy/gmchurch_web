@@ -31,7 +31,7 @@ gmchurch_web/
 ├── greenchurch.html  녹색교회 상세 페이지
 ├── links.html        관련 기관 상세 페이지
 ├── visit.html        오시는 길 (지도·교통·주차)
-├── giving.html       헌금 (봉헌 계좌·영수증 안내)
+├── giving.html       헌금 (헌금 계좌·영수증 안내)
 ├── media.html        미디어·자료 허브 (영상·사진·관련 기관 카드 링크)
 ├── videos.html       영상 갤러리 상세 페이지
 ├── gallery.html      사진 갤러리 상세 페이지 (noindex)
@@ -336,7 +336,7 @@ const CHURCH_DATA = {
   └ 주소·교통          visit.html#location              (JS)
   └ 주차 안내          visit.html#parking               (JS)
 
-※ Footer 전용 링크: giving.html(봉헌 안내), clergy.html#logo-intro(로고 소개), clergy.html#press(언론 보도), privacy.html(개인정보처리방침)
+※ Footer 전용 링크: giving.html(헌금 안내), clergy.html#logo-intro(로고 소개), clergy.html#press(언론 보도), privacy.html(개인정보처리방침)
 ```
 
 ---
@@ -360,7 +360,7 @@ window DOMContentLoaded
       │
       ├── FooterRenderer.render()     → #main-footer (모든 페이지)
       │     info + clergy[0] + sns 4개 링크
-      │     하단 바: 봉헌 안내(→ giving.html) + 개인정보 처리방침 링크
+      │     하단 바: 헌금 안내(→ giving.html) + 개인정보 처리방침 링크
       │     주소 → 네이버지도 링크로 렌더됨 (MapHelper.naverUrl)
       │
       ├── IndexRenderer.render()      → index.html 전용

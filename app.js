@@ -373,7 +373,7 @@ const FooterRenderer = {
                 <div class="footer-bottom">
                     <span>© ${new Date().getFullYear()} ${info.name}</span>
                     <nav class="footer-bottom-links" aria-label="하단 안내">
-                        <a href="giving.html" class="footer-privacy-link">봉헌 안내</a>
+                        <a href="giving.html" class="footer-privacy-link">헌금 안내</a>
                         <a href="clergy.html#logo-intro" class="footer-privacy-link">로고 소개</a>
                         <a href="clergy.html#press" class="footer-privacy-link">언론 보도</a>
                         <a href="privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
@@ -808,7 +808,7 @@ const NewcomerRenderer = {
                     <p class="section-eyebrow">Anglican Liturgy</p>
                     <h2 class="section-title">성공회 전례란?</h2>
                     <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 이어진 말씀의 전례와 성찬의 전례가 조화를 이루는 예배 전통을 400여 년간 지켜오고 있습니다.</p>
-                    <p class="liturgy-body">예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토머스 크랜머가 편찬한 이 기도서는, 라틴어가 아닌 자국어로 예배를 드리도록 하여 <strong>모든 신자가 전례에 직접 참여</strong>할 수 있게 한 종교개혁의 중요한 유산입니다.</p>
+                    <p class="liturgy-body">예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 편찬한 이 기도서는, 라틴어가 아닌 자국어로 예배를 드리도록 하여 <strong>모든 신자가 전례에 직접 참여</strong>할 수 있게 한 종교개혁의 중요한 유산입니다.</p>
                     <div class="liturgy-card">
                         <h3 class="liturgy-card-title">전례의 의미</h3>
                         <p class="liturgy-body"><strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말로, '공동체를 위해 수행하는 일'을 뜻합니다. 곧 전례는 <strong>그리스도인이 함께 드리고 함께 살아가는 신앙의 실천</strong>입니다.</p>
@@ -947,7 +947,7 @@ const GivingRenderer = {
 
         el.innerHTML = `
             <div class="info-card" id="offering" style="max-width:640px; margin:0 auto;">
-                <h3>봉헌 계좌</h3>
+                <h3>헌금 계좌</h3>
                 <div class="bank-card">
                     <p style="font-size:var(--fs-md); color:var(--green-mid); margin-bottom:0.3rem;">${bankName}</p>
                     <p class="account">${bank}</p>
