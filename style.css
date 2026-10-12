@@ -732,6 +732,9 @@ button:focus:not(:focus-visible) { outline: none; }
     overflow-wrap: break-word;
 }
 
+/* 부제가 한 줄이어도 두 줄 높이를 확보해, 페이지마다 제목 위치가 달라지지 않게 한다 */
+.page-hero p:not(.section-eyebrow) { min-height: 3.4em; }
+
 /* 서브 히어로 eyebrow — .page-hero p 크기를 의도적으로 따르는 라벨(부제와는 자간·대문자·굵기로 구분) */
 .page-hero .section-eyebrow {
     font-size: clamp(0.95rem, 2vw, 1.1rem);
