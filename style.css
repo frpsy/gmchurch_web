@@ -5415,3 +5415,23 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
         hyphens: none;
     }
 }
+
+/* 감사성찬례 순서(모바일): 번호를 제목 줄로 올려 목록이 카드 폭을 모두 쓰게 하고, 짧은 항목은 어절 단위로 끊되 마지막 줄에 한 단어만 남지 않게 한다 */
+@media (max-width: 480px) {
+    .liturgy-step {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        column-gap: 0.75rem;
+        row-gap: 0.4rem;
+        align-items: center;
+        padding: 1.15rem 1rem;
+    }
+    .liturgy-step .step-body { display: contents; }
+    .liturgy-step .step-title { margin: 0; }
+    .liturgy-step .step-list { grid-column: 1 / -1; }
+    .step-list li, .liturgy-body.liturgy-body--lead {
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        text-wrap: pretty;
+    }
+}
