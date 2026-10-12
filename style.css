@@ -3703,6 +3703,10 @@ footer {
     overflow: hidden;
     position: relative;
 }
+/* 좁은 화면에서 구글 지도의 자체 버튼·저작권 표기가 지도 면적을 가리므로 높이를 키운다 */
+@media (max-width: 600px) {
+    .map-card:not(.map-card--compact) .map-preview { aspect-ratio: 4 / 3; }
+}
 .map-embed {
     width: 100%;
     height: 100%;
