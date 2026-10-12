@@ -5392,3 +5392,15 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .worship-services-grid { align-items: start; }
 #community-full .grid { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 700px) { #community-full .grid { grid-template-columns: 1fr; } }
+
+/* 모바일 본문 폭 확보: keep-all 한글은 어절 단위로만 줄을 바꿔 좁은 칸에서 줄 끝이 들쭉날쭉해지므로 좌우 여백을 줄여 한 줄 글자 수를 늘린다 */
+@media (max-width: 480px) {
+    .container { padding-left: 1rem; padding-right: 1rem; }
+    .story-value { padding: 1.25rem 1rem; }
+    /* 여러 줄 본문은 양쪽 정렬로 줄 끝을 맞춘다(어절 단위 줄바꿈 keep-all은 유지, 가운데 정렬 문단은 인라인 style이 우선) */
+    .story-value-text, .faq-a-text, .faq-a-lead, .info-card p, .liturgy-body, .anglican-para, .space-desc,
+    .emmaus-lead, .emmaus-stage-desc, .clergy-desc, .bishop-desc, .newcomer-intro-body,
+    .worship-card-desc, .worship-card-detail, .logo-desc, .logo-history, .bio-ministry-note {
+        text-align: justify;
+    }
+}
