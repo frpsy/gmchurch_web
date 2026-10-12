@@ -605,7 +605,7 @@ const CHURCH_DATA = {
                         title: "공동기도서(Book of Common Prayer)란?",
                         body: [
                             "동방정교회, 로마가톨릭교회와 같이 성공회는 하나의 전례서(예배예식서)를 사용하는 '기도서의 교회'입니다. 성서, 기도서, 성가는 성공회 신앙생활의 세 기둥입니다.",
-                            "잉글랜드 종교개혁기에 토머스 크랜머 캔터베리 대주교가 성서와 개신교 교리에 입각해서 동서고금의 훌륭한 기도문과 예식문들을 참고하면서도, 영국의 평민들(commoners) 모두가 가정에 두고 즐겨 사용하도록 편찬했습니다. 그래서 영문학상으로도 중요한 자료로 평가됩니다.",
+                            "잉글랜드 종교개혁기에 토마스 크랜머 캔터베리 대주교가 성서와 개신교 교리에 입각해서 동서고금의 훌륭한 기도문과 예식문들을 참고하면서도, 영국의 평민들(commoners) 모두가 가정에 두고 즐겨 사용하도록 편찬했습니다. 그래서 영문학상으로도 중요한 자료로 평가됩니다.",
                             "전례력(교회력), 성찬예배, 세례성사와 병자·혼인·상장례 등 성사적 예식들, 성무일과(매일기도), 각종 기도문, 성무일과용 시편집으로 이뤄져 있습니다.",
                             "세계성공회는 이를 바탕으로 각 나라별 특성과 시대변화를 반영한 공동기도서를 계속해서 만들어가고 있습니다. 뉴질랜드 기도서는 마오리 원주민들의 신앙을 잘 반영한 예로 꼽힙니다."
                         ]
@@ -898,7 +898,7 @@ const CHURCH_DATA = {
                         a: "결혼 문제는 계기일 뿐, 핵심은 <strong>왕위 계승 위기</strong>와 유럽 종교개혁의 흐름이었습니다.\n\n헨리 8세는 남성 후계자 없이 생길 내전을 우려해 교황에게 이혼을 청했지만, 당시 교황은 왕비의 친정(에스파냐) 군대에 포위된 처지라 거절할 수밖에 없었습니다. 이에 헨리 8세는 로마와 관계를 끊고 국교회 수장이 되었고, 유럽의 종교개혁 세력이 이를 지지했습니다. 이후 크랜머 대주교 등의 영향으로 <strong>'개신교 교리에 가톨릭 전통의 예배 형식'</strong>을 갖춘 오늘날 성공회로 자리 잡았습니다.",
                         refs: [
                             { label: "잉글랜드의 종교 개혁 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EC%9E%89%EA%B8%80%EB%9E%9C%EB%93%9C%EC%9D%98_%EC%A2%85%EA%B5%90_%EA%B0%9C%ED%98%81" },
-                            { label: "토머스 크랜머 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%ED%86%A0%EB%A8%B8%EC%8A%A4_%ED%81%AC%EB%9E%9C%EB%A8%B8" }
+                            { label: "토마스 크랜머 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%ED%86%A0%EB%A8%B8%EC%8A%A4_%ED%81%AC%EB%9E%9C%EB%A8%B8" }
                         ]
                     },
                     {
@@ -941,7 +941,7 @@ const CHURCH_DATA = {
                         q: "구원을 어떻게 이해하나요?",
                         a: "구원은 조건을 채워 얻어내는 것이 아니라, <strong>예수 그리스도를 통해 하느님께서 거저 주시는 선물(은총)</strong>이라고 믿습니다.\n\n특정 교단 소속이나 정해진 ‘공식’을 구원의 조건으로 삼지 않으며, 성서를 구원에 필요한 모든 것을 담은 말씀으로 고백합니다.",
                         refs: [
-                            { label: "시카고-램베스 사대강령 — 성서의 권위", url: "https://www.anglicancommunion.org/the-chicago-lambeth-quadrilateral/" }
+                            { label: "시카고-람베스 사대강령 — 성서의 권위", url: "https://www.anglicancommunion.org/the-chicago-lambeth-quadrilateral/" }
                         ]
                     },
                     {
@@ -955,7 +955,7 @@ const CHURCH_DATA = {
                         q: "다른 교회에서 받은 세례를 다시 받아야 하나요?",
                         a: "아닙니다. <strong>삼위일체 하느님의 이름(성부·성자·성령)으로 물로 받은 세례</strong>는 교단과 관계없이 유효한 세례로 인정합니다.\n\n천주교·개신교에서 세례를 받으셨다면 다시 받을 필요가 없습니다.",
                         refs: [
-                            { label: "시카고-램베스 사대강령 — 세례 성사", url: "https://www.anglicancommunion.org/the-chicago-lambeth-quadrilateral/" },
+                            { label: "시카고-람베스 사대강령 — 세례 성사", url: "https://www.anglicancommunion.org/the-chicago-lambeth-quadrilateral/" },
                             { label: "세례 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EC%84%B8%EB%A1%80" }
                         ]
                     },
@@ -1148,7 +1148,7 @@ const CHURCH_DATA = {
                 en: "Season of Creation",
                 date: "9월 1일 ~ 10월 4일",
                 origin: "세계교회 · 대한성공회",
-                desc: "1989년 에큐메니컬 총대주교 디미트리오스 1세의 선포로 시작. WCC가 절기로 확대했으며, 10월 4일 성 프란체스코 축일에 마무리됩니다."
+                desc: "1989년 에큐메니컬 총대주교 디미트리오스 1세의 선포로 시작. WCC가 절기로 확대했으며, 10월 4일 성 프란시스 축일에 마무리됩니다."
             },
             {
                 name: "모든 성인의 날",

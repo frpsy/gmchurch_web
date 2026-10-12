@@ -83,7 +83,7 @@
   주소·교통 / 주차 안내
 ```
 
-Footer 전용 링크: `giving.html`(봉헌 안내), `clergy.html#logo-intro`(로고 소개), `clergy.html#press`(언론 보도), `privacy.html`
+Footer 전용 링크: `giving.html`(헌금 안내), `clergy.html#logo-intro`(로고 소개), `clergy.html#press`(언론 보도), `privacy.html`
 
 ---
 
