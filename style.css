@@ -5387,3 +5387,8 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .section-title--sub { font-size: 1.3rem; }
 .liturgy-section .info-card h2.section-title--sub { margin: 0; }
 .nowrap { white-space: nowrap; }
+
+/* 카드가 서로 높이를 맞추려고 늘어나 내부에 큰 빈 공간이 생기지 않게(worship), 4개 카드는 2×2로(community) */
+.worship-services-grid { align-items: start; }
+#community-full .grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 700px) { #community-full .grid { grid-template-columns: 1fr; } }
