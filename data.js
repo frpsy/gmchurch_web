@@ -289,12 +289,12 @@ const CHURCH_DATA = {
             bio: {
                 milestones: [
                     { year: "1988", text: "성공회대학교 신학과 입학" },
-                    { year: "1998", text: "서울교구 신학대학원 성직과정 입학 — 교구 최초 여성 성직 과정생", first: true },
+                    { year: "1998", text: "서울교구 신학대학원 성직과정 입학 — 교구 여성 성직 과정생", first: true },
                     { year: "2005", text: "사제 서품" },
-                    { year: "2006", text: "동두천교회 보좌사제 — 서울교구 여성 사목자 최초 일반교회 단독 사목", first: true },
+                    { year: "2006", text: "동두천교회 보좌사제 — 서울교구 여성 사목자 일반교회 단독 사목", first: true },
                     { year: "—", text: "동두천·성북 나눔의집 원장 역임 — 서울교구 첫 여성 원장", first: true },
                     { year: "2014", text: "강화 송산교회 관할사제 부임 — 서울교구 첫 여성 관할사제", first: true },
-                    { year: "2025", text: "서울교구 서부교무구 총사제 임명 — 교구 최초 여성 총사제", first: true }
+                    { year: "2025", text: "서울교구 서부교무구 총사제 임명 — 교구 여성 총사제", first: true }
                 ],
                 roles: [
                     "서울교구 청년연합회장(전, 1996)",
