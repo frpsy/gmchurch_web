@@ -1275,7 +1275,7 @@ const ClergyRenderer = {
                 <p class="bishop-eyebrow">Diocese of Seoul</p>
                 <div class="bishop-card-inner">
                     ${bishop.photo
-                        ? `<div class="bishop-portrait-wrap"><img src="${bishop.photo}" alt="${bishop.name} 주교 초상" class="bishop-portrait" loading="lazy"></div>`
+                        ? `<div class="bishop-portrait-wrap"><img src="${bishop.photoThumb || bishop.photo}" data-full="${bishop.photo}" alt="${bishop.name} 주교 초상" class="bishop-portrait" loading="lazy"></div>`
                         : `<div class="bishop-portrait-wrap bishop-portrait-fallback" aria-hidden="true">${icon('mitre')}</div>`}
                     <div class="bishop-card-body">
                         <p class="bishop-name">${bishop.name} 주교</p>
@@ -1299,7 +1299,7 @@ const ClergyRenderer = {
                     <div class="clergy-card" ${isFirstPriest ? 'id="priest"' : ''}>
                         <div class="clergy-avatar${c.photo ? '' : ' clergy-avatar--fallback'}">
                             ${c.photo
-                                ? `<img src="${c.photo}" alt="${c.name} 사제" loading="lazy" class="clergy-avatar-img">`
+                                ? `<img src="${c.photoThumb || c.photo}" data-full="${c.photo}" alt="${c.name} 사제" loading="lazy" class="clergy-avatar-img">`
                                 : icon('cross')}
                         </div>
                         <div>
@@ -1915,7 +1915,7 @@ const PortraitLightbox = {
         let opener = null;
         const open = (el) => {
             opener = el;
-            img.src = el.src;
+            img.src = el.dataset.full || el.src; // 목록은 작은 썸네일, 확대는 원본
             img.alt = el.alt;
             overlay.classList.add('is-open');
             document.body.style.overflow = 'hidden';

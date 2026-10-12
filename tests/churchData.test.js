@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { existsSync, statSync } from 'node:fs';
 import { CHURCH_DATA } from './helpers/loadData.js';
 
 // ──────────────────────────────────────────────
@@ -204,5 +205,25 @@ describe('CHURCH_DATA.community', () => {
             expect(g.title, `groups[${i}].title`).toBeTruthy();
             expect(g.desc,  `groups[${i}].desc`).toBeTruthy();
         });
+    });
+});
+
+// ──────────────────────────────────────────────
+// 성직자 초상: 목록은 썸네일, 확대는 원본
+// ──────────────────────────────────────────────
+describe('clergy portraits', () => {
+    const entries = [...CHURCH_DATA.clergy, CHURCH_DATA.bishop].filter(c => c.photo);
+
+    it('has portraits to check', () => {
+        expect(entries.length).toBeGreaterThan(0);
+    });
+
+    it('every portrait has a thumbnail that exists and is smaller than the original', () => {
+        for (const c of entries) {
+            expect(c.photoThumb, c.name).toBeTruthy();
+            expect(existsSync(c.photoThumb), c.photoThumb).toBe(true);
+            expect(existsSync(c.photo), c.photo).toBe(true);
+            expect(statSync(c.photoThumb).size, c.photoThumb).toBeLessThan(statSync(c.photo).size);
+        }
     });
 });

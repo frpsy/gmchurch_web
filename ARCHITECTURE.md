@@ -43,7 +43,7 @@ gmchurch_web/
 ├── favicon.svg       교회 로고 '열린 빛' (숲 녹 배경 + 크림 아치 십자)
 ├── apple-touch-icon.png  180×180 (scripts/brand/icon.html에서 생성)
 ├── images/brand/og-image-v3.png  소셜 공유 OG 이미지 1200×630 (scripts/brand/og.html에서 생성)
-├── images/clergy/   성직자 초상 (portrait jpg) · images/hero/ 페이지 상단 이미지(home.webp 포함) · images/gallery/ 갤러리 사진(영문 소문자·하이픈 파일명)
+├── images/clergy/   성직자 초상 (원본 portrait jpg + 목록용 `-450` 썸네일, data.js `photoThumb`) · images/hero/ 페이지 상단 이미지(home.webp 포함) · images/gallery/ 갤러리 사진(영문 소문자·하이픈 파일명)
 ├── fonts/            brand-serif.woff2 — 로고 워드마크 전용 3KB 서브셋 (고운바탕 Bold, OFL)
 ├── robots.txt
 ├── sitemap.xml
