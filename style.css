@@ -5404,12 +5404,13 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 @media (max-width: 480px) {
     .container { padding-left: 1rem; padding-right: 1rem; }
     .story-value { padding: 1.25rem 1rem; }
-    /* 여러 줄 본문은 양쪽 정렬로 줄 끝을 맞춘다(가운데 정렬 문단은 인라인 style이 우선) */
+    /* 양쪽 정렬은 iOS Safari에서 따옴표·숫자·괄호가 붙은 어절 주변 공백만 늘려 간격이 들쭉날쭉하고, 음절 단위 줄바꿈은 단어 중간이 끊기므로 왼쪽 정렬+어절 단위 줄바꿈으로 둔다 */
     .story-value-text, .faq-a-text, .faq-a-lead, .info-card p, .liturgy-body, .anglican-para, .space-desc,
     .emmaus-lead, .emmaus-stage-desc, .clergy-desc, .bishop-desc, .newcomer-intro-body,
     .worship-card-desc, .worship-card-detail, .logo-desc, .logo-history, .bio-ministry-note {
-        text-align: justify;
-        word-break: normal;        /* 음절 단위 줄바꿈(네이버 뉴스·브런치 모바일 본문과 같은 방식) — 양쪽 정렬 시 단어 간격이 벌어지지 않게 */
-        overflow-wrap: anywhere;
+        text-align: left;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        text-wrap: pretty;
     }
 }
