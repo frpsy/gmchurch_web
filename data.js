@@ -1134,7 +1134,7 @@ const CHURCH_DATA = {
                 name: "환경주일",
                 en: "Environment Sunday",
                 date: "6월 첫째 주일",
-                origin: "NCCK · 대한성공회",
+                origin: "NCCK",
                 desc: "하느님의 창조세계를 돌보는 청지기 사명을 새기는 날. 한국교회가 함께 지켜 왔습니다."
             },
             {
