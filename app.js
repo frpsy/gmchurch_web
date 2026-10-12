@@ -2796,6 +2796,89 @@ const HeroNav = {
     }
 };
 
+/* ── TextFit ─────────────────────────────────────────────── */
+// 모바일 본문 줄 끝 맞춤: 글자 단위로 줄을 바꾸는 왼쪽 정렬 문단마다 자간(-0.02~+0.015em)을 줄 끝 편차가 가장 작은 값으로 정한다.
+// 어절 간격은 건드리지 않고, 변화량은 눈에 띄지 않는 범위로 제한한다. 대상 목록은 style.css의 ≤480px 본문 규칙과 같다.
+const TextFit = {
+    SELECTOR: '.story-value-text, .faq-a-text, .faq-a-lead, .info-card p, .liturgy-body, .anglican-para, .space-desc, ' +
+        '.emmaus-lead, .emmaus-stage-desc, .clergy-desc, .bishop-desc, .newcomer-intro-body, ' +
+        '.worship-card-desc, .worship-card-detail, .logo-desc, .logo-history, .bio-ministry-note',
+    CANDIDATES: [0, -0.01, -0.02, 0.01, 0.015],
+    _isMobile() { return typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 480px)').matches; },
+
+    // 줄 끝 편차(글자 크기 대비) 제곱합 + 마지막 줄이 한두 글자뿐인 경우 + 0에서 벗어난 정도
+    _score(el, ls) {
+        el.style.letterSpacing = ls ? `${ls}em` : '';
+        const cs = getComputedStyle(el);
+        const fs = parseFloat(cs.fontSize) || 16;
+        const lh = parseFloat(cs.lineHeight) || fs * 1.6;
+        const box = el.getBoundingClientRect();
+        const right = box.right - (parseFloat(cs.paddingRight) || 0);
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const lines = new Map();
+        for (const r of range.getClientRects()) {
+            if (r.width < 1) continue;
+            const k = Math.round((r.top - box.top) / lh);
+            const cur = lines.get(k) || { right: 0, left: Infinity };
+            cur.right = Math.max(cur.right, r.right);
+            cur.left = Math.min(cur.left, r.left);
+            lines.set(k, cur);
+        }
+        const keys = [...lines.keys()].sort((a, b) => a - b);
+        let score = Math.abs(ls) * 5;
+        keys.slice(0, -1).forEach(k => {
+            const d = Math.min((right - lines.get(k).right) / fs, 1.5);
+            score += d * d;
+        });
+        const last = lines.get(keys[keys.length - 1]);
+        if (keys.length > 1 && last && (last.right - last.left) < fs * 2.5) score += 2;
+        return score;
+    },
+
+    fit(el) {
+        const width = Math.round(el.getBoundingClientRect().width);
+        if (!width || el.dataset.fitWidth === String(width)) return;
+        if (el.querySelector('br')) return;
+        let best = 0, bestScore = Infinity;
+        this.CANDIDATES.forEach(ls => {
+            const sc = this._score(el, ls);
+            if (sc < bestScore - 1e-9) { best = ls; bestScore = sc; }
+        });
+        el.style.letterSpacing = best ? `${best}em` : '';
+        el.dataset.fitWidth = String(width);
+    },
+
+    run(root) {
+        const scope = root || document;
+        if (!this._isMobile()) {
+            scope.querySelectorAll(this.SELECTOR).forEach(el => {
+                el.style.letterSpacing = '';
+                delete el.dataset.fitWidth;
+            });
+            return;
+        }
+        scope.querySelectorAll(this.SELECTOR).forEach(el => {
+            if (el.offsetParent !== null && el.textContent.trim().length >= 30) this.fit(el);
+        });
+    },
+
+    init() {
+        const ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+        ready.then(() => this.run());
+        window.addEventListener('load', () => this.run());
+        let timer;
+        window.addEventListener('resize', () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => this.run(), 150);
+        });
+        // 접혀 있던 FAQ 등 details가 열릴 때 그 안의 문단을 맞춘다
+        document.addEventListener('toggle', e => {
+            if (e.target && e.target.matches && e.target.matches('details')) this.run(e.target);
+        }, true);
+    }
+};
+
 const App = {
     init() {
         /* 사이트 대표 테마(--theme)는 녹색 고정(:root 기본값 사용). 절기색(--season)만
@@ -2842,6 +2925,7 @@ const App = {
         MenuOverlay.init();
         TapFeedback.init();
         HeroNav.init();
+        TextFit.init();
         document.addEventListener('click', e => {
             if (e.target.matches('.map-copy-btn')) MapHelper.copyAddr(e.target);
         });

@@ -486,6 +486,10 @@ window DOMContentLoaded
 
 ---
 
+### TextFit (모바일 본문 줄 끝 맞춤)
+
+`App.init()` 끝에서 `TextFit.init()` 호출. 480px 이하에서 `TextFit.SELECTOR`(style.css ≤480px 본문 규칙과 같은 목록)의 문단마다 자간 -0.02~+0.015em 중 줄 끝 편차가 가장 작은 값을 인라인 `letter-spacing`으로 정한다. 폭이 바뀌면(resize) 다시 계산하고, 접힌 `details`는 열릴 때 계산한다. 본문 클래스를 추가하면 CSS와 이 목록을 함께 고칠 것.
+
 ## HTML 페이지별 섹션 구조
 
 ### index.html
