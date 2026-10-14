@@ -126,11 +126,11 @@ const BULLETINS = path.join(ROOT, 'bulletins');
 const DATA_JS   = path.join(ROOT, 'data.js');
 const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
 const NEWS      = path.join(ROOT, 'data', 'bulletin-news.json');
-// 보관 규칙: 최근 4개 주보 이내이면서 4주(28일) 넘게 지나지 않은 것만 남긴다.
+// 보관 규칙: 최근 8개 주보 이내이면서 8주(56일) 넘게 지나지 않은 것만 남긴다.
 // 단, 가장 최근 주보 한 건은 기간이 지나도 남겨 목록이 비지 않게 한다.
 // 새 주보가 없어도 날짜만 지나면 삭제되도록, 매일 도는 워크플로가 이 스크립트를 실행한다.
-const MAX_BULLETINS = 4;
-const MAX_AGE_DAYS  = 28;
+const MAX_BULLETINS = 8;
+const MAX_AGE_DAYS  = 56;
 
 // 지정한 마커 사이 구간을 통째로 교체 (data.js 손질용)
 function replaceRegion(text, startMarker, endMarker, replacement) {
