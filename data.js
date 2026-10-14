@@ -1181,7 +1181,7 @@ const CHURCH_DATA = {
         labels: { thisWeek: "이번 주", latest: "최근 등록" },
         intro: "예배 순서와 공동체 소식을 담은 주간 주보입니다.",
         note: "예배 전에 미리 열어 두시면 도움이 됩니다.",
-        newsIntro: "최근 4주분의 교회소식을 보관합니다.",
+        newsIntro: "최근 8주분의 교회소식을 보관합니다.",
         newsEmpty: "등록된 교회소식이 없습니다.",
         items: [
             {

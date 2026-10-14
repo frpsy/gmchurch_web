@@ -29,7 +29,7 @@
 `info, ui, home, anglican, logo, ministerSection, clergy, officers, bishop, philosophy, aboutJourney, worship, community, giving, visit, sns, press, liveUrl, media, links, faq, sundays, bulletins, photoGallery, navigation`. 콘텐츠는 여기에만 두고 HTML에 직접 쓰지 않는다. `LiturgicalCalendar.compute()`가 오늘의 절기·색을 계산한다.
 
 ## 자동화
-- `bulletin-sync.yml`: 주보 이미지 push 시 + 매일 03:00(KST) `scripts/sync-bulletins.js` 실행. 보관은 최근 4개·28일 이내(최신 1건은 보존). 테스트 통과 시에만 커밋.
+- `bulletin-sync.yml`: 주보 이미지 push 시 + 매일 03:00(KST) `scripts/sync-bulletins.js` 실행. 보관은 최근 8개·56일 이내(최신 1건은 보존). 테스트 통과 시에만 커밋.
 - `cache-bust.yml`: main에 js/css/svg 변경이 머지되면 HTML의 `?v=`를 커밋 SHA로 갱신.
 - `sync-bulletins.js`가 하는 일: 이미지→PDF, `bulletins.items`(날짜·주일명·이미지·PDF·교회소식), `worship.currentReadings/nextReadings` 자동 파생, 경고(트랙·시편·교회소식 미기록).
 
