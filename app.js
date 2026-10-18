@@ -649,7 +649,7 @@ const ChildrenRenderer = {
         el.innerHTML = `
             <div class="page-hero">
                 <p class="section-eyebrow">${d.heroEyebrow}</p>
-                <h1>${d.title.join(' ')}</h1>
+                <h1>${service.title}</h1>
                 <p>${service.summary}</p>
             </div>
             <section class="section children-intro">
