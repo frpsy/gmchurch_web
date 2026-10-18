@@ -645,6 +645,7 @@ const ChildrenRenderer = {
         if (!el) return;
         const d = CHURCH_DATA.childrenWorship;
         const service = CHURCH_DATA.worship.main.find(w => w.id === 'children');
+        const parents = (CHURCH_DATA.community.smallgroups?.groups || []).find(g => g.id === 'parents');
         const picture = (name, alt, eager = false) => `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 768px) 100vw, 50vw" alt="${alt}" width="${name === 'welcome' ? 1440 : 1440}" height="${name === 'welcome' ? 720 : 1080}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
         el.innerHTML = `
             <div class="page-hero">
@@ -680,7 +681,18 @@ const ChildrenRenderer = {
                     <a class="btn-next" href="visit.html">${d.visitLabel}</a>
                     <a class="btn-next" href="worship.html">${d.backLabel}</a>
                 </div>
-            </div></section>`;
+            </div></section>
+            ${parents ? `<section class="section gc-section-alt children-parents"><div class="container children-join">
+                <div><p class="section-eyebrow">${parents.en}</p><h2 class="section-title">${parents.title}</h2><p class="children-lead">${d.parentsIntro}</p></div>
+                <div class="children-service"><dl>
+                    <div><dt>${d.parentsScheduleLabel}</dt><dd>${parents.schedule}</dd></div>
+                    <div><dt>${d.parentsPlaceLabel}</dt><dd>${d.parentsPlace}</dd></div>
+                    <div><dt>${d.parentsAudienceLabel}</dt><dd>${d.parentsAudience}</dd></div>
+                </dl></div>
+                <div class="next-step-cta-actions">
+                    <a class="btn-next btn-next--primary" href="smallgroup.html#${parents.id}">${d.parentsLinkLabel}</a>
+                </div>
+            </div></section>` : ''}`;
     }
 };
 

@@ -164,7 +164,14 @@ const CHURCH_DATA = {
         "timeLabel": "시간",
         "joinIntro": "처음 오시는 가족도 환영합니다. 궁금한 점은 교회로 문의해 주세요.",
         "contactLabel": "어린이 예배 문의",
-        "backLabel": "전체 예배 안내"
+        "backLabel": "전체 예배 안내",
+        "parentsIntro": "아이를 신앙 안에서 키우는 일은 부모 혼자 감당하기 어렵습니다. 주일학교 자녀를 둔 양육자들이 매월 모여 가정 안의 신앙 교육을 이야기하고 서로를 위해 기도합니다.",
+        "parentsScheduleLabel": "일정",
+        "parentsPlaceLabel": "장소",
+        "parentsPlace": "교회 내 소모임 공간",
+        "parentsAudienceLabel": "대상",
+        "parentsAudience": "주일학교에 아이가 다니고 있다면 누구나",
+        "parentsLinkLabel": "양육자모임 안내 보기"
     },
 
     ui: {
