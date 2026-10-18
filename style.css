@@ -5458,11 +5458,11 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .children-rhythm { padding-block: clamp(2.75rem, 5vw, 4.5rem); }
 .children-rhythm > .container > .section-title { text-align: center; }
 .children-rhythm-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 2rem; margin-top: 2rem; }
-.children-rhythm-grid article { border-top: 1px solid var(--border); padding-top: 1.25rem; text-align: center; }
-.children-rhythm-grid article > div { display: flex; align-items: baseline; justify-content: center; gap: .65rem; margin-bottom: .75rem; }
-.children-rhythm-grid .section-eyebrow { margin: 0; letter-spacing: var(--ls-label); flex-shrink: 0; }
-.children-rhythm-grid h3 { font-size: 1.25rem; color: var(--heading); margin: 0; }
-.children-rhythm-grid article > p:last-child { max-width: 34rem; margin-inline: auto; color: color-mix(in srgb, var(--text) 72%, var(--white)); line-height: var(--lh-body); word-break: keep-all; text-align: center; }
+.children-rhythm-grid article { border-top: 1px solid var(--border); padding-top: 1.5rem; text-align: center; }
+.children-rhythm-grid article > div { display: flex; flex-direction: column; align-items: center; gap: .6rem; margin-bottom: .85rem; }
+.children-rhythm-grid .section-eyebrow { margin: 0; letter-spacing: var(--ls-label); flex-shrink: 0; display: inline-grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: color-mix(in srgb, var(--heading) 9%, var(--white)); font-size: .85rem; }
+.children-rhythm-grid h3 { font-size: 1.2rem; color: var(--heading); margin: 0; line-height: 1.35; }
+.children-rhythm-grid article > p:last-child { max-width: 34rem; margin-inline: auto; color: color-mix(in srgb, var(--text) 72%, var(--white)); line-height: var(--lh-relaxed); word-break: keep-all; text-align: center; }
 .children-story { padding-block: clamp(3rem, 6vw, 5rem); }
 .children-story-heading { max-width: var(--content-read); margin: 0 auto 2.25rem; text-align: center; }
 .children-photo-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2rem 1.5rem; max-width: 960px; margin-inline: auto; }
