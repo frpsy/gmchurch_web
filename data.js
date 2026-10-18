@@ -119,7 +119,7 @@ const CHURCH_DATA = {
         ],
         "intro": "광명교회 어린이 예배는 아이들이 궁금한 것을 편하게 묻는 자리입니다. 선생님들과 함께 찬양하고, 놀고, 기도하며 하느님의 사랑을 배웁니다.",
         "heroAlt": "팔을 벌린 예수님 곁에 모인 어린이들을 그린 그림",
-        "welcomeLabel": "예배 안내",
+        "welcomeLabel": "시간·장소 보기",
         "visitLabel": "오시는 길",
         "rhythmTitle": "예배에서 하는 일",
         "rhythm": [
@@ -161,7 +161,7 @@ const CHURCH_DATA = {
                 "caption": "천사와 교회를 그린 벽화"
             }
         ],
-        "joinTitle": "예배 안내",
+        "joinTitle": "참여 안내",
         "placeLabel": "장소",
         "place": "교육관",
         "timeLabel": "시간",
