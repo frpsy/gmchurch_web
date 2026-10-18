@@ -248,12 +248,35 @@ echo "Done: $TODAY"
 - **JS로 주입하는 색 주의** — `app.js`가 `--season`/`--season-light`(전례력 절기색, `data.js`의 하드코딩 hex)를 `:root` 인라인 스타일로 주입한다. 인라인 변수는 미디어쿼리로 못 덮으므로, 그 변수를 쓰는 요소는 다크 블록에서 `background`/`color` **속성 자체**를 재선언(`color-mix(in srgb, var(--season) N%, var(--white)/(--heading))`)해 덮는다.
 - **대비 검증** — 새 색 조합은 본문 텍스트 기준 WCAG AA(4.5:1) 지향. 라이트·다크 양쪽에서 실제로 확인할 것.
 
+### 디자인 취향 (사용자 선호)
+- **설명글·사진 캡션은 가운데 정렬 + 연한 진회색.** 본문색을 `color-mix(in srgb, var(--text) 72%, var(--white))`로 섞어 쓴다(예: `.children-photo-grid figcaption`). 색 변수라 다크모드에서도 자동 전환되며 대비는 AA 이상이다.
+- **본문 문단과 버튼은 붙이지 않는다.** 문단 바로 뒤에 버튼이 오면 위 여백(약 1.25rem)을 둔다(예: `.worship-card-desc + .btn-next`).
+- 취향 판단이 필요한 시각 조정(색 농도·간격)은 "미학적으로 나은 쪽"을 직접 골라 적용하고, 고른 값을 한 줄로 알린다.
+
 ### 금지 사항
 - HTML에 직접 콘텐츠 하드코딩 (data.js를 거쳐야 함)
 - nav에 링크 없이 새 페이지 추가
 - 기존 CSS 클래스 확인 없이 동일 목적의 새 클래스 추가
 - `clergy.html`의 `id="philosophy"` 중복 사용 금지 (이미 섹션에 존재)
 - 렌더러가 없는 페이지에 `id="xxx-full"` div 추가 후 렌더러 연결 누락
+
+---
+
+## 요청 해석 기준
+
+- **끊기거나 모호한 요청**(문장이 중간에 끝남, 대상이 불분명)은 되묻지 않고 가장 합리적인 해석으로 바로 적용한 뒤, **어떻게 해석했는지 한 줄**로 알린다. 사용자가 바로잡으면 그 자리에서 다시 고친다.
+- 해석이 크게 갈려 되돌리기 어렵거나(데이터 삭제, 구조 변경) 외부에 공개되는 일만 먼저 묻는다.
+- 사용자가 화면을 캡처해 보내면 캡처 속 요소를 코드(`data.js` 키·`app.js` 렌더러·`style.css` 클래스)로 먼저 찾아 확인한 뒤 고친다.
+
+### 사용자 표현 ↔ 화면 요소 (확인된 것만 기록)
+
+| 표현 | 화면 요소 | 위치 |
+|---|---|---|
+| 어린이 예배 사진 설명 | `children.html` 사진 아래 캡션 | `app.js` `.children-photo-grid figcaption`, `data.js` photos `caption` |
+| 예배 카드 설명 문단 | `worship.html` 카드 설명 | `.worship-card-desc`, `data.js` `worship.main[].desc` |
+| 어린이 예배 만나보기 버튼 | `worship.html`·홈 카드의 링크 | `.btn-next`(worship), `.about-brief-link`(홈), `data.js` `linkLabel` |
+
+> 새로 표현이 확인되면 이 표에 추가한다. 확인하지 못한 대응은 적지 않는다(추측 금지).
 
 ---
 
