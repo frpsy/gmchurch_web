@@ -2325,6 +2325,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     max-width: 760px;
     margin: 4rem auto 0;
 }
+/* 공동기도서와 성가: 제목도 다른 예배 단락처럼 본문과 같은 760px 칼럼에 맞춘다 */
+#worship-bcp { max-width: 760px; margin: 0 auto; }
 .liturgy-season-badge {
     display: inline-flex;
     flex-wrap: wrap;   /* 좁은 화면: '성령강림 후'가 글자 중간에서 끊기지 않고 항목 단위로 줄바꿈 */
