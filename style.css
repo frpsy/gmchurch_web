@@ -1666,7 +1666,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     transition: color var(--dur);
 }
 .about-brief-link:hover { color: var(--heading); }
-.card-desc + .about-brief-link { margin-top: 1.25rem; }
 
 /* 수상 배지 — facts 아래, 소개 링크 위 */
 .about-brief-award {

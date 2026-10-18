@@ -519,8 +519,6 @@ const CHURCH_DATA = {
         main: [
             {
                 id: "main",
-                homeHref: "worship.html#main",
-                homeLinkLabel: "주일 예배 안내",
                 title: "주일 감사성찬례",
                 time: "매주 일요일 오전 11:00",
                 desc: "성공회 전례의 중심인 감사성찬례(Eucharist)입니다. 말씀과 성찬 안에서 예수 그리스도를 만나는 시간이며, 세례받은 모든 그리스도인이 성체를 모실 수 있습니다. 반려동물과 함께 오신 분은 예배 후 신부님께 강복을 청할 수 있습니다.",
