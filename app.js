@@ -526,11 +526,10 @@ const IndexRenderer = {
         // 홈 카드는 요약(summary)만 — 전문은 worship.html에서
         el.innerHTML = CHURCH_DATA.worship.main.map(w => `
             <div class="card">
-                ${w.image ? `<a href="${w.href}" class="children-home-image" tabindex="-1" aria-hidden="true"><img src="${w.image}" alt="${w.imageAlt}" width="720" height="360" loading="lazy" decoding="async"></a>` : ''}
+                ${w.image ? `<div class="children-home-image"><img src="${w.image}" alt="${w.imageAlt}" width="720" height="360" loading="lazy" decoding="async"></div>` : ''}
                 <h3>${w.title}</h3>
                 <p class="card-time">${w.time}</p>
                 <p class="card-desc">${w.summary || w.desc}</p>
-                ${(w.href || w.homeHref) ? `<a class="about-brief-link" href="${w.href || w.homeHref}">${w.linkLabel || w.homeLinkLabel}</a>` : ''}
             </div>
         `).join('');
         const guide = document.getElementById('worship-guide');
