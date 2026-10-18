@@ -529,7 +529,7 @@ const CHURCH_DATA = {
                 href: "children.html",
                 image: "images/children/welcome-sm.webp",
                 imageAlt: "어린이들을 맞이하는 예수님 그림",
-                summary: "아이들이 함께 놀고 기도하며 하느님의 사랑을 배웁니다.",
+                summary: "함께 놀고 기도하며 하느님의 사랑을 배웁니다.",
                 linkLabel: "어린이 예배 만나보기",
                 title: "어린이 예배",
                 time: "매주 일요일 오전 11:00",
