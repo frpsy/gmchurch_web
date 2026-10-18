@@ -2719,6 +2719,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .worship-card-quote    { margin-top: 1.25rem; font-size: var(--fs-sm); }
 .worship-card-cite     { font-size: var(--fs-label); font-style: normal; color: var(--text-muted); }
 .worship-card-detail   { margin-top: 1rem; font-size: var(--fs-desc); color: var(--text-muted); line-height: 1.9; }
+.worship-card-desc + .btn-next { margin-top: 1.25rem; }
 .liturgy-body--lead    { margin-bottom: 1.5rem; }
 .resource-en           { font-size: var(--fs-label); color: var(--text-muted); margin-bottom: 0.4rem; }
 .resource-grid--single { --resource-cols: 1; grid-template-columns: 1fr; }
