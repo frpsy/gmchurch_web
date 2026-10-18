@@ -166,7 +166,6 @@ const CHURCH_DATA = {
         "place": "교육관",
         "timeLabel": "시간",
         "joinIntro": "처음 오시는 가족도 환영합니다. 궁금한 점은 교회로 문의해 주세요.",
-        "communionTitle": "영성체 안내",
         "contactLabel": "어린이 예배 문의",
         "backLabel": "전체 예배 안내"
     },
