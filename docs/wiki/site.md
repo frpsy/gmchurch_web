@@ -44,3 +44,11 @@
 - `README.md` 파일 구조·주요 페이지에 `bulletin.html`, `news.html`이 없고 community 설명에 `녹색교회`가 포함돼 있어 현재 구조와 다르다.
 - `hopecenter.html`은 상세 내용이 없는 `준비 중` 페이지이고 `emmaus.html`, `faq.html`은 가안 표기가 남아 있다. 정식 전환 시 `draft-banner`/`badge: "임시"`를 제거한다(`CLAUDE.md`).
 - `data.js`의 `info.vision`은 `하느님 나라를 살아가는 사랑의 공동체`, 주보는 이를 `교구 표어`라 하고 `교회 표어`는 `함께 배우고, 함께 돌보는 교회`다. 사이트에는 교회 표어가 없다.
+
+
+## 어린이 예배 소개 (2026-10-18)
+- `children.html` → `ChildrenRenderer` → `CHURCH_DATA.childrenWorship`. 예배와 기도 하위 메뉴와 기존 어린이 예배 카드에서 연결.
+- 사용자가 제공한 소개문, 활동 사진 4장, 예수님과 어린이 그림을 사용. 사진 날짜·참여 연령 등 미확인 사실은 추가하지 않음.
+- 시간과 영성체 안내는 `worship.main`의 어린이 예배 항목에서 파생. 장소는 교육관. 이미지 `images/children/`, 반응형 스타일 `.children-*`.
+
+- 홈페이지 어린이 예배 카드에도 글씨를 제거한 최종 그림과 소개 페이지 링크를 연결. 사이트 검색의 어린이 예배 결과도 상세 페이지로 이동.

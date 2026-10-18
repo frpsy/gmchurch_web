@@ -526,9 +526,11 @@ const IndexRenderer = {
         // 홈 카드는 요약(summary)만 — 전문은 worship.html에서
         el.innerHTML = CHURCH_DATA.worship.main.map(w => `
             <div class="card">
+                ${w.image ? `<a href="${w.href}" class="children-home-image"><img src="${w.image}" alt="${w.imageAlt}" width="720" height="371" loading="lazy" decoding="async"></a>` : ''}
                 <h3>${w.title}</h3>
                 <p class="card-time">${w.time}</p>
                 <p class="card-desc">${w.summary || w.desc}</p>
+                ${w.href ? `<a class="about-brief-link" href="${w.href}">${w.linkLabel}</a>` : ''}
             </div>
         `).join('');
         const guide = document.getElementById('worship-guide');
@@ -637,6 +639,45 @@ const BcpRenderer = {
 };
 
 /* ── WorshipRenderer ─────────────────────────────────────── */
+const ChildrenRenderer = {
+    render() {
+        const el = document.getElementById('children-full');
+        if (!el) return;
+        const d = CHURCH_DATA.childrenWorship;
+        const service = CHURCH_DATA.worship.main.find(w => w.id === 'children');
+        const picture = (name, alt, eager = false) => `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 768px) 100vw, 50vw" alt="${alt}" width="${name === 'welcome' ? 1440 : 1440}" height="${name === 'welcome' ? 741 : 1080}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+        el.innerHTML = `
+            <header class="children-hero">
+                <div class="container children-hero-inner">
+                    <div class="children-hero-copy">
+                        <p class="section-eyebrow">${d.eyebrow}</p>
+                        <h1>${d.title.map(t => `<span>${t}</span>`).join('')}</h1>
+                        <p class="children-lead">${d.intro}</p>
+                        <div class="next-step-cta-actions">
+                            <a href="#join" class="btn-next btn-next--primary">${d.welcomeLabel}</a>
+                            <a href="visit.html" class="btn-next">${d.visitLabel}</a>
+                        </div>
+                    </div>
+                    <div class="children-illustration">${picture('welcome', d.heroAlt, true)}</div>
+                </div>
+            </header>
+            <section class="section children-rhythm"><div class="container">
+                <h2 class="section-title">${d.rhythmTitle}</h2>
+                <div class="children-rhythm-grid">${d.rhythm.map((r,i) => `<article><p class="section-eyebrow">0${i+1}</p><h3>${r.title}</h3><p>${r.desc}</p></article>`).join('')}</div>
+            </div></section>
+            <section class="section gc-section-alt"><div class="container">
+                <div class="children-story-heading"><p class="section-eyebrow">${d.storyEyebrow}</p><h2 class="section-title">${d.storyTitle}</h2><p class="children-lead">${d.storyIntro}</p></div>
+                <div class="children-photo-grid">${d.photos.map(p => `<figure>${picture(p.src,p.alt)}<figcaption>${p.caption}</figcaption></figure>`).join('')}</div>
+            </div></section>
+            <section class="section" id="join"><div class="container children-join">
+                <div><p class="section-eyebrow">${d.eyebrow}</p><h2 class="section-title">${d.joinTitle}</h2><p class="children-lead">${d.joinIntro}</p>
+                    <div class="next-step-cta-actions"><a class="btn-next btn-next--primary" href="tel:${CHURCH_DATA.info.phone}">${d.contactLabel} ${icon('phone')}</a><a class="btn-next" href="worship.html">${d.backLabel}</a></div>
+                </div>
+                <div class="info-card children-service"><dl><div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div><div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div></dl><p>${service.detail}</p><p class="text-note">${CHURCH_DATA.info.phone}</p></div>
+            </div></section>`;
+    }
+};
+
 const WorshipRenderer = {
     render() {
         const servicesEl  = document.getElementById('worship-services');
@@ -662,6 +703,7 @@ const WorshipRenderer = {
                             <span class="worship-time">${w.time}</span>
                         </div>
                         <p class="worship-card-desc">${w.desc}</p>
+                        ${w.href ? `<a class="btn-next" href="${w.href}">${w.linkLabel}</a>` : ''}
                         ${w.verse ? `
                         <blockquote class="liturgy-inner-quote worship-card-quote">
                             "${w.verse}"<br><cite class="worship-card-cite">— ${w.verseRef}</cite>
@@ -2899,6 +2941,7 @@ const App = {
         IndexRenderer.render();
         BcpRenderer.render();
         WorshipRenderer.render();
+        ChildrenRenderer.render();
         NewcomerRenderer.render();
         CommunityRenderer.render();
         SmallGroupRenderer.render();
@@ -3081,7 +3124,7 @@ const MenuOverlay = {
 
         // 예배와 기도 (worship.html)
         const wor = d.worship || {};
-        (wor.main || []).forEach(m => add(m.title, 'worship.html#' + m.id, '예배와 기도',
+        (wor.main || []).forEach(m => add(m.title, m.href || 'worship.html#' + m.id, '예배와 기도',
             join(m.time, m.desc, m.detail, m.verse)));
         (wor.resources || []).forEach(r => add(r.title, 'worship.html#resources', '예배 자료', r.desc));
         if (wor.prayer) {

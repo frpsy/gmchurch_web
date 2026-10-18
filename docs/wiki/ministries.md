@@ -24,3 +24,9 @@
 - SNS: YouTube, Instagram(`anglican_gm`), 네이버 블로그, 서울교구 홈페이지.
 - 관련 기관 4묶음: 대한성공회(교단·서울교구·서울주교좌성당·성공회신문·출판사), 교육·선교(성공회대학교, 여성선교센터, **G.F.S.**, 나눔의 집 협의회), 수도 공동체(성 프란시스 수도회, 성가수도회), 세계성공회(Anglican Communion, 캔터베리 대주교).
 - **G.F.S.** = Girls' Friendly Society, 1875년 영국에서 시작된 성공회 여성 공동체(사이트 `links` 표기). 한국 사이트 gfskorea.org.
+
+
+## 어린이 예배 소개 (2026-10-18)
+- `children.html` → `ChildrenRenderer` → `CHURCH_DATA.childrenWorship`. 예배와 기도 하위 메뉴와 기존 어린이 예배 카드에서 연결.
+- 사용자가 제공한 소개문, 활동 사진 4장, 예수님과 어린이 그림을 사용. 사진 날짜·참여 연령 등 미확인 사실은 추가하지 않음.
+- 시간과 영성체 안내는 `worship.main`의 어린이 예배 항목에서 파생. 장소는 교육관. 이미지 `images/children/`, 반응형 스타일 `.children-*`.

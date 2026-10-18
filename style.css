@@ -5435,3 +5435,40 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
         text-wrap: pretty;
     }
 }
+
+/* 어린이 예배는 그림의 흰 여백을 살리고 사진의 원래 비율을 유지한다. */
+.children-hero { padding: calc(var(--nav-h) + 4.5rem) 0 4.5rem; background: var(--white); }
+.children-hero-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; }
+.children-hero h1 { font-size: clamp(2rem, 3.3vw, 3.25rem); line-height: 1.4; letter-spacing: -.045em; color: var(--heading); margin: 1rem 0 1.5rem; word-break: keep-all; }
+.children-hero h1 span { display: block; }
+.children-lead { max-width: 40rem; font-size: var(--fs-lead); line-height: var(--lh-relaxed); color: var(--text-muted); word-break: keep-all; overflow-wrap: anywhere; }
+.children-hero .next-step-cta-actions, .children-join .next-step-cta-actions { justify-content: flex-start; margin-top: 1.75rem; }
+.children-illustration { border-radius: var(--radius-md); overflow: hidden; }
+.children-illustration img { display: block; width: 100%; height: auto; }
+.children-rhythm-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 3rem; margin-top: 2.5rem; }
+.children-rhythm-grid article { border-top: 1px solid var(--border); padding-top: 1.5rem; }
+.children-rhythm-grid h3 { font-size: 1.25rem; color: var(--heading); margin: .5rem 0 .75rem; }
+.children-rhythm-grid article > p:last-child { color: var(--text-muted); line-height: var(--lh-relaxed); word-break: keep-all; }
+.children-story-heading { max-width: 44rem; margin-bottom: 3rem; }
+.children-photo-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2rem; }
+.children-photo-grid figure { margin: 0; min-width: 0; }
+.children-photo-grid img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.children-photo-grid figcaption { padding-top: .8rem; color: var(--text-muted); font-size: var(--fs-sm); }
+.children-join { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 4rem; }
+.children-service dl { margin: 0 0 1.5rem; }
+.children-service dl > div { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; padding: .8rem 0; border-bottom: 1px solid var(--border); }
+.children-service dt { color: var(--text-muted); }
+.children-service dd { margin: 0; font-weight: 600; color: var(--heading); }
+.children-service > p { line-height: var(--lh-relaxed); color: var(--text-muted); }
+@media (max-width: 768px) {
+    .children-hero { padding: calc(var(--nav-h) + 2.5rem) 0 2.5rem; }
+    .children-hero-inner, .children-join { grid-template-columns: minmax(0,1fr); gap: 2rem; }
+    .children-hero h1 { font-size: clamp(1.75rem, 6.7vw, 2.5rem); }
+    .children-lead { font-size: 1rem; }
+    .children-rhythm-grid { grid-template-columns: minmax(0,1fr); gap: 1.5rem; }
+    .children-photo-grid { grid-template-columns: minmax(0,1fr); gap: 1.75rem; }
+    .children-story-heading { margin-bottom: 2rem; }
+}
+
+.children-home-image { display: block; margin-bottom: 1.25rem; background: var(--white); border-radius: var(--radius-sm); overflow: hidden; }
+.children-home-image img { display: block; width: 100%; height: auto; }

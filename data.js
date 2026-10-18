@@ -111,6 +111,66 @@ const CHURCH_DATA = {
         email: "bsyg2000@hanmail.net"
     },
 
+    childrenWorship: {
+        "eyebrow": "광명교회 어린이 예배",
+        "title": [
+            "어린이의 목소리로",
+            "교회가 자랍니다."
+        ],
+        "intro": "광명교회 어린이 예배는 아이들의 질문과 저마다의 목소리를 환영합니다. 함께 놀고 고민하고 기도하며 하느님의 사랑을 배웁니다.",
+        "heroAlt": "팔을 벌린 예수님 곁에 모인 어린이들을 그린 그림",
+        "welcomeLabel": "함께 예배해요",
+        "visitLabel": "오시는 길",
+        "rhythmTitle": "아이들의 눈높이에서, 함께",
+        "rhythm": [
+            {
+                "title": "말씀을 만나요",
+                "desc": "주일학교 선생님들과 그 주일의 성서 말씀을 만나고, 찬양과 활동으로 이야기를 나눕니다."
+            },
+            {
+                "title": "저마다의 목소리로",
+                "desc": "궁금한 것을 묻고 서로의 이야기를 듣습니다. 함께 놀고 고민하는 시간도 배움이 됩니다."
+            },
+            {
+                "title": "한 공동체로",
+                "desc": "영성체 시간에는 어른들과 함께합니다. 어린이도 교회의 예배를 함께 이루는 한 사람입니다."
+            }
+        ],
+        "storyEyebrow": "우리의 시간",
+        "storyTitle": "작은 손들이 그린, 우리의 교회",
+        "storyIntro": "붓을 들고 색을 고르며 벽에 그림을 남겼습니다. 서로 다른 색이 만나 하나의 그림이 되듯, 아이들의 목소리가 모여 교회의 이야기가 됩니다.",
+        "photos": [
+            {
+                "src": "painting-joy",
+                "alt": "붓을 들고 벽화 앞에서 두 팔을 펼친 어린이",
+                "caption": "마음껏 표현하는 기쁨"
+            },
+            {
+                "src": "painting-together",
+                "alt": "여러 색으로 칠한 벽에 붓질하는 어린이",
+                "caption": "내가 고른 색으로, 나의 자리에서"
+            },
+            {
+                "src": "mural-church",
+                "alt": "푸른 하늘과 초록 들판 위에 그린 작은 교회 벽화",
+                "caption": "아이들의 눈에 비친 교회"
+            },
+            {
+                "src": "mural-angel",
+                "alt": "여러 색의 바탕 위에 천사와 교회를 그린 벽화",
+                "caption": "함께 남긴 우리의 이야기"
+            }
+        ],
+        "joinTitle": "이번 주일, 함께 만나요",
+        "placeLabel": "장소",
+        "place": "교육관",
+        "timeLabel": "시간",
+        "joinIntro": "처음 오시는 가족도 환영합니다. 어린이 예배가 궁금하시다면 교회로 문의해 주세요.",
+        "communionTitle": "영성체 안내",
+        "contactLabel": "어린이 예배 문의",
+        "backLabel": "전체 예배 안내"
+    },
+
     ui: {
         copyAddress: { success: "복사됨", failure: "주소를 선택했습니다. 길게 눌러 복사해 주세요." }
     },
@@ -463,6 +523,11 @@ const CHURCH_DATA = {
             },
             {
                 id: "children",
+                href: "children.html",
+                image: "images/children/welcome-sm.webp",
+                imageAlt: "어린이들을 맞이하는 예수님 그림",
+                summary: "아이들의 질문과 저마다의 목소리를 환영합니다. 함께 놀고 고민하고 기도하며 하느님의 사랑을 배웁니다.",
+                linkLabel: "어린이 예배 만나보기",
                 title: "어린이 예배",
                 time: "매주 일요일 오전 11:00",
                 desc: "교육관에서 드리는 어린이 예배입니다. 성공회 전례를 어린이 눈높이에 맞추어 구성합니다.",
@@ -1302,7 +1367,7 @@ const CHURCH_DATA = {
             href: "worship.html",
             items: [
                 { label: "주일 감사성찬례",  href: "worship.html#main" },
-                { label: "어린이 예배",     href: "worship.html#children" },
+                { label: "어린이 예배",     href: "children.html" },
                 { label: "감사성찬례 순서",  href: "worship.html#eucharist-order" },
                 { label: "성무일과(매일기도)", href: "worship.html#daily-office" },
                 { label: "예배 자료",       href: "worship.html#resources" },
