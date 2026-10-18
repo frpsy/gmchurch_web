@@ -114,7 +114,7 @@ const CHURCH_DATA = {
     childrenWorship: {
         "eyebrow": "광명교회 어린이 예배",
         "heroEyebrow": "Children's Worship",
-        "intro": "광명교회 어린이 예배는 아이들이 선생님들과 함께 찬양하고, 말씀을 듣고, 기도하는 시간입니다. 궁금한 것은 편하게 묻고, 놀면서 하느님의 사랑을 배웁니다.",
+        "intro": "광명교회 어린이 예배는 주일학교 선생님들과 함께 드리는 예배입니다. 그 주일의 말씀을 듣고, 찬양하고, 기도합니다.",
         "heroAlt": "팔을 벌린 예수님 곁에 모인 어린이들을 그린 그림",
         "welcomeLabel": "시간·장소 보기",
         "visitLabel": "오시는 길",
@@ -126,7 +126,7 @@ const CHURCH_DATA = {
             },
             {
                 "title": "묻고 이야기하기",
-                "desc": "궁금한 것은 자유롭게 묻고, 서로의 이야기를 듣습니다. 함께 놀고 이야기 나누는 시간도 있습니다."
+                "desc": "궁금한 것은 자유롭게 말하고, 서로 귀 기울여 듣습니다. 함께 노는 시간도 있습니다."
             },
             {
                 "title": "영성체",
@@ -522,7 +522,7 @@ const CHURCH_DATA = {
                 href: "children.html",
                 image: "images/children/welcome-sm.webp",
                 imageAlt: "어린이들을 맞이하는 예수님 그림",
-                summary: "아이들이 궁금한 것을 편하게 묻고, 놀고, 기도하며 하느님의 사랑을 배웁니다.",
+                summary: "아이들이 함께 놀고 기도하며 하느님의 사랑을 배웁니다.",
                 linkLabel: "어린이 예배 만나보기",
                 title: "어린이 예배",
                 time: "매주 일요일 오전 11:00",
