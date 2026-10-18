@@ -660,10 +660,6 @@ const ChildrenRenderer = {
                             <div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div>
                             <div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div>
                         </dl>
-                        <div class="next-step-cta-actions">
-                            <a href="#join" class="btn-next btn-next--primary">${d.welcomeLabel}</a>
-                            <a href="visit.html" class="btn-next">${d.visitLabel}</a>
-                        </div>
                     </div>
                 </div>
             </header>
