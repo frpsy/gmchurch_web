@@ -1012,7 +1012,7 @@ const CHURCH_DATA = {
                         q: "성찬의 빵과 포도주를 어떻게 보나요?",
                         a: "그리스도께서 성찬에 <strong>참으로 임재</strong>하신다고 믿되, ‘어떻게’ 임재하시는지를 특정 교리로 규정하지 않습니다.\n\n빵과 포도주의 실체가 변한다는 가톨릭의 <strong>화체설은 따르지 않으며</strong>(39개조 제28조), 그 신비를 믿음으로 받아 모시는 것을 중요하게 여깁니다.",
                         refs: [
-                            { label: "성공회 신앙의 39개조 — 성찬론", url: "https://namu.wiki/w/%EC%84%B1%EA%B3%B5%ED%9A%8C%2039%EA%B0%9C%20%EC%8B%A0%EC%A1%B0" }
+                            { label: "성공회 신앙의 39개조 — 성찬론", url: "https://namu.wiki/w/39%EA%B0%9C%20%EC%8B%A0%EC%A1%B0" }
                         ]
                     },
                     {
@@ -1027,7 +1027,7 @@ const CHURCH_DATA = {
                         q: "마리아와 성인을 숭배하나요?",
                         a: "아닙니다. 성모 마리아와 성인들을 <strong>신앙의 모범으로 공경</strong>하지만, 예배와 기도의 대상은 오직 삼위일체 하느님입니다.\n\n성인을 신처럼 섬기거나 구원의 중개자로 삼지 않습니다. 이 점에서 가톨릭의 성인 공경과 구별됩니다.",
                         refs: [
-                            { label: "성공회 신앙의 39개조 — 제22조", url: "https://namu.wiki/w/%EC%84%B1%EA%B3%B5%ED%9A%8C%2039%EA%B0%9C%20%EC%8B%A0%EC%A1%B0" }
+                            { label: "성공회 신앙의 39개조 — 제22조", url: "https://namu.wiki/w/39%EA%B0%9C%20%EC%8B%A0%EC%A1%B0" }
                         ]
                     }
                 ]
@@ -1056,7 +1056,7 @@ const CHURCH_DATA = {
                         q: "성공회는 동성애·동성결혼을 지지하나요?",
                         a: "세계성공회 안에 <strong>단일한 공식 입장은 없으며</strong>, 대한성공회는 동성결혼을 공식 예식으로 시행하지 않습니다.\n\n관구에 따라 동성결혼을 허용하는 곳도 있고, 전통적 혼인관(1998년 람베스 회의 결의 I.10)을 유지하는 곳도 있어 논의 중입니다. 대한성공회는 <strong>성소수자를 정죄·배제하지 않으며 혐오와 차별에 반대</strong>합니다. 광명교회는 찾아오시는 누구도 문 앞에서 돌려보내지 않습니다.",
                         refs: [
-                            { label: "람베스 회의 1998 결의 I.10 (세계성공회)", url: "https://www.anglicancommunion.org/resources/document-library/lambeth-conference/1998/section-i-called-to-full-humanity/section-i10-human-sexuality" }
+                            { label: "람베스 회의 1998 결의문 (I.10 포함, 세계성공회)", url: "https://www.anglicancommunion.org/lambeth-conference-1998-resolutions/" }
                         ]
                     }
                 ]
