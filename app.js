@@ -526,7 +526,7 @@ const IndexRenderer = {
         // 홈 카드는 요약(summary)만 — 전문은 worship.html에서
         el.innerHTML = CHURCH_DATA.worship.main.map(w => `
             <div class="card">
-                ${w.image ? `<a href="${w.href}" class="children-home-image" tabindex="-1" aria-hidden="true"><img src="${w.image}" alt="${w.imageAlt}" width="720" height="371" loading="lazy" decoding="async"></a>` : ''}
+                ${w.image ? `<a href="${w.href}" class="children-home-image" tabindex="-1" aria-hidden="true"><img src="${w.image}" alt="${w.imageAlt}" width="720" height="360" loading="lazy" decoding="async"></a>` : ''}
                 <h3>${w.title}</h3>
                 <p class="card-time">${w.time}</p>
                 <p class="card-desc">${w.summary || w.desc}</p>
@@ -645,7 +645,7 @@ const ChildrenRenderer = {
         if (!el) return;
         const d = CHURCH_DATA.childrenWorship;
         const service = CHURCH_DATA.worship.main.find(w => w.id === 'children');
-        const picture = (name, alt, eager = false) => `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 768px) 100vw, 50vw" alt="${alt}" width="${name === 'welcome' ? 1440 : 1440}" height="${name === 'welcome' ? 741 : 1080}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+        const picture = (name, alt, eager = false) => `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 768px) 100vw, 50vw" alt="${alt}" width="${name === 'welcome' ? 1440 : 1440}" height="${name === 'welcome' ? 720 : 1080}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
         el.innerHTML = `
             <header class="children-hero">
                 <div class="container children-hero-inner">
