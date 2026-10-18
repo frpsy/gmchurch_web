@@ -679,8 +679,6 @@ const ChildrenRenderer = {
                 <div><p class="section-eyebrow">${d.eyebrow}</p><h2 class="section-title">${d.joinTitle}</h2><p class="children-lead">${d.joinIntro}</p></div>
                 <div class="children-service"><dl><div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div><div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div></dl>${service.detail ? `<p>${service.detail}</p>` : ''}</div>
                 <div class="next-step-cta-actions">
-                    <a class="btn-next btn-next--primary" href="tel:${CHURCH_DATA.info.phone}">${icon('phone')} ${d.contactLabel}</a>
-                    <a class="btn-next" href="visit.html">${d.visitLabel}</a>
                     <a class="btn-next" href="worship.html">${d.backLabel}</a>
                 </div>
             </div></section>`;
