@@ -647,12 +647,13 @@ const ChildrenRenderer = {
         const service = CHURCH_DATA.worship.main.find(w => w.id === 'children');
         const picture = (name, alt, eager = false) => `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 768px) 100vw, 50vw" alt="${alt}" width="${name === 'welcome' ? 1440 : 1440}" height="${name === 'welcome' ? 720 : 1080}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
         el.innerHTML = `
-            <header class="children-hero">
+            <div class="page-hero">
+                <p class="section-eyebrow">${d.heroEyebrow}</p>
+                <h1>${d.title.join(' ')}</h1>
+                <p>${service.summary}</p>
+            </div>
+            <section class="section children-intro">
                 <div class="container children-hero-inner">
-                    <div class="children-hero-copy">
-                        <p class="section-eyebrow">${d.eyebrow}</p>
-                        <h1>${d.title.map(t => `<span>${t}</span>`).join('')}</h1>
-                    </div>
                     <div class="children-illustration">${picture('welcome', d.heroAlt, true)}</div>
                     <div class="children-hero-details">
                         <p class="children-lead">${d.intro}</p>
@@ -662,7 +663,7 @@ const ChildrenRenderer = {
                         </dl>
                     </div>
                 </div>
-            </header>
+            </section>
             <section class="section children-rhythm"><div class="container">
                 <h2 class="section-title">${d.rhythmTitle}</h2>
                 <div class="children-rhythm-grid">${d.rhythm.map((r,i) => `<article><div><span class="section-eyebrow" aria-hidden="true">0${i+1}</span><h3>${r.title}</h3></div><p>${r.desc}</p></article>`).join('')}</div>
@@ -719,7 +720,7 @@ const WorshipRenderer = {
                 `).join('')}
             </div>
             ${guide ? `<div class="guide-banner"><p>${guide}</p></div>` : ''}
-            <div class="liturgy-guide">
+            <div class="worship-season">
                 <div class="liturgy-season-badge">
                     <span class="season-dot"></span>
                     ${icon(s.symbol)}&nbsp;${s.name}&nbsp;·&nbsp;<span class="season-name">${s.colorName}</span>
