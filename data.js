@@ -527,8 +527,6 @@ const CHURCH_DATA = {
             {
                 id: "children",
                 href: "children.html",
-                image: "images/children/welcome-sm.webp",
-                imageAlt: "어린이들을 맞이하는 예수님 그림",
                 summary: "함께 놀고 기도하며 하느님의 사랑을 배웁니다.",
                 linkLabel: "어린이 예배 만나보기",
                 title: "어린이 예배",
