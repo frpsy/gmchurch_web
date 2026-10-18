@@ -5454,7 +5454,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .children-photo-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2rem; }
 .children-photo-grid figure { margin: 0; min-width: 0; }
 .children-photo-grid img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
-.children-photo-grid figcaption { padding-top: .8rem; color: var(--text-muted); font-size: var(--fs-sm); }
+.children-photo-grid figcaption { padding-top: .8rem; color: color-mix(in srgb, var(--text) 85%, var(--white)); font-size: var(--fs-sm); text-align: center; }
 .children-join { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 4rem; }
 .children-service dl { margin: 0 0 1.5rem; }
 .children-service dl > div { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; padding: .8rem 0; border-bottom: 1px solid var(--border); }
