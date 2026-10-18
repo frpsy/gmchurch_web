@@ -5491,5 +5491,3 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     .children-service-summary { gap: .5rem 1.25rem; }
 }
 
-.children-home-image { display: block; margin-bottom: 1.25rem; background: var(--white); border-radius: var(--radius-sm); overflow: hidden; }
-.children-home-image img { display: block; width: 100%; height: auto; }
