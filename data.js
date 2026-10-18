@@ -776,6 +776,13 @@ const CHURCH_DATA = {
         note: "※ 네이버 지도·카카오맵에서 <strong>대한성공회 광명교회</strong>로 검색하시면 최단 경로 안내를 받으실 수 있습니다."
     },
 
+    // 방문자 수: 외부 카운터(Abacus, 가입 불필요)에 저장. baseline은 누적 표시에 더하는 시작 숫자
+    visitorCounter: {
+        endpoint: 'https://abacus.jasoncameron.dev',
+        namespace: 'gmchurch-frpsy-web',
+        baseline: 0
+    },
+
     sns: {
         youtube: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
         instagram: "https://www.instagram.com/anglican_gm?igsh=MTdnbWRsdHF3OGVucw==",
