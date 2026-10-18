@@ -202,9 +202,7 @@ const CHURCH_DATA = {
         },
         thisSunday: {
             title: "다가오는 주일",
-            labels: { season: "절기", first: "제1독서", second: "제2독서", gospel: "복음" },
-            more: "전례독서 전체 보기",
-            bulletin: "이번 주 주보 보기"
+            labels: { season: "절기", first: "제1독서", second: "제2독서", gospel: "복음" }
         },
         guide: {
             eyebrow: "Welcome",

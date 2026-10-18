@@ -563,19 +563,12 @@ const IndexRenderer = {
             .filter(([, ref]) => ref)
             .map(([lbl, ref]) => `<div class="info-row"><strong>${lbl}</strong><span>${SundaysRenderer._refLink(ref)}</span></div>`)
             .join('');
-        const latest = (CHURCH_DATA.bulletins.items || [])[0];
-        const bulletin = latest && latest.date === iso
-            ? `<a href="bulletin.html" class="detail-link">${t.bulletin} →</a>` : '';
         const dateStr = `${sun.getMonth() + 1}월 ${sun.getDate()}일`;
 
         el.innerHTML = `
             <h3>${t.title} · <span class="nowrap">${dateStr}</span> ${s.koreanName}</h3>
             <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.color};--season-ink:${season.ink || season.color}"><span class="season-dot"></span>${icon(season.symbol)}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">${season.colorName}</span></span></div>
             ${rows}
-            <p class="visit-detail-wrap">
-                <a href="sundays.html#lectionary" class="detail-link">${t.more} →</a>
-                ${bulletin}
-            </p>
         `;
         el.hidden = false;
     },
