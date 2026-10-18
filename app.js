@@ -673,7 +673,7 @@ const ChildrenRenderer = {
                 <div><p class="section-eyebrow">${d.eyebrow}</p><h2 class="section-title">${d.joinTitle}</h2><p class="children-lead">${d.joinIntro}</p>
                     <div class="next-step-cta-actions"><a class="btn-next btn-next--primary" href="tel:${CHURCH_DATA.info.phone}">${d.contactLabel} ${icon('phone')}</a><a class="btn-next" href="worship.html">${d.backLabel}</a></div>
                 </div>
-                <div class="info-card children-service"><dl><div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div><div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div></dl><p>${service.detail}</p><p class="text-note">${CHURCH_DATA.info.phone}</p></div>
+                <div class="info-card children-service"><dl><div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div><div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div></dl><p>${service.detail}</p></div>
             </div></section>`;
     }
 };
