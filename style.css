@@ -2716,6 +2716,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 
 /* Worship page components */
 .worship-services-grid { margin-bottom: 2rem; }
+.worship-season { text-align: center; }
 .worship-time          { color: var(--green-mid); font-weight: 700; }
 .worship-card-desc     { margin-top: 1rem; color: var(--text-muted); font-size: var(--fs-desc); line-height: 1.9; }
 .worship-card-quote    { margin-top: 1.25rem; font-size: var(--fs-sm); }
@@ -5398,8 +5399,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .liturgy-section .info-card h2.section-title--sub { margin: 0; }
 .nowrap { white-space: nowrap; }
 
-/* 카드가 서로 높이를 맞추려고 늘어나 내부에 큰 빈 공간이 생기지 않게(worship), 4개 카드는 2×2로(community) */
-.worship-services-grid { align-items: start; }
+/* 4개 카드는 2×2로(community) */
 #community-full .grid { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 700px) { #community-full .grid { grid-template-columns: 1fr; } }
 
@@ -5440,15 +5440,11 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 }
 
 /* 어린이 예배는 그림의 흰 여백을 살리고 사진의 원래 비율을 유지한다. */
-.children-hero { padding: calc(var(--nav-h) + 4.5rem) 0 4rem; background: var(--white); }
-.children-hero-inner { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); grid-template-areas: "title art" "details art"; align-items: center; column-gap: 3rem; row-gap: 1.5rem; }
-.children-hero-copy { grid-area: title; align-self: end; text-align: center; }
-.children-hero-details { grid-area: details; align-self: start; min-width: 0; }
-.children-hero h1 { font-size: clamp(2rem, 3.3vw, 3rem); line-height: 1.4; letter-spacing: -.045em; color: var(--heading); margin: .85rem 0 0; word-break: keep-all; }
-.children-hero h1 span { display: block; }
+.children-hero-inner { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); grid-template-areas: "art details"; align-items: center; column-gap: 3rem; row-gap: 1.5rem; }
+.children-hero-details { grid-area: details; align-self: center; min-width: 0; }
 .children-lead { max-width: var(--content-read); margin-inline: auto; font-size: var(--fs-lead); line-height: var(--lh-relaxed); color: color-mix(in srgb, var(--text) 72%, var(--white)); text-align: center; word-break: keep-all; overflow-wrap: break-word; }
-.children-hero .next-step-cta-actions, .children-join .next-step-cta-actions { justify-content: center; margin-top: 1.5rem; }
-.children-hero .btn-next, .children-join .btn-next { min-height: 44px; }
+.children-join .next-step-cta-actions { justify-content: center; margin-top: 1.5rem; }
+.children-join .btn-next { min-height: 44px; }
 .children-illustration { grid-area: art; border-radius: var(--radius-md); overflow: hidden; }
 .children-illustration img { display: block; width: 100%; height: auto; }
 .children-service-summary { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 2rem; margin: 1.5rem 0 0; padding: 1rem 0; border-block: 1px solid var(--border); }
@@ -5483,11 +5479,9 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .children-service dd { margin: 0; font-weight: 600; color: var(--heading); }
 .children-service > p { line-height: var(--lh-relaxed); color: color-mix(in srgb, var(--text) 72%, var(--white)); text-align: center; }
 @media (max-width: 768px) {
-    .children-hero { padding: calc(var(--nav-h) + 2rem) 0 2.5rem; }
-    .children-hero-inner { grid-template-columns: minmax(0,1fr); grid-template-areas: "title" "art" "details"; gap: 1.25rem; }
+    .children-hero-inner { grid-template-columns: minmax(0,1fr); grid-template-areas: "art" "details"; gap: 1.25rem; }
     .children-illustration { width: 100%; max-width: 560px; margin-inline: auto; }
     .children-hero-details { max-width: 560px; margin-inline: auto; }
-    .children-hero h1 { font-size: clamp(1.75rem, 6.7vw, 2.5rem); }
     .children-lead { font-size: 1rem; }
     .children-rhythm-grid { grid-template-columns: minmax(0,1fr); gap: 1.5rem; max-width: 560px; margin-inline: auto; }
     .children-rhythm-grid h3 { font-size: 1.125rem; }

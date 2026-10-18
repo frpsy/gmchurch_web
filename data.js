@@ -113,6 +113,7 @@ const CHURCH_DATA = {
 
     childrenWorship: {
         "eyebrow": "광명교회 어린이 예배",
+        "heroEyebrow": "Children's Worship",
         "title": [
             "아이들과 함께 드리는",
             "주일 예배입니다."
