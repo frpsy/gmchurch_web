@@ -669,18 +669,20 @@ const ChildrenRenderer = {
             </header>
             <section class="section children-rhythm"><div class="container">
                 <h2 class="section-title">${d.rhythmTitle}</h2>
-                <div class="children-rhythm-grid">${d.rhythm.map((r,i) => `<article><p class="section-eyebrow">0${i+1}</p><h3>${r.title}</h3><p>${r.desc}</p></article>`).join('')}</div>
+                <div class="children-rhythm-grid">${d.rhythm.map((r,i) => `<article><div><span class="section-eyebrow" aria-hidden="true">0${i+1}</span><h3>${r.title}</h3></div><p>${r.desc}</p></article>`).join('')}</div>
             </div></section>
             <section class="section gc-section-alt children-story"><div class="container">
                 <div class="children-story-heading"><p class="section-eyebrow">${d.storyEyebrow}</p><h2 class="section-title">${d.storyTitle}</h2><p class="children-lead">${d.storyIntro}</p></div>
                 <div class="children-photo-grid">${d.photos.map(p => `<figure>${picture(p.src,p.alt)}<figcaption>${p.caption}</figcaption></figure>`).join('')}</div>
             </div></section>
             <section class="section" id="join"><div class="container children-join">
-                <div><p class="section-eyebrow">${d.eyebrow}</p><h2 class="section-title">${d.joinTitle}</h2><p class="children-lead">${d.joinIntro}</p>
-                    <div class="next-step-cta-actions"><a class="btn-next btn-next--primary" href="tel:${CHURCH_DATA.info.phone}">${d.contactLabel} ${icon('phone')}</a><a class="btn-next" href="visit.html">${d.visitLabel}</a></div>
-                    <a class="children-back-link" href="worship.html">${d.backLabel}</a>
+                <div><p class="section-eyebrow">${d.eyebrow}</p><h2 class="section-title">${d.joinTitle}</h2><p class="children-lead">${d.joinIntro}</p></div>
+                <div class="children-service"><dl><div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div><div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div></dl>${service.detail ? `<p>${service.detail}</p>` : ''}</div>
+                <div class="next-step-cta-actions">
+                    <a class="btn-next btn-next--primary" href="tel:${CHURCH_DATA.info.phone}">${icon('phone')} ${d.contactLabel}</a>
+                    <a class="btn-next" href="visit.html">${d.visitLabel}</a>
+                    <a class="btn-next" href="worship.html">${d.backLabel}</a>
                 </div>
-                <div class="info-card children-service"><dl><div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div><div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div></dl>${service.detail ? `<p>${service.detail}</p>` : ''}</div>
             </div></section>`;
     }
 };
