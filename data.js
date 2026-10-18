@@ -114,7 +114,7 @@ const CHURCH_DATA = {
     childrenWorship: {
         "eyebrow": "광명교회 어린이 예배",
         "heroEyebrow": "Children's Worship",
-        "intro": "광명교회 어린이 예배는 아이들이 궁금한 것을 편하게 묻는 자리입니다. 선생님들과 함께 찬양하고, 놀고, 기도하며 하느님의 사랑을 배웁니다.",
+        "intro": "광명교회 어린이 예배는 아이들이 선생님들과 함께 찬양하고, 말씀을 듣고, 기도하는 시간입니다. 궁금한 것은 편하게 묻고, 놀면서 하느님의 사랑을 배웁니다.",
         "heroAlt": "팔을 벌린 예수님 곁에 모인 어린이들을 그린 그림",
         "welcomeLabel": "시간·장소 보기",
         "visitLabel": "오시는 길",
