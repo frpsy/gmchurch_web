@@ -652,28 +652,35 @@ const ChildrenRenderer = {
                     <div class="children-hero-copy">
                         <p class="section-eyebrow">${d.eyebrow}</p>
                         <h1>${d.title.map(t => `<span>${t}</span>`).join('')}</h1>
+                    </div>
+                    <div class="children-illustration">${picture('welcome', d.heroAlt, true)}</div>
+                    <div class="children-hero-details">
                         <p class="children-lead">${d.intro}</p>
+                        <dl class="children-service-summary">
+                            <div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div>
+                            <div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div>
+                        </dl>
                         <div class="next-step-cta-actions">
                             <a href="#join" class="btn-next btn-next--primary">${d.welcomeLabel}</a>
                             <a href="visit.html" class="btn-next">${d.visitLabel}</a>
                         </div>
                     </div>
-                    <div class="children-illustration">${picture('welcome', d.heroAlt, true)}</div>
                 </div>
             </header>
             <section class="section children-rhythm"><div class="container">
                 <h2 class="section-title">${d.rhythmTitle}</h2>
                 <div class="children-rhythm-grid">${d.rhythm.map((r,i) => `<article><p class="section-eyebrow">0${i+1}</p><h3>${r.title}</h3><p>${r.desc}</p></article>`).join('')}</div>
             </div></section>
-            <section class="section gc-section-alt"><div class="container">
+            <section class="section gc-section-alt children-story"><div class="container">
                 <div class="children-story-heading"><p class="section-eyebrow">${d.storyEyebrow}</p><h2 class="section-title">${d.storyTitle}</h2><p class="children-lead">${d.storyIntro}</p></div>
                 <div class="children-photo-grid">${d.photos.map(p => `<figure>${picture(p.src,p.alt)}<figcaption>${p.caption}</figcaption></figure>`).join('')}</div>
             </div></section>
             <section class="section" id="join"><div class="container children-join">
                 <div><p class="section-eyebrow">${d.eyebrow}</p><h2 class="section-title">${d.joinTitle}</h2><p class="children-lead">${d.joinIntro}</p>
-                    <div class="next-step-cta-actions"><a class="btn-next btn-next--primary" href="tel:${CHURCH_DATA.info.phone}">${d.contactLabel} ${icon('phone')}</a><a class="btn-next" href="worship.html">${d.backLabel}</a></div>
+                    <div class="next-step-cta-actions"><a class="btn-next btn-next--primary" href="tel:${CHURCH_DATA.info.phone}">${d.contactLabel} ${icon('phone')}</a><a class="btn-next" href="visit.html">${d.visitLabel}</a></div>
+                    <a class="children-back-link" href="worship.html">${d.backLabel}</a>
                 </div>
-                <div class="info-card children-service"><dl><div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div><div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div></dl><p>${service.detail}</p></div>
+                <div class="info-card children-service"><dl><div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div><div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div></dl>${service.detail ? `<p>${service.detail}</p>` : ''}</div>
             </div></section>`;
     }
 };
