@@ -530,7 +530,7 @@ const IndexRenderer = {
                 <h3>${w.title}</h3>
                 <p class="card-time">${w.time}</p>
                 <p class="card-desc">${w.summary || w.desc}</p>
-                ${w.href ? `<a class="about-brief-link" href="${w.href}">${w.linkLabel}</a>` : ''}
+                ${(w.href || w.homeHref) ? `<a class="about-brief-link" href="${w.href || w.homeHref}">${w.linkLabel || w.homeLinkLabel}</a>` : ''}
             </div>
         `).join('');
         const guide = document.getElementById('worship-guide');
