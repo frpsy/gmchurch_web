@@ -429,7 +429,7 @@ const VisitorCounter = {
             ]);
             if (!counted) { try { localStorage.setItem('gm-visit-day', today); } catch (e) { /* 무시 */ } }
             const n = v => v.toLocaleString('ko-KR');
-            el.textContent = ` · 오늘 ${n(day)}명 · 누적 ${n(total + (cfg.baseline || 0))}명`;
+            el.textContent = `오늘 방문 ${n(day)}회 · 누적 방문 ${n(total + (cfg.baseline || 0))}회`;
             el.hidden = false;
         } catch (e) {
             el.hidden = true;
