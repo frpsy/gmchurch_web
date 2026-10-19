@@ -3215,6 +3215,7 @@ footer {
     font-size: var(--fs-label);
     opacity: 0.78;
 }
+.footer-visitors { white-space: nowrap; }
 .footer-bottom-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 1.25rem; row-gap: 0; }
 .footer-bottom-links a { white-space: nowrap; }   /* 좁은 화면에서 '봉헌/안내'처럼 단어 중간이 끊기지 않게 */
 .footer-privacy-link { color: inherit; transition: opacity var(--dur); display: inline-block; padding: 0.4rem 0; }

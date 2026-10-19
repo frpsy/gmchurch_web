@@ -388,7 +388,7 @@ const FooterRenderer = {
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <span>© ${new Date().getFullYear()} ${info.name}</span>
+                    <span>© ${new Date().getFullYear()} ${info.name}<span class="footer-visitors" id="footer-visitors" hidden></span></span>
                     <nav class="footer-bottom-links" aria-label="하단 안내">
                         <a href="giving.html" class="footer-privacy-link">헌금 안내</a>
                         <a href="clergy.html#logo-intro" class="footer-privacy-link">로고 소개</a>
@@ -398,6 +398,42 @@ const FooterRenderer = {
                 </div>
             </div>
         `;
+    }
+};
+
+/* ── VisitorCounter ──────────────────────────────────────── */
+// 브라우저당 하루 1회만 집계(localStorage). 실패하면 표시를 숨겨 푸터가 깨지지 않게 한다.
+const VisitorCounter = {
+    _kstDate() {
+        const kst = new Date(Date.now() + 9 * 3600 * 1000);
+        return kst.toISOString().slice(0, 10).replace(/-/g, '');
+    },
+    async _call(cfg, action, key) {
+        const res = await fetch(`${cfg.endpoint}/${action}/${cfg.namespace}/${key}`);
+        if (res.status === 404) return 0;   // 아직 한 번도 집계되지 않은 날
+        if (!res.ok) throw new Error(res.status);
+        return (await res.json()).value || 0;
+    },
+    async render() {
+        const el = document.getElementById('footer-visitors');
+        const cfg = CHURCH_DATA.visitorCounter;
+        if (!el || !cfg) return;
+        const today = this._kstDate();
+        let counted = false;
+        try { counted = localStorage.getItem('gm-visit-day') === today; } catch (e) { /* 저장소 차단 시 매번 집계 */ }
+        const action = counted ? 'get' : 'hit';
+        try {
+            const [total, day] = await Promise.all([
+                this._call(cfg, action, 'total'),
+                this._call(cfg, action, `day-${today}`)
+            ]);
+            if (!counted) { try { localStorage.setItem('gm-visit-day', today); } catch (e) { /* 무시 */ } }
+            const n = v => v.toLocaleString('ko-KR');
+            el.textContent = ` · 오늘 ${n(day)}명 · 누적 ${n(total + (cfg.baseline || 0))}명`;
+            el.hidden = false;
+        } catch (e) {
+            el.hidden = true;
+        }
     }
 };
 
@@ -2946,6 +2982,7 @@ const App = {
 
         NavRenderer.render();
         FooterRenderer.render();
+        VisitorCounter.render();
         ContactBinder.render();
         IndexRenderer.render();
         BcpRenderer.render();
