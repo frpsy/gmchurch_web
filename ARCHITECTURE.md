@@ -441,8 +441,10 @@ window DOMContentLoaded
       │     관련 기관 목록.
       │
       ├── HistoryRenderer.render()    → #history-full (clergy.html)
-      │     history.items { year, date, text, first? } — 약력 타임라인(.bio-timeline) 재사용,
+      │     history.items { year, date, text, key?, first? } — 약력 타임라인(.bio-timeline) 재사용,
       │     같은 해 둘째 항목부터 연도 칸 비움. .history-timeline/.history-date
+      │     기본은 key: true 항목(#history-key)만, .more-toggle 버튼으로 전체(#history-all) 전환
+      │     (labels: history.moreLabel/lessLabel, Ctrl+F·인쇄 시 자동 펼침)
       │
       ├── PressRenderer.render()      → #press-table (clergy.html)
       │     press-list: press 배열의 모든 기사
