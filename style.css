@@ -5507,7 +5507,6 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .hope-vision-quote p { margin: 0; color: var(--heading); font-size: clamp(1.125rem, 2.2vw, 1.35rem); line-height: 1.75; font-weight: 500; word-break: keep-all; }
 .hope-vision-quote::before { content: ""; display: block; width: 2.5rem; height: 2px; margin: 0 auto 1.5rem; background: currentColor; color: var(--heading); opacity: .35; }
 .hope-join .children-service dl > div { grid-template-columns: 5.5rem minmax(0,1fr); }
-.hope-join .children-service dd a { color: inherit; }
 @media (max-width: 900px) {
     .hope-steps { grid-template-columns: minmax(0, 1fr); max-width: 560px; gap: 1.25rem; }
     .hope-history-inner { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; max-width: 560px; }
