@@ -16,7 +16,7 @@
 | news | 교회 소식(주보 교회소식, 날짜별 목록) | noindex |
 | newcomer | 처음 오신 분: 참여 안내, 전례, 공간, 영성체, 문의 | |
 | community | 공동체 허브 | |
-| hopecenter / emmaus / smallgroup | 사역 상세 | 희망터 준비 중, 엠마우스 가안 |
+| hopecenter / emmaus / smallgroup | 사역 상세 | 엠마우스 가안 |
 | greenchurch | 녹색교회 | |
 | sundays | 교회력 허브: 이달의 교회력·전례독서·절기·특별 주일 | |
 | media / videos / gallery / links | 미디어·자료 | gallery noindex |
@@ -42,11 +42,12 @@
 ## 알려진 이슈 (2026-10-11 위키 작성 중 발견, 요청 시 처리)
 - `README.md`의 줄 수 표기(data.js 1081줄 등)가 오래됐다. 현재 data.js 약 1340줄, app.js 약 3200줄, style.css 약 5300줄.
 - `README.md` 파일 구조·주요 페이지에 `bulletin.html`, `news.html`이 없고 community 설명에 `녹색교회`가 포함돼 있어 현재 구조와 다르다.
-- `hopecenter.html`은 상세 내용이 없는 `준비 중` 페이지이고 `emmaus.html`, `faq.html`은 가안 표기가 남아 있다. 정식 전환 시 `draft-banner`/`badge: "임시"`를 제거한다(`CLAUDE.md`).
+- `emmaus.html`, `faq.html`은 가안 표기가 남아 있다. 정식 전환 시 `draft-banner`/`badge: "임시"`를 제거한다(`CLAUDE.md`).
 - `data.js`의 `info.vision`은 `하느님 나라를 살아가는 사랑의 공동체`, 주보는 이를 `교구 표어`라 하고 `교회 표어`는 `함께 배우고, 함께 돌보는 교회`다. 사이트에는 교회 표어가 없다.
 
 
 ## 어린이 예배 소개 (2026-10-18)
+- `hopecenter.html` → `HopeCenterRenderer` → `CHURCH_DATA.hopeCenter`(교회 제공 소개문 2026-10-21). 구성: 사진+설립 요약 → 토요일의 나눔 3단계 → 걸어온 길 → 비전 → 함께하기(총무는 `officers`의 `희망터 총무`에서 파생). 사진 `images/hopecenter/`(배달 사진은 받는 분 얼굴·주소 표지판이 보이지 않게 잘라 씀). 검색 색인은 `_extractContent`에서 data로 추출.
 - `children.html` → `ChildrenRenderer` → `CHURCH_DATA.childrenWorship`. 예배와 기도 하위 메뉴와 기존 어린이 예배 카드에서 연결. 하단에서 `smallgroup.html#parents`(주일학교 양육자모임)로 연결.
 - 사용자가 제공한 소개문, 활동 사진 4장, 예수님과 어린이 그림을 사용. 사진 날짜·참여 연령 등 미확인 사실은 추가하지 않음.
 - 시간과 영성체 안내는 `worship.main`의 어린이 예배 항목에서 파생. 장소는 교육관. 이미지 `images/children/`, 반응형 스타일 `.children-*`.
