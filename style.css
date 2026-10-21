@@ -3377,6 +3377,9 @@ footer {
     color: var(--heading);
     font-variant-numeric: tabular-nums;
 }
+#history-all[hidden] { margin: 0; }
+#history-all[hidden]:not([hidden="until-found"]) { display: none; }
+@media print { .history-toggle { display: none !important; } #history-key { display: none; } #history-all { content-visibility: visible !important; } }
 @media (max-width: 480px) {
     .history-timeline .bio-text { display: block; }
     .history-date { display: block; }

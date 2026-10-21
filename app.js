@@ -1789,22 +1789,46 @@ const HistoryRenderer = {
         const el = document.getElementById('history-full');
         const h = CHURCH_DATA.history;
         if (!el || !h) return;
-        const items = h.items.map((m, i) => {
-            const showYear = i === 0 || h.items[i - 1].year !== m.year;
-            return `
+        // 같은 해 둘째 항목부터 연도를 비우므로, 핵심/전체 목록을 각각 따로 그린다
+        const list = (items) => items.map((m, i) => `
             <li class="bio-milestone">
-                <span class="bio-year">${showYear ? m.year : ''}</span>
+                <span class="bio-year">${i === 0 || items[i - 1].year !== m.year ? m.year : ''}</span>
                 <span class="bio-dot"></span>
                 <span class="bio-text"><span class="history-date">${m.date}</span>${m.text}${m.first ? ' <span class="bio-first">최초</span>' : ''}</span>
-            </li>`;
-        }).join('');
+            </li>`).join('');
+        const keyItems = h.items.filter(m => m.key);
         el.innerHTML = `
             <div class="section-header">
                 <p class="section-eyebrow">${h.eyebrow}</p>
                 <h2 class="section-title">${h.title}</h2>
                 <p class="section-sub">${h.sub}</p>
             </div>
-            <ul class="bio-timeline history-timeline">${items}</ul>`;
+            <ul class="bio-timeline history-timeline" id="history-key">${list(keyItems)}</ul>
+            <ul class="bio-timeline history-timeline" id="history-all" hidden="until-found">${list(h.items)}</ul>
+            <button type="button" class="more-toggle history-toggle" aria-controls="history-all"></button>`;
+
+        const keyList = el.querySelector('#history-key');
+        const allList = el.querySelector('#history-all');
+        const btn = el.querySelector('.history-toggle');
+        const set = (expand) => {
+            keyList.hidden = expand;
+            if (expand) allList.removeAttribute('hidden');
+            else allList.setAttribute('hidden', 'until-found');
+            btn.setAttribute('aria-expanded', String(expand));
+            btn.innerHTML = `<span>${expand ? h.lessLabel : `${h.moreLabel} (${h.items.length})`}</span>`
+                + '<svg class="more-toggle-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">'
+                + '<path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        };
+        btn.addEventListener('click', () => {
+            const expand = btn.getAttribute('aria-expanded') !== 'true';
+            set(expand);
+            // 접을 때 목록이 짧아져 버튼이 화면 밖으로 밀리지 않게 단락 머리로 돌아감
+            if (!expand && el.getBoundingClientRect().top < 0) el.scrollIntoView({ block: 'start' });
+        });
+        // Ctrl+F로 접힌 항목을 찾으면 전체 연혁을 펼침
+        allList.addEventListener('beforematch', () => set(true));
+        window.addEventListener('beforeprint', () => set(true));
+        set(false);
     }
 };
 
