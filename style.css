@@ -768,8 +768,8 @@ button:focus:not(:focus-visible) { outline: none; }
     text-shadow: 0 1px 10px rgba(0,0,0,0.45);
 }
 
-/* 실제 공동체 축복 사진을 바탕으로 보정한 이미지 — 사제의 손과 반려견에 초점. 글자 배치는 다른 페이지와 동일 */
-.page-hero--community { background-image: url('images/hero/community-blessing.webp'); background-position: center 35%; }
+/* 메뉴 상징 이미지(실제 교회 사진 아님) — 함께 모여 차를 나누는 공동체 공간. 글자 배치는 다른 페이지와 동일 */
+.page-hero--community { background-image: url('images/hero/community.webp'); background-position: center 52%; }
 
 /* 메뉴 상징 이미지(실제 교회 사진 아님) — 모바일은 경량 버전 */
 .page-hero--worship  { background-image: url('images/hero/worship.webp');  background-position: 30% center; }
@@ -779,7 +779,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .page-hero--media    { background-image: url('images/hero/media.webp'); }
 .page-hero--visit    { background-image: url('images/hero/visit.webp');    background-position: center 60%; }
 @media (max-width: 768px) {
-    .page-hero--community { background-image: url('images/hero/community-blessing-m.webp'); background-position: 43% center; }
+    .page-hero--community { background-image: url('images/hero/community-m.webp'); background-position: 60% 50%; }
     .page-hero--worship  { background-image: url('images/hero/worship-m.webp'); }
     .page-hero--clergy   { background-image: url('images/hero/clergy-m.webp'); background-position: 62% 30%; }
     .page-hero--sundays  { background-image: url('images/hero/sundays-m.webp'); }
