@@ -939,7 +939,7 @@ const NewcomerRenderer = {
                         </div>
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">장소</span>
-                            <span class="newcomer-key-value">${info.name} (${info.subName})<br>${info.addressShort}</span>
+                            <span class="newcomer-key-value">${info.name}<br>${info.addressShort}</span>
                         </div>
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">소요</span>
