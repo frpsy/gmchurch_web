@@ -45,7 +45,7 @@
 | `links.html` | 관련 기관 (미디어·자료 메뉴) | LinksRenderer |
 | `sundays.html` | 교회력 허브 — 이달의 교회력·전례독서·절기·특별 주일 (교회력 메뉴) | SundaysRenderer |
 | `visit.html` | 오시는 길 | VisitRenderer |
-| `hopecenter.html` | 광명 희망터 상세 | — |
+| `hopecenter.html` | 광명 희망터 상세 | HopeCenterRenderer |
 | `emmaus.html` | 엠마우스 코스 상세 | — |
 | `smallgroup.html` | 소그룹 모임 상세 | SmallGroupRenderer |
 | `greenchurch.html` | 녹색교회 상세 (교회 소개 메뉴) | — |

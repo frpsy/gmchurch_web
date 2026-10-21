@@ -174,6 +174,45 @@ const CHURCH_DATA = {
         "parentsLinkLabel": "양육자모임 안내 보기"
     },
 
+    // 광명 희망터(hopecenter.html) — 소개문은 교회 제공 원문(2026-10-21)
+    hopeCenter: {
+        heroEyebrow: "Community Ministry",
+        title: "광명 희망터",
+        summary: "지역의 소외된 이웃과 함께하는 나눔 사역",
+        intro: "광명교회는 2004년 3월, 하느님의 사랑을 실천하고 이웃의 필요에 귀 기울이기 위해 부설기관인 광명희망터를 설립하였습니다.",
+        heroImage: { src: "kitchen", alt: "희망터 주방에서 고개 숙여 기도하는 봉사자 세 사람", width: 1440, height: 665 },
+        facts: [
+            { label: "설립", value: "2004년 3월" },
+            { label: "지원", value: "10가정" },
+            { label: "활동", value: "매주 토요일" }
+        ],
+        weeklyEyebrow: "Every Saturday",
+        weeklyTitle: "토요일의 나눔",
+        weeklyIntro: "현재는 독거노인과 장애인 가정 등 총 10가정에 반찬을 지원하고 있습니다. 매주 토요일이면 봉사자들이 한자리에 모여 정성껏 반찬을 조리하고, 이를 각 가정에 직접 배달하며 따뜻한 마음을 전하고 있습니다.",
+        steps: [
+            { title: "한자리에 모입니다", desc: "매주 토요일, 봉사자들이 희망터 주방에 모입니다.", image: { src: "prayer", alt: "주방 조리대 앞에서 두 손을 모으고 기도하는 봉사자들" } },
+            { title: "반찬을 조리합니다", desc: "이웃 가정에 드릴 반찬을 정성껏 만듭니다.", image: { src: "dishes", alt: "용기에 나누어 담은 오이부추무침과 양념장에 담근 달걀" } },
+            { title: "가정에 전합니다", desc: "만든 반찬을 각 가정에 직접 배달합니다.", image: { src: "handoff", alt: "봉사자가 이웃에게 반찬 봉투를 건네는 모습" } }
+        ],
+        historyEyebrow: "Our Journey",
+        historyTitle: "걸어온 길",
+        historyIntro: "광명희망터는 그동안 노인 일자리 사업, 노숙인 급식 사업, 독거노인 반찬 지원 사업 등 다양한 나눔과 봉사 활동을 펼쳐 왔습니다.",
+        historyImage: { src: "delivery", alt: "나눔 물품 상자를 가득 실은 차량 앞에 선 봉사자 세 사람", caption: "나눔 물품을 싣고" },
+        programs: [
+            { title: "노인 일자리 사업", icon: "people" },
+            { title: "노숙인 급식 사업", icon: "bowl" },
+            { title: "독거노인 반찬 지원 사업", icon: "dish" }
+        ],
+        vision: "광명희망터는 앞으로도 도움이 필요한 이웃들의 목소리에 귀 기울이며, 나눔과 사랑을 통해 지역사회에 희망을 전하는 역할을 이어가고자 합니다.",
+        joinEyebrow: "Join Us",
+        joinTitle: "함께하기",
+        joinIntro: "희망터 봉사를 이어가기 위해서는 교우 여러분의 봉헌과 봉사가 필요합니다. 많은 관심과 기도를 바랍니다.",
+        officerRole: "희망터 총무",
+        contactLabel: "희망터 문의",
+        givingLabel: "헌금 안내",
+        communityLabel: "공동체 전체 보기"
+    },
+
     ui: {
         copyAddress: { success: "복사됨", failure: "주소를 선택했습니다. 길게 눌러 복사해 주세요." }
     },

@@ -475,7 +475,7 @@ window DOMContentLoaded
             nav-menu-trigger 버튼으로 여는 전체 메뉴 + 검색 오버레이
             CHURCH_DATA.navigation을 사이트맵으로 펼침
             검색 인덱스 = nav 라벨 + CHURCH_DATA 본문 자동 추출
-              + 정적 HTML 페이지(story·emmaus·greenchurch·hopecenter) 런타임 fetch 파싱
+              + 정적 HTML 페이지(story·emmaus·greenchurch) 런타임 fetch 파싱
             본문 일치 시 발췌 스니펫 표시, 첫 검색 시 정적 페이지 1회 로드
             
       └── App._handleHashScroll()
@@ -780,6 +780,7 @@ LiturgicalCalendar.adventStart(2026)  // 대림 1주일
 
 
 ## 어린이 예배 소개 (2026-10-18)
+- `hopecenter.html` → `HopeCenterRenderer` → `CHURCH_DATA.hopeCenter`(교회 제공 소개문 2026-10-21). 구성: 사진+설립 요약 → 토요일의 나눔 3단계 → 걸어온 길 → 비전 → 함께하기(총무는 `officers`의 `희망터 총무`에서 파생). 사진 `images/hopecenter/`(배달 사진은 받는 분 얼굴·주소 표지판이 보이지 않게 잘라 씀). 검색 색인은 `_extractContent`에서 data로 추출.
 - `children.html` → `ChildrenRenderer` → `CHURCH_DATA.childrenWorship`. 예배와 기도 하위 메뉴와 기존 어린이 예배 카드에서 연결. 하단에서 `smallgroup.html#parents`(주일학교 양육자모임)로 연결.
 - 사용자가 제공한 소개문, 활동 사진 4장, 예수님과 어린이 그림을 사용. 사진 날짜·참여 연령 등 미확인 사실은 추가하지 않음.
 - 시간과 영성체 안내는 `worship.main`의 어린이 예배 항목에서 파생. 장소는 교육관. 이미지 `images/children/`, 반응형 스타일 `.children-*`.
