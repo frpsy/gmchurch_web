@@ -730,7 +730,7 @@ const HopeCenterRenderer = {
         const d = CHURCH_DATA.hopeCenter;
         const officer = (CHURCH_DATA.officers || []).find(o => o.role === d.officerRole);
         // 원본보다 큰 1440w 후보를 내지 않도록 실제 너비를 쓴다
-        const picture = (img, sizes, w = 1440, h = 960, eager = false) => `<img src="images/hopecenter/${img.src}.webp" srcset="images/hopecenter/${img.src}-sm.webp 720w, images/hopecenter/${img.src}.webp ${w}w" sizes="${sizes}" alt="${img.alt}" width="${w}" height="${h}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+        const picture = (img, sizes, w = 1440, h = 960, eager = false) => `<img src="images/hopecenter/${img.src}.webp?v=${d.imageVersion}" srcset="images/hopecenter/${img.src}-sm.webp?v=${d.imageVersion} 720w, images/hopecenter/${img.src}.webp?v=${d.imageVersion} ${w}w" sizes="${sizes}" alt="${img.alt}" width="${w}" height="${h}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
         const stepSize = { prayer: [960, 640], dishes: [1440, 960], handoff: [1055, 703] };
         el.innerHTML = `
             <div class="page-hero">
