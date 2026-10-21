@@ -1426,6 +1426,66 @@ const CHURCH_DATA = {
                 src: "images/gallery/scenery/greenchurch-award-2023.webp",
                 thumb: "images/gallery/scenery/greenchurch-award-2023-thumb.webp",
                 alt: "2023년 녹색교회 선정 상패"
+            },
+            {
+                id: "p14",
+                title: "희망터 봉사자들의 기도",
+                desc: "희망터 주방에서 봉사자들이 두 손을 모으고 기도합니다.",
+                category: "공동체",
+                date: "",
+                src: "images/gallery/community/hopecenter-prayer.webp",
+                thumb: "images/gallery/community/hopecenter-prayer-thumb.webp",
+                alt: "주방 조리대 앞에서 두 손을 모으고 기도하는 봉사자들"
+            },
+            {
+                id: "p15",
+                title: "이웃에게 드릴 반찬",
+                desc: "이웃 가정에 드릴 반찬을 정성껏 만듭니다.",
+                category: "공동체",
+                date: "",
+                src: "images/gallery/community/hopecenter-dishes.webp",
+                thumb: "images/gallery/community/hopecenter-dishes-thumb.webp",
+                alt: "용기에 나누어 담은 오이부추무침과 양념장에 담근 달걀"
+            },
+            {
+                id: "p16",
+                title: "나눔 물품을 싣고",
+                desc: "나눔 물품을 가득 실은 차량 앞에 선 광명 희망터 봉사자들.",
+                category: "공동체",
+                date: "",
+                src: "images/gallery/community/hopecenter-delivery.webp",
+                thumb: "images/gallery/community/hopecenter-delivery-thumb.webp",
+                alt: "나눔 물품 상자를 가득 실은 차량 앞에 선 봉사자 세 사람"
+            },
+            {
+                id: "p17",
+                title: "하늘과 들판 위의 교회",
+                desc: "어린이 예배 아이들이 벽에 그린 교회 그림.",
+                category: "공동체",
+                date: "",
+                src: "images/gallery/community/children-mural-church.webp",
+                thumb: "images/gallery/community/children-mural-church-thumb.webp",
+                alt: "푸른 하늘과 초록 들판 위에 그린 작은 교회 벽화"
+            },
+            {
+                id: "p18",
+                title: "천사와 교회를 그린 벽화",
+                desc: "아이들이 직접 색을 골라 붓으로 벽에 그렸습니다.",
+                category: "공동체",
+                date: "",
+                src: "images/gallery/community/children-mural-angel.webp",
+                thumb: "images/gallery/community/children-mural-angel-thumb.webp",
+                alt: "여러 색의 바탕 위에 천사와 교회를 그린 벽화"
+            },
+            {
+                id: "p19",
+                title: "벽에 색을 칠하는 아이",
+                desc: "어린이 예배 아이들이 함께 벽화를 그립니다.",
+                category: "공동체",
+                date: "",
+                src: "images/gallery/community/children-painting-together.webp",
+                thumb: "images/gallery/community/children-painting-together-thumb.webp",
+                alt: "여러 색으로 칠한 벽에 붓질하는 어린이"
             }
         ]
     },

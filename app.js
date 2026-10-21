@@ -1713,7 +1713,7 @@ const PhotoGalleryRenderer = {
                                <div class="photo-overlay" aria-hidden="true">
                                    <span class="photo-cat-badge">${p.category}</span>
                                    <p class="photo-caption">${p.title}</p>
-                                   <p class="photo-date">${p.date}</p>
+                                   ${p.date ? `<p class="photo-date">${p.date}</p>` : ''}
                                </div>`
                         }
                     </button>`;
@@ -1759,7 +1759,7 @@ const PhotoGalleryRenderer = {
             lbImg.alt      = item.querySelector('img').alt;
             lbTitle.textContent = item.dataset.title;
             lbDesc.textContent  = item.dataset.desc;
-            lbDate.textContent  = item.dataset.date;
+            lbDate.textContent  = item.dataset.date || '';
             lb.classList.add('is-open');
             document.body.style.overflow = 'hidden';
             lbClose.focus();
