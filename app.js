@@ -1199,7 +1199,8 @@ const AnglicanRenderer = {
         el.innerHTML = `
             <div class="anglican-welcome">
                 <div class="container">
-                    <p>${CHURCH_DATA.anglican.welcome}</p>
+                    <p class="anglican-welcome-lead">${CHURCH_DATA.anglican.welcome}</p>
+                    <p class="anglican-welcome-sub">${CHURCH_DATA.anglican.welcomeSub}</p>
                 </div>
             </div>
         `;

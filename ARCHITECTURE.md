@@ -157,7 +157,8 @@ const CHURCH_DATA = {
   },
 
   anglican: {
-    welcome: "…배너 문구…",
+    welcome: "…인사 문구…",
+    welcomeSub: "…보조 문구…",
     what: {                         // 성공회란? 섹션
       eyebrow, title,
       paras: [String, String],
