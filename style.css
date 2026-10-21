@@ -773,7 +773,7 @@ button:focus:not(:focus-visible) { outline: none; }
 
 /* 메뉴 상징 이미지(실제 교회 사진 아님) — 모바일은 경량 버전 */
 .page-hero--worship  { background-image: url('images/hero/worship.webp');  background-position: 30% center; }
-.page-hero--clergy   { background-image: url('images/hero/clergy.webp');   background-position: 40% center; }
+.page-hero--clergy   { background-image: url('images/hero/clergy.webp');   background-position: 60% 25%; }
 .page-hero--sundays  { background-image: url('images/hero/sundays.webp'); }
 .page-hero--newcomer { background-image: url('images/hero/newcomer.webp'); background-position: 60% center; }
 .page-hero--media    { background-image: url('images/hero/media.webp'); }
@@ -781,7 +781,7 @@ button:focus:not(:focus-visible) { outline: none; }
 @media (max-width: 768px) {
     .page-hero--community { background-image: url('images/hero/community-blessing-m.webp'); background-position: 43% center; }
     .page-hero--worship  { background-image: url('images/hero/worship-m.webp'); }
-    .page-hero--clergy   { background-image: url('images/hero/clergy-m.webp'); }
+    .page-hero--clergy   { background-image: url('images/hero/clergy-m.webp'); background-position: 62% 30%; }
     .page-hero--sundays  { background-image: url('images/hero/sundays-m.webp'); }
     .page-hero--newcomer { background-image: url('images/hero/newcomer-m.webp'); }
     .page-hero--media    { background-image: url('images/hero/media-m.webp'); }
