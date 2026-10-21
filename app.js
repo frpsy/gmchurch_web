@@ -1783,6 +1783,31 @@ const PhotoGalleryRenderer = {
 };
 
 /* ── PressRenderer ───────────────────────────────────────── */
+// 교회 연혁 (clergy.html#history) — 섬기는 이들 약력과 같은 타임라인 마크업 재사용
+const HistoryRenderer = {
+    render() {
+        const el = document.getElementById('history-full');
+        const h = CHURCH_DATA.history;
+        if (!el || !h) return;
+        const items = h.items.map((m, i) => {
+            const showYear = i === 0 || h.items[i - 1].year !== m.year;
+            return `
+            <li class="bio-milestone">
+                <span class="bio-year">${showYear ? m.year : ''}</span>
+                <span class="bio-dot"></span>
+                <span class="bio-text"><span class="history-date">${m.date}</span>${m.text}${m.first ? ' <span class="bio-first">최초</span>' : ''}</span>
+            </li>`;
+        }).join('');
+        el.innerHTML = `
+            <div class="section-header">
+                <p class="section-eyebrow">${h.eyebrow}</p>
+                <h2 class="section-title">${h.title}</h2>
+                <p class="section-sub">${h.sub}</p>
+            </div>
+            <ul class="bio-timeline history-timeline">${items}</ul>`;
+    }
+};
+
 const PressRenderer = {
     render() {
         const el = document.getElementById('press-table');
@@ -3049,6 +3074,7 @@ const App = {
         VisitRenderer.render();
         AnglicanRenderer.render();
         ClergyRenderer.render();
+        HistoryRenderer.render();
         AboutNavRenderer.render();
         PressRenderer.render();
         FaqRenderer.render();
@@ -3210,6 +3236,8 @@ const MenuOverlay = {
         if (d.philosophy) add('교회 철학', 'clergy.html#philosophy', '교회 소개',
             join(d.philosophy.title, d.philosophy.intro,
                  d.philosophy.values.map(v => join(v.title, v.desc)), d.philosophy.closing));
+        if (d.history) add(d.history.title, 'clergy.html#history', '교회 소개',
+            join(d.history.sub, d.history.items.map(m => join(m.year + '년', m.date, m.text))));
         if (d.logo) {
             const ch = d.logo.church || {}, an = d.logo.anglican || {};
             add('로고 소개', 'clergy.html#logo-intro', '교회 소개',

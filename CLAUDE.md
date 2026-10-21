@@ -31,7 +31,7 @@
 | 파일 | 역할 | 렌더러 (app.js) |
 |---|---|---|
 | `index.html` | 홈 | IndexRenderer |
-| `clergy.html` | 교회 소개 (교회 이야기 `#identity` 정적 HTML 포함) | AnglicanRenderer, ClergyRenderer, AboutNavRenderer, PressRenderer |
+| `clergy.html` | 교회 소개 (교회 이야기 `#identity` 정적 HTML 포함) | AnglicanRenderer, ClergyRenderer, HistoryRenderer, AboutNavRenderer, PressRenderer |
 | `faq.html` | 자주 묻는 질문 (성공회 오해·궁금증) | FaqRenderer |
 | `worship.html` | 예배 | WorshipRenderer |
 | `bulletin.html` | 주일 주보 (noindex, 주보·소식 메뉴) | BulletinRenderer |
@@ -59,7 +59,7 @@
 
 ```
 교회 소개 (clergy.html)
-  성공회란? / 대한성공회 / 섬기는 이들 / 교회 이야기(clergy.html#philosophy — 철학·이야기 두 섹션을 하나로) / 녹색교회(greenchurch.html)
+  성공회란? / 대한성공회 / 섬기는 이들 / 교회 이야기(clergy.html#philosophy — 철학·이야기 두 섹션을 하나로) / 교회 연혁(clergy.html#history) / 녹색교회(greenchurch.html)
 
 예배와 기도 (worship.html)
   주일 감사성찬례 / 어린이 예배 / 감사성찬례 순서 / 성무일과(매일기도) / 예배 자료 / 공동기도서와 성가

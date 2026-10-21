@@ -17,7 +17,7 @@
 ```
 gmchurch_web/
 ├── index.html        메인 페이지
-├── clergy.html       교회 소개 (성공회·사제·철학·교회 이야기·로고·언론)
+├── clergy.html       교회 소개 (성공회·사제·철학·교회 이야기·연혁·로고·언론)
 ├── faq.html          자주 묻는 질문 (성공회 오해·궁금증 FAQ)
 ├── worship.html      예배 안내 (예배 카드·감사성찬례란·순서·예배 자료)
 ├── newcomer.html     처음 오신 분 (환영·참여 안내·전례·전례 공간·영성체·문의)
@@ -293,6 +293,7 @@ const CHURCH_DATA = {
   └ 대한성공회         clergy.html#ack
   └ 섬기는 이들        clergy.html#priest-section       (JS)
   └ 교회 이야기        clergy.html#philosophy   (철학 #philosophy + 이야기 #identity 섹션)
+  └ 교회 연혁          clergy.html#history              (JS, data.js history)
   └ 녹색교회           greenchurch.html                 (상세 페이지로 직접 이동)
 
 예배와 기도  worship.html
@@ -439,6 +440,10 @@ window DOMContentLoaded
       ├── LinksRenderer.render()      → #links-full (links.html)
       │     관련 기관 목록.
       │
+      ├── HistoryRenderer.render()    → #history-full (clergy.html)
+      │     history.items { year, date, text, first? } — 약력 타임라인(.bio-timeline) 재사용,
+      │     같은 해 둘째 항목부터 연도 칸 비움. .history-timeline/.history-date
+      │
       ├── PressRenderer.render()      → #press-table (clergy.html)
       │     press-list: press 배열의 모든 기사
       │     각 항목: 연도 | 미디어 · 날짜 | 제목(링크)
@@ -527,6 +532,8 @@ window DOMContentLoaded
   #philosophy-full                          ← ClergyRenderer._philosophy()
 <section id="identity"> .story-values — 교회 이야기 5대 정체성 서사 블록 (정적 HTML)
   01 전례 전통  02 평등 공동체  03 부활 신앙  04 밥상 공동체  05 약자·창조 돌봄
+<section id="history">
+  #history-full                             ← HistoryRenderer.render()
 <section id="logo-intro">
   #logo-content                             ← ClergyRenderer._logo()
 <section id="press">
