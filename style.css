@@ -3365,6 +3365,22 @@ footer {
     .footer-col .footer-ext-link--dim { margin-top: 0.5rem; }
 }
 
+/* 교회 연혁 — 약력 타임라인 재사용, 제목·본문 760px 칼럼 */
+#history-full { max-width: 760px; margin: 0 auto; }
+/* 같은 해 둘째 항목부터 연도를 비우므로 연도 칸을 고정 폭으로 둬 점·세로선이 흔들리지 않게 */
+.history-timeline .bio-year { flex: 0 0 44px; min-width: 0; box-sizing: border-box; }
+.history-timeline::before { left: calc(44px + 0.6rem + 3px); }
+.history-timeline .bio-text { display: flex; gap: 0.75rem; }
+.history-date {
+    flex: 0 0 5.5em;
+    font-weight: 700;
+    color: var(--heading);
+    font-variant-numeric: tabular-nums;
+}
+@media (max-width: 480px) {
+    .history-timeline .bio-text { display: block; }
+    .history-date { display: block; }
+}
 @media (max-width: 460px) {
     .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
 }

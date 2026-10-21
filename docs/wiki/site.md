@@ -9,7 +9,7 @@
 | 페이지 | 용도 | 비고 |
 |---|---|---|
 | index | 홈: 소개·예배·다가오는 주일 독서·처음 오셨나요 카드·오시는 길 | |
-| clergy | 교회 소개: 성공회란, 대한성공회, 섬기는 이들, 교회 이야기, 로고, 언론 | `#identity`는 정적 HTML |
+| clergy | 교회 소개: 성공회란, 대한성공회, 섬기는 이들, 교회 이야기, 교회 연혁(`history`), 로고, 언론 | `#identity`는 정적 HTML |
 | faq | 자주 묻는 질문 | 가안 |
 | worship | 예배 안내·감사성찬례 순서·성무일과·기도서와 성가 | |
 | bulletin | 주일 주보(이미지·PDF) | noindex |
@@ -26,7 +26,7 @@
 메뉴: 교회 소개 / 예배와 기도 / **주보·소식**(주일 주보, 교회 소식 — 2026-10-11 예배와 기도에서 분리, 상위 메뉴 8개) / 교회력 / 처음 오신 분 / 공동체 / 미디어·자료 / 오시는 길. 푸터에 봉헌, 로고 소개, 언론 보도, 개인정보.
 
 ## 데이터 (`data.js` `CHURCH_DATA` 최상위 키)
-`info, ui, home, anglican, logo, ministerSection, clergy, officers, bishop, philosophy, aboutJourney, worship, community, giving, visit, sns, press, liveUrl, media, links, faq, sundays, bulletins, photoGallery, navigation`. 콘텐츠는 여기에만 두고 HTML에 직접 쓰지 않는다. `LiturgicalCalendar.compute()`가 오늘의 절기·색을 계산한다.
+`info, ui, home, anglican, logo, ministerSection, clergy, officers, bishop, philosophy, history, aboutJourney, worship, community, giving, visit, sns, press, liveUrl, media, links, faq, sundays, bulletins, photoGallery, navigation`. 콘텐츠는 여기에만 두고 HTML에 직접 쓰지 않는다. `LiturgicalCalendar.compute()`가 오늘의 절기·색을 계산한다.
 
 ## 자동화
 - `bulletin-sync.yml`: 주보 이미지 push 시 + 매일 03:00(KST) `scripts/sync-bulletins.js` 실행. 보관은 최근 8개·56일 이내(최신 1건은 보존). 테스트 통과 시에만 커밋.
