@@ -766,9 +766,9 @@ const HopeCenterRenderer = {
             </div></section>
             <section class="section hope-join" id="join"><div class="container children-join">
                 <div><p class="section-eyebrow">${d.joinEyebrow}</p><h2 class="section-title">${d.joinTitle}</h2><p class="children-lead">${d.joinIntro}</p></div>
-                ${officer ? `<div class="children-service"><dl><div><dt>${officer.role}</dt><dd>${officer.members.join(', ')}</dd></div><div><dt>전화</dt><dd><a href="tel:${CHURCH_DATA.info.phone}">${CHURCH_DATA.info.phone}</a></dd></div></dl></div>` : ''}
+                ${officer ? `<div class="children-service"><dl><div><dt>${officer.role}</dt><dd>${officer.members.join(', ')}</dd></div></dl></div>` : ''}
                 <div class="next-step-cta-actions">
-                    <a class="btn-next btn-next--primary" href="tel:${CHURCH_DATA.info.phone}">${icon('phone')} ${d.contactLabel}</a>
+                    <a class="btn-next btn-next--primary" href="tel:${CHURCH_DATA.info.phone}">${icon('phone')} ${d.contactLabel} · ${CHURCH_DATA.info.phone}</a>
                     <a class="btn-next" href="giving.html">${d.givingLabel}</a>
                     <a class="btn-next" href="community.html">${d.communityLabel}</a>
                 </div>
