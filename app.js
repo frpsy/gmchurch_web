@@ -935,7 +935,7 @@ const NewcomerRenderer = {
                     <div class="newcomer-key-facts">
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">예배</span>
-                            <span class="newcomer-key-value"><strong>주일 감사성찬례</strong> · 매주 일요일 오전 11:00</span>
+                            <span class="newcomer-key-value"><strong>주일 감사성찬례</strong><br>매주 일요일 오전 11:00</span>
                         </div>
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">장소</span>
