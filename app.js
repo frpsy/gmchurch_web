@@ -603,7 +603,7 @@ const IndexRenderer = {
 
         el.innerHTML = `
             <h3>${t.title} · <span class="nowrap">${dateStr}</span> ${s.koreanName}</h3>
-            <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.color};--season-ink:${season.ink || season.color}"><span class="season-dot"></span>${icon(season.symbol)}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">${season.colorName}</span></span></div>
+            <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.color};--season-ink:${season.ink || season.color}"><span class="season-dot"></span>${icon(season.symbol)}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">전례색 ${season.colorName}</span></span></div>
             ${rows}
         `;
         el.hidden = false;
@@ -815,7 +815,7 @@ const WorshipRenderer = {
             <div class="worship-season">
                 <div class="liturgy-season-badge">
                     <span class="season-dot"></span>
-                    ${icon(s.symbol)}&nbsp;${s.name}&nbsp;·&nbsp;<span class="season-name">${s.colorName}</span>
+                    ${icon(s.symbol)}&nbsp;${s.name}&nbsp;·&nbsp;<span class="season-name">전례색 ${s.colorName}</span>
                     <span class="season-note">${s.note}</span>
                 </div>
             </div>
@@ -935,7 +935,7 @@ const NewcomerRenderer = {
                     <div class="newcomer-key-facts">
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">예배</span>
-                            <span class="newcomer-key-value"><strong>주일 감사성찬례</strong> · 매주 일요일 오전 11:00</span>
+                            <span class="newcomer-key-value"><strong>주일 감사성찬례</strong><br>매주 일요일 오전 11:00</span>
                         </div>
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">장소</span>
@@ -2162,7 +2162,7 @@ const BulletinRenderer = {
                     </div>
                     <div class="bulletin-row-meta">
                         <span class="bulletin-row-season">${item.season}</span>
-                        ${count > 0 ? `<span class="bulletin-row-count">${count}면</span>` : ''}
+                        ${count > 0 ? `<span class="bulletin-row-count">${count}쪽</span>` : ''}
                     </div>
                 </div>
                 <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true">
@@ -2183,7 +2183,7 @@ const BulletinRenderer = {
             return pdfBtn || `<p class="bulletin-empty-inner">주보가 준비 중입니다.</p>`;
         }
         const imgs = item.images.map((src, i) =>
-            `<img src="${src}" alt="${item.label} ${i + 1}면" loading="lazy" class="bulletin-page">`
+            `<img src="${src}" alt="${item.label} 주보 ${i + 1}쪽" loading="lazy" class="bulletin-page">`
         ).join('');
         return `<div class="bulletin-pages">${imgs}</div>${pdfBtn}`;
     },

@@ -75,7 +75,7 @@ function sundayLabel(dateStr) {
         if (w === 1) return '삼위일체 주일';
         const weeksToGoCK = Math.round((+ck - +date) / 604800000);
         if (weeksToGoCK === 0) return '그리스도 왕 주일';
-        return `${yLbl}해 연중 ${34 - weeksToGoCK}주일`;
+        return `${yLbl}해 연중 제${34 - weeksToGoCK}주일`;
     }
 
     // 부활절 ~ 성령강림
@@ -93,7 +93,7 @@ function sundayLabel(dateStr) {
     if (date >= ashWed) return `사순 제${wk(date, ashWed)}주일`;
 
     // 주현절 이후 연중 (사순절 전)
-    if (date >= baptism) return `${yLbl}해 연중 ${wk(date, baptism) + 1}주일`;
+    if (date >= baptism) return `${yLbl}해 연중 제${wk(date, baptism) + 1}주일`;
 
     // 성탄절 후 (1/1~1/5, 12/26~12/31 등)
     return '성탄절 후 주일';
