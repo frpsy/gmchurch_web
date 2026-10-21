@@ -176,6 +176,8 @@ const CHURCH_DATA = {
 
     // 광명 희망터(hopecenter.html) — 소개문은 교회 제공 원문(2026-10-21)
     hopeCenter: {
+        // 사진을 같은 이름으로 교체하면 값을 바꿔 브라우저 캐시를 무효화한다
+        imageVersion: "20261021b",
         heroEyebrow: "Community Ministry",
         title: "광명 희망터",
         summary: "지역의 소외된 이웃과 함께하는 나눔 사역",
