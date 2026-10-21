@@ -266,7 +266,8 @@ const CHURCH_DATA = {
     },
 
     anglican: {
-        welcome: "광명교회를 찾아 주셔서 감사합니다. 성공회의 역사와 신앙, 광명교회가 걸어온 길을 소개합니다.",
+        welcome: "광명교회를 찾아 주셔서 감사합니다.",
+        welcomeSub: "성공회의 역사와 신앙, 광명교회가 걸어온 길을 소개합니다.",
         what: {
             eyebrow: "Anglican Church",
             title: "성공회란?",
