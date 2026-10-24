@@ -17,7 +17,7 @@
 | 항목 | 내용 |
 |---|---|
 | 방식 | 바닐라 HTML + CSS + JS, 빌드 없음 |
-| 배포 | GitHub Pages (`main` 브랜치 자동 배포) — **Netlify는 사용하지 않음** (아래 참고) |
+| 배포 | 개발: GitHub Pages (`main` 자동 배포, 1~2분) · 공식(gmskh.or.kr): 공식 저장소 `main` → 서버가 2시간마다 반영 (`docs/REPO-STRUCTURE.md`) — **Netlify는 사용하지 않음** (아래 참고) |
 | 로드 순서 | `data.js` → `app.js` (CHURCH_DATA 전역 변수) |
 | 테스트 | `npm test` (Vitest) |
 | CI | `cache-bust.yml` — main 머지 시 `?v=` 자동 갱신 · `bulletin-sync.yml` — 주보 이미지 push 시 + 매일 03:00(KST) 주보·교회소식 갱신/만료 삭제 |
@@ -287,7 +287,8 @@ echo "Done: $TODAY"
 > **저장소 2개 운영 규칙 (2026-10-24, 사용자 지시)**
 > - **작업 저장소**: `frpsy/gmchurch_web` (이 저장소). 모든 수정·커밋·PR·머지는 여기서만 한다.
 > - **공식 교회 저장소**: `lmkhkm/GMSKH_Homepage` (도메인 `gmskh.or.kr`, 네이버 클라우드 배포). **사용자가 명시적으로 요청할 때만** 이 저장소의 최신 `main`을 공식 저장소에 머지한다. 공식 저장소에 직접 기능 작업·커밋을 하지 않는다.
-> - 공식 저장소 반영 절차: 공식 저장소에 `merge/…` 브랜치를 만들어 이 저장소 `main`을 머지 → 충돌 HTML은 이 저장소 최신본을 채택 → `node scripts/set-site-url.js https://gmskh.or.kr`로 절대주소 재적용 → `npm test` → PR 생성·머지. 공식 저장소 전용 파일(`deploy/`, `404.html`, `docs/DEPLOY-NCP.md`)은 유지한다.
+> - 공식 저장소 반영 절차: `scripts/release-official.sh` 실행(공식에 `merge/official-…` 브랜치 생성 → 이 저장소 `main` 머지 → 충돌은 이 저장소 쪽 채택 → `set-site-url.js`로 gmskh.or.kr 재적용 → `npm test` → push) → PR 생성·머지. 공식 저장소 전용 파일(`deploy/`, `404.html`, `docs/DEPLOY-NCP.md`)은 유지한다.
+> - 반영 시점: 이 저장소는 머지 후 1~2분(GitHub Pages), 공식은 공식 `main` 머지 후 **최대 2시간**(서버 타이머, 급하면 서버에서 `systemctl start gmchurch-publish.service`). 자동 작업 주기·충돌 처리 상세는 `docs/REPO-STRUCTURE.md`.
 
 ```bash
 # 작업 브랜치 생성 (항상 최신 main 기반)
