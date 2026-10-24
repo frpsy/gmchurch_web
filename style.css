@@ -1310,6 +1310,20 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     }
 }
 
+/* 교회력 페이지 PC 정렬 — 상단 히어로·색 리본·섹션 탭이 모두 가운데 축인데,
+   본문은 왼쪽에 붙고 폭 560px 위젯(달력·전례독서) 오른쪽이 비어 치우쳐 보였다.
+   PC(769px~)에서만 헤더·위젯·현재 절기 카드를 같은 가운데 축에 맞추고,
+   모바일은 읽기 편한 왼쪽 정렬을 유지한다. */
+@media (min-width: 769px) {
+    .sundays-page .section-header { text-align: center; }
+    .sundays-page .section-sub { margin-left: auto; margin-right: auto; }
+    .sundays-page .sundays-season-hero { max-width: var(--content-read); margin-left: auto; margin-right: auto; }
+    .sundays-page .lit-cal,
+    .sundays-page .lect-nav-row,
+    .sundays-page .lectionary-card { margin-left: auto; margin-right: auto; }
+    .sundays-page .lectionary-loading { text-align: center; }
+}
+
 /* Quote Block */
 .quote-block {
     background: var(--gold-bg);

@@ -682,6 +682,7 @@ window DOMContentLoaded
 | `.section-title--sub` | 소제목 h2(1.3rem) |
 | `.nowrap` | 줄바꿈 금지 구간(날짜 등) |
 | `.section.gc-section-alt` | 교차 띠 배경(emmaus·greenchurch) |
+| `.sundays-page` | `sundays.html`의 `<main>` 클래스 — PC(769px~)에서 섹션 헤더·달력·전례독서·현재 절기 카드를 가운데 축에 정렬, 모바일은 왼쪽 정렬 유지 |
 | `.liturgy-season-badge` | 현재 절기 배지 (색·심볼·절기명) |
 | `.liturgy-steps` / `.liturgy-step` | 감사성찬례 4단계 |
 | `.communion-grid` / `.communion-card` | 영성체 안내 카드 |
