@@ -1,7 +1,8 @@
 # 대한성공회 광명교회 웹사이트
 
 > 녹색교회, 모든 생명을 환대하는 교회  
-> **배포 주소**: https://frpsy.github.io/gmchurch_web
+> **공식 주소**: https://gmskh.or.kr  
+> **개발·미리보기 주소**: https://frpsy.github.io/gmchurch_web
 
 ## 개요
 
@@ -9,10 +10,21 @@
 
 | 항목 | 내용 |
 |------|------|
-| 저장소 | `frpsy/gmchurch_web` |
-| 배포 | GitHub Pages (main 브랜치 자동 배포) |
+| 개발 저장소 | `frpsy/gmchurch_web` — 모든 작업은 여기서 |
+| 공식 저장소 | `lmkhkm/GMSKH_Homepage` — 요청할 때만 개발 `main`을 머지 |
+| 배포 | 개발: GitHub Pages(머지 후 1~2분) · 공식: 네이버 클라우드 서버가 2시간마다 `main`을 받아 감 |
 | 기술 스택 | HTML5 · CSS3 · Vanilla JS (ES6+) |
 | 외부 의존 | Pretendard CDN · Google Maps iframe · Unsplash 이미지 1개 |
+
+## 저장소 2개 운영 (중요)
+
+이 README는 두 저장소에 똑같이 들어 있습니다.
+
+- **개발 저장소** [`frpsy/gmchurch_web`](https://github.com/frpsy/gmchurch_web): 모든 수정·주보 등록은 여기서 PR로 합니다. 머지하면 frpsy.github.io에 1~2분 안에 반영되어 먼저 확인할 수 있습니다.
+- **공식 저장소** [`lmkhkm/GMSKH_Homepage`](https://github.com/lmkhkm/GMSKH_Homepage): 직접 고치지 않습니다. 요청이 있을 때 `scripts/release-official.sh`로 개발 `main`을 머지하면, 서버가 **최대 2시간 안에** gmskh.or.kr에 반영합니다.
+- 자동 작업: cache-bust(`main`에 js·css·svg 변경 시 `?v=` 갱신), 주보 동기화(주보 이미지 push 시 + 매일 03:00 한국시간)가 두 저장소에서 각각 돕니다.
+
+흐름·주기·충돌 처리 상세는 [docs/REPO-STRUCTURE.md](./docs/REPO-STRUCTURE.md)를 보세요. 서버 설정은 공식 저장소의 `docs/DEPLOY-NCP.md`에 있습니다.
 
 ## 파일 구조
 
@@ -45,8 +57,8 @@ gmchurch_web/
 ├── fonts/            로고 워드마크 서체 서브셋
 ├── robots.txt
 ├── sitemap.xml
-├── docs/             위원회 audit 보고서 · 작업 지시서
-├── scripts/          생성 스크립트 (OG 이미지 등)
+├── docs/             저장소 운영 구조(REPO-STRUCTURE.md) · 위키 · 용어집 · audit 보고서
+├── scripts/          주보 동기화 · 공식 반영(release-official.sh) · 도메인 교체 · OG 이미지 생성
 ├── tests/            테스트 코드 (전례력 · 데이터 검증)
 └── ARCHITECTURE.md   개발 가이드 (AI·개발자·구조 설명용)
 ```
@@ -86,13 +98,19 @@ npx serve .
 ## 기여 방법
 
 ```bash
+# 개발 저장소에서
 git fetch origin main
 git checkout -b claude/작업명 origin/main
 # 작업 후
+npm test
 git add 파일
 git commit -m "설명"
 git push -u origin claude/작업명
-# PR 생성 → main에 머지 → GitHub Pages 자동 배포
+# PR 생성 → main에 머지 → GitHub Pages(frpsy.github.io) 자동 배포
+
+# 공식 주소(gmskh.or.kr)에 내보낼 때만 (요청이 있을 때)
+scripts/release-official.sh
+# → 공식 저장소에 머지 브랜치 push → PR 머지 → 서버가 2시간 안에 반영
 ```
 
 > **주의**: React · TypeScript · Vite 등 프레임워크·빌드 도구 도입은 위원회 사전 협의 없이 금지입니다.
