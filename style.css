@@ -1310,18 +1310,15 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     }
 }
 
-/* 교회력 페이지 PC 정렬 — 상단 히어로·색 리본·섹션 탭이 모두 가운데 축인데,
-   본문은 왼쪽에 붙고 폭 560px 위젯(달력·전례독서) 오른쪽이 비어 치우쳐 보였다.
-   PC(769px~)에서만 헤더·위젯·현재 절기 카드를 같은 가운데 축에 맞추고,
-   모바일은 읽기 편한 왼쪽 정렬을 유지한다. */
+/* 교회력 페이지 PC 정렬 — 다른 페이지처럼 제목은 왼쪽 정렬을 유지하되,
+   폭 560px 위젯(달력·전례독서)이 왼쪽에만 붙어 오른쪽이 비어 보이던 문제를
+   '가운데 칼럼 안에서 제목과 본문이 같은 왼쪽선'으로 해결한다(예배 페이지 단락과 같은 방식).
+   절기·특별 주일처럼 전체 폭 그리드는 제목이 컨테이너 왼쪽선과 같아 그대로 둔다.
+   PC(769px~)에서만 적용하고 모바일은 변경 없다. */
 @media (min-width: 769px) {
-    .sundays-page .section-header { text-align: center; }
-    .sundays-page .section-sub { margin-left: auto; margin-right: auto; }
+    .sundays-page #sundays-monthly,
+    .sundays-page #sundays-lectionary { max-width: 560px; margin-left: auto; margin-right: auto; }
     .sundays-page .sundays-season-hero { max-width: var(--content-read); margin-left: auto; margin-right: auto; }
-    .sundays-page .lit-cal,
-    .sundays-page .lect-nav-row,
-    .sundays-page .lectionary-card { margin-left: auto; margin-right: auto; }
-    .sundays-page .lectionary-loading { text-align: center; }
 }
 
 /* Quote Block */
