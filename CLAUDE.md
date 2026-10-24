@@ -284,6 +284,11 @@ echo "Done: $TODAY"
 
 ## Git 워크플로
 
+> **저장소 2개 운영 규칙 (2026-10-24, 사용자 지시)**
+> - **작업 저장소**: `frpsy/gmchurch_web` (이 저장소). 모든 수정·커밋·PR·머지는 여기서만 한다.
+> - **공식 교회 저장소**: `lmkhkm/GMSKH_Homepage` (도메인 `gmskh.or.kr`, 네이버 클라우드 배포). **사용자가 명시적으로 요청할 때만** 이 저장소의 최신 `main`을 공식 저장소에 머지한다. 공식 저장소에 직접 기능 작업·커밋을 하지 않는다.
+> - 공식 저장소 반영 절차: 공식 저장소에 `merge/…` 브랜치를 만들어 이 저장소 `main`을 머지 → 충돌 HTML은 이 저장소 최신본을 채택 → `node scripts/set-site-url.js https://gmskh.or.kr`로 절대주소 재적용 → `npm test` → PR 생성·머지. 공식 저장소 전용 파일(`deploy/`, `404.html`, `docs/DEPLOY-NCP.md`)은 유지한다.
+
 ```bash
 # 작업 브랜치 생성 (항상 최신 main 기반)
 git fetch origin main
