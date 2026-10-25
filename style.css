@@ -5543,6 +5543,8 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .children-photo-grid figure { margin: 0; min-width: 0; }
 .children-photo-grid img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
 .children-photo-grid figcaption { padding-top: .8rem; color: color-mix(in srgb, var(--text) 72%, var(--white)); font-size: var(--fs-sm); text-align: center; }
+.children-card-heading { margin-top: clamp(3rem, 6vw, 4.5rem); }
+.children-photo-grid--portrait { max-width: 640px; }
 .children-join { max-width: var(--content-read); }
 .children-join > div:first-child { text-align: center; }
 .children-join .children-service { max-width: 560px; margin: 1.75rem auto 0; }
