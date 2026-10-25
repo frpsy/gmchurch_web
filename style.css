@@ -3428,6 +3428,9 @@ footer {
 
 /* ── Community card note (footnote) ─────────────────────── */
 .community-card-note { font-size: var(--fs-label); color: var(--text-muted); margin-top: 0.5rem; }
+.community-card-photo { margin: 1.25rem 0 0; }
+.community-card-photo img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.community-card-photo figcaption { padding-top: .6rem; color: color-mix(in srgb, var(--text) 72%, var(--white)); font-size: var(--fs-label); text-align: center; }
 
 /* ── Community detail link ───────────────────────────────── */
 .community-detail-link {
