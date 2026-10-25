@@ -2172,7 +2172,18 @@ const BulletinRenderer = {
             </button>`;
     },
 
-    _drawerHtml(item) {
+    // 핵심구절은 data.js(sync가 data/bulletin-verses.json에서 합침)의 본문 그대로 보여 준다
+    _verseHtml(item, heading) {
+        if (!item.verse) return '';
+        return `
+            <figure class="bulletin-verse">
+                ${heading ? `<p class="bulletin-verse-label">${heading}</p>` : ''}
+                <blockquote class="bulletin-verse-text">${item.verse.text}</blockquote>
+                <figcaption class="bulletin-verse-ref">${item.verse.ref}</figcaption>
+            </figure>`;
+    },
+
+    _drawerHtml(item, showVerse = true) {
         const pdfSvg = `<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
@@ -2180,13 +2191,14 @@ const BulletinRenderer = {
         const pdfBtn = item.pdf
             ? `<a href="${item.pdf}" class="bulletin-pdf-btn" download>${pdfSvg} PDF 내려받기</a>`
             : '';
+        const verse = showVerse ? this._verseHtml(item) : '';
         if (!item.images || item.images.length === 0) {
-            return pdfBtn || `<p class="bulletin-empty-inner">주보가 준비 중입니다.</p>`;
+            return verse + (pdfBtn || `<p class="bulletin-empty-inner">주보가 준비 중입니다.</p>`);
         }
         const imgs = item.images.map((src, i) =>
             `<img src="${src}" alt="${item.label} 주보 ${i + 1}쪽" loading="lazy" class="bulletin-page">`
         ).join('');
-        return `<div class="bulletin-pages">${imgs}</div>${pdfBtn}`;
+        return `${verse}<div class="bulletin-pages">${imgs}</div>${pdfBtn}`;
     },
 
     _renderPage(el, items, page) {
@@ -2195,11 +2207,17 @@ const BulletinRenderer = {
         const start      = page * perPage;
         const pageItems  = items.slice(start, start + perPage);
 
+        // 첫 쪽에서는 최신 주보의 핵심구절을 목록 위에 따로 보여 주고, 그 주보의 펼침 영역에서는 뺀다
+        const featured = page === 0 && items[0].verse ? items[0] : null;
+        const featuredHtml = featured
+            ? this._verseHtml(featured, this._isThisWeek(featured.date) ? '이번 주 말씀' : '최근 주보 말씀')
+            : '';
+
         const listHtml = pageItems.map((item, relIdx) => `
             <div class="bulletin-item">
                 ${this._rowHtml(item, start + relIdx === 0)}
                 <div class="bulletin-drawer" hidden>
-                    ${this._drawerHtml(item)}
+                    ${this._drawerHtml(item, item !== featured)}
                 </div>
             </div>
         `).join('');
@@ -2212,7 +2230,7 @@ const BulletinRenderer = {
             </nav>
         ` : '';
 
-        el.innerHTML = `<div class="bulletin-list">${listHtml}</div>${pagHtml}`;
+        el.innerHTML = `${featuredHtml}<div class="bulletin-list">${listHtml}</div>${pagHtml}`;
 
         el.querySelectorAll('.bulletin-row').forEach(btn => {
             btn.addEventListener('click', () => {

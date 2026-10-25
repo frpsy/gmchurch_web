@@ -434,6 +434,7 @@ window DOMContentLoaded
       │
       ├── BulletinRenderer.render()   → #bulletin-full (bulletin.html)
       │     CHURCH_DATA.bulletins 목록 (5개씩 페이지) · 행 클릭 시 이미지·PDF 펼침
+      │     bulletins.items[].verse(sync가 data/bulletin-verses.json에서 합침): 첫 쪽 맨 위에 최신 주보의 '이번 주 말씀' 카드(.bulletin-verse), 나머지 주보는 펼침 영역 맨 앞에 표시
       ├── NewsRenderer.render()       → #news-full (news.html)
       │     bulletins.items[].news(sync가 data/bulletin-news.json에서 합침)를 게시판 목록으로 렌더 (주보 목록(bulletin-list) 스타일 재사용, 날짜 클릭 시 그 주 소식 펼침·최신 주 기본 펼침·#news-날짜 딥링크, "일시 : …" 줄은 항목표로 렌더)
       │     '이번 주' 배지는 한국 시간 기준 이번 주 주보에만, 아니면 최신 항목에 '최근 등록'

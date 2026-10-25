@@ -41,6 +41,26 @@ describe('주보 날짜 안내', () => {
     });
 });
 
+describe('주보 핵심구절', () => {
+    const item = { date: '2026-10-25', label: '2026년 10월 25일', images: ['a.jpg'], verse: { ref: '마태 22:37-40', text: '사랑하여라.' } };
+
+    it('핵심구절이 있으면 출처와 함께 그리고, 없으면 그리지 않는다', () => {
+        const { BulletinRenderer } = loadRenderers();
+        const html = BulletinRenderer._verseHtml(item, '이번 주 말씀');
+        expect(html).toContain('이번 주 말씀');
+        expect(html).toContain('사랑하여라.');
+        expect(html).toContain('마태 22:37-40');
+        expect(BulletinRenderer._verseHtml({ ...item, verse: undefined })).toBe('');
+    });
+
+    it('펼침 영역에는 구절이 앞에 오고, 최신 주보처럼 따로 보여 주는 경우엔 뺀다', () => {
+        const { BulletinRenderer } = loadRenderers();
+        const html = BulletinRenderer._drawerHtml(item);
+        expect(html.indexOf('bulletin-verse')).toBeLessThan(html.indexOf('bulletin-pages'));
+        expect(BulletinRenderer._drawerHtml(item, false)).not.toContain('bulletin-verse');
+    });
+});
+
 describe('교회 소식', () => {
     it('소식이 있는 주보만 최신 순으로 나열한다', () => {
         const { NewsRenderer, CHURCH_DATA } = loadRenderers();

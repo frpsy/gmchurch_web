@@ -126,6 +126,7 @@ const BULLETINS = path.join(ROOT, 'bulletins');
 const DATA_JS   = path.join(ROOT, 'data.js');
 const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
 const NEWS      = path.join(ROOT, 'data', 'bulletin-news.json');
+const VERSES    = path.join(ROOT, 'data', 'bulletin-verses.json');
 // 보관 규칙: 최근 8개 주보 이내이면서 8주(56일) 넘게 지나지 않은 것만 남긴다.
 // 단, 가장 최근 주보 한 건은 기간이 지나도 남겨 목록이 비지 않게 한다.
 // 새 주보가 없어도 날짜만 지나면 삭제되도록, 매일 도는 워크플로가 이 스크립트를 실행한다.
@@ -246,6 +247,18 @@ function readingsBlock(key, resolved, standardYear, withNote) {
         }
     }
 
+    let versesByWeek = {};
+    let versesNote = '';
+    if (fs.existsSync(VERSES)) {
+        try {
+            const parsed = JSON.parse(fs.readFileSync(VERSES, 'utf8'));
+            versesByWeek = parsed.weeks || {};
+            versesNote = parsed.note || '';
+        } catch (err) {
+            console.error('  bulletin-verses.json 파싱 실패:', err.message);
+        }
+    }
+
     const newItems = [...valid.keys()]
         .sort((a, b) => b.localeCompare(a))
         .map(ds => {
@@ -261,7 +274,8 @@ function readingsBlock(key, resolved, standardYear, withNote) {
                 season: (ov && ov.koreanName) || sundayLabel(ds),
                 images: valid.get(ds).map(f => `bulletins/${f}`),
                 pdf:    fs.existsSync(pdfPath) ? `bulletins/${ds}.pdf` : null,
-                news:   newsByWeek[dateKey] || []
+                news:   newsByWeek[dateKey] || [],
+                verse:  versesByWeek[dateKey] || null
             };
         });
 
@@ -274,6 +288,17 @@ function readingsBlock(key, resolved, standardYear, withNote) {
             `    ${JSON.stringify(date)}: [\n${list.map(n => `      ${JSON.stringify(n)}`).join(',\n')}\n    ]`).join(',\n');
         fs.writeFileSync(NEWS, `{\n  "note": ${JSON.stringify(newsNote)},\n  "weeks": {\n${weeksJson}\n  }\n}\n`);
         console.log('  bulletin-news.json: 보관 기간이 지난 주 정리');
+    }
+
+    // 핵심구절도 같은 기준으로 정리한다
+    const keptVerses = Object.fromEntries(
+        newItems.filter(it => it.verse).map(it => [it.date, it.verse]));
+    if (fs.existsSync(VERSES) && JSON.stringify(keptVerses) !== JSON.stringify(
+        Object.fromEntries(Object.entries(versesByWeek).sort(([a], [b]) => b.localeCompare(a))))) {
+        const weeksJson = Object.entries(keptVerses).map(([date, v]) =>
+            `    ${JSON.stringify(date)}: ${JSON.stringify(v, null, 2).replace(/\n/g, '\n    ')}`).join(',\n');
+        fs.writeFileSync(VERSES, `{\n  "note": ${JSON.stringify(versesNote)},\n  "weeks": {\n${weeksJson}\n  }\n}\n`);
+        console.log('  bulletin-verses.json: 보관 기간이 지난 주 정리');
     }
 
     // ── 5. data.js items 배열 교체 ───────────────────────────────
@@ -307,12 +332,15 @@ function readingsBlock(key, resolved, standardYear, withNote) {
             const newsLine  = it.news.length
                 ? `,\n                news: [\n${it.news.map(n => `                    { title: ${JSON.stringify(n.title)}, body: ${JSON.stringify(n.body)} }`).join(',\n')}\n                ]`
                 : '';
+            const verseLine = it.verse
+                ? `,\n                verse: { ref: ${JSON.stringify(it.verse.ref)}, text: ${JSON.stringify(it.verse.text)} }`
+                : '';
             return [
                 '            {',
                 `                date: "${it.date}",`,
                 `                label: "${it.label}",`,
                 `                season: "${it.season}",`,
-                `                images: [${imagesStr}]${pdfLine}${newsLine}`,
+                `                images: [${imagesStr}]${pdfLine}${newsLine}${verseLine}`,
                 '            }'
             ].join('\n');
         })
@@ -389,6 +417,12 @@ function readingsBlock(key, resolved, standardYear, withNote) {
         console.log('\nℹ️  교회소식 미기록 (교회 소식 페이지에 표시되지 않음):');
         newsGaps.forEach(it => console.log(
             `   - ${it.date}  → 주보 '교회소식' 란을 data/bulletin-news.json에 추가`));
+    }
+    const verseGaps = newItems.filter(it => !it.verse);
+    if (verseGaps.length) {
+        console.log('\nℹ️  핵심구절 미기록 (주보 페이지의 \'이번 주 말씀\'에 표시되지 않음):');
+        verseGaps.forEach(it => console.log(
+            `   - ${it.date}  → 본문 말씀의 핵심구절을 data/bulletin-verses.json에 추가`));
     }
     if (psalmGaps.length) {
         console.log('\nℹ️  트랙 A 주간 시편 미기록 (표준 트랙 B 시편으로 표시됨):');
