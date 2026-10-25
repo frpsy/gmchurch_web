@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
+import { CHURCH_DATA } from './helpers/loadData.js';
 import { buildSlides, paginate, splitSentences, modeOf, MAX_CHARS, MAX_LINES } from '../scripts/lib/worshipSlides.js';
 import { extractPassage, parseRef, respace } from '../scripts/lib/bible.js';
 
@@ -20,6 +21,21 @@ describe('worship-order.json', () => {
         for (const [date] of weeks) {
             expect(date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
             expect(new Date(date + 'T00:00:00').getDay()).toBe(0);
+        }
+    });
+
+    it('집전·설교 사제 이름은 사이트에 등록된 사제와 일치한다 (주보 이미지 오독 방지)', () => {
+        const names = new Set();
+        const walk = o => {
+            if (Array.isArray(o)) o.forEach(walk);
+            else if (o && typeof o === 'object') {
+                if (typeof o.name === 'string') names.add(o.name.replace(/\((.+)\)/, ' $1'));
+                Object.values(o).forEach(walk);
+            }
+        };
+        walk(CHURCH_DATA);
+        for (const [date, week] of weeks) {
+            for (const who of [week.celebrant, week.preacher]) expect(names, `${date} ${who}`).toContain(who.replace(/ 사제$/, ''));
         }
     });
 
