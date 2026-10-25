@@ -3,6 +3,7 @@
 상세 절차는 `CLAUDE.md` "주보 등록 절차", 표기는 `../church-glossary.md`가 원본이다.
 
 ## 주보를 받았을 때 (묻지 않고 끝까지)
+0. **먼저 위키를 읽는다**(`church.md`의 사람·직함, `../church-glossary.md`). 이미지에서 읽은 이름·세례명은 위키·`data.js`와 대조해 맞추고, 대조할 수 없는 이름은 읽은 대로 적되 보고에 `미확인`으로 알린다.
 1. 이미지를 `bulletins/YYYYMMDD_N.jpg`로 저장(표지부터).
 2. 3면 예배 순서면에서 제1독서·성시·제2독서·복음을 읽어 `data/lectionary-overrides.json` 기록. 연속 서사면 트랙 A(성시가 표준과 다르면 `psalm`), 예언서·복음 짝이면 트랙 B, 특별 주일은 `koreanName`+`readings`. 3면 오른쪽 아래 `다음 주일 봉사자` 표로 **다음 주 독서·성시**도 기록한다.
 3. 4면 교회소식을 `data/bulletin-news.json`에 기록(■ 항목 하나 = `{title, body}`, `일시 :` 줄은 `\n`). 통계·헌금 명단은 제외.
