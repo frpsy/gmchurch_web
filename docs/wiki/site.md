@@ -30,6 +30,7 @@
 
 ## 자동화
 - `bulletin-sync.yml`: 주보 이미지 push 시 + 매일 03:00(KST) `scripts/sync-bulletins.js` 실행. 보관은 최근 8개·56일 이내(최신 1건은 보존). 테스트 통과 시에만 커밋.
+- 예배 슬라이드: `presentation/worship/index.html`(noindex, nav·sitemap 없음, 홈페이지 소개용 `presentation/index.html`과 별개)이 `data/worship/YYYYMMDD.json`을 읽는다. 생성은 `scripts/build-worship-slides.js`(수동 실행, Actions 아님). 외부 서비스를 부르지 않는다. → `liturgy.md` "예배 슬라이드"
 - `cache-bust.yml`: main에 js/css/svg 변경이 머지되면 HTML의 `?v=`를 커밋 SHA로 갱신.
 - `sync-bulletins.js`가 하는 일: 이미지→PDF, `bulletins.items`(날짜·주일명·이미지·PDF·교회소식), `worship.currentReadings/nextReadings` 자동 파생, 경고(트랙·시편·교회소식 미기록).
 

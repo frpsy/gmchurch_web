@@ -1,0 +1,253 @@
+{
+  "note": "주보 3면(예배 순서)을 항목별로 옮긴다. 주보에 인쇄된 값만 적는다(추측 금지). by는 주보 오른쪽 칸 그대로(다 함께·집전자·맡은 분 이름·1양식). stand는 주보에서 항목 앞에 † 표시가 있는 것(주보 윗줄 '†는 일어섬'). 슬라이드 방식은 defaults.modes(full=제목과 본문, title=제목만, blank=빈 화면)에서 종류별로 정하고, 항목에 mode를 적으면 그 항목만 바꾼다.",
+  "defaults": {
+    "modes": {
+      "hymn": "full",
+      "bcp": "full",
+      "reading": "full",
+      "psalm": "full",
+      "prayer": "title",
+      "sermon": "title",
+      "notice": "title"
+    }
+  },
+  "weeks": {
+    "2026-10-25": {
+      "title": "(가해) 연중 30주일 감사성찬례",
+      "celebrant": "이남호 사도요한 사제",
+      "preacher": "민속희 마가렛 사제",
+      "form": "1형식 (C곡)",
+      "items": [
+        {
+          "section": "Ⅰ 개회예식"
+        },
+        {
+          "type": "hymn",
+          "label": "입당성가",
+          "number": 258,
+          "by": "다 함께",
+          "stand": true
+        },
+        {
+          "type": "bcp",
+          "label": "정심기도",
+          "page": 244,
+          "by": "다 함께",
+          "stand": true
+        },
+        {
+          "type": "hymn",
+          "label": "거룩하신 하느님",
+          "number": 89,
+          "by": "다 함께",
+          "stand": true
+        },
+        {
+          "section": "Ⅱ 말씀의 전례"
+        },
+        {
+          "type": "prayer",
+          "label": "본기도",
+          "by": "집전자",
+          "stand": true,
+          "text": "전능하신 하느님, 주님께서는 예수 그리스도를 통하여 사랑이 율법의 완성임을 가르쳐주셨나이다. 비오니, 우리가 주님을 온 마음으로 사랑하고 이웃을 내 몸같이 사랑하게 하소서."
+        },
+        {
+          "type": "reading",
+          "label": "제1독서",
+          "ref": "신명 34:1-12",
+          "by": "강옥금 모니카"
+        },
+        {
+          "type": "psalm",
+          "label": "성시",
+          "ref": "90편",
+          "by": "다 함께",
+          "lines": [
+            {
+              "n": 1,
+              "text": "주여, 당신은 대대손손"
+            },
+            {
+              "mark": "○",
+              "text": "우리의 피난처가 되셨나이다."
+            },
+            {
+              "n": 2,
+              "text": "산들이 생기기 전, 땅과 세상이 태어나기 전"
+            },
+            {
+              "mark": "○",
+              "text": "한 옛날부터 영원히 당신은 하느님,"
+            },
+            {
+              "n": 3,
+              "text": "당신 앞에서는 천 년도 하루와 같아"
+            },
+            {
+              "mark": "○",
+              "text": "지나간 어제 같고, 깨어 있는 밤과 같사오니"
+            },
+            {
+              "n": 4,
+              "text": "당신께서 휩쓸어 가시면, 인생은 한바탕 꿈이요"
+            },
+            {
+              "mark": "○",
+              "text": "아침에 돋아나는 풀잎입니다."
+            },
+            {
+              "n": 5,
+              "text": "동틀 녘에 당신의 사랑으로 한껏 배불러"
+            },
+            {
+              "mark": "○",
+              "text": "평생토록 기뻐 뛰며 노래하게 하소서."
+            },
+            {
+              "n": 6,
+              "text": "우리가 고생한 그 날수만큼"
+            },
+            {
+              "mark": "○",
+              "text": "어려움을 당한 그 햇수만큼 즐거움을 누리게 하소서."
+            },
+            {
+              "mark": "◉",
+              "text": "영광이 성부와"
+            },
+            {
+              "mark": "○",
+              "text": "성자와 성령께 처음과 같이 지금도"
+            },
+            {
+              "mark": "○",
+              "text": "그리고 영원히 아멘"
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "label": "제2독서",
+          "ref": "1데살 2:1-8",
+          "by": "김문경 키타리나"
+        },
+        {
+          "type": "hymn",
+          "label": "층계성가",
+          "number": 369,
+          "by": "다 함께",
+          "stand": true
+        },
+        {
+          "type": "reading",
+          "label": "복음",
+          "ref": "마태 22:34-46",
+          "by": "집전자",
+          "stand": true
+        },
+        {
+          "type": "sermon",
+          "label": "설교",
+          "by": "민속희 마가렛 사제"
+        },
+        {
+          "type": "hymn",
+          "label": "니케아신경",
+          "number": 76,
+          "by": "다 함께",
+          "stand": true
+        },
+        {
+          "type": "prayer",
+          "label": "교회와 세상을 위한 기도",
+          "by": "이인숙 데레사",
+          "stand": true
+        },
+        {
+          "section": "Ⅲ 성찬의 전례"
+        },
+        {
+          "type": "bcp",
+          "label": "평화의 인사",
+          "page": 256,
+          "by": "다 함께",
+          "stand": true
+        },
+        {
+          "type": "hymn",
+          "label": "봉헌성가",
+          "number": 500,
+          "by": "박건치 미카엘"
+        },
+        {
+          "type": "bcp",
+          "label": "성찬기도",
+          "page": 257,
+          "by": "1양식",
+          "stand": true
+        },
+        {
+          "type": "hymn",
+          "label": "거룩하시다",
+          "number": 82,
+          "by": "다 함께",
+          "stand": true
+        },
+        {
+          "type": "hymn",
+          "label": "주의기도",
+          "number": 65,
+          "by": "다 함께",
+          "stand": true
+        },
+        {
+          "type": "bcp",
+          "label": "성체나눔",
+          "page": 270,
+          "by": "다 함께",
+          "stand": true
+        },
+        {
+          "type": "hymn",
+          "label": "하느님의 어린양",
+          "number": 83,
+          "by": "다 함께"
+        },
+        {
+          "type": "hymn",
+          "label": "영성체성가",
+          "number": 208,
+          "by": "다 함께"
+        },
+        {
+          "type": "prayer",
+          "label": "영성체 후 기도",
+          "by": "집전자",
+          "stand": true
+        },
+        {
+          "section": "Ⅳ 파송예식"
+        },
+        {
+          "type": "prayer",
+          "label": "축복기도",
+          "by": "집전자",
+          "stand": true
+        },
+        {
+          "type": "notice",
+          "label": "교회소식",
+          "by": "박경준 프란시스 위원"
+        },
+        {
+          "type": "hymn",
+          "label": "파송성가",
+          "number": 272,
+          "by": "다 함께",
+          "stand": true
+        }
+      ]
+    }
+  }
+}
