@@ -158,6 +158,20 @@ const CHURCH_DATA = {
                 "caption": "천사와 교회를 그린 벽화"
             }
         ],
+        "cardTitle": "사제님께 드린 카드",
+        "cardIntro": "주일학교 아이들이 직접 쓰고 그린 카드를 민숙희 사제님께 전했습니다.",
+        "cardPhotos": [
+            {
+                "src": "card-presenting",
+                "alt": "분홍색 카드를 사제님께 건네는 두 어린이의 뒷모습",
+                "caption": "사제님께 카드를 전하는 아이들"
+            },
+            {
+                "src": "card-note",
+                "alt": "손글씨와 교회 그림으로 채운 분홍색 카드",
+                "caption": "아이들이 쓰고 그린 카드"
+            }
+        ],
         "joinTitle": "참여 안내",
         "placeLabel": "장소",
         "place": "교육관",
