@@ -815,12 +815,7 @@ const CHURCH_DATA = {
                 desc: "예배 후 함께 음식을 나누는 자리",
                 note: "비건 음식도 함께 준비됩니다",
                 footnote: "* 비건: 계란·우유도 포함하지 않는 완전 채식",
-                icon: "bowl",
-                photo: {
-                    src: "images/gallery/community/agape-vegan-jjajang.webp",
-                    alt: "비건(채식) 짜장과 논-비건(채식X) 짜장 안내문이 놓인 애찬 배식대",
-                    caption: "비건 짜장과 일반 짜장을 따로 준비한 애찬"
-                }
+                icon: "bowl"
             }
         ],
         smallgroups: {
