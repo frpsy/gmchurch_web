@@ -5002,6 +5002,39 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
     border-top: 1px solid var(--border);
 }
 .bulletin-drawer[hidden] { display: none; }
+.bulletin-verse {
+    max-width: 760px;
+    margin: 0 auto 1.5rem;
+    padding: 1.5rem 1.5rem 1.25rem;
+    background: var(--green-light);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+.bulletin-drawer .bulletin-verse {
+    max-width: none;
+    background: var(--white);
+    border: 1px solid var(--border);
+}
+.bulletin-verse-label {
+    margin: 0 0 0.75rem;
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--heading);
+}
+.bulletin-verse-text {
+    margin: 0;
+    max-width: 38rem;
+    margin-inline: auto;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-relaxed);
+    color: var(--text);
+    word-break: keep-all;
+}
+.bulletin-verse-ref {
+    margin-top: 0.75rem;
+    font-size: var(--fs-sm);
+    color: color-mix(in srgb, var(--text) 72%, var(--white));
+}
 .bulletin-empty-inner {
     font-size: var(--fs-sm);
     color: var(--text-muted);

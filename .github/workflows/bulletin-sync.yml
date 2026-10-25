@@ -1,6 +1,6 @@
 name: Sync Sunday Bulletins
 
-# 주보 목록(data.js)과 교회소식을 보관 규칙에 맞춰 갱신합니다.
+# 주보 목록(data.js)과 교회소식·핵심구절을 보관 규칙에 맞춰 갱신합니다.
 # 실행 시점
 # - bulletins/ 에 이미지가 push될 때: 새 주보 등록(PDF 생성, 절기명·전례독서 자동 계산)
 # - 매일 03:00(한국시간): 새 주보가 없어도 8주 넘게 지난 주보·교회소식을 자동 삭제
@@ -46,7 +46,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add bulletins/ data.js data/bulletin-news.json
+          git add bulletins/ data.js data/bulletin-news.json data/bulletin-verses.json
           git diff --cached --quiet && echo "변경 없음" || (
             TODAY=$(date +%Y%m%d)
             sed -i "s/data\.js?v=[A-Za-z0-9_-]*/data.js?v=${TODAY}/g" *.html
