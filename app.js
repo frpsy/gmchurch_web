@@ -1052,6 +1052,7 @@ const CommunityRenderer = {
                         <p style="color:var(--text-muted); font-size:var(--fs-desc);">${g.desc}</p>
                         ${g.note ? `<p style="font-size:var(--fs-desc); color:var(--text-muted); margin-top:0.5rem;">${g.note}</p>` : ''}
                         ${g.footnote ? `<p class="community-card-note">${g.footnote}</p>` : ''}
+                        ${g.photo ? `<figure class="community-card-photo"><img src="${g.photo.src}" alt="${g.photo.alt}" width="1000" height="607" loading="lazy" decoding="async"><figcaption>${g.photo.caption}</figcaption></figure>` : ''}
                         ${g.detailUrl ? `<a href="${g.detailUrl}" class="community-detail-link"><span>자세히 보기</span><span aria-hidden="true">→</span></a>` : ''}
                     </div>
                 `).join('')}
