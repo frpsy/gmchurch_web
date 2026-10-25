@@ -47,6 +47,7 @@
 
 ## 예배 슬라이드 (출처: `data/worship-order.json`, `presentation/worship/`, 2026-10-25 초도)
 주보 3면 예배 순서에서 웹 슬라이드(브라우저 전체화면)를 만든다. 조작: ←/→·스페이스·클릭·쓸기, `F` 전체화면, `B` 빈 화면, `O` 목차, 주소 `#번호`로 해당 슬라이드, `?date=YYYYMMDD`로 주 선택(기본은 최신).
+- 글꼴: 원티드 산스 가변(Wanted Sans Variable, OFL 1.1)을 jsDelivr에서 불러오고, 안 되면 Pretendard·시스템 글꼴로 대체한다. 사이트가 이미 방침에 밝힌 jsDelivr만 쓴다. 교회 네트워크가 막히면 대체 글꼴로 보이므로 현장 점검 때 확인한다.
 - 데이터 흐름: `worship-order.json`(주차별 순서) + `worship-texts/hymns.json`(성가 N장) + `bcp.json`(기도서 N쪽) + `readings.json`(성경 본문) → `scripts/build-worship-slides.js` → `data/worship/YYYYMMDD.json`(+`index.json`).
 - 성경 본문은 `bible/` 공동번역 PDF에서 `scripts/extract-bible.js`(빌드가 없는 본문을 자동 호출)가 뽑는다. PDF는 줄 끝이 단어 중간인지 알 수 없어 띄어쓰기를 bible.anglican.kr 공동번역에서 입히고, 두 출처의 글자가 다르면 중단한다. PDF 전체 추출은 1분 넘게 걸려 임시 폴더에 캐시한다. 2026-10-25 본문(신명 34:1-12, 1데살 2:1-8, 마태 22:34-46)은 양쪽 글자가 일치했다.
 - 슬라이드 방식(`defaults.modes`, 항목별 `mode`로 재정의): 성가·기도서·독서·성시 = `full`(제목 + 본문), 집전자 단독 기도·설교·교회소식 = `title`(제목만). 초도 기본값이며 교회 판단에 따라 바꾼다.
