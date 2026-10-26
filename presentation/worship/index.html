@@ -273,6 +273,21 @@ body.idle{cursor:none}
 
   const msg = text => { $('msg').textContent = text; $('msg').classList.add('is-on'); $('ui').style.display = 'none'; };
 
+  // 안내 만들기에서 올린 그 주 안내 그림(images/worship/notices/YYYYMMDD-1.jpg, -2.jpg …)을
+  // 맨 앞 안내 바로 뒤에 넣는다. 번호가 끊기면 거기서 멈춘다.
+  async function weeklyNotices(key) {
+    const out = [];
+    for (let n = 1; n <= 12; n++) {
+      const image = `images/worship/notices/${key}-${n}.jpg`;
+      try {
+        const res = await fetch(`../../${image}`, { method: 'HEAD' });
+        if (!res.ok || !(res.headers.get('content-type') || '').startsWith('image/')) break;
+      } catch (e) { break; }
+      out.push({ kind: 'notice', image, alt: '안내' });
+    }
+    return out;
+  }
+
   async function load() {
     const q = new URLSearchParams(location.search).get('date');
     let key = q && q.replaceAll('-', '');
@@ -284,7 +299,10 @@ body.idle{cursor:none}
     const res = await fetch(`../../data/worship/${key}.json`);
     if (!res.ok) throw new Error(`${key} 주의 슬라이드가 없습니다.`);
     data = await res.json();
-    slides = data.slides;
+    slides = data.slides.slice();
+    const extra = await weeklyNotices(key);
+    const at = slides.findIndex(s => s.kind !== 'notice');
+    slides.splice(at < 0 ? slides.length : at, 0, ...extra);
     document.title = `${data.title} | 예배 슬라이드`;
     buildOutline();
     const n = Number(location.hash.slice(1));

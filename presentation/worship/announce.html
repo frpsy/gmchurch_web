@@ -32,7 +32,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 canvas{width:100%;height:auto;aspect-ratio:16/9;background:#000;border-radius:10px;border:1px solid var(--line);display:block}
 .actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 button{font:inherit;font-weight:700;border-radius:8px;border:1px solid var(--accent);padding:8px 16px;cursor:pointer;background:var(--accent);color:var(--on-accent)}
-button.ghost{background:transparent;color:var(--accent)}
+button.ghost,.btn.ghost{background:transparent;color:var(--accent)}
+.btn{display:inline-block;font:inherit;font-weight:700;border-radius:8px;border:1px solid var(--accent);padding:8px 16px;text-decoration:none}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 button:disabled{opacity:.45;cursor:not-allowed}
 ol{margin:6px 0 0;padding-left:1.3em;color:var(--muted);font-size:.9rem}
@@ -86,6 +87,14 @@ pre{margin:6px 0 0;padding:10px;background:var(--panel);border:1px solid var(--l
         </div>
       </fieldset>
       <fieldset>
+        <label for="date">올릴 예배 날짜 · 순서</label>
+        <div style="display:flex;gap:8px">
+          <input id="date" type="date" style="flex:1;font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px">
+          <input id="num" type="number" min="1" max="12" value="1" aria-label="순서" style="width:5em;font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px">
+        </div>
+        <p class="hint">그 주 안내 그림이 여러 장이면 순서(1, 2, 3…)를 이어서 올립니다.</p>
+      </fieldset>
+      <fieldset>
         <label for="dim">사진 어둡게 <output id="dimv">0</output>%</label>
         <input id="dim" type="range" min="0" max="70" value="0">
         <p class="hint">사진이 밝아 글자가 안 읽히면 올리세요.</p>
@@ -95,14 +104,19 @@ pre{margin:6px 0 0;padding:10px;background:var(--panel);border:1px solid var(--l
       <canvas id="cv" width="1920" height="1080" aria-label="미리보기"></canvas>
       <div class="actions">
         <button id="save" type="button">JPG 내려받기</button>
-        <button id="copy" type="button" class="ghost">슬라이드 설정 복사</button>
+        <a id="upload" class="btn ghost" href="https://github.com/frpsy/gmchurch_web/upload/main/images/worship/notices" target="_blank" rel="noopener">GitHub에 올리기 열기</a>
       </div>
       <div id="status" role="status"></div>
       <ol>
-        <li>내려받은 JPG를 교회 홈페이지 저장소의 <code>images/worship/notices/</code>에 올립니다. (Claude에게 파일을 주시면 올려 드립니다.)</li>
-        <li>예배 순서 데이터의 <code>announcements</code>에 아래 설정을 넣습니다. 글자가 그림에 들어 있으므로 <code>alt</code>에 그 글자를 적습니다.</li>
+        <li><b>JPG 내려받기</b>를 누르면 <code id="fname"></code> 이름으로 저장됩니다.</li>
+        <li><b>GitHub에 올리기 열기</b>를 눌러 열린 화면에 그 파일을 끌어다 놓고 아래쪽 <b>Commit changes</b>를 누릅니다. (저장소에 쓰기 권한이 있는 GitHub 계정으로 로그인해야 합니다.)</li>
+        <li>1~2분 뒤 그 날짜 예배 슬라이드의 맨 앞 안내 다음에 자동으로 나타납니다. 따로 설정할 것은 없습니다.</li>
       </ol>
-      <pre id="snippet"></pre>
+      <details style="margin-top:10px"><summary style="cursor:pointer;color:var(--muted);font-size:.9rem">매주 고정으로 넣는 안내로 만들려면</summary>
+        <p class="hint">파일을 <code>images/worship/notices/</code>에 올리고 Claude에게 알려 주세요. 아래 설정을 <code>defaults.announcements</code>에 넣습니다. 글자가 그림에 들어 있으므로 <code>alt</code>에 그 글자를 적습니다.</p>
+        <button id="copy" type="button" class="ghost">설정 복사</button>
+        <pre id="snippet"></pre>
+      </details>
     </div>
   </div>
 </main>
@@ -173,8 +187,9 @@ pre{margin:6px 0 0;padding:10px;background:var(--panel);border:1px solid var(--l
     g.shadowBlur = 0;
   }
 
-  const stamp = () => { const d = new Date(); return `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`; };
-  const fileName = () => `notice-${stamp()}.jpg`;
+  const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  // 슬라이드가 찾는 이름: 예배날짜(YYYYMMDD)-순서.jpg
+  const fileName = () => `${($('date').value || ymd(new Date())).replaceAll('-', '')}-${Math.max(1, Math.min(12, Number($('num').value) || 1))}.jpg`;
 
   function snippet() {
     const text = $('text').value.trim();
@@ -183,7 +198,7 @@ pre{margin:6px 0 0;padding:10px;background:var(--panel);border:1px solid var(--l
     return o;
   }
 
-  function update() { $('dimv').textContent = $('dim').value; draw(); snippet(); }
+  function update() { $('dimv').textContent = $('dim').value; $('fname').textContent = fileName(); draw(); snippet(); }
 
   async function load(file) {
     if (!file || !file.type.startsWith('image/')) return;
@@ -220,6 +235,9 @@ pre{margin:6px 0 0;padding:10px;background:var(--panel);border:1px solid var(--l
     try { await navigator.clipboard.writeText(t); $('status').textContent = '설정을 복사했습니다.'; } catch (e) { $('status').textContent = '복사하지 못했습니다. 아래 설정을 직접 복사해 주세요.'; }
   });
 
+  const sunday = new Date();
+  sunday.setDate(sunday.getDate() + ((7 - sunday.getDay()) % 7)); // 오늘이 일요일이면 오늘
+  $('date').value = ymd(sunday);
   update();
   // 글꼴이 내려받아지면 다시 그린다
   document.fonts.load('800 40px "Wanted Sans Variable"', '가나다').then(draw).catch(() => {});
