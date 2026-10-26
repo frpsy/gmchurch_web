@@ -25,30 +25,30 @@ button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 #stage{position:fixed;inset:0;display:flex}
-#stage.has-nav{bottom:var(--nav-h)}
-#stage.has-sub{bottom:calc(var(--nav-h)*2)}
+#stage.has-nav{bottom:var(--nav-h);--chrome:var(--nav-h)}
+#stage.has-sub{bottom:calc(var(--nav-h)*2);--chrome:calc(var(--nav-h)*2)}
 #stage.is-blank .slide{visibility:hidden}
 .slide{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--u)*6) calc(var(--u)*11);min-width:0;overflow:hidden}
 .t{font-size:max(18px,calc(var(--u)*7));line-height:1.5;font-weight:600;letter-spacing:-.01em}
 .corner{position:absolute;right:calc(var(--u)*5);bottom:calc(var(--u)*2.5);font-size:max(13px,calc(var(--u)*3.4));color:var(--muted);font-weight:500}
 
-.slide--notice{align-items:center;text-align:center;background:#0a0a0a center/cover no-repeat}
-.slide--notice .t{font-size:max(22px,calc(var(--u)*9));line-height:1.45;font-weight:700;text-wrap:balance;position:relative}
-.slide--notice.has-image{padding:0}
-.slide--notice.has-image .t{position:absolute;max-width:80%;font-weight:800;line-height:1.28;text-shadow:0 0 calc(var(--u)*1.2) #000,0 calc(var(--u)*.3) calc(var(--u)*2.4) #000}
-.slide--notice.has-image .t.m{font-size:max(22px,calc(var(--u)*8))}
-.slide--notice.has-image .t.l{font-size:max(26px,calc(var(--u)*11))}
-.slide--notice.has-image .t.xl{font-size:max(30px,calc(var(--u)*14))}
-.slide--notice.has-image .t.lt{left:calc(var(--u)*5);top:calc(var(--u)*5);text-align:left}
-.slide--notice.has-image .t.rt{right:calc(var(--u)*5);top:calc(var(--u)*5);text-align:right}
-.slide--notice.has-image .t.lb{left:calc(var(--u)*5);bottom:calc(var(--u)*5);text-align:left}
-.slide--notice.has-image .t.rb{right:calc(var(--u)*5);bottom:calc(var(--u)*5);text-align:right}
-.slide--notice.has-image .t.c{text-align:center}
+.slide--notice{align-items:center;text-align:center}
+.slide--notice .t{font-size:max(22px,calc(var(--u)*9));line-height:1.45;font-weight:700;text-wrap:balance}
+/* 그림은 잘리지 않게 16:9 틀 안에 둔다. 세로 화면(휴대폰)에서는 위아래가 검게 남는다 */
+.slide.slide--notice.has-image,.slide.slide--theme{padding:0;align-items:center;justify-content:center}
+.frame{position:relative;flex:none;width:min(100%,calc((100vh - var(--chrome,0px))*16/9));aspect-ratio:16/9;background:#0a0a0a center/cover no-repeat;overflow:hidden}
+.slide--notice .frame .t{position:absolute;max-width:80%;font-weight:800;line-height:1.28;text-shadow:0 0 calc(var(--u)*1.2) #000,0 calc(var(--u)*.3) calc(var(--u)*2.4) #000}
+.frame .t.m{font-size:calc(var(--u)*8)}
+.frame .t.l{font-size:calc(var(--u)*11)}
+.frame .t.xl{font-size:calc(var(--u)*14)}
+.frame .t.lt{left:calc(var(--u)*5);top:calc(var(--u)*5);text-align:left}
+.frame .t.rt{right:calc(var(--u)*5);top:calc(var(--u)*5);text-align:right}
+.frame .t.lb{left:calc(var(--u)*5);bottom:calc(var(--u)*5);text-align:left}
+.frame .t.rb{right:calc(var(--u)*5);bottom:calc(var(--u)*5);text-align:right}
+.frame .t.c{left:50%;top:50%;transform:translate(-50%,-50%);text-align:center}
 
-.slide--theme{justify-content:center;background:#0a0a0a center/cover no-repeat}
-.slide--theme::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.18) 70%)}
-.slide--theme>*{position:relative}
-.slide--theme .big{font-size:max(30px,calc(var(--u)*12));font-weight:800;line-height:1.25;letter-spacing:-.02em;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+.slide--theme .frame::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.18) 70%)}
+.slide--theme .big{position:absolute;left:calc(var(--u)*8);top:50%;transform:translateY(-50%);max-width:84%;font-size:max(26px,calc(var(--u)*12));font-weight:800;line-height:1.25;letter-spacing:-.02em;text-shadow:0 2px 24px rgba(0,0,0,.5)}
 .slide--theme .big small{display:block;font-size:.72em;font-weight:600;color:var(--accent)}
 
 .slide--title{align-items:center;text-align:center;gap:calc(var(--u)*2)}
@@ -149,10 +149,14 @@ body.idle{cursor:none}
 
   function slideHtml(s) {
     switch (s.kind) {
-    case 'notice':
-      return `<section class="slide slide--notice${s.image ? ' has-image' : ''}"${bg(s)}${s.image && !s.text ? ` role="img" aria-label="${esc(s.alt)}"` : ''}>${s.text ? `<div class="t ${esc(s.size || 'l')} ${esc(s.pos || 'c')}">${esc(s.text).replace(/\n/g, '<br>')}</div>` : ''}</section>`;
+    case 'notice': {
+      const t = s.text ? `<div class="t ${s.image ? `${esc(s.size || 'l')} ${esc(s.pos || 'c')}` : ''}">${esc(s.text).replace(/\n/g, '<br>')}</div>` : '';
+      return s.image
+        ? `<section class="slide slide--notice has-image"><div class="frame"${bg(s)}${!s.text ? ` role="img" aria-label="${esc(s.alt)}"` : ''}>${t}</div></section>`
+        : `<section class="slide slide--notice">${t}</section>`;
+    }
     case 'theme':
-      return `<section class="slide slide--theme"${bg(s)}><div class="big">${esc(s.title)}${s.subtitle ? `<small>${esc(s.subtitle)}</small>` : ''}</div></section>`;
+      return `<section class="slide slide--theme"><div class="frame"${bg(s)}><div class="big">${esc(s.title)}${s.subtitle ? `<small>${esc(s.subtitle)}</small>` : ''}</div></div></section>`;
     case 'title':
       return `<section class="slide slide--title${s.theme ? ' is-theme' : ''}"><div class="label">${esc(s.label)}</div><div class="main">${esc(s.text)}</div>${s.caption ? `<div class="corner">${esc(s.caption)}</div>` : ''}</section>`;
     case 'lyrics':
