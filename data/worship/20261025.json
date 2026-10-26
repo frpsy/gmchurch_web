@@ -25,7 +25,8 @@
       "stage": "모임",
       "kind": "title",
       "label": "입당성가",
-      "text": "성가 258장"
+      "text": "성가 258장",
+      "caption": "자비하고 영원한 분"
     },
     {
       "stage": "모임",
@@ -51,7 +52,8 @@
       "stage": "모임",
       "kind": "title",
       "label": "거룩하신 하느님",
-      "text": "성가 89장"
+      "text": "성가 89장",
+      "caption": "거룩하신 하느님"
     },
     {
       "kind": "theme",
@@ -197,7 +199,8 @@
       "stage": "말씀",
       "kind": "title",
       "label": "층계성가",
-      "text": "성가 369장"
+      "text": "성가 369장",
+      "caption": "주님의 본을 따라"
     },
     {
       "stage": "말씀",
@@ -255,7 +258,8 @@
       "stage": "응답",
       "kind": "title",
       "label": "니케아신경",
-      "text": "성가 76장"
+      "text": "성가 76장",
+      "caption": "니케아신경(B)"
     },
     {
       "stage": "응답",
@@ -301,7 +305,8 @@
       "stage": "응답",
       "kind": "title",
       "label": "봉헌성가",
-      "text": "성가 500장"
+      "text": "성가 500장",
+      "caption": "새로운 계명"
     },
     {
       "stage": "응답",
@@ -545,7 +550,8 @@
       "stage": "응답",
       "kind": "title",
       "label": "영성체성가",
-      "text": "성가 208장"
+      "text": "성가 208장",
+      "caption": "지존하신 성체 앞에"
     },
     {
       "stage": "응답",
@@ -619,7 +625,8 @@
       "stage": "파송",
       "kind": "title",
       "label": "파송성가",
-      "text": "성가 272장"
+      "text": "성가 272장",
+      "caption": "갈릴리 푸른 언덕"
     }
   ]
 }

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { CHURCH_DATA } from './helpers/loadData.js';
-import { buildSlides, buildBook, paginate, STAGES, SUBS, NOTICE_POS, NOTICE_SIZE, MAX_CHARS, MAX_LINES } from '../scripts/lib/worshipSlides.js';
+import { buildSlides, buildBook, paginate, STAGES, SUBS, NOTICE_POS, NOTICE_SIZE, HYMNBOOK_URL, MAX_CHARS, MAX_LINES } from '../scripts/lib/worshipSlides.js';
 import { parseRef } from '../scripts/lib/bible.js';
 
 const json = rel => JSON.parse(readFileSync(new URL(rel, import.meta.url), 'utf8'));
@@ -195,6 +195,21 @@ describe('예식문 (book.json)', () => {
             for (const r of Object.values(readings)) for (const v of r.verses) expect(all).not.toContain(v.text.replace(/\s+/g, '').slice(0, 12));
         });
     }
+});
+
+describe('성가집 연결', () => {
+    it('주보의 성가마다 제목과 성가집 PDF 쪽이 있고, 예식문에 그 쪽 링크가 걸린다', () => {
+        for (const [date, week] of Object.entries(order.weeks)) {
+            const book = json(`../data/worship/${date.replaceAll('-', '')}.book.json`);
+            const byRef = Object.fromEntries(book.sections.flatMap(s => s.items).filter(i => i.ref?.startsWith('성가 ')).map(i => [i.ref, i]));
+            for (const item of week.items.filter(i => i.type === 'hymn')) {
+                const h = hymns[String(item.number)];
+                expect(h?.title, `성가 ${item.number}장`).toBeTruthy();
+                expect(Number.isInteger(h.pdfPage), `성가 ${item.number}장 pdfPage`).toBe(true);
+                expect(byRef[`성가 ${item.number}장`].link.url).toBe(`${HYMNBOOK_URL}#page=${h.pdfPage}`);
+            }
+        }
+    });
 });
 
 describe('성경 본문 readings.json (슬라이드에는 쓰지 않는 예비)', () => {

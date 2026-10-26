@@ -14,7 +14,12 @@
           "stand": true,
           "by": "다 함께",
           "lines": [],
-          "ref": "성가 258장"
+          "ref": "성가 258장",
+          "title": "자비하고 영원한 분",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=253",
+            "text": "성가집 악보 보기 (PDF 253쪽)"
+          }
         },
         {
           "no": 2,
@@ -40,7 +45,12 @@
           "stand": true,
           "by": "다 함께",
           "lines": [],
-          "ref": "성가 89장"
+          "ref": "성가 89장",
+          "title": "거룩하신 하느님",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=97",
+            "text": "성가집 악보 보기 (PDF 97쪽)"
+          }
         }
       ]
     },
@@ -176,7 +186,12 @@
           "stand": true,
           "by": "다 함께",
           "lines": [],
-          "ref": "성가 369장"
+          "ref": "성가 369장",
+          "title": "주님의 본을 따라",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=357",
+            "text": "성가집 악보 보기 (PDF 357쪽)"
+          }
         },
         {
           "no": 9,
@@ -227,7 +242,12 @@
           "stand": true,
           "by": "다 함께",
           "lines": [],
-          "ref": "성가 76장"
+          "ref": "성가 76장",
+          "title": "니케아신경(B)",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=83",
+            "text": "성가집 악보 보기 (PDF 83쪽)"
+          }
         },
         {
           "no": 12,
@@ -276,7 +296,12 @@
           "label": "봉헌성가",
           "by": "박건치 미카엘",
           "lines": [],
-          "ref": "성가 500장"
+          "ref": "성가 500장",
+          "title": "새로운 계명",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=483",
+            "text": "성가집 악보 보기 (PDF 483쪽)"
+          }
         },
         {
           "no": 15,
@@ -358,7 +383,11 @@
             }
           ],
           "ref": "성가 82장",
-          "title": "거룩하시다"
+          "title": "거룩하시다(C)",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=90",
+            "text": "성가집 악보 보기 (PDF 90쪽)"
+          }
         },
         {
           "no": 18,
@@ -428,7 +457,11 @@
             }
           ],
           "ref": "성가 65장",
-          "title": "주의기도"
+          "title": "주의 기도",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=73",
+            "text": "성가집 악보 보기 (PDF 73쪽)"
+          }
         },
         {
           "no": 20,
@@ -478,7 +511,11 @@
             }
           ],
           "ref": "성가 83장",
-          "title": "하느님의 어린양"
+          "title": "하느님의 어린양(C)",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=91",
+            "text": "성가집 악보 보기 (PDF 91쪽)"
+          }
         },
         {
           "no": 22,
@@ -500,7 +537,12 @@
           "label": "영성체성가",
           "by": "다 함께",
           "lines": [],
-          "ref": "성가 208장"
+          "ref": "성가 208장",
+          "title": "지존하신 성체 앞에",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=203",
+            "text": "성가집 악보 보기 (PDF 203쪽)"
+          }
         },
         {
           "no": 24,
@@ -573,7 +615,12 @@
           "stand": true,
           "by": "다 함께",
           "lines": [],
-          "ref": "성가 272장"
+          "ref": "성가 272장",
+          "title": "갈릴리 푸른 언덕",
+          "link": {
+            "url": "https://dulkuka12.github.io/khymn/hymnbook.pdf#page=266",
+            "text": "성가집 악보 보기 (PDF 266쪽)"
+          }
         }
       ]
     }

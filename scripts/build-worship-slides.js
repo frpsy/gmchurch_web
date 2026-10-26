@@ -35,7 +35,7 @@ const dates = readdirSync(dir).filter(f => /^\d{8}\.json$/.test(f)).map(f => f.s
 writeFileSync(`${dir}index.json`, JSON.stringify({ dates }, null, 2) + '\n');
 
 console.log(`data/worship/${key}.json — 슬라이드 ${slides.length}장, ${key}.book.json — 예식문`);
-for (const it of week.items.filter(i => i.type === 'hymn' && !ctx.hymns[String(i.number)]?.score)) console.log(`ℹ️ 악보 미등록: 성가 ${it.number}장 (${it.label}) — 예식문에 번호만 표시`);
+for (const it of week.items.filter(i => i.type === 'hymn' && !ctx.hymns[String(i.number)]?.score && !ctx.hymns[String(i.number)]?.pdfPage)) console.log(`ℹ️ 성가집 쪽 미등록: 성가 ${it.number}장 (${it.label}) — 예식문에 번호만 표시`);
 for (const w of warnings) console.log(`ℹ️ ${w}`);
 const extras = week.items.filter(i => i.extra).map(i => i.label);
 if (extras.length) console.log(`ℹ️ 주보에 없는 순서(교회 슬라이드 기준) ${extras.length}건: ${extras.join(', ')}`);
