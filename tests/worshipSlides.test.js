@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { CHURCH_DATA } from './helpers/loadData.js';
-import { buildSlides, buildBook, paginate, STAGES, SUBS, MAX_CHARS, MAX_LINES } from '../scripts/lib/worshipSlides.js';
+import { buildSlides, buildBook, paginate, STAGES, SUBS, NOTICE_POS, NOTICE_SIZE, MAX_CHARS, MAX_LINES } from '../scripts/lib/worshipSlides.js';
 import { parseRef } from '../scripts/lib/bible.js';
 
 const json = rel => JSON.parse(readFileSync(new URL(rel, import.meta.url), 'utf8'));
@@ -87,8 +87,10 @@ describe('슬라이드', () => {
         const { slides } = buildSlides(week, ctx);
         const text = s => (s.lines || []).map(l => l.text).join(' ');
 
-        it(`${date}: 안내로 시작하고 위치 막대 칸마다 주제 그림 슬라이드가 먼저 온다`, () => {
-            expect(slides[0].kind).toBe('intro');
+        it(`${date}: 안내(광고)로 시작하고 위치 막대 칸마다 주제 그림 슬라이드가 먼저 온다`, () => {
+            const notices = slides.filter(s => s.kind === 'notice');
+            expect(notices.length).toBe((order.defaults.announcements || []).length + (week.announcements || []).length);
+            expect(slides.slice(0, notices.length).every(s => s.kind === 'notice')).toBe(true);
             const themes = slides.filter(s => s.kind === 'theme').map(s => s.stage);
             expect(themes).toEqual(STAGES.filter(st => week.items.some(i => i.stage === st)));
             for (const st of STAGES) {
@@ -106,7 +108,7 @@ describe('슬라이드', () => {
 
         it(`${date}: 빈 슬라이드가 없고 글자·줄 수가 한도 안이다`, () => {
             for (const s of slides) {
-                if (s.kind === 'theme') continue;
+                if (s.kind === 'theme' || s.kind === 'notice') continue;
                 if (s.kind === 'title') { expect(s.text, s.label).toBeTruthy(); continue; }
                 expect(s.lines.length, `${s.label} ${s.kind}`).toBeGreaterThan(0);
                 expect(s.lines.length, s.label).toBeLessThanOrEqual(MAX_LINES);
@@ -148,6 +150,27 @@ describe('슬라이드', () => {
             }
         });
     }
+});
+
+describe('안내(광고) 슬라이드', () => {
+    it('글자나 그림이 있고, 그림 파일이 실제로 있으며, 글자 없는 그림에는 alt가 있다', () => {
+        for (const [, week] of Object.entries(order.weeks)) {
+            for (const a of [...(order.defaults.announcements || []), ...(week.announcements || [])]) {
+                expect(a.text || a.image).toBeTruthy();
+                if (a.image) expect(existsSync(new URL(`../${a.image}`, import.meta.url)), a.image).toBe(true);
+                if (a.image && !a.text) expect(a.alt, a.image).toBeTruthy();
+                if (a.pos) expect(NOTICE_POS).toContain(a.pos);
+                if (a.size) expect(NOTICE_SIZE).toContain(a.size);
+            }
+        }
+    });
+
+    it('잘못된 안내 설정은 빌드에서 막는다', () => {
+        const week = { title: 't', items: [], announcements: [{ image: 'x.jpg' }] };
+        expect(() => buildSlides(week, { ...ctx, defaults: {} })).toThrow('alt');
+        expect(() => buildSlides({ ...week, announcements: [{ text: 'a', pos: 'zz' }] }, { ...ctx, defaults: {} })).toThrow('pos');
+        expect(() => buildSlides({ ...week, announcements: [{}] }, { ...ctx, defaults: {} })).toThrow('text나 image');
+    });
 });
 
 describe('예식문 (book.json)', () => {

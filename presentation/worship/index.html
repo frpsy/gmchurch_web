@@ -32,8 +32,18 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .t{font-size:max(18px,calc(var(--u)*7));line-height:1.5;font-weight:600;letter-spacing:-.01em}
 .corner{position:absolute;right:calc(var(--u)*5);bottom:calc(var(--u)*2.5);font-size:max(13px,calc(var(--u)*3.4));color:var(--muted);font-weight:500}
 
-.slide--intro{align-items:center;text-align:center}
-.slide--intro .t{font-size:max(22px,calc(var(--u)*9));line-height:1.45;font-weight:700;text-wrap:balance}
+.slide--notice{align-items:center;text-align:center;background:#0a0a0a center/cover no-repeat}
+.slide--notice .t{font-size:max(22px,calc(var(--u)*9));line-height:1.45;font-weight:700;text-wrap:balance;position:relative}
+.slide--notice.has-image{padding:0}
+.slide--notice.has-image .t{position:absolute;max-width:80%;font-weight:800;line-height:1.28;text-shadow:0 0 calc(var(--u)*1.2) #000,0 calc(var(--u)*.3) calc(var(--u)*2.4) #000}
+.slide--notice.has-image .t.m{font-size:max(22px,calc(var(--u)*8))}
+.slide--notice.has-image .t.l{font-size:max(26px,calc(var(--u)*11))}
+.slide--notice.has-image .t.xl{font-size:max(30px,calc(var(--u)*14))}
+.slide--notice.has-image .t.lt{left:calc(var(--u)*5);top:calc(var(--u)*5);text-align:left}
+.slide--notice.has-image .t.rt{right:calc(var(--u)*5);top:calc(var(--u)*5);text-align:right}
+.slide--notice.has-image .t.lb{left:calc(var(--u)*5);bottom:calc(var(--u)*5);text-align:left}
+.slide--notice.has-image .t.rb{right:calc(var(--u)*5);bottom:calc(var(--u)*5);text-align:right}
+.slide--notice.has-image .t.c{text-align:center}
 
 .slide--theme{justify-content:center;background:#0a0a0a center/cover no-repeat}
 .slide--theme::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.18) 70%)}
@@ -139,8 +149,8 @@ body.idle{cursor:none}
 
   function slideHtml(s) {
     switch (s.kind) {
-    case 'intro':
-      return `<section class="slide slide--intro"><div class="t">${esc(s.lines[0].text)}</div></section>`;
+    case 'notice':
+      return `<section class="slide slide--notice${s.image ? ' has-image' : ''}"${bg(s)}${s.image && !s.text ? ` role="img" aria-label="${esc(s.alt)}"` : ''}>${s.text ? `<div class="t ${esc(s.size || 'l')} ${esc(s.pos || 'c')}">${esc(s.text).replace(/\n/g, '<br>')}</div>` : ''}</section>`;
     case 'theme':
       return `<section class="slide slide--theme"${bg(s)}><div class="big">${esc(s.title)}${s.subtitle ? `<small>${esc(s.subtitle)}</small>` : ''}</div></section>`;
     case 'title':
@@ -191,7 +201,7 @@ body.idle{cursor:none}
   const go = d => show(cur + d);
 
   function nameOf(s) {
-    if (s.kind === 'intro') return '안내';
+    if (s.kind === 'notice') return `안내 ${s.text || s.alt || ''}`.trim();
     if (s.kind === 'theme') return `${s.title} ${s.subtitle || ''}`.trim();
     if (s.kind === 'reading') return `${s.label} ${s.ref}`;
     return [s.label, s.kind === 'title' && s.label !== s.text ? s.text : ''].filter(Boolean).join(' ');
