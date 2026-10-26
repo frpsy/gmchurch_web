@@ -1,10 +1,10 @@
 // 예배 슬라이드(JSON)를 PowerPoint(.pptx)로 내려받는다. 브라우저 안에서 PptxGenJS로 만든다.
-// 화면(index.html)과 같은 배치 규칙을 쓰며, 높이를 100으로 본 단위(u)를 인치·pt로 옮긴다.
+// 화면(index.html)과 같은 배치 규칙을 쓰며, 슬라이드 높이를 100으로 본 단위(u)를 인치·pt로 옮긴다.
 (() => {
   const W = 13.333;
   const H = 7.5;
   const U = H / 100; // 1u (인치)
-  const PT = 8.1; // 1u의 글자 크기(pt) — 1080p 기준 10.8px × 0.75
+  const PT = 5.4; // 1u의 글자 크기(pt): 슬라이드 높이 7.5in = 540pt의 1%
   const FONT = 'Malgun Gothic';
   const STAGES = ['모임', '말씀', '응답', '파송'];
   const SUBS = ['예물 준비', '성찬기도', '성체 나눔', '영성체'];
@@ -28,7 +28,7 @@
     }, 0);
     let k = 1;
     while (k > 0.45 && need(k) > heightIn) k -= 0.04;
-    return runs.map(r => ({ ...r, options: { ...r.options, fontSize: Math.round(r.options.fontSize * k * 10) / 10, paraSpaceAfter: (r.options.paraSpaceAfter || 0) * k } }));
+    return runs.map(r => ({ ...r, options: { ...r.options, lang: 'ko-KR', fontSize: Math.round(r.options.fontSize * k * 10) / 10, paraSpaceAfter: (r.options.paraSpaceAfter || 0) * k } }));
   };
 
   async function toData(url) {
@@ -73,7 +73,7 @@
     const areaH = H - chrome;
     const bodyW = W - 1.8;
     const bodyH = areaH - 0.8;
-    const body = (runs, opt = {}) => slide.addText(Array.isArray(runs) ? squeeze(runs, bodyW, bodyH) : runs, { x: 0.9, y: 0.4, w: W - 1.8, h: areaH - 0.8, valign: 'middle', align: 'left', fontFace: FONT, color: COLOR.fg, margin: 0, ...opt });
+    const body = (runs, opt = {}) => slide.addText(Array.isArray(runs) ? squeeze(runs, bodyW, bodyH) : runs, { x: 0.9, y: 0.4, w: W - 1.8, h: areaH - 0.8, valign: 'middle', align: 'left', fontFace: FONT, color: COLOR.fg, margin: 0, lang: 'ko-KR', ...opt });
     const corner = label => label && slide.addText(label, { x: W - 5.5, y: areaH - 0.75, w: 5.1, h: 0.45, align: 'right', fontFace: FONT, fontSize: 3.4 * PT, color: COLOR.muted });
 
     switch (s.kind) {
