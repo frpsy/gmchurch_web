@@ -684,7 +684,7 @@ const ChildrenRenderer = {
             </div>
             <section class="section children-intro">
                 <div class="container children-hero-inner">
-                    <div class="children-illustration">${picture('welcome', d.heroAlt, true)}</div>
+                    <div class="children-illustration">${picture('welcome', d.heroAlt, true)}<p class="children-illustration-credit">${d.heroCredit}</p></div>
                     <div class="children-hero-details">
                         <p class="children-lead">${d.intro}</p>
                         <dl class="children-service-summary">
