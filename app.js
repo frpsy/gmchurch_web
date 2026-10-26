@@ -673,9 +673,11 @@ const ChildrenRenderer = {
         const d = CHURCH_DATA.childrenWorship;
         const service = CHURCH_DATA.worship.main.find(w => w.id === 'children');
         const parents = (CHURCH_DATA.community.smallgroups?.groups || []).find(g => g.id === 'parents');
-        const picture = (name, alt, eager = false, portrait = false) => portrait
+        const picture = (name, alt, eager = false, portrait = false) => name === 'welcome'
+            ? `<img src="images/children/welcome.jpg" alt="${alt}" width="600" height="302" fetchpriority="high" decoding="async">`
+            : portrait
             ? `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 480w, images/children/${name}.webp 640w" sizes="(max-width: 768px) 50vw, 400px" alt="${alt}" width="640" height="914" loading="lazy" decoding="async">`
-            : `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 768px) 100vw, 50vw" alt="${alt}" width="${name === 'welcome' ? 1440 : 1440}" height="${name === 'welcome' ? 720 : 1080}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+            : `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 768px) 100vw, 50vw" alt="${alt}" width="1440" height="1080" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
         el.innerHTML = `
             <div class="page-hero">
                 <p class="section-eyebrow">${d.heroEyebrow}</p>
