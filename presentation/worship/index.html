@@ -124,6 +124,7 @@ body.idle{cursor:none}
       <button id="btn-next" class="arrow" type="button" aria-label="다음 (→)">›</button>
     </div>
     <div class="group">
+      <button id="btn-pptx" type="button" aria-label="PowerPoint 파일로 내려받기">PPTX</button>
       <button id="btn-blank" type="button" aria-pressed="false" aria-label="빈 화면 (B)">빈 화면</button>
       <button id="btn-full" type="button" aria-label="전체 화면 (F)">전체 화면</button>
     </div>
@@ -238,6 +239,32 @@ body.idle{cursor:none}
   $('btn-next').onclick = () => go(1);
   $('btn-blank').onclick = () => setBlank(!blank);
   $('btn-full').onclick = toggleFull;
+
+  // PowerPoint 파일 내려받기: 인터넷이 불안한 곳에서도 쓸 수 있게 한다. 필요한 코드는 누를 때만 불러온다.
+  const loadScript = src => new Promise((resolve, reject) => {
+    const el = document.createElement('script');
+    el.src = src;
+    el.onload = resolve;
+    el.onerror = () => reject(new Error(`${src} 를 불러오지 못했습니다`));
+    document.head.appendChild(el);
+  });
+  $('btn-pptx').onclick = async () => {
+    const btn = $('btn-pptx');
+    if (btn.disabled) return;
+    btn.disabled = true;
+    const label = btn.textContent;
+    try {
+      btn.textContent = '준비 중…';
+      if (!window.PptxGenJS) await loadScript('https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js');
+      if (!window.buildWorshipPptx) await loadScript('pptx-export.js');
+      await window.buildWorshipPptx(data, slides, (i, n) => { btn.textContent = `${i}/${n}`; });
+    } catch (err) {
+      alert(`PPTX를 만들지 못했습니다. ${err.message}`);
+    } finally {
+      btn.textContent = label;
+      btn.disabled = false;
+    }
+  };
   $('btn-outline').onclick = () => toggleOutline();
   $('outline').addEventListener('click', e => {
     const b = e.target.closest('button[data-i]');
