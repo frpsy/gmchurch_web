@@ -5,6 +5,8 @@ import { parseRef } from './bible.js';
 
 export const STAGES = ['모임', '말씀', '응답', '파송'];
 export const SUBS = ['예물 준비', '성찬기도', '성체 나눔', '영성체'];
+export const NOTICE_POS = ['lt', 'rt', 'lb', 'rb', 'c'];
+export const NOTICE_SIZE = ['m', 'l', 'xl'];
 export const MAX_CHARS = 150;
 export const MAX_LINES = 8;
 
@@ -60,7 +62,14 @@ export function buildSlides(week, ctx) {
     const slides = [];
     const warnings = [];
     const theme = week.theme || {};
-    for (const text of ctx.defaults.intro || []) slides.push({ kind: 'intro', lines: [{ text }] });
+    // 맨 앞 안내(광고): 글자만, 그림 위 글자, 글자가 이미 든 그림 모두 같은 슬라이드로 만든다
+    for (const a of [...(ctx.defaults.announcements || []), ...(week.announcements || [])]) {
+        if (!a.text && !a.image) throw new Error('안내에는 text나 image가 있어야 합니다');
+        if (a.image && !a.text && !a.alt) throw new Error(`글자 없는 안내 그림에는 alt(그림 속 글자)가 필요합니다: ${a.image}`);
+        if (a.pos && !NOTICE_POS.includes(a.pos)) throw new Error(`안내 pos가 잘못됐습니다: ${a.pos}`);
+        if (a.size && !NOTICE_SIZE.includes(a.size)) throw new Error(`안내 size가 잘못됐습니다: ${a.size}`);
+        slides.push({ kind: 'notice', ...a });
+    }
 
     let stage = null;
     for (const item of week.items) {

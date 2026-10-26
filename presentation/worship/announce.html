@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>안내(광고) 슬라이드 만들기 | 성공회 광명교회</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA1NCIgYXJpYS1sYWJlbD0i6rSR66qF6rWQ7ZqMIOyXtOumsCDruZsiPjxwYXRoIGQ9Ik0yIDU0VjE4LjVDMiA5LjYgOS4yIDIuOCAxOC43NSAxLjZMMTguMzcgMTguOEgxMi40djIuOGg1LjlMMTcuNiA1NFpNMzggNTRWMTguNUMzOCA5LjYgMzAuOCAyLjggMjEuMjUgMS42TDIxLjYzIDE4LjhIMjcuNnYyLjhoLTUuOUwyMi40IDU0WiIgZmlsbD0iIzE3M2EyZSIvPjwvc3ZnPgo=" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/variable/split/WantedSansVariable.css">
+  <style>
+/* 안내(광고) 슬라이드 만들기 — 사진과 글자를 넣으면 16:9 그림(JPG)을 만든다. 사진은 이 브라우저 안에서만 처리된다. */
+:root{--bg:#fff;--fg:#141414;--muted:#666;--line:#d9d9d9;--accent:#173a2e;--panel:#f4f4f1;--on-accent:#fff;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--bg:#101412;--fg:#f2f2ee;--muted:#a3a8a4;--line:#2d3430;--accent:#b9d8b4;--panel:#181d1a;--on-accent:#101412}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Wanted Sans Variable','Wanted Sans',Pretendard,'Apple SD Gothic Neo','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased}
+main{max-width:1040px;margin:0 auto;padding:24px 16px 64px}
+h1{margin:0 0 4px;font-size:1.4rem;letter-spacing:-.02em}
+.lead{margin:0 0 18px;color:var(--muted);font-size:.95rem}
+.grid{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:20px;align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+fieldset{border:0;margin:0 0 14px;padding:0}
+label,legend{display:block;font-weight:700;font-size:.9rem;margin-bottom:4px;padding:0}
+input[type=file],textarea,select{width:100%;font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+textarea{min-height:96px;resize:vertical}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg label{display:inline-flex;align-items:center;gap:6px;font-weight:500;margin:0;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px;cursor:pointer}
+.seg input{accent-color:var(--accent)}
+.seg label:has(input:checked){border-color:var(--accent);color:var(--accent);font-weight:700}
+.hint{margin:4px 0 0;color:var(--muted);font-size:.82rem}
+canvas{width:100%;height:auto;aspect-ratio:16/9;background:#000;border-radius:10px;border:1px solid var(--line);display:block}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+button{font:inherit;font-weight:700;border-radius:8px;border:1px solid var(--accent);padding:8px 16px;cursor:pointer;background:var(--accent);color:var(--on-accent)}
+button.ghost{background:transparent;color:var(--accent)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}
+ol{margin:6px 0 0;padding-left:1.3em;color:var(--muted);font-size:.9rem}
+code{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:.88em}
+pre{margin:6px 0 0;padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:auto;font-size:.82rem;white-space:pre-wrap;word-break:break-all}
+#status{min-height:1.4em;color:var(--muted);font-size:.9rem}
+  </style>
+</head>
+<body>
+<main>
+  <h1>안내(광고) 슬라이드 만들기</h1>
+  <p class="lead">사진을 고르고 글자를 쓰면 예배 슬라이드에 넣을 그림(1920×1080 JPG)이 만들어집니다. 사진은 이 기기의 브라우저 안에서만 처리되고 어디에도 올라가지 않습니다.</p>
+  <div class="grid">
+    <div>
+      <fieldset>
+        <label for="photo">사진</label>
+        <input id="photo" type="file" accept="image/*">
+        <p class="hint">사진 없이 글자만 넣어도 됩니다. 사진을 끌어다 놓거나 붙여넣을 수도 있습니다.</p>
+      </fieldset>
+      <fieldset>
+        <label for="text">글자</label>
+        <textarea id="text">반려동물석은
+안내위원에게
+문의해 주세요.</textarea>
+        <p class="hint">줄을 바꾸면 슬라이드에서도 줄이 바뀝니다.</p>
+      </fieldset>
+      <fieldset>
+        <legend>글자 위치</legend>
+        <div class="seg" id="pos">
+          <label><input type="radio" name="pos" value="lt">왼쪽 위</label>
+          <label><input type="radio" name="pos" value="rt">오른쪽 위</label>
+          <label><input type="radio" name="pos" value="c">가운데</label>
+          <label><input type="radio" name="pos" value="lb">왼쪽 아래</label>
+          <label><input type="radio" name="pos" value="rb" checked>오른쪽 아래</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>글자 크기</legend>
+        <div class="seg" id="size">
+          <label><input type="radio" name="size" value="m">보통</label>
+          <label><input type="radio" name="size" value="l">크게</label>
+          <label><input type="radio" name="size" value="xl" checked>아주 크게</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>글자 색</legend>
+        <div class="seg" id="color">
+          <label><input type="radio" name="color" value="#ffffff" checked>흰색</label>
+          <label><input type="radio" name="color" value="#ffe27a">노랑</label>
+          <label><input type="radio" name="color" value="#111111">검정</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <label for="dim">사진 어둡게 <output id="dimv">0</output>%</label>
+        <input id="dim" type="range" min="0" max="70" value="0">
+        <p class="hint">사진이 밝아 글자가 안 읽히면 올리세요.</p>
+      </fieldset>
+    </div>
+    <div>
+      <canvas id="cv" width="1920" height="1080" aria-label="미리보기"></canvas>
+      <div class="actions">
+        <button id="save" type="button">JPG 내려받기</button>
+        <button id="copy" type="button" class="ghost">슬라이드 설정 복사</button>
+      </div>
+      <div id="status" role="status"></div>
+      <ol>
+        <li>내려받은 JPG를 교회 홈페이지 저장소의 <code>images/worship/notices/</code>에 올립니다. (Claude에게 파일을 주시면 올려 드립니다.)</li>
+        <li>예배 순서 데이터의 <code>announcements</code>에 아래 설정을 넣습니다. 글자가 그림에 들어 있으므로 <code>alt</code>에 그 글자를 적습니다.</li>
+      </ol>
+      <pre id="snippet"></pre>
+    </div>
+  </div>
+</main>
+<script>
+(() => {
+  const W = 1920;
+  const H = 1080;
+  const U = H / 100; // 높이의 1% — 슬라이드 화면의 단위와 같다
+  const SIZE = { m: 8, l: 11, xl: 14 };
+  const $ = id => document.getElementById(id);
+  const cv = $('cv');
+  const g = cv.getContext('2d');
+  let img = null;
+
+  const val = name => document.querySelector(`input[name=${name}]:checked`).value;
+
+  // 글자를 가로 80% 안에서 줄바꿈한다(사용자가 넣은 줄바꿈은 그대로)
+  function wrap(text, maxW) {
+    const out = [];
+    for (const para of text.split('\n')) {
+      let line = '';
+      for (const word of para.split(' ')) {
+        const t = line ? `${line} ${word}` : word;
+        if (line && g.measureText(t).width > maxW) { out.push(line); line = word; } else line = t;
+      }
+      out.push(line);
+    }
+    return out;
+  }
+
+  function draw() {
+    g.clearRect(0, 0, W, H);
+    g.fillStyle = '#0a0a0a';
+    g.fillRect(0, 0, W, H);
+    if (img) {
+      const s = Math.max(W / img.width, H / img.height);
+      const w = img.width * s;
+      const h = img.height * s;
+      g.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+    }
+    const dim = Number($('dim').value) / 100;
+    if (dim > 0) { g.fillStyle = `rgba(0,0,0,${dim})`; g.fillRect(0, 0, W, H); }
+    const text = $('text').value.trim();
+    if (!text) return;
+    const px = SIZE[val('size')] * U;
+    const lh = px * 1.28;
+    g.font = `800 ${px}px "Wanted Sans Variable","Wanted Sans",Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif`;
+    g.textBaseline = 'alphabetic';
+    const lines = wrap(text, W * 0.8);
+    const pos = val('pos');
+    const m = 5 * U;
+    const blockH = lh * lines.length;
+    const top = pos[1] === 't' ? m : pos[1] === 'b' ? H - m - blockH : (H - blockH) / 2;
+    const align = pos[0] === 'l' ? 'left' : pos === 'rt' || pos === 'rb' ? 'right' : 'center';
+    const x = align === 'left' ? m : align === 'right' ? W - m : W / 2;
+    g.textAlign = align;
+    g.fillStyle = val('color');
+    // 사진 위에서도 읽히도록 어두운 그림자를 두 겹 깐다
+    g.shadowColor = val('color') === '#111111' ? 'rgba(255,255,255,.7)' : 'rgba(0,0,0,.9)';
+    g.shadowBlur = 1.2 * U;
+    lines.forEach((l, i) => {
+      const y = top + lh * i + px * 0.95;
+      g.fillText(l, x, y);
+      g.shadowBlur = 2.4 * U;
+      g.fillText(l, x, y);
+      g.shadowBlur = 1.2 * U;
+    });
+    g.shadowBlur = 0;
+  }
+
+  const stamp = () => { const d = new Date(); return `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`; };
+  const fileName = () => `notice-${stamp()}.jpg`;
+
+  function snippet() {
+    const text = $('text').value.trim();
+    const o = { image: `images/worship/notices/${fileName()}`, alt: text.replace(/\n/g, ' ') };
+    $('snippet').textContent = JSON.stringify(o, null, 2);
+    return o;
+  }
+
+  function update() { $('dimv').textContent = $('dim').value; draw(); snippet(); }
+
+  async function load(file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    try {
+      img = await createImageBitmap(file, { imageOrientation: 'from-image' });
+      $('status').textContent = `사진을 불러왔습니다 (${img.width}×${img.height}).`;
+    } catch (e) {
+      $('status').textContent = '이 사진은 열 수 없습니다. 다른 사진을 골라 주세요.';
+    }
+    update();
+  }
+
+  $('photo').addEventListener('change', e => load(e.target.files[0]));
+  document.addEventListener('dragover', e => e.preventDefault());
+  document.addEventListener('drop', e => { e.preventDefault(); load(e.dataTransfer.files[0]); });
+  document.addEventListener('paste', e => { const f = [...(e.clipboardData?.files || [])][0]; if (f) load(f); });
+  document.querySelectorAll('input,textarea').forEach(el => el.addEventListener('input', update));
+
+  $('save').addEventListener('click', () => {
+    draw();
+    cv.toBlob(b => {
+      if (!b) { $('status').textContent = '그림을 만들지 못했습니다.'; return; }
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(b);
+      a.download = fileName();
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      $('status').textContent = `${fileName()} 을(를) 내려받았습니다.`;
+    }, 'image/jpeg', 0.92);
+  });
+
+  $('copy').addEventListener('click', async () => {
+    const t = JSON.stringify(snippet(), null, 2);
+    try { await navigator.clipboard.writeText(t); $('status').textContent = '설정을 복사했습니다.'; } catch (e) { $('status').textContent = '복사하지 못했습니다. 아래 설정을 직접 복사해 주세요.'; }
+  });
+
+  update();
+  // 글꼴이 내려받아지면 다시 그린다
+  document.fonts.load('800 40px "Wanted Sans Variable"', '가나다').then(draw).catch(() => {});
+  document.fonts.ready.then(draw);
+})();
+</script>
+</body>
+</html>

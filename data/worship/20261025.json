@@ -3,28 +3,17 @@
   "title": "(가해) 연중 30주일 감사성찬례",
   "slides": [
     {
-      "kind": "intro",
-      "lines": [
-        {
-          "text": "광명교회는 여러분을 환영합니다!"
-        }
-      ]
+      "kind": "notice",
+      "text": "광명교회는 여러분을 환영합니다!"
     },
     {
-      "kind": "intro",
-      "lines": [
-        {
-          "text": "반려동물석은 안내위원에게 문의해 주세요."
-        }
-      ]
+      "kind": "notice",
+      "image": "images/worship/notices/pet-seat.jpg",
+      "alt": "반려동물석은 안내위원에게 문의해 주세요."
     },
     {
-      "kind": "intro",
-      "lines": [
-        {
-          "text": "기독교 세례를 받으신 분은 누구나 성찬을 받으실 수 있습니다."
-        }
-      ]
+      "kind": "notice",
+      "text": "기독교 세례를 받으신 분은 누구나 성찬을 받으실 수 있습니다."
     },
     {
       "kind": "theme",
