@@ -1,15 +1,11 @@
 {
-  "note": "주보 3면(예배 순서)을 항목별로 옮긴다. 주보에 인쇄된 값만 적는다(추측 금지). by는 주보 오른쪽 칸 그대로(다 함께·집전자·맡은 분 이름·1양식). stand는 주보에서 항목 앞에 † 표시가 있는 것(주보 윗줄 '†는 일어섬'). 슬라이드 방식은 defaults.modes(full=제목과 본문, title=제목만, blank=빈 화면)에서 종류별로 정하고, 항목에 mode를 적으면 그 항목만 바꾼다.",
+  "note": "주보 3면(예배 순서)을 항목별로 옮기고 교회 슬라이드(TalkFile_2026…pptx) 방식으로 푼다. 슬라이드에는 예배 주제 그림·회중이 응답할 말·노래 가사·현재 위치 막대만 둔다(독서·설교·사제 기도문은 싣지 않음). 항목 필드: label·by는 주보 그대로(by=오른쪽 칸), stand=주보 앞 † (주보 윗줄 '†는 일어섬'), stage=위치 막대 칸(모임·말씀·응답·파송 — 교회 슬라이드 기준이라 주보 구역과 다를 수 있음: 니케아신경·교회와 세상을 위한 기도는 응답), sub=응답 칸의 작은 막대(예물 준비·성찬기도·성체 나눔·영성체), extra=주보에 인쇄되지 않지만 교회 슬라이드에 늘 들어가는 순서, refrain=교회와 세상을 위한 기도에서 회중이 매주 달리 하는 응답(주보에 없음, 미입력이면 제목만 뜬다).",
   "defaults": {
-    "modes": {
-      "hymn": "full",
-      "bcp": "full",
-      "reading": "full",
-      "psalm": "full",
-      "prayer": "title",
-      "sermon": "title",
-      "notice": "title"
-    }
+    "intro": [
+      "광명교회는 여러분을 환영합니다!",
+      "반려동물석은 안내위원에게 문의해 주세요.",
+      "기독교 세례를 받으신 분은 누구나 성찬을 받으실 수 있습니다."
+    ]
   },
   "weeks": {
     "2026-10-25": {
@@ -17,6 +13,11 @@
       "celebrant": "이남호 사도요한 사제",
       "preacher": "민숙희 마가렛 사제",
       "form": "1형식 (C곡)",
+      "theme": {
+        "title": "연중 30주일",
+        "subtitle": "감사성찬례",
+        "image": null
+      },
       "items": [
         {
           "section": "Ⅰ 개회예식"
@@ -26,43 +27,50 @@
           "label": "입당성가",
           "number": 258,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "모임"
         },
         {
           "type": "bcp",
           "label": "정심기도",
           "page": 244,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "모임"
         },
         {
           "type": "hymn",
           "label": "거룩하신 하느님",
           "number": 89,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "모임"
         },
         {
           "section": "Ⅱ 말씀의 전례"
         },
         {
-          "type": "prayer",
+          "type": "dialog",
           "label": "본기도",
+          "dialog": "collect",
           "by": "집전자",
           "stand": true,
-          "text": "전능하신 하느님, 주님께서는 예수 그리스도를 통하여 사랑이 율법의 완성임을 가르쳐주셨나이다. 비오니, 우리가 주님을 온 마음으로 사랑하고 이웃을 내 몸같이 사랑하게 하소서."
+          "stage": "말씀"
         },
         {
           "type": "reading",
           "label": "제1독서",
+          "kind": "구약",
           "ref": "신명 34:1-12",
-          "by": "강옥금 모니카"
+          "by": "강옥금 모니카",
+          "stage": "말씀"
         },
         {
           "type": "psalm",
           "label": "성시",
           "ref": "90편",
           "by": "다 함께",
+          "stage": "말씀",
           "lines": [
             {
               "n": 1,
@@ -129,40 +137,50 @@
         {
           "type": "reading",
           "label": "제2독서",
+          "kind": "서신",
           "ref": "1데살 2:1-8",
-          "by": "김문경 키타리나"
+          "by": "김문경 키타리나",
+          "stage": "말씀"
         },
         {
           "type": "hymn",
           "label": "층계성가",
           "number": 369,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "말씀"
         },
         {
           "type": "reading",
           "label": "복음",
+          "kind": "복음서",
+          "gospel": true,
           "ref": "마태 22:34-46",
           "by": "집전자",
-          "stand": true
+          "stand": true,
+          "stage": "말씀"
         },
         {
           "type": "sermon",
           "label": "설교",
-          "by": "민숙희 마가렛 사제"
+          "by": "민숙희 마가렛 사제",
+          "stage": "말씀"
         },
         {
           "type": "hymn",
           "label": "니케아신경",
           "number": 76,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "응답"
         },
         {
-          "type": "prayer",
+          "type": "intercession",
           "label": "교회와 세상을 위한 기도",
           "by": "이인숙 데레사",
-          "stand": true
+          "stand": true,
+          "stage": "응답",
+          "refrain": null
         },
         {
           "section": "Ⅲ 성찬의 전례"
@@ -172,80 +190,134 @@
           "label": "평화의 인사",
           "page": 256,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "응답"
         },
         {
           "type": "hymn",
           "label": "봉헌성가",
           "number": 500,
-          "by": "박건치 미카엘"
+          "by": "박건치 미카엘",
+          "stage": "응답"
+        },
+        {
+          "type": "dialog",
+          "label": "예물 기도",
+          "dialog": "offertory",
+          "by": "집전자",
+          "stage": "응답",
+          "sub": "예물 준비",
+          "extra": true
         },
         {
           "type": "bcp",
           "label": "성찬기도",
           "page": 257,
           "by": "1양식",
-          "stand": true
+          "stand": true,
+          "stage": "응답",
+          "sub": "성찬기도"
         },
         {
           "type": "hymn",
           "label": "거룩하시다",
           "number": 82,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "응답",
+          "sub": "성찬기도"
+        },
+        {
+          "type": "dialog",
+          "label": "성찬기도",
+          "dialog": "doxology",
+          "by": "집전자",
+          "stage": "응답",
+          "sub": "성찬기도",
+          "extra": true
         },
         {
           "type": "hymn",
           "label": "주의기도",
           "number": 65,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "응답",
+          "sub": "성찬기도"
         },
         {
           "type": "bcp",
           "label": "성체나눔",
           "page": 270,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "응답",
+          "sub": "성체 나눔"
         },
         {
           "type": "hymn",
           "label": "하느님의 어린양",
           "number": 83,
-          "by": "다 함께"
+          "by": "다 함께",
+          "stage": "응답",
+          "sub": "성체 나눔"
+        },
+        {
+          "type": "dialog",
+          "label": "영성체",
+          "dialog": "communion-invite",
+          "by": "집전자",
+          "stage": "응답",
+          "sub": "영성체",
+          "extra": true
         },
         {
           "type": "hymn",
           "label": "영성체성가",
           "number": 208,
-          "by": "다 함께"
+          "by": "다 함께",
+          "stage": "응답"
         },
         {
-          "type": "prayer",
+          "type": "dialog",
           "label": "영성체 후 기도",
+          "dialog": "after-communion",
           "by": "집전자",
-          "stand": true
+          "stand": true,
+          "stage": "응답"
         },
         {
           "section": "Ⅳ 파송예식"
         },
         {
-          "type": "prayer",
+          "type": "dialog",
           "label": "축복기도",
+          "dialog": "blessing",
           "by": "집전자",
-          "stand": true
+          "stand": true,
+          "stage": "파송"
+        },
+        {
+          "type": "dialog",
+          "label": "파송",
+          "dialog": "dismissal",
+          "by": "집전자",
+          "stage": "파송",
+          "extra": true
         },
         {
           "type": "notice",
           "label": "교회소식",
-          "by": "박경준 프란시스 위원"
+          "by": "박경준 프란시스 위원",
+          "stage": "파송"
         },
         {
           "type": "hymn",
           "label": "파송성가",
           "number": 272,
           "by": "다 함께",
-          "stand": true
+          "stand": true,
+          "stage": "파송"
         }
       ]
     }

@@ -1,10 +1,8 @@
 // 주보 예배 순서 → 예배 슬라이드 JSON.
 //   node scripts/build-worship-slides.js [YYYY-MM-DD]   (기본: worship-order.json의 가장 최근 주)
-// 성경 본문이 readings.json에 없으면 PDF에서 뽑아 채운다(extract-bible.js와 같은 방식).
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { buildSlides } from './lib/worshipSlides.js';
-import { extractReadings, READINGS_PATH } from './lib/readings.js';
 
 const root = new URL('../', import.meta.url);
 const json = rel => JSON.parse(readFileSync(new URL(rel, root), 'utf8'));
@@ -17,18 +15,10 @@ if (!week) {
     process.exit(1);
 }
 
-const readingsFile = json('data/worship-texts/readings.json');
-const missing = week.items.filter(i => i.type === 'reading' && !readingsFile.readings[i.ref]).map(i => i.ref);
-if (missing.length) {
-    Object.assign(readingsFile.readings, await extractReadings([...new Set(missing)]));
-    writeFileSync(READINGS_PATH, JSON.stringify(readingsFile, null, 2) + '\n');
-    console.log(`성경 본문 추가: ${missing.join(', ')}`);
-}
-
-const slides = buildSlides(week, {
+const { slides, warnings } = buildSlides(week, {
     hymns: json('data/worship-texts/hymns.json').hymns,
     bcp: json('data/worship-texts/bcp.json').pages,
-    readings: readingsFile.readings,
+    dialogs: json('data/worship-texts/responses.json').dialogs,
     defaults: order.defaults,
 });
 
@@ -41,5 +31,7 @@ const dates = readdirSync(dir).filter(f => /^\d{8}\.json$/.test(f)).map(f => f.s
 writeFileSync(`${dir}index.json`, JSON.stringify({ dates }, null, 2) + '\n');
 
 console.log(`data/worship/${key}.json — 슬라이드 ${slides.length}장`);
-const dummy = slides.filter(s => s.dummy);
-if (dummy.length) console.log(`⚠️ 더미 슬라이드 ${dummy.length}장: ${[...new Set(dummy.map(s => s.sub))].join(', ')} (성가집·기도서 파일 반영 필요)`);
+for (const w of warnings) console.log(`ℹ️ ${w}`);
+const extras = week.items.filter(i => i.extra).map(i => i.label);
+if (extras.length) console.log(`ℹ️ 주보에 없는 순서(교회 슬라이드 기준) ${extras.length}건: ${extras.join(', ')}`);
+if (!week.theme?.image) console.log('ℹ️ 주제 그림 미지정 (worship-order.json theme.image) — 그림 없이 글자만 표시');
