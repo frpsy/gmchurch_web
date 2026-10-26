@@ -136,3 +136,63 @@ export function buildSlides(week, ctx) {
     }
     return { slides, warnings };
 }
+
+// 예식문(전체 순서와 악보)용 구조. 슬라이드와 같은 데이터를 쓰되 사제 기도문을 뺀 것은 같고,
+// 소제목·번호·맡은 이·기도서 쪽·성가 번호·악보를 함께 담는다.
+export function buildBook(week, ctx) {
+    const sections = [];
+    let no = 0;
+    const flat = (slideList, vars) => slideList.flatMap((s, i) => [...(i ? [{ gap: true }] : []), ...toLines(s, vars)]);
+    for (const item of week.items) {
+        if (item.section) { sections.push({ title: item.section, items: [] }); continue; }
+        const out = {
+            no: ++no,
+            label: item.label,
+            ...(item.stand ? { stand: true } : {}),
+            ...(item.by ? { by: item.by } : {}),
+            lines: [],
+        };
+        switch (item.type) {
+        case 'hymn': {
+            const h = ctx.hymns[String(item.number)];
+            out.ref = `성가 ${item.number}장`;
+            if (h?.title) out.title = h.title;
+            if (h?.stanzas) out.lines = h.stanzas.flatMap((st, i) => [...(i ? [{ gap: true }] : []), ...st.map(text => ({ text }))]);
+            if (h?.score) out.score = h.score;
+            break;
+        }
+        case 'bcp':
+            out.ref = `기도서 ${item.page}쪽`;
+            out.lines = flat(need(ctx.bcp, item.page, '기도서 데이터').slides);
+            break;
+        case 'dialog':
+            out.lines = flat(need(ctx.dialogs, item.dialog, '응답 데이터').slides);
+            break;
+        case 'reading': {
+            const { book, chapter, from, to } = parseRef(item.ref);
+            out.ref = `${book} ${chapter}:${from}${to !== from ? `-${to}` : ''}`;
+            out.kind = item.kind;
+            const lines = [];
+            if (item.gospel) lines.push(...flat(need(ctx.dialogs, 'gospel-intro', '응답 데이터').slides, { 성인: GOSPEL_SAINT[book] }), { gap: true });
+            lines.push(...toLines(need(ctx.dialogs, item.gospel ? 'gospel-end' : 'reading-end', '응답 데이터').slides[0]));
+            out.lines = lines;
+            break;
+        }
+        case 'psalm':
+            out.ref = `시편 ${item.ref}`;
+            out.lines = item.lines.map(l => ({ text: l.text, ...(l.n ? { n: l.n } : {}), ...(l.mark ? { mark: l.mark } : {}) }));
+            if (item.score) out.score = item.score;
+            break;
+        case 'intercession':
+            out.lines = [...(item.refrain ? [{ r: 'a', text: item.refrain }, { gap: true }] : []), ...flat(need(ctx.dialogs, 'intercession-end', '응답 데이터').slides)];
+            break;
+        case 'sermon':
+        case 'notice':
+            break;
+        default:
+            throw new Error(`알 수 없는 종류: ${item.type} (${item.label})`);
+        }
+        sections.at(-1).items.push(out);
+    }
+    return { title: week.title, celebrant: week.celebrant, preacher: week.preacher, form: week.form, sections };
+}
