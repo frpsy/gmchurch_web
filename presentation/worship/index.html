@@ -4,17 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#0b1511">
+  <meta name="theme-color" content="#000000">
   <title>예배 슬라이드 | 성공회 광명교회</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA1NCIgYXJpYS1sYWJlbD0i6rSR66qF6rWQ7ZqMIOyXtOumsCDruZsiPjxwYXRoIGQ9Ik0yIDU0VjE4LjVDMiA5LjYgOS4yIDIuOCAxOC43NSAxLjZMMTguMzcgMTguOEgxMi40djIuOGg1LjlMMTcuNiA1NFpNMzggNTRWMTguNUMzOCA5LjYgMzAuOCAyLjggMjEuMjUgMS42TDIxLjYzIDE4LjhIMjcuNnYyLjhoLTUuOUwyMi40IDU0WiIgZmlsbD0iIzE3M2EyZSIvPjwvc3ZnPgo=" type="image/svg+xml">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/variable/split/WantedSansVariable.css">
-  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA1NCIgYXJpYS1sYWJlbD0i6rSR66qF6rWQ7ZqMIOyXtOumsCDruZsiPjxwYXRoIGQ9Ik0yIDU0VjE4LjVDMiA5LjYgOS4yIDIuOCAxOC43NSAxLjZMMTguMzcgMTguOEgxMi40djIuOGg1LjlMMTcuNiA1NFpNMzggNTRWMTguNUMzOCA5LjYgMzAuOCAyLjggMjEuMjUgMS42TDIxLjYzIDE4LjhIMjcuNnYyLjhoLTUuOUwyMi40IDU0WiIgZmlsbD0iIzE3M2EyZSIvPjwvc3ZnPgo=" type="image/svg+xml">
   <style>
-/* 예배 슬라이드 — 투사용 단색 배경·단색 글자, 움직임 없음. 데이터: data/worship/YYYYMMDD.json */
+/* 예배 슬라이드 — 검은 바탕·흰 글자, 움직임 없음. 데이터: data/worship/YYYYMMDD.json
+   화면에는 주제 그림·회중이 응답할 말·노래 가사·현재 위치 막대만 둔다. */
 :root{
-  --bg:#0b1511;--fg:#f4f1ea;--muted:color-mix(in srgb,var(--fg) 62%,var(--bg));
-  --accent:#b9d8b4;--gold:#e6cf8f;--warn:#f0b35a;--line:color-mix(in srgb,var(--fg) 22%,var(--bg));
-  --panel:#12221b;--ui-h:52px;color-scheme:dark;
+  --bg:#000;--fg:#fff;--muted:color-mix(in srgb,var(--fg) 58%,var(--bg));--dim:color-mix(in srgb,var(--fg) 22%,var(--bg));
+  --accent:#ffd866;--sub:#6a4c93;--panel:#161616;--line:#2c2c2c;
+  --u:min(1vh,.5625vw);--nav-h:calc(var(--u)*7.5);
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);overflow:hidden;overscroll-behavior:none}
@@ -22,79 +24,90 @@ body{font-family:'Wanted Sans Variable','Wanted Sans',Pretendard,'Apple SD Gothi
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-#stage{position:fixed;inset:0 0 var(--ui-h);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4vh 6vw;text-align:center}
-#stage.is-blank{visibility:hidden}
-.slide{width:100%;max-width:1500px;display:flex;flex-direction:column;align-items:center;gap:2.2vh}
-.kicker{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:.4em 1em;color:var(--muted);font-size:clamp(15px,min(2.8vh,2vw),30px);letter-spacing:.02em}
-.kicker .label{color:var(--gold);font-weight:650}
-.kicker .stand{color:var(--accent);margin-right:.3em}
-.by{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.05em .8em;font-size:.92em}
-.by[data-role=all]{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 50%,var(--bg))}
-.by[data-role=celebrant]{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 50%,var(--bg))}
-.part{font-variant-numeric:tabular-nums}
-.body{font-size:clamp(20px,min(5.4vh,3.7vw),64px);line-height:1.62;font-weight:500;letter-spacing:-.01em;text-wrap:balance;max-width:26em}
-.body p{margin:0}
-.body .gap{height:.9em}
-.body .mark{color:var(--accent);margin-right:.5em;font-size:.82em}
-.slide--reading .body{text-align:left}
-.slide--reading .body,.slide--psalm .body{max-width:25em}
-.slide--psalm .body{text-align:left}
-.slide--psalm .body p.resp{padding-left:1.2em;color:var(--accent)}
+#stage{position:fixed;inset:0;display:flex}
+#stage.has-nav{bottom:var(--nav-h)}
+#stage.has-sub{bottom:calc(var(--nav-h)*2)}
+#stage.is-blank .slide{visibility:hidden}
+.slide{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--u)*6) calc(var(--u)*11);min-width:0;overflow:hidden}
+.t{font-size:max(18px,calc(var(--u)*7));line-height:1.5;font-weight:600;letter-spacing:-.01em}
+.corner{position:absolute;right:calc(var(--u)*5);bottom:calc(var(--u)*2.5);font-size:max(13px,calc(var(--u)*3.4));color:var(--muted);font-weight:500}
 
-.slide--title{gap:3vh}
-.slide--title .head{font-size:clamp(34px,min(9vh,7vw),110px);font-weight:700;letter-spacing:-.03em;line-height:1.2}
-.slide--title .head .stand{color:var(--accent);margin-right:.25em;font-weight:500}
-.slide--title .sub{font-size:clamp(24px,min(6vh,4.6vw),70px);color:var(--gold);font-weight:600}
-.slide--title .by{font-size:clamp(18px,min(3.6vh,2.8vw),40px)}
+.slide--intro{align-items:center;text-align:center}
+.slide--intro .t{font-size:max(22px,calc(var(--u)*9));line-height:1.45;font-weight:700;text-wrap:balance}
 
-.slide--section .head{font-size:clamp(40px,min(11vh,8.5vw),130px);font-weight:700;letter-spacing:-.03em;color:var(--accent)}
-.slide--cover .head{font-size:clamp(34px,min(9vh,6.8vw),104px);font-weight:700;letter-spacing:-.035em;line-height:1.25}
-.slide--cover ul{list-style:none;margin:2vh 0 0;padding:0;color:var(--muted);font-size:clamp(20px,min(4vh,3vw),46px);line-height:1.7}
-.slide--cover .date{margin-top:2vh;color:var(--gold);font-size:clamp(16px,min(3vh,2.2vw),32px);letter-spacing:.08em}
+.slide--theme{justify-content:center;background:#0a0a0a center/cover no-repeat}
+.slide--theme::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.18) 70%)}
+.slide--theme>*{position:relative}
+.slide--theme .big{font-size:max(30px,calc(var(--u)*12));font-weight:800;line-height:1.25;letter-spacing:-.02em;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+.slide--theme .big small{display:block;font-size:.72em;font-weight:600;color:var(--accent)}
 
-.ribbon{position:fixed;top:0;left:0;right:0;padding:.5em 1em;background:var(--warn);color:#1b1304;font-weight:700;font-size:clamp(13px,2vh,20px);text-align:center;z-index:5}
+.slide--title{align-items:center;text-align:center;gap:calc(var(--u)*2)}
+.slide--title .label{font-size:max(18px,calc(var(--u)*4.6));color:var(--muted);font-weight:600}
+.slide--title .main{font-size:max(34px,calc(var(--u)*14));font-weight:800;letter-spacing:-.02em;line-height:1.2;text-wrap:balance}
+.slide--title.is-theme{background:#0a0a0a center/cover no-repeat}
 
-#ui{position:fixed;left:0;right:0;bottom:0;height:var(--ui-h);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 max(12px,2.5vw);background:var(--panel);border-top:1px solid var(--line);z-index:10;transition:opacity .3s}
+.slide--lyrics .t{text-wrap:balance}
+.row{display:flex;gap:calc(var(--u)*2.5);align-items:baseline}
+.row .sym{flex:none;width:1.4em;text-align:center;color:var(--accent);font-weight:700}
+.row.p,.row.l{color:var(--muted);font-size:max(16px,calc(var(--u)*5));font-weight:500;margin-bottom:calc(var(--u)*1.2)}
+.row.p .sym,.row.l .sym{color:var(--muted)}
+.row.a{font-size:max(20px,calc(var(--u)*7.4));font-weight:700;line-height:1.45;margin-bottom:calc(var(--u)*3)}
+.row .tx{text-wrap:pretty}
+
+.slide--reading .head{font-size:max(16px,calc(var(--u)*4.6));color:var(--muted);font-weight:600;margin-bottom:calc(var(--u)*1)}
+.slide--reading .ref{font-size:max(22px,calc(var(--u)*8));font-weight:800;line-height:1.3;margin-bottom:calc(var(--u)*7)}
+
+.slide--psalm .t{font-size:max(17px,calc(var(--u)*5.6));font-weight:600;line-height:1.55}
+.slide--psalm .line{display:flex;gap:calc(var(--u)*2)}
+.slide--psalm .line .mark{flex:none;width:1.4em;text-align:center;color:var(--accent)}
+.slide--psalm .line.resp{padding-left:calc(var(--u)*5);color:#ffe9a3;margin-bottom:calc(var(--u)*1.6)}
+
+#nav,#subnav{position:fixed;left:0;right:0;display:flex;background:var(--panel);height:var(--nav-h);z-index:5}
+#nav{bottom:0}
+#subnav{bottom:var(--nav-h)}
+#nav[hidden],#subnav[hidden]{display:none}
+#nav div,#subnav div{flex:1;display:flex;align-items:center;justify-content:center;font-size:max(14px,calc(var(--u)*4.2));font-weight:600;color:var(--dim);border-left:1px solid var(--bg)}
+#nav div:first-child,#subnav div:first-child{border-left:0}
+#nav div.done{color:var(--muted)}
+#nav div.cur{background:var(--fg);color:var(--bg);font-weight:800}
+#subnav div{background:color-mix(in srgb,var(--sub) 38%,var(--bg));color:color-mix(in srgb,var(--fg) 60%,var(--sub))}
+#subnav div.cur{background:var(--fg);color:var(--bg);font-weight:800}
+
+#ui{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px max(10px,2vw);background:linear-gradient(#000c,#0000);z-index:10;transition:opacity .3s}
 body.idle #ui{opacity:0;pointer-events:none}
 body.idle{cursor:none}
-#ui .group{display:flex;align-items:center;gap:6px}
-#ui button{min-width:40px;height:36px;padding:0 10px;white-space:nowrap;border:1px solid transparent;background:transparent;border-radius:6px;font-size:15px}
-#ui button:hover{background:color-mix(in srgb,var(--fg) 12%,var(--panel));border-color:var(--line)}
+#ui .group{display:flex;align-items:center;gap:4px}
+#ui button{min-width:40px;height:36px;padding:0 10px;border:1px solid transparent;background:#0008;border-radius:6px;font-size:15px;white-space:nowrap}
+#ui button:hover{border-color:#fff5}
 #ui .arrow{font-size:22px}
-#counter{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px;white-space:nowrap}
+#counter{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px;white-space:nowrap;padding:0 6px}
 #counter b{color:var(--fg)}
-#progress{position:absolute;left:0;top:-1px;height:2px;background:var(--accent);width:0}
 
-#outline{position:fixed;top:0;left:0;bottom:var(--ui-h);width:min(440px,92vw);background:var(--panel);border-right:1px solid var(--line);padding:18px 14px 12px;overflow-y:auto;transform:translateX(-102%);transition:transform .25s;z-index:20;text-align:left}
+#outline{position:fixed;top:0;left:0;bottom:0;width:min(440px,92vw);background:var(--panel);border-right:1px solid var(--line);padding:56px 14px 12px;overflow-y:auto;transform:translateX(-102%);transition:transform .25s;z-index:20;text-align:left}
 #outline.is-open{transform:none}
-#outline h2{margin:0 0 6px;font-size:15px;color:var(--gold)}
-#outline p.legend{margin:0 0 12px;color:var(--muted);font-size:13px}
 #outline .sec{margin:14px 0 4px;font-size:13px;color:var(--accent);letter-spacing:.06em}
 #outline ol{list-style:none;margin:0;padding:0}
-#outline button{display:flex;gap:10px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;padding:9px 4px;font-size:15px;color:color-mix(in srgb,var(--fg) 85%,var(--bg))}
-#outline button:hover,#outline button[aria-current=true]{background:color-mix(in srgb,var(--fg) 12%,var(--panel));color:var(--fg)}
+#outline button{display:flex;gap:10px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;padding:9px 4px;font-size:15px;color:#ddd}
+#outline button:hover,#outline button[aria-current=true]{background:#2a2a2a;color:#fff}
 #outline .n{min-width:2em;color:var(--muted);font-variant-numeric:tabular-nums}
-#outline .dummy{margin-left:auto;color:var(--warn);font-size:12px}
 
 #msg{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;text-align:center;font-size:18px;line-height:1.7;color:var(--muted)}
 #msg.is-on{display:flex}
 .skip{position:fixed;left:8px;top:-60px;background:var(--fg);color:var(--bg);padding:8px 12px;z-index:30}
 .skip:focus{top:8px}
-@media (max-width:520px){#ui{gap:4px;padding:0 6px}#ui button{padding:0 6px;font-size:13px}}
+@media (max-width:520px){#ui button{padding:0 6px;font-size:13px}.slide{padding:calc(var(--u)*6) 18px}}
 @media (prefers-reduced-motion:reduce){#outline,#ui{transition:none}}
   </style>
 </head>
 <body>
   <a class="skip" href="#stage">슬라이드로 바로가기</a>
-  <div id="ribbon" class="ribbon" hidden>더미 — 성가집·기도서 파일 반영 전의 임시 문구입니다</div>
   <main id="stage" aria-live="polite" tabindex="-1"></main>
+  <div id="subnav" hidden aria-label="응답 단계"></div>
+  <nav id="nav" hidden aria-label="예배 순서 위치"></nav>
   <div id="msg" role="status"></div>
   <aside id="outline" aria-label="목차"></aside>
-  <nav id="ui" aria-label="슬라이드 조작">
-    <div id="progress"></div>
-    <div class="group">
-      <button id="btn-outline" type="button" aria-label="목차 열기 (O)" aria-expanded="false">목차</button>
-    </div>
+  <div id="ui">
+    <div class="group"><button id="btn-outline" type="button" aria-label="목차 열기 (O)" aria-expanded="false">목차</button></div>
     <div class="group">
       <button id="btn-prev" class="arrow" type="button" aria-label="이전 (←)">‹</button>
       <span id="counter"></span>
@@ -104,42 +117,62 @@ body.idle{cursor:none}
       <button id="btn-blank" type="button" aria-pressed="false" aria-label="빈 화면 (B)">빈 화면</button>
       <button id="btn-full" type="button" aria-label="전체 화면 (F)">전체 화면</button>
     </div>
-  </nav>
+  </div>
   <script>
 (() => {
   const $ = id => document.getElementById(id);
   const stage = $('stage');
+  const STAGES = ['모임', '말씀', '응답', '파송'];
+  const SUBS = ['예물 준비', '성찬기도', '성체 나눔', '영성체'];
+  const SYM = { p: '†', l: '○', a: '◎' };
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   let data = null;
   let slides = [];
   let cur = 0;
+  let blank = false;
 
-  const roleOf = by => (by === '다 함께' ? 'all' : by === '집전자' ? 'celebrant' : 'person');
-  const byHtml = by => (by ? `<span class="by" data-role="${roleOf(by)}">${esc(by)}</span>` : '');
-  const standHtml = s => (s.stand ? '<span class="stand" aria-label="일어섭니다">†</span>' : '');
+  const rowHtml = l => (l.r
+    ? `<div class="row ${l.r}"><span class="sym" aria-hidden="true">${SYM[l.r]}</span><span class="tx">${esc(l.text)}</span></div>`
+    : `<div class="t">${esc(l.text)}</div>`);
+  const corner = s => (s.label ? `<div class="corner">${esc(s.label)}</div>` : '');
+  const bg = s => (s.image ? ` style="background-image:url('${/^https?:/.test(s.image) ? '' : '../../'}${esc(s.image)}')"` : '');
 
   function slideHtml(s) {
     switch (s.kind) {
-    case 'cover':
-      return `<section class="slide slide--cover"><h1 class="head">${esc(s.title)}</h1><ul>${s.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul><div class="date">${esc(data.date.replaceAll('-', '. '))}</div></section>`;
-    case 'section':
-      return `<section class="slide slide--section"><h2 class="head">${esc(s.title)}</h2></section>`;
+    case 'intro':
+      return `<section class="slide slide--intro"><div class="t">${esc(s.lines[0].text)}</div></section>`;
+    case 'theme':
+      return `<section class="slide slide--theme"${bg(s)}><div class="big">${esc(s.title)}${s.subtitle ? `<small>${esc(s.subtitle)}</small>` : ''}</div></section>`;
     case 'title':
-      return `<section class="slide slide--title"><div class="head">${standHtml(s)}${esc(s.label)}</div>${s.sub ? `<div class="sub">${esc(s.sub)}</div>` : ''}${byHtml(s.by)}</section>`;
-    case 'text': {
-      const kind = s.label === '성시' ? 'psalm' : /독서|복음/.test(s.label) ? 'reading' : 'lyrics';
-      const body = s.lines.map(l => (l.gap ? '<div class="gap"></div>' : `<p${l.mark === '○' ? ' class="resp"' : ''}>${l.mark ? `<span class="mark">${esc(l.mark)}</span>` : ''}${esc(l.text)}</p>`)).join('');
-      return `<section class="slide slide--${kind}"><div class="kicker"><span class="label">${standHtml(s)}${esc(s.label)}</span>${s.sub ? `<span>${esc(s.sub)}</span>` : ''}${byHtml(s.by)}${s.part ? `<span class="part">${esc(s.part)}</span>` : ''}</div><div class="body">${body}</div></section>`;
-    }
+      return `<section class="slide slide--title${s.theme ? ' is-theme' : ''}"><div class="label">${esc(s.label)}</div><div class="main">${esc(s.text)}</div>${s.caption ? `<div class="corner">${esc(s.caption)}</div>` : ''}</section>`;
+    case 'lyrics':
+      return `<section class="slide slide--lyrics">${s.lines.map(rowHtml).join('')}${corner(s)}</section>`;
+    case 'dialog':
+      return `<section class="slide slide--dialog">${s.lines.map(rowHtml).join('')}${corner(s)}</section>`;
+    case 'reading':
+      return `<section class="slide slide--reading"><div class="head">${esc(s.label)}</div><div class="ref">${esc(s.ref)}</div>${s.lines.map(rowHtml).join('')}</section>`;
+    case 'psalm':
+      return `<section class="slide slide--psalm"><div class="t">${s.lines.map(l => `<div class="line${l.mark === '○' ? ' resp' : ''}"><span class="mark" aria-hidden="true">${esc(l.mark || '')}</span><span>${esc(l.text)}</span></div>`).join('')}</div>${corner(s)}</section>`;
     default:
       return '';
     }
   }
 
-  let blank = false;
+  // 위치 막대: 지나온 칸은 흐리게, 지금 칸은 흰 바탕
+  function renderNav(s) {
+    const idx = STAGES.indexOf(s.stage);
+    $('nav').hidden = idx < 0;
+    $('nav').innerHTML = idx < 0 ? '' : STAGES.map((n, i) => `<div class="${i < idx ? 'done' : i === idx ? 'cur' : ''}"${i === idx ? ' aria-current="step"' : ''}>${n}</div>`).join('');
+    const si = SUBS.indexOf(s.sub);
+    $('subnav').hidden = si < 0;
+    $('subnav').innerHTML = si < 0 ? '' : SUBS.map((n, i) => `<div class="${i === si ? 'cur' : ''}"${i === si ? ' aria-current="step"' : ''}>${n}</div>`).join('');
+    stage.classList.toggle('has-nav', idx >= 0);
+    stage.classList.toggle('has-sub', si >= 0);
+  }
+
   function setBlank(on) {
     blank = on;
-    stage.classList.toggle('is-blank', blank || slides[cur]?.kind === 'blank');
+    stage.classList.toggle('is-blank', blank);
     $('btn-blank').setAttribute('aria-pressed', String(blank));
   }
 
@@ -147,10 +180,9 @@ body.idle{cursor:none}
     cur = Math.max(0, Math.min(slides.length - 1, i));
     const s = slides[cur];
     stage.innerHTML = slideHtml(s);
+    renderNav(s);
     setBlank(false);
-    $('ribbon').hidden = !s.dummy;
     $('counter').innerHTML = `<b>${cur + 1}</b> / ${slides.length}`;
-    $('progress').style.width = `${((cur + 1) / slides.length) * 100}%`;
     $('btn-prev').disabled = cur === 0;
     $('btn-next').disabled = cur === slides.length - 1;
     document.querySelectorAll('#outline button').forEach((b, k) => b.toggleAttribute('aria-current', k === cur));
@@ -158,22 +190,22 @@ body.idle{cursor:none}
   }
   const go = d => show(cur + d);
 
+  function nameOf(s) {
+    if (s.kind === 'intro') return '안내';
+    if (s.kind === 'theme') return `${s.title} ${s.subtitle || ''}`.trim();
+    if (s.kind === 'reading') return `${s.label} ${s.ref}`;
+    return [s.label, s.kind === 'title' && s.label !== s.text ? s.text : ''].filter(Boolean).join(' ');
+  }
+
   function buildOutline() {
-    let html = '<h2>목차</h2><p class="legend">† 일어섭니다</p>';
-    let sec = null;
-    let list = false;
+    let html = '';
+    let last = '\0';
     slides.forEach((s, i) => {
-      if (s.kind === 'section' || s.kind === 'cover') {
-        if (list) html += '</ol>';
-        html += `<div class="sec">${esc(s.title)}</div><ol>`;
-        list = true;
-        sec = s.title;
-        if (s.kind === 'section') return;
-      }
-      const name = s.kind === 'cover' ? '표지' : `${s.stand ? '† ' : ''}${s.label || ''}${s.sub ? ` ${s.sub}` : ''}${s.part ? ` (${s.part})` : ''}`;
-      html += `<li><button type="button" data-i="${i}"><span class="n">${i + 1}</span><span>${esc(name)}</span>${s.dummy ? '<span class="dummy">더미</span>' : ''}</button></li>`;
+      const sec = s.stage || '안내';
+      if (sec !== last) { if (last !== '\0') html += '</ol>'; html += `<div class="sec">${esc(sec)}</div><ol>`; last = sec; }
+      html += `<li><button type="button" data-i="${i}"><span class="n">${i + 1}</span><span>${esc(nameOf(s))}</span></button></li>`;
     });
-    $('outline').innerHTML = html + (list ? '</ol>' : '');
+    $('outline').innerHTML = html + '</ol>';
   }
 
   function toggleOutline(force) {
@@ -213,7 +245,7 @@ body.idle{cursor:none}
     else if (k === 'Escape') toggleOutline(false);
   });
 
-  // 화면 가장자리 누름: 왼쪽 30%는 이전, 나머지는 다음. 좌우 쓸기도 지원
+  // 화면 누름: 왼쪽 30%는 이전, 나머지는 다음. 좌우 쓸기도 지원
   stage.addEventListener('click', e => { toggleOutline(false); go(e.clientX < innerWidth * 0.3 ? -1 : 1); });
   let sx = null;
   document.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
@@ -226,7 +258,7 @@ body.idle{cursor:none}
 
   // 조작 막대와 커서는 가만히 있으면 숨긴다
   let idleTimer;
-  const wake = () => { document.body.classList.remove('idle'); clearTimeout(idleTimer); idleTimer = setTimeout(() => document.body.classList.add('idle'), 3500); };
+  const wake = () => { document.body.classList.remove('idle'); clearTimeout(idleTimer); idleTimer = setTimeout(() => document.body.classList.add('idle'), 3000); };
   ['mousemove', 'touchstart', 'keydown'].forEach(ev => document.addEventListener(ev, wake, { passive: true }));
 
   const msg = text => { $('msg').textContent = text; $('msg').classList.add('is-on'); $('ui').style.display = 'none'; };

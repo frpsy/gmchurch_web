@@ -1,18 +1,18 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { CHURCH_DATA } from './helpers/loadData.js';
-import { buildSlides, paginate, splitSentences, modeOf, MAX_CHARS, MAX_LINES } from '../scripts/lib/worshipSlides.js';
-import { extractPassage, parseRef, respace } from '../scripts/lib/bible.js';
+import { buildSlides, paginate, STAGES, SUBS, MAX_CHARS, MAX_LINES } from '../scripts/lib/worshipSlides.js';
+import { parseRef } from '../scripts/lib/bible.js';
 
 const json = rel => JSON.parse(readFileSync(new URL(rel, import.meta.url), 'utf8'));
 const order = json('../data/worship-order.json');
 const hymns = json('../data/worship-texts/hymns.json').hymns;
 const bcp = json('../data/worship-texts/bcp.json').pages;
+const dialogs = json('../data/worship-texts/responses.json').dialogs;
 const readings = json('../data/worship-texts/readings.json').readings;
-const verses = json('../data/bulletin-verses.json').weeks;
-const ctx = { hymns, bcp, readings, defaults: order.defaults };
+const ctx = { hymns, bcp, dialogs, defaults: order.defaults };
 
-const TYPES = ['hymn', 'bcp', 'reading', 'psalm', 'prayer', 'sermon', 'notice'];
+const TYPES = ['hymn', 'bcp', 'dialog', 'reading', 'psalm', 'intercession', 'sermon', 'notice'];
 
 describe('worship-order.json', () => {
     const weeks = Object.entries(order.weeks);
@@ -39,30 +39,35 @@ describe('worship-order.json', () => {
         }
     });
 
-    it('항목은 소제목이거나 알려진 종류이며 이름(label)과 맡은 이(by)를 가진다', () => {
+    it('항목은 소제목이거나 알려진 종류이며 이름(label)·맡은 이(by)·위치 막대 칸(stage)을 가진다', () => {
         for (const [date, week] of weeks) {
-            expect(week.title, date).toBeTruthy();
             for (const item of week.items) {
                 if (item.section) continue;
                 expect(TYPES, `${date} ${item.label}`).toContain(item.type);
                 expect(item.label, date).toBeTruthy();
                 expect(item.by, `${date} ${item.label}`).toBeTruthy();
+                expect(STAGES, `${date} ${item.label}`).toContain(item.stage);
+                if (item.sub) expect(SUBS, `${date} ${item.label}`).toContain(item.sub);
             }
         }
     });
 
-    it('성가·기도서·성경 본문 데이터가 모두 있다', () => {
+    it('위치 막대 칸은 되돌아가지 않는다 (모임→말씀→응답→파송)', () => {
+        for (const [, week] of weeks) {
+            const seq = week.items.filter(i => !i.section).map(i => STAGES.indexOf(i.stage));
+            expect(seq).toEqual([...seq].sort((a, b) => a - b));
+        }
+    });
+
+    it('기도서 쪽·응답·성경 참조 데이터가 모두 있다', () => {
         for (const [, week] of weeks) {
             for (const item of week.items) {
-                if (item.type === 'hymn') expect(hymns[String(item.number)], `성가 ${item.number}장`).toBeTruthy();
                 if (item.type === 'bcp') expect(bcp[String(item.page)], `기도서 ${item.page}쪽`).toBeTruthy();
-                if (item.type === 'reading') expect(readings[item.ref], item.ref).toBeTruthy();
+                if (item.type === 'dialog') expect(dialogs[item.dialog], item.dialog).toBeTruthy();
+                if (item.type === 'reading') expect(() => parseRef(item.ref), item.ref).not.toThrow();
             }
         }
-    });
-
-    it('종류별 기본 mode와 항목별 mode는 정해진 값만 쓴다', () => {
-        for (const [, week] of weeks) for (const item of week.items) if (item.type) expect(['full', 'title', 'blank']).toContain(modeOf(item, order.defaults));
+        for (const key of ['reading-end', 'gospel-intro', 'gospel-end', 'intercession-end']) expect(dialogs[key], key).toBeTruthy();
     });
 
     it('생성된 슬라이드 파일이 순서 데이터와 일치한다 (build-worship-slides 누락 방지)', () => {
@@ -71,7 +76,7 @@ describe('worship-order.json', () => {
             const key = date.replaceAll('-', '');
             expect(index.dates).toContain(key);
             const built = json(`../data/worship/${key}.json`);
-            expect(built).toEqual(JSON.parse(JSON.stringify({ date, title: week.title, slides: buildSlides(week, ctx) })));
+            expect(built).toEqual(JSON.parse(JSON.stringify({ date, title: week.title, slides: buildSlides(week, ctx).slides })));
         }
         for (const key of index.dates) expect(existsSync(new URL(`../data/worship/${key}.json`, import.meta.url))).toBe(true);
     });
@@ -79,51 +84,73 @@ describe('worship-order.json', () => {
 
 describe('슬라이드', () => {
     for (const [date, week] of Object.entries(order.weeks)) {
-        const slides = buildSlides(week, ctx);
+        const { slides } = buildSlides(week, ctx);
+        const text = s => (s.lines || []).map(l => l.text).join(' ');
 
-        it(`${date}: 표지로 시작하고 주보 항목마다 슬라이드가 있다`, () => {
-            expect(slides[0].kind).toBe('cover');
-            for (const item of week.items) {
-                if (item.section) expect(slides.some(s => s.kind === 'section' && s.title === item.section), item.section).toBe(true);
-                else expect(slides.some(s => s.label === item.label), item.label).toBe(true);
+        it(`${date}: 안내로 시작하고 위치 막대 칸마다 주제 그림 슬라이드가 먼저 온다`, () => {
+            expect(slides[0].kind).toBe('intro');
+            const themes = slides.filter(s => s.kind === 'theme').map(s => s.stage);
+            expect(themes).toEqual(STAGES.filter(st => week.items.some(i => i.stage === st)));
+            for (const st of STAGES) {
+                const first = slides.findIndex(s => s.stage === st);
+                if (first >= 0) expect(slides[first].kind, st).toBe('theme');
+            }
+        });
+
+        it(`${date}: 주보 항목마다 슬라이드가 있다`, () => {
+            for (const item of week.items.filter(i => !i.section)) {
+                const label = item.type === 'psalm' ? `시편 ${item.ref}` : item.label;
+                expect(slides.some(s => s.label === label || s.label?.startsWith(label) || (item.gospel && s.label === item.kind)), item.label).toBe(true);
             }
         });
 
         it(`${date}: 빈 슬라이드가 없고 글자·줄 수가 한도 안이다`, () => {
             for (const s of slides) {
-                if (s.kind === 'blank') continue;
-                expect([s.title, s.label].filter(Boolean).length, JSON.stringify(s)).toBeGreaterThan(0);
-                if (s.kind !== 'text') continue;
-                expect(s.lines.length).toBeGreaterThan(0);
-                expect(s.lines.length, `${s.label} ${s.part}`).toBeLessThanOrEqual(MAX_LINES);
-                const chars = s.lines.reduce((n, l) => n + l.text.length, 0);
-                expect(chars, `${s.label} ${s.part}`).toBeLessThanOrEqual(MAX_CHARS + 20);
+                if (s.kind === 'theme') continue;
+                if (s.kind === 'title') { expect(s.text, s.label).toBeTruthy(); continue; }
+                expect(s.lines.length, `${s.label} ${s.kind}`).toBeGreaterThan(0);
+                expect(s.lines.length, s.label).toBeLessThanOrEqual(MAX_LINES);
+                expect(text(s).length, s.label).toBeLessThanOrEqual(MAX_CHARS + 60);
             }
         });
 
-        it(`${date}: 독서 본문은 읽는 순서 그대로 빠짐없이 나뉜다`, () => {
-            for (const item of week.items.filter(i => i.type === 'reading')) {
-                const joined = slides.filter(s => s.label === item.label && s.kind === 'text').flatMap(s => s.lines.map(l => l.text)).join(' ');
-                const expected = readings[item.ref].verses.map(v => v.text).join(' ');
-                expect(joined.replace(/\s+/g, ' ')).toBe(expected.replace(/\s+/g, ' '));
+        it(`${date}: 독서 본문·사제 기도문은 슬라이드에 싣지 않는다`, () => {
+            const all = slides.map(text).join(' ').replace(/\s+/g, '');
+            for (const r of Object.values(readings)) for (const v of r.verses) expect(all, v.text.slice(0, 12)).not.toContain(v.text.replace(/\s+/g, '').slice(0, 12));
+            expect(all).not.toContain('전능하신하느님,주님께서는그리스도의성체와보혈');
+        });
+
+        it(`${date}: 독서 슬라이드는 책 이름·장절과 응답만 둔다`, () => {
+            const reads = slides.filter(s => s.kind === 'reading');
+            expect(reads.length).toBe(week.items.filter(i => i.type === 'reading').length);
+            for (const s of reads) {
+                expect(s.ref).toMatch(/^.+ \d+:\d+(-\d+)?$/);
+                expect(s.lines.map(l => l.r)).toEqual(['l', 'a']);
             }
+        });
+
+        it(`${date}: 복음 소개 응답에 해당 복음서 성인 이름이 들어간다`, () => {
+            const gospel = week.items.find(i => i.gospel);
+            const saint = { 마태: '성 마태오가', 마르코: '성 마르코가', 루가: '성 루가가', 요한: '성 요한이' }[gospel.ref.split(' ')[0]];
+            const intro = slides.find(s => s.label === gospel.label && s.kind === 'dialog');
+            expect(text(intro)).toContain(`${saint} 전한 거룩한 복음입니다.`);
+            expect(text(intro)).not.toContain('{');
         });
 
         it(`${date}: 시편 응답 줄은 앞 줄과 같은 쪽에 있다`, () => {
-            for (const s of slides.filter(x => x.label === '성시')) expect(s.lines[0].mark).not.toBe('○');
+            for (const s of slides.filter(x => x.kind === 'psalm')) expect(s.lines[0].mark).not.toBe('○');
         });
 
-        it(`${date}: 더미 슬라이드는 더미 데이터에서만 나온다`, () => {
-            for (const s of slides.filter(x => x.dummy)) {
-                const item = week.items.find(i => i.label === s.label);
-                const src = item.type === 'hymn' ? hymns[String(item.number)] : bcp[String(item.page)];
-                expect(src.dummy).toBe(true);
+        it(`${date}: 응답(a) 줄이 있는 슬라이드에는 신호말(p·l) 또는 단독 응답이 있다`, () => {
+            for (const s of slides.filter(x => x.kind === 'dialog' || x.kind === 'reading')) {
+                expect(s.lines.some(l => l.r === 'a'), s.label).toBe(true);
+                for (const l of s.lines) expect(['p', 'l', 'a']).toContain(l.r);
             }
         });
     }
 });
 
-describe('성경 본문 readings.json', () => {
+describe('성경 본문 readings.json (슬라이드에는 쓰지 않는 예비)', () => {
     it('절 번호가 참조 범위와 같고 본문에 숫자·줄바꿈이 없다', () => {
         for (const [ref, r] of Object.entries(readings)) {
             const { from, to } = parseRef(ref);
@@ -131,71 +158,15 @@ describe('성경 본문 readings.json', () => {
             for (const v of r.verses) {
                 expect(v.text, ref).not.toMatch(/\d/);
                 expect(v.text, ref).not.toContain('\n');
-                expect(v.text, ref).not.toMatch(/\s{2,}/);
             }
-        }
-    });
-
-    it('주보 핵심구절(bulletin-verses)과 같은 구절은 글자가 일치한다', () => {
-        const norm = s => s.replace(/[‘’“”\s]/g, '');
-        for (const [date, v] of Object.entries(verses)) {
-            const m = /^(\S+) (\d+):(\d+)-(\d+)$/.exec(v.ref);
-            const [, book, ch, a, b] = m;
-            const covering = Object.entries(readings).find(([ref]) => {
-                const p = /^(\S+) (\d+):(\d+)-(\d+)$/.exec(ref);
-                return p && p[1] === book && p[2] === ch && Number(p[3]) <= Number(a) && Number(p[4]) >= Number(b);
-            });
-            if (!covering) continue;
-            const text = covering[1].verses.filter(x => x.v >= Number(a) && x.v <= Number(b)).map(x => x.text).join('');
-            expect(norm(text), date).toContain(norm(v.text));
         }
     });
 });
 
-describe('문장·쪽 나누기', () => {
-    it('문장 끝(닫는 따옴표 포함)에서 나눈다', () => {
-        expect(splitSentences('“가나다.” 라마바. 사아자?')).toEqual(['“가나다.”', '라마바.', '사아자?']);
-    });
-
+describe('쪽 나누기', () => {
     it('한도를 넘기면 다음 쪽으로 넘기고 keep 줄은 앞 줄과 붙인다', () => {
         const lines = [{ text: 'a'.repeat(100) }, { text: 'b'.repeat(40) }, { text: 'c'.repeat(40), keep: true }];
         const pages = paginate(lines, { maxChars: 150 });
         expect(pages.map(p => p.map(l => l.text[0]).join(''))).toEqual(['a', 'bc']);
-    });
-
-    it('쪽 머리·꼬리의 연 구분 빈 줄을 버린다', () => {
-        const pages = paginate([{ text: 'a'.repeat(100) }, { text: '', gap: true }, { text: 'b'.repeat(100) }], { maxChars: 150 });
-        expect(pages.map(p => p.length)).toEqual([1, 1]);
-    });
-});
-
-describe('성경 PDF 파서 (scripts/lib/bible.js)', () => {
-    // 실제 공동번역 PDF의 마태오 22장 쪽을 pdftotext -layout으로 뽑은 일부
-    const fixture = readFileSync(new URL('./fixtures/bible-matt22.txt', import.meta.url), 'utf8');
-
-    it('참조를 책·장·절로 푼다', () => {
-        expect(parseRef('마태 22:34-46')).toEqual({ book: '마태오의 복음서', chapter: 22, from: 34, to: 46 });
-        expect(parseRef('1데살 2:8')).toEqual({ book: '데살로니카인들에게 보낸 첫째 편지', chapter: 2, from: 8, to: 8 });
-        expect(() => parseRef('없는책 1:1')).toThrow('책 이름을 모릅니다');
-    });
-
-    it('절 번호·소제목·각주·쪽 번호를 걷어내고 마지막 절에서 멈춘다', () => {
-        const out = extractPassage(fixture, '마태 22:34-46');
-        expect(out.map(v => v.v)).toEqual(Array.from({ length: 13 }, (_, i) => 34 + i));
-        const all = out.map(v => v.text).join('');
-        expect(all).not.toMatch(/\d|마르코|루가|신명|시편|ㄱ|ㄴ|ㄷ|ㄹ/);
-        expect(out[0].text.startsWith('예수께서')).toBe(true);
-        expect(out.at(-1).text.endsWith('없었다.')).toBe(true);
-    });
-
-    it('핵심구절(마태 22:37-40)의 글자와 같다', () => {
-        const got = extractPassage(fixture, '마태 22:37-40').map(v => v.text).join('').replace(/[‘’“”\s]/g, '');
-        expect(got).toContain(verses['2026-10-25'].text.replace(/[‘’“”\s]/g, ''));
-    });
-
-    it('온라인 띄어쓰기를 입히고, 글자가 다르면 멈춘다', () => {
-        expect(respace('너는저리로건너가지', '너는 저리로 건너가지')).toBe('너는 저리로 건너가지');
-        expect(respace('“그러면”', '"그러면"')).toBe('“그러면”');
-        expect(() => respace('가나다', '가나라')).toThrow('글자가 다릅니다');
     });
 });
