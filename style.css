@@ -5525,6 +5525,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .children-join .btn-next { min-height: 44px; }
 .children-illustration { grid-area: art; border-radius: var(--radius-md); overflow: hidden; }
 .children-illustration img { display: block; width: 100%; height: auto; }
+.children-illustration-credit { margin: .5rem 0 0; color: color-mix(in srgb, var(--text) 72%, var(--white)); font-size: var(--fs-label); text-align: center; }
 .children-service-summary { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 2rem; margin: 1.5rem 0 0; padding: 1rem 0; border-block: 1px solid var(--border); }
 .children-service-summary > div { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: .65rem; }
 .children-service-summary dt { font-size: var(--fs-sm); color: var(--text-muted); }
