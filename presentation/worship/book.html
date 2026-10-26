@@ -47,6 +47,7 @@ h2.sec{margin:28px 0 4px;font-size:1.05rem;color:var(--accent);letter-spacing:.0
 .psalm .resp{padding-left:2.6em}
 .score{display:block;max-width:100%;height:auto;margin:6px 0 8px;background:#fff;border-radius:4px}
 .noscore{margin:4px 0 0 calc(1.7em + 8px + .9em + 8px);padding:6px 10px;border:1px dashed var(--line);border-radius:6px;color:var(--muted);font-size:.85rem}
+.noscore a{color:var(--accent);font-weight:600}
 .tools{display:flex;justify-content:center;gap:8px;margin:14px 0 0}
 .tools button{font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 14px;cursor:pointer}
 .tools button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -57,6 +58,7 @@ h2.sec{margin:28px 0 4px;font-size:1.05rem;color:var(--accent);letter-spacing:.0
   body{font-size:11pt}
   main{max-width:none;padding:0}
   .tools{display:none}
+  .noscore a{color:#000;text-decoration:none}
   .score{filter:grayscale(1)}
 }
   </style>
@@ -79,7 +81,8 @@ h2.sec{margin:28px 0 4px;font-size:1.05rem;color:var(--accent);letter-spacing:.0
     const sub = [it.title, it.kind ? `(${it.kind})` : ''].filter(Boolean).join(' ');
     let body = '';
     if (it.score) body += `<img class="score" src="../../${esc(it.score)}" alt="${esc(it.label)} 악보">`;
-    else if (/^성가 /.test(it.ref || '') && !it.lines.length) body += `<div class="noscore">${esc(it.ref)} — 악보 미등록 (성가집을 보세요)</div>`;
+    else if (it.link) body += `<div class="noscore"><a href="${esc(it.link.url)}" target="_blank" rel="noopener">${esc(it.link.text)}</a></div>`;
+    else if (/^성가 /.test(it.ref || '') && !it.lines.length) body += `<div class="noscore">${esc(it.ref)} — 성가집을 보세요</div>`;
     if (it.lines.length) body += `<div class="body">${isPsalm ? psalmHtml(it.lines) : it.lines.map(lineHtml).join('')}</div>`;
     return `<section class="item"><div class="head"><span class="no">${it.no}</span><span class="stand" aria-label="${it.stand ? '일어섭니다' : ''}">${it.stand ? '†' : ''}</span><span class="label">${esc(it.label)}</span>${it.ref ? `<span class="ref">${esc(it.ref)}</span>` : ''}${it.by ? `<span class="by">${esc(it.by)}</span>` : ''}</div>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}${body}</section>`;
   }

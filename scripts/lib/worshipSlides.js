@@ -5,6 +5,8 @@ import { parseRef } from './bible.js';
 
 export const STAGES = ['모임', '말씀', '응답', '파송'];
 export const SUBS = ['예물 준비', '성찬기도', '성체 나눔', '영성체'];
+// 성가집(교우가 공개한 '성가 2015')의 PDF. 악보는 복사하지 않고 이 쪽으로 연결한다
+export const HYMNBOOK_URL = 'https://dulkuka12.github.io/khymn/hymnbook.pdf';
 export const NOTICE_POS = ['lt', 'rt', 'lb', 'rb', 'c'];
 export const NOTICE_SIZE = ['m', 'l', 'xl'];
 export const MAX_CHARS = 150;
@@ -168,6 +170,7 @@ export function buildBook(week, ctx) {
             if (h?.title) out.title = h.title;
             if (h?.stanzas) out.lines = h.stanzas.flatMap((st, i) => [...(i ? [{ gap: true }] : []), ...st.map(text => ({ text }))]);
             if (h?.score) out.score = h.score;
+            if (h?.pdfPage) out.link = { url: `${HYMNBOOK_URL}#page=${h.pdfPage}`, text: `성가집 악보 보기 (PDF ${h.pdfPage}쪽)` };
             break;
         }
         case 'bcp':
