@@ -8,7 +8,7 @@
 2. 3면 예배 순서면에서 제1독서·성시·제2독서·복음을 읽어 `data/lectionary-overrides.json` 기록. 연속 서사면 트랙 A(성시가 표준과 다르면 `psalm`), 예언서·복음 짝이면 트랙 B, 특별 주일은 `koreanName`+`readings`. 3면 오른쪽 아래 `다음 주일 봉사자` 표로 **다음 주 독서·성시**도 기록한다.
 3. 4면 교회소식을 `data/bulletin-news.json`에 기록(■ 항목 하나 = `{title, body}`, `일시 :` 줄은 `\n`). 통계·헌금 명단은 제외.
 4. 핵심구절을 `data/bulletin-verses.json`에 기록(`{ref, text}`). 주보에 인쇄돼 있으면 그것, 없으면 그 주 복음에서 1~3절을 직접 골라 알린다. 본문은 `bible/`의 공동번역 PDF(`pdftotext -layout`)에서 글자 대조해 그대로 옮기고 절 번호·각주 기호는 넣지 않는다.
-5. 3면 예배 순서를 `data/worship-order.json`에 기록(`†`는 `stand`, 오른쪽 칸은 `by`). `node scripts/build-worship-slides.js` → ℹ️ 안내 확인 → `/presentation/worship/`에서 눈으로 확인. → `liturgy.md` "예배 슬라이드"
+5. 3면 예배 순서를 `data/worship-order.json`에 기록(`†`는 `stand`, 오른쪽 칸은 `by`). `node scripts/build-worship-slides.js` → ℹ️ 안내 확인 → `/presentation/worship/`(슬라이드)·`book.html`(예식문)에서 눈으로 확인. → `liturgy.md` "예배 슬라이드"
 6. `node scripts/sync-bulletins.js` → 경고 확인 → `npm test` → `bulletin.html`(이번 주 말씀 카드)·`news.html`을 눈으로 확인.
 7. 커밋·푸시·PR·squash 머지까지 자동. **보고는 `머지했습니다`(+PR 링크)만.** 처리할 것 없는 PR 알림은 보고하지 않는다.
 

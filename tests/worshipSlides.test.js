@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { CHURCH_DATA } from './helpers/loadData.js';
-import { buildSlides, paginate, STAGES, SUBS, MAX_CHARS, MAX_LINES } from '../scripts/lib/worshipSlides.js';
+import { buildSlides, buildBook, paginate, STAGES, SUBS, MAX_CHARS, MAX_LINES } from '../scripts/lib/worshipSlides.js';
 import { parseRef } from '../scripts/lib/bible.js';
 
 const json = rel => JSON.parse(readFileSync(new URL(rel, import.meta.url), 'utf8'));
@@ -146,6 +146,30 @@ describe('슬라이드', () => {
                 expect(s.lines.some(l => l.r === 'a'), s.label).toBe(true);
                 for (const l of s.lines) expect(['p', 'l', 'a']).toContain(l.r);
             }
+        });
+    }
+});
+
+describe('예식문 (book.json)', () => {
+    for (const [date, week] of Object.entries(order.weeks)) {
+        const key = date.replaceAll('-', '');
+        const book = json(`../data/worship/${key}.book.json`);
+        const items = book.sections.flatMap(s => s.items);
+
+        it(`${date}: 생성된 예식문이 순서 데이터와 일치한다`, () => {
+            expect(book).toEqual(JSON.parse(JSON.stringify({ date, ...buildBook(week, ctx) })));
+        });
+
+        it(`${date}: 주보 항목이 번호 순서대로 모두 있고 소제목이 같다`, () => {
+            expect(items.map(i => i.label)).toEqual(week.items.filter(i => !i.section).map(i => i.label));
+            expect(items.map(i => i.no)).toEqual(items.map((_, i) => i + 1));
+            expect(book.sections.map(s => s.title)).toEqual(week.items.filter(i => i.section).map(i => i.section));
+        });
+
+        it(`${date}: 악보 이미지 파일이 있고 독서 본문은 싣지 않는다`, () => {
+            for (const i of items.filter(x => x.score)) expect(existsSync(new URL(`../${i.score}`, import.meta.url)), i.score).toBe(true);
+            const all = items.flatMap(i => i.lines.map(l => l.text || '')).join(' ').replace(/\s+/g, '');
+            for (const r of Object.values(readings)) for (const v of r.verses) expect(all).not.toContain(v.text.replace(/\s+/g, '').slice(0, 12));
         });
     }
 });
