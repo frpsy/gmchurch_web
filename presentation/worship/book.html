@@ -45,7 +45,7 @@ h2.sec{margin:28px 0 4px;font-size:1.05rem;color:var(--accent);letter-spacing:.0
 .psalm .n{flex:none;width:1.4em;text-align:right;color:var(--muted);font-size:.85rem}
 .psalm .mark{flex:none;width:1.2em;text-align:center;color:var(--accent)}
 .psalm .resp{padding-left:2.6em}
-.score{display:block;max-width:100%;height:auto;margin:6px 0 8px;background:#fff;border-radius:4px}
+.score{display:block;max-width:100%;height:auto;margin:6px 0 8px;background:#fff;border-radius:4px;break-inside:avoid}
 .noscore{margin:4px 0 0 calc(1.7em + 8px + .9em + 8px);padding:6px 10px;border:1px dashed var(--line);border-radius:6px;color:var(--muted);font-size:.85rem}
 .noscore a{color:var(--accent);font-weight:600}
 .sources{margin:28px 0 0;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem;line-height:1.7}
@@ -62,7 +62,8 @@ h2.sec{margin:28px 0 4px;font-size:1.05rem;color:var(--accent);letter-spacing:.0
   main{max-width:none;padding:0}
   .tools{display:none}
   .noscore a{color:#000;text-decoration:none}
-  .score{filter:grayscale(1)}
+  .score{filter:grayscale(1);max-height:245mm;object-fit:contain}
+  .item:has(.score){break-inside:auto}
 }
   </style>
 </head>
@@ -83,7 +84,8 @@ h2.sec{margin:28px 0 4px;font-size:1.05rem;color:var(--accent);letter-spacing:.0
   function itemHtml(it, isPsalm) {
     const sub = [it.title, it.kind ? `(${it.kind})` : ''].filter(Boolean).join(' ');
     let body = '';
-    if (it.score) body += `<img class="score" src="../../${esc(it.score)}" alt="${esc(it.label)} 악보">`;
+    const scores = it.score ? [it.score] : (Array.isArray(it.scores) ? it.scores : []);
+    if (scores.length) body += scores.map((src, i) => `<img class="score" src="../../${esc(src)}" alt="${esc(it.ref || it.label)} 악보 ${i + 1}/${scores.length}">`).join('');
     else if (it.link) body += `<div class="noscore"><a href="${esc(it.link.url)}" target="_blank" rel="noopener">${esc(it.link.text)}</a></div>`;
     else if (/^성가 /.test(it.ref || '') && !it.lines.length) body += `<div class="noscore">${esc(it.ref)} — 성가집을 보세요</div>`;
     if (it.lines.length) body += `<div class="body">${isPsalm ? psalmHtml(it.lines) : it.lines.map(lineHtml).join('')}</div>`;

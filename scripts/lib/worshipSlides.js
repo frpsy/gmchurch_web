@@ -5,7 +5,7 @@ import { parseRef } from './bible.js';
 
 export const STAGES = ['모임', '말씀', '응답', '파송'];
 export const SUBS = ['예물 준비', '성찬기도', '성체 나눔', '영성체'];
-// 성가집(교우가 공개한 '성가 2015')의 PDF. 악보는 복사하지 않고 이 쪽으로 연결한다
+// 원본 PDF 주소는 저장소 이미지가 없을 때 참고할 수 있도록 유지한다.
 export const HYMNBOOK_URL = 'https://dulkuka12.github.io/khymn/hymnbook.pdf';
 export const NOTICE_POS = ['lt', 'rt', 'lb', 'rb', 'c'];
 export const NOTICE_SIZE = ['m', 'l', 'xl'];
@@ -59,7 +59,7 @@ function need(table, key, where) {
     return v;
 }
 
-// week: worship-order.json의 한 주. ctx: { hymns, bcp, dialogs, defaults }
+// week: worship-order.json의 한 주. ctx: { hymns, hymnal, bcp, dialogs, defaults }
 export function buildSlides(week, ctx) {
     const slides = [];
     const warnings = [];
@@ -88,7 +88,7 @@ export function buildSlides(week, ctx) {
 
         switch (item.type) {
         case 'hymn': {
-            const h = ctx.hymns[String(item.number)];
+            const h = { ...ctx.hymnal?.[String(item.number)], ...ctx.hymns[String(item.number)] };
             if (!h || !h.stanzas?.length) {
                 warnings.push(`가사 미등록: 성가 ${item.number}장 (${item.label}) — 번호만 표시`);
                 push({ kind: 'title', label: item.label, text: `성가 ${item.number}장`, ...(h?.title ? { caption: h.title } : {}) });
@@ -165,12 +165,14 @@ export function buildBook(week, ctx) {
         };
         switch (item.type) {
         case 'hymn': {
-            const h = ctx.hymns[String(item.number)];
+            const h = { ...ctx.hymnal?.[String(item.number)], ...ctx.hymns[String(item.number)] };
             out.ref = `성가 ${item.number}장`;
             if (h?.title) out.title = h.title;
             if (h?.stanzas) out.lines = h.stanzas.flatMap((st, i) => [...(i ? [{ gap: true }] : []), ...st.map(text => ({ text }))]);
-            if (h?.score) out.score = h.score;
-            if (h?.pdfPage) out.link = { url: `${HYMNBOOK_URL}#page=${h.pdfPage}`, text: `성가집 악보 보기 (PDF ${h.pdfPage}쪽)` };
+            if (h.score) out.score = h.score;
+            else if (h.images?.length) out.scores = h.images;
+            const pdfPage = h.pdfPage ?? h.startPage;
+            if (pdfPage) out.link = { url: `${HYMNBOOK_URL}#page=${pdfPage}`, text: `성가집 악보 보기 (PDF ${pdfPage}쪽)` };
             break;
         }
         case 'bcp':

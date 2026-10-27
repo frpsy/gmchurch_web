@@ -7,10 +7,15 @@ import { parseRef } from '../scripts/lib/bible.js';
 const json = rel => JSON.parse(readFileSync(new URL(rel, import.meta.url), 'utf8'));
 const order = json('../data/worship-order.json');
 const hymns = json('../data/worship-texts/hymns.json').hymns;
+const archive = json('../data/hymnal-2015/index.json');
+const hymnal = Object.fromEntries(archive.hymns.map(h => [String(h.number), {
+    title: h.title, startPage: h.startPage,
+    images: h.images.map(path => `data/hymnal-2015/${path}`),
+}]));
 const bcp = json('../data/worship-texts/bcp.json').pages;
 const dialogs = json('../data/worship-texts/responses.json').dialogs;
 const readings = json('../data/worship-texts/readings.json').readings;
-const ctx = { hymns, bcp, dialogs, defaults: order.defaults };
+const ctx = { hymns, hymnal, bcp, dialogs, defaults: order.defaults };
 
 const TYPES = ['hymn', 'bcp', 'dialog', 'reading', 'psalm', 'intercession', 'sermon', 'notice'];
 
@@ -191,6 +196,10 @@ describe('예식문 (book.json)', () => {
 
         it(`${date}: 악보 이미지 파일이 있고 독서 본문은 싣지 않는다`, () => {
             for (const i of items.filter(x => x.score)) expect(existsSync(new URL(`../${i.score}`, import.meta.url)), i.score).toBe(true);
+            for (const i of items.filter(x => x.scores)) {
+                expect(i.scores.length).toBeGreaterThan(0);
+                for (const score of i.scores) expect(existsSync(new URL(`../${score}`, import.meta.url)), score).toBe(true);
+            }
             const all = items.flatMap(i => i.lines.map(l => l.text || '')).join(' ').replace(/\s+/g, '');
             for (const r of Object.values(readings)) for (const v of r.verses) expect(all).not.toContain(v.text.replace(/\s+/g, '').slice(0, 12));
         });
@@ -198,7 +207,7 @@ describe('예식문 (book.json)', () => {
 });
 
 describe('성가집 연결', () => {
-    it('주보의 성가마다 제목과 성가집 PDF 쪽이 있고, 예식문에 그 쪽 링크가 걸린다', () => {
+    it('주보의 성가마다 저장소 악보와 제목이 연결되고, 원본 PDF 링크도 보존된다', () => {
         for (const [date, week] of Object.entries(order.weeks)) {
             const book = json(`../data/worship/${date.replaceAll('-', '')}.book.json`);
             const byRef = Object.fromEntries(book.sections.flatMap(s => s.items).filter(i => i.ref?.startsWith('성가 ')).map(i => [i.ref, i]));
@@ -207,6 +216,7 @@ describe('성가집 연결', () => {
                 expect(h?.title, `성가 ${item.number}장`).toBeTruthy();
                 expect(Number.isInteger(h.pdfPage), `성가 ${item.number}장 pdfPage`).toBe(true);
                 expect(byRef[`성가 ${item.number}장`].link.url).toBe(`${HYMNBOOK_URL}#page=${h.pdfPage}`);
+                expect(byRef[`성가 ${item.number}장`].scores).toEqual(hymnal[String(item.number)].images);
             }
         }
     });
