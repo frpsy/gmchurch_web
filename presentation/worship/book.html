@@ -48,12 +48,15 @@ h2.sec{margin:28px 0 4px;font-size:1.05rem;color:var(--accent);letter-spacing:.0
 .score{display:block;max-width:100%;height:auto;margin:6px 0 8px;background:#fff;border-radius:4px}
 .noscore{margin:4px 0 0 calc(1.7em + 8px + .9em + 8px);padding:6px 10px;border:1px dashed var(--line);border-radius:6px;color:var(--muted);font-size:.85rem}
 .noscore a{color:var(--accent);font-weight:600}
+.sources{margin:28px 0 0;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem;line-height:1.7}
+.sources a{color:var(--accent)}
 .tools{display:flex;justify-content:center;gap:8px;margin:14px 0 0}
 .tools button{font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 14px;cursor:pointer}
 .tools button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 #msg{padding:40px 18px;text-align:center;color:var(--muted)}
 @media (max-width:520px){.sub,.body,.noscore{margin-left:0}.head{flex-wrap:wrap}}
 @media print{
+  .sources a{color:#000;text-decoration:none}
   @page{size:A4;margin:14mm}
   body{font-size:11pt}
   main{max-width:none;padding:0}
@@ -91,7 +94,8 @@ h2.sec{margin:28px 0 4px;font-size:1.05rem;color:var(--accent);letter-spacing:.0
     document.title = `${d.title} 예식문 | 성공회 광명교회`;
     const meta = [d.celebrant && `집전 ${d.celebrant}`, d.preacher && `설교 ${d.preacher}`, d.form].filter(Boolean).join(' · ');
     $app.innerHTML = `<header class="top"><h1>${esc(d.title)}</h1><p>${esc(meta)}</p><p>${esc(d.date.replaceAll('-', '. '))}</p><div class="legend"><span><b>†</b> 일어섭니다</span><span><b>회중</b> 함께 말하는 부분</span></div><div class="tools"><button type="button" onclick="print()">인쇄</button></div></header>`
-      + d.sections.map(s => `<h2 class="sec">${esc(s.title)}</h2>${s.items.map(it => itemHtml(it, it.label === '성시')).join('')}`).join('');
+      + d.sections.map(s => `<h2 class="sec">${esc(s.title)}</h2>${s.items.map(it => itemHtml(it, it.label === '성시')).join('')}`).join('')
+      + `<footer class="sources"><div><b>성경</b> 공동번역성서(개정판)</div><div><b>찬송</b> 대한성공회 성가집(성가개편위원회) — <a href="https://dulkuka12.github.io/khymn/hymnbook.pdf" target="_blank" rel="noopener">성가 2015 PDF</a>. 성가 번호는 이 성가집의 번호입니다.</div><div><b>기도서·응답</b> 대한성공회 기도서와 광명교회 예배 슬라이드</div></footer>`;
   }
 
   const $app = document.getElementById('app');

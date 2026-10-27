@@ -99,6 +99,7 @@ body.idle{cursor:none}
 #outline ol{list-style:none;margin:0;padding:0}
 #outline button{display:flex;gap:10px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;padding:9px 4px;font-size:15px;color:#ddd}
 #outline button:hover,#outline button[aria-current=true]{background:#2a2a2a;color:#fff}
+#outline .src{margin:18px 4px 4px;color:var(--muted);font-size:12px;line-height:1.7}
 #outline .n{min-width:2em;color:var(--muted);font-variant-numeric:tabular-nums}
 
 #msg{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;text-align:center;font-size:18px;line-height:1.7;color:var(--muted)}
@@ -220,7 +221,7 @@ body.idle{cursor:none}
       if (sec !== last) { if (last !== '\0') html += '</ol>'; html += `<div class="sec">${esc(sec)}</div><ol>`; last = sec; }
       html += `<li><button type="button" data-i="${i}"><span class="n">${i + 1}</span><span>${esc(nameOf(s))}</span></button></li>`;
     });
-    $('outline').innerHTML = html + '</ol>';
+    $('outline').innerHTML = `${html}</ol><p class="src">성경: 공동번역성서(개정판)<br>찬송: 대한성공회 성가집(성가개편위원회) — 성가 번호는 이 성가집의 번호입니다.<br>기도서·응답: 대한성공회 기도서와 광명교회 예배 슬라이드</p>`;
   }
 
   function toggleOutline(force) {
