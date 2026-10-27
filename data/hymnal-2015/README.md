@@ -37,3 +37,11 @@ python3 scripts/archive-hymnal-images.py /path/to/hymnbook.pdf /path/to/hymn-ind
 ```
 
 원본 페이지가 단일 스캔 이미지가 아니면 일부만 저장하지 않고 오류로 중단합니다. 갱신할 때는 새 임시 출력 폴더에서 생성·검증한 뒤 이 폴더를 교체합니다.
+
+## 예식문 자동 연결
+
+`node scripts/build-worship-slides.js`는 `index.json`으로 주보의 성가 번호에 맞는 악보 이미지 전부를 `data/worship/YYYYMMDD.book.json`의 `scores`에 자동 기록합니다. `presentation/worship/book.html`은 이를 인쇄 가능한 예식문에 표시합니다. 원본 페이지에는 인접 성가가 함께 보일 수 있습니다.
+
+회중에게 투사하는 `presentation/worship/index.html`은 기존 원칙대로 **검수된 가사만** 보여 주고, 악보 스캔 이미지는 투사하지 않습니다. 가사가 없는 성가는 성가 번호와 제목을 표시합니다. 가사는 `data/worship-texts/hymns.json`에서 관리합니다.
+
+이 자료의 **온라인 공개·재배포 허용 여부는 별도 확인이 필요**합니다. 외부 공개 범위를 넓히기 전에 사용 권리를 확인합니다.

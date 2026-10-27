@@ -16,8 +16,16 @@ if (!week) {
     process.exit(1);
 }
 
+// 2015 성가집 번호별 제목과 악보 이미지를 예식문 데이터에 연결한다.
+const archive = json('data/hymnal-2015/index.json');
+const hymnal = Object.fromEntries(archive.hymns.map(h => [String(h.number), {
+    title: h.title, startPage: h.startPage,
+    images: h.images.map(path => `data/hymnal-2015/${path}`),
+}]));
+
 const ctx = {
     hymns: json('data/worship-texts/hymns.json').hymns,
+    hymnal,
     bcp: json('data/worship-texts/bcp.json').pages,
     dialogs: json('data/worship-texts/responses.json').dialogs,
     defaults: order.defaults,
