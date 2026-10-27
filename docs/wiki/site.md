@@ -49,7 +49,7 @@
 
 ## 어린이 예배 소개 (2026-10-18)
 - `hopecenter.html` → `HopeCenterRenderer` → `CHURCH_DATA.hopeCenter`(교회 제공 소개문 2026-10-21). 구성: 사진+설립 요약 → 토요일의 나눔 3단계 → 걸어온 길 → 비전 → 함께하기(총무는 `officers`의 `희망터 총무`에서 파생). 사진 `images/hopecenter/`(배달 사진은 받는 분 얼굴·주소 표지판이 보이지 않게 잘라 씀). 검색 색인은 `_extractContent`에서 data로 추출.
-- `children.html` → `ChildrenRenderer` → `CHURCH_DATA.childrenWorship`. 예배와 기도 하위 메뉴와 기존 어린이 예배 카드에서 연결. 하단에서 `smallgroup.html#parents`(주일학교 양육자모임)로 연결.
+- `children.html` → `ChildrenRenderer` → `CHURCH_DATA.childrenWorship`. 예배와 기도 하위 메뉴와 기존 어린이 예배 카드에서 연결. 하단에서 `smallgroup.html#parents`(어린이 예배 양육자모임)로 연결.
 - 사용자가 제공한 소개문, 활동 사진 4장, 예수님과 어린이 그림을 사용. 사진 날짜·참여 연령 등 미확인 사실은 추가하지 않음.
 - 시간과 영성체 안내는 `worship.main`의 어린이 예배 항목에서 파생. 장소는 교육관. 이미지 `images/children/`, 반응형 스타일 `.children-*`.
 - 2026-10-18 문구를 담백한 표현으로 다듬고(은유·수식 제거, 사실은 기존 내용 그대로), 그림·사진 5종의 색감을 보정함(푸른 기 완화, 대비·채도 소폭 조정, 파일명·크기 동일).
