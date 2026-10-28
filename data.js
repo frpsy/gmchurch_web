@@ -295,7 +295,7 @@ const CHURCH_DATA = {
                 { icon: "bulb", title: "이성", desc: "하느님이 주신 이성으로 말씀을 해석하고, 그 신앙을 일상에서 실천합니다." },
                 { icon: "pillar", title: "전통", desc: "초대교회로부터 이어진 사도적 전통과 2,000년 공동체의 지혜를 신앙의 안내자로 삼습니다." }
             ],
-            pillarNote: "16세기 신학자 리처드 후커(Richard Hooker)가 정립한 '세 기둥'입니다. 성서·이성·전통이 균형을 이룰 때 신앙이 온전해진다는 가르침입니다.",
+            pillarNote: "흔히 16세기 신학자 리처드 후커(Richard Hooker, 1554–1600)에게서 비롯되었다고 설명하는 '세 기둥'입니다. 후커는 성서에 첫째 자리를 두고, 그다음 이성, 그리고 교회의 목소리(전통)를 따라야 한다고 가르쳤습니다.",
             mission: {
                 eyebrow: "Five Marks of Mission",
                 title: "성공회 선교정신",
@@ -319,7 +319,7 @@ const CHURCH_DATA = {
                 "일제강점기와 민주화 시기에도 사회적 책임을 이어왔으며, 오늘날에도 선교·교육·사회복지 분야에서 활동을 계속하고 있습니다."
             ],
             highlights: [
-                { icon: "church", text: "서울·부산·대전 3개 교구, 전국 200여 교회" },
+                { icon: "church", text: "서울·대전·부산 3개 교구, 전국 130여 교회" },
                 { icon: "cap", text: "성공회대학교 등 교육·사회 사업 운영" },
                 { icon: "globe", text: "세계성공회공동체(Anglican Communion) 정식 회원 교회" },
                 { icon: "scales", text: "2001년 여성 사제 서품 시작, 사회 정의와 인권 옹호" }
@@ -382,7 +382,7 @@ const CHURCH_DATA = {
                 "Canterbury Archaeological Trust, “Canterbury cross” (1867년 St George's Street 발굴, 850년경 제작, 1935년 복제 십자가 배포) — <a href=\"https://www.canterbury-archaeology.org.uk/canterbury-cross-cathedral\" target=\"_blank\" rel=\"noopener\">canterbury-archaeology.org.uk</a>",
                 "Wikipedia, “Canterbury cross” (원본 소장처: Beaney House of Art and Knowledge) — <a href=\"https://en.wikipedia.org/wiki/Canterbury_cross\" target=\"_blank\" rel=\"noopener\">en.wikipedia.org</a>",
                 "100 Objects Kent, “Canterbury cross brooch” (재질·소장처) — <a href=\"https://100objectskent.co.uk/object/canterbury-cross-brooch\" target=\"_blank\" rel=\"noopener\">100objectskent.co.uk</a>",
-                "The Episcopal Church, “Compass Rose” (세계성공회 공식 문장) — <a href=\"https://www.episcopalchurch.org/?p=169687\" target=\"_blank\" rel=\"noopener\">episcopalchurch.org</a>"
+                "The Episcopal Church, “Compass Rose” (세계성공회 공식 문장) — <a href=\"https://www.episcopalchurch.org/glossary/compass-rose/\" target=\"_blank\" rel=\"noopener\">episcopalchurch.org</a>"
             ]
         }
     },
@@ -455,12 +455,12 @@ const CHURCH_DATA = {
                 milestones: [
                     { year: "—", text: "서울 출생, 서대문·은평 지역에서 성장 — 충암초·중학교, 명지고등학교 졸업" },
                     { year: "—", text: "연세대학교 불어불문학과 졸업, 직장인으로 생활" },
-                    { year: "1999", text: "성공회신학대학교 편입(만 35세) — 늦깎이로 사제의 길을 선택" },
-                    { year: "2001", text: "성공회신학대학교 졸업, 성공회신학대학원 입학(만 37세)" },
-                    { year: "2003", text: "성공회신학대학원 졸업" },
+                    { year: "1999", text: "성공회대학교 신학과 편입(만 35세) — 늦깎이로 사제의 길을 선택" },
+                    { year: "2001", text: "성공회대학교 졸업, 성공회대학교 신학대학원 입학(만 37세)" },
+                    { year: "2003", text: "성공회대학교 신학대학원 졸업" },
                     { year: "2005", text: "부제 서품" },
-                    { year: "2007", text: "가톨릭상담심리대학원 입학" },
-                    { year: "2009", text: "가톨릭상담심리대학원 졸업(상담심리학 석사)" },
+                    { year: "2007", text: "가톨릭대학교 상담심리대학원 입학" },
+                    { year: "2009", text: "가톨릭대학교 상담심리대학원 졸업(상담심리학 석사)" },
                     { year: "2010", text: "상담심리사 자격 취득" },
                     { year: "2011", text: "동방문화대학원대학교 입학" },
                     { year: "2013", text: "사제 서품" },
@@ -771,8 +771,8 @@ const CHURCH_DATA = {
                     {
                         title: "대한성공회 성가란?",
                         body: [
-                            "한국 개신교는 모든 교단이 하나의 성경번역본과 하나의 찬송가를 쓰고 있지만, 외국은 각 교단 신학을 반영해 감리교·침례교·장로교 등이 각자 따로 만들어 씁니다.",
-                            "대한성공회 성가는 1903년 '셩회숑가'로 시작해서 1965·1990·2015년까지 개정을 거듭했습니다. 초대교회 동서방 교부들의 신앙이 담긴 노래들부터, 현대 가톨릭 성가와 한국 개신교 찬송가, 제3세계 성가, 복음성가를 두루 담았습니다.",
+                            "한국 개신교는 여러 교단이 같은 성경 번역본과 같은 찬송가를 함께 쓰는 경우가 많지만, 외국은 각 교단 신학을 반영해 감리교·침례교·장로교 등이 각자 따로 만들어 씁니다.",
+                            "대한성공회는 1990년판 성가집에 이어 2015년에 새 성가집 『성가 2015』를 펴냈습니다. 초대교회 동서방 교부들의 신앙이 담긴 노래들부터, 현대 가톨릭 성가와 한국 개신교 찬송가, 제3세계 성가, 복음성가를 두루 담았습니다.",
                             "특히 한국예술종합학교 총장이었던 이건용의 창작곡들과 여러 국악, 한국 작곡가들의 곡이 애창되고 있습니다."
                         ]
                     }
@@ -1022,8 +1022,8 @@ const CHURCH_DATA = {
             {
                 title: "수도 공동체",
                 items: [
-                    { name: "대한성공회 성 프란시스 수도회(네이버 지도)", url: "https://naver.me/xB77Wcf2",                                          desc: "한국 개신교 역사상 사실상 사라졌던 수도원 전통을 이어받아 1993년에 설립된 대한성공회 유일의 남자 수도회", external: true },
-                    { name: "대한성공회 성가수도회",         url: "https://www.sister.or.kr",                                           desc: "1925년에 설립된 한국 기독교 역사상 최초의 자생(방인) 여성 수도회" }
+                    { name: "대한성공회 성 프란시스 수도회(네이버 지도)", url: "https://naver.me/xB77Wcf2",                                          desc: "아시시의 성 프란시스 영성을 따르는 대한성공회의 남자 수도 공동체", external: true },
+                    { name: "대한성공회 성가수도회",         url: "https://www.sister.or.kr",                                           desc: "1925년에 설립된 대한성공회의 여성 수도회" }
                 ]
             },
             {
@@ -1051,7 +1051,7 @@ const CHURCH_DATA = {
                 items: [
                     {
                         q: "성공회는 이단인가요?",
-                        a: "아닙니다. 현재 세계 165개국, 약 8,500만 명 이상의 신자들이 캔터베리 대주교와 상징적 관계를 맺고 자치하고 있는 그리스도교 전통에 뿌리를 둔 교단입니다.\n\n16세기 종교개혁으로 로마가톨릭을 믿던 서유럽은 분열됩니다. 독일과 북유럽은 종교개혁가 마르틴 루터를 따르는 루터교가 국가교회로 설립되었고, 스위스와 프랑스 일부, 스코틀랜드에는 장 칼뱅을 따르는 장로교가 생겼습니다. 잉글랜드는 국왕 헨리 8세가 로마 교황을 거부하면서 국교회의 수장이 되면서 성공회가 생겨났습니다. 지금도 국왕이 잉글랜드 국교회의 수장이지만, 상징에 불과합니다.",
+                        a: "아닙니다. 현재 세계 165개 이상의 나라에서 약 8,500만 명의 신자들이 캔터베리 대주교와 상징적 관계를 맺고 자치하고 있는 그리스도교 전통에 뿌리를 둔 교단입니다.\n\n16세기 종교개혁으로 로마가톨릭을 믿던 서유럽은 분열됩니다. 독일과 북유럽은 종교개혁가 마르틴 루터를 따르는 루터교가 국가교회로 설립되었고, 스위스와 프랑스 일부, 스코틀랜드에는 장 칼뱅의 영향을 받은 개혁교회(스코틀랜드에서는 장로교)가 생겼습니다. 잉글랜드는 국왕 헨리 8세가 로마 교황을 거부하면서 국교회의 수장이 되면서 성공회가 생겨났습니다. 지금도 국왕이 잉글랜드 국교회의 수장이지만, 상징에 불과합니다.",
                         refs: [
                             { label: "성공회 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EC%84%B1%EA%B3%B5%ED%9A%8C" },
                             { label: "성공회 (나무위키)", url: "https://namu.wiki/w/%EC%84%B1%EA%B3%B5%ED%9A%8C" },
@@ -1060,7 +1060,7 @@ const CHURCH_DATA = {
                     },
                     {
                         q: "헨리 8세가 결혼(이혼)을 위해 만든 교단인가요?",
-                        a: "결혼 문제는 계기일 뿐, 핵심은 <strong>왕위 계승 위기</strong>와 유럽 종교개혁의 흐름이었습니다.\n\n헨리 8세는 남성 후계자 없이 생길 내전을 우려해 교황에게 이혼을 청했지만, 당시 교황은 왕비의 친정(에스파냐) 군대에 포위된 처지라 거절할 수밖에 없었습니다. 이에 헨리 8세는 로마와 관계를 끊고 국교회 수장이 되었고, 유럽의 종교개혁 세력이 이를 지지했습니다. 이후 크랜머 대주교 등의 영향으로 <strong>'개신교 교리에 가톨릭 전통의 예배 형식'</strong>을 갖춘 오늘날 성공회로 자리 잡았습니다.",
+                        a: "결혼 문제는 계기일 뿐, 핵심은 <strong>왕위 계승 위기</strong>와 유럽 종교개혁의 흐름이었습니다.\n\n헨리 8세는 왕위를 이을 아들을 얻지 못하자 교황 클레멘스 7세에게 혼인 무효를 청했지만, 교황은 왕비 캐서린의 조카인 황제 카를 5세의 압력 아래 있어 이를 받아들이지 않았습니다. 이에 헨리 8세는 로마와 관계를 끊고 1534년 수장령으로 잉글랜드 교회의 수장이 되었습니다. 이후 크랜머 대주교 등의 영향으로 <strong>'개신교 교리에 가톨릭 전통의 예배 형식'</strong>을 갖춘 오늘날 성공회로 자리 잡았습니다.",
                         refs: [
                             { label: "잉글랜드의 종교 개혁 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EC%9E%89%EA%B8%80%EB%9E%9C%EB%93%9C%EC%9D%98_%EC%A2%85%EA%B5%90_%EA%B0%9C%ED%98%81" },
                             { label: "토마스 크랜머 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%ED%86%A0%EB%A8%B8%EC%8A%A4_%ED%81%AC%EB%9E%9C%EB%A8%B8" }
@@ -1068,15 +1068,16 @@ const CHURCH_DATA = {
                     },
                     {
                         q: "천주교(가톨릭)인가요, 개신교인가요?",
-                        a: "한국에서는 법적·통계적으로 <strong>개신교</strong>로 분류됩니다. 다만 성공회는 가톨릭과 개신교 중 하나로 딱 잘라 말하기 어려운 교단입니다.\n\n16세기 잉글랜드 종교개혁에서 비롯되어 가톨릭의 전례 전통(주교직·성사·예배 형식)과 개신교의 성서 중심 신앙을 함께 품고 있습니다. 교황의 수위권은 인정하지 않으며, 이 균형을 <strong>‘중도의 길(Via Media)’</strong>이라 부릅니다.",
+                        a: "한국에서는 흔히 <strong>개신교</strong>의 한 교파로 분류되며, 대한성공회는 한국기독교교회협의회(NCCK) 회원 교단입니다. 다만 성공회는 가톨릭과 개신교 중 하나로 딱 잘라 말하기 어려운 교단입니다.\n\n16세기 잉글랜드 종교개혁에서 비롯되어 가톨릭의 전례 전통(주교직·성사·예배 형식)과 개신교의 성서 중심 신앙을 함께 품고 있습니다. 교황의 수위권은 인정하지 않으며, 이 균형을 <strong>‘중도의 길(Via Media)’</strong>이라 부릅니다.",
                         refs: [
                             { label: "성서·이성·전통과 리처드 후커 (Via Media)", url: "https://liturgy.co.nz/scripture-tradition-reason-and-richard-hooker" },
+                            { label: "대한성공회 (한국민족문화대백과사전)", url: "https://encykorea.aks.ac.kr/Article/E0015092" },
                             { label: "대한성공회 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C_%EC%84%B1%EA%B3%B5%ED%9A%8C" }
                         ]
                     },
                     {
                         q: "톰 라이트·존 스토트 책으로 성공회를 처음 알게 됐는데, 왜 한국성공회는 느낌이 다른가요?",
-                        a: "성공회 안에는 신학 성향과 예배 스타일에 따라 크게 세 흐름이 공존합니다. <strong>저교회파(Low Church, 복음주의)</strong>는 성서의 권위와 설교를 중시하고, <strong>고교회파(High Church, 앵글로-가톨릭주의)</strong>는 초대교회 전승과 성사·전례를 강조하며, <strong>광교회파(Broad Church)</strong>는 이성·학문과 사회 참여를 중심에 둡니다.\n\n존 스토트(1921–2011)와 톰 라이트(N.T. Wright) 같은 영국 신학자들은 <strong>복음주의(저교회파) 전통</strong> 안에서 활동했습니다. 성서 중심의 설교와 개인 신앙을 강조하는 이 전통은 가톨릭적 의례 중심 예배와 분위기가 크게 다릅니다.\n\n대한성공회가 가톨릭처럼 느껴지는 이유는 <strong>1890년 첫 선교사들이 고교회파 계열</strong>이었기 때문입니다. 초대 주교 고요한(찰스 존 코프)을 비롯한 선교사들은 19세기 영국에서 가톨릭의 역사적 전통과 전례를 회복하고자 일어난 <strong>'옥스퍼드 운동(Oxford Movement)'</strong>의 영향을 받았습니다. 이 뿌리로 인해 성당 건축·사제 제복·감사성찬례 형식이 가톨릭과 유사한 모습을 갖추게 되었습니다.\n\n그럼에도 저·고·광교회파 모두 '성서·전통·이성'의 세 기둥과 <strong>'중도의 길(Via Media)'</strong> 안에서 하나의 성공회를 이룹니다. 어떤 흐름으로 성공회를 처음 만나셨든, 같은 믿음의 공동체 안에 함께합니다.",
+                        a: "성공회 안에는 신학 성향과 예배 스타일에 따라 크게 세 흐름이 공존합니다. <strong>저교회파(Low Church, 복음주의)</strong>는 성서의 권위와 설교를 중시하고, <strong>고교회파(High Church, 앵글로-가톨릭주의)</strong>는 초대교회 전승과 성사·전례를 강조하며, <strong>광교회파(Broad Church)</strong>는 이성·학문과 사회 참여를 중심에 둡니다.\n\n존 스토트(1921–2011)와 톰 라이트(N.T. Wright) 같은 영국 신학자들은 <strong>복음주의 전통</strong>에서 널리 읽히는 저자들입니다. 성서 중심의 설교와 개인 신앙을 강조하는 이 전통은 가톨릭적 의례 중심 예배와 분위기가 크게 다릅니다.\n\n대한성공회가 가톨릭처럼 느껴지는 이유는 <strong>1890년 첫 선교사들이 고교회파 계열</strong>이었기 때문입니다. 초대 주교 고요한(찰스 존 코프)을 비롯한 선교사들은 19세기 영국에서 가톨릭의 역사적 전통과 전례를 회복하고자 일어난 <strong>'옥스퍼드 운동(Oxford Movement)'</strong>의 영향을 받았습니다. 이 뿌리로 인해 성당 건축·사제 제복·감사성찬례 형식이 가톨릭과 유사한 모습을 갖추게 되었습니다.\n\n그럼에도 저·고·광교회파 모두 '성서·전통·이성'의 세 기둥과 <strong>'중도의 길(Via Media)'</strong> 안에서 하나의 성공회를 이룹니다. 어떤 흐름으로 성공회를 처음 만나셨든, 같은 믿음의 공동체 안에 함께합니다.",
                         refs: [
                             { label: "고교회파 (위키백과)", url: "https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B5%90%ED%9A%8C%ED%8C%8C" },
                             { label: "고교회와 저교회 (나무위키)", url: "https://namu.wiki/w/%EA%B3%A0%EA%B5%90%ED%9A%8C%EC%99%80%20%EC%A0%80%EA%B5%90%ED%9A%8C" },
@@ -1126,7 +1127,7 @@ const CHURCH_DATA = {
                     },
                     {
                         q: "마리아와 성인을 숭배하나요?",
-                        a: "아닙니다. 성모 마리아와 성인들을 <strong>신앙의 모범으로 공경</strong>하지만, 예배와 기도의 대상은 오직 삼위일체 하느님입니다.\n\n성인을 신처럼 섬기거나 구원의 중개자로 삼지 않습니다. 이 점에서 가톨릭의 성인 공경과 구별됩니다.",
+                        a: "아닙니다. 성모 마리아와 성인들을 <strong>신앙의 모범으로 공경</strong>하지만, 예배와 기도의 대상은 오직 삼위일체 하느님입니다.\n\n성공회 39개조 제22조는 성인에게 기도로 전구를 청하는 당시 로마 교회의 가르침(invocation of saints)을 받아들이지 않았습니다. 다만 오늘날 성공회 안에서도 전통에 따라 성인 공경의 모습은 조금씩 다릅니다.",
                         refs: [
                             { label: "성공회 신앙의 39개조 — 제22조", url: "https://namu.wiki/w/39%EA%B0%9C%20%EC%8B%A0%EC%A1%B0" }
                         ]
@@ -1140,10 +1141,12 @@ const CHURCH_DATA = {
                 items: [
                     {
                         q: "성공회는 ‘좌파 교회’인가요?",
-                        a: "성공회의 사회 참여는 정당이나 이념이 아니라 <strong>신앙에서 나옵니다</strong>.\n\n세계성공회가 공유하는 ‘선교의 다섯 표지’ 네 번째가 <em>‘불의한 사회 구조를 변화시키는 것’</em>입니다. 대한성공회는 1970년대부터 빈민·산업 선교와 민주화운동에 함께해 왔으며, 이는 특정 정파를 지지하는 것과 다른 신앙적 실천입니다.",
+                        a: "성공회의 사회 참여는 정당이나 이념이 아니라 <strong>신앙에서 나옵니다</strong>.\n\n세계성공회가 공유하는 ‘선교의 다섯 표지’ 네 번째가 <em>‘불의한 사회 구조를 변화시키는 것’</em>입니다. 대한성공회는 1950년대 이후 산업 선교, 1986년 첫 나눔의 집을 연 빈민 선교, 1987년 6월 민주항쟁 때 서울주교좌성당의 역할 등으로 사회 현실에 함께해 왔으며, 이는 특정 정파를 지지하는 것과 다른 신앙적 실천입니다.",
                         refs: [
                             { label: "성공회 선교정신 — 다섯 표지 (세계성공회)", url: "https://www.anglicancommunion.org/five-marks-of-mission/" },
-                            { label: "성공회대학교 인권센터", url: "https://humanrights.skhu.ac.kr/" }
+                            { label: "대한성공회 (한국민족문화대백과사전)", url: "https://encykorea.aks.ac.kr/Article/E0015092" },
+                            { label: "성공회 나눔의집협의회 (Wikipedia)", url: "https://ko.wikipedia.org/wiki/%EC%84%B1%EA%B3%B5%ED%9A%8C_%EB%82%98%EB%88%94%EC%9D%98%EC%A7%91%ED%98%91%EC%9D%98%ED%9A%8C" },
+                            { label: "서울시청 앞 시민항쟁의 증인, 성공회 서울대성당 (시민언론 민들레)", url: "https://www.mindlenews.com/news/articleView.html?idxno=10937" }
                         ]
                     },
                     {
@@ -1155,9 +1158,10 @@ const CHURCH_DATA = {
                     },
                     {
                         q: "성공회는 동성애·동성결혼을 지지하나요?",
-                        a: "세계성공회 안에 <strong>단일한 공식 입장은 없으며</strong>, 대한성공회는 동성결혼을 공식 예식으로 시행하지 않습니다.\n\n관구에 따라 동성결혼을 허용하는 곳도 있고, 전통적 혼인관(1998년 람베스 회의 결의 I.10)을 유지하는 곳도 있어 논의 중입니다. 대한성공회는 <strong>성소수자를 정죄·배제하지 않으며 혐오와 차별에 반대</strong>합니다. 광명교회는 찾아오시는 누구도 문 앞에서 돌려보내지 않습니다.",
+                        a: "세계성공회 안에서는 <strong>관구마다 입장이 다릅니다</strong>. 대한성공회는 동성결혼을 공식 예식으로 시행하지 않습니다.\n\n관구에 따라 동성결혼을 허용하는 곳도 있고, 전통적 혼인관(1998년 람베스 회의 결의 I.10)을 유지하는 곳도 있어 논의 중입니다. 대한성공회 정의평화사제단과 나눔의집협의회는 2021년 성명에서 <strong>성소수자에 대한 혐오와 차별에 반대한다</strong>고 밝혔습니다. 광명교회는 찾아오시는 누구도 문 앞에서 돌려보내지 않습니다.",
                         refs: [
-                            { label: "람베스 회의 1998 결의문 (I.10 포함, 세계성공회)", url: "https://www.anglicancommunion.org/lambeth-conference-1998-resolutions/" }
+                            { label: "람베스 회의 1998 결의문 (I.10 포함, 세계성공회)", url: "https://www.anglicancommunion.org/lambeth-conference-1998-resolutions/" },
+                            { label: "대한성공회 정의평화사제단·나눔의집협의회 성명 (뉴시스, 2021)", url: "https://mobile.newsis.com/view/NISX20210305_0001361022" }
                         ]
                     }
                 ]
