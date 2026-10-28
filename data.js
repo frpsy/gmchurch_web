@@ -369,19 +369,20 @@ const CHURCH_DATA = {
         anglican: {
             title: "캔터베리 십자가",
             subtitle: "Canterbury Cross",
-            lead: "세계성공회의 상징",
-            desc: "세계성공회 공동체를 하나로 잇는 상징으로, 1867년 영국 캔터베리에서 발굴된 9세기 앵글로색슨 브로치에서 유래했습니다. 원형 디자인 안에 복음과 삼위일체, 세계 교회의 연대라는 성공회 신앙의 핵심이 담겨 있습니다.",
-            history: "1867년 영국 캔터베리 성 어거스틴 수도원 터 발굴 당시 출토된 앵글로색슨 청동 브로치(9세기경 제작)를 원형으로 합니다.¹ 이 브로치는 현재 캔터베리 대성당 박물관에 소장되어 있으며, 세계성공회는 이를 전 세계 성공회 공동체의 공식 상징으로 채택했습니다.² 대한성공회 역시 이 십자가를 교단의 공식 상징으로 사용합니다.³",
+            lead: "성공회를 대표하는 상징",
+            desc: "1867년 영국 캔터베리에서 발굴된 850년경 앵글로색슨 시대의 십자가 모양 브로치에서 유래한 상징으로, 세계 곳곳의 성공회를 나타내는 십자가로 널리 쓰입니다.",
+            history: "원형인 브로치는 1867년 캔터베리 세인트조지 거리(St George's Street)에서 발굴되었습니다.¹ 은 장식을 박은 청동(구리 합금) 브로치이며,³ 원본은 현재 캔터베리의 박물관인 비니 하우스(The Beaney House of Art & Knowledge)에 소장되어 있습니다.²³ 1935년 캔터베리 대성당은 이 십자가를 청동으로 본떠 대성당의 돌에 붙인 기념 십자가를 세계 여러 성공회 대성당에 선물로 보내, 성공회 공동체의 일치를 나타냈습니다.¹ 다만 세계성공회(Anglican Communion)의 공식 문장은 별도의 ‘컴퍼스 로즈(Compass Rose)’입니다.⁴",
             elements: [
-                { label: "십자가", desc: "그리스도의 구속과 부활. 성공회 신앙의 중심입니다." },
-                { label: "네 날개", desc: "마태오·마르코·루가·요한, 사복음서를 상징합니다." },
-                { label: "삼엽 문양", desc: "각 날개 끝의 세 잎은 성부·성자·성령, 삼위일체를 나타냅니다." },
-                { label: "중앙 원", desc: "하느님의 영원하심과 세계 성공회의 일치를 상징합니다." }
+                { label: "십자가", desc: "그리스도의 십자가를 나타냅니다." },
+                { label: "네 팔", desc: "바깥으로 갈수록 넓어지는 네 팔의 끝이 하나의 원을 이루어, 전체가 둥근 바퀴처럼 보입니다." },
+                { label: "세 갈래 매듭", desc: "각 팔에 새겨진 세 갈래 매듭 무늬(트리케트라)는 성부·성자·성령, 삼위일체를 나타냅니다." },
+                { label: "가운데", desc: "원래 브로치에서는 가운데의 작은 사각형이 네 팔을 하나로 잇습니다." }
             ],
             refs: [
-                "Canterbury Cathedral Museum, <em>The Canterbury Cross</em>, Canterbury (1867년 발굴, 현 캔터베리 대성당 박물관 소장).",
-                "The Anglican Communion Office, <em>Symbols of Anglican Identity</em>, London.",
-                "대한성공회, 《성공회 예식서》, 성공회출판사, 2004."
+                "Canterbury Archaeological Trust, “Canterbury cross” (1867년 St George's Street 발굴, 850년경 제작, 1935년 복제 십자가 배포) — <a href=\"https://www.canterbury-archaeology.org.uk/canterbury-cross-cathedral\" target=\"_blank\" rel=\"noopener\">canterbury-archaeology.org.uk</a>",
+                "Wikipedia, “Canterbury cross” (원본 소장처: Beaney House of Art and Knowledge) — <a href=\"https://en.wikipedia.org/wiki/Canterbury_cross\" target=\"_blank\" rel=\"noopener\">en.wikipedia.org</a>",
+                "100 Objects Kent, “Canterbury cross brooch” (재질·소장처) — <a href=\"https://100objectskent.co.uk/object/canterbury-cross-brooch\" target=\"_blank\" rel=\"noopener\">100objectskent.co.uk</a>",
+                "The Episcopal Church, “Compass Rose” (세계성공회 공식 문장) — <a href=\"https://www.episcopalchurch.org/?p=169687\" target=\"_blank\" rel=\"noopener\">episcopalchurch.org</a>"
             ]
         }
     },
