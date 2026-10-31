@@ -290,7 +290,9 @@ echo "Done: $TODAY"
 
 > **저장소 2개 운영 규칙 (2026-10-24, 사용자 지시)**
 > - **작업 저장소**: `frpsy/gmchurch_web` (이 저장소). 모든 수정·커밋·PR·머지는 여기서만 한다.
-> - **공식 교회 저장소**: `lmkhkm/GMSKH_Homepage` (도메인 `gmskh.or.kr`, 네이버 클라우드 배포). **사용자가 명시적으로 요청할 때만** 이 저장소의 최신 `main`을 공식 저장소에 머지한다. 공식 저장소에 직접 기능 작업·커밋을 하지 않는다.
+> - **공식 교회 저장소**: `lmkhkm/GMSKH_Homepage` (도메인 `gmskh.or.kr`, 네이버 클라우드 배포). 공식 저장소에 직접 기능 작업·커밋을 하지 않는다. 이 저장소의 최신 `main`을 공식 저장소에 머지하는 시점은 아래와 같다.
+>   - **주보·교회소식 등록은 예외 — 항상 두 곳에 동시에 머지한다 (2026-11-01, 사용자 지시).** 주보 PR을 이 저장소에 squash 머지한 직후, 묻지 않고 곧바로 아래 반영 절차로 공식 저장소에도 PR을 만들어 squash 머지한다. 같은 작업 안에서 끝내며 "공식 저장소에도 올릴까요?" 같은 확인을 하지 않는다.
+>   - 그 밖의 작업(기능·디자인 등)은 **사용자가 명시적으로 요청할 때만** 공식 저장소에 반영한다.
 > - 공식 저장소 반영 절차: `scripts/release-official.sh` 실행(공식에 `merge/official-…` 브랜치 생성 → 이 저장소 `main` 머지 → 충돌은 이 저장소 쪽 채택 → `set-site-url.js`로 gmskh.or.kr 재적용 → `npm test` → push) → PR 생성·머지. 공식 저장소 전용 파일(`deploy/`, `404.html`, `docs/DEPLOY-NCP.md`)은 유지한다.
 > - 반영 시점: 이 저장소는 머지 후 1~2분(GitHub Pages), 공식은 공식 `main` 머지 후 **최대 2시간**(서버 타이머, 급하면 서버에서 `systemctl start gmchurch-publish.service`). 자동 작업 주기·충돌 처리 상세는 `docs/REPO-STRUCTURE.md`.
 
