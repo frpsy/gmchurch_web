@@ -242,7 +242,7 @@ details[open] .chev{transform:rotate(180deg)}
   // 독서 본문(공동번역, data/worship-texts/readings.json — PDF 글자 대조본)
   const refKey = ref => { const m = /^(.+?)\s+(\d+.*)$/.exec(String(ref || '').trim()); return m && BIBLE[m[1]] ? `${BIBLE[m[1]]} ${m[2]}` : ''; };
   const readingHtml = (it, p) => `<div class="reading"><p class="rt">${esc(it.ref)}</p><p>${p.verses.map(v => `<sup>${v.v}</sup>${esc(v.text)}`).join(' ')}</p></div>`;
-  const scoreHtml = (src, alt) => `<a class="score" href="${ROOT}${esc(src)}" target="_blank" rel="noopener"><img src="${ROOT}${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></a>`;
+  const scoreHtml = (src, alt) => `<div class="score"><img src="${ROOT}${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`;
 
   function itemBody(it, ctx) {
     let h = '';
@@ -258,22 +258,20 @@ details[open] .chev{transform:rotate(180deg)}
     else if (it.lines.length) h += it.lines.map(lineHtml).join('');
     // 사제·회중 응답("기도합시다") 다음에 본기도 본문이 온다
     if (it.label === '본기도' && ctx.jubo.collect) h += `<div class="prayer"><small>오늘의 본기도</small>${esc(ctx.jubo.collect)}</div>`;
-    if (it.label === '설교') h += `<p class="plain">오늘 말씀: ${esc(ctx.gospel || '')}</p>`;
+    if (it.label === '설교') {
+      const sermonPassage = ctx.readings[refKey(ctx.gospel)];
+      h += `<p class="plain">설교 말씀 · ${esc(ctx.gospel || '')}</p>`;
+      if (sermonPassage) h += readingHtml({ ref: ctx.gospel }, sermonPassage);
+    }
     // 모바일 주보는 홈페이지에서 연결하지 않고 교우에게만 주소를 알린다(2026-11-01 사용자 결정) — 성가 악보도 화면 안에서 본다
     const scores = it.score ? [it.score] : (it.scores || []);
     if (scores.length && isHymn) h += `<p class="scap">${esc(it.ref)}${it.title ? ` · ${esc(it.title)}` : ''} 악보</p>`;
     scores.forEach((s, i) => { h += scoreHtml(s, `${it.ref || it.label} 악보${scores.length > 1 ? ` ${i + 1}/${scores.length}` : ''}`); });
-    if (scores.length) h += `<p class="hint">악보를 누르면 크게 볼 수 있습니다${isHymn ? '. 한 쪽에 두 곡이 실린 경우 번호를 확인해 주세요' : ''}</p>`;
+    if (scores.length) h += `<p class="hint">악보는 이 화면에서 두 손가락으로 확대해 볼 수 있습니다${isHymn ? '. 한 쪽에 두 곡이 실린 경우 번호를 확인해 주세요' : ''}</p>`;
     const links = [];
-    // 본문·악보가 없을 때만 바깥 사이트로 보낸다
-    const bible = it.kind && !passage ? bibleUrl(it.ref) : null;
-    if (bible) links.push(extLink(bible, '공동번역으로 읽기', 'btn primary'));
-    if (isHymn && !scores.length) {
-      // 공개된 모바일 성가집 앱으로 보낸다. 앱이 주소로 곡을 지정하지 못해 번호를 복사해 두고 검색창에 붙여 넣게 한다
-      const no = /\d+/.exec(it.ref)?.[0];
-      links.push(`<a class="btn" href="${HYMN_URL}" target="_blank" rel="noopener" data-copy="${esc(no || '')}">성가집 앱에서 ${esc(no || '')}장 찾기 ${EXT}</a>`);
-      h += `<p class="hint">누르면 번호(${esc(no || '')})가 복사됩니다. 성가집 앱에서 검색창에 붙여 넣어 주세요</p>`;
-    }
+    // 예배 자료 누락을 외부 화면 이동으로 대체하지 않는다.
+    if (it.kind && !passage) h += '<p class="hint">말씀 본문을 준비 중입니다.</p>';
+    if (isHymn && !scores.length) h += '<p class="hint">악보를 준비 중입니다.</p>';
     if (it.label === '교회소식') links.push(`<a class="btn" href="#news">교회소식 보기</a>`);
     if (links.length) h += `<div class="links">${links.join('')}</div>`;
     return h;
@@ -333,7 +331,7 @@ details[open] .chev{transform:rotate(180deg)}
           <p class="motto"><b>교구 표어</b> ${esc(vision)}<br><b>교회 표어</b> 함께 배우고, 함께 돌보는 교회</p>
         </div>
       </article>
-      ${verse ? `<figure class="card verse"><p>이번 주 말씀</p><blockquote>${esc(verse.text)}</blockquote><figcaption>${verseUrl ? `<a href="${esc(verseUrl)}" target="_blank" rel="noopener">${esc(verse.ref)} · 공동번역으로 읽기 ${EXT}</a>` : esc(verse.ref)}</figcaption></figure>` : ''}
+      ${verse ? `<figure class="card verse"><p>이번 주 말씀</p><blockquote>${esc(verse.text)}</blockquote><figcaption>${esc(verse.ref)} · 공동번역</figcaption></figure>` : ''}
 
       <section class="block" id="order" aria-labelledby="h-order">
         <h2 class="h" id="h-order">${use('cross')}예배 순서</h2>
