@@ -406,7 +406,12 @@ details[open] .chev{transform:rotate(180deg)}
         entries.filter(en => en.isIntersecting).forEach(en => {
           tabs.forEach(t => t.removeAttribute('aria-current'));
           const t = byId[en.target.id];
-          if (t) { t.setAttribute('aria-current', 'true'); t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); }
+          if (t) {
+            t.setAttribute('aria-current', 'true');
+            // 탭 줄만 가로로 옮긴다. scrollIntoView는 고정(sticky) 머리글 때문에 문서 스크롤까지 건드려 화면이 튕긴다
+            const strip = t.parentElement;
+            strip.scrollLeft = t.offsetLeft - (strip.clientWidth - t.offsetWidth) / 2;
+          }
         });
       }, { rootMargin: '-40% 0px -55% 0px' });
       Object.keys(byId).forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
