@@ -12,6 +12,10 @@ const hymnal = Object.fromEntries(archive.hymns.map(h => [String(h.number), {
     title: h.title, startPage: h.startPage,
     images: h.images.map(path => `data/hymnal-2015/${path}`),
 }]));
+const unison = json('../data/hymnal-2015/unison-verified.json').hymns;
+for (const [number, verified] of Object.entries(unison)) {
+    if (hymnal[number]) hymnal[number].images = verified.images;
+}
 const bcp = json('../data/worship-texts/bcp.json').pages;
 const dialogs = json('../data/worship-texts/responses.json').dialogs;
 const readings = json('../data/worship-texts/readings.json').readings;
