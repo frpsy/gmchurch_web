@@ -232,13 +232,18 @@ details[open] .chev{transform:rotate(180deg)}
   const getJson = async path => { const r = await fetch(ROOT + path, { cache: 'no-cache' }); if (!r.ok) throw new Error(path); return r.json(); };
   const tryJson = path => getJson(path).catch(() => null);
 
+  // 양식의 주교 빈칸은 섬기는 이들과 같은 원본을 사용한다.
+  function churchPrayerText(text) {
+    const name = typeof CHURCH_DATA !== 'undefined' ? CHURCH_DATA.bishop?.name : '';
+    return name ? String(text || '').replace(/우리 주교\s*\(\s*\)/g, () => '우리 주교 ' + name) : String(text || '');
+  }
   const lineHtml = l => {
     if (l.gap) return '<div class="gap"></div>';
-    if (l.note) return `<p class="hint">${esc(l.text)}</p>`;
-    if (l.r) return `<div class="row ${l.r}"><span class="who">${WHO[l.r]}</span><span class="tx">${esc(l.text)}</span></div>`;
-    return `<p class="plain">${esc(l.text)}</p>`;
+    if (l.note) return `<p class="hint">${esc(churchPrayerText(l.text))}</p>`;
+    if (l.r) return `<div class="row ${l.r}"><span class="who">${WHO[l.r]}</span><span class="tx">${esc(churchPrayerText(l.text))}</span></div>`;
+    return `<p class="plain">${esc(churchPrayerText(l.text))}</p>`;
   };
-  const psalmHtml = lines => `<div class="psalm">${lines.map(l => `<div class="ln${l.mark === '○' ? ' r' : ''}"><span class="n">${l.n || ''}</span><span class="m" aria-hidden="true">${esc(l.mark || '')}</span><span class="t">${esc(l.text)}</span></div>`).join('')}</div>`;
+  const psalmHtml = lines => `<div class="psalm">${lines.map(l => `<div class="ln${l.mark === '○' ? ' r' : ''}"><span class="n">${l.n || ''}</span><span class="m" aria-hidden="true">${esc(l.mark || '')}</span><span class="t">${esc(churchPrayerText(l.text))}</span></div>`).join('')}</div>`;
   // 독서 본문(공동번역, data/worship-texts/readings.json — PDF 글자 대조본)
   const refKey = ref => { const m = /^(.+?)\s+(\d+.*)$/.exec(String(ref || '').trim()); return m && BIBLE[m[1]] ? `${BIBLE[m[1]]} ${m[2]}` : ''; };
   const readingHtml = (it, p) => `<div class="reading"><p class="rt">${esc(it.ref)}</p><p>${p.verses.map(v => `<sup>${v.v}</sup>${esc(v.text)}`).join(' ')}</p></div>`;
