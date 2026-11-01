@@ -128,6 +128,10 @@ details[open] .chev{transform:rotate(180deg)}
 .scap + .score{margin-top:6px}
 .score{display:block;margin:12px 0 0;border-radius:10px;overflow:hidden;background:#fff;border:1px solid var(--line)}
 .score img{display:block;width:100%;height:auto}
+.reading{margin:10px 0 12px;padding:12px 14px;border-radius:12px;background:var(--surface-2);line-height:1.8}
+.reading .rt{margin:0 0 6px;font-size:.78rem;font-weight:700;color:var(--ink-3)}
+.reading p{margin:0}
+.reading sup{font-size:.62em;color:var(--ink-3);margin-right:2px;font-variant-numeric:tabular-nums}
 .hint{margin:6px 0 0;font-size:.78rem;color:var(--ink-3)}
 .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:12px;background:var(--surface-2);color:var(--brand);
@@ -243,33 +247,41 @@ details[open] .chev{transform:rotate(180deg)}
     return `<p class="plain">${esc(l.text)}</p>`;
   };
   const psalmHtml = lines => `<div class="psalm">${lines.map(l => `<div class="ln${l.mark === '○' ? ' r' : ''}"><span class="n">${l.n || ''}</span><span class="m" aria-hidden="true">${esc(l.mark || '')}</span><span class="t">${esc(l.text)}</span></div>`).join('')}</div>`;
+  // 독서 본문(공동번역, data/worship-texts/readings.json — PDF 글자 대조본)
+  const refKey = ref => { const m = /^(.+?)\s+(\d+.*)$/.exec(String(ref || '').trim()); return m && BIBLE[m[1]] ? `${BIBLE[m[1]]} ${m[2]}` : ''; };
+  const readingHtml = (it, p) => `<div class="reading"><p class="rt">${esc(it.ref)}</p><p>${p.verses.map(v => `<sup>${v.v}</sup>${esc(v.text)}`).join(' ')}</p></div>`;
   const scoreHtml = (src, alt) => `<a class="score" href="${ROOT}${esc(src)}" target="_blank" rel="noopener"><img src="${ROOT}${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></a>`;
 
   function itemBody(it, ctx) {
     let h = '';
     const isHymn = /^성가 /.test(it.ref || '');
-    const isBcp = /^기도서 /.test(it.ref || '');
-    if (it.kind) h += `<p class="hint">${esc(it.kind)} 말씀 · 본문은 아래 단추로 엽니다</p>`;
-    if (it.label === '성시') h += psalmHtml(it.lines);
+    // 독서 본문은 화면 안에서 바로 읽는다(복음은 앞 응답 → 본문 → 끝 응답, 다른 독서는 본문 → 끝 응답)
+    const passage = it.kind ? ctx.readings[refKey(it.ref)] : null;
+    if (passage) {
+      const gap = it.lines.findIndex(l => l.gap);
+      const before = gap >= 0 ? it.lines.slice(0, gap) : [];
+      const after = gap >= 0 ? it.lines.slice(gap + 1) : it.lines;
+      h += before.map(lineHtml).join('') + readingHtml(it, passage) + after.map(lineHtml).join('');
+    } else if (it.label === '성시') h += psalmHtml(it.lines);
     else if (it.lines.length) h += it.lines.map(lineHtml).join('');
     // 사제·회중 응답("기도합시다") 다음에 본기도 본문이 온다
     if (it.label === '본기도' && ctx.jubo.collect) h += `<div class="prayer"><small>오늘의 본기도</small>${esc(ctx.jubo.collect)}</div>`;
     if (it.label === '설교') h += `<p class="plain">오늘 말씀: ${esc(ctx.gospel || '')}</p>`;
-    // 성가 악보 이미지는 저작권 때문에 모바일 주보에 싣지 않고 성가집 PDF 링크만 둔다(성시 악보는 주보에 인쇄된 것이라 유지)
-    const scores = isHymn ? [] : (it.score ? [it.score] : (it.scores || []));
+    // 모바일 주보는 홈페이지에서 연결하지 않고 교우에게만 주소를 알린다(2026-11-01 사용자 결정) — 성가 악보도 화면 안에서 본다
+    const scores = it.score ? [it.score] : (it.scores || []);
     if (scores.length && isHymn) h += `<p class="scap">${esc(it.ref)}${it.title ? ` · ${esc(it.title)}` : ''} 악보</p>`;
     scores.forEach((s, i) => { h += scoreHtml(s, `${it.ref || it.label} 악보${scores.length > 1 ? ` ${i + 1}/${scores.length}` : ''}`); });
     if (scores.length) h += `<p class="hint">악보를 누르면 크게 볼 수 있습니다${isHymn ? '. 한 쪽에 두 곡이 실린 경우 번호를 확인해 주세요' : ''}</p>`;
     const links = [];
-    const bible = it.kind || it.label === '성시' ? bibleUrl(it.ref) : null;
-    if (bible) links.push(extLink(bible, it.label === '성시' ? '공동번역 시편 읽기' : '공동번역으로 읽기', 'btn primary'));
-    if (isHymn) {
+    // 본문·악보가 없을 때만 바깥 사이트로 보낸다
+    const bible = it.kind && !passage ? bibleUrl(it.ref) : null;
+    if (bible) links.push(extLink(bible, '공동번역으로 읽기', 'btn primary'));
+    if (isHymn && !scores.length) {
       // 공개된 모바일 성가집 앱으로 보낸다. 앱이 주소로 곡을 지정하지 못해 번호를 복사해 두고 검색창에 붙여 넣게 한다
       const no = /\d+/.exec(it.ref)?.[0];
       links.push(`<a class="btn" href="${HYMN_URL}" target="_blank" rel="noopener" data-copy="${esc(no || '')}">성가집 앱에서 ${esc(no || '')}장 찾기 ${EXT}</a>`);
       h += `<p class="hint">누르면 번호(${esc(no || '')})가 복사됩니다. 성가집 앱에서 검색창에 붙여 넣어 주세요</p>`;
     }
-    if (isBcp || it.label === '영성체후기도' || it.label === '본기도') links.push(extLink(BCP_URL, '기도서 감사성찬례 1형식'));
     if (it.label === '교회소식') links.push(`<a class="btn" href="#news">교회소식 보기</a>`);
     if (it.label === '설교') links.push(`<a class="btn" href="#reflection">묵상 글 읽기</a>`);
     if (links.length) h += `<div class="links">${links.join('')}</div>`;
@@ -298,7 +310,7 @@ details[open] .chev{transform:rotate(180deg)}
     }).join('')}</div>`;
   }
 
-  function render({ jubo, book, order, news, verse }) {
+  function render({ jubo, book, order, news, verse, readings }) {
     const info = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.info) || {};
     const giving = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.giving) || {};
     const vision = info.vision || '';
@@ -308,7 +320,7 @@ details[open] .chev{transform:rotate(180deg)}
     const sections = book.sections.map(s => ({ ...s, items: s.items.filter(it => !extra.has(it.no)) })).filter(s => s.items.length);
     const items = sections.flatMap(s => s.items);
     const gospelItem = items.find(i => i.kind === '복음서');
-    const ctx = { jubo, gospel: gospelItem ? shortRef(gospelItem.ref) : '' };
+    const ctx = { jubo, readings, gospel: gospelItem ? shortRef(gospelItem.ref) : '' };
     const title = jubo.title.replace(/^\((.+?)\)\s*/, '');
     const year = /^\((.+?)\)/.exec(jubo.title)?.[1];
     const date = kDate(jubo.date);
@@ -336,7 +348,7 @@ details[open] .chev{transform:rotate(180deg)}
         <h2 class="h" id="h-order">${use('cross')}예배 순서</h2>
         <div class="legend"><span><span class="stand-mark">†</span> 일어섭니다</span><span><span class="who-a">회중</span> 함께 말합니다</span><span class="sp"></span><button class="ghost" id="toggleAll" type="button" aria-pressed="false">모두 펼치기</button></div>
         ${sections.map(s => `<p class="part">${esc(s.title)}</p><div class="items">${s.items.map(it => itemHtml(it, ctx)).join('')}</div>`).join('')}
-        <p class="hint" style="margin-top:12px">항목을 누르면 응답·가사·악보와 성경·성가·기도서 링크가 열립니다.</p>
+        <p class="hint" style="margin-top:12px">항목을 누르면 응답·기도문, 성경 본문, 성가 악보가 펼쳐집니다.</p>
       </section>
 
       ${jubo.reflection ? `<section class="block" id="reflection" aria-labelledby="h-ref">
@@ -437,11 +449,15 @@ details[open] .chev{transform:rotate(180deg)}
       const q = (new URLSearchParams(location.search).get('date') || '').replaceAll('-', '');
       const key = /^\d{8}$/.test(q) ? q : (await getJson('data/jubo/index.json')).dates[0];
       const iso = `${key.slice(0, 4)}-${key.slice(4, 6)}-${key.slice(6)}`;
-      const [jubo, book, orderAll, newsAll, versesAll] = await Promise.all([
+      const [jubo, book, orderAll, newsAll, versesAll, readingsAll] = await Promise.all([
         getJson(`data/jubo/${key}.json`), getJson(`data/worship/${key}.book.json`),
-        tryJson('data/worship-order.json'), tryJson('data/bulletin-news.json'), tryJson('data/bulletin-verses.json')
+        tryJson('data/worship-order.json'), tryJson('data/bulletin-news.json'), tryJson('data/bulletin-verses.json'),
+        tryJson('data/worship-texts/readings.json')
       ]);
-      render({ jubo, book, order: orderAll?.weeks?.[iso], news: newsAll?.weeks?.[iso], verse: versesAll?.weeks?.[iso] });
+      // readings.json 키("마태 5:1-12")를 책 id 기준으로 바꿔 book.json의 긴 책 이름과 맞춘다
+      const readings = {};
+      Object.entries(readingsAll?.readings || {}).forEach(([k, v]) => { const key = refKey(k); if (key) readings[key] = v; });
+      render({ jubo, book, order: orderAll?.weeks?.[iso], news: newsAll?.weeks?.[iso], verse: versesAll?.weeks?.[iso], readings });
       if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
     } catch (err) {
       app.innerHTML = `<div id="msg" role="status">주보를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</div>`;
