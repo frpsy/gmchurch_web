@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-01",
+  "fullPageCount": 811,
+  "unisonPageCount": 782,
+  "files": [
+    {
+      "name": "hymnal-2015-full-part-01.pdf",
+      "bytes": 2620677,
+      "pages": [
+        1,
+        29
+      ],
+      "sha256": "ad7068794a105c492aba3353c8a3b13a502006efd84f2204a6e52241def533d5",
+      "gitBlobSha": "36378d866718e0a94a6854120ed991641e90ee77",
+      "path": "full/hymnal-2015-full-part-01.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-02.pdf",
+      "bytes": 7815385,
+      "pages": [
+        30,
+        60
+      ],
+      "sha256": "ea49c6a945f68006634abeb691c63fd78d4d84239267706f4e7a09ed4196c5cb",
+      "gitBlobSha": "4e74fe0e5df803c658a8699ec837776003112619",
+      "path": "full/hymnal-2015-full-part-02.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-03.pdf",
+      "bytes": 7188315,
+      "pages": [
+        61,
+        90
+      ],
+      "sha256": "2f5892d72e0d6ac2c536673ceacd33c0c3fdd0b157c549af84ebf65febfac219",
+      "gitBlobSha": "248b934071838a1c7be3b14ce80c3cd0eda1dd84",
+      "path": "full/hymnal-2015-full-part-03.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-04.pdf",
+      "bytes": 6174095,
+      "pages": [
+        91,
+        119
+      ],
+      "sha256": "d2656e261a51bdbaeadec9bcd3f5a18ffcc8eb1cd90994b7eb229f77367e3440",
+      "gitBlobSha": "073a89954cafae2617abc9e295f426758c4c62a8",
+      "path": "full/hymnal-2015-full-part-04.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-05.pdf",
+      "bytes": 5994545,
+      "pages": [
+        120,
+        149
+      ],
+      "sha256": "2d91efcfed8b26371f1f8c1ce8f715ea1a1c93bd3514af856e0bcc54908c4207",
+      "gitBlobSha": "0a64acbeefd617b58078a1c4d393ccde67da274d",
+      "path": "full/hymnal-2015-full-part-05.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-06.pdf",
+      "bytes": 5596670,
+      "pages": [
+        150,
+        179
+      ],
+      "sha256": "51f158f9d1cca8d2f55fa2bb0fb81627222655d47e57c973f2c62d7740d27ace",
+      "gitBlobSha": "6fb9d345fd3ad6ec321cac6f8d2f8361b2c66481",
+      "path": "full/hymnal-2015-full-part-06.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-07.pdf",
+      "bytes": 5600800,
+      "pages": [
+        180,
+        209
+      ],
+      "sha256": "3a9cd79a7a9d4ab447e25d772237308492f77955683cf08128506107dbea1562",
+      "gitBlobSha": "e660bfa2fd3b851bbc70a28dd800f0bbf7850af3",
+      "path": "full/hymnal-2015-full-part-07.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-08.pdf",
+      "bytes": 6597289,
+      "pages": [
+        210,
+        239
+      ],
+      "sha256": "2009eb09ac5a0fbf1c47648b63ef3c08fc0f0eb6e1a787a414e829e2303eb968",
+      "gitBlobSha": "21948a11c733f658641df283686592eae265463e",
+      "path": "full/hymnal-2015-full-part-08.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-09.pdf",
+      "bytes": 6061180,
+      "pages": [
+        240,
+        270
+      ],
+      "sha256": "b87690fb6b7bf7dd1ffd20300abc20f97d60e2f959cf11a174ee41320c8af394",
+      "gitBlobSha": "580a2dc747474ed5bb382ff8272220803208f66f",
+      "path": "full/hymnal-2015-full-part-09.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-10.pdf",
+      "bytes": 5681680,
+      "pages": [
+        271,
+        299
+      ],
+      "sha256": "48e6bf1b705357fc8b1cbda06974f2df38423424af16a97a5329ae1a5999f7b2",
+      "gitBlobSha": "c0b58385cdef060f67e7126c15cc10ab77bf8290",
+      "path": "full/hymnal-2015-full-part-10.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-11.pdf",
+      "bytes": 6364577,
+      "pages": [
+        300,
+        329
+      ],
+      "sha256": "797915c3e3c416b0fa3bc1457ed681b26b1f9416c25ab01c394b4a71baaf47a6",
+      "gitBlobSha": "12d27e0108a7e1246ff651e0ec6562ea6b37e8f5",
+      "path": "full/hymnal-2015-full-part-11.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-12.pdf",
+      "bytes": 6346674,
+      "pages": [
+        330,
+        359
+      ],
+      "sha256": "aed7396f03c27404a969b47177db1f40f9710feb2a8f96bfa6201019203f03cf",
+      "gitBlobSha": "02cabcef9145ab4664f9cb68c976478f9ac6bf41",
+      "path": "full/hymnal-2015-full-part-12.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-13.pdf",
+      "bytes": 6148131,
+      "pages": [
+        360,
+        389
+      ],
+      "sha256": "c84f6d855b25df0051b40287a6c3828eb0e22f3312dd6894cfdea8938922d8f9",
+      "gitBlobSha": "21b257a63be3108185d2689758fa96575983a170",
+      "path": "full/hymnal-2015-full-part-13.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-14.pdf",
+      "bytes": 6228360,
+      "pages": [
+        390,
+        420
+      ],
+      "sha256": "72e4e73e964a7cafbfc6a53f099f6e8b8d02b78cee9eaca18a3c06d0a1c17209",
+      "gitBlobSha": "b5638369fed50f4a827f760662202f38b5dcc599",
+      "path": "full/hymnal-2015-full-part-14.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-15.pdf",
+      "bytes": 5568920,
+      "pages": [
+        421,
+        449
+      ],
+      "sha256": "aa8f12b4ea7fe5c8368030bcf9d5947c47b6d5b4d08eecdd1b40b8f06cb17ef9",
+      "gitBlobSha": "ef7dad697bf1e012591c9121978bc97708eeb438",
+      "path": "full/hymnal-2015-full-part-15.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-16.pdf",
+      "bytes": 5641665,
+      "pages": [
+        450,
+        479
+      ],
+      "sha256": "9fc25629ba1c3df900af362c418b77bd804159833a2f7a28c0999729f78c8c6f",
+      "gitBlobSha": "246d4d3284c778457ca69dc36f8a794f4596aeb3",
+      "path": "full/hymnal-2015-full-part-16.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-17.pdf",
+      "bytes": 5769538,
+      "pages": [
+        480,
+        509
+      ],
+      "sha256": "d8c611f4d0fad5685d81f0de96c779fa2b216a609a7a8601dbb8258d3ec9dc14",
+      "gitBlobSha": "27a4f83d44180a9b31ff8210f78730cfef480619",
+      "path": "full/hymnal-2015-full-part-17.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-18.pdf",
+      "bytes": 6295525,
+      "pages": [
+        510,
+        539
+      ],
+      "sha256": "2a8547f6912e5eeccee9db64db5dfaa1be9009400976a1ca82656b9d1c27794c",
+      "gitBlobSha": "f3c52f26342335f7f1059a821e7a81ec3de24707",
+      "path": "full/hymnal-2015-full-part-18.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-19.pdf",
+      "bytes": 5810290,
+      "pages": [
+        540,
+        569
+      ],
+      "sha256": "827c1b73ad96290936cc5bffcc0c62b12dd703d1a3d755e9d2d17c8b38030d42",
+      "gitBlobSha": "ecfdd12f94c75c6ea0f9cee4d4cab373100124d6",
+      "path": "full/hymnal-2015-full-part-19.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-20.pdf",
+      "bytes": 5362559,
+      "pages": [
+        570,
+        599
+      ],
+      "sha256": "ba2065cf8df242f141affcd3168fa3953056e8b5728775cd45ffa7eeda61eb94",
+      "gitBlobSha": "378ece124b582ab999fe137a97c2f9e97a5ca8a6",
+      "path": "full/hymnal-2015-full-part-20.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-21.pdf",
+      "bytes": 5666539,
+      "pages": [
+        600,
+        630
+      ],
+      "sha256": "ad6ce234484b2cf30f2cf343bc1a81011efaa0031f9ff7d79cab1c8715efe6b9",
+      "gitBlobSha": "fa38d6f2508a7f88310d9a2dd1a4317698cd6b7d",
+      "path": "full/hymnal-2015-full-part-21.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-22.pdf",
+      "bytes": 5406556,
+      "pages": [
+        631,
+        659
+      ],
+      "sha256": "e99a14e0603e7d113385be7d8a08be1fe43a198f69276ccbd9b1f6a303b09330",
+      "gitBlobSha": "bc6c5ba6aa449c4a2643f8cc00dd483a926f515c",
+      "path": "full/hymnal-2015-full-part-22.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-23.pdf",
+      "bytes": 5127583,
+      "pages": [
+        660,
+        689
+      ],
+      "sha256": "c0eca81fa78881f6de83d5f92ddd53a16983f71a7daee73e0d3474126ee5b3ef",
+      "gitBlobSha": "7ea5f7614491b3878360426b4b5b8a2b3b3f3be8",
+      "path": "full/hymnal-2015-full-part-23.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-24.pdf",
+      "bytes": 6052076,
+      "pages": [
+        690,
+        719
+      ],
+      "sha256": "35245bb6ded1596426a8371c3c6a30fd10316866e64d409fdfb8f8b356473289",
+      "gitBlobSha": "c249733768db5061747434c5fd5d167003eac528",
+      "path": "full/hymnal-2015-full-part-24.pdf"
+    },
+    {
+      "name": "hymnal-2015-full-part-25.pdf",
+      "bytes": 3727530,
+      "pages": [
+        720,
+        811
+      ],
+      "sha256": "7b02e7fa87b8ca025b35c779c88d2c865e605cef2821b27ea156542737b0554a",
+      "gitBlobSha": "8d6a65e58cbf5506de16dce4b081536ed738da37",
+      "path": "full/hymnal-2015-full-part-25.pdf"
+    },
+    {
+      "name": "hymnal-2015-unison-part-01.pdf",
+      "bytes": 2917240,
+      "pages": [
+        1,
+        148
+      ],
+      "sha256": "a549ea992a7a0252c28544702949ad160bdd063bfd81994047aafbdcb06083a4",
+      "gitBlobSha": "93209ffe2d6826b74c77e77e6bb9abad6d0dea96",
+      "path": "unison/hymnal-2015-unison-part-01.pdf"
+    },
+    {
+      "name": "hymnal-2015-unison-part-02.pdf",
+      "bytes": 5112737,
+      "pages": [
+        149,
+        450
+      ],
+      "sha256": "79f486e63b74aa103bb232049629ff0feb498df2c271c018889a7c173ae99e72",
+      "gitBlobSha": "19f5a83b702f0999ef28f8706a0be5047f0cf859",
+      "path": "unison/hymnal-2015-unison-part-02.pdf"
+    },
+    {
+      "name": "hymnal-2015-unison-part-03.pdf",
+      "bytes": 6905990,
+      "pages": [
+        451,
+        782
+      ],
+      "sha256": "124c9f934ab7f6a4649f392e1d199cf417a79278cf242910f80d0e35c4a12e68",
+      "gitBlobSha": "6b89e96600a94e7f7e0bd5ba2b71515a59902a9f",
+      "path": "unison/hymnal-2015-unison-part-03.pdf"
+    }
+  ]
+}
