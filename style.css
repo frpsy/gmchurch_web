@@ -5124,6 +5124,22 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
 }
 .bulletin-lb-close:hover { background: #fff; transform: scale(1.1); }
 
+.bulletin-mobile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem 0.75rem;
+    margin: 0 0 1.5rem;
+    text-align: center;
+}
+.bulletin-mobile .bulletin-pdf-btn { margin-top: 0; }
+.bulletin-mobile .ico { width: 1.1em; height: 1.1em; }
+.bulletin-mobile-desc {
+    font-size: var(--fs-sm);
+    color: color-mix(in srgb, var(--text) 72%, var(--white));
+}
+
 .bulletin-pdf-btn {
     display: inline-flex;
     align-items: center;
