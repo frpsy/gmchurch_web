@@ -8,8 +8,8 @@
   <meta name="theme-color" content="#f6f5f0" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#101513" media="(prefers-color-scheme: dark)">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="대한성공회 광명교회 주일 예배 순서지 — 예배 순서, 성경·성가·기도서, 교회소식">
-  <title>예배 순서지 | 대한성공회 광명교회</title>
+  <meta name="description" content="대한성공회 광명교회 주일 주보 — 예배 순서, 성경·성가·기도서, 교회소식">
+  <title>주보 | 대한성공회 광명교회</title>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -177,13 +177,13 @@ details[open] .chev{transform:rotate(180deg)}
 <body>
   <header class="appbar">
     <div class="wrap">
-      <a class="brand" href="../bulletin.html"><b>광명교회 예배 순서지</b><span id="sub">대한성공회 광명교회</span></a>
+      <a class="brand" href="../bulletin.html"><b>광명교회 주보</b><span id="sub">대한성공회 광명교회</span></a>
       <button class="iconbtn" id="sizeBtn" type="button" aria-label="글자 크기 바꾸기"><span class="txt">가<small style="font-size:.7em">가</small></span></button>
-      <button class="iconbtn" id="shareBtn" type="button" aria-label="예배 순서지 링크 공유">
+      <button class="iconbtn" id="shareBtn" type="button" aria-label="주보 링크 공유">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11"/><path d="m7.5 8 4.5-4.5L16.5 8"/><path d="M5 12.5v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
       </button>
     </div>
-    <nav class="tabs" aria-label="예배 순서지 바로가기">
+    <nav class="tabs" aria-label="주보 바로가기">
       <div class="wrap">
         <a class="tab" href="#order">예배 순서</a>
         <a class="tab" href="#reflection">묵상</a>
@@ -192,7 +192,7 @@ details[open] .chev{transform:rotate(180deg)}
       </div>
     </nav>
   </header>
-  <main class="wrap" id="app"><div id="msg" role="status">예배 순서지를 불러오는 중…</div></main>
+  <main class="wrap" id="app"><div id="msg" role="status">주보를 불러오는 중…</div></main>
   <div id="toast" role="status" aria-live="polite"></div>
   <script src="../data.js"></script>
   <script>
@@ -303,7 +303,7 @@ details[open] .chev{transform:rotate(180deg)}
     const title = jubo.title.replace(/^\((.+?)\)\s*/, '');
     const year = /^\((.+?)\)/.exec(jubo.title)?.[1];
     const date = kDate(jubo.date);
-    document.title = `${date} 예배 순서지 | 대한성공회 광명교회`;
+    document.title = `${date} 주보 | 대한성공회 광명교회`;
     document.getElementById('sub').textContent = `제${jubo.issue}호 · ${date}`;
     const clergy = [book.celebrant && `집전 ${book.celebrant}`, book.preacher && book.preacher !== book.celebrant && `설교 ${book.preacher}`].filter(Boolean);
     if (book.preacher && book.preacher === book.celebrant) clergy[0] = `집전·설교 ${book.celebrant}`;
@@ -417,7 +417,7 @@ details[open] .chev{transform:rotate(180deg)}
     toast(['글자 보통', '글자 크게', '글자 아주 크게'][size]);
   });
   document.getElementById('shareBtn').addEventListener('click', async () => {
-    const data = { title: document.title, text: '대한성공회 광명교회 예배 순서지', url: location.href };
+    const data = { title: document.title, text: '대한성공회 광명교회 주보', url: location.href };
     if (navigator.share) { try { await navigator.share(data); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
     toast(await copy(location.href) ? '링크를 복사했습니다' : '링크를 복사하지 못했습니다');
   });
@@ -435,7 +435,7 @@ details[open] .chev{transform:rotate(180deg)}
       render({ jubo, book, order: orderAll?.weeks?.[iso], news: newsAll?.weeks?.[iso], verse: versesAll?.weeks?.[iso] });
       if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
     } catch (err) {
-      app.innerHTML = `<div id="msg" role="status">예배 순서지를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</div>`;
+      app.innerHTML = `<div id="msg" role="status">주보를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</div>`;
       console.error(err);
     }
   })();
