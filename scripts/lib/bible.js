@@ -76,6 +76,8 @@ function cleanLines(lines, book) {
         const t = line.trim();
         if (/^\d{3,4}$/.test(t)) continue;
         if (t.startsWith(book) && /제\d+장$/.test(t)) continue;
+        // 시 형식 본문 안의 각주 표지(들여쓴 한 글자 줄)는 표지만 지운다
+        if (/^[ㄱ-ㆎ]$/.test(t) && /^\s/.test(line)) continue;
         if (/^[ㄱ-ㆎ]$/.test(t)) {
             // 각주 표지 줄: 다음 빈 줄이나 다음 표지 줄 전까지가 각주 내용
             while (i + 1 < lines.length && lines[i + 1].trim() !== '' && !/^[ㄱ-ㆎ]$/.test(lines[i + 1].trim())) i++;
@@ -132,6 +134,8 @@ function splitVerses(text, chapter, to) {
     let buf = [];
     for (let i = start + 1; i < tokens.length; i++) {
         const tk = tokens[i];
+        // 장의 마지막 절: 다음 장 번호(첫 절 자리)가 나오면 닫는다
+        if (v >= to && tk === String(chapter + 1) && nextNum(i) === 2) break;
         if (isNum(tk) && Number(tk) === v + 1) {
             verses.set(v, buf.join(' '));
             if (v >= to) return verses;

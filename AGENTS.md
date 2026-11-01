@@ -19,7 +19,7 @@
 - 공식 교회 저장소 `lmkhkm/GMSKH_Homepage`(gmskh.or.kr)에는 `scripts/release-official.sh`로 이 저장소 `main`을 머지한다. 직접 작업 금지. **주보·교회소식 등록은 항상 두 저장소에 동시에 머지**하고(사용자 지시 2026-11-01), 그 밖의 작업은 **사용자가 요청할 때만** 반영한다.
 - 반영 시점: 개발 저장소는 머지 후 1~2분(GitHub Pages), 공식은 공식 `main` 머지 후 최대 2시간(서버 타이머). 상세는 `docs/REPO-STRUCTURE.md`.
 
-- 모바일 주보(`jubo/`): 이름은 "주보". 주보에 인쇄된 순서만 싣고 봉사자 구역은 두지 않으며, 본기도는 사제·회중 응답 뒤에 본문을 둔다. 스크롤 중 다른 요소를 스크롤하거나 `scroll-behavior: smooth`·`backdrop-filter`를 쓰지 않는다. 링크는 `tests/juboLinks.test.js`가 점검한다. 상세는 CLAUDE.md 6-1.
+- 모바일 주보(`jubo/`): 이름은 "주보". 주보에 인쇄된 순서만 싣고 봉사자 구역은 두지 않으며, 본기도는 사제·회중 응답 뒤에 본문을 둔다. 홈페이지에서 연결하지 않고(교우에게만 주소 안내) 성경 본문(`readings.json`)·성가 악보·기도문을 토글 안에서 바로 보여 준다. 스크롤 중 다른 요소를 스크롤하거나 `scroll-behavior: smooth`·`backdrop-filter`를 쓰지 않는다. 링크는 `tests/juboLinks.test.js`가 점검한다. 상세는 CLAUDE.md 6-1.
 
 ## 작업 순서 (매번)
 
