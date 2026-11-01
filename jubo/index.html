@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
   <style>
 /* 모바일 주보 — 주보 한 주를 휴대폰에서 읽는 화면. iPhone(Safari)·Galaxy(삼성 인터넷·Chrome) 기준.
-   데이터: data/jubo/YYYYMMDD.json(표지·본기도·묵상·다음 주 봉사), data/worship/YYYYMMDD.book.json(예배 순서·응답·악보),
+   데이터: data/jubo/YYYYMMDD.json(표지·본기도), data/worship/YYYYMMDD.book.json(예배 순서·응답·악보),
    data/worship-order.json(주보에 없는 순서 표시), data/bulletin-news.json, data/bulletin-verses.json, data.js(교회 정보) */
 :root{
   --bg:#f6f5f0; --surface:#ffffff; --surface-2:#eef2ec; --ink:#161a17; --ink-2:#4a4f4b; --ink-3:#6b716c;
@@ -139,13 +139,6 @@ details[open] .chev{transform:rotate(180deg)}
 .btn.primary{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
 .ext{width:.9em;height:.9em;flex:none;opacity:.85;vertical-align:-.1em}
 
-/* 묵상 */
-.reflect{padding:20px 18px}
-.reflect h3{margin:0;font-size:1.3rem;letter-spacing:-.02em}
-.reflect .src{margin:4px 0 14px;font-size:.84rem;color:var(--ink-3)}
-.reflect p{margin:0 0 1em;font-size:1.02rem;line-height:1.85;color:var(--ink)}
-.reflect p.amen{font-weight:700}
-.reflect .from{margin:0;text-align:right;font-size:.84rem;color:var(--ink-3)}
 
 /* 교회소식 */
 .news{display:flex;flex-direction:column;gap:8px}
@@ -190,7 +183,6 @@ details[open] .chev{transform:rotate(180deg)}
     <nav class="tabs" aria-label="주보 바로가기">
       <div class="wrap">
         <a class="tab" href="#order">예배 순서</a>
-        <a class="tab" href="#reflection">묵상</a>
         <a class="tab" href="#news">교회소식</a>
         <a class="tab" href="#info">안내</a>
       </div>
@@ -283,7 +275,6 @@ details[open] .chev{transform:rotate(180deg)}
       h += `<p class="hint">누르면 번호(${esc(no || '')})가 복사됩니다. 성가집 앱에서 검색창에 붙여 넣어 주세요</p>`;
     }
     if (it.label === '교회소식') links.push(`<a class="btn" href="#news">교회소식 보기</a>`);
-    if (it.label === '설교') links.push(`<a class="btn" href="#reflection">묵상 글 읽기</a>`);
     if (links.length) h += `<div class="links">${links.join('')}</div>`;
     return h;
   }
@@ -350,16 +341,6 @@ details[open] .chev{transform:rotate(180deg)}
         ${sections.map(s => `<p class="part">${esc(s.title)}</p><div class="items">${s.items.map(it => itemHtml(it, ctx)).join('')}</div>`).join('')}
         <p class="hint" style="margin-top:12px">항목을 누르면 응답·기도문, 성경 본문, 성가 악보가 펼쳐집니다.</p>
       </section>
-
-      ${jubo.reflection ? `<section class="block" id="reflection" aria-labelledby="h-ref">
-        <h2 class="h" id="h-ref">${use('candle')}묵상</h2>
-        <article class="card reflect">
-          <h3>${esc(jubo.reflection.title)}</h3>
-          <p class="src">${jubo.reflection.ref ? (bibleUrl(jubo.reflection.ref) ? `<a href="${esc(bibleUrl(jubo.reflection.ref))}" target="_blank" rel="noopener">${esc(jubo.reflection.ref)}</a>` : esc(jubo.reflection.ref)) : ''}</p>
-          ${jubo.reflection.paragraphs.map((p, i, a) => `<p${i === a.length - 1 ? ' class="amen"' : ''}>${esc(p)}</p>`).join('')}
-          ${jubo.reflection.source ? `<p class="from">— ${esc(jubo.reflection.source)}</p>` : ''}
-        </article>
-      </section>` : ''}
 
       <section class="block" id="news" aria-labelledby="h-news">
         <h2 class="h" id="h-news">${use('calendar')}교회소식</h2>
