@@ -91,3 +91,5 @@ let ok=true;CHURCH_DATA.navigation.forEach(i=>{const[p]=i.href.split('#');if(p&&
 - [`CLAUDE.md`](CLAUDE.md) — 전체 규칙·절차 (원본)
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) — `data.js` 스키마, 렌더러 구조, CSS 변수·클래스 목록
 - [`docs/chatgpt-handoff.md`](docs/chatgpt-handoff.md) — ChatGPT에 붙여넣는 시작 안내문, 현재 남은 일
+
+- **기준 화면과 재사용 스킬 (2026-11-01 사용자 확정)** — https://frpsy.github.io/gmchurch_web/jubo/ 의 현재 구성을 매주 유지한다. 주보 작업 전에 [모바일 주보 스킬](.agents/skills/gmchurch-mobile-bulletin/SKILL.md)을 읽는다. 상단·탭 → 표지 → 이번 주 말씀 → 예배 순서(본문·악보·기도문 토글) → 교회소식 → 안내 순서를 따른다. 날짜·내용을 갱신하되 사용자 요청 없이 디자인을 재구성하지 않는다.
