@@ -9,7 +9,6 @@ const exists = rel => existsSync(new URL(rel, root));
 
 const html = read('jubo/index.html');
 const BIBLE = JSON.parse(/const BIBLE = (\{.*?\});/s.exec(html)[1]);
-const HYMNBOOK = 'https://dulkuka12.github.io/khymn/hymnbook.pdf';
 
 // jubo/index.html의 bibleUrl과 같은 규칙: 책 이름이 BIBLE에 있어야 링크가 만들어진다
 function bibleOk(ref) {
@@ -35,12 +34,10 @@ describe.each(dates)('모바일 예배 순서지 %s', key => {
         if (jubo.reflection?.ref) expect(bibleOk(jubo.reflection.ref), jubo.reflection.ref).toBe(true);
     });
 
-    it('악보 이미지가 있고 성가는 성가집 PDF 링크가 있다', () => {
+    it('시편 악보 이미지가 있고 성가는 번호가 있어 성가집 앱 링크가 만들어진다', () => {
         items.forEach(i => {
             [i.score, ...(i.scores || [])].filter(Boolean).forEach(s => expect(exists(s), s).toBe(true));
-            if (/^성가 /.test(i.ref || '')) {
-                expect(i.link?.url, i.ref).toMatch(new RegExp(`^${HYMNBOOK.replace(/\./g, '\\.')}#page=\\d+$`));
-            }
+            if (/^성가 /.test(i.ref || '')) expect(/\d+/.test(i.ref), i.ref).toBe(true);
         });
     });
 });

@@ -200,6 +200,7 @@ details[open] .chev{transform:rotate(180deg)}
   // 공동번역 온라인(대한성공회 bible.anglican.kr) 책 이름 → 주소용 책 id. 출처: https://bible.anglican.kr/data/books.json
   const BIBLE = {"창세기":"gen","창세":"gen","출애굽기":"exod","출애":"exod","레위기":"lev","레위":"lev","민수기":"num","민수":"num","신명기":"deut","신명":"deut","여호수아":"josh","여호":"josh","판관기":"judg","판관":"judg","룻기":"ruth","사무엘상":"1sam","1사무":"1sam","사무엘하":"2sam","2사무":"2sam","열왕기상":"1kgs","1열왕":"1kgs","열왕기하":"2kgs","2열왕":"2kgs","역대기상":"1chr","1역대":"1chr","역대기하":"2chr","2역대":"2chr","에즈라":"ezra","에즈":"ezra","느헤미야":"neh","느헤":"neh","토비트":"tob","토비":"tob","유딧":"jdt","에스델":"esth","에스":"esth","마카베오상":"1macc","1마카":"1macc","마카베오하":"2macc","2마카":"2macc","욥기":"job","시편":"ps","잠언":"prov","전도서":"eccl","전도":"eccl","아가":"song","지혜서":"wis","지혜":"wis","집회서":"sir","집회":"sir","이사야":"isa","이사":"isa","예레미야":"jer","예레":"jer","애가":"lam","바룩":"bar","에제키엘":"ezek","에제":"ezek","다니엘":"dan","다니":"dan","호세아":"hos","호세":"hos","요엘":"joel","아모스":"amos","아모":"amos","오바디야":"obad","오바":"obad","요나":"jonah","미가":"mic","나훔":"nah","하바꾹":"hab","하바":"hab","스바니야":"zeph","스바":"zeph","하깨":"hag","즈가리야":"zech","즈가":"zech","말라기":"mal","말라":"mal","마태오의 복음서":"matt","마태":"matt","마르코의 복음서":"mark","마르":"mark","루가의 복음서":"luke","루가":"luke","요한의 복음서":"john","요한":"john","사도행전":"acts","사도":"acts","로마인들에게 보낸 편지":"rom","로마":"rom","고린토인들에게 보낸 첫째 편지":"1cor","1고린":"1cor","고린토인들에게 보낸 둘째 편지":"2cor","2고린":"2cor","갈라디아인들에게 보낸 편지":"gal","갈라":"gal","에페소인들에게 보낸 편지":"eph","에페":"eph","필립비인들에게 보낸 편지":"phil","필립":"phil","골로사이인들에게 보낸 편지":"col","골로":"col","데살로니카인들에게 보낸 첫째 편지":"1thess","1데살":"1thess","데살로니카인들에게 보낸 둘째 편지":"2thess","2데살":"2thess","디모테오에게 보낸 첫째 편지":"1tim","1디모":"1tim","디모테오에게 보낸 둘째 편지":"2tim","2디모":"2tim","디도에게 보낸 편지":"titus","디도":"titus","필레몬에게 보낸 편지":"phlm","필레":"phlm","히브리인들에게 보낸 편지":"heb","히브":"heb","야고보의 편지":"jas","야고":"jas","베드로의 첫째 편지":"1pet","1베드":"1pet","베드로의 둘째 편지":"2pet","2베드":"2pet","요한의 첫째 편지":"1john","1요한":"1john","요한의 둘째 편지":"2john","2요한":"2john","요한의 셋째 편지":"3john","3요한":"3john","유다의 편지":"jude","유다":"jude","요한의 묵시록":"rev","묵시":"rev"};
   const BIBLE_URL = 'https://bible.anglican.kr';
+  const HYMN_URL = 'https://dulkuka12.github.io/khymn/';
   const BCP_URL = 'https://dulkuka12.github.io/kbcp/ucharist-form1.html';
   const ROOT = '../';
   const WHO = { p: '사제', k: '기도자', l: '독서자', a: '회중' };
@@ -262,7 +263,12 @@ details[open] .chev{transform:rotate(180deg)}
     const links = [];
     const bible = it.kind || it.label === '성시' ? bibleUrl(it.ref) : null;
     if (bible) links.push(extLink(bible, it.label === '성시' ? '공동번역 시편 읽기' : '공동번역으로 읽기', 'btn primary'));
-    if (isHymn && it.link) links.push(extLink(it.link.url, `성가집 PDF ${/\d+쪽/.exec(it.link.text)?.[0] || ''}`.trim()));
+    if (isHymn) {
+      // 공개된 모바일 성가집 앱으로 보낸다. 앱이 주소로 곡을 지정하지 못해 번호를 복사해 두고 검색창에 붙여 넣게 한다
+      const no = /\d+/.exec(it.ref)?.[0];
+      links.push(`<a class="btn" href="${HYMN_URL}" target="_blank" rel="noopener" data-copy="${esc(no || '')}">성가집 앱에서 ${esc(no || '')}장 찾기 ${EXT}</a>`);
+      h += `<p class="hint">누르면 번호(${esc(no || '')})가 복사됩니다. 성가집 앱에서 검색창에 붙여 넣어 주세요</p>`;
+    }
     if (isBcp || it.label === '영성체후기도' || it.label === '본기도') links.push(extLink(BCP_URL, '기도서 감사성찬례 1형식'));
     if (it.label === '교회소식') links.push(`<a class="btn" href="#news">교회소식 보기</a>`);
     if (it.label === '설교') links.push(`<a class="btn" href="#reflection">묵상 글 읽기</a>`);
@@ -363,7 +369,7 @@ details[open] .chev{transform:rotate(180deg)}
           </div>
         </div>
         <p class="foot">성경: 공동번역성서(개정판) — <a href="${BIBLE_URL}/" target="_blank" rel="noopener">bible.anglican.kr</a><br>
-          성가: 대한성공회 성가집(2015) — <a href="https://dulkuka12.github.io/khymn/hymnbook.pdf" target="_blank" rel="noopener">성가집 PDF</a><br>
+          성가: 대한성공회 성가집(2015) — <a href="${HYMN_URL}" target="_blank" rel="noopener">성가 2015 모바일 성가집</a><br>
           기도서: 대한성공회 기도서 — <a href="${BCP_URL}" target="_blank" rel="noopener">감사성찬례 1형식</a></p>
       </section>`;
 
