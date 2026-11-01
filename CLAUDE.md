@@ -351,3 +351,5 @@ git push -u origin claude/작업명
 - **`docs/wiki/`** — 홈페이지 전체를 학습해 정리한 **Claude용 위키**(교회 개요·예배/전례·사역·사이트 구조·운영 흐름). 소개 문구, 소식, FAQ, 주보 작업 전에 읽고, 새로 확인한 사실과 사이트 변경은 같은 PR에서 위키에 반영한다. 원본은 `data.js`이며 충돌하면 `data.js`가 맞다
 - **`docs/`** — 위원회 audit, 작업 지시서, 교회 용어·표기 용어집(`church-glossary.md`)
 - **`AGENTS.md`** — ChatGPT 등 다른 AI용 규칙 요약 (이 파일이 원본. 규칙을 바꾸면 AGENTS.md 요약도 맞출 것) · 인계 안내문은 `docs/chatgpt-handoff.md`
+
+- **기준 화면과 재사용 스킬 (2026-11-01 사용자 확정)** — https://frpsy.github.io/gmchurch_web/jubo/ 의 현재 구성을 매주 유지한다. 주보 작업 전에 [모바일 주보 스킬](.agents/skills/gmchurch-mobile-bulletin/SKILL.md)을 읽는다. 상단·탭 → 표지 → 이번 주 말씀 → 예배 순서(본문·악보·기도문 토글) → 교회소식 → 안내 순서를 따른다. 날짜·내용을 갱신하되 사용자 요청 없이 디자인을 재구성하지 않는다.
