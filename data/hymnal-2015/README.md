@@ -58,3 +58,8 @@ python3 scripts/archive-hymnal-images.py /path/to/hymnbook.pdf /path/to/hymn-ind
 ```
 
 원본 페이지가 단일 스캔 이미지가 아니면 오류로 중단한다. 새 임시 폴더에 생성·검증한 뒤 교체한다. 새 PDF에 기존 source-index.json을 재사용하지 않는다.
+
+
+## 최신 작업 결과
+
+[품질 비교·PDF 분할 검증 결과](QUALITY.md)를 확인한다. 새 단성판의 같은 악보는 기존 이미지보다 가로·세로 약 2.5배 크다. 전체판 3분할과 단성판 보존 파일을 만들고 검증했지만, GitHub 바이너리 업로드·새 이미지 매핑·검색 제외 적용은 아직 완료되지 않았다.
