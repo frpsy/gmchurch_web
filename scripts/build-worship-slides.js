@@ -23,6 +23,12 @@ const hymnal = Object.fromEntries(archive.hymns.map(h => [String(h.number), {
     images: h.images.map(path => `data/hymnal-2015/${path}`),
 }]));
 
+// 새 단성판에서 실제 대조한 곡만 기존 자료보다 우선한다.
+const unison = json('data/hymnal-2015/unison-verified.json').hymns;
+for (const [number, verified] of Object.entries(unison)) {
+    if (hymnal[number]) hymnal[number].images = verified.images;
+}
+
 const ctx = {
     hymns: json('data/worship-texts/hymns.json').hymns,
     hymnal,

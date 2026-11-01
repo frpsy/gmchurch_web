@@ -1,0 +1,57 @@
+{
+  "note": "2026-10-25 주보 사용곡: 새 단성판 번호와 이어지는 페이지를 원본에서 대조. 쪽은 782쪽 원본 기준.",
+  "hymns": {
+    "65": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0111.png",
+        "data/hymnal-2015/unison-images/page-0112.png"
+      ]
+    },
+    "76": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0121.png",
+        "data/hymnal-2015/unison-images/page-0122.png"
+      ]
+    },
+    "82": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0128.png"
+      ]
+    },
+    "83": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0129.png"
+      ]
+    },
+    "89": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0135.png"
+      ]
+    },
+    "208": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0243.png"
+      ]
+    },
+    "258": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0293.png"
+      ]
+    },
+    "272": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0306.png"
+      ]
+    },
+    "369": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0397.png"
+      ]
+    },
+    "500": {
+      "images": [
+        "data/hymnal-2015/unison-images/page-0523.png"
+      ]
+    }
+  }
+}
