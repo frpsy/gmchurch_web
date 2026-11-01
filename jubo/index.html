@@ -247,10 +247,11 @@ details[open] .chev{transform:rotate(180deg)}
     let h = '';
     const isHymn = /^성가 /.test(it.ref || '');
     const isBcp = /^기도서 /.test(it.ref || '');
-    if (it.label === '본기도' && ctx.jubo.collect) h += `<div class="prayer"><small>오늘의 본기도</small>${esc(ctx.jubo.collect)}</div>`;
     if (it.kind) h += `<p class="hint">${esc(it.kind)} 말씀 · 본문은 아래 단추로 엽니다</p>`;
     if (it.label === '성시') h += psalmHtml(it.lines);
     else if (it.lines.length) h += it.lines.map(lineHtml).join('');
+    // 사제·회중 응답("기도합시다") 다음에 본기도 본문이 온다
+    if (it.label === '본기도' && ctx.jubo.collect) h += `<div class="prayer"><small>오늘의 본기도</small>${esc(ctx.jubo.collect)}</div>`;
     if (it.label === '설교') h += `<p class="plain">오늘 말씀: ${esc(ctx.gospel || '')}</p>`;
     const scores = it.score ? [it.score] : (it.scores || []);
     if (scores.length && isHymn) h += `<p class="scap">${esc(it.ref)}${it.title ? ` · ${esc(it.title)}` : ''} 악보</p>`;
