@@ -8,8 +8,8 @@
   <meta name="theme-color" content="#f6f5f0" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#101513" media="(prefers-color-scheme: dark)">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="대한성공회 광명교회 주일 주보 — 예배 순서, 성경·성가·기도서, 교회소식">
-  <title>모바일 주보 | 대한성공회 광명교회</title>
+  <meta name="description" content="대한성공회 광명교회 주일 예배 순서지 — 예배 순서, 성경·성가·기도서, 교회소식">
+  <title>예배 순서지 | 대한성공회 광명교회</title>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -35,9 +35,8 @@
   }
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%;font-size:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--bar) + 52px + var(--safe-t))}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;font-size:100%;scroll-padding-top:calc(var(--bar) + 52px + var(--safe-t))}
 html[data-size="1"]{font-size:112.5%} html[data-size="2"]{font-size:125%}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
   font-size:1rem;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
   padding-left:var(--safe-l);padding-right:var(--safe-r)}
@@ -48,8 +47,7 @@ button{font:inherit;color:inherit}
 .wrap{max-width:560px;margin:0 auto;padding:0 var(--gutter)}
 
 /* 상단 바 */
-.appbar{position:sticky;top:0;z-index:20;padding-top:var(--safe-t);background:color-mix(in srgb,var(--bg) 86%,transparent);
-  -webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px)}
+.appbar{position:sticky;top:0;z-index:20;padding-top:var(--safe-t);background:var(--bg)}
 .appbar .wrap{display:flex;align-items:center;gap:8px;height:var(--bar)}
 .brand{display:flex;flex-direction:column;line-height:1.2;min-width:0;flex:1;text-decoration:none;color:var(--ink)}
 .brand b{font-size:1rem;letter-spacing:-.01em}
@@ -112,8 +110,6 @@ details.item[open]{box-shadow:var(--shadow)}
 .side{display:flex;align-items:center;gap:6px;color:var(--ink-3);font-size:.82rem;text-align:right;max-width:9.5em}
 .chev{width:16px;height:16px;flex:none;transition:transform .2s}
 details[open] .chev{transform:rotate(180deg)}
-.item.extra{background:transparent;border-style:dashed}
-.item.extra .lbl b{font-weight:600;color:var(--ink-2)}
 .body{padding:2px 14px 16px 30px;border-top:1px solid var(--line)}
 .body > *:first-child{margin-top:12px}
 .row{display:grid;grid-template-columns:3.2em 1fr;gap:8px;margin:6px 0;align-items:baseline}
@@ -157,8 +153,6 @@ details[open] .chev{transform:rotate(180deg)}
 .news dd{margin:0;color:var(--ink)}
 
 /* 다음 주 봉사 */
-.serve{padding:6px 16px 14px}
-.serve h3{margin:14px 0 6px;font-size:.86rem;color:var(--ink-3);letter-spacing:.04em}
 .kv{display:grid;grid-template-columns:5.5em 1fr;gap:0 10px;margin:0}
 .kv dt,.kv dd{padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
 .kv dt{color:var(--ink-3);font-weight:700}
@@ -183,23 +177,22 @@ details[open] .chev{transform:rotate(180deg)}
 <body>
   <header class="appbar">
     <div class="wrap">
-      <a class="brand" href="../bulletin.html"><b>광명교회 주보</b><span id="sub">대한성공회 광명교회</span></a>
+      <a class="brand" href="../bulletin.html"><b>광명교회 예배 순서지</b><span id="sub">대한성공회 광명교회</span></a>
       <button class="iconbtn" id="sizeBtn" type="button" aria-label="글자 크기 바꾸기"><span class="txt">가<small style="font-size:.7em">가</small></span></button>
-      <button class="iconbtn" id="shareBtn" type="button" aria-label="주보 링크 공유">
+      <button class="iconbtn" id="shareBtn" type="button" aria-label="예배 순서지 링크 공유">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11"/><path d="m7.5 8 4.5-4.5L16.5 8"/><path d="M5 12.5v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
       </button>
     </div>
-    <nav class="tabs" aria-label="주보 바로가기">
+    <nav class="tabs" aria-label="예배 순서지 바로가기">
       <div class="wrap">
         <a class="tab" href="#order">예배 순서</a>
         <a class="tab" href="#reflection">묵상</a>
         <a class="tab" href="#news">교회소식</a>
-        <a class="tab" href="#serve">봉사자</a>
         <a class="tab" href="#info">안내</a>
       </div>
     </nav>
   </header>
-  <main class="wrap" id="app"><div id="msg" role="status">주보를 불러오는 중…</div></main>
+  <main class="wrap" id="app"><div id="msg" role="status">예배 순서지를 불러오는 중…</div></main>
   <div id="toast" role="status" aria-live="polite"></div>
   <script src="../data.js"></script>
   <script>
@@ -275,16 +268,15 @@ details[open] .chev{transform:rotate(180deg)}
   }
 
   function itemHtml(it, ctx) {
-    const extra = ctx.extra.has(it.no);
     const refText = /^성가 |^기도서 /.test(it.ref || '') ? it.ref : (it.ref ? shortRef(it.ref) : (it.label === '영성체후기도' ? '기도서 271쪽' : ''));
-    const sub = it.title || (extra ? '주보에는 없는 순서 · 회중 응답' : '');
+    const sub = it.title || '';
     const body = itemBody(it, ctx);
     const head = `<span class="mark" aria-hidden="true">${it.stand ? '†' : ''}</span>
       <span class="lbl"><b>${esc(it.label)}${it.stand ? '<span class="sr"> (일어섭니다)</span>' : ''}</b>${sub ? `<small>${esc(sub)}</small>` : ''}${refText ? `<span class="ref">${esc(refText)}</span>` : ''}</span>
       <span class="side">${esc(it.by || '')}${body ? CHEV : ''}</span>`;
     return body
-      ? `<details class="item${extra ? ' extra' : ''}"><summary>${head}</summary><div class="body">${body}</div></details>`
-      : `<div class="item static${extra ? ' extra' : ''}"><div class="sum">${head}</div></div>`;
+      ? `<details class="item"><summary>${head}</summary><div class="body">${body}</div></details>`
+      : `<div class="item static"><div class="sum">${head}</div></div>`;
   }
 
   function newsHtml(items) {
@@ -301,21 +293,22 @@ details[open] .chev{transform:rotate(180deg)}
     const info = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.info) || {};
     const giving = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.giving) || {};
     const vision = info.vision || '';
-    const items = book.sections.flatMap(s => s.items);
     const orderItems = (order?.items || []).filter(i => !i.section);
+    // 주보에 인쇄되지 않은 순서(회중 응답 등)는 싣지 않는다
     const extra = new Set(orderItems.map((o, i) => o.extra ? i + 1 : 0).filter(Boolean));
+    const sections = book.sections.map(s => ({ ...s, items: s.items.filter(it => !extra.has(it.no)) })).filter(s => s.items.length);
+    const items = sections.flatMap(s => s.items);
     const gospelItem = items.find(i => i.kind === '복음서');
-    const ctx = { jubo, extra, gospel: gospelItem ? shortRef(gospelItem.ref) : '' };
+    const ctx = { jubo, gospel: gospelItem ? shortRef(gospelItem.ref) : '' };
     const title = jubo.title.replace(/^\((.+?)\)\s*/, '');
     const year = /^\((.+?)\)/.exec(jubo.title)?.[1];
     const date = kDate(jubo.date);
-    document.title = `${date} 주보 | 대한성공회 광명교회`;
+    document.title = `${date} 예배 순서지 | 대한성공회 광명교회`;
     document.getElementById('sub').textContent = `제${jubo.issue}호 · ${date}`;
     const clergy = [book.celebrant && `집전 ${book.celebrant}`, book.preacher && book.preacher !== book.celebrant && `설교 ${book.preacher}`].filter(Boolean);
     if (book.preacher && book.preacher === book.celebrant) clergy[0] = `집전·설교 ${book.celebrant}`;
 
     const verseUrl = verse && bibleUrl(verse.ref);
-    const nw = jubo.nextWeek;
     const app = document.getElementById('app');
     app.innerHTML = `
       <article class="card cover">
@@ -333,8 +326,8 @@ details[open] .chev{transform:rotate(180deg)}
       <section class="block" id="order" aria-labelledby="h-order">
         <h2 class="h" id="h-order">${use('cross')}예배 순서</h2>
         <div class="legend"><span><span class="stand-mark">†</span> 일어섭니다</span><span><span class="who-a">회중</span> 함께 말합니다</span><span class="sp"></span><button class="ghost" id="toggleAll" type="button" aria-pressed="false">모두 펼치기</button></div>
-        ${book.sections.map(s => `<p class="part">${esc(s.title)}</p><div class="items">${s.items.map(it => itemHtml(it, ctx)).join('')}</div>`).join('')}
-        <p class="hint" style="margin-top:12px">항목을 누르면 응답·가사·악보와 성경·성가·기도서 링크가 열립니다. 점선 항목은 주보에는 없지만 예배 중 함께 하는 응답입니다.</p>
+        ${sections.map(s => `<p class="part">${esc(s.title)}</p><div class="items">${s.items.map(it => itemHtml(it, ctx)).join('')}</div>`).join('')}
+        <p class="hint" style="margin-top:12px">항목을 누르면 응답·가사·악보와 성경·성가·기도서 링크가 열립니다.</p>
       </section>
 
       ${jubo.reflection ? `<section class="block" id="reflection" aria-labelledby="h-ref">
@@ -351,17 +344,6 @@ details[open] .chev{transform:rotate(180deg)}
         <h2 class="h" id="h-news">${use('calendar')}교회소식</h2>
         ${newsHtml(news)}
       </section>
-
-      ${nw ? `<section class="block" id="serve" aria-labelledby="h-serve">
-        <h2 class="h" id="h-serve">${use('people')}다음 주일 봉사자 <span style="font-size:.8rem;color:var(--ink-3);font-weight:600">${esc(kDate(nw.date))}</span></h2>
-        <div class="card serve">
-          <h3>말씀</h3>
-          <dl class="kv">${nw.readings.map(r => { const u = bibleUrl(r.ref); return `<dt>${esc(r.label)}</dt><dd>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(r.ref)}</a>` : esc(r.ref)}${r.by ? ` <span class="by">· ${esc(r.by)}</span>` : ''}</dd>`; }).join('')}</dl>
-          <h3>맡은 일</h3>
-          <dl class="kv">${nw.roles.map(r => `<dt>${esc(r.label)}</dt><dd>${esc(r.name)}</dd>`).join('')}</dl>
-          ${(nw.rotations || []).map(g => `<h3>${esc(g.label)}</h3><dl class="kv">${g.rows.map(([d, n]) => `<dt>${esc(d)}</dt><dd>${esc(n)}</dd>`).join('')}</dl>`).join('')}
-        </div>
-      </section>` : ''}
 
       <section class="block" id="info" aria-labelledby="h-info">
         <h2 class="h" id="h-info">${use('church')}교회 안내</h2>
@@ -402,17 +384,22 @@ details[open] .chev{transform:rotate(180deg)}
     const byId = Object.fromEntries(tabs.map(t => [t.getAttribute('href').slice(1), t]));
     tabs.forEach(t => { if (!document.getElementById(t.getAttribute('href').slice(1))) t.hidden = true; });
     if ('IntersectionObserver' in window) {
+      // 스크롤 중에는 아무것도 건드리지 않는다. 관성 스크롤 도중 다른 요소를 스크롤하면 iOS에서 화면이 멈추거나 튄다
+      let cur = null, timer = 0;
+      const mark = () => {
+        tabs.forEach(t => t.removeAttribute('aria-current'));
+        const t = byId[cur];
+        if (!t) return;
+        t.setAttribute('aria-current', 'true');
+        const strip = t.parentElement;
+        strip.scrollLeft = t.offsetLeft - (strip.clientWidth - t.offsetWidth) / 2;
+      };
       const io = new IntersectionObserver(entries => {
-        entries.filter(en => en.isIntersecting).forEach(en => {
-          tabs.forEach(t => t.removeAttribute('aria-current'));
-          const t = byId[en.target.id];
-          if (t) {
-            t.setAttribute('aria-current', 'true');
-            // 탭 줄만 가로로 옮긴다. scrollIntoView는 고정(sticky) 머리글 때문에 문서 스크롤까지 건드려 화면이 튕긴다
-            const strip = t.parentElement;
-            strip.scrollLeft = t.offsetLeft - (strip.clientWidth - t.offsetWidth) / 2;
-          }
-        });
+        const hit = entries.filter(en => en.isIntersecting).pop();
+        if (!hit || hit.target.id === cur) return;
+        cur = hit.target.id;
+        clearTimeout(timer);
+        timer = setTimeout(mark, 200);
       }, { rootMargin: '-40% 0px -55% 0px' });
       Object.keys(byId).forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
     }
@@ -430,9 +417,9 @@ details[open] .chev{transform:rotate(180deg)}
     toast(['글자 보통', '글자 크게', '글자 아주 크게'][size]);
   });
   document.getElementById('shareBtn').addEventListener('click', async () => {
-    const data = { title: document.title, text: '대한성공회 광명교회 주보', url: location.href };
+    const data = { title: document.title, text: '대한성공회 광명교회 예배 순서지', url: location.href };
     if (navigator.share) { try { await navigator.share(data); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
-    toast(await copy(location.href) ? '주보 링크를 복사했습니다' : '링크를 복사하지 못했습니다');
+    toast(await copy(location.href) ? '링크를 복사했습니다' : '링크를 복사하지 못했습니다');
   });
 
   (async () => {
@@ -448,7 +435,7 @@ details[open] .chev{transform:rotate(180deg)}
       render({ jubo, book, order: orderAll?.weeks?.[iso], news: newsAll?.weeks?.[iso], verse: versesAll?.weeks?.[iso] });
       if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
     } catch (err) {
-      app.innerHTML = `<div id="msg" role="status">주보를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</div>`;
+      app.innerHTML = `<div id="msg" role="status">예배 순서지를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</div>`;
       console.error(err);
     }
   })();
