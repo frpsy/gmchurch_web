@@ -328,6 +328,318 @@
           "stage": "파송"
         }
       ]
+    },
+    "2026-11-01": {
+      "title": "(가해) 모든 성인의 날 감사성찬례",
+      "celebrant": "민숙희 마가렛 사제",
+      "preacher": "민숙희 마가렛 사제",
+      "form": "1형식 (C곡)",
+      "theme": {
+        "title": "모든 성인의 날",
+        "subtitle": "감사성찬례",
+        "image": null
+      },
+      "items": [
+        {
+          "section": "Ⅰ 개회예식"
+        },
+        {
+          "type": "hymn",
+          "label": "입당성가",
+          "number": 265,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "모임"
+        },
+        {
+          "type": "bcp",
+          "label": "정심기도",
+          "page": 244,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "모임"
+        },
+        {
+          "type": "hymn",
+          "label": "거룩하신 하느님",
+          "number": 89,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "모임"
+        },
+        {
+          "section": "Ⅱ 말씀의 전례"
+        },
+        {
+          "type": "dialog",
+          "label": "본기도",
+          "dialog": "collect",
+          "by": "집전자",
+          "stand": true,
+          "stage": "말씀"
+        },
+        {
+          "type": "reading",
+          "label": "제1독서",
+          "kind": "구약",
+          "ref": "묵시 7:9-17",
+          "by": "한금숙 앵니다",
+          "stage": "말씀"
+        },
+        {
+          "type": "psalm",
+          "label": "성시",
+          "ref": "34편",
+          "by": "다 함께",
+          "stage": "말씀",
+          "lines": [
+            {
+              "n": 1,
+              "text": "나 어떤 일이 있어도 주님을 찬양하리라."
+            },
+            {
+              "mark": "○",
+              "text": "주님을 찬양하는 노래, 내 입에서 그칠 날이 없으리라."
+            },
+            {
+              "n": 2,
+              "text": "나의 자랑, 주님께 있으니"
+            },
+            {
+              "mark": "○",
+              "text": "비천한 이들아, 듣고 기뻐하여라."
+            },
+            {
+              "n": 3,
+              "text": "나와 함께 “주, 높으시도다” 노래 부르자."
+            },
+            {
+              "mark": "○",
+              "text": "모두 소리 맞춰 그 이름 기리자."
+            },
+            {
+              "n": 4,
+              "text": "주님 찾아 호소할 때 들어 주시고"
+            },
+            {
+              "mark": "○",
+              "text": "몸서리쳐지는 곤경에서 건져 주셨다."
+            },
+            {
+              "n": 5,
+              "text": "그를 쳐다보는 자, 그 얼굴 빛나고"
+            },
+            {
+              "mark": "○",
+              "text": "부끄러운 꼴 당하지 아니하리라."
+            },
+            {
+              "n": 6,
+              "text": "가엾은 이의 부르짖음을 들으시고"
+            },
+            {
+              "mark": "○",
+              "text": "주께서 곤경에서 건져 주셨다."
+            },
+            {
+              "mark": "◉",
+              "text": "영광이 성부와"
+            },
+            {
+              "mark": "○",
+              "text": "성자와 성령께 처음과 같이 지금도"
+            },
+            {
+              "mark": "○",
+              "text": "그리고 영원히 아멘"
+            }
+          ],
+          "score": "data/worship/scores/20261101-psalm.png"
+        },
+        {
+          "type": "reading",
+          "label": "제2독서",
+          "kind": "서신",
+          "ref": "1요한 3:1-3",
+          "by": "유명숙 데레사",
+          "stage": "말씀"
+        },
+        {
+          "type": "hymn",
+          "label": "층계성가",
+          "number": 357,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "말씀"
+        },
+        {
+          "type": "reading",
+          "label": "복음",
+          "kind": "복음서",
+          "gospel": true,
+          "ref": "마태 5:1-12",
+          "by": "집전자",
+          "stand": true,
+          "stage": "말씀"
+        },
+        {
+          "type": "sermon",
+          "label": "설교",
+          "by": "민숙희 마가렛 사제",
+          "stage": "말씀"
+        },
+        {
+          "type": "bcp",
+          "label": "사도신경",
+          "page": 250,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "응답"
+        },
+        {
+          "type": "intercession",
+          "label": "교회와 세상을 위한 기도",
+          "by": "신효심 베로니카",
+          "stand": true,
+          "stage": "응답",
+          "refrain": null
+        },
+        {
+          "section": "Ⅲ 성찬의 전례"
+        },
+        {
+          "type": "bcp",
+          "label": "평화의 인사",
+          "page": 256,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "응답"
+        },
+        {
+          "type": "hymn",
+          "label": "봉헌성가",
+          "number": 348,
+          "by": "황주익 베드로",
+          "stage": "응답"
+        },
+        {
+          "type": "dialog",
+          "label": "예물 기도",
+          "dialog": "offertory",
+          "by": "집전자",
+          "stage": "응답",
+          "sub": "예물 준비",
+          "extra": true
+        },
+        {
+          "type": "bcp",
+          "label": "성찬기도",
+          "page": 257,
+          "by": "1양식",
+          "stand": true,
+          "stage": "응답",
+          "sub": "성찬기도"
+        },
+        {
+          "type": "hymn",
+          "label": "거룩하시다",
+          "number": 82,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "응답",
+          "sub": "성찬기도"
+        },
+        {
+          "type": "dialog",
+          "label": "성찬기도",
+          "dialog": "doxology",
+          "by": "집전자",
+          "stage": "응답",
+          "sub": "성찬기도",
+          "extra": true
+        },
+        {
+          "type": "hymn",
+          "label": "주의기도",
+          "number": 65,
+          "by": "다 함께",
+          "stage": "응답",
+          "sub": "성찬기도"
+        },
+        {
+          "type": "hymn",
+          "label": "하느님의 어린양",
+          "number": 83,
+          "by": "다 함께",
+          "stage": "응답",
+          "sub": "성체 나눔"
+        },
+        {
+          "type": "bcp",
+          "label": "성체나눔",
+          "page": 270,
+          "by": "다 함께",
+          "stage": "응답",
+          "sub": "성체 나눔"
+        },
+        {
+          "type": "dialog",
+          "label": "영성체",
+          "dialog": "communion-invite",
+          "by": "집전자",
+          "stage": "응답",
+          "sub": "영성체",
+          "extra": true
+        },
+        {
+          "type": "hymn",
+          "label": "성체성가",
+          "number": 343,
+          "by": "다 함께",
+          "stage": "응답"
+        },
+        {
+          "type": "dialog",
+          "label": "영성체후기도",
+          "dialog": "after-communion",
+          "by": "다 함께",
+          "stand": true,
+          "stage": "응답"
+        },
+        {
+          "section": "Ⅳ 파송예식"
+        },
+        {
+          "type": "dialog",
+          "label": "축복기도",
+          "dialog": "blessing",
+          "by": "집전자",
+          "stand": true,
+          "stage": "파송"
+        },
+        {
+          "type": "dialog",
+          "label": "파송",
+          "dialog": "dismissal",
+          "by": "집전자",
+          "stage": "파송",
+          "extra": true
+        },
+        {
+          "type": "notice",
+          "label": "교회소식",
+          "by": "나영숙 엘리사벳 위원",
+          "stage": "파송"
+        },
+        {
+          "type": "hymn",
+          "label": "파송성가",
+          "number": 387,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "파송"
+        }
+      ]
     }
   }
 }

@@ -2236,7 +2236,11 @@ const BulletinRenderer = {
             </nav>
         ` : '';
 
-        el.innerHTML = `${featuredHtml}<div class="bulletin-list">${listHtml}</div>${pagHtml}`;
+        const mobile = page === 0 ? CHURCH_DATA.bulletins.mobile : null;
+        const mobileHtml = mobile
+            ? `<p class="bulletin-mobile"><a href="${mobile.href}" class="bulletin-pdf-btn">${icon('book')} ${mobile.label}</a><span class="bulletin-mobile-desc">${mobile.desc}</span></p>`
+            : '';
+        el.innerHTML = `${mobileHtml}${featuredHtml}<div class="bulletin-list">${listHtml}</div>${pagHtml}`;
 
         el.querySelectorAll('.bulletin-row').forEach(btn => {
             btn.addEventListener('click', () => {
