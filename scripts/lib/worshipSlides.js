@@ -49,6 +49,7 @@ function toLines(slide, vars = {}) {
     return slide.map(l => {
         const raw = typeof l === 'string' ? { t: l } : l;
         const text = Object.entries(vars).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), raw.t);
+        if (raw.note) return { text, note: true };
         return raw.r ? { r: raw.r, text } : { text };
     });
 }
@@ -198,7 +199,10 @@ export function buildBook(week, ctx) {
             if (item.score) out.score = item.score;
             break;
         case 'intercession':
-            out.lines = [...(item.refrain ? [{ r: 'a', text: item.refrain }, { gap: true }] : []), ...flat(need(ctx.dialogs, 'intercession-end', '응답 데이터').slides)];
+            // 예식문·모바일 주보에는 기도서 1양식 전문을 싣는다(기도자가 인도하며 사제가 아니다)
+            out.lines = ctx.dialogs['intercession-form1']
+                ? flat(ctx.dialogs['intercession-form1'].slides)
+                : [...(item.refrain ? [{ r: 'a', text: item.refrain }, { gap: true }] : []), ...flat(need(ctx.dialogs, 'intercession-end', '응답 데이터').slides)];
             break;
         case 'sermon':
         case 'notice':

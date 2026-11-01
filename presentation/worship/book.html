@@ -72,10 +72,11 @@ h2.sec{margin:28px 0 4px;font-size:1.05rem;color:var(--accent);letter-spacing:.0
   <script>
 (() => {
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const WHO = { p: '사제', l: '독서자', a: '회중' };
+  const WHO = { p: '사제', k: '기도자', l: '독서자', a: '회중' };
 
   const lineHtml = l => {
     if (l.gap) return '<div class="gap"></div>';
+    if (l.note) return `<p class="hint">${esc(l.text)}</p>`;
     if (l.r) return `<div class="row ${l.r}"><span class="who">${WHO[l.r]}</span><span class="tx">${esc(l.text)}</span></div>`;
     return `<p class="plain">${esc(l.text)}</p>`;
   };
