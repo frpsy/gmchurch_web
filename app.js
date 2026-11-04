@@ -430,6 +430,9 @@ const VisitorCounter = {
             if (!counted) { try { localStorage.setItem('gm-visit-day', today); } catch (e) { /* 무시 */ } }
             const n = v => v.toLocaleString('ko-KR');
             el.textContent = `오늘 방문 ${n(day)}회 · 누적 방문 ${n(total + (cfg.baseline || 0))}회`;
+            // 사람 수가 아닌 브라우저별 하루 1회 접속 횟수의 추정치임을 명확히 안내한다.
+            el.title = '브라우저 기준 방문 횟수입니다. 같은 사람이 다른 기기·브라우저로 접속하면 중복 집계될 수 있습니다.';
+            el.setAttribute('aria-label', `${el.textContent}. ${el.title}`);
             el.hidden = false;
         } catch (e) {
             el.hidden = true;
