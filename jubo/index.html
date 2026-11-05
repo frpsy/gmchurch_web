@@ -59,6 +59,10 @@ body::before{content:"";position:fixed;top:0;left:0;right:0;height:var(--safe-t)
 .iconbtn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:12px;background:transparent;color:var(--brand);cursor:pointer}
 .iconbtn:active{background:var(--surface-2)}
 .iconbtn .txt{font-weight:800;font-size:.95rem;letter-spacing:-.03em}
+.sizebtn{width:auto;gap:4px;padding:0 12px;border:1px solid var(--line);background:var(--surface);font-size:.88rem;font-weight:600;color:var(--ink-2)}
+.sizebtn b{color:var(--brand);font-weight:800}
+.totop{position:fixed;right:calc(16px + var(--safe-r));bottom:calc(88px + var(--safe-b));z-index:25;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border:0;border-radius:50%;background:var(--brand);color:var(--brand-ink);box-shadow:0 2px 10px rgba(0,0,0,.28);cursor:pointer}
+.totop[hidden]{display:none}
 .tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
 .tabs .wrap{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-top:8px;padding-bottom:8px;-webkit-overflow-scrolling:touch}
 .tabs .wrap::-webkit-scrollbar{display:none}
@@ -67,7 +71,7 @@ body::before{content:"";position:fixed;top:0;left:0;right:0;height:var(--safe-t)
 .tab[aria-current="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
 
 /* .wrap의 padding 줄임 표기에 덮이지 않게 main.wrap으로 쓴다. 사파리 하단 바에 마지막 줄이 가리지 않도록 넉넉히 둔다 */
-main.wrap{padding-bottom:calc(96px + var(--safe-b))}
+main.wrap{padding-bottom:calc(152px + var(--safe-b))}
 section.block{margin-top:28px}
 h2.h{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:1.12rem;letter-spacing:-.02em;color:var(--brand)}
 .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line)}
@@ -113,7 +117,7 @@ details.item[open]{box-shadow:var(--shadow)}
 .lbl b{display:block;font-size:1rem;font-weight:700;line-height:1.35}
 .lbl small{display:block;font-size:.8rem;color:var(--ink-3);line-height:1.4;margin-top:2px}
 .ref{display:inline-flex;align-items:center;gap:4px;margin-top:4px;padding:2px 8px;border-radius:8px;background:var(--chip);color:var(--chip-ink);font-size:.8rem;font-weight:700}
-.ref.hymn{background:var(--brand);color:var(--brand-ink)}
+.ref.hymn{background:transparent;color:var(--brand);box-shadow:inset 0 0 0 1.5px var(--brand)}
 .side{display:flex;align-items:center;align-self:start;min-height:1.35rem;line-height:1.35;gap:6px;color:var(--ink-3);font-size:.82rem;text-align:right;max-width:9.5em}
 .chev{width:16px;height:16px;flex:none;transition:transform .2s}
 details[open] .chev{transform:rotate(180deg)}
@@ -131,7 +135,7 @@ details[open] .chev{transform:rotate(180deg)}
 .psalm .n{color:var(--ink-3);font-size:.8rem;text-align:right;font-variant-numeric:tabular-nums}
 .psalm .m{color:var(--accent);text-align:center}
 .psalm .r .t{font-weight:700;color:var(--resp)}
-.scap{margin:14px 0 0;font-size:.84rem;font-weight:700;color:var(--ink-2)}
+.scap{margin:14px 0 0;font-size:.95rem;font-weight:800;color:var(--brand)}
 .scap + .score{margin-top:6px}
 .score{display:block;margin:12px 0 0;border-radius:10px;overflow:hidden;background:#fff;border:1px solid var(--line)}
 .score img{display:block;width:100%;height:auto}
@@ -139,7 +143,7 @@ details[open] .chev{transform:rotate(180deg)}
 .reading .rt{margin:0 0 6px;font-size:.78rem;font-weight:700;color:var(--ink-3)}
 .reading p{margin:0}
 .reading sup{font-size:.62em;color:var(--ink-3);margin-right:2px;font-variant-numeric:tabular-nums}
-.hint{margin:6px 0 0;font-size:.78rem;color:var(--ink-3)}
+.hint{margin:6px 0 0;font-size:.84rem;color:var(--ink-3)}
 .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:12px;background:var(--surface-2);color:var(--brand);
   font-size:.9rem;font-weight:700;text-decoration:none;border:1px solid var(--line)}
@@ -176,8 +180,8 @@ details[open] .chev{transform:rotate(180deg)}
 .info .links{display:grid;grid-template-columns:1fr}
 .info .btn{justify-content:center}
 .copy{flex:none;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--brand);font-size:.82rem;font-weight:700;cursor:pointer}
-.foot{margin:24px 0 0;font-size:.78rem;color:var(--ink-3);line-height:1.7;text-align:center}
-.foot a{color:var(--ink-2)}
+.foot{margin:24px 0 0;font-size:.9rem;color:var(--ink-2);line-height:1.8;text-align:center}
+.foot a{color:var(--ink);font-weight:600}
 #toast{position:fixed;left:50%;bottom:calc(20px + var(--safe-b));transform:translate(-50%,20px);opacity:0;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--bg);
   font-size:.88rem;font-weight:600;pointer-events:none;transition:.2s;z-index:50}
 #toast.on{opacity:1;transform:translate(-50%,0)}
@@ -190,7 +194,7 @@ details[open] .chev{transform:rotate(180deg)}
   <header class="appbar">
     <div class="wrap">
       <a class="brand" href="../bulletin.html"><b>광명교회 주보</b><span id="sub">대한성공회 광명교회</span></a>
-      <button class="iconbtn" id="sizeBtn" type="button" aria-label="글자 크기 바꾸기"><span class="txt">가<small style="font-size:.7em">가</small></span></button>
+      <button class="iconbtn sizebtn" id="sizeBtn" type="button" aria-label="글자 크기 바꾸기">글자 <b id="sizeLbl">보통</b></button>
       <button class="iconbtn" id="shareBtn" type="button" aria-label="주보 링크 공유">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11"/><path d="m7.5 8 4.5-4.5L16.5 8"/><path d="M5 12.5v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
       </button>
@@ -204,6 +208,7 @@ details[open] .chev{transform:rotate(180deg)}
       </div>
   </nav>
   <main class="wrap" id="app"><div id="msg" role="status">주보를 불러오는 중…</div></main>
+  <button class="totop" id="toTop" type="button" aria-label="맨 위로" hidden><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg></button>
   <div id="toast" role="status" aria-live="polite"></div>
   <script src="../data.js"></script>
   <script>
@@ -287,7 +292,7 @@ details[open] .chev{transform:rotate(180deg)}
     const scores = it.score ? [it.score] : (it.scores || []);
     if (scores.length && isHymn) h += `<p class="scap">${esc(it.ref)}${it.title ? ` · ${esc(it.title)}` : ''} 악보</p>`;
     scores.forEach((s, i) => { h += scoreHtml(s, `${it.ref || it.label} 악보${scores.length > 1 ? ` ${i + 1}/${scores.length}` : ''}`); });
-    if (scores.length) h += `<p class="hint">악보는 이 화면에서 두 손가락으로 확대해 볼 수 있습니다${isHymn ? '. 한 쪽에 두 곡이 실린 경우 번호를 확인해 주세요' : ''}</p>`;
+    if (scores.length) h += '<p class="hint">두 손가락으로 벌리면 크게 볼 수 있습니다</p>';
     const links = [];
     // 예배 자료 누락을 외부 화면 이동으로 대체하지 않는다.
     if (it.kind && !passage) h += '<p class="hint">말씀 본문을 준비 중입니다.</p>';
@@ -296,6 +301,8 @@ details[open] .chev{transform:rotate(180deg)}
     if (links.length) h += `<div class="links">${links.join('')}</div>`;
     return h;
   }
+
+  const isHymnRef = it => /^성가 /.test(it.ref || '');
 
   function itemHtml(it, ctx) {
     const refText = /^성가 |^기도서 /.test(it.ref || '') ? it.ref : (it.ref ? shortRef(it.ref) : (it.label === '영성체후기도' ? '기도서 271쪽' : ''));
@@ -306,8 +313,10 @@ details[open] .chev{transform:rotate(180deg)}
     const head = `<span class="mark" aria-hidden="true">${it.stand ? '†' : ''}</span>
       <span class="lbl"><b>${esc(it.label)}${it.stand ? '<span class="sr"> (일어섭니다)</span>' : ''}</b>${sub ? `<small>${esc(sub)}</small>` : ''}${refText ? `<span class="ref${/^성가 /.test(refText) ? ' hymn' : ''}">${esc(refText)}</span>` : ''}</span>
       <span class="side">${esc(it.by || '')}${body ? CHEV : ''}</span>`;
+    // 성가 악보 항목은 「펼치기」 버튼에서 제외한다(악보까지 모두 열면 페이지가 너무 길어진다)
+    const hymnScore = isHymnRef(it) && !!(it.score || (it.scores || []).length);
     return body
-      ? `<details class="item"><summary>${head}</summary><div class="body">${body}</div></details>`
+      ? `<details class="item"${hymnScore ? ' data-hymn' : ''}><summary>${head}</summary><div class="body">${body}</div></details>`
       : `<div class="item static"><div class="sum">${head}</div></div>`;
   }
 
@@ -374,7 +383,7 @@ details[open] .chev{transform:rotate(180deg)}
 
       <section class="block" id="order" aria-labelledby="h-order">
         <h2 class="h" id="h-order">${use('book')}예배 순서</h2>
-        <div class="legend"><span><span class="stand-mark">†</span> 일어섭니다</span><span><span class="who-a">회중</span> 함께 말합니다</span><span class="sp"></span><button class="ghost" id="toggleAll" type="button" aria-pressed="false">모두 펼치기</button></div>
+        <div class="legend"><span><span class="stand-mark">†</span> 일어섭니다</span><span><span class="who-a">회중</span> 함께 말합니다</span><span class="sp"></span><button class="ghost" id="toggleAll" type="button" aria-pressed="false">기도문·말씀 펼치기</button></div>
         ${sections.map(s => `<p class="part">${esc(s.title)}</p><div class="items">${s.items.map(it => itemHtml(it, ctx)).join('')}</div>`).join('')}
         <p class="hint" style="margin-top:12px">항목을 누르면 응답·기도문, 성경 본문, 성가 악보가 펼쳐집니다.</p>
       </section>
@@ -408,9 +417,9 @@ details[open] .chev{transform:rotate(180deg)}
     const tg = document.getElementById('toggleAll');
     tg.addEventListener('click', () => {
       const open = tg.getAttribute('aria-pressed') !== 'true';
-      all().forEach(d => { d.open = open; });
+      all().forEach(d => { d.open = open && !d.hasAttribute('data-hymn'); });
       tg.setAttribute('aria-pressed', String(open));
-      tg.textContent = open ? '모두 접기' : '모두 펼치기';
+      tg.textContent = open ? '모두 접기' : '기도문·말씀 펼치기';
     });
     app.addEventListener('click', async e => {
       const b = e.target.closest('[data-copy]');
@@ -443,13 +452,26 @@ details[open] .chev{transform:rotate(180deg)}
       }, { rootMargin: '-40% 0px -55% 0px' });
       Object.keys(byId).forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
     }
+
+    // 맨 위로: 표지가 화면 밖으로 나가면 보인다. 스크롤 이벤트 대신 관찰자를 쓰고 멈춘 뒤에만 바꾼다(부드러운 스크롤 효과는 쓰지 않는다)
+    const toTop = document.getElementById('toTop');
+    toTop.onclick = () => window.scrollTo(0, 0);
+    const cover = app.querySelector('.cover');
+    if (cover && 'IntersectionObserver' in window) {
+      let t2 = 0;
+      new IntersectionObserver(([en]) => { clearTimeout(t2); t2 = setTimeout(() => { toTop.hidden = en.isIntersecting; }, 200); }).observe(cover);
+    }
   }
 
   // 글자 크기 (보통 → 크게 → 아주 크게) — 이 기기에만 기억
   const root = document.documentElement;
   let size = 0;
   try { size = Number(localStorage.getItem('jubo-size')) || 0; } catch {}
-  const applySize = () => { if (size) root.dataset.size = String(size); else delete root.dataset.size; };
+  const applySize = () => {
+    if (size) root.dataset.size = String(size); else delete root.dataset.size;
+    const lbl = document.getElementById('sizeLbl');
+    if (lbl) lbl.textContent = ['보통', '크게', '아주 크게'][size];
+  };
   applySize();
   document.getElementById('sizeBtn').addEventListener('click', () => {
     size = (size + 1) % 3; applySize();
