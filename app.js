@@ -416,8 +416,11 @@ const VisitorCounter = {
     },
     async render() {
         const el = document.getElementById('footer-visitors');
-        const cfg = CHURCH_DATA.visitorCounter;
-        if (!el || !cfg) return;
+        const base = CHURCH_DATA.visitorCounter;
+        if (!el || !base) return;
+        // 공식 주소만 공식 네임스페이스에 집계하고, 개발·미리보기 방문은 별도 네임스페이스로 분리한다.
+        const isOfficial = (base.officialHosts || []).includes(location.hostname);
+        const cfg = { ...base, namespace: isOfficial ? base.namespace : (base.devNamespace || `${base.namespace}-dev`) };
         const today = this._kstDate();
         let counted = false;
         try { counted = localStorage.getItem('gm-visit-day') === today; } catch (e) { /* 저장소 차단 시 매번 집계 */ }
