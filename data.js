@@ -965,6 +965,12 @@ const CHURCH_DATA = {
         channelUrl: "https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A",
         videos: [
             {
+                id: "wc8ZUO_7EI0",
+                title: "누가 거룩한 사람인가?",
+                desc: "광명교회 설교 말씀 가운데 '누가 거룩한 사람인가?'라는 물음을 다룬 짧은 영상(쇼츠)입니다.",
+                category: "설교"
+            },
+            {
                 id: "ZwZie64rrZ0",
                 title: "성공회 교회에 들어오면 깜짝 놀라는 이유",
                 desc: "처음 성공회 교회나 성당에 방문했을 때 겪을 수 있는 낯선 예배 형식과 성찬례 등 성공회만의 독특한 특징을 소개합니다.",
