@@ -16,13 +16,13 @@
 ## 저장소 2개 운영 규칙 (중요)
 
 - 모든 작업은 이 저장소 `frpsy/gmchurch_web`에서만 한다.
-- 공식 교회 저장소 `lmkhkm/GMSKH_Homepage`(gmskh.or.kr)에는 `scripts/release-official.sh`로 이 저장소 `main`을 머지한다. 직접 작업 금지. **주보·교회소식 등록은 항상 두 저장소에 동시에 머지**하고(사용자 지시 2026-11-01), 그 밖의 작업은 **사용자가 요청할 때만** 반영한다.
+- 공식 교회 저장소 `lmkhkm/GMSKH_Homepage`(gmskh.or.kr)에는 `scripts/release-official.sh`로 이 저장소 `main`을 머지한다. 직접 작업 금지. **홈페이지 작업은 항상 두 저장소에 동시에 머지한다**(주보·교회소식은 2026-11-01, 그 밖의 작업도 2026-11-05 사용자 지시).
 - 반영 시점: 개발 저장소는 머지 후 1~2분(GitHub Pages), 공식은 공식 `main` 머지 후 최대 2시간(서버 타이머). 상세는 `docs/REPO-STRUCTURE.md`.
 
 - **모바일 주보 배포 원칙 (2026-11-01 사용자 확정)** — 모바일 주보와 본문·성가 악보 이미지는 공개 저장소에 반영하고 GitHub Pages의 `/jubo/`에 웹 배포한다(사용자 명시 승인, 2026-11-01). 교우가 웹에서 열어 보도록 하되, 링크 안내는 비공개 교회 밴드에서만 한다. 공개 홈페이지 본문·메뉴·푸터·사이트맵·공개 게시물에는 모바일 주보 링크나 홍보를 추가하지 않는다. “홈페이지에 게시하지 않는다”는 웹 배포 금지가 아니라 홈페이지에서 연결·홍보하지 않는다는 뜻이다. 이 범위의 커밋·푸시·PR·머지는 기존 자동 처리 절차로 진행하며 공개 접근 가능성을 이유로 매번 재승인을 요청하지 않는다. 비공개 밴드에 링크를 올려도 공개 저장소/GitHub Pages의 대상 파일 자체가 비공개로 전환되지는 않는다. 원본 PDF·악보 이미지의 공개 여부와 검색 제외는 별도로 관리하고, robots.txt나 링크 숨김만으로 비공개·검색 제외가 완료됐다고 기록하지 않는다.
 - **성가 악보 원칙 (2026-11-01 사용자 확정)** — 단성판을 기본으로 사용하고 수록되지 않은 곡은 전체판에서 가져온다. 해당 곡의 악보 이미지를 그대로 기존 토글 안에 넣는다. PDF 전체 열기나 #page 링크로 대체하지 않는다. 원본 파일명은 영어로 단성판(unison)·전체판 및 분할 번호(part-01 등)를 구분하고, 문서의 자료명은 ‘성가’로 기록한다.
 
-- 모바일 주보(`jubo/`): 이름은 "주보". 주보에 인쇄된 순서만 싣고 봉사자 구역·묵상란은 두지 않으며, 본기도는 사제·회중 응답 뒤에 본문을 둔다. 홈페이지에서 연결하지 않고(교우에게만 주소 안내), 주보 작업을 마치면 항상 모바일 주보를 만들어 링크(`https://frpsy.github.io/gmchurch_web/jubo/`)를 사용자에게 준다. 성경 본문(`readings.json`)·성가 악보·기도문을 토글 안에서 바로 보여 준다. 스크롤 중 다른 요소를 스크롤하거나 `scroll-behavior: smooth`·`backdrop-filter`를 쓰지 않는다. 링크는 `tests/juboLinks.test.js`가 점검한다. 상세는 CLAUDE.md 6-1.
+- 모바일 주보(`jubo/`): 이름은 "주보". 주보에 인쇄된 순서만 싣고 봉사자 구역·묵상란은 두지 않으며, 본기도는 사제·회중 응답 뒤에 본문을 둔다. 홈페이지에서 연결하지 않고(교우에게만 주소 안내), 주보 작업을 마치면 항상 모바일 주보를 만들어 개발(`https://frpsy.github.io/gmchurch_web/jubo/`)·공식(`https://gmskh.or.kr/jubo/`) 링크를 사용자에게 준다. 성경 본문(`readings.json`)·성가 악보·기도문을 토글 안에서 바로 보여 준다. 스크롤 중 다른 요소를 스크롤하거나 `scroll-behavior: smooth`·`backdrop-filter`를 쓰지 않는다. 링크는 `tests/juboLinks.test.js`가 점검한다. 상세는 CLAUDE.md 6-1.
 
 ## 작업 순서 (매번)
 
@@ -70,6 +70,7 @@ git push -u origin 작업자/작업명
 | 문구·일정·연락처 수정 | `data.js` | 해당 키 검색 후 수정 |
 | 매주 주보 등록 | `bulletins/YYYYMMDD_N.jpg` + `data/lectionary-overrides.json` + `data/bulletin-news.json`(교회소식) + `data/bulletin-verses.json`(핵심구절, 공동번역 `bible/` 대조) + `data/worship-order.json`(예배 순서 → `node scripts/build-worship-slides.js`로 예배 슬라이드 생성) — 주보를 받으면 묻지 말고 이미지에서 교회소식·핵심구절까지 직접 작성·검수 | `CLAUDE.md` "주보 등록 절차"·"교회소식 검수 기준"·"교회 지식 쌓기", 용어집 `docs/church-glossary.md`, 위키 `docs/wiki/README.md` |
 | 다해(C년) 전례독서 | `data/lectionary-year-c.json` + 목록 두 곳 | **2027-11-28 대림 제1주일 전까지** |
+| 새 유튜브 영상 추가 | `data.js` → `media.videos` 맨 앞에 `{ id, title, desc, category }` | 채널 `https://youtube.com/channel/UCDaJNUSrCsljsECQpKDBv7A`. 영상 정보는 확인된 것만, 두 저장소에 모두 반영. `CLAUDE.md` "새 유튜브 영상 추가" |
 | 메뉴 추가·변경 | `data.js` → `navigation` | 아래 nav 검증 명령 실행 |
 | 아이콘 | `images/icons.svg` (아이콘 팩) | 이모티콘 금지 — data.js엔 심볼 이름, app.js는 `icon('name')` |
 | 로고·공유 이미지 | `app.js` `ARCH_MARK_PATH`, `scripts/brand/` | 아이콘·OG는 템플릿 HTML을 스크린샷 |
