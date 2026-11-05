@@ -102,3 +102,5 @@ let ok=true;CHURCH_DATA.navigation.forEach(i=>{const[p]=i.href.split('#');if(p&&
 - **완료 보고 필수 링크 (2026-11-01 사용자 재확정)** — 주보 작업 완료 시 해당 날짜의 모바일 주보 링크 `https://frpsy.github.io/gmchurch_web/jubo/?date=YYYYMMDD`를 반드시 사용자에게 제공한다. 기본 `/jubo/` 주소만 주거나 링크를 생략하지 않는다. 실제 배포·표시를 확인한 링크를 주며, 미완료면 미완료임을 명시한다.
 
 - **요청어 ‘주보제작’ (2026-11-01 사용자 확정)** — 사용자가 ‘주보제작’이라고 하면 대상 주보를 기존 대화·첨부·저장소에서 찾아 모바일 주보 제작을 즉시 진행한다. 별도로 작업 종류를 되묻지 않는다. 기존 디자인·원문 검증·주보 안에서 읽기·단성판 원칙을 적용하고 검증·웹 배포·실제 날짜별 페이지 확인 후 링크를 반드시 제공한다. 진행 중인 대상 날짜가 있으면 그 작업을 이어간다. 새 주보 등록이 동반되면 기존 개발·공식 홈페이지 동시 반영 규칙도 따른다.
+
+- **쇼츠 대표 10개 구성 (2026-11-05, 사용자 지시)** — 영상 갤러리 아래 '대표 쇼츠' 가로 목록(`media.shorts.featured`, 조회수·중요도 기준 10개)과 '전체 보기'(`media.shorts.all`, 제목+링크 전체)가 있다. 새 쇼츠가 올라오면 `all` 맨 앞에 `{ id, title }`(해시태그 제외)을 넣는다. 대표 교체는 사용자 요청이 있을 때만 한다. 소개글(`desc`)은 자막·제목에서 확인된 내용만 쓴다(추측 금지). 목록 확보: `yt-dlp --compat-options no-certifi --ignore-no-formats-error --extractor-args "youtube:player_client=web_embedded" --flat-playlist ".../channel/UCDaJNUSrCsljsECQpKDBv7A/shorts"`. 개발·공식 두 저장소에 모두 올린다.

@@ -1628,7 +1628,7 @@ const MediaRenderer = {
     render() {
         const el = document.getElementById('media-full');
         if (!el || !CHURCH_DATA.media) return;
-        const { intro, channelUrl, videos } = CHURCH_DATA.media;
+        const { intro, channelUrl, videos, shorts } = CHURCH_DATA.media;
 
         el.innerHTML = `
             <div class="section-header">
@@ -1651,12 +1651,70 @@ const MediaRenderer = {
                     </a>
                 `).join('')}
             </div>
+            ${this._shorts(shorts)}
             <div class="video-channel-cta">
                 <a href="${channelUrl}" target="_blank" rel="noopener noreferrer" class="video-channel-link">
                     유튜브 채널 전체 보기 ↗
                 </a>
             </div>
         `;
+        this._bindShorts(el);
+    },
+
+    /* 쇼츠: 대표작 가로 목록 + 더보기(전체 제목·링크) — 페이지 길이를 늘리지 않으려는 구성 */
+    _shorts(shorts) {
+        if (!shorts || !shorts.featured || !shorts.featured.length) return '';
+        const url = id => `https://www.youtube.com/shorts/${id}`;
+        return `
+            <section class="shorts" aria-labelledby="shorts-title">
+                <div class="shorts-head">
+                    <h3 id="shorts-title" class="shorts-title">대표 쇼츠</h3>
+                    <div class="shorts-nav">
+                        <button type="button" class="shorts-arrow" data-shorts-dir="-1" aria-label="이전 쇼츠">‹</button>
+                        <button type="button" class="shorts-arrow" data-shorts-dir="1" aria-label="다음 쇼츠">›</button>
+                    </div>
+                </div>
+                <div class="shorts-track" tabindex="0" aria-label="대표 쇼츠 목록">
+                    ${shorts.featured.map(v => `
+                    <a class="shorts-card" href="${url(v.id)}" target="_blank" rel="noopener noreferrer">
+                        <span class="shorts-thumb">
+                            <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                            <span class="video-play-btn" aria-hidden="true">▶</span>
+                        </span>
+                        <span class="video-category">${v.category}</span>
+                        <span class="shorts-card-title">${v.title}</span>
+                        <span class="shorts-card-desc">${v.desc}</span>
+                    </a>`).join('')}
+                </div>
+                <div class="shorts-more">
+                    <button type="button" class="shorts-more-btn" aria-expanded="false" aria-controls="shorts-all">
+                        쇼츠 ${shorts.all.length}개 전체 보기
+                    </button>
+                    <ol class="shorts-all" id="shorts-all" hidden>
+                        ${shorts.all.map(v => `<li><a href="${url(v.id)}" target="_blank" rel="noopener noreferrer">${v.title}</a></li>`).join('')}
+                    </ol>
+                </div>
+            </section>
+        `;
+    },
+
+    _bindShorts(root) {
+        const track = root.querySelector('.shorts-track');
+        if (!track) return;
+        root.querySelectorAll('.shorts-arrow').forEach(b => {
+            b.addEventListener('click', () => {
+                track.scrollBy({ left: Number(b.dataset.shortsDir) * track.clientWidth * 0.8 });
+            });
+        });
+        const btn = root.querySelector('.shorts-more-btn');
+        const list = root.querySelector('.shorts-all');
+        const total = list.children.length;
+        btn.addEventListener('click', () => {
+            const open = list.hidden;
+            list.hidden = !open;
+            btn.setAttribute('aria-expanded', String(open));
+            btn.textContent = open ? '전체 목록 접기' : `쇼츠 ${total}개 전체 보기`;
+        });
     }
 };
 

@@ -5626,3 +5626,57 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     .children-service-summary { gap: .5rem 1.25rem; }
 }
 
+
+/* ── 쇼츠 (videos.html) ── */
+.shorts { margin: 0 0 2.5rem; }
+.shorts-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
+.shorts-title { font-size: var(--fs-lg, 1.2rem); color: var(--heading); margin: 0; }
+.shorts-nav { display: flex; gap: 0.5rem; }
+.shorts-arrow {
+    width: 2.25rem; height: 2.25rem; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--white); color: var(--heading);
+    font-size: 1.25rem; line-height: 1; cursor: pointer;
+}
+.shorts-arrow:hover { background: var(--cream); }
+.shorts-track {
+    display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.75rem;
+    scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+}
+.shorts-card {
+    flex: 0 0 11rem; display: flex; flex-direction: column; gap: 0.35rem;
+    scroll-snap-align: start; text-decoration: none; color: var(--text);
+}
+.shorts-thumb {
+    position: relative; display: block; aspect-ratio: 9 / 16; overflow: hidden;
+    border-radius: var(--radius-lg); background: var(--green-deep);
+}
+.shorts-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.shorts-card:hover .video-play-btn { opacity: 1; }
+.shorts-card-title { font-weight: 700; color: var(--heading); line-height: 1.4; font-size: var(--fs-sm); }
+.shorts-card-desc {
+    font-size: var(--fs-xs, 0.85rem); line-height: 1.5;
+    color: color-mix(in srgb, var(--text) 72%, var(--white));
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.shorts-more { margin-top: 0.75rem; text-align: center; }
+.shorts-more-btn {
+    padding: 0.65rem 1.5rem; border-radius: var(--radius-pill);
+    border: 1px solid var(--border); background: var(--white); color: var(--heading);
+    font-weight: 700; font-size: var(--fs-sm); cursor: pointer;
+}
+.shorts-more-btn:hover { background: var(--cream); }
+.shorts-all {
+    list-style: decimal inside; text-align: left; margin: 1rem 0 0; padding: 0.5rem 1rem;
+    max-height: 22rem; overflow-y: auto; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); background: var(--white);
+}
+.shorts-all[hidden] { display: none; }
+.shorts-all li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); color: color-mix(in srgb, var(--text) 72%, var(--white)); }
+.shorts-all li:last-child { border-bottom: 0; }
+.shorts-all a { color: var(--heading); text-decoration: none; line-height: 1.5; }
+.shorts-all a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .shorts-card { flex-basis: 9.5rem; }
+    .shorts-nav { display: none; }
+    .shorts-all { max-height: 18rem; }
+}

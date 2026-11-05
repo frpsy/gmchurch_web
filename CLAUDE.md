@@ -259,6 +259,8 @@ echo "Done: $TODAY"
 - 영상 ID·제목·내용은 채널·영상 페이지에서 확인된 것만 쓴다(추측 금지). 클라우드 환경에서는 채널 목록이 읽히지 않을 수 있으니, 읽히지 않으면 사용자에게 영상 링크를 받는다. `desc`는 영상 설명·자막에서 확인된 내용만 담백하게 쓰고, `category`는 기존 분류(성공회 소개·공동체·설교·신앙 이야기)에서 고른다.
 - 새 영상은 배열 맨 앞에 넣는다. 개발·공식 두 저장소에 모두 올린다(위 저장소 2개 운영 규칙).
 
+- **쇼츠 대표 10개 구성 (2026-11-05, 사용자 지시)** — 영상 갤러리 아래 '대표 쇼츠' 가로 목록(`media.shorts.featured`, 조회수·중요도 기준 10개)과 '전체 보기'(`media.shorts.all`, 제목+링크 전체)가 있다. 새 쇼츠가 올라오면 `all` 맨 앞에 `{ id, title }`(해시태그 제외)을 넣는다. 대표 교체는 사용자 요청이 있을 때만 한다. 소개글(`desc`)은 자막·제목에서 확인된 내용만 쓴다(추측 금지). 목록 확보: `yt-dlp --compat-options no-certifi --ignore-no-formats-error --extractor-args "youtube:player_client=web_embedded" --flat-playlist ".../channel/UCDaJNUSrCsljsECQpKDBv7A/shorts"`. 개발·공식 두 저장소에 모두 올린다.
+
 ---
 
 ## 코드 규칙
