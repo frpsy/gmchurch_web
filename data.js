@@ -872,7 +872,9 @@ const CHURCH_DATA = {
     // 방문자 수: 외부 카운터(Abacus, 가입 불필요)에 저장. baseline은 누적 표시에 더하는 시작 숫자
     visitorCounter: {
         endpoint: 'https://abacus.jasoncameron.dev',
-        namespace: 'gmchurch-frpsy-web',
+        namespace: 'gmchurch-frpsy-web',   // 공식 사이트(gmskh.or.kr) 전용 — 기존 누적값 유지
+        devNamespace: 'gmchurch-frpsy-web-dev', // 그 외 주소(GitHub Pages 미리보기 등)는 별도 집계
+        officialHosts: ['gmskh.or.kr', 'www.gmskh.or.kr'],
         baseline: 0
     },
 
