@@ -1665,33 +1665,39 @@ const MediaRenderer = {
     _shorts(shorts) {
         if (!shorts || !shorts.featured || !shorts.featured.length) return '';
         const url = id => `https://www.youtube.com/shorts/${id}`;
+        /* all은 최신순 — 맨 앞이 항상 '최신' 카드가 되고, 새 쇼츠를 앞에 넣으면 이전 최신은 목록으로 내려간다 */
+        const latest = shorts.all[0];
+        const cards = [{ ...latest, isLatest: true, ...(shorts.featured.find(f => f.id === latest.id) || {}) },
+            ...shorts.featured.filter(f => f.id !== latest.id)];
+        const shown = new Set(cards.map(c => c.id));
+        const rest = shorts.all.filter(v => !shown.has(v.id));
         return `
             <section class="shorts" aria-labelledby="shorts-title">
                 <div class="shorts-head">
-                    <h3 id="shorts-title" class="shorts-title">대표 쇼츠</h3>
+                    <h3 id="shorts-title" class="shorts-title">쇼츠</h3>
                     <div class="shorts-nav">
                         <button type="button" class="shorts-arrow" data-shorts-dir="-1" aria-label="이전 쇼츠">‹</button>
                         <button type="button" class="shorts-arrow" data-shorts-dir="1" aria-label="다음 쇼츠">›</button>
                     </div>
                 </div>
-                <div class="shorts-track" tabindex="0" aria-label="대표 쇼츠 목록">
-                    ${shorts.featured.map(v => `
+                <div class="shorts-track" tabindex="0" aria-label="쇼츠 목록">
+                    ${cards.map(v => `
                     <a class="shorts-card" href="${url(v.id)}" target="_blank" rel="noopener noreferrer">
                         <span class="shorts-thumb">
                             <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
                             <span class="video-play-btn" aria-hidden="true">▶</span>
                         </span>
-                        <span class="video-category">${v.category}</span>
+                        <span class="video-category">${v.isLatest ? '최신' : v.category}</span>
                         <span class="shorts-card-title">${v.title}</span>
-                        <span class="shorts-card-desc">${v.desc}</span>
+                        ${v.desc ? `<span class="shorts-card-desc">${v.desc}</span>` : ''}
                     </a>`).join('')}
                 </div>
                 <div class="shorts-more">
                     <button type="button" class="shorts-more-btn" aria-expanded="false" aria-controls="shorts-all">
-                        쇼츠 ${shorts.all.length}개 전체 보기
+                        나머지 쇼츠 ${rest.length}개 보기
                     </button>
                     <ol class="shorts-all" id="shorts-all" hidden>
-                        ${shorts.all.map(v => `<li><a href="${url(v.id)}" target="_blank" rel="noopener noreferrer">${v.title}</a></li>`).join('')}
+                        ${rest.map(v => `<li><a href="${url(v.id)}" target="_blank" rel="noopener noreferrer">${v.title}</a></li>`).join('')}
                     </ol>
                 </div>
             </section>
@@ -1713,7 +1719,7 @@ const MediaRenderer = {
             const open = list.hidden;
             list.hidden = !open;
             btn.setAttribute('aria-expanded', String(open));
-            btn.textContent = open ? '전체 목록 접기' : `쇼츠 ${total}개 전체 보기`;
+            btn.textContent = open ? '전체 목록 접기' : `나머지 쇼츠 ${total}개 보기`;
         });
     }
 };

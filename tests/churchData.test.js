@@ -234,6 +234,7 @@ describe('media.shorts', () => {
     expect(sh.featured).toHaveLength(10);
     const ids = new Set(sh.all.map(v => v.id));
     sh.featured.forEach(v => expect(ids.has(v.id)).toBe(true));
+    // 최신(all[0])은 화면에서 항상 맨 앞에 따로 나오므로 대표 10개와 겹치지 않아도 된다
     expect(ids.size).toBe(sh.all.length);
   });
 });
