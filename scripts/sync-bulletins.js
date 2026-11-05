@@ -127,11 +127,9 @@ const DATA_JS   = path.join(ROOT, 'data.js');
 const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
 const NEWS      = path.join(ROOT, 'data', 'bulletin-news.json');
 const VERSES    = path.join(ROOT, 'data', 'bulletin-verses.json');
-// 보관 규칙: 최근 8개 주보 이내이면서 8주(56일) 넘게 지나지 않은 것만 남긴다.
-// 단, 가장 최근 주보 한 건은 기간이 지나도 남겨 목록이 비지 않게 한다.
-// 새 주보가 없어도 날짜만 지나면 삭제되도록, 매일 도는 워크플로가 이 스크립트를 실행한다.
+// 보관 규칙: 최근 8개 주보만 남긴다(2026-11-05 사용자 확정, 기간 제한 없음).
+// 새 주보가 올라오면 가장 오래된 것부터 밀려나 삭제된다.
 const MAX_BULLETINS = 8;
-const MAX_AGE_DAYS  = 56;
 
 // 지정한 마커 사이 구간을 통째로 교체 (data.js 손질용)
 function replaceRegion(text, startMarker, endMarker, replacement) {
@@ -181,11 +179,7 @@ function readingsBlock(key, resolved, standardYear, withNote) {
     // PDF만 있는 항목(직접 업로드된 PDF)도 같은 기준으로 센다
     const allPdfs = fs.readdirSync(BULLETINS).filter(f => /^\d{8}\.pdf$/i.test(f));
     const allDates = new Set([...groups.keys(), ...allPdfs.map(f => f.slice(0, 8))]);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const ageDays = ds => Math.round((today - new Date(+ds.slice(0, 4), +ds.slice(4, 6) - 1, +ds.slice(6, 8))) / 86400000);
-    const recent = [...allDates].sort((a, b) => b.localeCompare(a)).slice(0, MAX_BULLETINS);
-    const keep = new Set(recent.filter((ds, i) => i === 0 || ageDays(ds) <= MAX_AGE_DAYS));
+    const keep = new Set([...allDates].sort((a, b) => b.localeCompare(a)).slice(0, MAX_BULLETINS));
 
     const valid = new Map();
     for (const ds of allDates) {
