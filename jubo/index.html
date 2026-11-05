@@ -292,7 +292,6 @@ details[open] .chev{transform:rotate(180deg)}
     const scores = it.score ? [it.score] : (it.scores || []);
     if (scores.length && isHymn) h += `<p class="scap">${esc(it.ref)}${it.title ? ` · ${esc(it.title)}` : ''} 악보</p>`;
     scores.forEach((s, i) => { h += scoreHtml(s, `${it.ref || it.label} 악보${scores.length > 1 ? ` ${i + 1}/${scores.length}` : ''}`); });
-    if (scores.length) h += '<p class="hint">두 손가락으로 벌리면 크게 볼 수 있습니다</p>';
     const links = [];
     // 예배 자료 누락을 외부 화면 이동으로 대체하지 않는다.
     if (it.kind && !passage) h += '<p class="hint">말씀 본문을 준비 중입니다.</p>';
