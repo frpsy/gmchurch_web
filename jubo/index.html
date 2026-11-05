@@ -179,7 +179,6 @@ details[open] .chev{transform:rotate(180deg)}
 .nw{white-space:nowrap}
 .info .links{display:grid;grid-template-columns:1fr}
 .info .btn{justify-content:center}
-.copy{flex:none;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--brand);font-size:.82rem;font-weight:700;cursor:pointer}
 .foot{margin:24px 0 0;font-size:.9rem;color:var(--ink-2);line-height:1.8;text-align:center}
 .foot a{color:var(--ink);font-weight:600}
 #toast{position:fixed;left:50%;bottom:calc(20px + var(--safe-b));transform:translate(-50%,20px);opacity:0;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--bg);
@@ -187,7 +186,7 @@ details[open] .chev{transform:rotate(180deg)}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 #msg{padding:48px 8px;text-align:center;color:var(--ink-3)}
 @media (min-width:600px){.cover h1{font-size:1.85rem}}
-@media print{.appbar,.tabs,.links,.copy,.ghost{display:none}details.item{break-inside:avoid}body{background:#fff}}
+@media print{.appbar,.tabs,.links,.totop,.ghost{display:none}details.item{break-inside:avoid}body{background:#fff}}
   </style>
 </head>
 <body>
@@ -292,7 +291,6 @@ details[open] .chev{transform:rotate(180deg)}
     const scores = it.score ? [it.score] : (it.scores || []);
     if (scores.length && isHymn) h += `<p class="scap">${esc(it.ref)}${it.title ? ` · ${esc(it.title)}` : ''} 악보</p>`;
     scores.forEach((s, i) => { h += scoreHtml(s, `${it.ref || it.label} 악보${scores.length > 1 ? ` ${i + 1}/${scores.length}` : ''}`); });
-    if (scores.length) h += '<p class="hint">두 손가락으로 벌리면 크게 볼 수 있습니다</p>';
     const links = [];
     // 예배 자료 누락을 외부 화면 이동으로 대체하지 않는다.
     if (it.kind && !passage) h += '<p class="hint">말씀 본문을 준비 중입니다.</p>';
@@ -399,7 +397,7 @@ details[open] .chev{transform:rotate(180deg)}
           <dl class="kv">
             ${info.address ? `<dt>주소</dt><dd><span>${esc(info.address)}${info.postalCode ? `<br><span class="by">우편번호 ${esc(info.postalCode)}</span>` : ''}</span></dd>` : ''}
             ${info.phone ? `<dt>전화</dt><dd><a href="tel:${esc(info.phone.replace(/-/g, ''))}">${esc(info.phone)}</a></dd>` : ''}
-            ${giving.bank ? `<dt>봉헌계좌</dt><dd><span>${esc(giving.bankName || '')} <span class="nw">${esc(giving.bank)}</span><br><span class="by">${esc(giving.holder || '')}</span></span><button class="copy" type="button" data-copy="${esc(giving.bankName || '')} ${esc(giving.bank)}">복사</button></dd>` : ''}
+            ${giving.bank ? `<dt>봉헌계좌</dt><dd><span>${esc(giving.bankName || '')} <span class="nw">${esc(giving.bank)}</span><br><span class="by">${esc(giving.holder || '')}</span></span></dd>` : ''}
           </dl>
           <div class="links">
             <a class="btn" href="${ROOT}visit.html">${use('map')}오시는 길</a>
@@ -421,12 +419,6 @@ details[open] .chev{transform:rotate(180deg)}
       tg.setAttribute('aria-pressed', String(open));
       tg.textContent = open ? '모두 접기' : '기도문·말씀 펼치기';
     });
-    app.addEventListener('click', async e => {
-      const b = e.target.closest('[data-copy]');
-      if (!b) return;
-      toast(await copy(b.dataset.copy) ? '복사했습니다' : '복사하지 못했습니다');
-    });
-
     // 바로가기 탭: 지금 보는 단락 표시
     const tabs = [...document.querySelectorAll('.tab')];
     const byId = Object.fromEntries(tabs.map(t => [t.getAttribute('href').slice(1), t]));
