@@ -424,6 +424,7 @@ window DOMContentLoaded
       │     유튜브 영상 소개 섹션 헤더
       │     video-grid: 5개+ 영상 카드 (썸네일 + 카테고리 + 제목 + 설명)
       │     각 카드는 유튜브 링크로 이동
+      │     shorts: 대표 쇼츠 가로 목록(.shorts-track/.shorts-card) + 전체 보기(.shorts-all), 데이터 media.shorts
       │     video-channel-cta: 유튜브 채널 전체 보기 버튼
       │
       ├── MediaHubRenderer.render()   → #media-hub (media.html)

@@ -227,3 +227,13 @@ describe('clergy portraits', () => {
         }
     });
 });
+
+describe('media.shorts', () => {
+  const sh = CHURCH_DATA.media.shorts;
+  it('대표 10개가 전체 목록에 포함된다', () => {
+    expect(sh.featured).toHaveLength(10);
+    const ids = new Set(sh.all.map(v => v.id));
+    sh.featured.forEach(v => expect(ids.has(v.id)).toBe(true));
+    expect(ids.size).toBe(sh.all.length);
+  });
+});
