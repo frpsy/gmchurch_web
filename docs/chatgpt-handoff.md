@@ -3,6 +3,8 @@
 ChatGPT가 이 저장소(`frpsy/gmchurch_web`)를 이어받아 **받아오기 → 수정 → 커밋 → PR**까지 하도록 하는 안내서입니다.
 아래 **2. 붙여넣기 안내문**을 ChatGPT 대화창에 그대로 복사해 붙여넣으면 됩니다.
 
+> 주보·모바일 주보 작업은 [`mobile-bulletin-rules.md`](mobile-bulletin-rules.md)(최신 통합 규칙)를 먼저 읽고 따릅니다.
+
 ---
 
 ## 1. 먼저 할 준비 (사람이 1회)
