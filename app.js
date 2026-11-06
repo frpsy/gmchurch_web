@@ -401,6 +401,22 @@ const FooterRenderer = {
     }
 };
 
+/* ── Analytics ───────────────────────────────────────────── */
+// Cloudflare Web Analytics 비콘을 주소별 토큰으로 넣는다(쿠키 없음, 개인 식별 없음). 실패해도 화면에 영향 없음.
+const Analytics = {
+    init() {
+        const cfg = CHURCH_DATA.analytics;
+        if (!cfg || document.querySelector('script[data-cf-beacon]')) return;
+        const token = (cfg.tokens || {})[location.hostname];
+        if (!token) return;
+        const s = document.createElement('script');
+        s.defer = true;
+        s.src = cfg.beaconSrc;
+        s.setAttribute('data-cf-beacon', JSON.stringify({ token }));
+        document.head.appendChild(s);
+    }
+};
+
 /* ── VisitorCounter ──────────────────────────────────────── */
 // 브라우저당 하루 1회만 집계(localStorage). 실패하면 표시를 숨겨 푸터가 깨지지 않게 한다.
 const VisitorCounter = {
@@ -3181,6 +3197,7 @@ const App = {
             r.setProperty('--season-on',    cs.onColor || '#fff');
         }
 
+        Analytics.init();
         NavRenderer.render();
         FooterRenderer.render();
         VisitorCounter.render();
