@@ -361,6 +361,7 @@ window DOMContentLoaded
       │     하위 메뉴 item에 badge 필드 → .nav-badge 칩 렌더 (예: "임시")
       │
       ├── FooterRenderer.render()     → #main-footer (모든 페이지)
+      ├── Analytics.init()            → Cloudflare Web Analytics 비콘 주입 (주소별 토큰, data.js analytics)
       ├── VisitorCounter.render()     → #footer-visitors (오늘·누적 방문자, Abacus 외부 카운터, data.js visitorCounter)
       │     info + clergy[0] + sns 4개 링크
       │     하단 바: 헌금 안내(→ giving.html) + 개인정보 처리방침 링크

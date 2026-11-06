@@ -870,6 +870,17 @@ const CHURCH_DATA = {
     },
 
     // 방문자 수: 외부 카운터(Abacus, 가입 불필요)에 저장. baseline은 누적 표시에 더하는 시작 숫자
+    // Cloudflare Web Analytics: 주소(호스트)별로 사이트를 따로 만들어 공식·개발 통계를 분리해서 본다.
+    // 토큰은 공개 페이지에 그대로 들어가는 값이다(비밀 아님). 목록에 없는 주소(로컬 등)는 집계하지 않는다.
+    analytics: {
+        beaconSrc: 'https://static.cloudflareinsights.com/beacon.min.js',
+        tokens: {
+            'gmskh.or.kr': '3660518ce5e240329474e2f4beda75fc',
+            'www.gmskh.or.kr': '3660518ce5e240329474e2f4beda75fc',
+            'frpsy.github.io': 'f39e147222cc4d21bc89313dead37d0f'
+        }
+    },
+
     visitorCounter: {
         endpoint: 'https://abacus.jasoncameron.dev',
         namespace: 'gmchurch-frpsy-web',   // 공식 사이트(gmskh.or.kr) 전용 — 기존 누적값 유지
