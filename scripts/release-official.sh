@@ -6,7 +6,7 @@
 # 사용:  scripts/release-official.sh [작업폴더]
 #   작업폴더 기본값: 임시 폴더 (끝나면 경로를 알려 줍니다)
 #
-# 주보·교회소식 등록 직후에는 항상 실행하고, 그 밖의 작업은 사용자가 공식 반영을 요청했을 때만 실행합니다.
+# 모든 홈페이지 작업(주보·교회소식 포함)은 개발 저장소에 머지한 뒤 같은 작업 안에서 이 스크립트로 공식에도 반영합니다(2026-11-05).
 
 set -euo pipefail
 
@@ -54,11 +54,22 @@ if [ -n "$CONFLICTS" ]; then
   done <<< "$CONFLICTS"
 fi
 
+say "공식 robots.txt 적용 (개발 robots.txt는 검색 차단용이라 공식에는 쓰지 않는다)"
+cp scripts/robots.official.txt robots.txt
+
 say "공식 도메인 적용"
 node scripts/set-site-url.js "$OFFICIAL_SITE" --from "$DEV_SITE"
 git add -u
 
 say "검증"
+if grep -qE '^Disallow:[[:space:]]*/[[:space:]]*$' robots.txt || ! grep -q '^Allow: /' robots.txt; then
+  echo "공식 robots.txt가 검색을 막고 있습니다. scripts/robots.official.txt를 확인하세요." >&2
+  exit 1
+fi
+if ! grep -q "^Sitemap: $OFFICIAL_SITE/sitemap.xml" robots.txt; then
+  echo "공식 robots.txt의 Sitemap 주소가 $OFFICIAL_SITE 가 아닙니다." >&2
+  exit 1
+fi
 LEFT="$(grep -l "$DEV_SITE" -- *.html *.xml *.txt 2>/dev/null || true)"
 if [ -n "$LEFT" ]; then
   echo "개발 주소가 남은 파일이 있습니다: $LEFT" >&2

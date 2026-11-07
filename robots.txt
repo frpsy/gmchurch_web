@@ -1,4 +1,4 @@
+# 개발·미리보기 주소(frpsy.github.io)는 검색에 나오지 않게 막는다.
+# 공식 주소(gmskh.or.kr)는 공식 반영 때 scripts/robots.official.txt 로 바뀐다(scripts/release-official.sh).
 User-agent: *
-Allow: /
-
-Sitemap: https://frpsy.github.io/gmchurch_web/sitemap.xml
+Disallow: /

@@ -1,0 +1,5 @@
+# 공식 주소용 robots.txt 원본 — 공식 반영 때 scripts/release-official.sh 가 robots.txt 로 복사한 뒤 도메인을 바꾼다.
+User-agent: *
+Allow: /
+
+Sitemap: https://frpsy.github.io/gmchurch_web/sitemap.xml
