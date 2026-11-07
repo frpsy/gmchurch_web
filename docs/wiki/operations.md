@@ -1,6 +1,6 @@
 # 운영 흐름 요약
 
-상세 절차는 `CLAUDE.md` "주보 등록 절차", 표기는 `../church-glossary.md`가 원본이다.
+상세 절차는 `docs/bulletin-procedure.md`, 표기는 `../church-glossary.md`가 원본이다.
 
 ## 주보를 받았을 때 (묻지 않고 끝까지)
 0. **먼저 위키를 읽는다**(`church.md`의 사람·직함, `../church-glossary.md`). 이미지에서 읽은 이름·세례명은 위키·`data.js`와 대조해 맞추고, 대조할 수 없는 이름은 읽은 대로 적되 보고에 `미확인`으로 알린다.

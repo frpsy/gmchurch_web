@@ -1,6 +1,6 @@
 # 사이트 구조와 운영 정책
 
-기술 규칙과 스키마는 `CLAUDE.md`, `ARCHITECTURE.md`가 원본이다. 여기에는 지도와 요약만 둔다.
+기술 규칙과 스키마는 `AGENTS.md`·`docs/dev-guide.md`, `ARCHITECTURE.md`가 원본이다. 여기에는 지도와 요약만 둔다.
 
 ## 스택·배포
 바닐라 HTML+CSS+JS, 빌드 없음. GitHub Pages(`main` 자동 배포). 로드 순서 `data.js` → `app.js`. 테스트 `npm test`(Vitest). Netlify는 쓰지 않으며 봇 알림은 무시한다.
@@ -38,12 +38,12 @@
 - 개인정보: 회원가입·로그인·문의 양식 없음, 자체 쿠키·분석·광고 추적 없음. 외부 서비스(Google 지도, YouTube, Instagram, 네이버, 카카오, jsDelivr, GitHub Pages)로 접속 정보가 전달될 수 있다고 방침에 명시. **이 방침과 어긋나는 기능(분석 스크립트, 입력 폼 등)을 넣지 않는다.**
 - 교회소식 날짜에는 요일이 자동으로 붙는다(`NewsRenderer._withWeekdays`, 주보 날짜 기준). 목록의 주 날짜에도 `(주일)`이 붙는다.
 - 주보 헌금 명단 등 개인 이름 나열은 사이트에 올리지 않는다.
-- 다크모드·색 변수 규칙은 `CLAUDE.md`를 따른다.
+- 다크모드·색 변수 규칙은 `docs/dev-guide.md`를 따른다.
 
 ## 알려진 이슈 (2026-10-11 위키 작성 중 발견, 요청 시 처리)
 - `README.md`의 줄 수 표기(data.js 1081줄 등)가 오래됐다. 현재 data.js 약 1340줄, app.js 약 3200줄, style.css 약 5300줄.
 - `README.md` 파일 구조·주요 페이지에 `bulletin.html`, `news.html`이 없고 community 설명에 `녹색교회`가 포함돼 있어 현재 구조와 다르다.
-- `emmaus.html`, `faq.html`은 가안 표기가 남아 있다. 정식 전환 시 `draft-banner`/`badge: "임시"`를 제거한다(`CLAUDE.md`).
+- `emmaus.html`, `faq.html`은 가안 표기가 남아 있다. 정식 전환 시 `draft-banner`/`badge: "임시"`를 제거한다(`docs/dev-guide.md`).
 - `data.js`의 `info.vision`은 `하느님 나라를 살아가는 사랑의 공동체`, 주보는 이를 `교구 표어`라 하고 `교회 표어`는 `함께 배우고, 함께 돌보는 교회`다. 사이트에는 교회 표어가 없다.
 
 

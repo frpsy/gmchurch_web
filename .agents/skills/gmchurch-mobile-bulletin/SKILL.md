@@ -7,7 +7,7 @@ description: 광명교회 모바일 주보를 만들거나 수정할 때 사용�
 ## 기준과 먼저 읽을 자료
 - 기준 화면: https://frpsy.github.io/gmchurch_web/jubo/
 - 2026-11-01 사용자 확정. 날짜·본문은 매주 바꾸되 화면 구성과 사용 방식은 유지한다.
-- 저장소 루트의 CLAUDE.md(원본), AGENTS.md(요약), jubo/index.html(실제 구현), docs/wiki/operations.md, data/hymnal-2015/README.md를 먼저 읽는다.
+- docs/mobile-bulletin-rules.md(운영 원칙, 우선), docs/bulletin-procedure.md(절차), jubo/index.html(실제 구현)을 먼저 읽고, 필요할 때 docs/wiki/operations.md, data/hymnal-2015/README.md를 본다.
 - 기존 주보가 기준이다. 새 디자인으로 재구성하거나 기능을 임의로 줄이지 않는다. 사용자 후속 지시가 이 문서보다 우선한다.
 
 ## 화면 순서
@@ -17,7 +17,7 @@ description: 광명교회 모바일 주보를 만들거나 수정할 때 사용�
 4. 이번 주 말씀: 공동번역 본문과 출처.
 5. 예배 순서: 인쇄된 주보의 순서·구분을 따르는 접이식 항목, 기립 표시, 회중 응답 구분, 모두 펼치기/접기.
 6. 교회소식: 제목과 본문을 카드로 표시.
-7. 교회 안내: 주소·전화·봉헌계좌, 복사 버튼, 오시는 길·원본 주보·홈페이지 링크, 자료 출처.
+7. 교회 안내: 주소·전화·봉헌계좌(복사 버튼 없음, 2026-11-05), 오시는 길·원본 주보·홈페이지 링크, 자료 출처.
 - 다음 주 봉사자 구역·묵상란을 새로 넣지 않는다.
 - 모바일 주보에서 홈페이지로 가는 기존 링크와, 공개 홈페이지에서 모바일 주보로 유입시키는 링크를 혼동하지 않는다. 후자는 추가하지 않는다.
 
@@ -40,7 +40,7 @@ description: 광명교회 모바일 주보를 만들거나 수정할 때 사용�
 5. data/bulletin-news.json, data/bulletin-verses.json, data/worship-texts/readings.json과 연결을 확인한다.
 6. 성가 번호를 판별해 검증된 악보 이미지를 연결한다. data/hymnal-2015/index.json은 기존 자료의 색인일 뿐 새 PDF의 색인이 아니다.
 7. npm test를 실행하고 tests/juboLinks.test.js·성가 이미지 관련 검사를 확인한다. 실행 불가 시 미실행을 명시한다.
-8. 브랜치 → PR → 검증 → squash merge를 진행한다. 주보 등록의 공식 저장소 반영은 CLAUDE.md 절차를 따른다.
+8. 브랜치 → PR → 검증 → squash merge를 진행한다. 주보 등록의 공식 저장소 반영은 AGENTS.md "저장소 2개 운영"을 따른다.
 
 ## 모바일 확인
 - 320·390·412px에서 표지·탭·모든 항목 펼침·교회소식·안내를 확인한다.
