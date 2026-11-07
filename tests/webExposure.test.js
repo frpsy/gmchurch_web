@@ -28,10 +28,15 @@ describe('성가 스캔 웹 공개 범위', () => {
 });
 
 describe('개발 주소 검색 제외와 공식 robots', () => {
-  it('개발 robots.txt는 검색을 막는다', () => {
+  it('robots.txt는 개발 주소에서는 검색을 막고, 공식 반영본(gmskh.or.kr)에서는 허용한다', () => {
+    // 공식 반영 스크립트는 공식 robots로 바꾼 뒤 npm test를 돌리므로 두 상태를 모두 인정한다.
     const robots = read('robots.txt');
-    expect(robots).toMatch(/^Disallow: \/\s*$/m);
-    expect(robots).not.toMatch(/^Allow:/m);
+    const blocked = /^Disallow: \/\s*$/m.test(robots) && !/^Allow:/m.test(robots);
+    const official =
+      /^Allow: \/\s*$/m.test(robots) &&
+      !/^Disallow: \/\s*$/m.test(robots) &&
+      /^Sitemap: https:\/\/gmskh\.or\.kr\/sitemap\.xml$/m.test(robots);
+    expect(blocked || official).toBe(true);
   });
 
   it('공식용 robots 원본은 허용하고 개발 주소 sitemap을 가리켜 도메인 치환 대상이 된다', () => {
