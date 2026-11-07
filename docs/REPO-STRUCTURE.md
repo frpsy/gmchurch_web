@@ -12,7 +12,7 @@
 | 사이트 주소 | https://frpsy.github.io/gmchurch_web/ (테스트·미리보기용) | https://gmskh.or.kr/ (교회 공식 주소) |
 | 배포 방식 | GitHub Pages가 `main`을 바로 배포 | 네이버 클라우드 서버가 `main`을 받아 가서 nginx로 서비스 |
 | 반영 시점 | `main` 머지 후 **보통 1~2분 안** | 공식 `main` 반영 후 **최대 2시간 안** (서버 타이머) |
-| 하는 일 | 모든 수정·주보 등록·문서 작업 | 개발 저장소 `main`을 **요청이 있을 때만** 머지 |
+| 하는 일 | 모든 수정·주보 등록·문서 작업 | 개발 저장소 `main`을 **모든 홈페이지 작업 뒤에 같은 작업 안에서** 머지 (2026-11-05) |
 | 직접 커밋 | 함 (작업 브랜치 → PR → squash 머지) | **하지 않음** (머지 브랜치 PR만) |
 
 ## 흐름
@@ -23,7 +23,7 @@
       ▼
 frpsy/gmchurch_web  main ──── GitHub Pages (1~2분) ─▶ frpsy.github.io/gmchurch_web   ← 먼저 여기서 확인
       │
-      │  사용자가 "공식에 반영해 줘"라고 요청할 때만
+      │  모든 홈페이지 작업 뒤 같은 작업 안에서 (2026-11-05)
       │  scripts/release-official.sh → 머지 브랜치 PR → 머지
       ▼
 lmkhkm/GMSKH_Homepage  main
@@ -48,7 +48,7 @@ lmkhkm/GMSKH_Homepage  main
 
 ## 공식 저장소에 반영하는 방법
 
-**사용자가 요청할 때만** 합니다. 개발 저장소 `main`이 frpsy.github.io에서 문제없는지 먼저 확인합니다.
+**모든 홈페이지 작업 뒤에 같은 작업 안에서** 합니다(2026-11-05). 개발 저장소 `main`이 frpsy.github.io에서 문제없는지 먼저 확인합니다.
 
 ```bash
 # 개발 저장소 클론 안에서 (공식 저장소 push 권한 필요)
@@ -62,7 +62,7 @@ scripts/release-official.sh
 1. 공식 저장소 `main`을 받아 `merge/official-…` 브랜치를 만든다
 2. 개발 저장소 `main`을 머지한다 (`--no-ff`)
 3. **충돌은 전부 개발 저장소 쪽을 채택**한다 — 원본은 개발 저장소이기 때문
-4. `node scripts/set-site-url.js https://gmskh.or.kr`로 HTML·sitemap·robots의 절대주소를 공식 도메인으로 바꾼다
+4. 개발 `robots.txt`(검색 차단)를 `scripts/robots.official.txt`로 바꾼 뒤 `node scripts/set-site-url.js https://gmskh.or.kr`로 HTML·sitemap·robots의 절대주소를 공식 도메인으로 바꾼다. 공식 robots가 검색을 막고 있으면 스크립트가 멈춘다
 5. 루트 `.html`·`.xml`·`.txt`에 `frpsy.github.io/gmchurch_web`이 남지 않았는지 확인한다
 6. `npm ci && npm test`가 통과해야 커밋·push 한다
 7. PR 머지 → 공식 저장소 cache-bust가 `?v=` 갱신 → 2시간 안에 서버가 받아 감
@@ -86,3 +86,10 @@ scripts/release-official.sh
   (공식에서 직접 고친 내용은 다음 반영 때 충돌이 나면 개발 쪽으로 덮인다)
 - 주보 등록도 개발 저장소에서 작업한다. 단 **주보·교회소식은 개발 저장소에 머지한 직후 항상 공식 저장소에도 바로 반영**한다(2026-11-01 사용자 지시). 다른 변경은 요청이 있을 때 반영 때 따라온다.
 - 이 구조를 바꾸면 이 문서, `README.md`, `AGENTS.md`(저장소 2개 운영), `docs/dev-guide.md`를 함께 고친다.
+
+## 개발 주소는 검색에서 제외, 성가 스캔은 순서지용 쪽만 공개 (2026-11-07)
+
+- **개발 주소(frpsy.github.io)**: `robots.txt`가 `Disallow: /`로 검색을 막는다. 공식 주소용 원본은 `scripts/robots.official.txt`이고 `release-official.sh`가 공식 반영 때만 바꿔 넣는다. 개발 `robots.txt`를 공식에 그대로 올리지 않는다.
+- **성가 스캔(`data/hymnal-2015/`)**: 저장소에는 전부 보관하지만 웹(두 사이트)에는 순서지(`jubo/`)가 쓰는 쪽(`data/worship/*.book.json`이 가리키는 이미지)만 올린다. 원본 PDF `sources/`와 쓰지 않는 쪽은 개발은 `_config.yml`의 자동 생성 구간으로, 공식은 `scripts/hymnal-web-exclude.txt`를 `deploy/publish.sh`가 읽어 막는다.
+- **주보제작 때**: `book.json`을 만든 뒤 `node scripts/hymnal-web-exclude.js`를 실행한다. 안 하면 `npm test`가 실패한다(새로 쓰는 악보가 비공개 목록에 있으면 순서지에서 깨지기 때문).
+- 저장소 자체가 공개라 GitHub에서는 여전히 내려받을 수 있다. 이 조치는 두 홈페이지 주소에서의 노출만 줄인다.

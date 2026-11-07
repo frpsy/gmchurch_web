@@ -40,4 +40,5 @@
 ## 주보 요점 (상세는 위 문서)
 - 주보 이미지가 오면 묻지 않고 홈페이지 게시(`bulletin.html`) + 순서지(`jubo/`) 제작 + 주보 내용 텍스트 정리를 한 세트로 하고 두 저장소에 반영한다.
 - 순서지 디자인은 고정(2026-11-05) — 데이터만 교체. 홈페이지에서 순서지로 링크하지 않는다.
+- 주보제작에서 `book.json`을 만든 뒤 `node scripts/hymnal-web-exclude.js`를 실행한다(순서지가 쓰는 성가 악보만 웹에 공개, 나머지 스캔은 비공개 — `docs/REPO-STRUCTURE.md` 끝).
 - 완료 보고 링크: https://gmskh.or.kr/jubo/ , https://frpsy.github.io/gmchurch_web/jubo/ (날짜별 링크는 요청 시에만).
