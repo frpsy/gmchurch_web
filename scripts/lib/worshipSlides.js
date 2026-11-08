@@ -123,7 +123,7 @@ export function buildSlides(week, ctx) {
         }
         case 'psalm': {
             if (!item.lines?.length) {
-                warnings.push(`성시 본문 미입력: 시편 ${item.ref} (주보에 인쇄된 본문이 이 시편과 달라 옮기지 않음) — 제목만 표시`);
+                warnings.push(`성시 본문 미입력: 시편 ${item.ref} — node scripts/extract-psalm.js <번호> --write 로 채우세요`);
                 push({ kind: 'title', label: `시편 ${item.ref}`, text: `시편 ${item.ref}` });
                 break;
             }
