@@ -31,7 +31,7 @@
 ## 작업별 문서 (해당 작업 때만 읽기)
 | 작업 | 문서 |
 |---|---|
-| 주보 이미지 등록·주보제작·주보검수·순서지(모바일 주보 `jubo/`) | `docs/mobile-bulletin-rules.md`(운영 원칙, 우선) → `docs/bulletin-procedure.md`(절차) → `.agents/skills/gmchurch-mobile-bulletin/SKILL.md` |
+| 주보 이미지 등록·주보제작·주보검수·순서지(모바일 주보 `jubo/`) | `docs/mobile-bulletin-rules.md`(운영 원칙, 우선) → `docs/bulletin-procedure.md`(절차) → `.agents/skills/gmchurch-soonseoji/SKILL.md`(순서지 제작 실행 절차) → `.agents/skills/gmchurch-mobile-bulletin/SKILL.md` |
 | 페이지·메뉴·CSS·새 페이지·유튜브 영상/쇼츠 추가 | `docs/dev-guide.md` |
 | 데이터 스키마·렌더러·CSS 목록 | `ARCHITECTURE.md` |
 | 교회 사실·용어 | `docs/wiki/README.md`, `docs/church-glossary.md` |
@@ -43,6 +43,7 @@
 - **순서지 성시는 회중 강조 없이 내용만(2026-11-08, 상시 규칙)** — `jubo/`의 성시는 ○·◉ 표시와 굵은 강조 없이 절 번호와 본문만 보인다. 데이터의 `mark`는 예배 슬라이드용이라 그대로 둔다.
 - **제작 후 성시·기도서 누락 점검(2026-11-08, 상시 규칙)** — 주보 한 세트를 끝내면 순서지의 성시·기도서(N쪽)·성가·성서 본문이 빠졌는지 항상 확인한다. 본문은 모두 저장소에 있다(`data/worship-texts/` bcp·psalms·responses, `bible/`, `data/hymnal-2015/`). `tests/worshipCompleteness.test.js`가 성시 본문·기도서 쪽 본문 전체·'아멘'만 남은 기도를 막고, 주보 교회소식은 인쇄된 글(소그룹 명단 등)과 대조해 빠진 줄이 없게 한다. 새 기도서 쪽은 `bcp.json`에 추가하고 worship-order는 `type: bcp`로 쓴다.
 - **순서지 펼침 기본값(2026-11-08, 상시 규칙)** — 성서 본문(독서·복음)만 접고 나머지(성가 악보·성시·기도문 등)는 모두 펼쳐 둔다. 상단 버튼은 「전부 접기」(접힌 뒤 「기본대로 펼치기」).
+- **순서지 설교 란에는 성경 본문을 넣지 않는다(2026-11-08, 상시 규칙)** — 복음 본문은 복음 항목에만 싣는다.
 - 순서지 디자인은 고정(2026-11-05) — 데이터만 교체. 홈페이지에서 순서지로 링크하지 않는다.
 - 주보제작에서 `book.json`을 만든 뒤 `node scripts/hymnal-web-exclude.js`를 실행한다(순서지가 쓰는 성가 악보만 웹에 공개, 나머지 스캔은 비공개 — `docs/REPO-STRUCTURE.md` 끝).
 - 완료 보고 링크: https://gmskh.or.kr/jubo/ , https://frpsy.github.io/gmchurch_web/jubo/ (날짜별 링크는 요청 시에만).
