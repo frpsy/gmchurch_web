@@ -102,8 +102,6 @@ h2.h{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:1.12rem;l
 .legend .who-a{color:var(--resp);font-weight:800}
 .legend .sp{flex:1}
 .ghost{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:.84rem;font-weight:600;color:var(--brand);cursor:pointer}
-.order-nav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
-.order-nav a{flex:1 0 60px;justify-content:center;text-decoration:none}
 .part{margin:18px 0 8px;font-size:.86rem;font-weight:800;letter-spacing:.04em;color:var(--ink-3)}
 .items{display:flex;flex-direction:column;gap:8px}
 details.item,div.item{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
@@ -184,7 +182,7 @@ details[open] .chev{transform:rotate(180deg)}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 #msg{padding:48px 8px;text-align:center;color:var(--ink-3)}
 @media (min-width:600px){.cover h1{font-size:1.85rem}}
-@media print{.appbar,.tabs,.links,.ghost,.order-nav{display:none}details.item{break-inside:avoid}body{background:#fff}}
+@media print{.appbar,.tabs,.links,.ghost{display:none}details.item{break-inside:avoid}body{background:#fff}}
   </style>
 </head>
 <body>
@@ -377,11 +375,8 @@ details[open] .chev{transform:rotate(180deg)}
 
       <section class="block" id="order" aria-labelledby="h-order">
         <h2 class="h" id="h-order">${use('book')}예배 순서</h2>
-        <nav class="order-nav" aria-label="예배 순서 바로가기">
-          ${sections.map((s, i) => `<a class="ghost" href="#order-part-${i + 1}">${esc(s.title.replace(/^[ⅠⅡⅢⅣ]+\s*/, '').replace(/예식$|의 전례$/g, ''))}</a>`).join('')}
-        </nav>
         <div class="legend"><span><span class="stand-mark">†</span> 일어섭니다</span><span><span class="who-a">회중</span> 함께 말합니다</span><span class="sp"></span><button class="ghost" id="toggleAll" type="button" aria-pressed="true">전부 접기</button></div>
-        ${sections.map((s, i) => `<p class="part" id="order-part-${i + 1}" tabindex="-1">${esc(s.title)}</p><div class="items">${s.items.map(it => itemHtml(it, ctx)).join('')}</div>`).join('')}
+        ${sections.map(s => `<p class="part">${esc(s.title)}</p><div class="items">${s.items.map(it => itemHtml(it, ctx)).join('')}</div>`).join('')}
         <p class="hint" style="margin-top:12px">성경 본문(독서·복음)만 접혀 있습니다. 항목을 누르면 펼치거나 접을 수 있습니다.</p>
       </section>
 
