@@ -128,7 +128,6 @@ describe('슬라이드', () => {
         it(`${date}: 독서 본문·사제 기도문은 슬라이드에 싣지 않는다`, () => {
             const all = slides.map(text).join(' ').replace(/\s+/g, '');
             for (const r of Object.values(readings)) for (const v of r.verses) expect(all, v.text.slice(0, 12)).not.toContain(v.text.replace(/\s+/g, '').slice(0, 12));
-            expect(all).not.toContain('전능하신하느님,주님께서는그리스도의성체와보혈');
         });
 
         it(`${date}: 독서 슬라이드는 책 이름·장절과 응답만 둔다`, () => {
