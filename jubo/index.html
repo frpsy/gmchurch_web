@@ -129,10 +129,8 @@ details[open] .chev{transform:rotate(180deg)}
 .gap{height:.15em}
 .prayer{margin:12px 0;padding:12px 14px;border-radius:12px;background:var(--surface-2);line-height:1.7}
 .prayer small{display:block;color:var(--ink-3);font-size:.78rem;font-weight:700;margin-bottom:4px}
-.psalm .ln{display:grid;grid-template-columns:1.4em 1.2em 1fr;gap:4px;margin:4px 0}
+.psalm .ln{display:grid;grid-template-columns:1.4em 1fr;gap:8px;margin:4px 0}
 .psalm .n{color:var(--ink-3);font-size:.8rem;text-align:right;font-variant-numeric:tabular-nums}
-.psalm .m{color:var(--accent);text-align:center}
-.psalm .r .t{font-weight:700;color:var(--resp)}
 .scap{margin:14px 0 0;font-size:.95rem;font-weight:800;color:var(--brand)}
 .scap + .score{margin-top:6px}
 .score{display:block;margin:12px 0 0;border-radius:10px;overflow:hidden;background:#fff;border:1px solid var(--line)}
@@ -264,7 +262,7 @@ details[open] .chev{transform:rotate(180deg)}
     if (l.r) return `<div class="row ${l.r}"><span class="who">${WHO[l.r]}</span><span class="tx">${esc(churchPrayerText(l.text))}</span></div>`;
     return `<p class="plain">${esc(churchPrayerText(l.text))}</p>`;
   };
-  const psalmHtml = lines => `<div class="psalm">${lines.map(l => `<div class="ln${l.mark === '○' ? ' r' : ''}"><span class="n">${l.n || ''}</span><span class="m" aria-hidden="true">${esc(l.mark || '')}</span><span class="t">${esc(churchPrayerText(l.text))}</span></div>`).join('')}</div>`;
+  const psalmHtml = lines => `<div class="psalm">${lines.map(l => `<div class="ln"><span class="n">${l.n || ''}</span><span class="t">${esc(churchPrayerText(l.text))}</span></div>`).join('')}</div>`;
   // 독서 본문(공동번역, data/worship-texts/readings.json — PDF 글자 대조본)
   const refKey = ref => { const m = /^(.+?)\s+(\d+.*)$/.exec(String(ref || '').trim()); return m && BIBLE[m[1]] ? `${BIBLE[m[1]]} ${m[2]}` : ''; };
   const readingHtml = (it, p) => `<div class="reading"><p class="rt">${esc(it.ref)}</p><p>${p.verses.map(v => `<sup>${v.v}</sup>${esc(v.text)}`).join(' ')}</p></div>`;
