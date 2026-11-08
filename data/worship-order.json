@@ -640,6 +640,255 @@
           "stage": "파송"
         }
       ]
+    },
+    "2026-11-08": {
+      "title": "(가해) 추수감사주일 감사성찬례",
+      "celebrant": "민숙희 마가렛 사제",
+      "preacher": "이남호 사도요한 사제",
+      "form": "1형식 (C곡)",
+      "theme": {
+        "title": "추수감사주일",
+        "subtitle": "감사성찬례",
+        "image": null
+      },
+      "items": [
+        {
+          "section": "Ⅰ 개회예식"
+        },
+        {
+          "type": "hymn",
+          "label": "입당성가",
+          "number": 336,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "모임"
+        },
+        {
+          "type": "bcp",
+          "label": "정심기도",
+          "page": 244,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "모임"
+        },
+        {
+          "type": "hymn",
+          "label": "거룩하신 하느님",
+          "number": 89,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "모임"
+        },
+        {
+          "section": "Ⅱ 말씀의 전례"
+        },
+        {
+          "type": "dialog",
+          "label": "본기도",
+          "dialog": "collect",
+          "by": "집전자",
+          "stand": true,
+          "stage": "말씀"
+        },
+        {
+          "type": "reading",
+          "label": "제1독서",
+          "kind": "구약",
+          "ref": "신명 8:1-10",
+          "by": "정순진 디모데오",
+          "stage": "말씀"
+        },
+        {
+          "type": "psalm",
+          "label": "성시",
+          "ref": "65편",
+          "by": "다 함께",
+          "stage": "말씀",
+          "lines": []
+        },
+        {
+          "type": "reading",
+          "label": "제2독서",
+          "kind": "서신",
+          "ref": "야고보 1:17-18,21-27",
+          "by": "서태석 다윗",
+          "stage": "말씀"
+        },
+        {
+          "type": "hymn",
+          "label": "층계성가",
+          "number": 330,
+          "by": "다 함께 (1-2절)",
+          "stand": true,
+          "stage": "말씀"
+        },
+        {
+          "type": "reading",
+          "label": "복음",
+          "kind": "복음서",
+          "gospel": true,
+          "ref": "마태 6:25-33",
+          "by": "집전자",
+          "stand": true,
+          "stage": "말씀"
+        },
+        {
+          "type": "sermon",
+          "label": "설교",
+          "by": "이남호 사도요한 사제",
+          "stage": "말씀"
+        },
+        {
+          "type": "bcp",
+          "label": "사도신경",
+          "page": 250,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "응답"
+        },
+        {
+          "type": "intercession",
+          "label": "교회와 세상을 위한 기도",
+          "by": "윤준섭 토마",
+          "stand": true,
+          "stage": "응답"
+        },
+        {
+          "section": "Ⅲ 성찬의 전례"
+        },
+        {
+          "type": "bcp",
+          "label": "평화의 인사",
+          "page": 256,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "응답"
+        },
+        {
+          "type": "hymn",
+          "label": "봉헌성가",
+          "number": 530,
+          "by": "박건치 미카엘",
+          "stage": "응답"
+        },
+        {
+          "type": "dialog",
+          "label": "예물 기도",
+          "dialog": "offertory",
+          "by": "집전자",
+          "stage": "응답",
+          "sub": "예물 준비",
+          "extra": true
+        },
+        {
+          "type": "bcp",
+          "label": "성찬기도",
+          "page": 257,
+          "by": "1양식",
+          "stand": true,
+          "stage": "응답",
+          "sub": "성찬기도"
+        },
+        {
+          "type": "hymn",
+          "label": "거룩하시다",
+          "number": 82,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "응답",
+          "sub": "성찬기도"
+        },
+        {
+          "type": "dialog",
+          "label": "성찬기도",
+          "dialog": "doxology",
+          "by": "집전자",
+          "stage": "응답",
+          "sub": "성찬기도",
+          "extra": true
+        },
+        {
+          "type": "hymn",
+          "label": "주의기도",
+          "number": 65,
+          "by": "다 함께",
+          "stage": "응답",
+          "sub": "성찬기도"
+        },
+        {
+          "type": "hymn",
+          "label": "하느님의 어린양",
+          "number": 83,
+          "by": "다 함께",
+          "stage": "응답",
+          "sub": "성체 나눔"
+        },
+        {
+          "type": "bcp",
+          "label": "성체나눔",
+          "page": 270,
+          "by": "다 함께",
+          "stage": "응답",
+          "sub": "성체 나눔"
+        },
+        {
+          "type": "dialog",
+          "label": "영성체",
+          "dialog": "communion-invite",
+          "by": "집전자",
+          "stage": "응답",
+          "sub": "영성체",
+          "extra": true
+        },
+        {
+          "type": "hymn",
+          "label": "성체성가",
+          "number": 588,
+          "by": "다 함께",
+          "stage": "응답"
+        },
+        {
+          "type": "dialog",
+          "label": "영성체후기도",
+          "dialog": "after-communion",
+          "by": "다 함께",
+          "stand": true,
+          "stage": "응답"
+        },
+        {
+          "section": "Ⅳ 파송예식"
+        },
+        {
+          "type": "dialog",
+          "label": "축복기도",
+          "dialog": "blessing",
+          "by": "집전자",
+          "stand": true,
+          "stage": "파송"
+        },
+        {
+          "type": "dialog",
+          "label": "파송",
+          "dialog": "dismissal",
+          "by": "집전자",
+          "stage": "파송",
+          "extra": true
+        },
+        {
+          "type": "notice",
+          "label": "교회소식",
+          "by": "윤상돈 베드로 위원",
+          "stage": "파송"
+        },
+        {
+          "type": "hymn",
+          "label": "파송성가",
+          "number": 526,
+          "by": "다 함께",
+          "stand": true,
+          "stage": "파송"
+        }
+      ]
     }
   }
 }

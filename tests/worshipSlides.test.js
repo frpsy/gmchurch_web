@@ -135,7 +135,7 @@ describe('슬라이드', () => {
             const reads = slides.filter(s => s.kind === 'reading');
             expect(reads.length).toBe(week.items.filter(i => i.type === 'reading').length);
             for (const s of reads) {
-                expect(s.ref).toMatch(/^.+ \d+:\d+(-\d+)?$/);
+                expect(s.ref).toMatch(/^.+ \d+:\d+(-\d+)?(,\d+(-\d+)?)*$/);
                 expect(s.lines.map(l => l.r)).toEqual(['l', 'a']);
             }
         });
@@ -229,8 +229,9 @@ describe('성가집 연결', () => {
 describe('성경 본문 readings.json (슬라이드에는 쓰지 않는 예비)', () => {
     it('절 번호가 참조 범위와 같고 본문에 숫자·줄바꿈이 없다', () => {
         for (const [ref, r] of Object.entries(readings)) {
-            const { from, to } = parseRef(ref);
-            expect(r.verses.map(v => v.v)).toEqual(Array.from({ length: to - from + 1 }, (_, i) => from + i));
+            const { segments } = parseRef(ref);
+            const expected = segments.flatMap(g => Array.from({ length: g.to - g.from + 1 }, (_, i) => g.from + i));
+            expect(r.verses.map(v => v.v)).toEqual(expected);
             for (const v of r.verses) {
                 expect(v.text, ref).not.toMatch(/\d/);
                 expect(v.text, ref).not.toContain('\n');
