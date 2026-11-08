@@ -109,8 +109,8 @@ export function buildSlides(week, ctx) {
             break;
         }
         case 'reading': {
-            const { book, chapter, from, to } = parseRef(item.ref);
-            const ref = `${book} ${chapter}:${from}${to !== from ? `-${to}` : ''}`;
+            const { book, chapter, verses } = parseRef(item.ref);
+            const ref = `${book} ${chapter}:${verses}`;
             if (item.gospel) {
                 const saint = GOSPEL_SAINT[book];
                 if (!saint) throw new Error(`복음서가 아닙니다: ${book}`);
@@ -122,6 +122,11 @@ export function buildSlides(week, ctx) {
             break;
         }
         case 'psalm': {
+            if (!item.lines?.length) {
+                warnings.push(`성시 본문 미입력: 시편 ${item.ref} (주보에 인쇄된 본문이 이 시편과 달라 옮기지 않음) — 제목만 표시`);
+                push({ kind: 'title', label: `시편 ${item.ref}`, text: `시편 ${item.ref}` });
+                break;
+            }
             const lines = item.lines.map(l => ({ text: l.text, ...(l.mark ? { mark: l.mark } : {}), ...(l.mark === '○' ? { keep: true } : {}) }));
             paginate(lines).forEach(page => push({ kind: 'psalm', label: `시편 ${item.ref}`, lines: page }));
             break;
@@ -184,8 +189,8 @@ export function buildBook(week, ctx) {
             out.lines = flat(need(ctx.dialogs, item.dialog, '응답 데이터').slides);
             break;
         case 'reading': {
-            const { book, chapter, from, to } = parseRef(item.ref);
-            out.ref = `${book} ${chapter}:${from}${to !== from ? `-${to}` : ''}`;
+            const { book, chapter, verses } = parseRef(item.ref);
+            out.ref = `${book} ${chapter}:${verses}`;
             out.kind = item.kind;
             const lines = [];
             if (item.gospel) lines.push(...flat(need(ctx.dialogs, 'gospel-intro', '응답 데이터').slides, { 성인: GOSPEL_SAINT[book] }), { gap: true });
@@ -195,7 +200,7 @@ export function buildBook(week, ctx) {
         }
         case 'psalm':
             out.ref = `시편 ${item.ref}`;
-            out.lines = item.lines.map(l => ({ text: l.text, ...(l.n ? { n: l.n } : {}), ...(l.mark ? { mark: l.mark } : {}) }));
+            out.lines = (item.lines || []).map(l => ({ text: l.text, ...(l.n ? { n: l.n } : {}), ...(l.mark ? { mark: l.mark } : {}) }));
             if (item.score) out.score = item.score;
             break;
         case 'intercession':

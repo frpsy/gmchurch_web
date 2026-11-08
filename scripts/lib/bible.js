@@ -24,7 +24,7 @@ const BOOKS = {
     '필립비': '필립비인들에게 보낸 편지', '골로사이': '골로사이인들에게 보낸 편지',
     '데살로니카전서': '데살로니카인들에게 보낸 첫째 편지', '1데살': '데살로니카인들에게 보낸 첫째 편지',
     '데살로니카후서': '데살로니카인들에게 보낸 둘째 편지', '2데살': '데살로니카인들에게 보낸 둘째 편지',
-    '히브리': '히브리인들에게 보낸 편지', '야고보': '야고보의 편지',
+    '히브리': '히브리인들에게 보낸 편지', '야고보': '야고보의 편지', '야고': '야고보의 편지',
     '베드로전서': '베드로의 첫째 편지', '베드로후서': '베드로의 둘째 편지',
     '요한1서': '요한의 첫째 편지', '1요한': '요한의 첫째 편지',
     '묵시': '요한의 묵시록', '묵시록': '요한의 묵시록',
@@ -40,14 +40,22 @@ export function bibleText(pdfPath) {
     return text;
 }
 
-// "마태 22:34-46" → { book, chapter, from, to }. 한 장 안의 구절만 다룬다.
+// "마태 22:34-46" → { book, chapter, from, to, segments, verses }. 한 장 안의 구절만 다룬다.
+// "야고 1:17-18,21-27"처럼 쉼표로 이은 구절도 읽는다(from·to는 전체 범위, segments는 실제 구절, verses는 표기).
 export function parseRef(ref) {
-    const m = /^(\S+) (\d+):(\d+)(?:-(\d+))?$/.exec(ref.trim());
+    const m = /^(\S+) (\d+):(\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*)$/.exec(ref.trim());
     if (!m) throw new Error(`성경 참조 형식이 아닙니다: ${ref}`);
     const book = BOOKS[m[1]];
     if (!book) throw new Error(`책 이름을 모릅니다: ${m[1]} (scripts/lib/bible.js BOOKS에 추가)`);
-    const from = Number(m[3]);
-    return { book, chapter: Number(m[2]), from, to: m[4] ? Number(m[4]) : from };
+    const segments = m[3].split(',').map(part => {
+        const [a, b] = part.split('-').map(Number);
+        return { from: a, to: b ?? a };
+    });
+    for (let i = 0; i < segments.length; i++) {
+        if (segments[i].to < segments[i].from || (i && segments[i].from <= segments[i - 1].to)) throw new Error(`구절 범위가 올바르지 않습니다: ${ref}`);
+    }
+    const verses = segments.map(g => (g.to !== g.from ? `${g.from}-${g.to}` : `${g.from}`)).join(',');
+    return { book, chapter: Number(m[2]), from: segments[0].from, to: segments.at(-1).to, segments, verses };
 }
 
 const JAMO = /[ㄱ-ㆎ]/g;
@@ -177,7 +185,7 @@ export function respace(pdfText, onlineText) {
 
 // ref에 해당하는 절 목록 [{ v, text }]. 절이 이어지지 않으면 오류.
 export function extractPassage(text, ref) {
-    const { book, chapter, from, to } = parseRef(ref);
+    const { book, chapter, from, to, segments } = parseRef(ref);
     let lines = bookLines(text, book);
     // 쪽 머리말의 "책 제N장"은 그 쪽에서 시작하는 마지막 장이므로, 그 장 이상인 첫 쪽부터 읽는다
     if (chapter > 1) {
@@ -192,6 +200,7 @@ export function extractPassage(text, ref) {
     const verses = splitVerses(stream, chapter, to);
     const out = [];
     for (let v = from; v <= to; v++) {
+        if (!segments.some(g => v >= g.from && v <= g.to)) continue;
         const t = verses.get(v);
         if (!t) throw new Error(`${ref}: ${chapter}장 ${v}절을 찾지 못했습니다`);
         out.push({ v, text: tidy(t) });

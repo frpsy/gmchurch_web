@@ -9,9 +9,12 @@ describe('성경 PDF 파서 (scripts/lib/bible.js)', () => {
     const fixture = readFileSync(new URL('./fixtures/bible-matt22.txt', import.meta.url), 'utf8');
 
     it('참조를 책·장·절로 푼다', () => {
-        expect(parseRef('마태 22:34-46')).toEqual({ book: '마태오의 복음서', chapter: 22, from: 34, to: 46 });
-        expect(parseRef('1데살 2:8')).toEqual({ book: '데살로니카인들에게 보낸 첫째 편지', chapter: 2, from: 8, to: 8 });
+        expect(parseRef('마태 22:34-46')).toMatchObject({ book: '마태오의 복음서', chapter: 22, from: 34, to: 46, verses: '34-46' });
+        expect(parseRef('1데살 2:8')).toMatchObject({ book: '데살로니카인들에게 보낸 첫째 편지', chapter: 2, from: 8, to: 8, verses: '8' });
         expect(() => parseRef('없는책 1:1')).toThrow('책 이름을 모릅니다');
+        // 쉼표로 이은 구절(2026-11-08 야고 1:17-18,21-27)
+        expect(parseRef('야고 1:17-18,21-27')).toMatchObject({ book: '야고보의 편지', chapter: 1, from: 17, to: 27, verses: '17-18,21-27', segments: [{ from: 17, to: 18 }, { from: 21, to: 27 }] });
+        expect(() => parseRef('야고 1:21-27,17-18')).toThrow('구절 범위가 올바르지 않습니다');
     });
 
     it('절 번호·소제목·각주·쪽 번호를 걷어내고 마지막 절에서 멈춘다', () => {
