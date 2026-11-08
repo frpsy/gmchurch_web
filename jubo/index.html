@@ -311,10 +311,10 @@ details[open] .chev{transform:rotate(180deg)}
     const head = `<span class="mark" aria-hidden="true">${it.stand ? '†' : ''}</span>
       <span class="lbl"><b>${esc(it.label)}${it.stand ? '<span class="sr"> (일어섭니다)</span>' : ''}</b>${sub ? `<small>${esc(sub)}</small>` : ''}${refText ? `<span class="ref${/^성가 /.test(refText) ? ' hymn' : ''}">${esc(refText)}</span>` : ''}</span>
       <span class="side">${esc(it.by || '')}${body ? CHEV : ''}</span>`;
-    // 성가 악보 항목은 「펼치기」 버튼에서 제외한다(악보까지 모두 열면 페이지가 너무 길어진다)
-    const hymnScore = isHymnRef(it) && !!(it.score || (it.scores || []).length);
+    // 기본은 성서 본문(독서·복음, kind가 있는 항목)만 접고 나머지는 모두 펼친다(2026-11-08)
+    const bible = !!it.kind;
     return body
-      ? `<details class="item"${hymnScore ? ' data-hymn' : ''}><summary>${head}</summary><div class="body">${body}</div></details>`
+      ? `<details class="item"${bible ? ' data-bible' : ' open'}><summary>${head}</summary><div class="body">${body}</div></details>`
       : `<div class="item static"><div class="sum">${head}</div></div>`;
   }
 
@@ -381,9 +381,9 @@ details[open] .chev{transform:rotate(180deg)}
 
       <section class="block" id="order" aria-labelledby="h-order">
         <h2 class="h" id="h-order">${use('book')}예배 순서</h2>
-        <div class="legend"><span><span class="stand-mark">†</span> 일어섭니다</span><span><span class="who-a">회중</span> 함께 말합니다</span><span class="sp"></span><button class="ghost" id="toggleAll" type="button" aria-pressed="false">기도문·말씀 펼치기</button></div>
+        <div class="legend"><span><span class="stand-mark">†</span> 일어섭니다</span><span><span class="who-a">회중</span> 함께 말합니다</span><span class="sp"></span><button class="ghost" id="toggleAll" type="button" aria-pressed="true">전부 접기</button></div>
         ${sections.map(s => `<p class="part">${esc(s.title)}</p><div class="items">${s.items.map(it => itemHtml(it, ctx)).join('')}</div>`).join('')}
-        <p class="hint" style="margin-top:12px">항목을 누르면 응답·기도문, 성경 본문, 성가 악보가 펼쳐집니다.</p>
+        <p class="hint" style="margin-top:12px">성경 본문(독서·복음)만 접혀 있습니다. 항목을 누르면 펼치거나 접을 수 있습니다.</p>
       </section>
 
       <section class="block" id="news" aria-labelledby="h-news">
@@ -415,9 +415,10 @@ details[open] .chev{transform:rotate(180deg)}
     const tg = document.getElementById('toggleAll');
     tg.addEventListener('click', () => {
       const open = tg.getAttribute('aria-pressed') !== 'true';
-      all().forEach(d => { d.open = open && !d.hasAttribute('data-hymn'); });
+      // 접힌 상태에서 누르면 기본 상태(성서 제외 모두 펼침)로 돌아간다
+      all().forEach(d => { d.open = open && !d.hasAttribute('data-bible'); });
       tg.setAttribute('aria-pressed', String(open));
-      tg.textContent = open ? '모두 접기' : '기도문·말씀 펼치기';
+      tg.textContent = open ? '전부 접기' : '기본대로 펼치기';
     });
     // 바로가기 탭: 지금 보는 단락 표시
     const tabs = [...document.querySelectorAll('.tab')];
