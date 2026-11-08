@@ -279,7 +279,8 @@ details[open] .chev{transform:rotate(180deg)}
       const after = gap >= 0 ? it.lines.slice(gap + 1) : it.lines;
       h += before.map(lineHtml).join('') + readingHtml(it, passage) + after.map(lineHtml).join('');
     } else if (it.label === '성시') h += psalmHtml(it.lines);
-    else if (it.lines.length) h += it.lines.map(lineHtml).join('');
+    // 성가는 악보 이미지가 있으면 가사 글자를 싣지 않는다(2026-11-08)
+    else if (it.lines.length && !(isHymn && (it.score || (it.scores || []).length))) h += it.lines.map(lineHtml).join('');
     // 사제·회중 응답("기도합시다") 다음에 본기도 본문이 온다
     if (it.label === '본기도' && ctx.jubo.collect) h += `<div class="prayer"><small>오늘의 본기도</small>${esc(ctx.jubo.collect)}</div>`;
     // 모바일 주보는 홈페이지에서 연결하지 않고 교우에게만 주소를 알린다(2026-11-01 사용자 결정) — 성가 악보도 화면 안에서 본다
