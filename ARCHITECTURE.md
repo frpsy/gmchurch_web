@@ -691,6 +691,8 @@ window DOMContentLoaded
 | `.communion-grid` / `.communion-card` | 영성체 안내 카드 |
 | `.space-grid` / `.space-item` | 전례 공간 안내 카드 (아이콘 + 국문/영문명 + 설명) |
 | `.resource-grid` / `.resource-card` | 예배 자료 외부 링크 카드 (hover lift) |
+| `.resource-grid--pair` | 카드가 네 장일 때 2×2로 배치 (성무일과, 600px 이상) |
+| `.section-header--intro` | 히어로가 제목을 이미 보여 주는 페이지에서 제목 없이 소개 문장만 두는 헤더 (영상·사진 갤러리) |
 | `.liturgy-checklist` / `.checklist-item` | 처음 오신 분 체크리스트 |
 | `.nav-badge` | 내비 하위 메뉴 상태 칩 (골드, 예: "임시") |
 | `.draft-banner` | 임시/초안 페이지 상단 안내 배너 (골드) |

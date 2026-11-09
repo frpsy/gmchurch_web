@@ -895,6 +895,8 @@ button:focus:not(:focus-visible) { outline: none; }
 .section-header { margin-bottom: var(--space-8); }
 /* 서브 문구가 없는 헤더는 본문과의 간격을 줄여 리듬 정돈 */
 .section-header:not(:has(.section-sub)) { margin-bottom: var(--space-6); }
+/* 페이지 히어로가 이미 제목을 보여 주는 페이지(영상·사진 갤러리): 제목을 되풀이하지 않고 소개 문장만 둔다 */
+.section-header--intro { margin-bottom: var(--space-6); }
 
 /* ── Grid ────────────────────────────────────────────────── */
 .grid {
@@ -939,6 +941,7 @@ button:focus:not(:focus-visible) { outline: none; }
     font-size: var(--fs-desc);
     line-height: var(--lh-body);
 }
+.card-desc + .about-brief-link { margin-top: 1.25rem; font-size: var(--fs-md); }
 .card-icon {
     font-size: 2.2rem;
     margin-bottom: 1.1rem;
@@ -2087,7 +2090,9 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     letter-spacing: 0.02em;
     font-variant-numeric: tabular-nums;
 }
+.bank-card .account { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
 .bank-card .sub { font-size: var(--fs-md); color: var(--theme); margin-top: 0.35rem; }
+.bank-card .map-copy-status:empty { display: none; }
 
 /* ── Bus Chips ──────────────────────────────────────────── */
 .bus-list {
@@ -2743,6 +2748,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 /* Worship page components */
 .worship-services-grid { margin-bottom: 2rem; }
 .worship-season { text-align: center; }
+.worship-season .liturgy-season-badge { margin-bottom: 0; }   /* 단락 끝이라 아래 여백은 섹션 여백에 맡긴다 */
 .worship-time          { color: var(--green-mid); font-weight: 700; }
 .worship-card-desc     { margin-top: 1rem; color: var(--text-muted); font-size: var(--fs-desc); line-height: 1.9; }
 .worship-card-quote    { margin-top: 1.25rem; font-size: var(--fs-sm); }
@@ -2752,6 +2758,10 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .liturgy-body--lead    { margin-bottom: 1.5rem; }
 .resource-en           { font-size: var(--fs-label); color: var(--text-muted); margin-bottom: 0.4rem; }
 .resource-grid--single { --resource-cols: 1; grid-template-columns: 1fr; }
+/* 카드가 네 장일 때 3+1로 한 장만 남지 않게 2×2로 놓는다 (성무일과) */
+@media (min-width: 600px) {
+    .resource-grid.resource-grid--pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 /* Worship Resources */
 .resource-grid {

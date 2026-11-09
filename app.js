@@ -62,7 +62,9 @@ const MapHelper = {
         const prev = btn.dataset.copyLabel || btn.textContent;
         btn.dataset.copyLabel = prev;
         btn.disabled = true;
-        let status = btn.closest('.map-card').querySelector('[role="status"]');
+        const ui = CHURCH_DATA.ui[btn.dataset.copyKind === 'account' ? 'copyAccount' : 'copyAddress'];
+        const scope = btn.closest('.map-card, .bank-card');
+        let status = scope.querySelector('[role="status"]');
         if (!status) {
             status = document.createElement('p');
             status.className = 'map-copy-status';
@@ -72,17 +74,17 @@ const MapHelper = {
         status.textContent = "";
         try {
             await navigator.clipboard.writeText(addr);
-            btn.textContent = CHURCH_DATA.ui.copyAddress.success;
-            status.textContent = CHURCH_DATA.ui.copyAddress.success;
+            btn.textContent = ui.success;
+            status.textContent = ui.success;
         } catch (_) {
             // 복사 권한이 없는 브라우저에서도 주소를 직접 복사할 수 있게 한다.
-            const text = btn.parentElement.querySelector('.map-addr-text');
+            const text = btn.parentElement.querySelector('.map-addr-text, .account-number');
             const range = document.createRange();
             range.selectNodeContents(text);
             const selection = window.getSelection();
             selection.removeAllRanges();
             selection.addRange(range);
-            status.textContent = CHURCH_DATA.ui.copyAddress.failure;
+            status.textContent = ui.failure;
         } finally {
             btn.disabled = false;
             setTimeout(() => { btn.textContent = prev; }, 1800);
@@ -587,6 +589,7 @@ const IndexRenderer = {
                 <h3>${w.title}</h3>
                 <p class="card-time">${w.time}</p>
                 <p class="card-desc">${w.summary || w.desc}</p>
+                ${w.href ? `<a href="${w.href}" class="about-brief-link">${w.linkLabel} →</a>` : ''}
             </div>
         `).join('');
         const guide = document.getElementById('worship-guide');
@@ -914,7 +917,7 @@ const WorshipRenderer = {
                     ${(prayer.dailyOfficeIntro || []).map((p, i) => `
                         <p class="liturgy-body${i === prayer.dailyOfficeIntro.length - 1 ? ' liturgy-body--lead' : ''}">${p}</p>
                     `).join('')}
-                    <div class="resource-grid">
+                    <div class="resource-grid resource-grid--pair">
                         ${prayer.dailyOffice.map(o => `
                             <a class="resource-card" href="${o.url}" target="_blank" rel="noopener noreferrer">
                                 <span class="resource-icon" aria-hidden="true">${icon(o.icon)}</span>
@@ -1135,7 +1138,8 @@ const GivingRenderer = {
                 <h3>헌금 계좌</h3>
                 <div class="bank-card">
                     <p style="font-size:var(--fs-md); color:var(--green-mid); margin-bottom:0.3rem;">${bankName}</p>
-                    <p class="account">${bank}</p>
+                    <p class="account"><span class="account-number">${bank}</span><button class="map-copy-btn" type="button" data-copy="${bankName} ${bank}" data-copy-kind="account" aria-label="헌금 계좌번호 복사">복사</button></p>
+                    <p class="map-copy-status" role="status"></p>
                     <p class="sub">예금주 ${holder}</p>
                 </div>
                 <p style="font-size:var(--fs-desc); color:var(--text-muted); line-height:1.8;" id="report">${report}</p>
@@ -1647,9 +1651,8 @@ const MediaRenderer = {
         const { intro, channelUrl, videos, shorts } = CHURCH_DATA.media;
 
         el.innerHTML = `
-            <div class="section-header">
-                <p class="section-eyebrow">YouTube</p>
-                <h2 class="section-title">영상 갤러리</h2>
+            <div class="section-header section-header--intro">
+                <h2 class="sr-only">영상</h2>
                 <p class="section-sub">${intro}</p>
             </div>
             <div class="video-grid">
@@ -1773,9 +1776,7 @@ const PhotoGalleryRenderer = {
             <div class="draft-banner">
                 <span class="draft-badge">${badge}</span>${note}
             </div>` : ''}
-            <div class="section-header">
-                <p class="section-eyebrow">Photo Gallery</p>
-                <h2 class="section-title">사진 갤러리</h2>
+            <div class="section-header section-header--intro">
                 <p class="section-sub">${intro}</p>
             </div>
             <div class="photo-filters" role="group" aria-label="사진 분류 필터">
