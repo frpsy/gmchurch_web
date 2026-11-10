@@ -458,15 +458,11 @@ button:focus:not(:focus-visible) { outline: none; }
 .hero h1      { animation-delay: 0.24s; }
 .hero-sub     { animation-delay: 0.40s; }
 .hero-actions { animation-delay: 0.56s; }
-.hero-stats {
-    animation: hero-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) 0.72s both;
-}
 
 /* 모션 감소 선호 → 모든 애니메이션 정지 */
 @media (prefers-reduced-motion: reduce) {
     .hero-fallback,
     .hero-content > *,
-    .hero-stats,
     .hero-scroll,
     .page-hero > * { animation: none; opacity: 1; transform: none; }
 
@@ -558,54 +554,38 @@ button:focus:not(:focus-visible) { outline: none; }
     box-shadow: 0 8px 24px rgba(177, 184, 131, 0.26);
 }
 
-/* Hero — 하단 스탯 스트립 */
+/* Hero — 첫 화면 방문 안내 */
 .hero-stats {
     position: absolute;
     bottom: 0; left: 0; right: 0;
     z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    padding: 1.1rem 1.5rem;
-    /* 상단 내비와 같은 유리 톤 — 사진 위 상·하단 띠의 명도 차이 방지 */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 0.55rem max(0.5rem, calc((100% - 36rem) / 2));
     background: var(--nav-glass);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255,255,255,0.10);
-    flex-wrap: wrap;
 }
 .hero-stat {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 0.15rem;
-    padding: 0.25rem 2rem;
+    min-height: 3.25rem;
+    padding: 0.2rem 0.35rem;
 }
 .hero-stat-val {
     font-size: var(--fs-sm);
     font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.01em;
-    white-space: nowrap;
+    word-break: keep-all;
 }
 .hero-stat-lbl {
-    font-size: var(--fs-label);
+    font-size: 0.8125rem;
     font-weight: 500;
-    color: rgba(255,255,255,0.78);  /* 어두운 오버레이 위 대비 상향 */
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-.hero-stat-divider {
-    width: 1px;
-    height: 2.2rem;
-    background: linear-gradient(180deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0.35) 50%,
-        rgba(255,255,255,0) 100%);
-    flex-shrink: 0;
+    color: var(--brand-sub);
 }
 .hero-stat--link {
+    color: inherit;
     text-decoration: none;
     border-radius: var(--radius-sm);
     transition: background var(--dur);
@@ -613,15 +593,8 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .hero-stat--link:hover,
 .hero-stat--link:focus-visible {
+    color: inherit;
     background: rgba(255,255,255,0.12);
-}
-.hero-stat--link:hover .hero-stat-val,
-.hero-stat--link:focus-visible .hero-stat-val {
-    color: #fff;
-}
-.hero-stat--link:hover .hero-stat-lbl,
-.hero-stat--link:focus-visible .hero-stat-lbl {
-    color: rgba(255,255,255,1);
 }
 
 /* Hero — 스크롤 인디케이터 */
@@ -645,11 +618,6 @@ button:focus:not(:focus-visible) { outline: none; }
     .hero-actions { flex-direction: column; align-items: center; gap: 0.7rem; }
     .hero-actions a { width: 100%; max-width: 300px; text-align: center; }
 
-    .hero-stats { gap: 0; padding: 0.8rem 0.5rem; }
-    .hero-stat { padding: 0.2rem 0.7rem; }
-    .hero-stat-val { font-size: var(--fs-md); }
-    .hero-stat-lbl { font-size: 0.75rem; }
-    .hero-stat-divider { height: 1.8rem; }
     .hero-scroll { bottom: 5rem; }
     .btn-hero-primary { font-size: var(--fs-sm); }
 
