@@ -241,7 +241,11 @@ const CHURCH_DATA = {
             { label: "처음 오셨나요?", href: "newcomer.html", primary: true },
             { label: "예배 안내",    href: "worship.html" }
         ],
-        stats: { established: "설립", worship: "주일 예배", location: "위치" },
+        quickLinks: [
+            { label: "주일 예배", href: "worship.html", worshipTime: true },
+            { label: "오시는 길", href: "visit.html", detail: "교통·주차" },
+            { label: "이번 주 주보", href: "bulletin.html", detail: "이미지·PDF" }
+        ],
         about: {
             eyebrow: "About",
             title: "광명교회",

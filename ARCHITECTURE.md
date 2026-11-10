@@ -143,7 +143,7 @@ const CHURCH_DATA = {
 
   home: {                           // index.html 전용 문구 (예배 시간·위치는 worship.main/info에서 파생)
     heroActions: [{ label, href, primary? }],
-    stats: { established, worship, location },   // 히어로 수치 라벨
+    quickLinks: [{ label, href, detail?, worshipTime? }],  // 첫 화면 방문 안내
     about:   { eyebrow, title, facts: [{ label, key }], more },  // key = info의 필드명
     worship: { eyebrow, title, sub, more },     // 카드는 worship.main[].summary(없으면 desc)
     thisSunday: { title, labels: { season, first, second, gospel }, more, bulletin },  // 다가오는 주일 카드
