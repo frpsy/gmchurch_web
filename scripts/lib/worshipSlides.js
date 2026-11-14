@@ -141,6 +141,10 @@ export function buildSlides(week, ctx) {
             end.slides.forEach(s => push({ kind: 'dialog', label: item.label, lines: toLines(s) }));
             break;
         }
+        case 'text':
+            // 그 주에만 쓰는 예식문(온 가족 예배 등)·기도서 밖 찬양: 슬라이드에는 제목만 둔다
+            push({ kind: 'title', label: item.label, text: item.title ? `${item.label}: ${item.title}` : item.label });
+            break;
         case 'sermon':
             push({ kind: 'title', label: item.label, text: `${item.label}: ${item.by}`, theme: true });
             break;
@@ -208,6 +212,14 @@ export function buildBook(week, ctx) {
             out.lines = ctx.dialogs['intercession-form1']
                 ? flat(ctx.dialogs['intercession-form1'].slides)
                 : [...(item.refrain ? [{ r: 'a', text: item.refrain }, { gap: true }] : []), ...flat(need(ctx.dialogs, 'intercession-end', '응답 데이터').slides)];
+            break;
+        case 'text':
+            // 주보·예식문에 실린 글을 그대로 싣는다. 줄에 {img}가 있으면 그 자리에 악보를 보인다
+            if (item.title) out.title = item.title;
+            if (item.ref) out.ref = item.ref;
+            out.lines = (item.lines || []).map(l => (typeof l === 'string' ? { text: l } : { ...l }));
+            if (item.score) out.score = item.score;
+            if (item.scores) out.scores = item.scores;
             break;
         case 'sermon':
         case 'notice':
