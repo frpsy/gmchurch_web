@@ -22,7 +22,7 @@ description: 광명교회 순서지(모바일 주보 jubo/) 제작 요청 시 �
 4. 독서 본문은 `node scripts/extract-bible.js "<구절>" --write`로 `data/worship-texts/readings.json`에 넣는다. 쉼표로 이은 구절의 키는 짧은 책 이름(`야고 1:17-18,21-27`)으로 적는다.
 5. 성시는 비우지 않는다. `node scripts/extract-psalm.js <편> --write` 후 `lines`를 `worship-order.json`에 넣는다(교회 관례: 1~6절 + 영광송). 주보 본문이 그 주 시편과 다르면 올바른 본문으로 채우고 보고에 적는다.
 6. 성가 악보는 단성판 우선(없으면 전체판), 번호·제목·이미지를 대조하고 여러 쪽은 순서대로 모두 넣는다. `book.json` 생성 뒤 `node scripts/hymnal-web-exclude.js`를 실행한다.
-7. `data/bulletin-news.json`·`data/bulletin-verses.json`을 채우고, 교회소식은 인쇄된 글과 줄 단위로 대조한다(소그룹 명단 등 빠진 줄 없게).
+7. `data/bulletin-news.json`·`data/bulletin-verses.json`을 채우고, 교회소식은 인쇄된 글과 줄 단위로 대조한다(소그룹 명단 등 빠진 줄 없게). 교회소식 마지막 항목으로 봉사자표 「애찬」 칸의 그 주 이름을 `{ "title": "이번 주 애찬 준비", "body": "이름" }`으로 항상 넣는다(2026-11-15).
 8. 홈페이지 주보 게시판용 이미지를 `bulletins/`에 두고 `node scripts/sync-bulletins.js`를 실행한다(최근 8개만 유지).
 9. `npm test` 통과 확인 → 브랜치 → 커밋(한국어 메시지, `git add -A` 금지) → PR → squash 머지까지 묻지 않고 끝낸다.
 10. 개발 머지 뒤 같은 작업 안에서 `scripts/release-official.sh` → 공식 PR → squash 머지(주보·교회소식 포함 항상 두 곳).
