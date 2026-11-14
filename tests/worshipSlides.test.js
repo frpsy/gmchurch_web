@@ -21,7 +21,7 @@ const dialogs = json('../data/worship-texts/responses.json').dialogs;
 const readings = json('../data/worship-texts/readings.json').readings;
 const ctx = { hymns, hymnal, bcp, dialogs, defaults: order.defaults };
 
-const TYPES = ['hymn', 'bcp', 'dialog', 'reading', 'psalm', 'intercession', 'sermon', 'notice'];
+const TYPES = ['hymn', 'bcp', 'dialog', 'reading', 'psalm', 'intercession', 'sermon', 'notice', 'text'];
 
 describe('worship-order.json', () => {
     const weeks = Object.entries(order.weeks);
@@ -203,6 +203,7 @@ describe('예식문 (book.json)', () => {
                 expect(i.scores.length).toBeGreaterThan(0);
                 for (const score of i.scores) expect(existsSync(new URL(`../${score}`, import.meta.url)), score).toBe(true);
             }
+            for (const l of items.flatMap(i => i.lines).filter(l => l.img)) expect(existsSync(new URL(`../${l.img}`, import.meta.url)), l.img).toBe(true);
             const all = items.flatMap(i => i.lines.map(l => l.text || '')).join(' ').replace(/\s+/g, '');
             for (const r of Object.values(readings)) for (const v of r.verses) expect(all).not.toContain(v.text.replace(/\s+/g, '').slice(0, 12));
         });

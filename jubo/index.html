@@ -258,6 +258,7 @@ details[open] .chev{transform:rotate(180deg)}
   }
   const lineHtml = l => {
     if (l.gap) return '<div class="gap"></div>';
+    if (l.img) return scoreHtml(l.img, l.alt || '악보');
     if (l.note) return `<p class="hint">${esc(churchPrayerText(l.text))}</p>`;
     if (l.r) return `<div class="row ${l.r}"><span class="who">${WHO[l.r]}</span><span class="tx">${esc(churchPrayerText(l.text))}</span></div>`;
     return `<p class="plain">${esc(churchPrayerText(l.text))}</p>`;
@@ -299,7 +300,7 @@ details[open] .chev{transform:rotate(180deg)}
   const isHymnRef = it => /^성가 /.test(it.ref || '');
 
   function itemHtml(it, ctx) {
-    const refText = /^성가 |^기도서 /.test(it.ref || '') ? it.ref : (it.ref ? shortRef(it.ref) : (it.label === '영성체후기도' ? '기도서 271쪽' : ''));
+    const refText = /^성가 |^기도서 /.test(it.ref || '') ? it.ref : (it.ref ? shortRef(it.ref) : (it.label === '영성체후기도' && !it.lines.length ? '기도서 271쪽' : ''));
     // 순서 이름과 같은 부제(거룩하신 하느님 / 거룩하신 하느님)는 보이지 않게 한다
     const norm = s => String(s || '').replace(/\s+/g, '');
     const sub = it.title && norm(it.title) !== norm(it.label) ? it.title : '';
