@@ -128,7 +128,7 @@ details[open] .chev{transform:rotate(180deg)}
 .plain{margin:6px 0}
 .gap{height:.15em}
 .prayer{margin:12px 0;padding:12px 14px;border-radius:12px;background:var(--surface-2);line-height:1.7}
-.prayer small{display:block;color:var(--ink-3);font-size:.78rem;font-weight:700;margin-bottom:4px}
+.prayer small{display:block;color:var(--ink-2);font-size:.78rem;font-weight:700;margin-bottom:4px}
 .psalm .ln{display:grid;grid-template-columns:1.4em 1fr;gap:8px;margin:4px 0}
 .psalm .n{color:var(--ink-3);font-size:.8rem;text-align:right;font-variant-numeric:tabular-nums}
 .scap{margin:14px 0 0;font-size:.95rem;font-weight:800;color:var(--brand)}
@@ -136,9 +136,9 @@ details[open] .chev{transform:rotate(180deg)}
 .score{display:block;margin:12px 0 0;border-radius:10px;overflow:hidden;background:#fff;border:1px solid var(--line)}
 .score img{display:block;width:100%;height:auto}
 .reading{margin:10px 0 12px;padding:12px 14px;border-radius:12px;background:var(--surface-2);line-height:1.8}
-.reading .rt{margin:0 0 6px;font-size:.78rem;font-weight:700;color:var(--ink-3)}
+.reading .rt{margin:0 0 6px;font-size:.78rem;font-weight:700;color:var(--ink-2)}
 .reading p{margin:0}
-.reading sup{font-size:.62em;color:var(--ink-3);margin-right:2px;font-variant-numeric:tabular-nums}
+.reading sup{font-size:.62em;color:var(--ink-2);margin-right:2px;font-variant-numeric:tabular-nums}
 .hint{margin:6px 0 0;font-size:.84rem;color:var(--ink-3)}
 .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:12px;background:var(--surface-2);color:var(--brand);
@@ -189,7 +189,7 @@ details[open] .chev{transform:rotate(180deg)}
   <header class="appbar">
     <div class="wrap">
       <a class="brand" href="../bulletin.html"><b>광명교회 주보</b><span id="sub">대한성공회 광명교회</span></a>
-      <button class="iconbtn sizebtn" id="sizeBtn" type="button" aria-label="글자 크기 바꾸기">글자 <b id="sizeLbl">보통</b></button>
+      <button class="iconbtn sizebtn" id="sizeBtn" type="button" title="글자 크기 바꾸기">글자 <b id="sizeLbl">보통</b></button>
       <button class="iconbtn" id="shareBtn" type="button" aria-label="주보 링크 공유">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11"/><path d="m7.5 8 4.5-4.5L16.5 8"/><path d="M5 12.5v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
       </button>
@@ -221,9 +221,7 @@ details[open] .chev{transform:rotate(180deg)}
   const WHO = { p: '사제', k: '기도자', l: '독서자', a: '회중' };
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const use = (name, cls = 'ic') => `<svg class="${cls}" aria-hidden="true"><use href="${ROOT}images/icons.svg#${name}"/></svg>`;
-  const EXT = '<svg class="ext" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.5h4.5V7"/><path d="M13.5 2.5 7 9"/><path d="M11.5 9.5v3a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3"/></svg>';
   const CHEV = '<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>';
-  const extLink = (url, text, cls = 'btn') => `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener">${esc(text)} ${EXT}</a>`;
 
   // "마태오의 복음서 5:1-12" · "마태 5:1-12" · "시편 34편" · "여호 24:3상-14-18" → 공동번역 온라인 주소
   function bibleUrl(ref) {
@@ -296,8 +294,6 @@ details[open] .chev{transform:rotate(180deg)}
     if (links.length) h += `<div class="links">${links.join('')}</div>`;
     return h;
   }
-
-  const isHymnRef = it => /^성가 /.test(it.ref || '');
 
   function itemHtml(it, ctx) {
     const refText = /^성가 |^기도서 /.test(it.ref || '') ? it.ref : (it.ref ? shortRef(it.ref) : (it.label === '영성체후기도' && !it.lines.length ? '기도서 271쪽' : ''));
@@ -376,7 +372,7 @@ details[open] .chev{transform:rotate(180deg)}
 
       <section class="block" id="order" aria-labelledby="h-order">
         <h2 class="h" id="h-order">${use('book')}예배 순서</h2>
-        <div class="legend"><span><span class="stand-mark">†</span> 일어섭니다</span><span><span class="who-a">회중</span> 함께 말합니다</span><span class="sp"></span><button class="ghost" id="toggleAll" type="button" aria-pressed="true">전부 접기</button></div>
+        <div class="legend"><span><span class="stand-mark">†</span> 일어섭니다</span><span><span class="who-a">회중</span> 함께 말합니다</span><span class="sp"></span><button class="ghost" id="toggleAll" type="button">전부 접기</button></div>
         ${sections.map(s => `<p class="part">${esc(s.title)}</p><div class="items">${s.items.map(it => itemHtml(it, ctx)).join('')}</div>`).join('')}
         <p class="hint" style="margin-top:12px">성경 본문(독서·복음)만 접혀 있습니다. 항목을 누르면 펼치거나 접을 수 있습니다.</p>
       </section>
@@ -408,13 +404,17 @@ details[open] .chev{transform:rotate(180deg)}
     // 모두 펼치기/접기
     const all = () => [...app.querySelectorAll('details.item:not(.static)')];
     const tg = document.getElementById('toggleAll');
+    // 버튼 라벨이 다음 동작을 말한다(상태는 aria-pressed로 따로 두지 않는다). 접힌 뒤에는 기본 상태(성서 제외 모두 펼침)로 돌아간다
+    let nextAction = 'close';
     tg.addEventListener('click', () => {
-      const open = tg.getAttribute('aria-pressed') !== 'true';
-      // 접힌 상태에서 누르면 기본 상태(성서 제외 모두 펼침)로 돌아간다
+      const open = nextAction === 'reset';
       all().forEach(d => { d.open = open && !d.hasAttribute('data-bible'); });
-      tg.setAttribute('aria-pressed', String(open));
+      nextAction = open ? 'close' : 'reset';
       tg.textContent = open ? '전부 접기' : '기본대로 펼치기';
     });
+    // 인쇄할 때 접힌 항목(독서·복음 본문 포함)을 펼쳐 내보내고, 인쇄 뒤 원래 상태로 되돌린다
+    window.addEventListener('beforeprint', () => all().forEach(d => { if (!d.open) { d.dataset.printOpened = '1'; d.open = true; } }));
+    window.addEventListener('afterprint', () => all().forEach(d => { if (d.dataset.printOpened) { d.open = false; delete d.dataset.printOpened; } }));
     // 바로가기 탭: 지금 보는 단락 표시
     const tabs = [...document.querySelectorAll('.tab')];
     const byId = Object.fromEntries(tabs.map(t => [t.getAttribute('href').slice(1), t]));
@@ -427,8 +427,6 @@ details[open] .chev{transform:rotate(180deg)}
         const t = byId[cur];
         if (!t) return;
         t.setAttribute('aria-current', 'true');
-        const strip = t.parentElement;
-        strip.scrollLeft = t.offsetLeft - (strip.clientWidth - t.offsetWidth) / 2;
       };
       mark(); // 맨 위에서도 「예배 순서」 탭이 켜져 있게 한다
       const io = new IntersectionObserver(entries => {
