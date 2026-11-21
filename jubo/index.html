@@ -181,6 +181,8 @@ details[open] .chev{transform:rotate(180deg)}
   font-size:.88rem;font-weight:600;pointer-events:none;transition:.2s;z-index:50}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 #msg{padding:48px 8px;text-align:center;color:var(--ink-3)}
+/* 휴대폰에서는 악보를 카드 가장자리 쪽으로 조금 넓혀 더 크게 보이게 한다(2026-11-22 사용자 요청) */
+@media (max-width:599px){.score{margin-left:-18px;margin-right:-8px}}
 @media (min-width:600px){.cover h1{font-size:1.85rem}}
 @media print{.appbar,.tabs,.links,.ghost{display:none}details.item{break-inside:avoid}body{background:#fff}}
   </style>
