@@ -1,5 +1,5 @@
 <!-- 사용: python3 scripts/ai-evidence.py jubo/index.html > ev.md
-  python3 scripts/ai-call.py gemini --model gemini-3.5-flash --prompt docs/ai-prompts/a11y-review.md --out out.md --file jubo/index.html --file ev.md
+  python3 scripts/ai-call.py gemini --model gemini-3.8-flash --prompt docs/ai-prompts/a11y-review.md --out out.md --file jubo/index.html --file ev.md
   (v4, 2026-11-21 측정: 결함 4개 중 4개 탐지, 정상 파일에서 확정 의도 오탐 0) -->
 # 역할
 너는 모바일 웹 접근성 감사자다. 독단적인 의견이 아니라 코드 근거로만 판정한다.
