@@ -22,7 +22,7 @@
   --bg:#f6f5f0; --surface:#ffffff; --surface-2:#eef2ec; --ink:#161a17; --ink-2:#4a4f4b; --ink-3:#6b716c;
   --line:#e2e5df; --brand:#173a2e; --brand-2:#285a47; --brand-ink:#ffffff; --accent:#2f6b52; --resp:#173a2e;
   --chip:#e5ede6; --chip-ink:#1f4a3a; --shadow:0 1px 2px rgba(20,30,24,.06),0 4px 14px rgba(20,30,24,.05);
-  --verse-bg:var(--brand); --verse-ink:var(--brand-ink);
+  --verse-bg:var(--brand); --verse-ink:var(--brand-ink); --score-bg:#ffffff;
   --radius:16px; --gutter:16px; --bar:56px;
   --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
   --safe-l:env(safe-area-inset-left,0px); --safe-r:env(safe-area-inset-right,0px);
@@ -133,7 +133,7 @@ details[open] .chev{transform:rotate(180deg)}
 .psalm .n{color:var(--ink-3);font-size:.8rem;text-align:right;font-variant-numeric:tabular-nums}
 .scap{margin:14px 0 0;font-size:.95rem;font-weight:800;color:var(--brand)}
 .scap + .score{margin-top:6px}
-.score{display:block;margin:12px 0 0;border-radius:10px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.score{display:block;margin:12px 0 0;border-radius:10px;overflow:hidden;background:var(--score-bg);border:1px solid var(--line)}
 .score img{display:block;width:100%;height:auto}
 .reading{margin:10px 0 12px;padding:12px 14px;border-radius:12px;background:var(--surface-2);line-height:1.8}
 .reading .rt{margin:0 0 6px;font-size:.78rem;font-weight:700;color:var(--ink-2)}
@@ -184,7 +184,11 @@ details[open] .chev{transform:rotate(180deg)}
 /* 휴대폰에서는 악보를 카드 가장자리 쪽으로 조금 넓혀 더 크게 보이게 한다(2026-11-22 사용자 요청) */
 @media (max-width:599px){.score{margin-left:-18px;margin-right:-8px}}
 @media (min-width:600px){.cover h1{font-size:1.85rem}}
-@media print{.appbar,.tabs,.links,.ghost{display:none}details.item{break-inside:avoid}body{background:#fff}}
+@media print{
+  /* 인쇄는 다크모드 기기에서도 밝은 종이 색으로 나온다. :root:root로 다크 규칙보다 우선한다(2026-11-22 승인) */
+  :root:root{--bg:#ffffff;--surface:#ffffff;--surface-2:#ffffff;--ink:#000000;--ink-2:#222222;--ink-3:#444444;--line:#bbbbbb;--brand:#173a2e;--brand-2:#173a2e;--brand-ink:#ffffff;--accent:#173a2e;--resp:#173a2e;--chip:#eeeeee;--chip-ink:#173a2e;--shadow:none;--verse-bg:#173a2e;--verse-ink:#ffffff;color-scheme:light}
+  .appbar,.tabs,.links,.ghost{display:none}details.item{break-inside:avoid}body{background:#fff}
+}
   </style>
 </head>
 <body>
