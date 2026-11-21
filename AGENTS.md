@@ -38,6 +38,7 @@
 | 교회 사실·용어 | `docs/wiki/README.md`, `docs/church-glossary.md` |
 | 공식 저장소 반영 | `docs/REPO-STRUCTURE.md` |
 | ChatGPT·Gemini 검토·주보 이미지 대조(외부 AI 보조) | `docs/ai-orchestration.md` (래퍼 `scripts/ai-call.py`) |
+| Gemini 프롬프트 템플릿·화면 증거 계산 | `docs/ai-prompts/`(템플릿), `scripts/ai-evidence.py`(대비·사용처·죽은 코드 증거) |
 
 ## 주보 요점 (상세는 위 문서)
 - 주보 이미지가 오면 묻지 않고 홈페이지 게시(`bulletin.html`) + 순서지(`jubo/`) 제작 + 주보 내용 텍스트 정리를 한 세트로 하고 두 저장소에 반영한다.
