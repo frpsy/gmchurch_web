@@ -10,7 +10,10 @@
 - ChatGPT: codex exec를 읽기 전용 샌드박스(-s read-only)로 실행한다. 파일 경로를 프롬프트에 적는다.
   이미지는 codex의 -i 옵션으로 붙인다.
 """
-import argparse, base64, json, mimetypes, os, subprocess, sys, urllib.request, urllib.error
+import argparse, base64, json, mimetypes, os, subprocess, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from gemini_client import GeminiError, generate  # 재시도·모델 체인·경로 이중화
 
 IMG_EXT = {".png", ".jpg", ".jpeg", ".webp"}
 
@@ -34,17 +37,16 @@ def call_gemini(prompt, files, model, out):
             parts.append({"text": f"(위 이미지: {os.path.basename(p)})"})
         else:
             parts.append({"text": f"=== 파일: {os.path.basename(p)} ===\n" + read_text(p)})
-    body = json.dumps({"contents": [{"role": "user", "parts": parts}]}).encode()
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-    req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json", "x-goog-api-key": key})
+    # --model로 지정한 모델을 먼저 쓰고, 막히면 기본 체인으로 넘어간다.
+    from gemini_client import MODELS
+    chain = [model] + [m for m in MODELS if m != model]
     try:
-        with urllib.request.urlopen(req, timeout=600) as r:
-            data = json.load(r)
-    except urllib.error.HTTPError as e:
-        sys.exit(f"Gemini HTTP {e.code}: {e.read()[:300].decode(errors='replace')}")
-    text = "".join(p.get("text", "") for c in data.get("candidates", []) for p in c.get("content", {}).get("parts", []))
+        r = generate(parts=parts, models=chain, timeout=600, key=key)
+    except GeminiError as e:
+        sys.exit(f"Gemini 실패: {e}")
+    text, model = r.text, r.model
     if not text.strip():
-        sys.exit(f"Gemini 빈 응답: {json.dumps(data)[:300]}")
+        sys.exit("Gemini 빈 응답")
     with open(out, "w", encoding="utf-8") as f:
         f.write(text)
     print(f"gemini({model}) -> {out} ({len(text)} chars)")
@@ -70,7 +72,7 @@ def main():
     ap.add_argument("--prompt", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--file", action="append", default=[])
-    ap.add_argument("--model", default=os.environ.get("AI_GEMINI_MODEL", "gemini-3.1-pro-preview"))
+    ap.add_argument("--model", default=os.environ.get("AI_GEMINI_MODEL", "gemini-3.8-flash"))
     ap.add_argument("--cwd", default=os.getcwd())
     a = ap.parse_args()
     prompt = read_text(a.prompt)

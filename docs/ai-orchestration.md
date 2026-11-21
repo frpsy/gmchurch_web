@@ -18,6 +18,7 @@ AI는 저장소에 쓰지 않는다. 파일 수정은 Claude만 한다. 머지�
 - **ChatGPT**: `codex exec --skip-git-repo-check -s read-only -C <저장소> -o <출력> "<프롬프트>"`. 이미지는 `-i <파일>`.
 - **Gemini**: 환경 변수 `GEMINI_API_KEY`로 호출한다. Gemini CLI의 구글 로그인은 지원 종료되어 쓰지 않는다.
   - 기본 모델은 `gemini-3.5-flash`다. 2026-11-21 확인: `gemini-3.1-pro-preview`는 할당량 429, `gemini-2.5-flash`는 신규 사용자에게 404였다. 바꾸려면 `AI_GEMINI_MODEL`을 설정한다.
+  - 안정 호출(2026-11-22): `scripts/gemini_client.py`가 429·503·시간 초과·빈 404 같은 간헐 오류를 재시도하고, 지정 모델이 막히면 다음 모델(`gemini-3.5-flash`→`3.6`→`3.7`→`3-flash-preview`→`3.1-pro-preview`)과 Interactions API로 자동 전환한다. 429는 한 번만 재시도하고 바로 다음 모델로 간다. 상태 점검은 `python3 scripts/gemini_client.py --check`. 이 파일은 `ai-orchestrator/scripts/gemini_client.py`의 복사본이므로 고칠 때 세 곳(ai-orchestrator, study_hub, gmchurch_web)을 함께 맞춘다.
   - 키는 저장소·문서·채팅에 적지 않는다. 로컬 환경 변수나 개인 설정 파일에만 둔다.
 - **공통 래퍼**: `scripts/ai-call.py`
   ```bash
