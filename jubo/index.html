@@ -223,15 +223,6 @@ details[open] .chev{transform:rotate(180deg)}
   const use = (name, cls = 'ic') => `<svg class="${cls}" aria-hidden="true"><use href="${ROOT}images/icons.svg#${name}"/></svg>`;
   const CHEV = '<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>';
 
-  // "마태오의 복음서 5:1-12" · "마태 5:1-12" · "시편 34편" · "여호 24:3상-14-18" → 공동번역 온라인 주소
-  function bibleUrl(ref) {
-    const ps = /^시편\s*(\d+)편/.exec(ref);
-    if (ps) return `${BIBLE_URL}/ps/${ps[1]}`;
-    const m = /^(.+?)\s+(\d+)(?::(.+))?$/.exec(String(ref).trim());
-    if (!m || !BIBLE[m[1]]) return null;
-    const range = /^(\d+)(?:-(\d+))?$/.exec(m[3] || '');
-    return `${BIBLE_URL}/${BIBLE[m[1]]}/${m[2]}${range ? '/' + range[1] + (range[2] ? '-' + range[2] : '') : ''}`;
-  }
   const shortRef = ref => {
     const m = /^(.+?)\s+(\d+.*)$/.exec(ref || '');
     if (!m) return ref;
@@ -355,7 +346,6 @@ details[open] .chev{transform:rotate(180deg)}
     const clergy = [book.celebrant && `집전 ${book.celebrant}`, book.preacher && book.preacher !== book.celebrant && `설교 ${book.preacher}`].filter(Boolean);
     if (book.preacher && book.preacher === book.celebrant) clergy[0] = `집전·설교 ${book.celebrant}`;
 
-    const verseUrl = verse && bibleUrl(verse.ref);
     const app = document.getElementById('app');
     app.innerHTML = `
       <article class="card cover">
