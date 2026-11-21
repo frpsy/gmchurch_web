@@ -232,8 +232,6 @@ exclude:
   - data/hymnal-2015/images/page-0228.jpg
   - data/hymnal-2015/images/page-0229.jpg
   - data/hymnal-2015/images/page-0230.jpg
-  - data/hymnal-2015/images/page-0231.jpg
-  - data/hymnal-2015/images/page-0232.jpg
   - data/hymnal-2015/images/page-0233.jpg
   - data/hymnal-2015/images/page-0234.jpg
   - data/hymnal-2015/images/page-0235.jpg
@@ -327,7 +325,6 @@ exclude:
   - data/hymnal-2015/images/page-0324.jpg
   - data/hymnal-2015/images/page-0325.jpg
   - data/hymnal-2015/images/page-0326.jpg
-  - data/hymnal-2015/images/page-0327.jpg
   - data/hymnal-2015/images/page-0328.jpg
   - data/hymnal-2015/images/page-0329.jpg
   - data/hymnal-2015/images/page-0330.jpg
@@ -484,7 +481,6 @@ exclude:
   - data/hymnal-2015/images/page-0485.jpg
   - data/hymnal-2015/images/page-0486.jpg
   - data/hymnal-2015/images/page-0487.jpg
-  - data/hymnal-2015/images/page-0488.jpg
   - data/hymnal-2015/images/page-0489.jpg
   - data/hymnal-2015/images/page-0490.jpg
   - data/hymnal-2015/images/page-0491.jpg
