@@ -1,4 +1,4 @@
-<!-- 사용: python3 scripts/ai-call.py gemini --model gemini-3.5-flash --prompt docs/ai-prompts/bulletin-transcribe.md --out out.json --file bulletins/YYYYMMDD_N.jpg
+<!-- 사용: python3 scripts/ai-call.py gemini --model gemini-3.8-flash --prompt docs/ai-prompts/bulletin-transcribe.md --out out.json --file bulletins/YYYYMMDD_N.jpg
   주의(2026-11-21 실측): 예배 순서 쪽 판독에서 이름 1개(희→의)와 성서 구절 1개(4:2→4:1)를 틀렸고,
   그때도 "uncertain"은 빈 목록이었다. 모델의 불확실성 표시를 믿지 말고, 반드시 기존 데이터와 기계 대조한다. -->
 
