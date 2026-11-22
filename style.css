@@ -5479,6 +5479,8 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-notes ol { margin: 0; padding-left: 1.25rem; }
 .sermon-notes li + li { margin-top: 0.4rem; }
 .sermon-notes li a { color: var(--text-muted); text-decoration: none; }
+/* 본문으로 돌아가기: 글자 링크로 두어 이모지처럼 보이지 않게 한다 */
+.sermon-backref { margin-left: 0.25rem; font-size: 0.85em; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
 .sermon-sort { max-width: 760px; margin: 0 auto 0.75rem; display: flex; justify-content: flex-end; gap: 0.35rem; }
 /* 정렬 버튼: 작은 글씨의 알약 모양. 선택 상자와 달리 글자를 줄여도 iOS가 화면을 확대하지 않는다 */
 .sermon-sort-btn { font-family: inherit; font-size: 0.8125rem; font-weight: 500; line-height: 1.2; min-height: 36px; padding: 0.3rem 0.85rem; color: var(--text-muted); background: transparent; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast); }
