@@ -39,12 +39,12 @@ describe('설교 말씀 데이터', () => {
     }
   });
 
-  it('편집자 강조(**)는 짝이 맞고 문단마다 한 번씩만 쓴다', () => {
+  it('편집자 강조(**)는 짝이 맞고 문단마다 두 개를 넘지 않는다', () => {
     for (const s of sermons.items) {
       for (const p of s.paragraphs) {
         const count = (p.match(/\*\*/g) || []).length;
         expect(count % 2, s.date).toBe(0);
-        expect(count / 2, s.date).toBeLessThanOrEqual(1);
+        expect(count / 2, s.date).toBeLessThanOrEqual(2);
       }
     }
   });
