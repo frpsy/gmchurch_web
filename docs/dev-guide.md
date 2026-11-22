@@ -24,6 +24,7 @@
 | `worship.html` | 예배 | WorshipRenderer |
 | `bulletin.html` | 주일 주보 (noindex, 주보·소식 메뉴) | BulletinRenderer |
 | `news.html` | 교회 소식 — 주보 교회소식 날짜별 목록 (noindex, 주보·소식 메뉴) | NewsRenderer |
+| `sermons.html` | 설교 말씀 — `CHURCH_DATA.sermons` 원문 목록, 날짜 내림차순 (noindex, 주보·소식 메뉴) | SermonsRenderer |
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
 | `giving.html` | 헌금 | GivingRenderer |

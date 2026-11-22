@@ -2355,6 +2355,45 @@ const BulletinRenderer = {
     }
 };
 
+/* ── SermonsRenderer ─────────────────────────────────────── */
+// 설교 원문 목록(sermons.html). 글 모양은 교회소식(news-post)과 같은 클래스를 쓴다.
+const SermonsRenderer = {
+    _itemHtml(item) {
+        const weekday = NewsRenderer._weekdayOf(item.date);
+        const [y, m, d] = item.date.split('-').map(Number);
+        const meta = [
+            ['날짜', `${y}년 ${m}월 ${d}일${weekday ? `(${weekday})` : ''}`],
+            ['본문', item.scripture],
+            ['설교', item.preacher]
+        ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+        const source = item.source
+            ? `<p class="news-intro"><a href="${item.source.url}" target="_blank" rel="noopener">${item.source.label}</a></p>`
+            : '';
+        const note = item.note ? `<p class="news-intro">※ ${item.note}</p>` : '';
+        return `
+            <article class="news-post" id="sermon-${item.date}">
+                <h2 class="news-post-title">${item.title}</h2>
+                <dl class="news-post-meta">${meta}</dl>
+                <div class="sermon-body">${item.paragraphs.map(p => `<p>${p}</p>`).join('')}</div>
+                ${note}${source}
+            </article>`;
+    },
+
+    render() {
+        const el = document.getElementById('sermons-full');
+        if (!el) return;
+        const data = CHURCH_DATA.sermons;
+        const items = (data.items || []).slice().sort((a, b) => b.date.localeCompare(a.date));
+        if (!items.length) {
+            el.innerHTML = `<p class="news-empty">${data.empty}</p>`;
+            return;
+        }
+        el.innerHTML = `
+            <p class="news-intro">${data.intro}</p>
+            ${items.map(item => this._itemHtml(item)).join('')}`;
+    }
+};
+
 /* ── NewsRenderer ────────────────────────────────────────── */
 const NewsRenderer = {
     // "일시 : …"처럼 라벨이 짧은 줄은 항목표로 보여 일정·장소를 한눈에 찾게 한다
@@ -3186,6 +3225,7 @@ const App = {
         LinksRenderer.render();
         BulletinRenderer.render();
         NewsRenderer.render();
+        SermonsRenderer.render();
         SundaysRenderer.render();
         MoreToggle.init();
         this._handleHashScroll();
