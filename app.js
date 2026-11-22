@@ -2509,7 +2509,6 @@ const SermonsRenderer = {
         return `
             <section class="sermon-notes" aria-label="편집자 주석">
                 <p class="sermon-notes-head">편집자 주석</p>
-                <p class="sermon-notes-intro">강조와 각주는 편집자가 붙였습니다. 본문 문장은 바꾸지 않았습니다.</p>
                 <ol>${items}</ol>
             </section>`;
     },
@@ -2546,6 +2545,7 @@ const SermonsRenderer = {
         }
         // 소개 문장은 페이지 머리말(sermons.html)에 이미 있으므로 목록에서는 다시 쓰지 않는다
         el.innerHTML = `
+            <p class="news-intro">강조와 각주는 편집자가 붙였습니다. 본문 문장은 바꾸지 않았습니다.</p>
             <div class="sermon-sort">
                 <label for="sermon-sort-select">정렬</label>
                 <select id="sermon-sort-select">
