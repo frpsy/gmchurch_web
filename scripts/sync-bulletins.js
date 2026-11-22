@@ -412,12 +412,6 @@ function readingsBlock(key, resolved, standardYear, withNote) {
         newsGaps.forEach(it => console.log(
             `   - ${it.date}  → 주보 '교회소식' 란을 data/bulletin-news.json에 추가`));
     }
-    const verseGaps = newItems.filter(it => !it.verse);
-    if (verseGaps.length) {
-        console.log('\nℹ️  핵심구절 미기록 (주보 페이지의 \'이번 주 말씀\'에 표시되지 않음):');
-        verseGaps.forEach(it => console.log(
-            `   - ${it.date}  → 본문 말씀의 핵심구절을 data/bulletin-verses.json에 추가`));
-    }
     if (psalmGaps.length) {
         console.log('\nℹ️  트랙 A 주간 시편 미기록 (표준 트랙 B 시편으로 표시됨):');
         psalmGaps.forEach(it => console.log(
