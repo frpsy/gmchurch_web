@@ -281,7 +281,6 @@ details[open] .chev{transform:rotate(180deg)}
     if (it.label === '본기도' && ctx.jubo.collect) h += `<div class="prayer"><small>오늘의 본기도</small>${esc(ctx.jubo.collect)}</div>`;
     // 모바일 주보는 홈페이지에서 연결하지 않고 교우에게만 주소를 알린다(2026-11-01 사용자 결정) — 성가 악보도 화면 안에서 본다
     const scores = it.score ? [it.score] : (it.scores || []);
-    if (scores.length && isHymn) h += `<p class="scap">${esc(it.ref)}${it.title ? ` · ${esc(it.title)}` : ''} 악보</p>`;
     scores.forEach((s, i) => { h += scoreHtml(s, `${it.ref || it.label} 악보${scores.length > 1 ? ` ${i + 1}/${scores.length}` : ''}`); });
     const links = [];
     // 예배 자료 누락을 외부 화면 이동으로 대체하지 않는다.
