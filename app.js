@@ -2366,7 +2366,8 @@ const BulletinRenderer = {
         const pageItems  = items.slice(start, start + perPage);
 
         // 첫 쪽에서는 최신 주보의 핵심구절을 목록 위에 따로 보여 주고, 그 주보의 펼침 영역에서는 뺀다
-        const featured = page === 0 && items[0].verse ? items[0] : null;
+        // 주일 주보 화면에는 '이번 주 말씀' 카드를 두지 않는다(2026-11-22 사용자 지시)
+        const featured = null;
         const featuredHtml = featured
             ? this._verseHtml(featured, this._isThisWeek(featured.date) ? '이번 주 말씀' : '최근 주보 말씀')
             : '';
@@ -2375,7 +2376,7 @@ const BulletinRenderer = {
             <div class="bulletin-item">
                 ${this._rowHtml(item, start + relIdx === 0)}
                 <div class="bulletin-drawer" hidden>
-                    ${this._drawerHtml(item, item !== featured)}
+                    ${this._drawerHtml(item, false)}
                 </div>
             </div>
         `).join('');
