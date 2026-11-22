@@ -278,7 +278,7 @@ const CHURCH_DATA = {
         visit: {
             eyebrow: "Welcome & Visit",
             title: "처음 오셨나요?",
-            sub: "예배 시간, 오시는 길, 방문 안내를 한곳에 모았습니다. 예배는 약 1시간 걸립니다.",
+            sub: "예배 시간과 오시는 길을 한곳에 모았습니다. 주일 예배는 약 1시간 소요됩니다.",
             worshipLabel: "예배",
             phoneLabel: "전화",
             more: "자세히 보기"
