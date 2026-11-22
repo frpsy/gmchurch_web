@@ -2116,18 +2116,30 @@ const ScrollProgress = {
         bar.setAttribute('aria-hidden', 'true');
         document.body.prepend(bar);
 
+        // 전체 높이는 레이아웃이 바뀔 때만 다시 잰다. 스크롤마다 scrollHeight를 읽으면
+        // 브라우저가 레이아웃을 강제로 다시 계산해 막대가 끊긴다.
+        let docHeight = 0;
+        const measure = () => {
+            docHeight = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        };
+
         let rafId = null;
         const update = () => {
             rafId = null;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const pct = docHeight > 0 ? window.scrollY / docHeight : 0;
+            const pct = docHeight > 0 ? Math.min(1, window.scrollY / docHeight) : 0;
             bar.style.transform = `scaleX(${pct})`;
         };
         const onScroll = () => {
             if (!rafId) rafId = requestAnimationFrame(update);
         };
 
+        measure();
         window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', () => { measure(); onScroll(); }, { passive: true });
+        // 등장 애니메이션·이미지 로딩으로 페이지 높이가 바뀌면 다시 잰다
+        if (window.ResizeObserver) {
+            new ResizeObserver(() => { measure(); onScroll(); }).observe(document.body);
+        }
         update();
     }
 };

@@ -221,9 +221,9 @@ button:focus:not(:focus-visible) { outline: none; }
     position: fixed;
     top: 0; left: 0; right: 0;
     height: var(--nav-h);
+    /* backdrop-filter는 스크롤 중 매 프레임 다시 흐리게 그려 진행 막대와 함께 버벅인다(PR #614·#615).
+       배경은 이미 94% 불투명이라 흐림 효과 없이도 같은 모습이다. */
     background: var(--nav-glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.08);
     z-index: 1000;
     transition: box-shadow var(--dur-slow), background var(--dur-slow);
