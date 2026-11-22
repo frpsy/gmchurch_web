@@ -5,7 +5,7 @@
 ## 프로젝트
 - 대한성공회 광명교회 홈페이지. 바닐라 HTML·CSS·JS, 빌드 없음. 콘텐츠는 `data.js`의 `CHURCH_DATA` → `app.js` 렌더러가 채운다.
 - 개발: `frpsy/gmchurch_web` → https://frpsy.github.io/gmchurch_web/ (머지 후 1~2분)
-- 공식: `lmkhkm/GMSKH_Homepage` → https://gmskh.or.kr/ (공식 `main` 머지 후 최대 2시간)
+- 공식: `lmkhkm/GMSKH_Homepage` → https://gmskh.or.kr/ (공식 `main` 머지 후 평소 최대 2시간. 주일 오전 10시부터는 10분 간격으로 반영되고, 그 뒤 평소 주기로 돌아간다. 2026-11-22 공식 담당자 안내)
 - 테스트 `npm test`(Vitest), 미리보기 `python3 -m http.server 8000`. Netlify는 종료됨 — `netlify[bot]` 코멘트는 무시한다.
 
 ## 저장소 2개 운영
