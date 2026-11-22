@@ -5447,9 +5447,11 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-post p + p { margin-top: 0.3rem; }
 .sermon-body p + p { margin-top: 1rem; }
 /* 제목이 한 줄을 차지하고, 설교자 태그는 그 아래 줄에 온다 */
-.sermon-row-title { color: var(--heading); font-weight: 600; flex-basis: 100%; }
+.sermon-row-title { color: var(--heading); font-weight: 600; font-size: var(--fs-body); line-height: 1.45; flex-basis: 100%; }
+/* 날짜는 보조 정보로 낮추고, 제목을 목록의 기준으로 세운다 */
+.sermon-item .bulletin-row-date { font-size: var(--fs-label); font-weight: 500; color: var(--text-muted); }
 /* 편집자 강조: 글자색은 제목 색 그대로, 아래쪽에 옅은 색 띠를 깐다(글자 대비 유지) */
-.sermon-em { font-weight: 600; color: var(--heading); background: linear-gradient(transparent 58%, color-mix(in srgb, var(--gold) 40%, transparent) 58%); padding: 0 0.1em; }
+.sermon-em { font-weight: 600; color: var(--heading); background: linear-gradient(transparent 58%, color-mix(in srgb, var(--gold) 55%, transparent) 58%); padding: 0 0.1em; }
 /* 절 번호 제목(1. 2. …) */
 .sermon-section { margin: 1.75rem 0 0.5rem; font-size: var(--fs-body); font-weight: 600; color: var(--heading); }
 /* 각주 번호 위치 */
