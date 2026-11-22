@@ -5479,9 +5479,16 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-notes ol { margin: 0; padding-left: 1.25rem; }
 .sermon-notes li + li { margin-top: 0.4rem; }
 .sermon-notes li a { color: var(--text-muted); text-decoration: none; }
-.sermon-sort { max-width: 760px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; font-size: var(--fs-label); color: var(--text-muted); }
+.sermon-sort { max-width: 760px; margin: 0 auto 0.75rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.4rem; font-size: var(--fs-label); color: var(--text-muted); }
 /* 16px 미만 글자는 iOS가 입력 칸을 확대하므로 16px, 터치 높이는 44px을 지킨다 */
-.sermon-sort select { font-family: inherit; font-weight: 400; font-size: 16px; line-height: 1.4; min-height: 44px; color-scheme: light dark; color: var(--text); background-color: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.6rem; }
+/* 정렬 선택: 기본 상자 대신 작은 알약 모양. 16px 미만 글자는 iOS가 입력 칸을 확대하므로 글자는 16px을 지킨다(상자 자체를 줄인다) */
+.sermon-sort select { appearance: none; -webkit-appearance: none; font-family: inherit; font-weight: 500; font-size: 16px; line-height: 1.2; min-height: 40px; color-scheme: light dark; color: var(--heading); background-color: var(--white);
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+    background-position: calc(100% - 17px) 50%, calc(100% - 12px) 50%; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+    border: 1px solid var(--border); border-radius: 999px; padding: 0.3rem 2rem 0.3rem 0.95rem; cursor: pointer; transition: border-color var(--dur-fast); }
+.sermon-sort select:hover { border-color: var(--text-muted); }
+.sermon-sort select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.sermon-sort label { font-size: var(--fs-label); }
 /* 제목 줄 헤딩은 목록 버튼의 모양을 그대로 쓰고, 스크롤 시 고정 머리글에 가리지 않게 여백을 준다 */
 .sermon-heading { margin: 0; font: inherit; font-size: inherit; font-weight: inherit; scroll-margin-top: 5rem; }
 
