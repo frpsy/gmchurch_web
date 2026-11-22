@@ -2422,10 +2422,34 @@ const SermonsRenderer = {
                  aria-labelledby="sermon-btn-${item.date}" hidden>
                 <article class="news-post">
                     <dl class="news-post-meta">${meta}</dl>
-                    <div class="sermon-body">${item.paragraphs.map(p => `<p>${p}</p>`).join('')}</div>
+                    <div class="sermon-body">${item.paragraphs.map(p => this._paraHtml(p, item.date)).join('')}</div>
                     ${note}${source}
+                    ${this._notesHtml(item)}
                 </article>
             </div>`;
+    },
+
+    // 문단 한 줄. 편집 표시: **강조** → 강조 글씨, [^n] → 각주 위치, "1." 같은 줄 → 절 제목
+    _paraHtml(p, date) {
+        if (/^\d+\.$/.test(p.trim())) return `<h4 class="sermon-section">${p.trim().slice(0, -1)}</h4>`;
+        const html = p
+            .replace(/\*\*(.+?)\*\*/g, '<strong class="sermon-em">$1</strong>')
+            .replace(/\[\^(\d+)\]/g, (all, n) =>
+                `<sup class="sermon-fn-ref"><a href="#fn-${date}-${n}" id="fnref-${date}-${n}" aria-label="주석 ${n}">${n}</a></sup>`);
+        return `<p>${html}</p>`;
+    },
+
+    // 편집자 주석(각주) 목록. 각 주석에서 본문으로 돌아가는 링크를 단다
+    _notesHtml(item) {
+        if (!item.footnotes || !item.footnotes.length) return '';
+        const items = item.footnotes.map((text, i) =>
+            `<li id="fn-${item.date}-${i + 1}">${text} <a href="#fnref-${item.date}-${i + 1}" aria-label="본문으로 돌아가기">↩</a></li>`).join('');
+        return `
+            <section class="sermon-notes" aria-label="편집자 주석">
+                <p class="sermon-notes-head">편집자 주석</p>
+                <p class="sermon-notes-intro">강조와 각주는 편집자가 붙였습니다. 본문 문장은 바꾸지 않았습니다.</p>
+                <ol>${items}</ol>
+            </section>`;
     },
 
     // 펼치기·접기. 드로어는 같은 항목(.sermon-item) 안에 있다(제목이 헤딩으로 감싸져 있어 형제가 아니다)
