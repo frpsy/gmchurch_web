@@ -24,6 +24,11 @@ describe('설교 말씀 데이터', () => {
     }
   });
 
+  it('설교 날짜는 겹치지 않는다 (펼치기 주소·정렬 키가 날짜로 정해진다)', () => {
+    const dates = sermons.items.map(s => s.date);
+    expect(new Set(dates).size).toBe(dates.length);
+  });
+
   it('원문 출처 링크가 있으면 https 주소다', () => {
     for (const s of sermons.items) {
       if (s.source) expect(s.source.url).toMatch(/^https:\/\//);
