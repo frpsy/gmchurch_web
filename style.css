@@ -757,7 +757,7 @@ button:focus:not(:focus-visible) { outline: none; }
     .page-hero--sundays  { background-image: url('images/hero/sundays-m.webp'); }
     .page-hero--newcomer { background-image: url('images/hero/newcomer-m.webp'); }
     .page-hero--media    { background-image: url('images/hero/media-m.webp'); }
-    .page-hero--visit    { background-image: url('images/hero/visit-m.webp'); }
+    .page-hero--visit    { background-image: url('images/hero/visit-m.webp'); background-position: right center; }
 }
 /* 상패·촛불·인형이 모바일에서도 함께 보이도록 가로 구도의 보정본을 사용한다. */
 .page-hero--greenchurch { background-image: url('images/hero/greenchurch-award.webp'); background-position: center 65%; }
