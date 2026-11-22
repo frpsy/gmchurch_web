@@ -1599,7 +1599,13 @@ const AboutNavRenderer = {
             });
             links.forEach(l => l.classList.toggle('is-active', l.dataset.aboutSection === activeId));
         };
-        window.addEventListener('scroll', update, { passive: true });
+        // 스크롤 이벤트마다 바로 레이아웃을 읽으면 빠른 스크롤에서 진행 막대가 끊긴다.
+        // 한 프레임에 한 번만 계산하도록 묶는다.
+        let spyRaf = null;
+        const onScroll = () => {
+            if (!spyRaf) spyRaf = requestAnimationFrame(() => { spyRaf = null; update(); });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
         update();
     }
 };
