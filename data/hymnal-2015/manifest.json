@@ -18,7 +18,7 @@
     99,
     100
   ],
-  "imageBytes": 30346162,
+  "imageBytes": 30363748,
   "extraction": "embedded-original-image-without-recompression",
   "pages": [
     {
@@ -601,17 +601,17 @@
       "page": 73,
       "file": "images/page-0073.jpg",
       "width": 610,
-      "height": 940,
-      "bytes": 63284,
-      "sha256": "5135710bb9a5f8e31d9827d890d435947f4c724bf7d366c266f9cae3869cf663"
+      "height": 510,
+      "bytes": 95651,
+      "sha256": "d5cb5e9ca9b9c3d82f64dc4bfbaece94c1a9dc510f74d35ccb1c06cf75f85fc3"
     },
     {
       "page": 74,
       "file": "images/page-0074.jpg",
       "width": 610,
-      "height": 940,
-      "bytes": 56254,
-      "sha256": "61bdd7d956e2c9179aae2cf2c1d935c4ae912337822167a5ef002eef18472e11"
+      "height": 340,
+      "bytes": 41473,
+      "sha256": "1c777504a8a73c052c9ec245cc475b395586629727a1b699240cdee65a57b0d1"
     },
     {
       "page": 75,
@@ -5095,6 +5095,7 @@
     }
   ],
   "notes": [
-    "2026-11-22: 순서지 악보 검은 스캔 테두리 제거로 232, 332, 346, 372, 488쪽 JPG를 잘랐다. 원본은 git 이력(이전 커밋)에 있다."
+    "2026-11-22: 순서지 악보 검은 스캔 테두리 제거로 232, 332, 346, 372, 488쪽 JPG를 잘랐다. 원본은 git 이력(이전 커밋)에 있다.",
+    "2026-11-22: 주의기도(65장) 쪽에 섞인 64장·66장 부분을 잘라 73, 74쪽 JPG를 갱신했다. 원본은 git 이력에 있다."
   ]
 }
