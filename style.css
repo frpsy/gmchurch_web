@@ -5447,6 +5447,21 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-post p + p { margin-top: 0.3rem; }
 .sermon-body p + p { margin-top: 1rem; }
 .sermon-row-title { color: var(--heading); font-weight: 600; }
+/* 편집자 강조: 글자색은 제목 색 그대로, 아래쪽에 옅은 색 띠를 깐다(글자 대비 유지) */
+.sermon-em { font-weight: 600; color: var(--heading); background: linear-gradient(transparent 58%, color-mix(in srgb, var(--gold) 40%, transparent) 58%); padding: 0 0.1em; }
+/* 절 번호 제목(1. 2. …) */
+.sermon-section { margin: 1.75rem 0 0.5rem; font-size: var(--fs-body); font-weight: 600; color: var(--heading); }
+/* 각주 번호 위치 */
+.sermon-fn-ref { font-size: 0.7em; line-height: 0; vertical-align: super; }
+.sermon-fn-ref a { color: var(--text-muted); text-decoration: none; padding: 0 0.1em; }
+.sermon-fn-ref a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+/* 편집자 주석 목록 */
+.sermon-notes { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: var(--fs-label); color: var(--text-muted); line-height: 1.7; }
+.sermon-notes-head { margin: 0; font-weight: 600; color: var(--text); }
+.sermon-notes-intro { margin: 0.2rem 0 0.4rem; }
+.sermon-notes ol { margin: 0; padding-left: 1.25rem; }
+.sermon-notes li + li { margin-top: 0.4rem; }
+.sermon-notes li a { color: var(--text-muted); text-decoration: none; }
 .sermon-sort { max-width: 760px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; font-size: var(--fs-label); color: var(--text-muted); }
 /* 16px 미만 글자는 iOS가 입력 칸을 확대하므로 16px, 터치 높이는 44px을 지킨다 */
 .sermon-sort select { font: inherit; font-size: 16px; min-height: 44px; color-scheme: light dark; color: var(--text); background: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.6rem; }

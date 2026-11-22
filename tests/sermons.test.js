@@ -29,6 +29,26 @@ describe('설교 말씀 데이터', () => {
     expect(new Set(dates).size).toBe(dates.length);
   });
 
+  it('편집자 각주 표시 [^n]와 주석 목록이 1번부터 순서대로 짝이 맞는다', () => {
+    for (const s of sermons.items) {
+      const text = s.paragraphs.join('\n');
+      const marks = [...text.matchAll(/\[\^(\d+)\]/g)].map(m => Number(m[1]));
+      const notes = s.footnotes || [];
+      expect(marks, s.date).toEqual(notes.map((_, i) => i + 1));
+      for (const n of notes) expect(n.trim(), s.date).not.toBe('');
+    }
+  });
+
+  it('편집자 강조(**)는 짝이 맞고 문단마다 한 번씩만 쓴다', () => {
+    for (const s of sermons.items) {
+      for (const p of s.paragraphs) {
+        const count = (p.match(/\*\*/g) || []).length;
+        expect(count % 2, s.date).toBe(0);
+        expect(count / 2, s.date).toBeLessThanOrEqual(1);
+      }
+    }
+  });
+
   it('원문 출처 링크가 있으면 https 주소다', () => {
     for (const s of sermons.items) {
       if (s.source) expect(s.source.url).toMatch(/^https:\/\//);
