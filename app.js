@@ -2471,9 +2471,9 @@ const SermonsRenderer = {
 
     // 펼쳐지는 본문: 본문 절·설교자, 문단, 저작 표기, 원문 링크
     _bodyHtml(item) {
+        // 설교자는 목록 줄에 이미 있으므로 펼친 본문에서는 본문 절만 보인다(중복 방지)
         const meta = [
-            ['본문', item.scripture],
-            ['설교', item.preacher]
+            ['본문', item.scripture]
         ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
         const source = item.source
             ? `<p class="news-intro"><a href="${item.source.url}" target="_blank" rel="noopener" aria-label="${item.source.label} (새 창으로 열림)">${item.source.label}</a></p>`
