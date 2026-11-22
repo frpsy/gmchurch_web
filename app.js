@@ -2308,12 +2308,12 @@ const BulletinRenderer = {
         return bulletinDate >= sunday.getTime() && bulletinDate < sunday.getTime() + 7 * 86400000;
     },
 
-    _rowHtml(item, isLatest) {
+    _rowHtml(item, isLatest, open = false) {
         const count = item.images ? item.images.length : 0;
         const labels = CHURCH_DATA.bulletins.labels;
         const badge = this._isThisWeek(item.date) ? labels.thisWeek : (isLatest ? labels.latest : '');
         return `
-            <button class="bulletin-row" aria-expanded="false" type="button">
+            <button class="bulletin-row" aria-expanded="${open ? 'true' : 'false'}" type="button">
                 <div class="bulletin-row-info">
                     <div class="bulletin-row-top">
                         <span class="bulletin-row-date">${item.label}</span>
@@ -2372,14 +2372,18 @@ const BulletinRenderer = {
             ? this._verseHtml(featured, this._isThisWeek(featured.date) ? '이번 주 말씀' : '최근 주보 말씀')
             : '';
 
-        const listHtml = pageItems.map((item, relIdx) => `
+        // 첫 쪽의 최신 주보는 열 때 펼쳐 둔다(사용자 요청 2026-11-22)
+        const listHtml = pageItems.map((item, relIdx) => {
+            const open = page === 0 && relIdx === 0;
+            return `
             <div class="bulletin-item">
-                ${this._rowHtml(item, start + relIdx === 0)}
-                <div class="bulletin-drawer" hidden>
+                ${this._rowHtml(item, start + relIdx === 0, open)}
+                <div class="bulletin-drawer"${open ? '' : ' hidden'}>
                     ${this._drawerHtml(item, false)}
                 </div>
             </div>
-        `).join('');
+        `;
+        }).join('');
 
         const pagHtml = totalPages > 1 ? `
             <nav class="bulletin-pagination" aria-label="주보 목록 페이지">
