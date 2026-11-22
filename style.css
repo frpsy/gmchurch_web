@@ -5446,6 +5446,9 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-post p { margin: 0; line-height: 1.8; color: var(--text); }
 .news-post p + p { margin-top: 0.3rem; }
 .sermon-body p + p { margin-top: 1rem; }
+.sermon-row-title { color: var(--heading); font-weight: 600; }
+.sermon-sort { max-width: 760px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; font-size: var(--fs-label); color: var(--text-muted); }
+.sermon-sort select { font: inherit; color: var(--text); background: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.6rem; }
 .news-post-meta { margin: 0.5rem 0 0; display: grid; gap: 0.3rem; }
 .news-post-meta div { display: grid; grid-template-columns: 3rem 1fr; gap: 0.5rem; line-height: 1.7; }
 .news-post-meta dt { font-weight: 600; color: var(--text-muted); }
