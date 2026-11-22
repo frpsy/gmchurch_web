@@ -5465,7 +5465,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-notes li a { color: var(--text-muted); text-decoration: none; }
 .sermon-sort { max-width: 760px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; font-size: var(--fs-label); color: var(--text-muted); }
 /* 16px 미만 글자는 iOS가 입력 칸을 확대하므로 16px, 터치 높이는 44px을 지킨다 */
-.sermon-sort select { font: inherit; font-size: 16px; min-height: 44px; color-scheme: light dark; color: var(--text); background: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.6rem; }
+.sermon-sort select { font-family: inherit; font-weight: 400; font-size: 16px; line-height: 1.4; min-height: 44px; color-scheme: light dark; color: var(--text); background-color: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.6rem; }
 /* 제목 줄 헤딩은 목록 버튼의 모양을 그대로 쓰고, 스크롤 시 고정 머리글에 가리지 않게 여백을 준다 */
 .sermon-heading { margin: 0; font: inherit; font-size: inherit; font-weight: inherit; scroll-margin-top: 5rem; }
 .news-post-meta { margin: 0.5rem 0 0; display: grid; gap: 0.3rem; }

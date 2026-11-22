@@ -2231,6 +2231,7 @@ const CHURCH_DATA = {
             href: "worship.html",
             items: [
                 { label: "주일 감사성찬례",  href: "worship.html#main" },
+                { label: "설교 말씀",      href: "sermons.html" },
                 { label: "어린이 예배",     href: "children.html" },
                 { label: "감사성찬례 순서",  href: "worship.html#eucharist-order" },
                 { label: "성무일과(매일기도)", href: "worship.html#daily-office" },
@@ -2243,8 +2244,7 @@ const CHURCH_DATA = {
             href: "bulletin.html",
             items: [
                 { label: "주일 주보", href: "bulletin.html" },
-                { label: "교회 소식", href: "news.html" },
-                { label: "설교 말씀", href: "sermons.html" }
+                { label: "교회 소식", href: "news.html" }
             ]
         },
         {
