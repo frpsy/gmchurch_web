@@ -127,9 +127,9 @@ const DATA_JS   = path.join(ROOT, 'data.js');
 const OVERRIDES = path.join(ROOT, 'data', 'lectionary-overrides.json');
 const NEWS      = path.join(ROOT, 'data', 'bulletin-news.json');
 const VERSES    = path.join(ROOT, 'data', 'bulletin-verses.json');
-// 보관 규칙: 최근 8개 주보만 남긴다(2026-11-05 사용자 확정, 기간 제한 없음).
+// 보관 규칙: 최근 5개 주보만 남긴다(2026-11-22 사용자 지시, 기간 제한 없음).
 // 새 주보가 올라오면 가장 오래된 것부터 밀려나 삭제된다.
-const MAX_BULLETINS = 8;
+const MAX_BULLETINS = 5;
 
 // 지정한 마커 사이 구간을 통째로 교체 (data.js 손질용)
 function replaceRegion(text, startMarker, endMarker, replacement) {
