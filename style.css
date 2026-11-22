@@ -5446,7 +5446,8 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-post p { margin: 0; line-height: 1.8; color: var(--text); }
 .news-post p + p { margin-top: 0.3rem; }
 .sermon-body p + p { margin-top: 1rem; }
-.sermon-row-title { color: var(--heading); font-weight: 600; }
+/* 제목이 한 줄을 차지하고, 설교자 태그는 그 아래 줄에 온다 */
+.sermon-row-title { color: var(--heading); font-weight: 600; flex-basis: 100%; }
 /* 편집자 강조: 글자색은 제목 색 그대로, 아래쪽에 옅은 색 띠를 깐다(글자 대비 유지) */
 .sermon-em { font-weight: 600; color: var(--heading); background: linear-gradient(transparent 58%, color-mix(in srgb, var(--gold) 40%, transparent) 58%); padding: 0 0.1em; }
 /* 절 번호 제목(1. 2. …) */
