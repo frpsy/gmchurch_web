@@ -18,7 +18,7 @@
     99,
     100
   ],
-  "imageBytes": 30149302,
+  "imageBytes": 30346162,
   "extraction": "embedded-original-image-without-recompression",
   "pages": [
     {
@@ -1872,10 +1872,10 @@
     {
       "page": 232,
       "file": "images/page-0232.jpg",
-      "width": 608,
-      "height": 951,
-      "bytes": 43844,
-      "sha256": "af7ea7f9f621a6021f5db9e5e414912c74c2051d23e4e89a3f45953ee4259a36"
+      "width": 607,
+      "height": 941,
+      "bytes": 81334,
+      "sha256": "8b34d263562f9ac70c84aecba6aa528c6b29c5c22546aef378266e1a4ac7de5b"
     },
     {
       "page": 233,
@@ -2672,10 +2672,10 @@
     {
       "page": 332,
       "file": "images/page-0332.jpg",
-      "width": 609,
-      "height": 939,
-      "bytes": 59185,
-      "sha256": "16e4eee919633bebb195f121d559acf9c03c427ee6735fa93c1185d190fb5242"
+      "width": 607,
+      "height": 929,
+      "bytes": 112583,
+      "sha256": "c009d3ae2402d517afb97acb13fe62b46634135ea143f28433664a7d65d1c77c"
     },
     {
       "page": 333,
@@ -2784,10 +2784,10 @@
     {
       "page": 346,
       "file": "images/page-0346.jpg",
-      "width": 610,
-      "height": 938,
-      "bytes": 44709,
-      "sha256": "f2f8720f58a8518ad2f17667777285ca426b0c9f44e247c5b211310f674c0fb6"
+      "width": 608,
+      "height": 929,
+      "bytes": 80881,
+      "sha256": "e9bba25173a1a12d26418485c20bd40d3133e010e0a8413f761290c67aa8d29f"
     },
     {
       "page": 347,
@@ -2992,10 +2992,10 @@
     {
       "page": 372,
       "file": "images/page-0372.jpg",
-      "width": 610,
-      "height": 938,
-      "bytes": 37757,
-      "sha256": "a09f61569ea01df488285dacc47066fe3b0c73f790cf48d1534008df51781d36"
+      "width": 608,
+      "height": 928,
+      "bytes": 66579,
+      "sha256": "85e32ce9f39b8c6732779fa29ba7c63aefbd417729550fdf1c460c35d103be1c"
     },
     {
       "page": 373,
@@ -3920,10 +3920,10 @@
     {
       "page": 488,
       "file": "images/page-0488.jpg",
-      "width": 609,
-      "height": 938,
-      "bytes": 47684,
-      "sha256": "d5a5b40dc524c3cd2b77a0ccf68f5d0e5f89998ba9831840f11114988ada6122"
+      "width": 608,
+      "height": 929,
+      "bytes": 88662,
+      "sha256": "f237df1472554978aa81a27c070c1130c996d25048bc522d5b2f551b9ae3aced"
     },
     {
       "page": 489,
@@ -5093,5 +5093,8 @@
       "bytes": 45091,
       "sha256": "0a37d8eb5abcbfcfb5066a52d1248ec307d9087efb7bcf845c8f865dee896679"
     }
+  ],
+  "notes": [
+    "2026-11-22: 순서지 악보 검은 스캔 테두리 제거로 232, 332, 346, 372, 488쪽 JPG를 잘랐다. 원본은 git 이력(이전 커밋)에 있다."
   ]
 }
