@@ -718,7 +718,7 @@ window DOMContentLoaded
 | `.ico` | 아이콘 팩 SVG (`images/icons.svg` 심볼, 1em 크기·가는 단색 선) |
 | `.reveal` | ScrollReveal 애니메이션 대상 (fade-in on scroll) |
 | `.hero-nav` / `.hero-nav--prev` / `--next` | 메뉴 히어로 좌·우 17% 이전/다음 메뉴 터치 영역 (HeroNav가 생성) |
-| `.page-hero--{clergy,worship,sundays,newcomer,community,media,visit}` | 메뉴별 상징 이미지 히어로 (`images/hero/*.webp`, 모바일은 `-m` 경량본). 글자 배치는 전부 `.page-hero--photo` 공통 규칙 |
+| `.page-hero--{clergy,worship,bulletin,altar,sundays,newcomer,community,media,visit}` | 메뉴별 상징 이미지 히어로 (`images/hero/*.webp`, 모바일은 `-m` 경량본. `bulletin`=주보 페이지, `altar`=예배와 기도 페이지). 글자 배치는 전부 `.page-hero--photo` 공통 규칙 |
 
 ### 반응형 브레이크포인트
 
