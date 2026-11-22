@@ -41,6 +41,13 @@ description: 광명교회 순서지(모바일 주보 jubo/) 제작 요청 시 �
 - 문체는 정중·담백, 하느님·감사성찬례 등 표기와 성서 책 이름은 공동번역.
 - 자료가 빠졌다고 외부 링크로 대체하지 않는다. 원문을 확보해 보완한다.
 
+## 기도서·성가·성서 출처 (2026-11-22 사용자 확정)
+- 기도서 본문은 `data/worship-texts/bcp.json`에 쪽마다 기록된 출처만 쓴다: 교회 예배 슬라이드(`TalkFile_YYYYMMDD 슬라이드 N`, 대부분) 또는 온라인 기도서 `dulkuka12.github.io/kbcp/ucharist-form1.html`(사도신경 250쪽, 영성체 후 기도 271쪽 등). 온라인 기도서는 개인 운영 사이트라 교회 공식 자료가 아니다.
+- 따로 받은 예식문 PDF가 있으면 그 글을 따른다. 어느 출처에도 없는 본문(예: 특정문 본기도)은 추측하지 않고 비우고 보고한다.
+- 주보에 인쇄된 쪽 번호가 `bcp.json`과 다르면 인쇄된 값을 따르고 불일치를 보고한다(2026-11-22 성체나눔 269쪽 인쇄 · 270쪽 기록, 미확정).
+- 「우리 주교」 등 교회 인물 빈칸은 `data.js`의 `섬기는 이들`에서 채운다.
+- 성서 본문은 `bible/` 공동번역 PDF(`extract-bible.js`·`extract-psalm.js`), 성가 악보는 `data/hymnal-2015/`. 성가의 `pdfPage`는 악보 이미지 쪽 번호와 같다.
+
 ## 제작 후 누락 점검 (매번)
 - 순서지의 성시·기도서(N쪽)·성가·성서 본문이 빠지지 않았는지 확인한다. 본문은 모두 저장소에 있다(`data/worship-texts/` bcp·psalms·responses, `bible/`, `data/hymnal-2015/`). 새 기도서 쪽은 `bcp.json`에 추가하고 `worship-order`에는 `type: bcp`로 쓴다.
 - `tests/worshipCompleteness.test.js`·`tests/psalms.test.js`·`tests/juboLinks.test.js`가 통과해야 한다.
