@@ -1681,17 +1681,17 @@
           "sub": "성찬기도"
         },
         {
-          "type": "hymn",
-          "label": "하느님의 어린양",
-          "number": 83,
+          "type": "bcp",
+          "label": "성체나눔",
+          "page": 269,
           "by": "다 함께",
           "stage": "응답",
           "sub": "성체 나눔"
         },
         {
-          "type": "bcp",
-          "label": "성체나눔",
-          "page": 269,
+          "type": "hymn",
+          "label": "하느님의 어린양",
+          "number": 83,
           "by": "다 함께",
           "stage": "응답",
           "sub": "성체 나눔"
