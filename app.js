@@ -2544,8 +2544,8 @@ const SermonsRenderer = {
             el.innerHTML = `<p class="news-empty" role="status">${data.empty || '등록된 설교 말씀이 없습니다.'}</p>`;
             return;
         }
+        // 소개 문장은 페이지 머리말(sermons.html)에 이미 있으므로 목록에서는 다시 쓰지 않는다
         el.innerHTML = `
-            <p class="news-intro">${data.intro || ''}</p>
             <div class="sermon-sort">
                 <label for="sermon-sort-select">정렬</label>
                 <select id="sermon-sort-select">
