@@ -2537,7 +2537,7 @@ const SermonsRenderer = {
     _notesHtml(item) {
         if (!item.footnotes || !item.footnotes.length) return '';
         const items = item.footnotes.map((text, i) =>
-            `<li id="fn-${item.date}-${i + 1}">${text} <a href="#fnref-${item.date}-${i + 1}" aria-label="본문으로 돌아가기">↩</a></li>`).join('');
+            `<li id="fn-${item.date}-${i + 1}">${text} <a href="#fnref-${item.date}-${i + 1}" class="sermon-backref" aria-label="본문으로 돌아가기">본문으로</a></li>`).join('');
         return `
             <section class="sermon-notes" aria-label="편집자 주석">
                 <p class="sermon-notes-head">편집자 주석</p>
