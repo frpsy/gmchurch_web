@@ -2472,8 +2472,9 @@ const SermonsRenderer = {
     // 펼쳐지는 본문: 본문 절·설교자, 문단, 저작 표기, 원문 링크
     _bodyHtml(item) {
         // 설교자는 목록 줄에 이미 있으므로 펼친 본문에서는 본문 절만 보인다(중복 방지)
+        // 성경 봉독 정보(상자)와 설교문을 구분한다. 날짜는 목록 줄에 이미 있으므로 다시 쓰지 않는다.
         const meta = [
-            ['본문', item.scripture]
+            ['성경 봉독', item.scripture]
         ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
         const source = item.source
             ? `<p class="news-intro"><a href="${item.source.url}" target="_blank" rel="noopener" aria-label="${item.source.label} (새 창으로 열림)">${item.source.label}</a></p>`
@@ -2483,7 +2484,8 @@ const SermonsRenderer = {
             <div class="bulletin-drawer" id="sermon-${item.date}" role="region"
                  aria-labelledby="sermon-btn-${item.date}" hidden>
                 <article class="news-post">
-                    <dl class="news-post-meta">${meta}</dl>
+                    ${meta ? `<div class="sermon-meta"><dl class="news-post-meta">${meta}</dl></div>` : ''}
+                    <p class="sermon-text-label">설교문</p>
                     <div class="sermon-body">${item.paragraphs.map(p => this._paraHtml(p, item.date)).join('')}</div>
                     ${note}${source}
                     ${this._notesHtml(item)}
