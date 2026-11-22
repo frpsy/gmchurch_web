@@ -469,7 +469,6 @@ const IndexRenderer = {
         this._about();
         this._worship();
         this._thisSunday();
-        this._guide();
         this._visit();
     },
 
@@ -548,8 +547,8 @@ const IndexRenderer = {
         // 홈 카드는 요약(summary)만 — 전문은 worship.html에서
         el.innerHTML = CHURCH_DATA.worship.main.map(w => `
             <div class="card">
-                <h3>${w.title}</h3>
-                <p class="card-time">${w.time}</p>
+                <h3>${w.title}${w.en ? ` <span class="term-en" lang="en">${w.en}</span>` : ''}</h3>
+                <p class="card-time">${w.time}${w.duration ? ` · ${w.duration}` : ''}</p>
                 <p class="card-desc">${w.summary || w.desc}</p>
             </div>
         `).join('');
@@ -595,34 +594,26 @@ const IndexRenderer = {
         el.hidden = false;
     },
 
-    _guide() {
-        const el = document.getElementById('home-guide-cards');
-        if (!el) return;
-        const g = CHURCH_DATA.home.guide;
-        this._header('home-guide-header', g);
-        el.innerHTML = `
-            <div class="resource-grid">
-                ${g.cards.map(c => `
-                    <a class="resource-card" href="${c.href}">
-                        <span class="resource-icon" aria-hidden="true">${icon(c.icon)}</span>
-                        <h3 class="resource-title">${c.title}</h3>
-                        <p class="resource-desc">${c.desc}</p>
-                        <span class="resource-link">${c.action} →</span>
-                    </a>
-                `).join('')}
-            </div>
-        `;
-    },
-
+    /* 방문 정보 한 카드: 예배 시간·소요 → 주소·전화 → 방문 바로가기 → 지도 */
     _visit() {
         const locationEl = document.getElementById('location-card');
         if (!locationEl) return;
         const { phone } = CHURCH_DATA.info;
         const v = CHURCH_DATA.home.visit;
+        const main = CHURCH_DATA.worship.main[0];
+        const g = CHURCH_DATA.home.guide;
         this._header('visit-header', v);
         locationEl.innerHTML = `
+            <div class="visit-facts">
+                <div class="info-row"><strong>${v.worshipLabel}</strong><span>${main.time} · ${main.duration}</span></div>
+                <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}" class="link-plain">${phone}</a></span></div>
+            </div>
+            <ul class="visit-quick" aria-label="방문 안내 바로가기">
+                ${g.cards.map(c => `
+                    <li><a href="${c.href}">${c.title}${c.en ? ` <span class="term-en" lang="en">${c.en}</span>` : ''} →</a></li>
+                `).join('')}
+            </ul>
             ${MapHelper.html(true)}
-            <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}" class="link-plain">${phone}</a></span></div>
             <p class="visit-detail-wrap">
                 <a href="visit.html" class="detail-link">${v.more} →</a>
             </p>

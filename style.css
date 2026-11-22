@@ -5742,3 +5742,35 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .page-switch-link:hover { color: var(--text); }
 .page-switch-link[aria-current="page"] { background: var(--heading); color: var(--cream); font-weight: 600; }
 .page-switch { padding: 0.25rem; border: 1px solid var(--border); border-radius: 999px; background: var(--cream); width: fit-content; margin-left: auto; margin-right: auto; }
+
+/* ── 홈 방문 안내 카드 (2026-11-22): 영어 풀이, 방문 바로가기 ── */
+.term-en {
+    font-size: 0.78em;
+    font-weight: 400;
+    color: var(--text-muted);
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+.visit-facts { margin-bottom: var(--space-4); }
+.visit-quick {
+    list-style: none;
+    margin: 0 0 var(--space-5);
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+.visit-quick a {
+    display: block;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: var(--fs-sm);
+}
+.visit-quick a:hover,
+.visit-quick a:focus-visible { border-color: var(--theme); }
+@media (max-width: 480px) {
+    .visit-quick { grid-template-columns: 1fr; }
+}
