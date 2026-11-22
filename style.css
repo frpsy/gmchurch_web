@@ -5681,3 +5681,10 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     .shorts-nav { display: none; }
     .shorts-all { max-height: 18rem; }
 }
+
+/* ── 주보 ↔ 교회 소식 전환 (페이지 상단 버튼) ───────────────────────── */
+.page-switch { display: flex; justify-content: center; margin: 0 0 1.5rem; }
+.page-switch-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.25rem; border-radius: 999px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
+.page-switch-link:hover { color: var(--text); }
+.page-switch-link[aria-current="page"] { background: var(--heading); color: var(--cream); font-weight: 600; }
+.page-switch { padding: 0.25rem; border: 1px solid var(--border); border-radius: 999px; background: var(--cream); width: fit-content; margin-left: auto; margin-right: auto; }
