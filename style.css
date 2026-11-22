@@ -5486,6 +5486,8 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-heading { margin: 0; font: inherit; font-size: inherit; font-weight: inherit; scroll-margin-top: 5rem; }
 
 /* ── 설교 화면 다듬기: 공유 목록(.bulletin-*)은 건드리지 않고 .sermon-item 안에서만 바꾼다 ── */
+/* 펼친 본문은 카드 가운데에 둔다(.news-post는 40rem 폭 제한만 있어 PC에서 왼쪽으로 쏠린다) */
+.sermon-item .news-post { margin-inline: auto; }
 /* 펼친 항목: 왼쪽에 금색 띠를 둬 지금 읽는 설교가 어느 것인지 보이게 한다 */
 .sermon-item .bulletin-row[aria-expanded="true"] { box-shadow: inset 3px 0 0 var(--gold); }
 .sermon-item .bulletin-row:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
