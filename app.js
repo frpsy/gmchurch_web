@@ -2227,6 +2227,8 @@ const PageSwitch = {
         if (canon && newCanon) canon.href = newCanon.href;
         // 화면을 먼저 그리고, 주소 바꾸기는 따로 감싼다(주소를 못 바꾸는 환경에서도 목록이 보이도록)
         this._ROUTES[file]();
+        // 본문이 바뀌었으니 히어로의 이전·다음 화살표도 새 페이지 기준으로 다시 붙인다(교회소식으로 가면 사라지던 문제)
+        HeroNav.init(file);
         if (push) {
             try { history.pushState({}, '', file + hash); } catch (err) { /* 주소 표시만 그대로 둔다 */ }
         }
@@ -3303,11 +3305,12 @@ const TapFeedback = {
 // 메뉴 히어로 좌·우 17% 터치 영역 — 메뉴 순서(CHURCH_DATA.navigation)상 이전/다음 메뉴로 이동한다.
 // 첫 메뉴의 이전은 마지막으로, 마지막의 다음은 첫 메뉴로 이어진다.
 const HeroNav = {
-    init() {
+    // page: 현재 페이지 파일명. 생략하면 주소에서 읽는다. 본문만 바꾸는 전환(PageSwitch) 뒤에는 바뀐 페이지 이름을 넘긴다.
+    init(page = location.pathname.split('/').pop() || 'index.html') {
         const hero = document.querySelector('.page-hero--photo');
         if (!hero) return;
+        hero.querySelectorAll('.hero-nav').forEach(el => el.remove());
         const menu = CHURCH_DATA.navigation;
-        const page = location.pathname.split('/').pop() || 'index.html';
         const i = menu.findIndex(m => m.href.split('#')[0] === page);
         if (i < 0) return;
         const prev = menu[(i - 1 + menu.length) % menu.length];
