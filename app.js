@@ -2362,7 +2362,8 @@ const SermonsRenderer = {
     _SORTS: {
         'date-desc': (a, b) => b.date.localeCompare(a.date),
         'date-asc': (a, b) => a.date.localeCompare(b.date),
-        'title': (a, b) => a.title.localeCompare(b.title, 'ko')
+        // 제목이 같으면 최신 날짜가 위에 오도록 한다(정렬 결과가 항상 같게)
+        'title': (a, b) => a.title.localeCompare(b.title, 'ko') || b.date.localeCompare(a.date)
     },
 
     _dateLabel(date) {
@@ -2373,7 +2374,9 @@ const SermonsRenderer = {
 
     // 목록의 한 줄(날짜·제목·설교자). 누르면 아래 본문이 펼쳐진다.
     _rowHtml(item) {
+        // 제목 줄은 헤딩으로 감싸 스크린 리더가 제목 목록으로 찾을 수 있게 한다(아코디언 패턴)
         return `
+            <h3 class="sermon-heading">
             <button class="bulletin-row" type="button" id="sermon-btn-${item.date}"
                     aria-expanded="false" aria-controls="sermon-${item.date}">
                 <div class="bulletin-row-info">
@@ -2388,7 +2391,8 @@ const SermonsRenderer = {
                 <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true">
                     <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-            </button>`;
+            </button>
+            </h3>`;
     },
 
     // 펼쳐지는 본문: 본문 절·설교자, 문단, 저작 표기, 원문 링크
@@ -2398,7 +2402,7 @@ const SermonsRenderer = {
             ['설교', item.preacher]
         ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
         const source = item.source
-            ? `<p class="news-intro"><a href="${item.source.url}" target="_blank" rel="noopener">${item.source.label}</a></p>`
+            ? `<p class="news-intro"><a href="${item.source.url}" target="_blank" rel="noopener" aria-label="${item.source.label} (새 창으로 열림)">${item.source.label}</a></p>`
             : '';
         const note = item.note ? `<p class="news-intro">※ ${item.note}</p>` : '';
         return `
@@ -2412,14 +2416,15 @@ const SermonsRenderer = {
             </div>`;
     },
 
+    // 펼치기·접기. 드로어는 같은 항목(.sermon-item) 안에 있다(제목이 헤딩으로 감싸져 있어 형제가 아니다)
+    _setOpen(btn, open) {
+        btn.setAttribute('aria-expanded', String(open));
+        btn.closest('.sermon-item').querySelector('.bulletin-drawer').hidden = !open;
+    },
+
     _bind(list) {
         list.querySelectorAll('.bulletin-row').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const drawer = btn.nextElementSibling;
-                const open = btn.getAttribute('aria-expanded') === 'true';
-                btn.setAttribute('aria-expanded', String(!open));
-                drawer.hidden = open;
-            });
+            btn.addEventListener('click', () => this._setOpen(btn, btn.getAttribute('aria-expanded') !== 'true'));
         });
     },
 
@@ -2434,14 +2439,15 @@ const SermonsRenderer = {
     render() {
         const el = document.getElementById('sermons-full');
         if (!el) return;
-        const data = CHURCH_DATA.sermons;
+        // CHURCH_DATA는 data.js의 const 전역이라 window 속성이 아니다. typeof로 안전하게 확인한다.
+        const data = (typeof CHURCH_DATA !== 'undefined' && CHURCH_DATA.sermons) || {};
         const items = data.items || [];
         if (!items.length) {
-            el.innerHTML = `<p class="news-empty">${data.empty}</p>`;
+            el.innerHTML = `<p class="news-empty" role="status">${data.empty || '등록된 설교 말씀이 없습니다.'}</p>`;
             return;
         }
         el.innerHTML = `
-            <p class="news-intro">${data.intro}</p>
+            <p class="news-intro">${data.intro || ''}</p>
             <div class="sermon-sort">
                 <label for="sermon-sort-select">정렬</label>
                 <select id="sermon-sort-select">
@@ -2464,10 +2470,16 @@ const SermonsRenderer = {
             this._sort(list, items, e.target.value);
         });
 
-        // 공유한 링크(#sermon-날짜)로 들어오면 그 설교를 펼친다
-        const hash = location.hash.match(/^#sermon-(\d{4}-\d{2}-\d{2})$/);
-        const btn = hash && document.getElementById(`sermon-btn-${hash[1]}`);
-        if (btn) btn.click();
+        // 공유한 링크(#sermon-날짜)로 들어오면 그 설교를 펼쳐 그 자리로 옮긴다. 같은 페이지에서 주소가 바뀌어도 따라간다.
+        const openFromHash = () => {
+            const hash = location.hash.match(/^#sermon-(\d{4}-\d{2}-\d{2})$/);
+            const btn = hash && document.getElementById(`sermon-btn-${hash[1]}`);
+            if (!btn) return;
+            this._setOpen(btn, true);
+            btn.scrollIntoView({ block: 'start' });
+        };
+        openFromHash();
+        window.addEventListener('hashchange', openFromHash);
     }
 };
 
