@@ -1702,8 +1702,7 @@
           "dialog": "communion-invite",
           "by": "집전자",
           "stage": "응답",
-          "sub": "영성체",
-          "extra": true
+          "sub": "영성체"
         },
         {
           "type": "hymn",
