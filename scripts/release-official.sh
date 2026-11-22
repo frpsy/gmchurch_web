@@ -4,7 +4,8 @@
 # 반영할 머지 브랜치를 만들어 push 합니다. 절차 설명은 docs/REPO-STRUCTURE.md.
 #
 # 사용:  scripts/release-official.sh [작업폴더]
-#   작업폴더 기본값: 임시 폴더 (끝나면 경로를 알려 줍니다)
+#   작업폴더 기본값: 임시 폴더. 끝나거나 실패하면 자동으로 지운다(용량 누적 방지, 2026-11-22).
+#   작업폴더를 직접 준 경우는 남겨 둔다.
 #
 # 모든 홈페이지 작업(주보·교회소식 포함)은 개발 저장소에 머지한 뒤 같은 작업 안에서 이 스크립트로 공식에도 반영합니다(2026-11-05).
 
@@ -15,7 +16,13 @@ OFFICIAL_URL="${OFFICIAL_URL:-https://github.com/lmkhkm/GMSKH_Homepage}"
 OFFICIAL_SITE="https://gmskh.or.kr"
 DEV_SITE="https://frpsy.github.io/gmchurch_web"
 
-WORK="${1:-$(mktemp -d)}"
+if [ -n "${1:-}" ]; then
+  WORK="$1"
+else
+  WORK="$(mktemp -d)"
+  # 기본 임시 폴더는 성공·실패와 관계없이 종료 때 지운다. npm ci 한 번에 수백 MB가 든다.
+  trap 'rm -rf "$WORK"' EXIT
+fi
 BRANCH="merge/official-$(date +%Y%m%d-%H%M)"
 
 say() { printf '\n== %s\n' "$*"; }
