@@ -2478,9 +2478,9 @@ const SermonsRenderer = {
     _rowHtml(item) {
         // 제목 줄은 헤딩으로 감싸 스크린 리더가 제목 목록으로 찾을 수 있게 한다(아코디언 패턴)
         return `
-            <h3 class="sermon-heading">
+            <h3 class="sermon-heading" id="sermon-${item.date}">
             <button class="bulletin-row" type="button" id="sermon-btn-${item.date}"
-                    aria-expanded="false" aria-controls="sermon-${item.date}">
+                    aria-expanded="false" aria-controls="sermon-body-${item.date}">
                 <div class="bulletin-row-info">
                     <div class="bulletin-row-top">
                         <span class="bulletin-row-date">${this._dateLabel(item.date)}</span>
@@ -2509,7 +2509,7 @@ const SermonsRenderer = {
             : '';
         const note = item.note ? `<p class="news-intro">※ ${item.note}</p>` : '';
         return `
-            <div class="bulletin-drawer" id="sermon-${item.date}" role="region"
+            <div class="bulletin-drawer" id="sermon-body-${item.date}" role="region"
                  aria-labelledby="sermon-btn-${item.date}" hidden>
                 <article class="news-post">
                     ${meta ? `<div class="sermon-meta"><dl class="news-post-meta">${meta}</dl></div>` : ''}
@@ -2604,7 +2604,10 @@ const SermonsRenderer = {
             const btn = hash && document.getElementById(`sermon-btn-${hash[1]}`);
             if (!btn) return;
             this._setOpen(btn, true);
-            btn.scrollIntoView({ block: 'start' });
+            // 제목 줄을 감싼 헤딩으로 옮겨야 scroll-margin-top이 적용되어 고정 머리글에 가리지 않는다
+            const target = btn.closest('.sermon-heading') || btn;
+            // 전체 CSS의 부드러운 스크롤(smooth)은 로드 중 다른 스크롤에 끊기므로 즉시 이동한다
+            target.scrollIntoView({ block: 'start', behavior: 'instant' });
         };
         openFromHash();
         window.addEventListener('hashchange', openFromHash);

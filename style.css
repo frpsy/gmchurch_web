@@ -5484,6 +5484,37 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-sort select { font-family: inherit; font-weight: 400; font-size: 16px; line-height: 1.4; min-height: 44px; color-scheme: light dark; color: var(--text); background-color: var(--cream); border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.6rem; }
 /* 제목 줄 헤딩은 목록 버튼의 모양을 그대로 쓰고, 스크롤 시 고정 머리글에 가리지 않게 여백을 준다 */
 .sermon-heading { margin: 0; font: inherit; font-size: inherit; font-weight: inherit; scroll-margin-top: 5rem; }
+
+/* ── 설교 화면 다듬기: 공유 목록(.bulletin-*)은 건드리지 않고 .sermon-item 안에서만 바꾼다 ── */
+/* 펼친 항목: 왼쪽에 금색 띠를 둬 지금 읽는 설교가 어느 것인지 보이게 한다 */
+.sermon-item .bulletin-row[aria-expanded="true"] { box-shadow: inset 3px 0 0 var(--gold); }
+.sermon-item .bulletin-row:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+/* 설교 제목은 날짜보다 먼저 읽히도록 키운다 */
+.sermon-row-title { font-size: 1.0625rem; }
+/* 성경 봉독: 어절 중간에서 끊기지 않게 하고 라벨은 위쪽에 맞춘다 */
+.sermon-meta .news-post-meta div { align-items: baseline; }
+.sermon-meta dd { word-break: keep-all; line-height: 1.6; }
+/* 각주 번호와 되돌아가기 링크: 눈에 띄고 손가락으로 누를 만한 크기 */
+.sermon-fn-ref { font-size: 0.75em; }
+.sermon-fn-ref a { display: inline-block; color: var(--heading); font-weight: 600; padding: 0.5em 0.45em; margin: -0.5em -0.3em; }
+.sermon-notes li a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; margin: -0.8rem 0; vertical-align: middle; color: var(--heading); }
+.sermon-notes li a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+/* 휴대폰: 카드 안쪽 여백을 줄여 글 폭을 넓히고, 봉독 상자 라벨 칸을 좁힌다 */
+@media (max-width: 480px) {
+    .sermon-item .bulletin-row { padding: 1rem 1.1rem; }
+    .sermon-item .bulletin-drawer { padding: 1.1rem 1.1rem 1.4rem; }
+    .sermon-meta { padding: 0.7rem 0.85rem; }
+    .sermon-meta .news-post-meta div { grid-template-columns: 4.25rem 1fr; gap: 0.4rem; }
+    .sermon-section { margin-top: 1.6rem; }
+}
+/* PC: 글자를 키우고 줄 간격을 넓혀 긴 글을 편하게 읽게 한다(줄 길이는 40rem 그대로) */
+@media (min-width: 769px) {
+    .sermon-item .bulletin-row { padding: 1.3rem 1.75rem; }
+    .sermon-item .bulletin-drawer { padding: 2rem 1.75rem 2.25rem; }
+    .sermon-row-title { font-size: 1.1875rem; }
+    .sermon-body p { font-size: 1.0625rem; line-height: 1.9; }
+    .sermon-meta { padding: 0.9rem 1.25rem; }
+}
 .news-post-meta { margin: 0.5rem 0 0; display: grid; gap: 0.3rem; }
 .news-post-meta div { display: grid; grid-template-columns: 3rem 1fr; gap: 0.5rem; line-height: 1.7; }
 .news-post-meta dt { font-weight: 600; color: var(--text-muted); }
