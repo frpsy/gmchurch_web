@@ -2129,24 +2129,46 @@ const ScrollProgress = {
             docHeight = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
         };
 
+        // 스크롤 이벤트는 모바일 관성 스크롤에서 간격이 들쭉날쭉하다. 값을 바로 옮기면
+        // 막대가 툭툭 끊겨 보이므로, 프레임 시간 기준 지수 보간으로 목표값을 따라가게 한다.
+        const TAU = 90;          // 시정수(ms): 작을수록 빨리 따라붙는다
+        const EPSILON = 0.0005;  // 이만큼 가까워지면 목표값에 맞추고 애니메이션을 멈춘다
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         let rafId = null;
-        const update = () => {
-            rafId = null;
-            const pct = docHeight > 0 ? Math.min(1, window.scrollY / docHeight) : 0;
-            bar.style.transform = `scaleX(${pct})`;
+        let current = 0;
+        let last = 0;
+
+        // iOS 고무줄 스크롤(범위 밖 scrollY)은 0~1로 자른다
+        const target = () => (docHeight > 0 ? Math.min(1, Math.max(0, window.scrollY / docHeight)) : 0);
+        const paint = () => { bar.style.transform = `scaleX(${current})`; };
+        const frame = (now) => {
+            const goal = target();
+            const dt = Math.min(now - last, 100); // 탭 복귀 직후의 큰 시간 간격은 잘라낸다
+            last = now;
+            current = reduceMotion.matches ? goal : current + (goal - current) * (1 - Math.exp(-dt / TAU));
+            if (Math.abs(goal - current) < EPSILON) {
+                current = goal;
+                rafId = null;
+            } else {
+                rafId = requestAnimationFrame(frame);
+            }
+            paint();
         };
-        const onScroll = () => {
-            if (!rafId) rafId = requestAnimationFrame(update);
+        const kick = () => {
+            if (rafId) return;
+            last = performance.now();
+            rafId = requestAnimationFrame(frame);
         };
 
         measure();
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', () => { measure(); onScroll(); }, { passive: true });
+        window.addEventListener('scroll', kick, { passive: true });
+        window.addEventListener('resize', () => { measure(); kick(); }, { passive: true });
         // 등장 애니메이션·이미지 로딩으로 페이지 높이가 바뀌면 다시 잰다
         if (window.ResizeObserver) {
-            new ResizeObserver(() => { measure(); onScroll(); }).observe(document.body);
+            new ResizeObserver(() => { measure(); kick(); }).observe(document.body);
         }
-        update();
+        current = target();
+        paint();
     }
 };
 
