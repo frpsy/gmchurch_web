@@ -2358,11 +2358,42 @@ const BulletinRenderer = {
 /* ── SermonsRenderer ─────────────────────────────────────── */
 // 설교 원문 목록(sermons.html). 글 모양은 교회소식(news-post)과 같은 클래스를 쓴다.
 const SermonsRenderer = {
-    _itemHtml(item) {
-        const weekday = NewsRenderer._weekdayOf(item.date);
-        const [y, m, d] = item.date.split('-').map(Number);
+    // 정렬 기준. 값은 설교 항목 두 개를 받아 순서를 돌려준다.
+    _SORTS: {
+        'date-desc': (a, b) => b.date.localeCompare(a.date),
+        'date-asc': (a, b) => a.date.localeCompare(b.date),
+        'title': (a, b) => a.title.localeCompare(b.title, 'ko')
+    },
+
+    _dateLabel(date) {
+        const weekday = NewsRenderer._weekdayOf(date);
+        const [y, m, d] = date.split('-').map(Number);
+        return `${y}년 ${m}월 ${d}일${weekday ? `(${weekday})` : ''}`;
+    },
+
+    // 목록의 한 줄(날짜·제목·설교자). 누르면 아래 본문이 펼쳐진다.
+    _rowHtml(item) {
+        return `
+            <button class="bulletin-row" type="button" id="sermon-btn-${item.date}"
+                    aria-expanded="false" aria-controls="sermon-${item.date}">
+                <div class="bulletin-row-info">
+                    <div class="bulletin-row-top">
+                        <span class="bulletin-row-date">${this._dateLabel(item.date)}</span>
+                    </div>
+                    <div class="bulletin-row-meta">
+                        <span class="bulletin-row-season sermon-row-title">${item.title}</span>
+                        <span class="bulletin-row-count">${item.preacher}</span>
+                    </div>
+                </div>
+                <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true">
+                    <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>`;
+    },
+
+    // 펼쳐지는 본문: 본문 절·설교자, 문단, 저작 표기, 원문 링크
+    _bodyHtml(item) {
         const meta = [
-            ['날짜', `${y}년 ${m}월 ${d}일${weekday ? `(${weekday})` : ''}`],
             ['본문', item.scripture],
             ['설교', item.preacher]
         ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
@@ -2371,26 +2402,72 @@ const SermonsRenderer = {
             : '';
         const note = item.note ? `<p class="news-intro">※ ${item.note}</p>` : '';
         return `
-            <article class="news-post" id="sermon-${item.date}">
-                <h2 class="news-post-title">${item.title}</h2>
-                <dl class="news-post-meta">${meta}</dl>
-                <div class="sermon-body">${item.paragraphs.map(p => `<p>${p}</p>`).join('')}</div>
-                ${note}${source}
-            </article>`;
+            <div class="bulletin-drawer" id="sermon-${item.date}" role="region"
+                 aria-labelledby="sermon-btn-${item.date}" hidden>
+                <article class="news-post">
+                    <dl class="news-post-meta">${meta}</dl>
+                    <div class="sermon-body">${item.paragraphs.map(p => `<p>${p}</p>`).join('')}</div>
+                    ${note}${source}
+                </article>
+            </div>`;
+    },
+
+    _bind(list) {
+        list.querySelectorAll('.bulletin-row').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const drawer = btn.nextElementSibling;
+                const open = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!open));
+                drawer.hidden = open;
+            });
+        });
+    },
+
+    _sort(list, items, key) {
+        const byDate = new Map(items.map(item => [item.date, item]));
+        const cmp = this._SORTS[key] || this._SORTS['date-desc'];
+        const rows = [...list.children].sort((x, y) =>
+            cmp(byDate.get(x.dataset.date), byDate.get(y.dataset.date)));
+        list.append(...rows);
     },
 
     render() {
         const el = document.getElementById('sermons-full');
         if (!el) return;
         const data = CHURCH_DATA.sermons;
-        const items = (data.items || []).slice().sort((a, b) => b.date.localeCompare(a.date));
+        const items = data.items || [];
         if (!items.length) {
             el.innerHTML = `<p class="news-empty">${data.empty}</p>`;
             return;
         }
         el.innerHTML = `
             <p class="news-intro">${data.intro}</p>
-            ${items.map(item => this._itemHtml(item)).join('')}`;
+            <div class="sermon-sort">
+                <label for="sermon-sort-select">정렬</label>
+                <select id="sermon-sort-select">
+                    <option value="date-desc">최신순</option>
+                    <option value="date-asc">오래된순</option>
+                    <option value="title">제목순</option>
+                </select>
+            </div>
+            <div class="bulletin-list sermon-list" id="sermon-list">${items.map(item => `
+                <div class="bulletin-item sermon-item" data-date="${item.date}">
+                    ${this._rowHtml(item)}${this._bodyHtml(item)}
+                </div>`).join('')}
+            </div>`;
+
+        const list = el.querySelector('#sermon-list');
+        this._bind(list);
+        this._sort(list, items, 'date-desc');
+
+        el.querySelector('#sermon-sort-select').addEventListener('change', e => {
+            this._sort(list, items, e.target.value);
+        });
+
+        // 공유한 링크(#sermon-날짜)로 들어오면 그 설교를 펼친다
+        const hash = location.hash.match(/^#sermon-(\d{4}-\d{2}-\d{2})$/);
+        const btn = hash && document.getElementById(`sermon-btn-${hash[1]}`);
+        if (btn) btn.click();
     }
 };
 
