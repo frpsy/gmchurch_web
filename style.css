@@ -5449,7 +5449,8 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-post-title { font-size: var(--fs-body); line-height: var(--lh-snug); color: var(--heading); margin: 0 0 0.4rem; }
 .news-post p { margin: 0; line-height: 1.8; color: var(--text); }
 .news-post p + p { margin-top: 0.3rem; }
-.sermon-body p + p { margin-top: 1rem; }
+.sermon-body p { margin: 0 0 1.1em; font-size: 1rem; line-height: 1.8; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: break-word; text-wrap: pretty; }
+.sermon-body p:last-child { margin-bottom: 0; }
 /* 제목이 한 줄을 차지하고, 설교자 태그는 그 아래 줄에 온다 */
 .sermon-row-title { color: var(--heading); font-weight: 600; font-size: var(--fs-body); line-height: 1.45; flex-basis: 100%; }
 /* 날짜는 보조 정보로 낮추고, 제목을 목록의 기준으로 세운다 */
@@ -5457,7 +5458,8 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 /* 편집자 강조: 글자색은 제목 색 그대로, 아래쪽에 옅은 색 띠를 깐다(글자 대비 유지) */
 .sermon-em { font-weight: 600; color: var(--heading); background: linear-gradient(transparent 58%, color-mix(in srgb, var(--gold) 55%, transparent) 58%); padding: 0 0.1em; }
 /* 절 번호 제목(1. 2. …) */
-.sermon-section { margin: 1.75rem 0 0.5rem; font-size: var(--fs-body); font-weight: 600; color: var(--heading); }
+.sermon-section { display: flex; align-items: center; gap: 0.6rem; margin: 2rem 0 0.9rem; font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.08em; color: var(--heading); font-variant-numeric: tabular-nums; }
+.sermon-section::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 /* 각주 번호 위치 */
 .sermon-fn-ref { font-size: 0.7em; line-height: 0; vertical-align: super; }
 .sermon-fn-ref a { color: var(--text-muted); text-decoration: none; padding: 0 0.1em; }
