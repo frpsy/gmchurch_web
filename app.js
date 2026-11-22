@@ -2144,6 +2144,68 @@ const ScrollProgress = {
     }
 };
 
+/* ── PageSwitch (주보 ↔ 교회 소식, 전체 새로고침 없이 본문만 전환) ─────── */
+// 같은 메뉴 묶음의 두 페이지를 상단 버튼으로 오갈 때 쓴다. 링크의 새 페이지를 받아
+// <main>만 바꿔 끼우고, 그 페이지의 렌더러를 다시 돌린다. 주소와 뒤로 가기도 따라간다.
+const PageSwitch = {
+    _ROUTES: {
+        'bulletin.html': () => BulletinRenderer.render(),
+        'news.html': () => NewsRenderer.render(),
+    },
+
+    _file(href) {
+        return href.split('/').pop() || 'index.html';
+    },
+
+    init() {
+        document.addEventListener('click', e => {
+            const a = e.target.closest('a[data-switch]');
+            if (!a || e.defaultPrevented || e.button !== 0) return;
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            const url = new URL(a.href, location.href);
+            if (url.origin !== location.origin) return;
+            const file = this._file(url.pathname);
+            if (!this._ROUTES[file]) return;
+            e.preventDefault();
+            if (file === this._file(location.pathname)) return;
+            this.go(file + url.hash, true);
+        });
+        window.addEventListener('popstate', () => {
+            this.go(this._file(location.pathname) + location.hash, false);
+        });
+    },
+
+    async go(target, push) {
+        const file = target.split('#')[0];
+        const hash = target.includes('#') ? '#' + target.split('#')[1] : '';
+        if (!this._ROUTES[file]) { location.href = target; return; }
+        let html;
+        try {
+            const res = await fetch(file, { cache: 'no-cache' });
+            if (!res.ok) throw new Error(String(res.status));
+            html = await res.text();
+        } catch (err) {
+            location.href = target; // 가져오지 못하면 일반 이동
+            return;
+        }
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const newMain = doc.querySelector('main');
+        const oldMain = document.querySelector('main');
+        if (!newMain || !oldMain) { location.href = target; return; }
+        oldMain.replaceWith(document.importNode(newMain, true));
+        document.title = doc.title;
+        const canon = document.querySelector('link[rel="canonical"]');
+        const newCanon = doc.querySelector('link[rel="canonical"]');
+        if (canon && newCanon) canon.href = newCanon.href;
+        // 화면을 먼저 그리고, 주소 바꾸기는 따로 감싼다(주소를 못 바꾸는 환경에서도 목록이 보이도록)
+        this._ROUTES[file]();
+        if (push) {
+            try { history.pushState({}, '', file + hash); } catch (err) { /* 주소 표시만 그대로 둔다 */ }
+        }
+        if (!hash) window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+};
+
 /* ── Portrait Lightbox ───────────────────────────────────── */
 const PortraitLightbox = {
     init() {
@@ -3356,6 +3418,7 @@ const App = {
         this._handleHashScroll();
         ScrollReveal.init();
         ScrollProgress.init();
+        PageSwitch.init();
         BackToTop.init();
         PortraitLightbox.init();
         MenuOverlay.init();
