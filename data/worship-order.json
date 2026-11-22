@@ -1698,7 +1698,7 @@
         },
         {
           "type": "dialog",
-          "label": "영성체",
+          "label": "영성체 (기도서 270쪽)",
           "dialog": "communion-invite",
           "by": "집전자",
           "stage": "응답",
