@@ -5449,7 +5449,8 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-post-title { font-size: var(--fs-body); line-height: var(--lh-snug); color: var(--heading); margin: 0 0 0.4rem; }
 .news-post p { margin: 0; line-height: 1.8; color: var(--text); }
 .news-post p + p { margin-top: 0.3rem; }
-.sermon-body p { margin: 0 0 1.1em; font-size: 1rem; line-height: 1.8; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: break-word; text-wrap: pretty; }
+/* 줄을 가로로 꽉 채운다: keep-all과 text-wrap: pretty는 어절을 통째로 넘겨 줄이 일찍 끊기므로 쓰지 않는다 */
+.sermon-body p { margin: 0 0 1.1em; font-size: 1rem; line-height: 1.8; letter-spacing: -0.01em; word-break: normal; overflow-wrap: break-word; text-align: justify; text-justify: inter-character; }
 .sermon-body p:last-child { margin-bottom: 0; }
 /* 제목이 한 줄을 차지하고, 설교자 태그는 그 아래 줄에 온다 */
 .sermon-row-title { color: var(--heading); font-weight: 600; font-size: var(--fs-body); line-height: 1.45; flex-basis: 100%; }
