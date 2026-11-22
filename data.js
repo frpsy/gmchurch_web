@@ -269,16 +269,17 @@ const CHURCH_DATA = {
             title: "처음 오셨나요?",
             sub: "방문 전에 많이 궁금해하시는 내용을 모았습니다.",
             cards: [
-                { icon: "parking", title: "주차 안내",      desc: "교회 인근에 무료 주차가 가능합니다.",                     href: "visit.html#parking",       action: "주차 안내 보기" },
-                { icon: "chalice", title: "영성체 안내",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
-                { icon: "question", title: "자주 묻는 질문", desc: "성공회와 예배에 관해 자주 받는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
-                { icon: "book", title: "주일 주보",      desc: "이번 주 주보를 이미지와 PDF로 보실 수 있습니다.", href: "bulletin.html",           action: "주보 보기" }
+                { icon: "parking", title: "주차 안내", en: "Parking",      desc: "교회 인근에 무료 주차가 가능합니다.",                     href: "visit.html#parking",       action: "주차 안내 보기" },
+                { icon: "chalice", title: "영성체 안내", en: "Communion",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
+                { icon: "question", title: "자주 묻는 질문", en: "FAQ",desc: "성공회와 예배에 관해 자주 받는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
+                { icon: "book", title: "주일 주보", en: "Bulletin",      desc: "이번 주 주보를 이미지와 PDF로 보실 수 있습니다.", href: "bulletin.html",           action: "주보 보기" }
             ]
         },
         visit: {
-            eyebrow: "Visit",
-            title: "오시는 길",
-            sub: "광명교회로 초대합니다.",
+            eyebrow: "Welcome & Visit",
+            title: "처음 오셨나요?",
+            sub: "예배 시간, 오시는 길, 방문 안내를 한곳에 모았습니다. 예배는 약 1시간 걸립니다.",
+            worshipLabel: "예배",
             phoneLabel: "전화",
             more: "자세히 보기"
         }
@@ -616,7 +617,9 @@ const CHURCH_DATA = {
             {
                 id: "main",
                 title: "주일 감사성찬례",
+                en: "Holy Eucharist",
                 time: "매주 일요일 오전 11:00",
+                duration: "약 1시간 소요",
                 desc: "성공회 전례의 중심인 감사성찬례(Eucharist)입니다. 말씀과 성찬 안에서 예수 그리스도를 만나는 시간이며, 세례받은 모든 그리스도인이 성체를 모실 수 있습니다. 반려동물과 함께 오신 분은 예배 후 신부님께 강복(축복 기도)을 청할 수 있습니다.",
                 summary: "말씀과 성찬 안에서 예수 그리스도를 만나는 성공회 전례의 중심 예배입니다. 세례받은 모든 그리스도인이 성체를 모실 수 있으며, 반려동물과 함께 오신 분은 예배 후 강복(축복 기도)을 청할 수 있습니다."
             },
