@@ -2576,13 +2576,10 @@ const SermonsRenderer = {
         // 소개 문장은 페이지 머리말(sermons.html)에 이미 있으므로 목록에서는 다시 쓰지 않는다
         el.innerHTML = `
             <p class="news-intro">강조와 각주는 편집자가 붙였습니다. 본문 문장은 바꾸지 않았습니다.</p>
-            <div class="sermon-sort">
-                <label for="sermon-sort-select">정렬</label>
-                <select id="sermon-sort-select">
-                    <option value="date-desc">최신순</option>
-                    <option value="date-asc">오래된순</option>
-                    <option value="title">제목순</option>
-                </select>
+            <div class="sermon-sort" role="group" aria-label="정렬">
+                <button type="button" class="sermon-sort-btn" data-sort="date-desc" aria-pressed="true">최신순</button>
+                <button type="button" class="sermon-sort-btn" data-sort="date-asc" aria-pressed="false">오래된순</button>
+                <button type="button" class="sermon-sort-btn" data-sort="title" aria-pressed="false">제목순</button>
             </div>
             <div class="bulletin-list sermon-list" id="sermon-list">${items.map(item => `
                 <div class="bulletin-item sermon-item" data-date="${item.date}">
@@ -2594,9 +2591,12 @@ const SermonsRenderer = {
         this._bind(list);
         this._sort(list, items, 'date-desc');
 
-        el.querySelector('#sermon-sort-select').addEventListener('change', e => {
-            this._sort(list, items, e.target.value);
-        });
+        // 정렬 버튼: 눌린 버튼만 aria-pressed="true". 글자를 줄여도 iOS가 화면을 확대하지 않도록 선택 상자 대신 버튼을 쓴다.
+        const sortBtns = el.querySelectorAll('.sermon-sort-btn');
+        sortBtns.forEach(b => b.addEventListener('click', () => {
+            sortBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+            this._sort(list, items, b.dataset.sort);
+        }));
 
         // 공유한 링크(#sermon-날짜)로 들어오면 그 설교를 펼쳐 그 자리로 옮긴다. 같은 페이지에서 주소가 바뀌어도 따라간다.
         const openFromHash = () => {
