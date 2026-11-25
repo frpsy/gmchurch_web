@@ -1,5 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg">
 <!-- 광명교회 아이콘 팩: 24px 격자, 1.35 단색 선(글자색 currentColor). 색면 없음. 목록과 사용법은 ARCHITECTURE.md -->
+  <symbol id="arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4.5 12h14m-6-6 6 6-6 6"/>
+  </symbol>
   <symbol id="church" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12 2.75v4M10.4 4.25h3.2"/>
     <path d="M5.75 11.25 12 6.75l6.25 4.5"/>

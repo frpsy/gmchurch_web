@@ -1583,7 +1583,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .about-brief-award-body { display: flex; flex-direction: column; gap: 0.1rem; flex: 1; text-align: left; }
 .about-brief-award-body strong { font-size: var(--fs-sm); font-weight: 700; color: var(--heading); }
 .about-brief-award-body span   { font-size: var(--fs-label); color: var(--text-muted); }
-.about-brief-award-arrow       { color: var(--theme); font-size: var(--fs-sm); flex-shrink: 0; }
 .about-brief-news-link { margin-bottom: var(--space-5); }
 .link-plain-ext { font-size: var(--fs-label); color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
 .link-plain-ext:hover { color: var(--theme); }
@@ -1610,7 +1609,25 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border-block: 1px solid var(--border);
 }
 .home #visit-preview { background: var(--white); }
-.home .hero .btn-hero-primary { min-width: 11rem; }
+.home #hero-actions a {
+    gap: 0.75rem;
+    padding: 0.35rem 0.35rem 0.35rem 1.15rem;
+    min-height: 48px;
+    box-shadow: none;
+}
+.home .hero-stats {
+    gap: clamp(0.35rem, 1.4vw, 0.75rem);
+    padding-block: 0 1.25rem;
+    border-top: 0;
+}
+.home .hero-stat {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 0.55rem 0.25rem;
+}
+.home .hero-stat:where(:active) { background: var(--md-secondary-container); }
+.home .hero-stat + .hero-stat::before { content: none; }
 
 #about-brief-content, .home-worship-layout, #location-card {
     display: grid;
@@ -1620,40 +1637,80 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .home-about-copy .about-brief-lead { margin-bottom: 0.75rem; }
 .home-about-copy .about-brief-desc { margin-bottom: 0.65rem; }
-.home-about-facts .about-brief-facts { padding: 1rem 1.15rem; margin: 0 0 0.65rem; }
-.home-about-facts .about-brief-award { margin-bottom: 0; }
+.home-about-facts .about-brief-facts {
+    background: var(--cream);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.15rem;
+    margin: 0 0 0.65rem;
+}
+.home-about-facts .about-brief-facts strong { color: var(--md-primary); }
+.home-about-facts .about-brief-award {
+    border-radius: var(--radius-xl);
+    margin-bottom: 0;
+}
 .home-about-facts .about-brief-award-body,
 .home-about-facts .about-brief-facts span { min-width: 0; overflow-wrap: anywhere; }
 .home .about-brief-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.4em;
-    min-height: 44px;
-    padding: 0;
+    gap: 0.75rem;
+    min-height: var(--md-button-height);
+    padding: 0.3rem 0.3rem 0.3rem 1rem;
     border: 0;
-    text-decoration: underline;
-    text-underline-offset: 0.28em;
+    border-radius: var(--radius-pill);
+    background: var(--green-light);
+    color: var(--heading);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-heading);
+    text-align: left;
 }
+.home .home-link-arrow {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+}
+.home .home-link-arrow .ico { width: 1.15rem; height: 1.15rem; }
+.home .btn-hero-primary .home-link-arrow {
+    width: 2.25rem;
+    height: 2.25rem;
+    background: var(--md-on-primary);
+    color: var(--md-primary);
+}
+.home .btn-hero-primary .home-link-arrow .ico { width: 1.3rem; height: 1.3rem; }
+@media (hover: hover) {
+    .home .hero-stat:hover,
+    .home .about-brief-link:hover { background: var(--md-secondary-container); }
+}
+.home .about-brief-link:active { background: var(--md-secondary-container); }
+.home .about-brief-desc + .about-brief-link { margin-top: 0.6rem; }
 
-.home #worship-grid { gap: 0; }
+.home #worship-grid { gap: var(--space-3); }
 .home #worship-grid .card {
-    padding: 0.9rem 0;
-    background: transparent;
-    border: 0;
-    border-top: 1px solid var(--border);
-    border-radius: 0;
+    padding: clamp(1.05rem, 2.6vw, 1.6rem);
+    background: var(--white);
+    border-radius: var(--radius-xl);
     will-change: auto;
 }
 .home #worship-grid h3 { margin-bottom: 0.25rem; }
 .home #this-sunday {
+    background: var(--green-light);
+    border-radius: var(--radius-xl);
     margin: 0;
     padding: clamp(1rem, 2.4vw, 1.5rem);
 }
-.home #worship-more { margin-top: 0.5rem; }
+.home #worship-more { margin-top: var(--space-4); }
 
-.home #location-card .map-card { margin-bottom: 0; }
+.home #location-card .map-card {
+    border-radius: var(--radius-xl);
+    margin-bottom: 0;
+}
 .home .map-card--compact .map-btn { min-height: 44px; padding-inline: 0.55rem; }
-.home .visit-quick { margin-bottom: 0.4rem; }
+.home .visit-quick { margin-bottom: var(--space-4); }
 .home .visit-quick a {
     display: flex;
     align-items: center;
@@ -1661,9 +1718,12 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     gap: 0.55rem;
     min-height: 44px;
     height: 100%;
-    padding: 0.45rem 0.7rem;
-    border-radius: var(--radius-sm);
+    padding: 0.35rem 0.55rem 0.35rem 0.7rem;
+    border-radius: var(--radius-lg);
+    background: var(--cream);
 }
+.home .visit-quick .home-link-arrow { width: 1.55rem; height: 1.55rem; }
+.home .visit-quick .home-link-arrow .ico { width: 0.95rem; height: 0.95rem; }
 .home .visit-facts a { text-decoration: underline; text-underline-offset: 0.18em; }
 
 @media (min-width: 380px) {

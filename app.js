@@ -505,7 +505,7 @@ const IndexRenderer = {
         if (sub)   sub.textContent   = vision;
 
         if (acts) acts.innerHTML = heroActions.map(a =>
-            `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label}</a>`
+            `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label} <span class="home-link-arrow">${icon('arrow-right')}</span></a>`
         ).join('');
 
         if (!links) return;
@@ -530,7 +530,7 @@ const IndexRenderer = {
             <div class="home-about-copy">
                 <p class="about-brief-lead">${aboutLead}</p>
                 <p class="about-brief-desc">${aboutDesc}</p>
-                <a href="clergy.html" class="about-brief-link">${about.more} <span aria-hidden="true">→</span></a>
+                <a href="clergy.html" class="about-brief-link">${about.more} <span class="home-link-arrow">${icon('arrow-right')}</span></a>
             </div>
             <div class="home-about-facts">
                 <ul class="about-brief-facts">
@@ -543,7 +543,7 @@ const IndexRenderer = {
                         <strong>${award.year} ${award.title}</strong>
                         <span>${award.org}</span>
                     </span>
-                    <span class="about-brief-award-arrow" aria-hidden="true">→</span>
+                    <span class="home-link-arrow">${icon('arrow-right')}</span>
                 </a>` : ''}
             </div>
         `;
@@ -571,7 +571,7 @@ const IndexRenderer = {
             }
         }
         const more = document.getElementById('worship-more');
-        if (more) more.innerHTML = `<a href="worship.html" class="about-brief-link">${home.more} <span aria-hidden="true">→</span></a>`;
+        if (more) more.innerHTML = `<a href="worship.html" class="about-brief-link">${home.more} <span class="home-link-arrow">${icon('arrow-right')}</span></a>`;
     },
 
     /* 다가오는 주일(오늘이 주일이면 오늘) 전례 정보 — 독서 파일을 못 불러오면 블록을 숨긴다 */
@@ -622,10 +622,10 @@ const IndexRenderer = {
                 </div>
                 <ul class="visit-quick" aria-label="방문 안내 바로가기">
                     ${g.cards.map(c => `
-                        <li><a href="${c.href}"><span>${c.title}${c.en ? ` <span class="term-en" lang="en">${c.en}</span>` : ''}</span><span aria-hidden="true">→</span></a></li>
+                        <li><a href="${c.href}"><span>${c.title}${c.en ? ` <span class="term-en" lang="en">${c.en}</span>` : ''}</span><span class="home-link-arrow">${icon('arrow-right')}</span></a></li>
                     `).join('')}
                 </ul>
-                <a href="visit.html" class="about-brief-link">${v.more} <span aria-hidden="true">→</span></a>
+                <a href="visit.html" class="about-brief-link">${v.more} <span class="home-link-arrow">${icon('arrow-right')}</span></a>
             </div>
         `;
     }
