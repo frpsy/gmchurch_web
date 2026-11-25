@@ -2190,7 +2190,8 @@ const PageSwitch = {
             this.go(file + url.hash, true);
         });
         window.addEventListener('popstate', () => {
-            this.go(this._file(location.pathname) + location.hash, false);
+            const file = this._file(location.pathname);
+            if (this._ROUTES[file]) this.go(file + location.hash, false);
         });
     },
 
