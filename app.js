@@ -2472,27 +2472,30 @@ const SermonsRenderer = {
         return `${y}년 ${m}월 ${d}일${weekday ? `(${weekday})` : ''}`;
     },
 
-    // 목록의 한 줄(날짜·제목·설교자). 누르면 아래 본문이 펼쳐진다.
-    _rowHtml(item) {
-        // 제목 줄은 헤딩으로 감싸 스크린 리더가 제목 목록으로 찾을 수 있게 한다(아코디언 패턴)
+    // 최신 설교와 목록이 동일한 본문 및 공유 주소를 사용한다.
+    _itemHtml(item, featured = false) {
         return `
-            <h3 class="sermon-heading" id="sermon-${item.date}">
-            <button class="bulletin-row" type="button" id="sermon-btn-${item.date}"
-                    aria-expanded="false" aria-controls="sermon-body-${item.date}">
-                <div class="bulletin-row-info">
-                    <div class="bulletin-row-top">
-                        <span class="bulletin-row-date">${this._dateLabel(item.date)}</span>
-                    </div>
-                    <div class="bulletin-row-meta">
-                        <span class="bulletin-row-season sermon-row-title">${item.title}</span>
-                        <span class="bulletin-row-count">${item.preacher}</span>
-                    </div>
-                </div>
-                <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true">
-                    <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-            </h3>`;
+            <div class="bulletin-item sermon-item" data-date="${item.date}">
+                <h3 class="sermon-heading" id="sermon-${item.date}">
+                    <button class="bulletin-row" type="button" id="sermon-btn-${item.date}"
+                            aria-expanded="false" aria-controls="sermon-body-${item.date}">
+                        <span class="bulletin-row-info">
+                            <span class="sermon-row-title">${item.title}</span>
+                            <span class="sermon-byline">
+                                <time datetime="${item.date}">${this._dateLabel(item.date)}</time>
+                                <span>${item.preacher}</span>
+                            </span>
+                        </span>
+                        <span class="sermon-action">
+                            ${featured ? '<span class="sermon-open-label">설교 읽기</span><span class="sermon-close-label">본문 접기</span>' : ''}
+                            <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true">
+                                <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </button>
+                </h3>
+                ${this._bodyHtml(item)}
+            </div>`;
     },
 
     // 펼쳐지는 본문: 본문 절·설교자, 문단, 저작 표기, 원문 링크
@@ -2571,29 +2574,33 @@ const SermonsRenderer = {
             el.innerHTML = `<p class="news-empty" role="status">${data.empty || '등록된 설교 말씀이 없습니다.'}</p>`;
             return;
         }
-        // 소개 문장은 페이지 머리말(sermons.html)에 이미 있으므로 목록에서는 다시 쓰지 않는다
+        const [latest, ...archive] = [...items].sort(this._SORTS['date-desc']);
         el.innerHTML = `
+            <section class="sermon-feature" aria-labelledby="sermon-feature-title">
+                <h2 id="sermon-feature-title">최신 설교</h2>
+                <div class="bulletin-list">${this._itemHtml(latest, true)}</div>
+            </section>
             <p class="news-intro">강조와 각주는 편집자가 붙였습니다. 본문 문장은 바꾸지 않았습니다.</p>
-            <div class="sermon-sort" role="group" aria-label="정렬">
-                <button type="button" class="sermon-sort-btn" data-sort="date-desc" aria-pressed="true">최신순</button>
-                <button type="button" class="sermon-sort-btn" data-sort="date-asc" aria-pressed="false">오래된순</button>
-                <button type="button" class="sermon-sort-btn" data-sort="title" aria-pressed="false">제목순</button>
-            </div>
-            <div class="bulletin-list sermon-list" id="sermon-list">${items.map(item => `
-                <div class="bulletin-item sermon-item" data-date="${item.date}">
-                    ${this._rowHtml(item)}${this._bodyHtml(item)}
-                </div>`).join('')}
-            </div>`;
+            ${archive.length ? `
+                <section aria-labelledby="sermon-archive-title">
+                    <div class="sermon-archive-header">
+                        <h2 id="sermon-archive-title">지난 설교</h2>
+                        <div class="sermon-sort" role="group" aria-label="지난 설교 정렬">
+                            <button type="button" class="sermon-sort-btn" data-sort="date-desc" aria-pressed="true">최신순</button>
+                            <button type="button" class="sermon-sort-btn" data-sort="date-asc" aria-pressed="false">오래된순</button>
+                            <button type="button" class="sermon-sort-btn" data-sort="title" aria-pressed="false">제목순</button>
+                        </div>
+                    </div>
+                    <div class="bulletin-list sermon-list" id="sermon-list">${archive.map(item => this._itemHtml(item)).join('')}</div>
+                </section>` : ''}`;
+
+        this._bind(el);
 
         const list = el.querySelector('#sermon-list');
-        this._bind(list);
-        this._sort(list, items, 'date-desc');
-
-        // 정렬 버튼: 눌린 버튼만 aria-pressed="true". 글자를 줄여도 iOS가 화면을 확대하지 않도록 선택 상자 대신 버튼을 쓴다.
         const sortBtns = el.querySelectorAll('.sermon-sort-btn');
-        sortBtns.forEach(b => b.addEventListener('click', () => {
-            sortBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-            this._sort(list, items, b.dataset.sort);
+        sortBtns.forEach(btn => btn.addEventListener('click', () => {
+            sortBtns.forEach(control => control.setAttribute('aria-pressed', String(control === btn)));
+            this._sort(list, archive, btn.dataset.sort);
         }));
 
         // 공유한 링크(#sermon-날짜)로 들어오면 그 설교를 펼쳐 그 자리로 옮긴다. 같은 페이지에서 주소가 바뀌어도 따라간다.
