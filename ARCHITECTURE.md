@@ -639,6 +639,14 @@ window DOMContentLoaded
 --theme-on:     #fff      /* --theme 배경 위 텍스트 */
 --nav-h:        68px
 --section-pad:  6rem   /* ≤768px 2.5rem */
+/* Material 3 역할 토큰 (docs/design-material-plan.md). 새 컴포넌트는 색 이름보다 이 역할 토큰을 먼저 쓴다 */
+--md-primary / --md-on-primary            /* filled 버튼 면·글자. 라이트 #285a47/#fff, 다크 #66a284/#0f1b16 */
+--md-secondary-container / --md-on-secondary-container  /* tonal 면 */
+--md-outline                              /* outlined 버튼 테두리 (면 대비 4.5:1) */
+--md-state-hover/focus/pressed            /* 상태 레이어 투명도 0.08/0.10/0.10 */
+--md-elevation-1, --md-ease-standard, --md-button-height(44px)
+/* 버튼 4종(.btn-next, .btn-next--primary, .btn-hero-primary, .btn-outline, .btn-live)은 알약 모양 +
+   ::before 상태 레이어를 공유한다. hover 떠오름(translateY)은 쓰지 않는다 */
 --content-max:  1200px
 --radius-xs/sm/md/lg: 4px / 8px / 14px / 20px
 --fs-label/md/sm/body/lead: 12.48 / 13.6 / 14.4 / 16 / 18px   /* 라벨 하한은 12.48px */
