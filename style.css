@@ -5456,13 +5456,13 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-row-title { color: var(--heading); font-weight: 600; font-size: var(--fs-body); line-height: 1.45; flex-basis: 100%; }
 /* 날짜는 보조 정보로 낮추고, 제목을 목록의 기준으로 세운다 */
 .sermon-item .bulletin-row-date { font-size: var(--fs-label); font-weight: 500; color: var(--text-muted); }
-/* 성경 봉독 상자: 설교문과 한눈에 구분되도록 옅은 배경과 작은 글씨 */
-.sermon-meta { margin: 0; padding: 0.8rem 1rem; border-radius: 10px; background: var(--green-light); }
+/* 성경 봉독: 상자 대신 위아래 가는 선으로 구분해 카드 안의 겹 상자를 없앤다 */
+.sermon-meta { margin: 0; padding: 0.8rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: none; }
 .sermon-meta .news-post-meta div { grid-template-columns: 5.5rem 1fr; }
-.sermon-meta dt { font-size: var(--fs-label); color: var(--text-muted); }
+.sermon-meta dt { font-size: var(--fs-label); font-weight: 600; color: var(--heading); }
 .sermon-meta dd { font-size: var(--fs-label); color: var(--heading); font-weight: 600; }
-/* 설교문 시작 표지: 굵은 윗선으로 봉독 상자와 본문을 가른다 */
-.sermon-text-label { margin: 1.75rem 0 1.1rem; padding-top: 0.6rem; border-top: 2px solid var(--heading); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.08em; color: var(--heading); }
+/* 설교문 시작 표지: 본문 글자 크기로 키우고 봉독 선과 본문 사이를 넓힌다 */
+.sermon-text-label { margin: 2.25rem 0 1.25rem; padding-top: 0.75rem; border-top: 2px solid var(--heading); font-size: var(--fs-body); font-weight: 700; letter-spacing: 0.04em; color: var(--heading); }
 /* 편집자 강조: 글자색은 제목 색 그대로, 아래쪽에 옅은 색 띠를 깐다(글자 대비 유지) */
 .sermon-em { font-weight: 600; color: var(--heading); background: linear-gradient(transparent 58%, color-mix(in srgb, var(--gold) 55%, transparent) 58%); padding: 0 0.1em; }
 /* 절 번호 제목(1. 2. …) */
@@ -5510,7 +5510,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 @media (max-width: 480px) {
     .sermon-item .bulletin-row { padding: 1rem 1.1rem; }
     .sermon-item .bulletin-drawer { padding: 1.1rem 1.1rem 1.4rem; }
-    .sermon-meta { padding: 0.7rem 0.85rem; }
+    .sermon-meta { padding: 0.7rem 0; }
     .sermon-meta .news-post-meta div { grid-template-columns: 4.25rem 1fr; gap: 0.4rem; }
     .sermon-section { margin-top: 1.6rem; }
 }
@@ -5520,7 +5520,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     .sermon-item .bulletin-drawer { padding: 2rem 1.75rem 2.25rem; }
     .sermon-row-title { font-size: 1.1875rem; }
     .sermon-body p { font-size: 1.0625rem; line-height: 1.9; }
-    .sermon-meta { padding: 0.9rem 1.25rem; }
+    .sermon-meta { padding: 0.9rem 0; }
 }
 .news-post-meta { margin: 0.5rem 0 0; display: grid; gap: 0.3rem; }
 .news-post-meta div { display: grid; grid-template-columns: 3rem 1fr; gap: 0.5rem; line-height: 1.7; }
