@@ -425,7 +425,9 @@ button:focus:not(:focus-visible) { outline: none; }
 .nav-toggle span {
     display: block; width: 22px; height: 2px;
     background: #fff; border-radius: 2px;
-    transition: transform var(--dur-slow), opacity var(--dur-slow);
+}
+@media (prefers-reduced-motion: no-preference) {
+    .nav-toggle span { transition: transform var(--dur-fast), opacity var(--dur-fast); }
 }
 /* 메뉴가 열리면 ≡ → ✕ (닫기 버튼임을 바로 알 수 있게) */
 .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -501,8 +503,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* 모션 감소 선호 → 모든 애니메이션 정지 */
 @media (prefers-reduced-motion: reduce) {
     .hero-fallback,
-    .hero-content > *,
-    .hero-scroll { animation: none; opacity: 1; transform: none; }
+    .hero-content > * { animation: none; opacity: 1; transform: none; }
 
     .reveal, .reveal.visible {
         opacity: 1;
@@ -657,28 +658,11 @@ button:focus:not(:focus-visible) { outline: none; }
     background: rgba(255,255,255,0.12);
 }
 
-/* Hero — 스크롤 인디케이터 */
-@keyframes hero-scroll-bounce {
-    0%, 100% { transform: translateY(0); opacity: 0.55; }
-    50%       { transform: translateY(5px); opacity: 1; }
-}
-.hero-scroll {
-    position: absolute;
-    bottom: 5.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    color: rgba(255,255,255,0.65);
-    animation: hero-scroll-bounce 2s ease-in-out infinite;
-    pointer-events: none;
-}
-
 @media (max-width: 768px) {
     /* CTA — 세로 스택 시 동일 너비로 정렬 */
     .hero-actions { flex-direction: column; align-items: center; gap: 0.7rem; }
     .hero-actions a { width: 100%; max-width: 300px; text-align: center; }
 
-    .hero-scroll { bottom: 5rem; }
     .btn-hero-primary { font-size: var(--fs-sm); }
 
     .hero-fallback { animation: none; transform: none; will-change: auto; }
@@ -829,44 +813,44 @@ button:focus:not(:focus-visible) { outline: none; }
     .page-hero--greenchurch { background-image: url('images/hero/greenchurch-award-m.webp'); background-position: center; }
 }
 
-/* 히어로 좌·우 17% 메뉴 이동 영역 — 가운데 글자 영역은 건드리지 않는다 */
+/* 사진 위 이동 버튼은 제목과 분리된 고정 크기 터치 영역을 둔다. */
 .page-hero > .hero-nav {
     position: absolute;
-    top: var(--nav-h);
-    bottom: 0;
-    width: 17%;
+    top: calc(50% + var(--nav-h) / 2);
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
     z-index: 2;
-    display: flex;
-    align-items: center;
+    display: grid;
+    place-items: center;
     animation: none;
     opacity: 1;
-    color: #fff;
-    -webkit-tap-highlight-color: transparent;
+    color: var(--brand-sub);
+    background: var(--nav-glass);
+    border: 1px solid color-mix(in srgb, var(--brand-sub) 45%, transparent);
+    border-radius: 50%;
 }
-.hero-nav--prev { left: 0;  justify-content: flex-start; padding-left: 0.4rem; }
-.hero-nav--next { right: 0; justify-content: flex-end;   padding-right: 0.4rem; }
+.hero-nav--prev { inset-inline-start: clamp(0.5rem, 3vw, 2rem); }
+.hero-nav--next { inset-inline-end: clamp(0.5rem, 3vw, 2rem); }
 .hero-nav svg {
-    width: 1.9rem;
-    height: 1.9rem;
+    width: 1.3rem;
+    height: 1.3rem;
     fill: none;
     stroke: currentColor;
-    stroke-width: 1.6;
+    stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
-    opacity: 0.35;
-    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));
-    transition: opacity var(--dur-fast);
 }
-/* 누를 때는 영역 전체가 아니라 화살표 주변에만 아주 옅게 표시한다 */
-.hero-nav:active svg {
-    opacity: 0.7;
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.05);
-    box-shadow: 0 0 0 0.3rem rgba(255,255,255,0.05);
-}
-.hero-nav:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.page-hero > .hero-nav:active { background: var(--green-deep); }
+.page-hero > .hero-nav:focus-visible { outline: 2px solid var(--brand-sub); outline-offset: 2px; }
 @media (hover: hover) {
-    .hero-nav:hover svg { opacity: 0.7; }
+    .page-hero > .hero-nav:hover { border-color: var(--brand-sub); }
+}
+@media (max-width: 768px) {
+    .page-hero--photo:has(.hero-nav) { padding-inline: 60px; }
+    .page-hero > .hero-nav { width: 44px; height: 44px; }
+    .hero-nav--prev { inset-inline-start: 0.5rem; }
+    .hero-nav--next { inset-inline-end: 0.5rem; }
 }
 @media print { .hero-nav { display: none !important; } }
 
@@ -3222,8 +3206,9 @@ footer {
         align-items: stretch;
         height: auto;
         max-height: calc(100vh - var(--nav-h));
-        max-height: calc(100svh - var(--nav-h));
+        max-height: calc(100dvh - var(--nav-h));
         overflow-y: auto;
+        overscroll-behavior-y: contain;
         -webkit-overflow-scrolling: touch;
         border-top: 1px solid rgba(255,255,255,0.1);
     }
@@ -3272,9 +3257,11 @@ footer {
         padding: 0;
     }
     .nav-chevron:hover { background: rgba(255,255,255,0.08); color: #fff; }
-    .nav-item.mobile-open .nav-chevron { color: #fff; }
+    .nav-item.mobile-open .nav-chevron { color: var(--brand-sub); background-color: color-mix(in srgb, var(--brand-sub) 18%, transparent); }
     .nav-item.mobile-open .nav-chevron svg { transform: rotate(180deg); }
-    .nav-chevron svg { transition: transform var(--dur-slow); }
+    @media (prefers-reduced-motion: no-preference) {
+        .nav-chevron svg { transition: transform var(--dur-fast) var(--md-ease-standard); }
+    }
     .dropdown {
         position: static;
         opacity: 1; visibility: visible; transform: none;
@@ -3303,7 +3290,35 @@ footer {
     .nav-link.active { box-shadow: none; }
 
     /* Hero */
-    .hero { min-height: 100vh; min-height: max(100svh, 560px); }
+    .hero {
+        height: auto;
+        min-height: 30rem;
+        min-height: clamp(28rem, 78svh, 43rem);
+        display: grid;
+        grid-template: minmax(min-content, 1fr) auto / minmax(0, 1fr);
+    }
+    .hero-content {
+        align-self: center;
+        padding-top: calc(var(--nav-h) + 1.25rem);
+        padding-bottom: 1.5rem;
+    }
+    .hero-content > * { animation: none; opacity: 1; }
+    .hero-label { margin-bottom: 0.75rem; }
+    .hero h1 { margin-bottom: 0.75rem; }
+    .hero-sub { margin-bottom: 1.25rem; }
+    .hero-stats {
+        position: relative;
+        padding-inline: max(0.5rem, calc((100% - 28rem) / 2));
+    }
+    .hero-stat { position: relative; }
+    .hero-stat + .hero-stat::before {
+        content: '';
+        position: absolute;
+        inset-block: 0.4rem;
+        inset-inline-start: 0;
+        border-inline-start: 1px solid color-mix(in srgb, var(--brand-sub) 24%, transparent);
+        pointer-events: none;
+    }
 
     /* Clergy Card — 초상만 가운데, bio 텍스트는 좌측 정렬 유지 */
     .clergy-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem 1.75rem; }

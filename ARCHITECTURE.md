@@ -480,7 +480,7 @@ window DOMContentLoaded
       │     iOS :active(눌림 색)용 touchstart 리스너만 — 이동 지연 없음. 터치 기기 hover 이동 제거는 style.css 끝 @media (hover: none)
       │
       ├── HeroNav.init()              (.page-hero--photo가 있고 navigation 최상위 메뉴인 페이지)
-      │     히어로 좌·우 17%에 이전/다음 메뉴 링크(.hero-nav) 추가 — 메뉴 순서는 CHURCH_DATA.navigation, 양 끝은 순환
+      │     히어로 좌·우에 이전/다음 메뉴 버튼(.hero-nav) 추가 — 메뉴 순서는 CHURCH_DATA.navigation, 양 끝은 순환
       │
       └── MenuOverlay.init()          (모든 페이지)
             nav-menu-trigger 버튼으로 여는 전체 메뉴 + 검색 오버레이
@@ -731,7 +731,7 @@ window DOMContentLoaded
 | `.footer-logo-mark` | 푸터 캔터베리 십자가 컨테이너 (38×38px, 흰색 SVG) |
 | `.ico` | 아이콘 팩 SVG (`images/icons.svg` 심볼, 1em 크기·가는 단색 선) |
 | `.reveal` | ScrollReveal 애니메이션 대상 (fade-in on scroll) |
-| `.hero-nav` / `.hero-nav--prev` / `--next` | 메뉴 히어로 좌·우 17% 이전/다음 메뉴 터치 영역 (HeroNav가 생성) |
+| `.hero-nav` / `.hero-nav--prev` / `--next` | 메뉴 히어로 좌·우 이전/다음 메뉴 버튼 (모바일 44px, 데스크톱 48px) |
 | `.page-hero--{clergy,worship,bulletin,altar,sundays,newcomer,community,media,visit}` | 메뉴별 상징 이미지 히어로 (`images/hero/*.webp`, 모바일은 `-m` 경량본. `bulletin`=주보 페이지, `altar`=예배와 기도 페이지). 글자 배치는 전부 `.page-hero--photo` 공통 규칙 |
 
 ### 반응형 브레이크포인트

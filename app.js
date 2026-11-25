@@ -144,15 +144,15 @@ const NavRenderer = {
         // active 우선순위: 페이지+해시 완전 일치 > 하위 메뉴 hash 일치 > 해시 없는 페이지 일치(fallback)
         const activeHref = this._resolveActiveHref(currentPage, currentHash);
 
-        const items = CHURCH_DATA.navigation.map(item => {
+        const items = CHURCH_DATA.navigation.map((item, index) => {
             const isActive = item.href === activeHref;
             return `
             <li class="nav-item has-dropdown">
                 <a href="${item.href}" class="nav-link${isActive ? ' active' : ''}"${isActive ? ' aria-current="page"' : ''}>${item.label}</a>
-                <button class="nav-chevron" aria-label="${item.label} 하위 메뉴" aria-expanded="false">
+                <button class="nav-chevron" aria-label="${item.label} 하위 메뉴" aria-expanded="false" aria-controls="nav-submenu-${index}">
                     <svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
-                <ul class="dropdown">
+                <ul class="dropdown" id="nav-submenu-${index}">
                     ${item.items.map(sub =>
                         `<li><a href="${sub.href}">${sub.label}${sub.badge ? ` <span class="nav-badge">${sub.badge}</span>` : ''}</a></li>`
                     ).join('')}
@@ -221,6 +221,7 @@ const NavRenderer = {
                 menu.classList.add('open');
                 toggle.setAttribute('aria-expanded', true);
                 toggle.setAttribute('aria-label', '메뉴 닫기');
+                menu.querySelector('.nav-link')?.focus();
             }
         });
 
@@ -229,6 +230,10 @@ const NavRenderer = {
                 closeMenu();
                 toggle.focus();
             }
+        });
+
+        menu.addEventListener('focusout', (e) => {
+            if (e.relatedTarget && e.relatedTarget !== toggle && !menu.contains(e.relatedTarget)) closeMenu();
         });
 
         menu.querySelectorAll('.nav-chevron').forEach(btn => {
@@ -260,7 +265,7 @@ const NavRenderer = {
                     history.pushState(null, '', '#' + hash);
                 }
                 NavRenderer._updateActive();
-                App._scrollToHash('#' + hash);
+                App._scrollToHash('#' + hash, { focus: true });
             }
         };
 
@@ -3469,12 +3474,19 @@ const App = {
         });
     },
 
-    _scrollToHash(hash) {
+    _scrollToHash(hash, { focus = false } = {}) {
         // '#'만 있거나 선택자로 쓸 수 없는 해시(텍스트 조각 등)는 무시
         let el = null;
         try { el = hash && hash.length > 1 ? document.querySelector(hash) : null; } catch (e) { return; }
         if (!el) return;
         MoreToggle.reveal(el);
+        if (focus) {
+            if (!el.hasAttribute('tabindex') && el.tabIndex < 0) {
+                el.setAttribute('tabindex', '-1');
+                el.addEventListener('blur', () => el.removeAttribute('tabindex'), { once: true });
+            }
+            el.focus({ preventScroll: true });
+        }
         const navH = parseInt(getComputedStyle(document.documentElement)
             .getPropertyValue('--nav-h')) || 64;
         window.scrollTo({
