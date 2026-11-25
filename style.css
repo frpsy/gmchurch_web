@@ -1655,9 +1655,12 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .home main > .section > .container,
 .home #main-footer > .container { max-width: 66rem; }
-.home main > .section .section-header { margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+.home main > .section .section-header {
+    margin-bottom: clamp(1.25rem, 3vw, 2rem);
+    text-align: center;
+}
 .home main > .section .section-title { margin-bottom: 0; }
-.home main > .section .section-sub { margin-top: 0.55rem; }
+.home main > .section .section-sub { margin: 0.55rem auto 0; }
 
 .home #about-brief { background: var(--white); }
 .home #worship {
