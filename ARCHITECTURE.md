@@ -647,6 +647,8 @@ window DOMContentLoaded
 --md-elevation-1, --md-ease-standard, --md-button-height(44px)
 /* 버튼 4종(.btn-next, .btn-next--primary, .btn-hero-primary, .btn-outline, .btn-live)은 알약 모양 +
    ::before 상태 레이어를 공유한다. hover 떠오름(translateY)은 쓰지 않는다 */
+--md-layer-hover/focus/pressed   /* 카드 상태 레이어(inset 그림자). 누르는 카드는 "M3 카드 상호작용" 블록에 이름을 더한다.
+   정보만 담은 카드는 hover에 반응시키지 않는다 */
 --content-max:  1200px
 --radius-xs/sm/md/lg: 4px / 8px / 14px / 20px
 --fs-label/md/sm/body/lead: 12.48 / 13.6 / 14.4 / 16 / 18px   /* 라벨 하한은 12.48px */
