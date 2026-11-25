@@ -125,6 +125,10 @@
     --md-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.30), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
     --md-ease-standard: cubic-bezier(0.2, 0, 0, 1);
     --md-button-height: 44px;  /* M3 기본 40px보다 조금 크게 — 터치 영역 확보 */
+    /* 카드 상태 레이어 — 면 위를 primary로 덮는 inset 그림자(가상요소를 쓰지 않아 기존 ::before와 겹치지 않음) */
+    --md-layer-hover:   inset 0 0 0 100vmax color-mix(in srgb, var(--md-primary) 8%, transparent);
+    --md-layer-focus:   inset 0 0 0 100vmax color-mix(in srgb, var(--md-primary) 10%, transparent);
+    --md-layer-pressed: inset 0 0 0 100vmax color-mix(in srgb, var(--md-primary) 10%, transparent);
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
@@ -928,15 +932,6 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: border-color var(--dur-slow) ease, box-shadow var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out), opacity 0.6s ease;
     will-change: transform, opacity;
 }
-.card:hover {
-    border-color: var(--theme);
-    box-shadow: var(--hover-shadow);
-    transform: translateY(var(--lift-2));
-}
-@media (prefers-reduced-motion: reduce) {
-    .card { transition: border-color var(--dur-slow), box-shadow var(--dur-slow); }
-    .card:hover { transform: none; }
-}
 .card h3 {
     font-size: var(--fs-lead);
     font-weight: 700;
@@ -962,7 +957,6 @@ button:focus:not(:focus-visible) { outline: none; }
     display: inline-block;
     transition: transform var(--dur-slow) var(--ease-out);
 }
-.card:hover .card-icon { transform: scale(1.18) translateY(-3px); }
 
 /* Info Card */
 .info-card {
@@ -971,15 +965,6 @@ button:focus:not(:focus-visible) { outline: none; }
     border: 1px solid var(--border);
     padding: 2.5rem 2.25rem;
     transition: border-color var(--dur-slow) ease, box-shadow var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out), opacity 0.6s ease;
-}
-.info-card:hover {
-    border-color: var(--theme);
-    box-shadow: var(--hover-shadow-sm);
-    transform: translateY(var(--lift-2));
-}
-@media (prefers-reduced-motion: reduce) {
-    .info-card { transition: border-color var(--dur-slow), box-shadow var(--dur-slow); }
-    .info-card:hover { transform: none; }
 }
 .info-card h3 {
     font-size: var(--fs-lead);
@@ -1369,11 +1354,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     transition: transform var(--dur-slow) cubic-bezier(.2,.7,.3,1),
                 box-shadow var(--dur-slow) cubic-bezier(.2,.7,.3,1),
                 border-color var(--dur-slow);
-}
-.value-card:hover {
-    transform: translateY(var(--lift-1));
-    box-shadow: var(--shadow-md);
-    border-color: var(--green-soft);
 }
 .value-card .val-icon { font-size: 1.8rem; margin-bottom: 0.85rem; }
 .value-card h3 { font-size: var(--fs-body); font-weight: 700; color: var(--heading); margin-bottom: 0.5rem; }
@@ -1959,22 +1939,12 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     text-align: center;
     transition: border-color var(--dur-slow) ease, box-shadow var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out), opacity 0.6s ease;
 }
-.anglican-pillar:hover {
-    border-color: var(--theme);
-    box-shadow: var(--hover-shadow-sm);
-    transform: translateY(var(--lift-2));
-}
-@media (prefers-reduced-motion: reduce) {
-    .anglican-pillar { transition: border-color var(--dur-slow), box-shadow var(--dur-slow); }
-    .anglican-pillar:hover { transform: none; }
-}
 .anglican-pillar-icon {
     font-size: 2rem;
     margin-bottom: 0.75rem;
     display: inline-block;
     transition: transform var(--dur-slow) var(--ease-out);
 }
-.anglican-pillar:hover .anglican-pillar-icon { transform: scale(1.15) translateY(-2px); }
 @media (prefers-reduced-motion: reduce) {
     .anglican-pillar-icon { transition: none; }
 }
@@ -2076,14 +2046,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border-radius: var(--radius-sm);
     border-left: 3px solid var(--theme);
     transition: box-shadow var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out), opacity 0.6s ease;
-}
-.mission-mark:hover {
-    box-shadow: var(--hover-shadow-sm);
-    transform: translateY(var(--lift-2));
-}
-@media (prefers-reduced-motion: reduce) {
-    .mission-mark { transition: box-shadow var(--dur-slow); }
-    .mission-mark:hover { transform: none; }
 }
 .mission-mark__num { flex-shrink: 0; width: 1.75rem; height: 1.75rem; background: var(--theme); color: var(--theme-on); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--fs-label); font-weight: 700; }
 .mission-mark__body { flex: 1; min-width: 0; }
@@ -2606,13 +2568,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     text-decoration: none;
     transition: border-color var(--dur), color var(--dur), background var(--dur), transform var(--dur), box-shadow var(--dur);
 }
-.newcomer-cta-link:hover {
-    border-color: var(--theme);
-    color: var(--heading);
-    background: var(--green-light);
-    box-shadow: var(--hover-shadow-sm);
-    transform: translateY(var(--lift-1));
-}
 
 .liturgy-section { margin-bottom: 3.5rem; }
 .liturgy-body {
@@ -2674,15 +2629,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     padding: 1.5rem 1.75rem;
     border: 1px solid var(--border);
     transition: border-color var(--dur-slow) ease, box-shadow var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out), opacity 0.6s ease;
-}
-.liturgy-step:hover {
-    border-color: var(--green-soft);
-    box-shadow: var(--hover-shadow-sm);
-    transform: translateY(var(--lift-2));
-}
-@media (prefers-reduced-motion: reduce) {
-    .liturgy-step { transition: border-color var(--dur-slow), box-shadow var(--dur-slow); }
-    .liturgy-step:hover { transform: none; }
 }
 .step-num {
     flex-shrink: 0;
@@ -2774,23 +2720,12 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: inherit;
     transition: border-color var(--dur-slow) ease, box-shadow var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out), opacity 0.6s ease, background-color var(--dur-slow) ease;
 }
-/* 터치 기기는 hover가 탭과 동시에 걸려 카드가 뜨며 어색하므로 마우스에서만 적용 */
-@media (hover: hover) {
-    .resource-card:hover {
-        border-color: var(--theme);
-        box-shadow: var(--hover-shadow-sm);
-        transform: translateY(var(--lift-2));
-    }
-}
 .resource-card { -webkit-tap-highlight-color: transparent; }
 .resource-icon {
     font-size: 1.9rem;
     margin-bottom: 0.8rem;
     display: inline-block;
     transition: transform var(--dur-slow) var(--ease-out);
-}
-@media (hover: hover) {
-    .resource-card:hover .resource-icon { transform: scale(1.12) translateY(-2px); }
 }
 .resource-title {
     font-size: var(--fs-body);
@@ -2811,12 +2746,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     overflow-wrap: break-word;
 }
 .resource-link { font-size: var(--fs-md); font-weight: 700; letter-spacing: 0.01em; }
-@media (prefers-reduced-motion: reduce) {
-    .resource-card { transition: border-color var(--dur-slow), box-shadow var(--dur-slow); }
-    .resource-card:hover { transform: none; }
-    .resource-icon { transition: none; }
-    .resource-card:hover .resource-icon { transform: none; }
-}
 
 /* Lectionary Calendar */
 .lectionary-cal-wrap {
@@ -3828,11 +3757,6 @@ footer {
     transition: transform var(--dur-fast), box-shadow var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
     text-decoration: none;
 }
-.map-btn:hover {
-    transform: translateY(var(--lift-1));
-    box-shadow: var(--shadow-md);
-    border-color: var(--green-soft);
-}
 .map-btn-mark {
     display: inline-flex;
     align-items: center;
@@ -3989,11 +3913,6 @@ footer {
     position: relative;
     transition: box-shadow var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);
 }
-.links-card:hover {
-    border-color: var(--theme);
-    box-shadow: var(--shadow-md);
-    transform: translateY(var(--lift-1));
-}
 .links-card-name {
     font-size: var(--fs-body);
     font-weight: 700;
@@ -4053,10 +3972,6 @@ footer {
     text-decoration: none;
     color: var(--text);
     transition: transform var(--dur), box-shadow var(--dur);
-}
-.video-card:hover {
-    transform: translateY(var(--lift-2));
-    box-shadow: var(--shadow-md);
 }
 .video-thumb {
     position: relative;
@@ -4719,11 +4634,6 @@ footer {
     text-decoration: none;
     font-size: var(--fs-sm);
     transition: border-color var(--dur-slow), transform var(--dur-slow), box-shadow var(--dur-slow);
-}
-.about-next:hover {
-    border-color: var(--green-mid);
-    transform: translateY(var(--lift-1));
-    box-shadow: var(--shadow-md);
 }
 .about-next-label { color: var(--text-muted); font-weight: 500; }
 .about-next-target { color: var(--heading); font-weight: 700; }
@@ -5439,26 +5349,50 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     vertical-align: 0;
 }
 
+/* ── M3 카드 상호작용 (docs/design-material-plan.md 2단계) ──────
+   정보만 담은 카드(.card, .info-card, .value-card, .anglican-pillar, .mission-mark, .liturgy-step)는
+   누를 수 없으므로 hover에 반응하지 않는다.
+   누르는 카드·링크 상자는 떠오르지 않고, 면 위에 primary 상태 레이어(inset 그림자)를 덮는다.
+   썸네일이 있는 카드는 그림 위가 아니라 글자 영역에만 막이 보인다. */
+.newcomer-cta-link, .resource-card, .map-btn, .links-card, .video-card, .shorts-card,
+.about-next, .value-card--link {
+    -webkit-tap-highlight-color: transparent;
+    /* opacity·transform은 스크롤 등장(.reveal)용 — 이 선언이 .reveal의 transition을 덮으므로 함께 둔다 */
+    transition: box-shadow var(--dur) var(--md-ease-standard), border-color var(--dur) var(--md-ease-standard),
+                opacity 0.6s ease, transform var(--dur-slow) var(--ease-out);
+}
+@media (hover: hover) {
+    .newcomer-cta-link:hover, .resource-card:hover, .map-btn:hover, .links-card:hover,
+    .video-card:hover, .shorts-card:hover, .about-next:hover, .value-card--link:hover {
+        border-color: var(--md-outline);
+        box-shadow: var(--md-elevation-1), var(--md-layer-hover);
+    }
+}
+.newcomer-cta-link:focus-visible, .resource-card:focus-visible, .map-btn:focus-visible,
+.links-card:focus-visible, .video-card:focus-visible, .shorts-card:focus-visible,
+.about-next:focus-visible, .value-card--link:focus-visible {
+    box-shadow: var(--md-layer-focus);
+}
+.newcomer-cta-link:active, .resource-card:active, .map-btn:active, .links-card:active,
+.video-card:active, .shorts-card:active, .about-next:active, .value-card--link:active {
+    box-shadow: var(--md-layer-pressed);
+    transition: none;
+}
+
 /* ── 터치 기기 탭 반응 ──────────────────────────────────────
-   hover의 떠오름·확대가 탭 뒤에 남아 카드가 튀고, 크기 변화(scale)는 스크롤 시작에도 걸려 버벅인다.
-   터치에서는 움직임을 없애고, 눌린 순간 색만 바로 바꾼다. */
+   hover의 떠오름·확대가 탭 뒤에 남지 않게 움직임을 없앤다. 눌림은 위 상태 레이어가 보여 준다. */
 @media (hover: none) {
-    .card:hover, .card:hover .card-icon, .info-card:hover, .value-card:hover,
-    .anglican-pillar:hover, .anglican-pillar:hover .anglican-pillar-icon, .mission-mark:hover,
-    .btn-next:hover, .btn-live:hover, .btn-hero-primary:hover, .liturgy-step:hover, .map-btn:hover,
-    .links-card:hover, .video-card:hover, .photo-item:hover, .photo-item:hover img,
-    .about-next:hover, .about-next:hover .about-next-arrow, .bulletin-page:hover,
+    .btn-next:hover, .btn-live:hover, .btn-hero-primary:hover,
+    .photo-item:hover, .photo-item:hover img,
+    .about-next:hover .about-next-arrow, .bulletin-page:hover,
     .iona-link-card:hover .iona-link-card__arrow {
         transform: none;
     }
-    a.resource-card:active, a.card:active, a.links-card:active, a.iona-link-card:active,
-    .video-card:active, .newcomer-cta-link:active, .about-next:active {
+    a.iona-link-card:active {
         background-color: var(--green-light);
         border-color: var(--theme);
         transition: none;
     }
-    /* 버튼(.btn-next 등)은 M3 상태 레이어가 눌림을 보여 주므로 여기서 따로 흐리게 하지 않는다 */
-    .map-btn:active { opacity: 0.75; transition: none; }
     /* 터치 뒤 hover 상태가 남아 막이 덮인 채로 보이지 않게 한다(눌린 순간만 표시) */
     .btn-outline:hover::before, .btn-live:hover::before,
     .btn-hero-primary:hover::before, .btn-next:hover::before { opacity: 0; }
