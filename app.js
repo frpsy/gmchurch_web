@@ -96,9 +96,10 @@ const MapHelper = {
         const jibun = CHURCH_DATA.info.addressJibun;
         return `
             <div class="map-card${compact ? ' map-card--compact' : ''}">
+                ${compact ? '' : `
                 <div class="map-preview">
                     <iframe class="map-embed" src="${this._embedSrc()}" title="대한성공회 광명교회 위치 — Google 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-                </div>
+                </div>`}
                 <div class="map-card-addr">
                     <div class="map-addr-row">
                         <span class="map-addr-tag">도로명</span>
@@ -480,12 +481,11 @@ const IndexRenderer = {
         this._visit();
     },
 
-    _header(id, { eyebrow, title, sub }) {
+    _header(id, { title, sub }) {
         const el = document.getElementById(id);
         if (!el) return;
         el.innerHTML = `
-            <p class="section-eyebrow">${eyebrow}</p>
-            <h2 class="section-title">${title}</h2>
+            <h2 class="section-title" id="${id}-title">${title}</h2>
             ${sub ? `<p class="section-sub">${sub}</p>` : ''}
         `;
     },
@@ -527,7 +527,15 @@ const IndexRenderer = {
         const about = CHURCH_DATA.home.about;
         this._header('about-brief-header', about);
         el.innerHTML = `
-            <div class="about-brief">
+            <div class="home-about-copy">
+                <p class="about-brief-lead">${aboutLead}</p>
+                <p class="about-brief-desc">${aboutDesc}</p>
+                <a href="clergy.html" class="about-brief-link">${about.more} <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="home-about-facts">
+                <ul class="about-brief-facts">
+                    ${about.facts.map(f => `<li><strong>${f.label}</strong><span>${info[f.key]}</span></li>`).join('')}
+                </ul>
                 ${award ? `
                 <a href="${award.href}" class="about-brief-award">
                     <span class="about-brief-award-icon" aria-hidden="true">${icon('leaf')}</span>
@@ -537,12 +545,6 @@ const IndexRenderer = {
                     </span>
                     <span class="about-brief-award-arrow" aria-hidden="true">→</span>
                 </a>` : ''}
-                <p class="about-brief-lead">${aboutLead}</p>
-                <p class="about-brief-desc">${aboutDesc}</p>
-                <ul class="about-brief-facts">
-                    ${about.facts.map(f => `<li><strong>${f.label}</strong><span>${info[f.key]}</span></li>`).join('')}
-                </ul>
-                <a href="clergy.html" class="about-brief-link">${about.more} →</a>
             </div>
         `;
     },
@@ -569,7 +571,7 @@ const IndexRenderer = {
             }
         }
         const more = document.getElementById('worship-more');
-        if (more) more.innerHTML = `<a href="worship.html" class="about-brief-link">${home.more} →</a>`;
+        if (more) more.innerHTML = `<a href="worship.html" class="about-brief-link">${home.more} <span aria-hidden="true">→</span></a>`;
     },
 
     /* 다가오는 주일(오늘이 주일이면 오늘) 전례 정보 — 독서 파일을 못 불러오면 블록을 숨긴다 */
@@ -602,7 +604,7 @@ const IndexRenderer = {
         el.hidden = false;
     },
 
-    /* 방문 정보 한 카드: 예배 시간·소요 → 주소·전화 → 방문 바로가기 → 지도 */
+    /* 홈에서는 주소와 길찾기 링크를 가장 먼저 보여 준다. */
     _visit() {
         const locationEl = document.getElementById('location-card');
         if (!locationEl) return;
@@ -612,19 +614,19 @@ const IndexRenderer = {
         const g = CHURCH_DATA.home.guide;
         this._header('visit-header', v);
         locationEl.innerHTML = `
-            <div class="visit-facts">
-                <div class="info-row"><strong>${v.worshipLabel}</strong><span>${main.time} · ${main.duration}</span></div>
-                <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}" class="link-plain">${phone}</a></span></div>
-            </div>
-            <ul class="visit-quick" aria-label="방문 안내 바로가기">
-                ${g.cards.map(c => `
-                    <li><a href="${c.href}">${c.title}${c.en ? ` <span class="term-en" lang="en">${c.en}</span>` : ''} →</a></li>
-                `).join('')}
-            </ul>
             ${MapHelper.html(true)}
-            <p class="visit-detail-wrap">
-                <a href="visit.html" class="detail-link">${v.more} →</a>
-            </p>
+            <div class="home-visit-details">
+                <div class="visit-facts">
+                    <div class="info-row"><strong>${v.worshipLabel}</strong><span>${main.time} · ${main.duration}</span></div>
+                    <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}">${phone}</a></span></div>
+                </div>
+                <ul class="visit-quick" aria-label="방문 안내 바로가기">
+                    ${g.cards.map(c => `
+                        <li><a href="${c.href}"><span>${c.title}${c.en ? ` <span class="term-en" lang="en">${c.en}</span>` : ''}</span><span aria-hidden="true">→</span></a></li>
+                    `).join('')}
+                </ul>
+                <a href="visit.html" class="about-brief-link">${v.more} <span aria-hidden="true">→</span></a>
+            </div>
         `;
     }
 };
