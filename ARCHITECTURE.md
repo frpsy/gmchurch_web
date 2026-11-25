@@ -649,6 +649,10 @@ window DOMContentLoaded
    ::before 상태 레이어를 공유한다. hover 떠오름(translateY)은 쓰지 않는다 */
 --md-layer-hover/focus/pressed   /* 카드 상태 레이어(inset 그림자). 누르는 카드는 "M3 카드 상호작용" 블록에 이름을 더한다.
    정보만 담은 카드는 hover에 반응시키지 않는다 */
+--md-surface-container(-high), --md-elevation-2/3   /* 메뉴·대화상자·검색창 표면과 높이 */
+--md-ease-emphasized-decel                 /* 나타나는 요소 곡선 (--ease-out도 같은 값) */
+--md-display-l/m, --md-headline-l/m, --md-title-l/m, --md-body-l/m, --md-label-l/m  /* 글자 역할 */
+--radius-sm 8 · --radius-md 12 · --radius-lg 16 · --radius-xl 28   /* M3 모양 척도 */
 --content-max:  1200px
 --radius-xs/sm/md/lg: 4px / 8px / 14px / 20px
 --fs-label/md/sm/body/lead: 12.48 / 13.6 / 14.4 / 16 / 18px   /* 라벨 하한은 12.48px */

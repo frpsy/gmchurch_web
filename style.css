@@ -49,16 +49,18 @@
     --nav-h:        68px;
     --section-pad:  6rem;
     --content-max:  1200px;
-    --radius-sm:    8px;
-    --radius-md:    14px;
-    --radius-lg:    20px;
+    /* 모양 — M3 척도(XS 4 · S 8 · M 12 · L 16 · XL 28 · full)에 맞춘다 */
+    --radius-sm:    8px;    /* S: 칩·메뉴·작은 상자 */
+    --radius-md:    12px;   /* M: 카드 (전 14px) */
+    --radius-lg:    16px;   /* L: 큰 카드·영상 카드 (전 20px) */
+    --radius-xl:    28px;   /* XL: 시트·큰 패널 */
     --radius-pill:  999px;
     /* Shadows — lighter, less decorative */
     --shadow-sm:    0 1px 3px rgba(28, 67, 54, 0.06);
     --shadow-md:    0 3px 14px rgba(28, 67, 54, 0.08);
     --shadow-lg:    0 12px 40px rgba(28, 67, 54, 0.11);
     /* Motion — shared language for hover/reveal across all pages */
-    --ease-out:        cubic-bezier(0.2, 0.7, 0.3, 1);
+    --ease-out:        cubic-bezier(0.05, 0.7, 0.1, 1);  /* M3 emphasized decelerate — 나타나는 요소 */
     --dur-fast:        0.15s;
     --dur:             0.2s;
     --dur-slow:        0.3s;
@@ -129,6 +131,24 @@
     --md-layer-hover:   inset 0 0 0 100vmax color-mix(in srgb, var(--md-primary) 8%, transparent);
     --md-layer-focus:   inset 0 0 0 100vmax color-mix(in srgb, var(--md-primary) 10%, transparent);
     --md-layer-pressed: inset 0 0 0 100vmax color-mix(in srgb, var(--md-primary) 10%, transparent);
+    /* 표면 단계 — 떠 있는 메뉴·검색창 바탕 */
+    --md-surface-container:      #ffffff;
+    --md-surface-container-high: #f0f2ec;
+    --md-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.30), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+    --md-elevation-3: 0 1px 3px rgba(0, 0, 0, 0.30), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+    --md-ease-emphasized-decel: cubic-bezier(0.05, 0.7, 0.1, 1);
+    /* 글자 역할 (M3 type scale) — 값은 기존 크기 그대로, 이름만 역할로 붙인다.
+       새 제목·본문은 --fs-* 대신 이 역할을 먼저 쓴다. */
+    --md-display-l:  clamp(2rem, 5.2vw, 3.8rem);    /* 홈 첫 화면 제목 */
+    --md-display-m:  clamp(2.2rem, 4.5vw, 3.4rem);  /* 하위 쪽 첫 화면 제목 */
+    --md-headline-l: clamp(2rem, 3.8vw, 2.8rem);    /* 섹션 제목 */
+    --md-headline-m: clamp(1.5rem, 3vw, 2.1rem);    /* 마무리 안내 띠 제목 */
+    --md-title-l:    var(--fs-lead);                /* 카드 제목 */
+    --md-title-m:    var(--fs-body);                /* 작은 카드·목록 제목 */
+    --md-body-l:     var(--fs-body);
+    --md-body-m:     var(--fs-sm);
+    --md-label-l:    var(--fs-sm);                  /* 버튼·메뉴 글자 */
+    --md-label-m:    var(--fs-label);               /* 배지·작은 라벨 */
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
@@ -322,20 +342,21 @@ button:focus:not(:focus-visible) { outline: none; }
     box-shadow: inset 0 -2px 0 var(--gold);
 }
 
-/* Dropdown */
+/* Dropdown — M3 메뉴: 떠 있는 표면(높이 2단계), 네 모서리 둥금, 구분선 없이 상태 레이어로 구분 */
 .dropdown {
     position: absolute;
-    top: 100%; left: 0;
-    background: var(--white);
-    border-top: 2px solid var(--theme);
-    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-    min-width: 180px;
+    top: calc(100% - 6px); left: 0.35rem;
+    background: var(--md-surface-container);
+    border-radius: var(--radius-sm);
+    min-width: 200px;
+    padding: 0.5rem 0;
     list-style: none;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4px);
-    transition: opacity var(--dur), transform var(--dur), visibility var(--dur);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+    transform-origin: top left;
+    transition: opacity var(--dur) var(--md-ease-standard), transform var(--dur) var(--md-ease-emphasized-decel), visibility var(--dur);
+    box-shadow: var(--md-elevation-2);
 }
 /* 키보드 사용자도 상위 링크 포커스 시 하위 메뉴 접근 가능 (focus-within) */
 .nav-item:hover .dropdown,
@@ -343,19 +364,16 @@ button:focus:not(:focus-visible) { outline: none; }
     opacity: 1; visibility: visible; transform: translateY(0);
 }
 .dropdown li a {
-    display: block;
-    padding: 0.8rem 1.25rem;  /* 터치 타깃 ≥44px 확보 */
+    display: flex;
+    align-items: center;
+    min-height: 48px;          /* M3 메뉴 항목 높이 — 터치 타깃 ≥44px */
+    padding: 0 1rem;
     font-size: var(--fs-sm);
-    color: var(--text-muted);
-    border-bottom: 1px solid var(--border);
-    transition: color var(--dur-fast), background var(--dur-fast), padding-left var(--dur-fast);
+    color: var(--text);
+    transition: background-color var(--dur-fast) var(--md-ease-standard);
 }
-.dropdown li:last-child a { border-bottom: none; }
-.dropdown li a:hover {
-    color: var(--theme);
-    background: var(--green-light);
-    padding-left: 1.6rem;
-}
+.dropdown li a:hover { background-color: color-mix(in srgb, var(--md-primary) 8%, transparent); }
+.dropdown li a:active { background-color: color-mix(in srgb, var(--md-primary) 10%, transparent); }
 .dropdown li a:focus-visible { outline-color: var(--theme); outline-offset: -3px; }
 
 /* 메뉴 배지 (임시/준비중 등 상태 표시) */
@@ -473,7 +491,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .hero-content > * {
     opacity: 0;
-    animation: hero-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+    animation: hero-fade-up 0.85s var(--md-ease-emphasized-decel) both;
 }
 .hero-label   { animation-delay: 0.10s; }
 .hero h1      { animation-delay: 0.24s; }
@@ -503,7 +521,7 @@ button:focus:not(:focus-visible) { outline: none; }
     margin-bottom: 1.5rem;
 }
 .hero h1 {
-    font-size: clamp(2rem, 5.2vw, 3.8rem);
+    font-size: var(--md-display-l);
     font-weight: 800;
     letter-spacing: -0.025em;
     line-height: 1.18;
@@ -698,7 +716,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* Stagger children so eyebrow → h1 → subtitle animate in sequence */
 .page-hero > * {
     opacity: 0;
-    animation: hero-fade-up 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+    animation: hero-fade-up 0.85s var(--md-ease-emphasized-decel) both;
     will-change: transform, opacity;
 }
 .page-hero > :nth-child(1) { animation-delay: 0.10s; }
@@ -728,7 +746,7 @@ button:focus:not(:focus-visible) { outline: none; }
     .page-hero { min-height: 276px; }
 }
 .page-hero h1 {
-    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-size: var(--md-display-m);
     font-weight: 700;
     color: var(--heading);
     letter-spacing: -0.02em;
@@ -865,8 +883,8 @@ button:focus:not(:focus-visible) { outline: none; }
 .reveal {
     opacity: 0;
     transform: translateY(22px);
-    transition: opacity 0.75s cubic-bezier(0.2, 0.7, 0.3, 1),
-                transform 0.75s cubic-bezier(0.2, 0.7, 0.3, 1);
+    transition: opacity 0.75s var(--md-ease-emphasized-decel),
+                transform 0.75s var(--md-ease-emphasized-decel);
 }
 .reveal.visible {
     opacity: 1;
@@ -894,7 +912,7 @@ button:focus:not(:focus-visible) { outline: none; }
     display: block;
 }
 .section-title {
-    font-size: clamp(2rem, 3.8vw, 2.8rem);
+    font-size: var(--md-headline-l);
     font-weight: 700;
     color: var(--heading);
     letter-spacing: -0.03em;
@@ -933,7 +951,7 @@ button:focus:not(:focus-visible) { outline: none; }
     will-change: transform, opacity;
 }
 .card h3 {
-    font-size: var(--fs-lead);
+    font-size: var(--md-title-l);
     font-weight: 700;
     color: var(--heading);
     margin-bottom: var(--space-3);
@@ -967,7 +985,7 @@ button:focus:not(:focus-visible) { outline: none; }
     transition: border-color var(--dur-slow) ease, box-shadow var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out), opacity 0.6s ease;
 }
 .info-card h3 {
-    font-size: var(--fs-lead);
+    font-size: var(--md-title-l);
     font-weight: 700;
     color: var(--heading);
     margin-bottom: var(--space-5);
@@ -1046,7 +1064,7 @@ button:focus:not(:focus-visible) { outline: none; }
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: height var(--dur-slow) cubic-bezier(.4, 0, .2, 1), flex-grow var(--dur-slow);
+    transition: height var(--dur-slow) var(--md-ease-standard), flex-grow var(--dur-slow);
 }
 .season-ribbon-seg:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
 .season-ribbon-seg:last-child  { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
@@ -1351,8 +1369,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 1.75rem 1.5rem;
-    transition: transform var(--dur-slow) cubic-bezier(.2,.7,.3,1),
-                box-shadow var(--dur-slow) cubic-bezier(.2,.7,.3,1),
+    transition: transform var(--dur-slow) var(--ease-out),
+                box-shadow var(--dur-slow) var(--ease-out),
                 border-color var(--dur-slow);
 }
 .value-card .val-icon { font-size: 1.8rem; margin-bottom: 0.85rem; }
@@ -2464,7 +2482,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     margin-bottom: 0.85rem;
 }
 .next-step-cta-title {
-    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-size: var(--md-headline-m);
     font-weight: 800;
     color: #ffffff;
     margin-bottom: 0.9rem;
@@ -2494,7 +2512,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     justify-content: center;
     gap: 0.5rem;
     padding: 0.6rem 1.5rem;
-    font-size: var(--fs-sm);
+    font-size: var(--md-label-l);
     font-weight: 600;
     background: transparent;
     border: 1px solid var(--md-outline);
@@ -3198,6 +3216,8 @@ footer {
         position: fixed;
         top: var(--nav-h); left: 0; right: 0;
         background: var(--green-deep);
+        gap: 2px;
+        padding: 0.75rem 0.75rem calc(0.75rem + env(safe-area-inset-bottom));
         flex-direction: column;
         align-items: stretch;
         height: auto;
@@ -3205,12 +3225,11 @@ footer {
         max-height: calc(100svh - var(--nav-h));
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        padding-bottom: env(safe-area-inset-bottom);
         border-top: 1px solid rgba(255,255,255,0.1);
     }
     .nav-menu.open {
         display: flex;
-        animation: mobile-menu-open 0.22s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+        animation: mobile-menu-open 0.25s var(--md-ease-emphasized-decel) both;
     }
     @media (prefers-reduced-motion: reduce) {
         .nav-menu.open { animation: none; }
@@ -3221,29 +3240,38 @@ footer {
         align-items: stretch;
         flex-wrap: wrap;
     }
+    /* M3 내비게이션 드로어 — 항목은 56px 알약, 현재 쪽은 세이지 활성 표시, 구분선 없음 */
     .nav-link {
         flex: 1;
-        padding: 0.9rem 1.5rem;
+        min-height: 56px;
+        padding: 0 1.25rem;
         height: auto;
         color: rgba(255,255,255,0.9);
-        border-bottom: 1px solid rgba(255,255,255,0.06);
+        font-weight: 600;
+        border-radius: var(--radius-pill);
+        transition: background-color var(--dur-fast) var(--md-ease-standard);
     }
+    .nav-link:hover { background-color: rgba(255,255,255,0.08); }
+    .nav-link:active { background-color: rgba(255,255,255,0.12); }
+    .nav-link.active { background-color: color-mix(in srgb, var(--gold) 26%, transparent); color: #fff; }
     .nav-chevron {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 48px;
+        height: 48px;
+        align-self: center;
+        margin-left: 0.25rem;
         background: none;
         border: none;
-        border-left: 1px solid rgba(255,255,255,0.08);
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-        color: rgba(255,255,255,0.65);
+        border-radius: 50%;
+        color: rgba(255,255,255,0.75);
         cursor: pointer;
         flex-shrink: 0;
-        transition: background var(--dur-fast), color var(--dur-fast);
+        transition: background-color var(--dur-fast), color var(--dur-fast);
         padding: 0;
     }
-    .nav-chevron:hover { background: rgba(255,255,255,0.06); color: #fff; }
+    .nav-chevron:hover { background: rgba(255,255,255,0.08); color: #fff; }
     .nav-item.mobile-open .nav-chevron { color: #fff; }
     .nav-item.mobile-open .nav-chevron svg { transform: rotate(180deg); }
     .nav-chevron svg { transition: transform var(--dur-slow); }
@@ -3253,8 +3281,8 @@ footer {
         box-shadow: none;
         border: none;
         border-top: none;
-        border-left: 3px solid rgba(255,255,255,0.3);
-        margin-left: 1.5rem;
+        margin: 2px 0 0.5rem 1rem;
+        padding: 0;
         border-radius: 0;
         min-width: 0;
         width: 100%;
@@ -3265,15 +3293,13 @@ footer {
     .nav-item.mobile-open .dropdown { display: block; }
     .dropdown li a {
         color: rgba(255,255,255,0.82);  /* 대비 상향 (AA) */
-        padding: 0.85rem 1.1rem;        /* 터치 타깃 ≥44px */
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        min-height: 48px;               /* 터치 타깃 ≥44px */
+        padding: 0 1.25rem;
+        border-radius: var(--radius-pill);
         font-size: var(--fs-sm);
     }
-    .dropdown li a:hover {
-        color: #fff;
-        background: rgba(255,255,255,0.05);
-        padding-left: 1.4rem;
-    }
+    .dropdown li a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .dropdown li a:active { background: rgba(255,255,255,0.12); }
     .nav-link.active { box-shadow: none; }
 
     /* Hero */
@@ -3370,7 +3396,7 @@ footer {
     color: var(--theme);
     font-size: var(--fs-md);
     font-weight: 700;
-    transition: color var(--dur), gap var(--dur-slow) cubic-bezier(0.2, 0.7, 0.3, 1);
+    transition: color var(--dur), gap var(--dur-slow) var(--ease-out);
 }
 .community-detail-link:hover {
     color: var(--heading);
@@ -4092,27 +4118,32 @@ footer {
     gap: 0.5rem;
     margin-bottom: 2rem;
 }
+/* M3 filter chip — 8px 모서리(알약 아님), outline 테두리, 선택되면 secondary-container 면 */
 .photo-filter-btn {
-    padding: 0.45rem 1.1rem;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;           /* M3 칩 32px보다 키워 터치 영역 확보 */
+    padding: 0 1rem;
+    border: 1px solid var(--md-outline);
+    border-radius: var(--radius-sm);
     background: transparent;
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
+    color: var(--text);
+    font-size: var(--md-label-l);
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
-    transition: background var(--dur), border-color var(--dur), color var(--dur);
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--dur) var(--md-ease-standard), border-color var(--dur) var(--md-ease-standard);
 }
-.photo-filter-btn:hover {
-    border-color: var(--green-mid);
-    color: var(--green-mid);
-}
+.photo-filter-btn:hover { background-color: color-mix(in srgb, var(--md-primary) 8%, transparent); }
+.photo-filter-btn:active { background-color: color-mix(in srgb, var(--md-primary) 10%, transparent); }
 .photo-filter-btn.is-active {
-    background: var(--green-mid);
-    border-color: var(--green-mid);
-    color: var(--theme-on);
+    background: var(--md-secondary-container);
+    border-color: transparent;
+    color: var(--md-on-secondary-container);
+    font-weight: 600;
 }
+.photo-filter-btn.is-active:hover { background: color-mix(in srgb, var(--md-on-secondary-container) 8%, var(--md-secondary-container)); }
 .photo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -4364,6 +4395,8 @@ footer {
         --md-secondary-container:    #1f3a30;
         --md-on-secondary-container: #ecefe2;
         --md-outline:                #8a948d;  /* 카드 면 5.1:1 */
+        --md-surface-container:      #1c2c25;
+        --md-surface-container-high: #22352d;
     }
     /* 페이지 히어로 — 라이트 전용 하드코딩 그라데이션을 다크 톤으로 대체.
        (--theme-light는 항상 밝은 토큰이라 다크에서 밝은 띠가 생기므로, 어두운
@@ -4669,9 +4702,9 @@ footer {
     margin-top: calc(var(--nav-h) + 0.5rem);
     display: flex;
     flex-direction: column;
-    background: var(--white);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
+    background: var(--md-surface-container);
+    border-radius: var(--radius-xl);   /* M3 대화상자 모양 XL(28px) */
+    box-shadow: var(--md-elevation-3);
     overflow: hidden;
     transform: translateY(-12px);
     transition: transform var(--dur) var(--ease-out);
@@ -4686,19 +4719,21 @@ footer {
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
 }
+/* M3 search bar — 테두리 없는 채운 알약(높이 56px). 입력 중에는 primary 테두리로 초점을 보인다 */
 .menu-search-box {
     flex: 1;
     min-width: 0;
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.6rem 0.9rem;
-    background: var(--cream);
-    border: 1px solid var(--border);
+    gap: 0.75rem;
+    min-height: 56px;
+    padding: 0 1.1rem;
+    background: var(--md-surface-container-high);
+    border: 2px solid transparent;
     border-radius: var(--radius-pill);
-    transition: border-color var(--dur);
+    transition: border-color var(--dur) var(--md-ease-standard), background-color var(--dur) var(--md-ease-standard);
 }
-.menu-search-box:focus-within { border-color: var(--theme); }
+.menu-search-box:focus-within { border-color: var(--md-primary); }
 .menu-search-icon { width: 18px; height: 18px; color: var(--text-muted); flex-shrink: 0; }
 .menu-search-input {
     flex: 1;
@@ -5551,15 +5586,16 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     width: 100%;
     min-height: 34px;
     padding: var(--space-1) var(--space-3);
-    border: 1px solid var(--green-soft);
+    border: 1px solid var(--md-outline);
     transition: background var(--dur-fast), color var(--dur-fast);
 }
 .sermon-sort-btn + .sermon-sort-btn span { border-inline-start: 0; }
 .sermon-sort-btn:first-child span { border-start-start-radius: var(--radius-pill); border-end-start-radius: var(--radius-pill); }
 .sermon-sort-btn:last-child span { border-start-end-radius: var(--radius-pill); border-end-end-radius: var(--radius-pill); }
 .sermon-sort-btn:is(:hover, [aria-pressed="true"]) { color: var(--heading); }
-.sermon-sort-btn:hover span { background: var(--green-light); }
-.sermon-sort-btn[aria-pressed="true"] span { background: var(--green-soft); font-weight: 700; }
+.sermon-sort-btn:hover span { background: color-mix(in srgb, var(--md-primary) 8%, transparent); }
+.sermon-sort-btn[aria-pressed="true"] { color: var(--md-on-secondary-container); }
+.sermon-sort-btn[aria-pressed="true"] span { background: var(--md-secondary-container); font-weight: 700; }
 .sermon-sort-btn:focus-visible { position: relative; outline: 2px solid var(--green-mid); outline-offset: -2px; border-radius: var(--radius-sm); }
 /* 제목 줄 헤딩은 목록 버튼의 모양을 그대로 쓰고, 스크롤 시 고정 머리글에 가리지 않게 여백을 준다 */
 .sermon-heading { margin: 0; font: inherit; font-size: inherit; font-weight: inherit; scroll-margin-top: 5rem; }
@@ -5781,7 +5817,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .shorts-card:hover .video-play-btn { opacity: 1; }
 .shorts-card-title { font-weight: 700; color: var(--heading); line-height: 1.4; font-size: var(--fs-sm); }
 .shorts-card-desc {
-    font-size: var(--fs-xs, 0.85rem); line-height: 1.5;
+    font-size: var(--fs-md); line-height: 1.5;
     color: color-mix(in srgb, var(--text) 72%, var(--white));
     display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
 }
