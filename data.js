@@ -276,8 +276,7 @@ const CHURCH_DATA = {
         visit: {
             title: "방문 안내",
             worshipLabel: "예배",
-            phoneLabel: "전화",
-            more: "오시는 길 자세히 보기"
+            phoneLabel: "전화"
         }
     },
 
