@@ -675,7 +675,7 @@ window DOMContentLoaded
 | `.nav-header` | 고정 헤더 (--nav-glass), scroll 시 `.scrolled` |
 | `.nav-chevron` | 모바일 드롭다운 토글 화살표 버튼 (desktop: hidden) |
 | `.nav-item.mobile-open` | 모바일 드롭다운 열림 상태 |
-| `.hero` / `.hero-fallback` | Ken Burns 애니메이션 배경 (Unsplash 이미지) |
+| `.hero` | 이미지 없는 홈 소개와 방문 바로가기 |
 | `.page-hero` | 서브 페이지 상단 헤더 (높이 통일: PC `min-height` 350px · 모바일 291px, 내용은 세로 가운데 정렬) |
 | `.section` / `.section-header` | 섹션 레이아웃 |
 | `.container` | 최대폭 1200px, 패딩 clamp |

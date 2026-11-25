@@ -230,7 +230,7 @@ button:focus-visible {
 /* 어두운 숲 녹 영역에서는 세이지 포커스 링 (밝은 배경에선 세이지가 3:1 미달) */
 .nav-header a:focus-visible, .nav-header button:focus-visible,
 footer a:focus-visible, footer button:focus-visible,
-.hero a:focus-visible, .next-step-cta a:focus-visible {
+.next-step-cta a:focus-visible {
     outline-color: var(--gold);
 }
 a:focus:not(:focus-visible),
@@ -436,75 +436,52 @@ button:focus:not(:focus-visible) { outline: none; }
 
 /* ── Hero ────────────────────────────────────────────────── */
 .hero {
-    position: relative;
-    height: 100vh;
-    height: 100svh;
-    min-height: 560px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    color: #fff;
-}
-
-/* Ken Burns — 배경 이미지를 천천히 줌·이동하여 생동감 부여 */
-@keyframes hero-kenburns {
-    0%   { transform: scale(1.06) translate(0,      0);     }
-    50%  { transform: scale(1.13) translate(-1.2%,  0.7%);  }
-    100% { transform: scale(1.06) translate(0,      0);     }
-}
-
-.hero-fallback {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background:
-        var(--green-deep) url('images/hero/home.webp')
-        center/cover no-repeat;
-    animation: hero-kenburns 24s ease-in-out infinite;
-    will-change: transform;
-}
-
-/* 오버레이 — 상단/하단 강화로 텍스트 가독성 확보 */
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-        180deg,
-        rgba(8, 26, 20, 0.58) 0%,
-        rgba(8, 26, 20, 0.28) 45%,
-        rgba(8, 26, 20, 0.76) 100%
-    );
-}
-
-/* 텍스트 컨텐츠 */
-.hero-content {
-    position: relative;
-    z-index: 2;
     padding-top: var(--nav-h);
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
 }
+.hero-content {
+    padding-block: clamp(2.25rem, 5vw, 4.75rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+.hero-label {
+    margin-bottom: 0.85rem;
+    color: var(--md-primary);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+.hero h1 {
+    margin: 0 auto 0.85rem;
+    color: var(--heading);
+    font-size: clamp(2rem, 5vw, var(--md-display-l));
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: var(--lh-tight);
+    text-wrap: balance;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+.hero-sub {
+    margin: 0 auto 1.5rem;
+    color: var(--text-muted);
+    font-size: clamp(1rem, 2.5vw, var(--fs-lead));
+    text-wrap: balance;
+}
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+.hero a:focus-visible { outline-color: var(--md-primary); }
 
-/* 콘텐츠 스태거 등장 — 위로 살짝 떠오르며 페이드 인 */
+/* 서브 페이지 제목에 사용하는 등장 효과 */
 @keyframes hero-fade-up {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-.hero-content > * {
-    opacity: 0;
-    animation: hero-fade-up 0.85s var(--md-ease-emphasized-decel) both;
-}
-.hero-label   { animation-delay: 0.10s; }
-.hero h1      { animation-delay: 0.24s; }
-.hero-sub     { animation-delay: 0.40s; }
-.hero-actions { animation-delay: 0.56s; }
-
-/* 모션 감소 선호 → 모든 애니메이션 정지 */
 @media (prefers-reduced-motion: reduce) {
-    .hero-fallback,
-    .hero-content > * { animation: none; opacity: 1; transform: none; }
-
     .reveal, .reveal.visible {
         opacity: 1;
         transform: none;
@@ -512,35 +489,7 @@ button:focus:not(:focus-visible) { outline: none; }
     }
 }
 
-.hero-label {
-    display: block;
-    font-size: var(--fs-label);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.82);
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-}
-.hero h1 {
-    font-size: var(--md-display-l);
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    line-height: 1.18;
-    margin-bottom: 1.2rem;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.4);
-    word-break: keep-all;
-}
-.hero-sub {
-    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-    opacity: 0.90;
-    max-width: 520px;
-    margin: 0 auto 2.5rem;
-    text-shadow: 0 1px 10px rgba(0,0,0,0.20);
-}
-.hero-actions {
-    display: flex; gap: 0.8rem;
-    justify-content: center; flex-wrap: wrap;
-}
+
 /* ── M3 공통 버튼 문법 ─────────────────────────────────────
    모든 버튼은 알약 모양이고, hover·focus·pressed를 떠오름 대신
    상태 레이어(글자색을 8~10% 덮는 막)로 보여 준다. 터치 기기에서도 똑같이 눌림이 보인다. */
@@ -569,21 +518,21 @@ button:focus:not(:focus-visible) { outline: none; }
 .btn-outline:active::before, .btn-live:active::before,
 .btn-hero-primary:active::before, .btn-next:active::before { opacity: var(--md-state-pressed); transition: none; }
 
-/* 첫 화면 보조 버튼 — 사진 위 outlined */
+/* 첫 화면 보조 버튼 */
 .btn-outline {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255,255,255,0.70);
-    background: rgba(255,255,255,0.10);
-    color: #fff;
+    border: 1px solid var(--md-outline);
+    background: transparent;
+    color: var(--md-primary);
     padding: 0 1.5rem;
     font-size: var(--fs-sm);
     font-weight: 600;
     letter-spacing: 0.01em;
     transition: border-color var(--dur) var(--md-ease-standard);
 }
-.btn-outline:hover { border-color: #fff; }
+.btn-outline:hover { border-color: var(--md-primary); }
 
 /* Hero — 실시간 예배 버튼 (히어로 외부 영역용) */
 .btn-live {
@@ -599,13 +548,13 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 .btn-live:hover { box-shadow: var(--md-elevation-1); }
 
-/* Hero — 첫 화면 주 버튼 — 사진 위 filled(밝은 면). 사진 위라 모드와 무관하게 고정색 */
+/* Hero — 처음 오신 분을 위한 주 버튼 */
 .btn-hero-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #f6f4ee;
-    color: var(--ink-on-light);
+    background: var(--md-primary);
+    color: var(--md-on-primary);
     padding: 0 1.75rem;
     font-size: var(--fs-sm);
     font-weight: 600;
@@ -613,60 +562,57 @@ button:focus:not(:focus-visible) { outline: none; }
     box-shadow: var(--md-elevation-1);
     transition: box-shadow var(--dur) var(--md-ease-standard);
 }
-.btn-hero-primary:hover { box-shadow: 0 2px 6px 2px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.30); }
+
 
 /* Hero — 첫 화면 방문 안내 */
 .hero-stats {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    z-index: 2;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    padding: 0.55rem max(0.5rem, calc((100% - 36rem) / 2));
-    background: var(--nav-glass);
-    border-top: 1px solid rgba(255,255,255,0.10);
+    width: min(42rem, calc(100% - 2rem));
+    margin-inline: auto;
+    padding-block: 0.6rem;
+    border-top: 1px solid var(--border);
 }
 .hero-stat {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.15rem;
-    min-height: 3.25rem;
-    padding: 0.2rem 0.35rem;
+    min-height: 3.5rem;
+    padding: 0.25rem;
+    color: var(--heading);
+    border-radius: var(--radius-sm);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+.hero-stat + .hero-stat::before {
+    content: '';
+    position: absolute;
+    inset-block: 0.55rem;
+    inset-inline-start: 0;
+    border-inline-start: 1px solid var(--border);
+    pointer-events: none;
 }
 .hero-stat-val {
     font-size: var(--fs-sm);
     font-weight: 700;
-    word-break: keep-all;
 }
 .hero-stat-lbl {
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--brand-sub);
+    font-size: var(--fs-md);
+    color: var(--text-muted);
 }
-.hero-stat--link {
-    color: inherit;
-    text-decoration: none;
-    border-radius: var(--radius-sm);
-    transition: background var(--dur);
-    cursor: pointer;
+@media (hover: hover) {
+    .hero-stat--link:hover { background: var(--green-light); }
 }
-.hero-stat--link:hover,
-.hero-stat--link:focus-visible {
-    color: inherit;
-    background: rgba(255,255,255,0.12);
-}
+.hero-stat--link:active { background: var(--md-secondary-container); }
+.hero-stat--link:focus-visible { outline-offset: -2px; }
 
 @media (max-width: 768px) {
-    /* CTA — 세로 스택 시 동일 너비로 정렬 */
-    .hero-actions { flex-direction: column; align-items: center; gap: 0.7rem; }
-    .hero-actions a { width: 100%; max-width: 300px; text-align: center; }
-
-    .btn-hero-primary { font-size: var(--fs-sm); }
-
-    .hero-fallback { animation: none; transform: none; will-change: auto; }
+    .hero h1 { max-width: 11em; }
 }
+
 
 /* ── 아이콘 팩 (images/icons.svg) ──────────────────────────
    가는 단색 선(글자색 currentColor)만 쓰는 미니멀 아이콘.
@@ -3289,37 +3235,6 @@ footer {
     .dropdown li a:active { background: rgba(255,255,255,0.12); }
     .nav-link.active { box-shadow: none; }
 
-    /* Hero */
-    .hero {
-        height: auto;
-        min-height: 30rem;
-        min-height: clamp(28rem, 78svh, 43rem);
-        display: grid;
-        grid-template: minmax(min-content, 1fr) auto / minmax(0, 1fr);
-    }
-    .hero-content {
-        align-self: center;
-        padding-top: calc(var(--nav-h) + 1.25rem);
-        padding-bottom: 1.5rem;
-    }
-    .hero-content > * { animation: none; opacity: 1; }
-    .hero-label { margin-bottom: 0.75rem; }
-    .hero h1 { margin-bottom: 0.75rem; }
-    .hero-sub { margin-bottom: 1.25rem; }
-    .hero-stats {
-        position: relative;
-        padding-inline: max(0.5rem, calc((100% - 28rem) / 2));
-    }
-    .hero-stat { position: relative; }
-    .hero-stat + .hero-stat::before {
-        content: '';
-        position: absolute;
-        inset-block: 0.4rem;
-        inset-inline-start: 0;
-        border-inline-start: 1px solid color-mix(in srgb, var(--brand-sub) 24%, transparent);
-        pointer-events: none;
-    }
-
     /* Clergy Card — 초상만 가운데, bio 텍스트는 좌측 정렬 유지 */
     .clergy-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem 1.75rem; }
     .clergy-avatar { margin: 0 auto; }
@@ -3393,8 +3308,6 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .hero h1 { font-size: 2rem; }
-    .hero-actions { flex-direction: column; align-items: center; }
     .btn-live, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
 }
 
