@@ -111,12 +111,10 @@ const MapHelper = {
                     <a href="${this.naverUrl}" target="_blank" rel="noopener" class="map-btn map-btn--naver">
                         <span class="map-btn-mark">N</span>
                         <span class="map-btn-label">네이버 길찾기</span>
-                        <span class="map-btn-arrow" aria-hidden="true">→</span>
                     </a>
                     <a href="${this.kakaoUrl}" target="_blank" rel="noopener" class="map-btn map-btn--kakao">
                         <span class="map-btn-mark map-btn-mark--kakao">K</span>
                         <span class="map-btn-label">카카오 길찾기</span>
-                        <span class="map-btn-arrow" aria-hidden="true">→</span>
                     </a>
                 </div>
                 ${compact ? '' : `
@@ -498,23 +496,23 @@ const IndexRenderer = {
         const title = document.getElementById('hero-title');
         const sub   = document.getElementById('hero-sub');
         const acts  = document.getElementById('hero-actions');
-        const links = document.getElementById('hero-stats');
+        const links = document.getElementById('home-quick-links');
 
         if (label) label.textContent = name;
         if (title) title.textContent = slogan;
         if (sub)   sub.textContent   = vision;
 
         if (acts) acts.innerHTML = heroActions.map(a =>
-            `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label} <span class="home-link-arrow">${icon('arrow-right')}</span></a>`
+            `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label}${a.primary ? ` <span class="home-link-arrow">${icon('arrow-right')}</span>` : ''}</a>`
         ).join('');
 
         if (!links) return;
         const mainTime = CHURCH_DATA.worship.main[0].time;
         const worshipTime = mainTime.replace(/^매주 일요일\s*/, '');
         links.innerHTML = quickLinks.map(({ label, href, detail, worshipTime: showTime }) => `
-            <a href="${href}" class="hero-stat hero-stat--link">
-                <span class="hero-stat-val">${label}</span>
-                <span class="hero-stat-lbl">${showTime ? worshipTime : detail}</span>
+            <a href="${href}" class="home-quick-link">
+                <span class="home-quick-link-title">${label}</span>
+                <span class="home-quick-link-detail">${showTime ? worshipTime : detail}</span>
             </a>
         `).join('');
     },
@@ -530,7 +528,7 @@ const IndexRenderer = {
             <div class="home-about-copy">
                 <p class="about-brief-lead">${aboutLead}</p>
                 <p class="about-brief-desc">${aboutDesc}</p>
-                <a href="clergy.html" class="about-brief-link">${about.more} <span class="home-link-arrow">${icon('arrow-right')}</span></a>
+                <a href="clergy.html" class="about-brief-link">${about.more}</a>
             </div>
             <div class="home-about-facts">
                 <ul class="about-brief-facts">
@@ -543,7 +541,6 @@ const IndexRenderer = {
                         <strong>${award.year} ${award.title}</strong>
                         <span>${award.org}</span>
                     </span>
-                    <span class="home-link-arrow">${icon('arrow-right')}</span>
                 </a>` : ''}
             </div>
         `;
@@ -571,7 +568,7 @@ const IndexRenderer = {
             }
         }
         const more = document.getElementById('worship-more');
-        if (more) more.innerHTML = `<a href="worship.html" class="about-brief-link">${home.more} <span class="home-link-arrow">${icon('arrow-right')}</span></a>`;
+        if (more) more.innerHTML = `<a href="worship.html" class="about-brief-link">${home.more}</a>`;
     },
 
     /* 다가오는 주일(오늘이 주일이면 오늘) 전례 정보 — 독서 파일을 못 불러오면 블록을 숨긴다 */
@@ -622,10 +619,10 @@ const IndexRenderer = {
                 </div>
                 <ul class="visit-quick" aria-label="방문 안내 바로가기">
                     ${g.cards.map(c => `
-                        <li><a href="${c.href}"><span>${c.title}${c.en ? ` <span class="term-en" lang="en">${c.en}</span>` : ''}</span><span class="home-link-arrow">${icon('arrow-right')}</span></a></li>
+                        <li><a href="${c.href}"><span>${c.title}${c.en ? ` <span class="term-en" lang="en">${c.en}</span>` : ''}</span></a></li>
                     `).join('')}
                 </ul>
-                <a href="visit.html" class="about-brief-link">${v.more} <span class="home-link-arrow">${icon('arrow-right')}</span></a>
+                <a href="visit.html" class="about-brief-link">${v.more}</a>
             </div>
         `;
     }
@@ -860,7 +857,7 @@ const WorshipRenderer = {
                                 <span class="resource-icon" aria-hidden="true">${icon(r.icon)}</span>
                                 <h3 class="resource-title">${r.title}</h3>
                                 <p class="resource-desc">${r.desc}</p>
-                                <span class="resource-link">바로가기 <span aria-hidden="true">↗</span></span>
+                                <span class="resource-link">바로가기</span>
                             </a>
                         `).join('')}
                     </div>
@@ -886,7 +883,7 @@ const WorshipRenderer = {
                                 <h3 class="resource-title">${o.title}</h3>
                                 <p class="resource-desc resource-en">${o.en}</p>
                                 <p class="resource-desc">${o.desc}</p>
-                                <span class="resource-link">기도서 열기 <span aria-hidden="true">↗</span></span>
+                                <span class="resource-link">기도서 열기</span>
                             </a>
                         `).join('')}
                     </div>
@@ -901,7 +898,7 @@ const WorshipRenderer = {
                             <h3 class="resource-title">${prayer.intercession.title}</h3>
                             <p class="resource-desc resource-en">${prayer.intercession.en}</p>
                             <p class="resource-desc">${prayer.intercession.desc}</p>
-                            <span class="resource-link">PDF 내려받기 <span aria-hidden="true">↗</span></span>
+                            <span class="resource-link">PDF 내려받기</span>
                         </a>
                     </div>
                 </div>
@@ -1041,7 +1038,7 @@ const CommunityRenderer = {
                         <p style="color:var(--text-muted); font-size:var(--fs-desc);">${g.desc}</p>
                         ${g.note ? `<p style="font-size:var(--fs-desc); color:var(--text-muted); margin-top:0.5rem;">${g.note}</p>` : ''}
                         ${g.footnote ? `<p class="community-card-note">${g.footnote}</p>` : ''}
-                        ${g.detailUrl ? `<a href="${g.detailUrl}" class="community-detail-link"><span>자세히 보기</span><span aria-hidden="true">→</span></a>` : ''}
+                        ${g.detailUrl ? `<a href="${g.detailUrl}" class="community-detail-link">자세히 보기</a>` : ''}
                     </div>
                 `).join('')}
             </div>
@@ -1170,7 +1167,6 @@ const LinksRenderer = {
                         <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="links-card">
                             <span class="links-card-name">${item.name}</span>
                             <span class="links-card-desc">${item.desc}</span>
-                            <span class="links-card-arrow" aria-hidden="true">↗</span>
                         </a>
                     `).join('')}
                 </div>
@@ -1269,7 +1265,6 @@ const AnglicanRenderer = {
                             <span class="iona-link-card__label">${iona.label}</span>
                             <span class="iona-link-card__desc">${iona.desc}</span>
                         </span>
-                        <span class="iona-link-card__arrow" aria-hidden="true">↗</span>
                     </a>
                     ` : ''}
                     ${korea.incheonLink ? `
@@ -1280,7 +1275,6 @@ const AnglicanRenderer = {
                             <span class="iona-link-card__label">${korea.incheonLink.label}</span>
                             <span class="iona-link-card__desc">${korea.incheonLink.desc}</span>
                         </span>
-                        <span class="iona-link-card__arrow" aria-hidden="true">↗</span>
                     </a>
                     ` : ''}
                     ${korea.cathedralLink ? `
@@ -1291,7 +1285,6 @@ const AnglicanRenderer = {
                             <span class="iona-link-card__label">${korea.cathedralLink.label}</span>
                             <span class="iona-link-card__desc">${korea.cathedralLink.desc}</span>
                         </span>
-                        <span class="iona-link-card__arrow" aria-hidden="true">↗</span>
                     </a>
                     ` : ''}
                 </div>
@@ -1531,7 +1524,7 @@ const ClergyRenderer = {
                         <div class="val-icon">${icon(v.icon)}</div>
                         <h3>${v.title}</h3>
                         <p>${v.desc}</p>
-                        ${v.href && v.cta ? `<span class="value-card-cta">${v.cta} <span aria-hidden="true">→</span></span>` : ''}`;
+                        ${v.href && v.cta ? `<span class="value-card-cta">${v.cta}</span>` : ''}`;
                     return v.href
                         ? `<a class="value-card value-card--link" href="${v.href}">${inner}</a>`
                         : `<div class="value-card">${inner}</div>`;
@@ -1577,8 +1570,7 @@ const AboutNavRenderer = {
             a.href = next.href;
             a.innerHTML =
                 `<span class="about-next-label">${cfg.nextLabel || '다음'}</span>` +
-                `<span class="about-next-target">${next.label}</span>` +
-                `<span class="about-next-arrow" aria-hidden="true">→</span>`;
+                `<span class="about-next-target">${next.label}</span>`;
             container.appendChild(a);
         });
 
@@ -1641,7 +1633,7 @@ const MediaRenderer = {
             ${this._shorts(shorts)}
             <div class="video-channel-cta">
                 <a href="${channelUrl}" target="_blank" rel="noopener noreferrer" class="video-channel-link">
-                    유튜브 채널 전체 보기 ↗
+                    유튜브 채널 전체 보기
                 </a>
             </div>
         `;
@@ -1724,7 +1716,7 @@ const MediaHubRenderer = {
                         <span class="resource-icon" aria-hidden="true">${icon(c.icon)}</span>
                         <p class="resource-title">${c.title}</p>
                         <p class="resource-desc">${c.desc}</p>
-                        <span class="resource-link" style="color:var(--green-mid);">${c.action} →</span>
+                        <span class="resource-link" style="color:var(--green-mid);">${c.action}</span>
                     </a>
                 `).join('')}
             </div>
@@ -1935,7 +1927,7 @@ const FaqRenderer = {
 
         const refsHtml = (refs) => (refs && refs.length)
             ? `<p class="faq-refs"><span class="faq-refs-label">출처</span>${refs.map(r =>
-                  `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="faq-ref">${r.label} <span aria-hidden="true">↗</span></a>`
+                  `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="faq-ref">${r.label}</a>`
               ).join('')}</p>`
             : '';
 
@@ -2390,9 +2382,9 @@ const BulletinRenderer = {
 
         const pagHtml = totalPages > 1 ? `
             <nav class="bulletin-pagination" aria-label="주보 목록 페이지">
-                <button class="bulletin-pag-btn" type="button" data-dir="-1"${page === 0 ? ' disabled' : ''}>← 이전</button>
+                <button class="bulletin-pag-btn" type="button" data-dir="-1"${page === 0 ? ' disabled' : ''}>이전</button>
                 <span class="bulletin-pag-info">${page + 1} / ${totalPages}</span>
-                <button class="bulletin-pag-btn" type="button" data-dir="1"${page >= totalPages - 1 ? ' disabled' : ''}>다음 →</button>
+                <button class="bulletin-pag-btn" type="button" data-dir="1"${page >= totalPages - 1 ? ' disabled' : ''}>다음</button>
             </nav>
         ` : '';
 
@@ -2927,7 +2919,7 @@ const SundaysRenderer = {
     _refLink(ref) {
         const url = this._bibleUrl(ref);
         if (!url) return `<span class="lectionary-ref">${ref}</span>`;
-        return `<a class="lectionary-ref lectionary-ref-link" href="${url}" target="_blank" rel="noopener noreferrer">${ref}<span class="lectionary-ref-ico" aria-hidden="true">↗</span></a>`;
+        return `<a class="lectionary-ref lectionary-ref-link" href="${url}" target="_blank" rel="noopener noreferrer">${ref}</a>`;
     },
 
     _lectionaryCardHtml(sundays, idx, track) {
@@ -2966,10 +2958,10 @@ const SundaysRenderer = {
         return `
         <div class="lect-nav-row">
             <button class="lect-nav-btn" id="lect-prev"
-                    ${hasPrev ? '' : 'disabled'} aria-label="이전 주일">‹ 이전</button>
+                    ${hasPrev ? '' : 'disabled'} aria-label="이전 주일">이전</button>
             <span class="lect-nav-label">${s.koreanName}</span>
             <button class="lect-nav-btn" id="lect-next"
-                    ${hasNext ? '' : 'disabled'} aria-label="다음 주일">다음 ›</button>
+                    ${hasNext ? '' : 'disabled'} aria-label="다음 주일">다음</button>
         </div>
         <div class="lectionary-card lectionary-card--current" id="lect-card">
             <div class="lectionary-card-head">
@@ -3334,8 +3326,8 @@ const PageTrail = {
         const next = menu[(i + 1) % menu.length];
         main.insertAdjacentHTML('beforeend', `
             <nav class="container page-trail" aria-label="이전·다음 메뉴">
-                <a href="${prev.href}" aria-label="이전 메뉴: ${prev.label}"><span aria-hidden="true">←</span> ${prev.label}</a>
-                <a href="${next.href}" aria-label="다음 메뉴: ${next.label}">${next.label} <span aria-hidden="true">→</span></a>
+                <a href="${prev.href}" aria-label="이전 메뉴: ${prev.label}">${prev.label}</a>
+                <a href="${next.href}" aria-label="다음 메뉴: ${next.label}">${next.label}</a>
             </nav>
         `);
     }
