@@ -229,8 +229,7 @@ button:focus-visible {
 }
 /* 어두운 숲 녹 영역에서는 세이지 포커스 링 (밝은 배경에선 세이지가 3:1 미달) */
 .nav-header a:focus-visible, .nav-header button:focus-visible,
-footer a:focus-visible, footer button:focus-visible,
-.next-step-cta a:focus-visible {
+footer a:focus-visible, footer button:focus-visible {
     outline-color: var(--gold);
 }
 a:focus:not(:focus-visible),
@@ -2530,28 +2529,9 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 /* Newcomer CTA (page closing) */
 /* ── Next Step CTA ────────────────────────────────────────── */
 .next-step-cta {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
     padding: var(--section-pad) 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--brand-mid) 0%, var(--green-deep) 65%);
-    border-top: none;
-}
-.next-step-cta::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    right: max(-60px, calc(50% - 640px));
-    bottom: -90px;
-    width: 320px;
-    aspect-ratio: 40 / 54;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 54'%3E%3Cpath fill='%23b1b883' d='M2 54V18.5C2 9.6 9.2 2.8 18.75 1.6L18.37 18.8H12.4v2.8h5.9L17.6 54ZM38 54V18.5C38 9.6 30.8 2.8 21.25 1.6L21.63 18.8H27.6v2.8h-5.9L22.4 54Z'/%3E%3C/svg%3E") center / contain no-repeat;
-    opacity: 0.05;
-    pointer-events: none;
-    display: none;   /* 버튼·문단과 겹치면 가독성을 해치므로 여백이 충분한 넓은 화면에서만 */
-}
-@media (min-width: 1100px) {
-    .next-step-cta::before { display: block; }
+    background: var(--white);
+    border-top: 1px solid var(--border);
 }
 .next-step-cta .container {
     display: flex;
@@ -2564,13 +2544,13 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--text-muted);
     margin-bottom: 0.85rem;
 }
 .next-step-cta-title {
     font-size: var(--md-headline-m);
     font-weight: 800;
-    color: #ffffff;
+    color: var(--heading);
     margin-bottom: 0.9rem;
     letter-spacing: -0.02em;
     line-height: 1.25;
@@ -2578,9 +2558,9 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .next-step-cta-desc {
     font-size: var(--fs-body);
-    color: rgba(255,255,255,0.70);
+    color: var(--text-muted);
     max-width: 480px;
-    margin: 0 0 2.4rem;
+    margin: 0 0 var(--space-5);
     line-height: 1.75;
     word-break: keep-all;
 }
@@ -2612,17 +2592,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: var(--md-on-primary);
 }
 .btn-next--primary:hover { box-shadow: var(--md-elevation-1); }
-/* Dark CTA — 늘 어두운 숲녹 패널 위. 모드와 무관하게 밝은 글자 */
-.next-step-cta .btn-next {
-    background: transparent;
-    border-color: rgba(255,255,255,0.55);
-    color: #fff;
-}
-.next-step-cta .btn-next--primary {
-    background: var(--gold);
-    border-color: transparent;
-    color: var(--ink-on-sage);   /* 세이지 위 숲 녹 글자 (흰 글자는 대비 미달) */
-}
+.next-step-cta a:focus-visible { outline-color: var(--md-primary); }
 
 @media (max-width: 560px) {
     .next-step-cta-actions { flex-direction: column; width: 100%; align-items: center; }
