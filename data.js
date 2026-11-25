@@ -246,7 +246,6 @@ const CHURCH_DATA = {
             { label: "이번 주 주보", href: "bulletin.html", detail: "이미지·PDF" }
         ],
         about: {
-            eyebrow: "About",
             title: "광명교회",
             facts: [
                 { label: "성당", key: "subName" },
@@ -255,7 +254,6 @@ const CHURCH_DATA = {
             more: "교회 소개 자세히 보기"
         },
         worship: {
-            eyebrow: "Worship",
             title: "예배 안내",
             sub: "성공회 전례를 중심으로 드리는 주일 예배입니다.",
             more: "예배 자세히 보기"
@@ -276,12 +274,10 @@ const CHURCH_DATA = {
             ]
         },
         visit: {
-            eyebrow: "Welcome & Visit",
-            title: "처음 오셨나요?",
-            sub: "예배 시간과 오시는 길을 한곳에 모았습니다. 주일 예배는 약 1시간 소요됩니다.",
+            title: "방문 안내",
             worshipLabel: "예배",
             phoneLabel: "전화",
-            more: "자세히 보기"
+            more: "오시는 길 자세히 보기"
         }
     },
 

@@ -82,7 +82,7 @@
     </header>
 
     <!-- 교회 소개 (간략) -->
-    <section class="section" id="about-brief">
+    <section class="section" id="about-brief" aria-labelledby="about-brief-header-title">
         <div class="container">
             <div class="section-header" id="about-brief-header"></div>
             <div id="about-brief-content"></div>
@@ -90,21 +90,25 @@
     </section>
 
     <!-- 예배 -->
-    <section class="section section--white" id="worship">
+    <section class="section section--white" id="worship" aria-labelledby="worship-header-title">
         <div class="container">
             <div class="section-header" id="worship-header"></div>
-            <div id="worship-grid" class="grid"></div>
-            <div class="guide-banner" id="worship-guide"></div>
-            <div class="info-card info-card--wide this-sunday" id="this-sunday" hidden></div>
-            <div class="about-brief visit-detail-wrap" id="worship-more"></div>
+            <div class="home-worship-layout">
+                <div>
+                    <div id="worship-grid" class="grid"></div>
+                    <div class="guide-banner" id="worship-guide"></div>
+                </div>
+                <div class="info-card this-sunday" id="this-sunday" hidden></div>
+            </div>
+            <div id="worship-more"></div>
         </div>
     </section>
 
-    <!-- 처음 오신 분 · 방문 안내 (예배 시간·주소·바로가기·지도를 한 카드로) -->
-    <section class="section section--white" id="visit-preview">
+    <!-- 방문 안내 -->
+    <section class="section" id="visit-preview" aria-labelledby="visit-header-title">
         <div class="container">
             <div class="section-header" id="visit-header"></div>
-            <div class="info-card info-card--wide" id="location-card"></div>
+            <div id="location-card"></div>
         </div>
     </section>
 
