@@ -510,9 +510,10 @@ window DOMContentLoaded
 <nav id="main-nav">                         ← NavRenderer
 <main id="main-content">
 <header class="hero">
-  #hero-title / #hero-sub                   ← IndexRenderer._hero()
+  #hero-title / #hero-sub / #hero-actions   ← IndexRenderer._hero()
 <section id="about-brief">
   #about-brief-header / #about-brief-content           ← IndexRenderer._about()
+  #home-quick-links (예배·오시는 길·주보)                 ← IndexRenderer._hero()
 <section id="worship">
   #worship-header / #worship-grid / #worship-guide / #worship-more ← IndexRenderer._worship()
   #this-sunday (info-card, 독서 파일 로드 실패 시 hidden) ← IndexRenderer._thisSunday() — SundaysRenderer._loadSundays() 재사용
