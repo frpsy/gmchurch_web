@@ -622,7 +622,6 @@ const IndexRenderer = {
                         <li><a href="${c.href}"><span>${c.title}${c.en ? ` <span class="term-en" lang="en">${c.en}</span>` : ''}</span></a></li>
                     `).join('')}
                 </ul>
-                <a href="visit.html" class="about-brief-link">${v.more}</a>
             </div>
         `;
     }
