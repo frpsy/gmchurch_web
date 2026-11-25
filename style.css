@@ -653,6 +653,16 @@ main:has(.page-hero) {
     text-shadow: 0 1px 10px rgba(0,0,0,0.45);
 }
 
+.page-hero--newcomer { background-image: url('images/hero/newcomer.webp'); }
+.page-hero--worship { background-image: url('images/hero/worship-altar.webp'); }
+.page-hero:is(.page-hero--newcomer, .page-hero--worship)::before {
+    background: color-mix(in srgb, black 60%, transparent);
+}
+@media (max-width: 768px) {
+    .page-hero--newcomer { background-image: url('images/hero/newcomer-m.webp'); }
+    .page-hero--worship { background-image: url('images/hero/worship-altar-m.webp'); }
+}
+
 /* 메뉴 상징 이미지(실제 교회 사진 아님) — 함께 모여 차를 나누는 공동체 공간. 글자 배치는 다른 페이지와 동일 */
 .page-hero--community { background-image: url('images/hero/community.webp'); background-position: center 52%; }
 
@@ -1609,6 +1619,23 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     align-items: center;
     min-height: clamp(27rem, 67vh, 37rem);
     min-height: clamp(27rem, 67svh, 37rem);
+}
+.home .hero-content {
+    display: grid;
+    align-items: center;
+    gap: clamp(1.75rem, 4vw, 3.75rem);
+    max-width: 66rem;
+}
+.hero-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+}
+@media (min-width: 800px) {
+    .home .hero-content { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .home .hero h1 { max-width: 12em; }
 }
 .home .hero-label {
     font-weight: 550;
