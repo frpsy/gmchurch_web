@@ -2581,15 +2581,14 @@ const SermonsRenderer = {
                 <h2 id="sermon-feature-title">최신 설교</h2>
                 <div class="bulletin-list">${this._itemHtml(latest, true)}</div>
             </section>
-            <p class="news-intro">강조와 각주는 편집자가 붙였습니다. 본문 문장은 바꾸지 않았습니다.</p>
             ${archive.length ? `
                 <section aria-labelledby="sermon-archive-title">
                     <div class="sermon-archive-header">
                         <h2 id="sermon-archive-title">지난 설교</h2>
                         <div class="sermon-sort" role="group" aria-label="지난 설교 정렬">
-                            <button type="button" class="sermon-sort-btn" data-sort="date-desc" aria-pressed="true">최신순</button>
-                            <button type="button" class="sermon-sort-btn" data-sort="date-asc" aria-pressed="false">오래된순</button>
-                            <button type="button" class="sermon-sort-btn" data-sort="title" aria-pressed="false">제목순</button>
+                            <button type="button" class="sermon-sort-btn" data-sort="date-desc" aria-pressed="true"><span>최신순</span></button>
+                            <button type="button" class="sermon-sort-btn" data-sort="date-asc" aria-pressed="false"><span>오래된순</span></button>
+                            <button type="button" class="sermon-sort-btn" data-sort="title" aria-pressed="false"><span>제목순</span></button>
                         </div>
                     </div>
                     <div class="bulletin-list sermon-list" id="sermon-list">${archive.map(item => this._itemHtml(item)).join('')}</div>

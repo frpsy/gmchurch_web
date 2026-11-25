@@ -463,8 +463,7 @@ button:focus:not(:focus-visible) { outline: none; }
 @media (prefers-reduced-motion: reduce) {
     .hero-fallback,
     .hero-content > *,
-    .hero-scroll,
-    .page-hero > * { animation: none; opacity: 1; transform: none; }
+    .hero-scroll { animation: none; opacity: 1; transform: none; }
 
     .reveal, .reveal.visible {
         opacity: 1;
@@ -663,6 +662,10 @@ button:focus:not(:focus-visible) { outline: none; }
 .page-hero > :nth-child(2) { animation-delay: 0.24s; }
 .page-hero > :nth-child(3) { animation-delay: 0.38s; }
 .page-hero > :nth-child(4) { animation-delay: 0.50s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .page-hero > * { animation: none; opacity: 1; will-change: auto; }
+}
 
 .page-hero {
     padding-top: calc(var(--nav-h) + 3.8rem - 5px);
@@ -5452,22 +5455,8 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 /* ── 설교 말씀 (sermons.html) ── */
 .sermon-column {
     width: 100%;
-    max-width: 47.5rem;
+    max-width: var(--content-read);
     margin-inline: auto;
-}
-.page-hero.sermon-hero {
-    min-height: 0;
-    padding-block: calc(var(--nav-h) + clamp(1.75rem, 5vw, 4rem)) clamp(1.75rem, 5vw, 3.5rem);
-    text-align: left;
-}
-.sermon-hero > .sermon-column {
-    animation: none;
-    opacity: 1;
-    will-change: auto;
-}
-.sermon-hero p:not(.section-eyebrow) {
-    min-height: 0;
-    margin: 0.5rem 0 0;
 }
 .sermon-content {
     padding-block: clamp(1.5rem, 4vw, 2.75rem) clamp(2.5rem, 6vw, 4.5rem);
@@ -5481,43 +5470,36 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     font-size: var(--fs-label);
 }
 .sermon-feature .bulletin-list {
-    border: 0;
+    border-color: var(--green-soft);
+    box-shadow: none;
 }
 .sermon-feature .bulletin-row {
-    flex-wrap: wrap;
-    padding: clamp(1.2rem, 4vw, 2.25rem);
-    background: var(--green-deep);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: clamp(1rem, 4vw, 1.5rem);
+    background: var(--green-light);
 }
-.sermon-feature .bulletin-row:hover {
-    background: color-mix(in srgb, var(--green-deep) 90%, var(--gold));
+.sermon-feature .bulletin-row:is(:hover, [aria-expanded="true"]) {
+    background: color-mix(in srgb, var(--green-light) 70%, var(--green-soft));
 }
 .sermon-feature .bulletin-row-info {
-    flex-basis: 100%;
-    gap: 0.65rem;
+    gap: var(--space-2);
 }
 .sermon-feature .sermon-row-title {
-    max-width: 28ch;
-    font-size: clamp(1.6rem, 4vw, 2.65rem);
+    font-size: clamp(1.25rem, 2.5vw, 1.625rem);
     font-weight: 700;
-    line-height: 1.24;
-    letter-spacing: -0.03em;
-}
-.sermon-feature :is(.sermon-row-title, .sermon-byline, .bulletin-row-chevron) {
-    color: var(--on-dark-1);
+    line-height: 1.35;
 }
 .sermon-feature .sermon-action {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
-    min-height: 44px;
-    margin-top: 0.25rem;
-    padding-inline: 0.85rem;
-    border: 1px solid currentColor;
-    border-radius: var(--radius-sm);
-    color: var(--on-dark-1);
-    font-size: 0.9375rem;
+    gap: var(--space-2);
+    color: var(--sage-ink);
+    font-size: var(--fs-sm);
     font-weight: 600;
 }
+.sermon-feature .bulletin-row-chevron { color: inherit; }
 .sermon-feature [aria-expanded="true"] .sermon-open-label,
 .sermon-feature [aria-expanded="false"] .sermon-close-label {
     display: none;
@@ -5525,10 +5507,10 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-archive-header {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
-    gap: 0.55rem 1rem;
-    margin: clamp(1.75rem, 5vw, 3rem) 0 0.65rem;
+    gap: 0 var(--space-4);
+    margin: clamp(1.25rem, 4vw, 2rem) 0 var(--space-1);
 }
 .sermon-archive-header h2 {
     margin: 0;
@@ -5592,12 +5574,38 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-notes li a { color: var(--text-muted); text-decoration: none; }
 /* 본문으로 돌아가기: 글자 링크로 두어 이모지처럼 보이지 않게 한다 */
 .sermon-backref { margin-left: 0.25rem; font-size: 0.85em; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
-.sermon-sort { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-/* 정렬 버튼: 작은 글씨의 알약 모양. 선택 상자와 달리 글자를 줄여도 iOS가 화면을 확대하지 않는다 */
-.sermon-sort-btn { font-family: inherit; font-size: 0.875rem; font-weight: 500; line-height: 1.2; min-height: 44px; padding: 0.3rem 0.85rem; color: var(--text-muted); background: transparent; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast); }
-.sermon-sort-btn:hover { border-color: var(--text-muted); color: var(--heading); }
-.sermon-sort-btn[aria-pressed="true"] { color: var(--heading); font-weight: 700; background: var(--green-light); border-color: var(--heading); }
-.sermon-sort-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.sermon-sort { display: flex; max-width: 100%; }
+.sermon-sort-btn {
+    display: flex;
+    align-items: center;
+    min-width: 48px;
+    min-height: 48px;
+    color: var(--text-muted);
+    background: transparent;
+    border: 0;
+    font-family: inherit;
+    font-size: var(--fs-md);
+    font-weight: 500;
+    line-height: 1.25;
+    cursor: pointer;
+}
+/* 안쪽 표면만 낮춰 보이고, 바깥 버튼의 터치 높이는 유지한다. */
+.sermon-sort-btn span {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 34px;
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--green-soft);
+    transition: background var(--dur-fast), color var(--dur-fast);
+}
+.sermon-sort-btn + .sermon-sort-btn span { border-inline-start: 0; }
+.sermon-sort-btn:first-child span { border-start-start-radius: var(--radius-pill); border-end-start-radius: var(--radius-pill); }
+.sermon-sort-btn:last-child span { border-start-end-radius: var(--radius-pill); border-end-end-radius: var(--radius-pill); }
+.sermon-sort-btn:is(:hover, [aria-pressed="true"]) { color: var(--heading); }
+.sermon-sort-btn:hover span { background: var(--green-light); }
+.sermon-sort-btn[aria-pressed="true"] span { background: var(--green-soft); font-weight: 700; }
+.sermon-sort-btn:focus-visible { position: relative; outline: 2px solid var(--green-mid); outline-offset: -2px; border-radius: var(--radius-sm); }
 /* 제목 줄 헤딩은 목록 버튼의 모양을 그대로 쓰고, 스크롤 시 고정 머리글에 가리지 않게 여백을 준다 */
 .sermon-heading { margin: 0; font: inherit; font-size: inherit; font-weight: inherit; scroll-margin-top: 5rem; }
 
@@ -5606,7 +5614,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-item .news-post { margin-inline: auto; }
 /* 펼친 항목: 왼쪽에 금색 띠를 둬 지금 읽는 설교가 어느 것인지 보이게 한다 */
 .sermon-item .bulletin-row[aria-expanded="true"] { box-shadow: inset 3px 0 0 var(--gold); }
-.sermon-item .bulletin-row:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+.sermon-item .bulletin-row:focus-visible { outline: 2px solid var(--green-mid); outline-offset: -2px; }
 /* 성경 봉독: 어절 중간에서 끊기지 않게 하고 라벨은 위쪽에 맞춘다 */
 .sermon-meta .news-post-meta div { align-items: baseline; }
 .sermon-meta dd { word-break: keep-all; line-height: 1.6; }
@@ -5617,7 +5625,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-notes li a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
 /* 휴대폰: 카드 안쪽 여백을 줄여 글 폭을 넓히고, 봉독 상자 라벨 칸을 좁힌다 */
 @media (max-width: 480px) {
-    .sermon-list .bulletin-row { padding: 1rem 1.1rem; }
+    .sermon-list .bulletin-row { padding: 0.85rem 1rem; }
     .sermon-item .bulletin-drawer { padding: 1.1rem 1.1rem 1.4rem; }
     .sermon-meta { padding: 0.7rem 0; }
     .sermon-meta .news-post-meta div { grid-template-columns: 4.25rem 1fr; gap: 0.4rem; }
@@ -5625,7 +5633,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 }
 /* PC: 글자를 키우고 줄 간격을 넓혀 긴 글을 편하게 읽게 한다(줄 길이는 40rem 그대로) */
 @media (min-width: 769px) {
-    .sermon-list .bulletin-row { padding: 1.3rem 1.75rem; }
+    .sermon-list .bulletin-row { padding: 1rem 1.5rem; }
     .sermon-item .bulletin-drawer { padding: 2rem 1.75rem 2.25rem; }
     .sermon-row-title { font-size: 1.1875rem; }
     .sermon-body p { font-size: 1.0625rem; line-height: 1.9; }
