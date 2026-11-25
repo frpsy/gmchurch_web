@@ -4,5 +4,5 @@
 
 - `community-blessing.webp`: PC용, 2048×683
 - `community-blessing-m.webp`: 모바일용, 1200×400
-- 적용 위치: `community.html`, `.page-hero--community`
+- 적용 위치: `community.html`의 첫 화면 `picture`
 - 제목과 설명은 기존 HTML 텍스트를 유지합니다.

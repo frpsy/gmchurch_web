@@ -36,9 +36,17 @@
     <main id="main-content">
 
         <!-- ── Page Hero ─────────────────────────────────────── -->
-        <div class="page-hero">
-            <h1>미디어·자료</h1>
-            <p>영상, 사진, 신앙 자료를 한곳에서</p>
+        <div class="page-hero page-hero--illustrated">
+            <div class="container page-hero-layout">
+                <div>
+                    <h1>미디어·자료</h1>
+                    <p>영상, 사진, 신앙 자료를 한곳에서</p>
+                </div>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images/hero/media-m.webp">
+                    <img class="hero-photo" src="images/hero/media.webp" width="1600" height="900" alt="" fetchpriority="high">
+                </picture>
+            </div>
         </div>
 
         <!-- ── 미디어 허브 카드 (MediaHubRenderer) ───────────── -->
