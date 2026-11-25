@@ -192,6 +192,7 @@ const NavRenderer = {
         const toggle = document.getElementById('nav-toggle');
         const menu   = document.getElementById('nav-menu');
         if (!toggle || !menu) return;
+        const firstLink = menu.querySelector('.nav-link');
 
         const closeMenu = () => {
             menu.classList.remove('open');
@@ -221,15 +222,17 @@ const NavRenderer = {
                 menu.classList.add('open');
                 toggle.setAttribute('aria-expanded', true);
                 toggle.setAttribute('aria-label', '메뉴 닫기');
-                menu.querySelector('.nav-link')?.focus();
+                firstLink?.focus();
             }
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && menu.classList.contains('open')) {
-                closeMenu();
-                toggle.focus();
-            }
+            if (!menu.classList.contains('open')) return;
+            const backFromFirstLink = e.key === 'Tab' && e.shiftKey && e.target === firstLink;
+            if (e.key !== 'Escape' && !backFromFirstLink) return;
+            if (backFromFirstLink) e.preventDefault();
+            closeMenu();
+            toggle.focus();
         });
 
         menu.addEventListener('focusout', (e) => {
