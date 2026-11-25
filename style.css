@@ -5449,13 +5449,124 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .news-post-title { font-size: var(--fs-body); line-height: var(--lh-snug); color: var(--heading); margin: 0 0 0.4rem; }
 .news-post p { margin: 0; line-height: 1.8; color: var(--text); }
 .news-post p + p { margin-top: 0.3rem; }
+/* ── 설교 말씀 (sermons.html) ── */
+.sermon-column {
+    width: 100%;
+    max-width: 47.5rem;
+    margin-inline: auto;
+}
+.page-hero.sermon-hero {
+    min-height: 0;
+    padding-block: calc(var(--nav-h) + clamp(1.75rem, 5vw, 4rem)) clamp(1.75rem, 5vw, 3.5rem);
+    text-align: left;
+}
+.sermon-hero > .sermon-column {
+    animation: none;
+    opacity: 1;
+    will-change: auto;
+}
+.sermon-hero p:not(.section-eyebrow) {
+    min-height: 0;
+    margin: 0.5rem 0 0;
+}
+.sermon-content {
+    padding-block: clamp(1.5rem, 4vw, 2.75rem) clamp(2.5rem, 6vw, 4.5rem);
+}
+.sermon-feature {
+    margin-bottom: 0.75rem;
+}
+.sermon-feature h2 {
+    margin: 0 0 0.6rem;
+    color: var(--text-muted);
+    font-size: var(--fs-label);
+}
+.sermon-feature .bulletin-list {
+    border: 0;
+}
+.sermon-feature .bulletin-row {
+    flex-wrap: wrap;
+    padding: clamp(1.2rem, 4vw, 2.25rem);
+    background: var(--green-deep);
+}
+.sermon-feature .bulletin-row:hover {
+    background: color-mix(in srgb, var(--green-deep) 90%, var(--gold));
+}
+.sermon-feature .bulletin-row-info {
+    flex-basis: 100%;
+    gap: 0.65rem;
+}
+.sermon-feature .sermon-row-title {
+    max-width: 28ch;
+    font-size: clamp(1.6rem, 4vw, 2.65rem);
+    font-weight: 700;
+    line-height: 1.24;
+    letter-spacing: -0.03em;
+}
+.sermon-feature :is(.sermon-row-title, .sermon-byline, .bulletin-row-chevron) {
+    color: var(--on-dark-1);
+}
+.sermon-feature .sermon-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 44px;
+    margin-top: 0.25rem;
+    padding-inline: 0.85rem;
+    border: 1px solid currentColor;
+    border-radius: var(--radius-sm);
+    color: var(--on-dark-1);
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+.sermon-feature [aria-expanded="true"] .sermon-open-label,
+.sermon-feature [aria-expanded="false"] .sermon-close-label {
+    display: none;
+}
+.sermon-archive-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.55rem 1rem;
+    margin: clamp(1.75rem, 5vw, 3rem) 0 0.65rem;
+}
+.sermon-archive-header h2 {
+    margin: 0;
+    color: var(--heading);
+    font-size: clamp(1.3rem, 3vw, 1.65rem);
+}
+.sermon-list {
+    box-shadow: none;
+}
+.sermon-byline {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.75rem;
+    color: var(--text-muted);
+    font-size: var(--fs-label);
+    line-height: 1.5;
+}
+.sermon-row-title {
+    color: var(--heading);
+    font-size: 1.0625rem;
+    font-weight: 650;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+.sermon-related {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 44px;
+    margin: 1.25rem auto 0;
+    color: var(--heading);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
 /* 줄을 가로로 꽉 채운다: keep-all과 text-wrap: pretty는 어절을 통째로 넘겨 줄이 일찍 끊기므로 쓰지 않는다 */
 .sermon-body p { margin: 0 0 1.1em; font-size: 1rem; line-height: 1.8; letter-spacing: -0.01em; word-break: normal; overflow-wrap: break-word; text-align: justify; text-justify: inter-character; }
 .sermon-body p:last-child { margin-bottom: 0; }
-/* 제목이 한 줄을 차지하고, 설교자 태그는 그 아래 줄에 온다 */
-.sermon-row-title { color: var(--heading); font-weight: 600; font-size: var(--fs-body); line-height: 1.45; flex-basis: 100%; }
-/* 날짜는 보조 정보로 낮추고, 제목을 목록의 기준으로 세운다 */
-.sermon-item .bulletin-row-date { font-size: var(--fs-label); font-weight: 500; color: var(--text-muted); }
 /* 성경 봉독: 상자 대신 위아래 가는 선으로 구분해 카드 안의 겹 상자를 없앤다 */
 .sermon-meta { margin: 0; padding: 0.8rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: none; }
 .sermon-meta .news-post-meta div { grid-template-columns: 5.5rem 1fr; }
@@ -5481,9 +5592,9 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-notes li a { color: var(--text-muted); text-decoration: none; }
 /* 본문으로 돌아가기: 글자 링크로 두어 이모지처럼 보이지 않게 한다 */
 .sermon-backref { margin-left: 0.25rem; font-size: 0.85em; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
-.sermon-sort { max-width: 760px; margin: 0 auto 0.75rem; display: flex; justify-content: flex-end; gap: 0.35rem; }
+.sermon-sort { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 /* 정렬 버튼: 작은 글씨의 알약 모양. 선택 상자와 달리 글자를 줄여도 iOS가 화면을 확대하지 않는다 */
-.sermon-sort-btn { font-family: inherit; font-size: 0.8125rem; font-weight: 500; line-height: 1.2; min-height: 36px; padding: 0.3rem 0.85rem; color: var(--text-muted); background: transparent; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast); }
+.sermon-sort-btn { font-family: inherit; font-size: 0.875rem; font-weight: 500; line-height: 1.2; min-height: 44px; padding: 0.3rem 0.85rem; color: var(--text-muted); background: transparent; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast); }
 .sermon-sort-btn:hover { border-color: var(--text-muted); color: var(--heading); }
 .sermon-sort-btn[aria-pressed="true"] { color: var(--heading); font-weight: 700; background: var(--green-light); border-color: var(--heading); }
 .sermon-sort-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
@@ -5496,8 +5607,6 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 /* 펼친 항목: 왼쪽에 금색 띠를 둬 지금 읽는 설교가 어느 것인지 보이게 한다 */
 .sermon-item .bulletin-row[aria-expanded="true"] { box-shadow: inset 3px 0 0 var(--gold); }
 .sermon-item .bulletin-row:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
-/* 설교 제목은 날짜보다 먼저 읽히도록 키운다 */
-.sermon-row-title { font-size: 1.0625rem; }
 /* 성경 봉독: 어절 중간에서 끊기지 않게 하고 라벨은 위쪽에 맞춘다 */
 .sermon-meta .news-post-meta div { align-items: baseline; }
 .sermon-meta dd { word-break: keep-all; line-height: 1.6; }
@@ -5508,7 +5617,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .sermon-notes li a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
 /* 휴대폰: 카드 안쪽 여백을 줄여 글 폭을 넓히고, 봉독 상자 라벨 칸을 좁힌다 */
 @media (max-width: 480px) {
-    .sermon-item .bulletin-row { padding: 1rem 1.1rem; }
+    .sermon-list .bulletin-row { padding: 1rem 1.1rem; }
     .sermon-item .bulletin-drawer { padding: 1.1rem 1.1rem 1.4rem; }
     .sermon-meta { padding: 0.7rem 0; }
     .sermon-meta .news-post-meta div { grid-template-columns: 4.25rem 1fr; gap: 0.4rem; }
@@ -5516,7 +5625,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 }
 /* PC: 글자를 키우고 줄 간격을 넓혀 긴 글을 편하게 읽게 한다(줄 길이는 40rem 그대로) */
 @media (min-width: 769px) {
-    .sermon-item .bulletin-row { padding: 1.3rem 1.75rem; }
+    .sermon-list .bulletin-row { padding: 1.3rem 1.75rem; }
     .sermon-item .bulletin-drawer { padding: 2rem 1.75rem 2.25rem; }
     .sermon-row-title { font-size: 1.1875rem; }
     .sermon-body p { font-size: 1.0625rem; line-height: 1.9; }
