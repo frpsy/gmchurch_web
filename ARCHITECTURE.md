@@ -479,8 +479,8 @@ window DOMContentLoaded
       ├── TapFeedback.init()          (모든 페이지)
       │     iOS :active(눌림 색)용 touchstart 리스너만 — 이동 지연 없음. 터치 기기 hover 이동 제거는 style.css 끝 @media (hover: none)
       │
-      ├── HeroNav.init()              (.page-hero--photo가 있고 navigation 최상위 메뉴인 페이지)
-      │     히어로 좌·우에 이전/다음 메뉴 버튼(.hero-nav) 추가 — 메뉴 순서는 CHURCH_DATA.navigation, 양 끝은 순환
+      ├── PageTrail.init()              (.page-hero가 있고 navigation 최상위 메뉴인 페이지)
+      │     본문 아래에 이전/다음 메뉴 이름을 표시(.page-trail) — 메뉴 순서는 CHURCH_DATA.navigation, 양 끝은 순환
       │
       └── MenuOverlay.init()          (모든 페이지)
             nav-menu-trigger 버튼으로 여는 전체 메뉴 + 검색 오버레이
@@ -676,7 +676,7 @@ window DOMContentLoaded
 | `.nav-chevron` | 모바일 드롭다운 토글 화살표 버튼 (desktop: hidden) |
 | `.nav-item.mobile-open` | 모바일 드롭다운 열림 상태 |
 | `.hero` | 이미지 없는 홈 소개와 방문 바로가기 |
-| `.page-hero` | 서브 페이지 상단 헤더 (높이 통일: PC `min-height` 350px · 모바일 291px, 내용은 세로 가운데 정렬) |
+| `.page-hero` | 서브 페이지 상단 헤더 (가운데 정렬, 제목과 설명에 맞춰 높이 조정) |
 | `.section` / `.section-header` | 섹션 레이아웃 |
 | `.container` | 최대폭 1200px, 패딩 clamp |
 | `.grid` | auto-fit minmax(280px) 그리드 |
@@ -731,8 +731,8 @@ window DOMContentLoaded
 | `.footer-logo-mark` | 푸터 캔터베리 십자가 컨테이너 (38×38px, 흰색 SVG) |
 | `.ico` | 아이콘 팩 SVG (`images/icons.svg` 심볼, 1em 크기·가는 단색 선) |
 | `.reveal` | ScrollReveal 애니메이션 대상 (fade-in on scroll) |
-| `.hero-nav` / `.hero-nav--prev` / `--next` | 메뉴 히어로 좌·우 이전/다음 메뉴 버튼 (모바일 44px, 데스크톱 48px) |
-| `.page-hero--{clergy,worship,bulletin,altar,sundays,newcomer,community,media,visit}` | 메뉴별 상징 이미지 히어로 (`images/hero/*.webp`, 모바일은 `-m` 경량본. `bulletin`=주보 페이지, `altar`=예배와 기도 페이지). 글자 배치는 전부 `.page-hero--photo` 공통 규칙 |
+| `.page-trail` | 주요 페이지 본문 끝에서 이전/다음 메뉴로 이동하는 이름이 표시된 링크 (최소 44px) |
+| `.page-hero--{clergy,community,greenchurch}` | 교회 정체성과 공동체를 소개하는 사진 상단. 다른 페이지에는 콘텐츠 높이에 맞는 공통 제목 영역을 사용 |
 
 ### 반응형 브레이크포인트
 

@@ -96,10 +96,6 @@ const MapHelper = {
         const jibun = CHURCH_DATA.info.addressJibun;
         return `
             <div class="map-card${compact ? ' map-card--compact' : ''}">
-                ${compact ? '' : `
-                <div class="map-preview">
-                    <iframe class="map-embed" src="${this._embedSrc()}" title="대한성공회 광명교회 위치 — Google 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-                </div>`}
                 <div class="map-card-addr">
                     <div class="map-addr-row">
                         <span class="map-addr-tag">도로명</span>
@@ -123,6 +119,10 @@ const MapHelper = {
                         <span class="map-btn-arrow" aria-hidden="true">→</span>
                     </a>
                 </div>
+                ${compact ? '' : `
+                <div class="map-preview">
+                    <iframe class="map-embed" src="${this._embedSrc()}" title="대한성공회 광명교회 위치 — Google 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </div>`}
             </div>
         `;
     }
@@ -2178,8 +2178,8 @@ const ScrollProgress = {
 // <main>만 바꿔 끼우고, 그 페이지의 렌더러를 다시 돌린다. 주소와 뒤로 가기도 따라간다.
 const PageSwitch = {
     _ROUTES: {
-        'bulletin.html': () => BulletinRenderer.render(),
-        'news.html': () => NewsRenderer.render(),
+        'bulletin.html': hash => BulletinRenderer.render(hash),
+        'news.html': hash => NewsRenderer.render(hash),
     },
 
     _file(href) {
@@ -2228,13 +2228,14 @@ const PageSwitch = {
         const newCanon = doc.querySelector('link[rel="canonical"]');
         if (canon && newCanon) canon.href = newCanon.href;
         // 화면을 먼저 그리고, 주소 바꾸기는 따로 감싼다(주소를 못 바꾸는 환경에서도 목록이 보이도록)
-        this._ROUTES[file]();
-        // 본문이 바뀌었으니 히어로의 이전·다음 화살표도 새 페이지 기준으로 다시 붙인다(교회소식으로 가면 사라지던 문제)
-        HeroNav.init(file);
+        this._ROUTES[file](hash);
+        // 교체한 본문에 현재 페이지 기준의 메뉴 이동 링크를 붙인다.
+        PageTrail.init(file);
         if (push) {
             try { history.pushState({}, '', file + hash); } catch (err) { /* 주소 표시만 그대로 둔다 */ }
         }
-        if (!hash) window.scrollTo({ top: 0, behavior: 'auto' });
+        if (hash) App._scrollToHash(hash);
+        else window.scrollTo({ top: 0, behavior: 'auto' });
     }
 };
 
@@ -2315,10 +2316,10 @@ const BulletinRenderer = {
         const labels = CHURCH_DATA.bulletins.labels;
         const badge = this._isThisWeek(item.date) ? labels.thisWeek : (isLatest ? labels.latest : '');
         return `
-            <button class="bulletin-row" aria-expanded="${open ? 'true' : 'false'}" type="button">
+            <button class="bulletin-row" id="bulletin-${item.date}" aria-expanded="${open}" aria-controls="bulletin-panel-${item.date}" type="button">
                 <div class="bulletin-row-info">
                     <div class="bulletin-row-top">
-                        <span class="bulletin-row-date">${item.label}</span>
+                        <time class="bulletin-row-date" datetime="${item.date}">${item.label}</time>
                         ${badge ? `<span class="bulletin-badge-new">${badge}</span>` : ''}
                     </div>
                     <div class="bulletin-row-meta">
@@ -2361,7 +2362,7 @@ const BulletinRenderer = {
         return `${verse}<div class="bulletin-pages">${imgs}</div>${pdfBtn}`;
     },
 
-    _renderPage(el, items, page) {
+    _renderPage(el, items, page, selectedDate) {
         const perPage    = this._PER_PAGE;
         const totalPages = Math.ceil(items.length / perPage);
         const start      = page * perPage;
@@ -2376,11 +2377,11 @@ const BulletinRenderer = {
 
         // 첫 쪽의 최신 주보는 열 때 펼쳐 둔다(사용자 요청 2026-11-22)
         const listHtml = pageItems.map((item, relIdx) => {
-            const open = page === 0 && relIdx === 0;
+            const open = selectedDate ? item.date === selectedDate : page === 0 && relIdx === 0;
             return `
             <div class="bulletin-item">
                 ${this._rowHtml(item, start + relIdx === 0, open)}
-                <div class="bulletin-drawer"${open ? '' : ' hidden'}>
+                <div class="bulletin-drawer" id="bulletin-panel-${item.date}"${open ? '' : ' hidden'}>
                     ${this._drawerHtml(item, false)}
                 </div>
             </div>
@@ -2418,13 +2419,17 @@ const BulletinRenderer = {
                 drawer.hidden = isOpen;
                 const shift = btn.getBoundingClientRect().top - before;
                 if (shift) window.scrollBy({ top: shift, behavior: 'instant' });
+                if (!isOpen) history.replaceState(history.state, '', `#${btn.id}`);
+                else if (location.hash === `#${btn.id}`) history.replaceState(history.state, '', location.pathname + location.search);
             });
         });
 
         el.querySelectorAll('.bulletin-pag-btn').forEach(btn => {
             btn.addEventListener('click', () => {
+                if (location.hash.startsWith('#bulletin-')) history.replaceState(history.state, '', location.pathname + location.search);
                 this._renderPage(el, items, page + parseInt(btn.dataset.dir, 10));
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const first = el.querySelector('.bulletin-row');
+                if (first) App._scrollToHash('#' + first.id, { focus: true });
             });
         });
     },
@@ -2446,7 +2451,7 @@ const BulletinRenderer = {
         return dlg;
     },
 
-    render() {
+    render(hash = location.hash) {
         const el = document.getElementById('bulletin-full');
         if (!el) return;
         const { items } = CHURCH_DATA.bulletins;
@@ -2462,7 +2467,9 @@ const BulletinRenderer = {
             dlg.querySelector('.bulletin-lb-img').alt = img.alt;
             dlg.showModal();
         });
-        this._renderPage(el, items, 0);
+        const selected = items.findIndex(item => `#bulletin-${item.date}` === hash);
+        const page = selected < 0 ? 0 : Math.floor(selected / this._PER_PAGE);
+        this._renderPage(el, items, page, items[selected]?.date);
     }
 };
 
@@ -2697,7 +2704,7 @@ const NewsRenderer = {
                     aria-expanded="${isOpen}" aria-controls="news-${item.date}">
                 <div class="bulletin-row-info">
                     <div class="bulletin-row-top">
-                        <span class="bulletin-row-date">${item.label}(${this._weekdayOf(item.date)})</span>
+                        <time class="bulletin-row-date" datetime="${item.date}">${item.label}(${this._weekdayOf(item.date)})</time>
                         ${badge ? `<span class="bulletin-badge-new">${badge}</span>` : ''}
                     </div>
                     <div class="bulletin-row-meta">
@@ -2711,7 +2718,7 @@ const NewsRenderer = {
             </button>`;
     },
 
-    render() {
+    render(hash = location.hash) {
         const el = document.getElementById('news-full');
         if (!el) return;
         const weeks = this._weeks();
@@ -2720,7 +2727,7 @@ const NewsRenderer = {
             return;
         }
         // 공유한 링크(#news-날짜)로 들어오면 그 주를, 아니면 최신 주를 펼친다
-        const wanted = weeks.findIndex(item => `#news-${item.date}` === location.hash);
+        const wanted = weeks.findIndex(item => `#news-${item.date}` === hash);
         const openIdx = wanted === -1 ? 0 : wanted;
 
         el.innerHTML = `
@@ -3315,25 +3322,22 @@ const TapFeedback = {
     }
 };
 
-// 메뉴 히어로 좌·우 17% 터치 영역 — 메뉴 순서(CHURCH_DATA.navigation)상 이전/다음 메뉴로 이동한다.
-// 첫 메뉴의 이전은 마지막으로, 마지막의 다음은 첫 메뉴로 이어진다.
-const HeroNav = {
-    // page: 현재 페이지 파일명. 생략하면 주소에서 읽는다. 본문만 바꾸는 전환(PageSwitch) 뒤에는 바뀐 페이지 이름을 넘긴다.
+const PageTrail = {
     init(page = location.pathname.split('/').pop() || 'index.html') {
-        const hero = document.querySelector('.page-hero--photo');
-        if (!hero) return;
-        hero.querySelectorAll('.hero-nav').forEach(el => el.remove());
+        const main = document.querySelector('main:has(.page-hero)');
+        if (!main) return;
+        main.querySelector('.page-trail')?.remove();
         const menu = CHURCH_DATA.navigation;
-        const i = menu.findIndex(m => m.href.split('#')[0] === page);
+        const i = menu.findIndex(item => item.href.split('#')[0] === page);
         if (i < 0) return;
         const prev = menu[(i - 1 + menu.length) % menu.length];
         const next = menu[(i + 1) % menu.length];
-        const chevron = d => `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="${d}"/></svg>`;
-        const link = (dir, m, label, points) =>
-            `<a class="hero-nav hero-nav--${dir}" href="${m.href}" aria-label="${label}: ${m.label}">${chevron(points)}</a>`;
-        hero.insertAdjacentHTML('beforeend',
-            link('prev', prev, '이전 메뉴', '15 5 8 12 15 19') +
-            link('next', next, '다음 메뉴', '9 5 16 12 9 19'));
+        main.insertAdjacentHTML('beforeend', `
+            <nav class="container page-trail" aria-label="이전·다음 메뉴">
+                <a href="${prev.href}" aria-label="이전 메뉴: ${prev.label}"><span aria-hidden="true">←</span> ${prev.label}</a>
+                <a href="${next.href}" aria-label="다음 메뉴: ${next.label}">${next.label} <span aria-hidden="true">→</span></a>
+            </nav>
+        `);
     }
 };
 
@@ -3472,7 +3476,7 @@ const App = {
         PortraitLightbox.init();
         MenuOverlay.init();
         TapFeedback.init();
-        HeroNav.init();
+        PageTrail.init();
         TextFit.init();
         document.addEventListener('click', e => {
             if (e.target.matches('.map-copy-btn')) MapHelper.copyAddr(e.target);
