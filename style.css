@@ -1590,6 +1590,89 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 /* ── Home page ─────────────────────────────────────────── */
 .section--white { background: var(--white); }
 
+.home {
+    --white: #ffffff;
+    --cream: #f3f4f6;
+    --heading: #1b1d21;
+    --text: #30343a;
+    --text-muted: #555d66;
+    --border: #dce0e4;
+    --md-secondary-container: color-mix(in srgb, var(--text) 8%, var(--white));
+    --md-surface-container: var(--white);
+    --md-surface-container-high: var(--cream);
+}
+@media (prefers-color-scheme: dark) {
+    .home {
+        --white: #1d1f22;
+        --cream: #151719;
+        --heading: #f0f1f2;
+        --text: #dfe1e4;
+        --text-muted: #a9afb7;
+        --border: #373b40;
+    }
+}
+
+.home #main-nav {
+    background: var(--white);
+    border-color: var(--border);
+}
+.home #main-nav.scrolled {
+    background: color-mix(in srgb, var(--white) 94%, transparent);
+    box-shadow: none;
+}
+.home #main-nav :is(.nav-logo-mark, .nav-logo-sub),
+.home #main-footer :is(.footer-logo-mark, .footer-brand-sub) { color: var(--md-primary); }
+.home #main-nav .nav-logo-mark svg { filter: none; }
+.home #main-nav .nav-logo-name { color: var(--heading); text-shadow: none; }
+.home #main-nav :is(.nav-link, .nav-menu-trigger, .nav-toggle) { color: var(--text); }
+.home #main-nav .nav-toggle span { background: currentColor; }
+.home #main-nav :is(.nav-link:hover, .nav-item:hover > .nav-link, .nav-link.active) {
+    color: var(--md-primary);
+}
+.home #main-nav .nav-menu-trigger:is(:hover, :focus-visible) {
+    color: var(--heading);
+    background: var(--cream);
+}
+.home #main-nav :is(a, button):focus-visible,
+.home #main-footer a:focus-visible { outline-color: var(--md-primary); }
+
+@media (max-width: 768px) {
+    .home #main-nav .nav-menu {
+        background: var(--white);
+        border-color: var(--border);
+    }
+    .home #main-nav :is(.nav-chevron, .dropdown a) { color: var(--text-muted); }
+    .home #main-nav :is(.nav-link, .nav-chevron, .dropdown a):is(:hover, :active) {
+        background: var(--cream);
+        color: var(--heading);
+    }
+    .home #main-nav :is(.nav-link.active, .mobile-open .nav-chevron) {
+        background: var(--cream);
+        color: var(--md-primary);
+    }
+}
+
+.home #main-footer {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+}
+.home #main-footer :is(.footer-brand-name, .footer-col h2, .footer-service-time) {
+    color: var(--heading);
+}
+.home #main-footer :is(.footer-brand-slogan, .footer-brand-meta, .footer-service-label,
+                       .footer-info-row, .footer-info-label, .footer-ext-link) {
+    color: var(--text-muted);
+}
+.home #main-footer :is(.footer-service-row, .footer-ext-link, .footer-bottom) {
+    border-color: var(--border);
+}
+.home #main-footer :is(.footer-bottom, .footer-ext-link--dim) { opacity: 1; }
+.home #main-footer a:hover {
+    color: var(--md-primary);
+    text-decoration-color: currentColor;
+}
+
 .home main {
     font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont,
                  "Noto Sans KR", "Segoe UI", "Apple SD Gothic Neo", sans-serif;
@@ -1673,11 +1756,14 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     padding: 1rem 1.15rem;
     margin: 0 0 0.65rem;
 }
-.home-about-facts .about-brief-facts strong { color: var(--md-primary); }
+.home-about-facts .about-brief-facts strong { color: var(--text-muted); }
 .home-about-facts .about-brief-award {
+    background: var(--white);
+    border-color: var(--border);
     border-radius: var(--radius-xl);
     margin-bottom: 0;
 }
+.home-about-facts .about-brief-award:hover { background: var(--cream); }
 .home-about-facts .about-brief-award-body,
 .home-about-facts .about-brief-facts span { min-width: 0; overflow-wrap: anywhere; }
 .home .about-brief-link {
@@ -1688,7 +1774,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     padding: 0.3rem 0.3rem 0.3rem 1rem;
     border: 0;
     border-radius: var(--radius-pill);
-    background: var(--green-light);
+    background: var(--cream);
     color: var(--heading);
     font-size: var(--fs-sm);
     font-weight: 650;
@@ -1702,8 +1788,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    background: var(--md-primary);
-    color: var(--md-on-primary);
+    background: var(--heading);
+    color: var(--white);
 }
 .home .home-link-arrow .ico { width: 1.15rem; height: 1.15rem; }
 .home .btn-hero-primary .home-link-arrow {
@@ -1729,12 +1815,13 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .home #worship-grid h3 { margin-bottom: 0.25rem; }
 .home #worship-grid .card-time {
+    color: var(--text-muted);
     font-size: var(--fs-sm);
     font-weight: 650;
     font-variant-numeric: tabular-nums;
 }
 .home #this-sunday {
-    background: var(--green-light);
+    background: var(--white);
     border-radius: var(--radius-xl);
     margin: 0;
     padding: clamp(1rem, 2.4vw, 1.5rem);
@@ -1746,6 +1833,18 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     margin-bottom: 0;
 }
 .home .map-card--compact .map-btn { min-height: 44px; padding-inline: 0.55rem; }
+.home .map-card--compact .map-btn--naver {
+    background: var(--white);
+    border-color: var(--border);
+    color: var(--heading);
+    box-shadow: none;
+}
+.home .map-card--compact .map-btn--naver:hover { border-color: var(--md-primary); }
+.home .map-card--compact .map-btn--naver .map-btn-mark {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+}
+.home .map-card--compact .map-btn--naver .map-btn-arrow { color: var(--text-muted); }
 .home .visit-quick { margin-bottom: var(--space-4); }
 .home .visit-quick a {
     display: flex;
