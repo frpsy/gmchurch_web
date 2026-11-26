@@ -2486,12 +2486,13 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     align-items: center;
     text-align: center;
 }
+/* 작은 머리말은 사이트 공통 section-eyebrow와 같은 색·자간을 쓴다 */
 .next-step-cta-eyebrow {
     font-size: var(--fs-label);
-    font-weight: 700;
-    letter-spacing: 0.22em;
+    font-weight: 600;
+    letter-spacing: var(--ls-eyebrow);
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--md-primary);
     margin-bottom: 0.85rem;
 }
 .next-step-cta-title {
