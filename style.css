@@ -1522,7 +1522,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 #main-footer :is(.footer-service-row, .footer-ext-link, .footer-bottom) {
     border-color: var(--border);
 }
-#main-footer :is(.footer-bottom, .footer-ext-link--dim) { opacity: 1; }
+#main-footer .footer-bottom { opacity: 1; }
 #main-footer a:hover {
     color: var(--md-primary);
     text-decoration-color: currentColor;
@@ -3123,12 +3123,6 @@ footer {
 }
 .footer-col .footer-ext-link:last-child { border-bottom: none; }
 .footer-col .footer-ext-link:hover { color: #fff; }
-.footer-col .footer-ext-link--dim {
-    opacity: 0.78;
-    font-size: var(--fs-label);
-    margin-top: 0.65rem;
-    border-bottom: none;
-}
 
 /* Bottom bar */
 .footer-bottom {
@@ -3292,7 +3286,6 @@ footer {
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
     .footer-bottom { flex-direction: column; text-align: center; }
     .footer-service-row { font-size: var(--fs-md); }
-    .footer-col .footer-ext-link--dim { margin-top: 0.5rem; }
 }
 
 /* 교회 연혁 — 약력 타임라인 재사용, 제목·본문 760px 칼럼 */
