@@ -891,8 +891,8 @@ const NewcomerRenderer = {
             <div class="liturgy-guide" id="newcomer">
 
                 <div class="newcomer-intro">
-                    <h2 class="newcomer-intro-title">처음 오시는 분을 위한 예배 안내</h2>
-                    <p class="newcomer-intro-body">광명교회에 오신 것을 환영합니다. 성공회 예배에서는 회중이 함께 기도하고 응답합니다. 순서가 낯설다면 처음에는 지켜보셔도 괜찮습니다.</p>
+                    <h2 class="newcomer-intro-title">예배 안내</h2>
+                    <p class="newcomer-intro-body">성공회 예배에서는 회중이 함께 기도하고 응답합니다. 순서가 낯설면 처음에는 지켜보셔도 괜찮습니다.</p>
                     <div class="newcomer-key-facts">
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">예배</span>
@@ -912,28 +912,27 @@ const NewcomerRenderer = {
                 <div class="liturgy-section" id="firsttime">
                     <p class="section-eyebrow">First Visit</p>
                     <h2 class="section-title">참여 안내</h2>
-                    <p class="liturgy-body" style="margin-bottom:1rem;">주보와 기도서를 보며 예배 순서를 따라가실 수 있습니다.</p>
+                    <p class="liturgy-body" style="margin-bottom:1rem;">처음 오셨을 때 알아 두시면 좋은 것들입니다.</p>
                     <div class="liturgy-checklist">
-                        <div class="checklist-item"><span class="check-icon">✓</span><p>예배 중 <strong>앉고 서는</strong> 순서가 있습니다. 몸이 불편하시면 앉아 계셔도 됩니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon">✓</span><p>예배 순서는 <strong>주보</strong>에서 확인하세요. <strong>자리에 놓인 기도서</strong>를 함께 펴고 응답하시면 됩니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon">✓</span><p>회중이 함께 부르는 <strong>성가</strong>는 따라 부르지 않으셔도 괜찮습니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon">✓</span><p>처음부터 모든 순서를 따라 하실 필요는 없습니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon">✓</span><p>도움이 필요하면 옆자리 교우나 안내위원에게 말씀해 주세요.</p></div>
+                        <div class="checklist-item"><span class="check-icon">✓</span><p>예배 중에는 <strong>앉고 서는</strong> 순서가 있습니다. 몸이 불편하시면 앉아 계셔도 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon">✓</span><p>예배 순서는 <strong>주보</strong>에 있습니다. 응답은 <strong>자리에 놓인 기도서</strong>를 펴고 함께 읽으시면 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon">✓</span><p><strong>성가</strong>는 따라 부르지 않으셔도 괜찮습니다.</p></div>
+                                                <div class="checklist-item"><span class="check-icon">✓</span><p>도움이 필요하면 옆자리 교우나 안내위원에게 말씀해 주세요.</p></div>
                     </div>
                 </div>
 
                 <div class="liturgy-section" id="liturgy">
                     <p class="section-eyebrow">Anglican Liturgy</p>
                     <h2 class="section-title">성공회 전례란?</h2>
-                    <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 초대교회로부터 이어진 말씀의 전례와 성찬의 전례가 조화를 이루는 예배 전통을 16세기부터 지켜오고 있습니다.</p>
-                    <p class="liturgy-body">예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 1549년 캔터베리 대주교 토마스 크랜머가 편찬한 이 기도서는, 라틴어가 아닌 자국어로 예배를 드리도록 하여 <strong>모든 신자가 전례에 직접 참여</strong>할 수 있게 한 종교개혁의 중요한 유산입니다.</p>
+                    <p class="liturgy-body">성공회(Anglican Church)는 <strong>말씀과 성찬을 함께 중시하는 전례 교회</strong>입니다. 말씀의 전례와 성찬의 전례는 초대교회부터 이어 온 예배 전통입니다. 성공회는 16세기부터 이 전통을 지켜 오고 있습니다.</p>
+                    <p class="liturgy-body">예배는 <strong>성공회 기도서(Book of Common Prayer)</strong>에 따라 드립니다. 이 기도서는 1549년 캔터베리 대주교 토마스 크랜머가 펴냈습니다. 라틴어 대신 자기 나라 말로 예배하게 해서 <strong>모든 신자가 전례에 직접 참여</strong>할 수 있게 했습니다. 종교개혁이 남긴 중요한 유산입니다.</p>
                     <div class="liturgy-card">
                         <h3 class="liturgy-card-title">전례의 의미</h3>
-                        <p class="liturgy-body"><strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말로, '공동체를 위해 수행하는 일'을 뜻합니다. 곧 전례는 <strong>그리스도인이 함께 드리고 함께 살아가는 신앙의 실천</strong>입니다.</p>
+                        <p class="liturgy-body"><strong>'전례(典禮, Liturgy)'</strong>는 그리스어 <em>레이투르기아(λειτουργία)</em>에서 온 말입니다. '공동체를 위해 하는 일'이라는 뜻입니다. 전례는 <strong>그리스도인이 함께 드리고 함께 살아가는 신앙의 실천</strong>입니다.</p>
                         <ul class="liturgy-list">
-                            <li>회중이 <strong>함께 기도하고 응답하는 대화 형식</strong>으로 진행됩니다.</li>
+                            <li>예배는 회중이 <strong>함께 기도하고 응답하는 대화 형식</strong>입니다.</li>
                             <li>모든 신자가 성직자와 함께 <strong>예배를 드리는 주체</strong>가 됩니다.</li>
-                            <li>성서·성가집·기도서·주보를 함께 펴고 능동적으로 참여합니다.</li>
+                            <li>성서·성가집·기도서·주보를 펴고 함께 참여합니다.</li>
                         </ul>
                     </div>
                 </div>
@@ -963,20 +962,20 @@ const NewcomerRenderer = {
                     <div class="communion-grid">
                         <div class="communion-card communion-season">
                             <h3>세례받으신 분</h3>
-                            <p class="liturgy-body">성공회의 성찬은 모든 그리스도인에게 열려 있습니다. 교파에 관계없이 <strong>세례받은 그리스도인이라면 누구나</strong> 그리스도의 몸과 피를 모실 수 있습니다.</p>
+                            <p class="liturgy-body">성공회의 성찬은 교파와 관계없이 열려 있습니다. <strong>세례받은 그리스도인이라면 누구나</strong> 그리스도의 몸과 피를 모실 수 있습니다.</p>
                             <ul class="liturgy-list">
-                                <li>제대 앞으로 나오신 후, 두 손을 펴서 빵을 받으십시오.</li>
-                                <li>빵을 받으신 후, 포도주에 찍어 <strong>영하십시오</strong>.<br><small style="color:var(--text-muted); font-size:0.82em;">영하다: 성체를 받아 모시다</small></li>
+                                <li>제대 앞으로 나와 두 손을 펴고 빵을 받으십시오.</li>
+                                <li>받은 빵은 포도주에 찍어 <strong>영하십시오</strong>.<br><small style="color:var(--text-muted); font-size:0.82em;">영하다: 성체를 받아 모시다</small></li>
                                 <li>빵과 포도주를 받을 때 <em>"아멘"</em>으로 응답합니다.</li>
-                                <li>성찬을 받는 방법이 궁금하시면 안내위원에게 문의해 주세요.</li>
+                                <li>성찬 받는 방법이 궁금하시면 안내위원에게 문의해 주세요.</li>
                             </ul>
                         </div>
                         <div class="communion-card" style="border-top-color:var(--green-mid); background:var(--green-light);">
                             <h3>아직 세례를 받지 않으신 분</h3>
                             <p class="liturgy-body"><strong>제대 앞으로 나오시면 강복(축복)을 받으실 수 있습니다.</strong></p>
                             <ul class="liturgy-list">
-                                <li>두 손을 가슴에 X자로 모으시면, 집전자가 머리에 손을 얹고 강복해 드립니다.</li>
-                                <li>편안한 마음으로 나오세요. 이 시간은 하느님께서 여러분을 맞이하시는 자리입니다.</li>
+                                <li>두 손을 가슴에 X자로 모으시면 집전자가 머리에 손을 얹고 강복해 드립니다.</li>
+                                <li>편안한 마음으로 나오세요. 이때 하느님께서 여러분을 맞이하십니다.</li>
                             </ul>
                         </div>
                     </div>
