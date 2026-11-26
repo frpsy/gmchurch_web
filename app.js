@@ -806,7 +806,7 @@ const WorshipRenderer = {
                 <div class="liturgy-section">
                     <p class="section-eyebrow">Order of Service</p>
                     <h2 class="section-title">감사성찬례 순서</h2>
-                    <p class="liturgy-body liturgy-body--lead">성공회 기도서에 따른 감사성찬례는 크게 <strong>네&nbsp;부분</strong>으로 구성됩니다.</p>
+                    <p class="liturgy-body liturgy-body--lead">감사성찬례는 성공회 기도서에 따라 <strong>네&nbsp;부분</strong>으로 이루어집니다.</p>
                     <div class="liturgy-steps">
                         ${eucharistOrder.map((step, i) => `
                             <div class="liturgy-step">
@@ -873,7 +873,7 @@ const WorshipRenderer = {
                 <div class="liturgy-section" id="intercession">
                     <p class="section-eyebrow">Anglican Cycle of Prayer</p>
                     <h2 class="section-title">세계성공회 중보기도</h2>
-                    <p class="liturgy-body liturgy-body--lead">세계성공회(Anglican Communion)는 날마다 특정 교구와 지역 교회를 위해 함께 기도하는 기도 달력을 발행합니다. 전 세계 165개 이상의 나라에 퍼져 있는 성공회 공동체와 하나로 이어지는 기도입니다.</p>
+                    <p class="liturgy-body liturgy-body--lead">세계성공회(Anglican Communion)는 기도 달력을 펴냅니다. 날마다 정해진 교구와 지역 교회를 함께 기억하며 기도합니다. 이 기도로 165개 이상의 나라에 있는 성공회 공동체와 하나로 이어집니다.</p>
                     <div class="resource-grid resource-grid--single">
                         <a class="resource-card" href="${prayer.intercession.url}" target="_blank" rel="noopener noreferrer">
                             <span class="resource-icon" aria-hidden="true">${icon(prayer.intercession.icon)}</span>
