@@ -3066,13 +3066,21 @@ const SundaysRenderer = {
             currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
             this._bindRibbonPopover(currentEl.querySelector('.season-ribbon-wrap'), signal);
         }
-        if (lectionaryEl) this._lectionaryAsync(lectionaryEl);
+        const readings = monthlyEl || lectionaryEl ? this._loadSundays() : null;
+        if (lectionaryEl) this._lectionaryAsync(lectionaryEl, readings);
         if (seasonsEl)    seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
         if (monthlyEl) {
             this._calYear  = year;
             this._calMonth = mon;
             monthlyEl.innerHTML = this._monthlyFull(year, mon, specialMap);
-            this._bindCalNav(monthlyEl);
+            const sundayNames = new Map();
+            const refresh = this._bindCalNav(monthlyEl, sundayNames);
+            readings.then(sundays => {
+                if (!monthlyEl.isConnected) return;
+                sundays.forEach(sunday => sundayNames.set(sunday.date,
+                    sunday.bulletinReadings ? sunday.anglicanName : sunday.koreanName));
+                refresh();
+            });
         }
         if (specialEl)  specialEl.innerHTML = this._special(d.specialSundays);
         AboutNavRenderer.bindSpy(document.querySelectorAll('[data-sundays-section]'), 'sundaysSection', signal);
@@ -3082,7 +3090,7 @@ const SundaysRenderer = {
 
     /* 전례독서 — RCL 가해 JSON에서 오늘 날짜 기준 자동 표시.
        연중 시기는 연속(A)·짝(B) 두 트랙을 토글로 오가며, 본문은 공동번역 성서로 연결 */
-    async _lectionaryAsync(el) {
+    async _lectionaryAsync(el, readings = this._loadSundays()) {
         const header = `
             <div class="section-header">
                 <p class="section-eyebrow">Lectionary</p>
@@ -3091,7 +3099,7 @@ const SundaysRenderer = {
             </div>`;
         el.innerHTML = header + '<p class="lectionary-loading">불러오는 중…</p>';
 
-        const sundays = await this._loadSundays();
+        const sundays = await readings;
         if (!sundays.length) {
             el.innerHTML = header + `<div class="lect-nav-wrap">${this._lectionaryFallback()}</div>`;
             el.querySelector('[data-lectionary-retry]').addEventListener('click', () => this._lectionaryAsync(el));
@@ -3453,7 +3461,7 @@ const SundaysRenderer = {
     },
 
     /* 달력 그리드 — 전/다음 달 이동 시 이 부분만 교체 */
-    _monthlyGrid(year, month, specialMap) {
+    _monthlyGrid(year, month, specialMap, sundayNames = new Map()) {
         const today      = new Date();
         const todayDate  = (today.getFullYear() === year && today.getMonth() === month) ? today.getDate() : -1;
         const monthLabel = new Date(year, month).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' });
@@ -3468,25 +3476,32 @@ const SundaysRenderer = {
             cells.push('<div class="lit-cal-cell lit-cal-cell--empty"></div>');
         }
         const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const adventStart = LiturgicalCalendar.adventStart(year).getTime();
+        const commemorations = new Set(['세계기도일', '환경주일', '창조절', '에이즈 추모 주일']);
         for (let n = 1; n <= daysInMon; n++) {
             const date    = new Date(year, month, n);
             const isSun   = date.getDay() === 0;
             const isToday = n === todayDate;
             const isPast  = date < todayStart;
             const special = specialMap[key(date)];
+            const sunday = sundayNames.get(key(date)) || (date.getTime() === adventStart ? '대림 제1주일' : '');
+            const primary = sunday || special;
+            const secondary = sunday && commemorations.has(special) ? special : '';
             const season  = LiturgicalCalendar.compute(date);
             const alpha   = isSun ? '2e' : '12';
             let cls = 'lit-cal-cell';
             if (isSun)   cls += ' lit-cal-cell--sun';
             if (isToday) cls += ' lit-cal-cell--today';
             if (isPast)  cls += ' lit-cal-cell--past';
-            const aria = special
-                ? ` aria-label="${n}일 ${special}" title="${special}"`
+            const label = [primary, secondary].filter(Boolean).join(' · ');
+            const aria = label
+                ? ` aria-label="${n}일 ${label}" title="${label}"`
                 : ` aria-label="${n}일"`;
             cells.push(`
                 <div class="${cls}" style="background:${season.color}${alpha};"${aria}>
                     <span class="lit-cal-num">${n}</span>
-                    ${special ? `<span class="lit-cal-label">${special}</span>` : ''}
+                    ${primary ? `<span class="lit-cal-label">${primary}</span>` : ''}
+                    ${secondary ? `<span class="lit-cal-label lit-cal-label--commemoration">${secondary}</span>` : ''}
                 </div>`);
         }
 
@@ -3508,17 +3523,24 @@ const SundaysRenderer = {
             <ul class="lit-cal-legend" aria-label="달력 보는 법">
                 <li data-cal-today role="button" tabindex="0" title="이번 달로 이동"><span class="lit-cal-legend-dot lit-cal-legend-dot--today" aria-hidden="true"></span>오늘</li>
                 <li><span class="lit-cal-legend-dot lit-cal-legend-dot--sun" aria-hidden="true"></span>주일 (전례색 강조)</li>
-                <li><span class="lit-cal-legend-tag" aria-hidden="true">이름</span>특별 주일·절기</li>
+                <li><span class="lit-cal-legend-tag" aria-hidden="true">이름</span>전례 주일·기념일</li>
             </ul>`;
     },
 
     /* 전/다음 달 이동 + 오늘 복귀 — 이벤트 위임으로 re-render 없이 그리드만 교체 */
-    _bindCalNav(container) {
+    _bindCalNav(container, sundayNames) {
         const goToMonth = (y, m) => {
             this._calYear  = y;
             this._calMonth = m;
             const wrap = container.querySelector('.lit-cal-wrap');
-            if (wrap) wrap.innerHTML = this._monthlyGrid(y, m, this._specialDates(y));
+            if (wrap) {
+                const button = document.activeElement?.closest('[data-cal-dir], [data-cal-today]');
+                const selector = button && wrap.contains(button)
+                    ? (button.dataset.calDir ? `[data-cal-dir="${button.dataset.calDir}"]` : '[data-cal-today]')
+                    : null;
+                wrap.innerHTML = this._monthlyGrid(y, m, this._specialDates(y), sundayNames);
+                if (selector) wrap.querySelector(selector)?.focus({ preventScroll: true });
+            }
         };
         container.addEventListener('click', e => {
             if (e.target.closest('[data-cal-today]')) {
@@ -3542,6 +3564,7 @@ const SundaysRenderer = {
                 goToMonth(now.getFullYear(), now.getMonth());
             }
         });
+        return () => goToMonth(this._calYear, this._calMonth);
     },
 
     /* 교회력 절기 카드 그리드 — 대림절을 시작으로 시간순 배열 */

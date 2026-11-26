@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'fs';
+import { CHURCH_DATA } from './helpers/loadData.js';
 
 // JSON-LD(검색엔진용 구조화 데이터)는 정적이어야 하므로 data.js와 같은 값인지 테스트로 보장한다
 const data = fs.readFileSync('data.js', 'utf8');
@@ -10,6 +11,10 @@ const phone = pick('phone');
 const digits = (v) => v.replace(/\D/g, '').replace(/^82/, '0');
 
 describe('연락처 단일 출처', () => {
+    it('민숙희 사제 연락 이메일은 대표 이메일과 같다', () => {
+        const priest = CHURCH_DATA.clergy.find(person => person.name.startsWith('민숙희'));
+        expect(priest.contact).toBe(CHURCH_DATA.info.email);
+    });
     it('HTML의 JSON-LD 이메일·전화가 data.js info와 같다', () => {
         for (const f of fs.readdirSync('.').filter(n => n.endsWith('.html'))) {
             const html = fs.readFileSync(f, 'utf8');
