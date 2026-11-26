@@ -19,7 +19,11 @@ it('교회력 달력은 전례독서의 대림 제1주일을 추모 주일보다
     const html = renderer._monthlyGrid(2026, 10, renderer._specialDates(2026),
         new Map([[sunday.date, sunday.koreanName]]));
     expect(html).toContain('aria-label="29일 대림 제1주일 · 에이즈 추모 주일"');
-    expect(html).toMatch(/<span class="lit-cal-label">대림 제1주일<\/span>\s*<span class="lit-cal-label lit-cal-label--commemoration">에이즈 추모 주일<\/span>/);
+    const cell = html.match(/aria-label="29일 대림 제1주일[^>]*>([\s\S]*?)<\/div>/)[1];
+    expect(cell).toContain('lit-cal-commemoration-dot');
+    expect(cell).toContain('<span class="lit-cal-label">대림 제1주일</span>');
+    expect(cell).not.toContain('에이즈 추모 주일');
+    expect(html).toContain('29일 에이즈 추모 주일</li>');
 });
 
 // 연도별 표준 파일이 끊김 없이 이어져야 대림절(해 바뀜)에도 전례독서가 멈추지 않는다

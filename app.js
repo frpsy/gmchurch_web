@@ -3478,6 +3478,7 @@ const SundaysRenderer = {
         const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
         const adventStart = LiturgicalCalendar.adventStart(year).getTime();
         const commemorations = new Set(['세계기도일', '환경주일', '창조절', '에이즈 추모 주일']);
+        const notes = new Map();
         for (let n = 1; n <= daysInMon; n++) {
             const date    = new Date(year, month, n);
             const isSun   = date.getDay() === 0;
@@ -3487,6 +3488,10 @@ const SundaysRenderer = {
             const sunday = sundayNames.get(key(date)) || (date.getTime() === adventStart ? '대림 제1주일' : '');
             const primary = sunday || special;
             const secondary = sunday && commemorations.has(special) ? special : '';
+            if (secondary) {
+                if (!notes.has(secondary)) notes.set(secondary, []);
+                notes.get(secondary).push(n + '일');
+            }
             const season  = LiturgicalCalendar.compute(date);
             const alpha   = isSun ? '2e' : '12';
             let cls = 'lit-cal-cell';
@@ -3499,9 +3504,8 @@ const SundaysRenderer = {
                 : ` aria-label="${n}일"`;
             cells.push(`
                 <div class="${cls}" style="background:${season.color}${alpha};"${aria}>
-                    <span class="lit-cal-num">${n}</span>
+                    <span class="lit-cal-num">${n}${secondary ? '<span class="lit-cal-commemoration-dot" aria-hidden="true"></span>' : ''}</span>
                     ${primary ? `<span class="lit-cal-label">${primary}</span>` : ''}
-                    ${secondary ? `<span class="lit-cal-label lit-cal-label--commemoration">${secondary}</span>` : ''}
                 </div>`);
         }
 
@@ -3524,6 +3528,7 @@ const SundaysRenderer = {
                 <li data-cal-today role="button" tabindex="0" title="이번 달로 이동"><span class="lit-cal-legend-dot lit-cal-legend-dot--today" aria-hidden="true"></span>오늘</li>
                 <li><span class="lit-cal-legend-dot lit-cal-legend-dot--sun" aria-hidden="true"></span>주일 (전례색 강조)</li>
                 <li><span class="lit-cal-legend-tag" aria-hidden="true">이름</span>전례 주일·기념일</li>
+                ${Array.from(notes, ([name, dates]) => `<li><span class="lit-cal-commemoration-dot" aria-hidden="true"></span>${dates.join(', ')} ${name}</li>`).join('')}
             </ul>`;
     },
 

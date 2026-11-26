@@ -1022,7 +1022,15 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     word-break: keep-all;
     overflow-wrap: anywhere;
 }
-.lit-cal-label--commemoration { color: var(--text-muted); font-weight: 400; }
+.lit-cal-commemoration-dot {
+    display: inline-block;
+    inline-size: 0.35em;
+    block-size: 0.35em;
+    margin-inline-start: 0.25em;
+    border-radius: 50%;
+    background: var(--text-muted);
+    vertical-align: middle;
+}
 /* 범례 */
 .lit-cal-legend {
     list-style: none;
