@@ -413,8 +413,8 @@ const CHURCH_DATA = {
             category: "성직자",
             name: "이남호(사도요한)",
             title: "협동사제",
-            photo: "images/clergy/priest-portrait-2.jpg",
-            photoThumb: "images/clergy/priest-portrait-2-450.jpg",
+            photo: "images/clergy/lee-namho-portrait.jpg",
+            photoThumb: "images/clergy/lee-namho-portrait-450.jpg",
             ordained: "2013년 서품",
             quote: "목회와 상담의 공통 원칙은 공감이며, 타인의 아픔을 공감하는 것은 주님이 주시는 능력입니다.",
             desc: "문학, 신학, 상담심리, 동양철학을 두루 공부한 성공회 사제입니다. 35세에 늦깎이로 신학의 길에 들어서 사제 서품을 받았으며, 마포들음교회에서 상담센터를 운영하는 등 사목과 상담을 접목한 사역을 이어왔습니다. 현재 광명교회 협동사제로 섬기고 있습니다.",
@@ -1706,8 +1706,8 @@ const CHURCH_DATA = {
                 "desc": "",
                 "category": "섬기는 이들",
                 "date": "",
-                "src": "images/clergy/priest-portrait-2.jpg",
-                "thumb": "images/clergy/priest-portrait-2-450.jpg",
+                "src": "images/clergy/lee-namho-portrait.jpg",
+                "thumb": "images/clergy/lee-namho-portrait-450.jpg",
                 "alt": "이남호(사도요한) 사제 초상"
             },
             {
