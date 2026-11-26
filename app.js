@@ -2209,19 +2209,21 @@ const SwipeNavigation = {
         const tabs = target.closest('nav[data-swipe-tabs]');
         const nav = tabs || document.getElementById('nav-menu');
         if (!nav) return null;
+        const onHome = !tabs && document.body.classList.contains('home');
         if (tabs) {
             const strip = tabs.querySelector('.container') || tabs;
             if (strip.scrollWidth > strip.clientWidth + 1) return null;
-        } else if (target.closest('nav') || target.closest(this._controls) || !nav.querySelector('.nav-link[aria-current="page"]')) {
+        } else if (target.closest('nav') || target.closest(this._controls) || (!onHome && !nav.querySelector('.nav-link[aria-current="page"]'))) {
             return null;
         }
-        return { main, nav, onTabs: Boolean(tabs) };
+        return { main, nav, onTabs: Boolean(tabs), onHome };
     },
 
-    _destination({ nav, onTabs }, dx) {
+    _destination({ nav, onTabs, onHome }, dx) {
         if (!nav.isConnected || dx === 0) return null;
         const selector = onTabs ? 'a[href]' : ':scope > .nav-item > .nav-link';
         const links = Array.from(nav.querySelectorAll(selector));
+        if (onHome) return dx < 0 ? links[0] : null;
         const pending = onTabs && PageSwitch.pendingFile();
         const current = links.findIndex(link => pending
             ? link.getAttribute('href') === pending
@@ -2314,12 +2316,14 @@ const SwipeNavigation = {
                 if (Math.abs(dx) < 10 || Math.abs(dx) < dy * 1.6) return;
                 start.horizontal = true;
             }
+            // Safari가 가로 드래그를 브라우저 스크롤로 가져가지 않도록 방향 확정 후에만 막는다.
+            if (event.cancelable) event.preventDefault();
             if (reducedMotion.matches) return;
             const hasDestination = Boolean(this._destination(start, dx));
             const limit = window.innerWidth * (hasDestination ? 0.28 : 0.06);
             start.offset = Math.sign(dx) * Math.min(Math.abs(dx) * (hasDestination ? 0.88 : 0.2), limit);
             start.main.style.translate = start.offset ? start.offset + 'px' : '';
-        }, { passive: true });
+        }, { passive: false });
         document.addEventListener('touchcancel', () => {
             const gesture = start;
             start = null;
