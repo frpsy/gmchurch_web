@@ -1020,7 +1020,9 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     line-height: 1.25;
     margin-top: 0.15rem;
     word-break: keep-all;
+    overflow-wrap: anywhere;
 }
+.lit-cal-label--commemoration { color: var(--text-muted); font-weight: 400; }
 /* 범례 */
 .lit-cal-legend {
     list-style: none;
