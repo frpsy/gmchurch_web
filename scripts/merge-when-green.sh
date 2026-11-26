@@ -10,6 +10,7 @@
 #  - PR을 만든 직후에는 검사가 아직 잡히지 않는다. 그때 결과를 보면 실패로 오인하거나
 #    검사 없이 머지하게 된다 → `test` 검사가 뜰 때까지 기다린다.
 #  - Netlify 검사는 끝나지 않고 남을 수 있다(서비스 종료) → `test` 검사만 본다.
+#  - 다시 push한 직후에는 이전 커밋의 통과 결과가 보일 수 있다 → PR 머리 커밋의 검사만 본다(#835).
 #  - 그사이 다른 세션이 먼저 머지하면 충돌(CONFLICTING)한다 → 머지하지 않고 멈춘다.
 #    공식 반영 PR이면 그 PR을 닫고 scripts/release-official.sh를 다시 실행한다.
 #  - 네트워크가 잠깐 끊기면(TLS 시간 초과 등) gh 호출을 몇 번 다시 시도한다.
@@ -31,9 +32,15 @@ retry() { # 네트워크 오류에 대비해 최대 4번 시도
     done
 }
 
-state_of_test() { # test 검사의 bucket(pass/fail/pending/…)을 돌려준다. 아직 없으면 빈 문자열
-    retry gh pr checks "$PR" -R "$REPO" --json name,bucket \
-        --jq ".[] | select(.name == \"$CHECK\") | .bucket" 2>/dev/null | head -1
+state_of_test() { # PR 머리 커밋의 test 검사 결과(pass/fail/pending)를 돌려준다. 아직 없으면 빈 문자열
+    # 다시 push한 직후 이전 커밋의 통과 결과를 읽지 않도록, 지금 머리 커밋(SHA)의 검사만 본다.
+    local sha
+    sha=$(retry gh pr view "$PR" -R "$REPO" --json headRefOid --jq .headRefOid) || return 0
+    retry gh api "repos/$REPO/commits/$sha/check-runs" --jq \
+        ".check_runs | map(select(.name == \"$CHECK\")) | sort_by(.started_at) | last
+         | if . == null then \"\" elif .status != \"completed\" then \"pending\"
+           elif .conclusion == \"success\" then \"pass\"
+           elif (.conclusion == \"cancelled\" or .conclusion == \"skipped\") then \"cancel\" else \"fail\" end" 2>/dev/null
 }
 
 echo "[$REPO #$PR] '$CHECK' 검사를 기다립니다."
