@@ -65,6 +65,17 @@
       ]
     }
     </script>
+    <script>
+        try {
+            if (sessionStorage.getItem('menu-swipe-transition')) {
+                const ready = document.createElement('link');
+                ready.rel = 'expect';
+                ready.href = '#swipe-ready';
+                ready.setAttribute('blocking', 'render');
+                document.head.append(ready);
+            }
+        } catch {}
+    </script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">본문으로 바로가기</a>
@@ -109,5 +120,6 @@
 
     <script src="data.js?v=134495a"></script>
     <script src="app.js?v=134495a"></script>
+    <span id="swipe-ready" hidden></span>
 </body>
 </html>

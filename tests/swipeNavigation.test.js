@@ -4,11 +4,12 @@ import { createContext, runInContext } from 'node:vm';
 
 const source = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
 
-function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, home = false, targetTag, currentIndex = 0 } = {}) {
+function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, home = false, targetTag, currentIndex = 0, native = false } = {}) {
     const listeners = new Map();
     const animation = { cancel: vi.fn() };
     const main = { isConnected: true, style: {}, animate: vi.fn(() => animation) };
     const links = [0, 1].map(index => ({
+        href: 'https://site.test/menu-' + index + '.html',
         isConnected: true,
         getAttribute: name => name === 'aria-current' && !home && index === currentIndex ? 'page' : null,
         click: vi.fn(),
@@ -21,10 +22,13 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         querySelectorAll: vi.fn(() => links),
     };
     const window = {
+        PageSwapEvent: native,
+        PageRevealEvent: native,
+        location: new URL('https://site.test/menu-0.html'),
         innerWidth: 390,
         visualViewport: { scale: zoom, addEventListener() {} },
         matchMedia: query => ({ matches: !query.includes('reduced') || reduced }),
-        addEventListener() {},
+        addEventListener: (type, fn) => listeners.set(type, fn),
         getSelection: () => ({ isCollapsed: true }),
     };
     const document = {
@@ -41,6 +45,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
     const context = createContext({
         window, document, setTimeout: vi.fn(), clearTimeout: vi.fn(),
         requestAnimationFrame, cancelAnimationFrame: () => { scheduledFrame = null; },
+        URL, sessionStorage: { setItem: vi.fn(), getItem: vi.fn() },
     });
     runInContext(source, context);
     runInContext('SwipeNavigation.init()', context);
@@ -61,11 +66,11 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         scheduledFrame = null;
         callback?.();
     };
-    return { main, links, touch, animation, frame, requestAnimationFrame, nav };
+    return { main, links, touch, animation, frame, requestAnimationFrame, nav, storage: context.sessionStorage, listeners };
 }
 
-it('follows the finger and settles before opening the next menu', () => {
-    const { main, links, touch, animation, frame } = setup();
+it('hands off to document navigation from the painted position without a separate finish animation', () => {
+    const { main, links, touch, frame, storage, listeners } = setup({ native: true });
     touch('touchstart', 240);
     expect(touch('touchmove', 205).preventDefault).toHaveBeenCalledOnce();
     frame();
@@ -74,9 +79,17 @@ it('follows the finger and settles before opening the next menu', () => {
     frame();
     expect(parseFloat(main.style.translate)).toBeLessThan(-35);
     touch('touchend', 150);
-    expect(links[1].click).not.toHaveBeenCalled();
-    animation.onfinish();
+    expect(main.animate).not.toHaveBeenCalled();
+    expect(main.style.translate).toBe('-85.5px');
     expect(links[1].click).toHaveBeenCalledOnce();
+    const [, state] = storage.setItem.mock.calls[0];
+    expect(JSON.parse(state)).toMatchObject({ to: links[1].href, travel: 304.5 });
+    storage.getItem.mockReturnValue(state);
+    const types = new Set();
+    listeners.get('pageswap')({ viewTransition: { types, ready: Promise.resolve() }, activation: { entry: { url: links[1].href } } });
+    expect(types.has('menu-swipe')).toBe(true);
+    listeners.get('pagehide')();
+    expect(main.style.translate).toBe('');
 });
 
 it('returns a short drag to its origin without opening a tab', () => {
@@ -102,13 +115,13 @@ it.each([{ zoom: 2 }, { onTabs: true, overflow: true }, {}])('leaves native vert
 });
 
 it('opens the first main menu from the homepage', () => {
-    const { main, links, touch, animation, frame } = setup({ home: true });
+    const { main, links, touch, frame } = setup({ home: true });
     touch('touchstart', 240);
     touch('touchmove', 150);
     frame();
     expect(parseFloat(main.style.translate)).toBeLessThan(-50);
     touch('touchend', 150);
-    animation.onfinish();
+    expect(main.animate).not.toHaveBeenCalled();
     expect(links[0].click).toHaveBeenCalledOnce();
 });
 
@@ -124,7 +137,7 @@ it('paints only the latest position in each frame and keeps tracking past a quar
     frame();
     expect(parseFloat(main.style.translate)).toBeLessThan(-150);
     touch('touchend', 110);
-    expect(main.animate.mock.calls[0][1].duration).toBeLessThan(100);
+    expect(main.animate).not.toHaveBeenCalled();
 });
 
 it('navigates without motion when reduced motion is requested', () => {
