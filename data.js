@@ -44,12 +44,12 @@ const LiturgicalCalendar = (() => {
     const SEASONS = {
         advent:    { key: "advent",    name: "대림절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", onColor: "#fff",     symbol: "candle", note: "주님의 오심을 기다리는 시간" },
         christmas: { key: "christmas", name: "성탄절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", ink: "#80600a", onColor: "#1a1a1a", symbol: "star",   note: "말씀이 사람이 되시다"   },
-        epiphany:  { key: "epiphany",  name: "공현절 후",    colorName: "녹색", color: "#285a47", colorLight: "#e7eee8", onColor: "#fff",     symbol: "sparkle",   note: "주님이 세상에 드러나심" },
+        epiphany:  { key: "epiphany",  name: "공현 후 연중 시기", colorName: "녹색", color: "#285a47", colorLight: "#e7eee8", onColor: "#fff",     symbol: "sparkle",   note: "주님이 세상에 드러나심" },
         lent:      { key: "lent",      name: "사순절",       colorName: "자색", color: "#6b4f8f", colorLight: "#f0eaf7", onColor: "#fff",     symbol: "cross",  note: "회개와 절제의 시간"     },
-        holyweek:  { key: "holyweek",  name: "성주간",       colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "palm",   note: "주님의 수난을 묵상"     },
+        holyweek:  { key: "holyweek",  name: "성주간",       colorName: "홍색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "palm",   note: "주님의 수난을 묵상"     },
         easter:    { key: "easter",    name: "부활절",       colorName: "백색", color: "#b8860b", colorLight: "#fbf3df", ink: "#80600a", onColor: "#1a1a1a", symbol: "sunrise",   note: "다시 살아나신 주님"     },
-        pentecost: { key: "pentecost", name: "성령강림절",   colorName: "적색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "flame",   note: "성령께서 임하시다"      },
-        ordinary:  { key: "ordinary",  name: "성령강림 후",  colorName: "녹색", color: "#285a47", colorLight: "#e7eee8", onColor: "#fff",     symbol: "leaf",   note: "그리스도인의 일상"      }
+        pentecost: { key: "pentecost", name: "성령강림주일", colorName: "홍색", color: "#c0390f", colorLight: "#fdf2ee", onColor: "#fff",     symbol: "flame",   note: "성령께서 임하시다"      },
+        ordinary:  { key: "ordinary",  name: "성령강림 후 연중 시기", colorName: "녹색", color: "#285a47", colorLight: "#e7eee8", onColor: "#fff",     symbol: "leaf",   note: "그리스도인의 일상"      }
     };
 
     function compute(today = new Date()) {
@@ -555,7 +555,7 @@ const CHURCH_DATA = {
             ]
         },
         nextReadings: {
-            week: "대림 제1주일",
+            week: "대림 1주일",
             year: "B년",
             date: "2026년 11월 29일",
             items: [
@@ -1294,13 +1294,13 @@ const CHURCH_DATA = {
             },
             {
                 key: "epiphany",
-                name: "공현절 후",
+                name: "공현 후 연중 시기",
                 en: "Epiphany",
                 colorName: "녹색",
                 color: "#2f6a52",
                 symbol: "sparkle",
                 period: "1월 6일 ~ 재의 수요일 전날",
-                desc: "주님께서 세상에 자신을 드러내신 것을 기념합니다. 공현절과 주님의 세례 주일을 포함합니다."
+                desc: "주님께서 세상에 자신을 드러내신 것을 기념합니다. 공현일과 주의 세례주일을 포함합니다."
             },
             {
                 key: "lent",
@@ -1316,11 +1316,11 @@ const CHURCH_DATA = {
                 key: "holyweek",
                 name: "성주간",
                 en: "Holy Week",
-                colorName: "적색",
+                colorName: "홍색",
                 color: "#c0390f",
                 symbol: "palm",
-                period: "종려주일 ~ 성토요일",
-                desc: "주님의 수난을 묵상하는 한 주간. 종려주일·성목요일·성금요일·성토요일을 포함합니다."
+                period: "고난주일(성지주일) ~ 성 토요일",
+                desc: "주님의 수난을 묵상하는 한 주간. 고난주일·성 목요일·성 금요일·성 토요일을 포함합니다."
             },
             {
                 key: "easter",
@@ -1329,14 +1329,14 @@ const CHURCH_DATA = {
                 colorName: "백색·금색",
                 color: "#b8860b",
                 symbol: "sunrise",
-                period: "부활 주일 ~ 성령강림 주일 (50일)",
+                period: "부활주일 ~ 성령강림주일 (50일)",
                 desc: "다시 살아나신 주님을 기리는 기쁨의 계절. 50일간 이어집니다."
             },
             {
                 key: "pentecost",
-                name: "성령강림절",
+                name: "성령강림주일",
                 en: "Pentecost",
-                colorName: "적색",
+                colorName: "홍색",
                 color: "#c0390f",
                 symbol: "flame",
                 period: "부활 후 50일째 주일",
@@ -1344,7 +1344,7 @@ const CHURCH_DATA = {
             },
             {
                 key: "ordinary",
-                name: "성령강림 후",
+                name: "성령강림 후 연중 시기",
                 en: "Ordinary Time",
                 colorName: "녹색",
                 color: "#2f6a52",
@@ -1355,11 +1355,11 @@ const CHURCH_DATA = {
         ],
         specialSundays: [
             {
-                name: "공현절",
+                name: "공현일",
                 en: "Epiphany",
                 date: "1월 6일 또는 직후 주일",
                 origin: "세계성공회",
-                desc: "동방박사들의 방문을 통해 예수님이 온 세상에 드러나신 날입니다. 공현절 후 첫 주일은 주님의 세례 주일로 지킵니다."
+                desc: "동방박사들의 방문을 통해 예수님이 온 세상에 드러나신 날입니다. 공현일 후 첫 주일은 주의 세례주일로 지킵니다."
             },
             {
                 name: "세계기도일",
@@ -1369,21 +1369,21 @@ const CHURCH_DATA = {
                 desc: "1887년 미국에서 시작된 에큐메니컬 평신도 여성 기도운동. 매년 특정 나라 여성들이 예식을 준비하며, 170여 개국에서 함께 드립니다."
             },
             {
-                name: "종려주일",
+                name: "고난주일(성지주일)",
                 en: "Palm Sunday",
                 date: "성주간 첫날 (부활 7일 전)",
                 origin: "세계성공회",
                 desc: "예수님의 예루살렘 입성을 기념하며 종려가지를 들고 행진합니다. 성주간의 시작입니다."
             },
             {
-                name: "승천주일",
-                en: "Ascension Sunday",
-                date: "부활 후 40일째 또는 직후 주일",
+                name: "승천일",
+                en: "Ascension Day",
+                date: "부활 후 40일째 목요일 (부활 7주일로 옮길 수 있음)",
                 origin: "세계성공회",
-                desc: "부활하신 주님께서 하늘에 오르신 날을 기념합니다. 부활절에서 성령강림절로 이어지는 길목입니다."
+                desc: "부활하신 주님께서 하늘에 오르신 날을 기념합니다. 부활절에서 성령강림주일로 이어지는 길목입니다."
             },
             {
-                name: "성삼위일체 주일",
+                name: "삼위일체 주일",
                 en: "Trinity Sunday",
                 date: "성령강림 다음 주일",
                 origin: "세계성공회",
@@ -1438,7 +1438,7 @@ const CHURCH_DATA = {
             {
                 date: "2026-11-22",
                 label: "2026년 11월 22일",
-                season: "그리스도 왕 주일",
+                season: "왕이신 그리스도 주일",
                 images: ["bulletins/20261122_1.jpg", "bulletins/20261122_2.jpg", "bulletins/20261122_3.jpg", "bulletins/20261122_4.jpg"],
                 pdf: "bulletins/20261122.pdf",
                 news: [
@@ -1453,7 +1453,7 @@ const CHURCH_DATA = {
             {
                 date: "2026-11-15",
                 label: "2026년 11월 15일",
-                season: "가해 연중 제33주일",
+                season: "가해 연중 33주일",
                 images: ["bulletins/20261115_1.jpg", "bulletins/20261115_2.jpg", "bulletins/20261115_3.jpg", "bulletins/20261115_4.jpg"],
                 pdf: "bulletins/20261115.pdf",
                 news: [
@@ -1482,7 +1482,7 @@ const CHURCH_DATA = {
             {
                 date: "2026-11-01",
                 label: "2026년 11월 1일",
-                season: "가해 연중 제31주일",
+                season: "가해 연중 31주일",
                 images: ["bulletins/20261101_1.jpg", "bulletins/20261101_2.jpg", "bulletins/20261101_3.jpg", "bulletins/20261101_4.jpg"],
                 pdf: "bulletins/20261101.pdf",
                 news: [
@@ -1497,7 +1497,7 @@ const CHURCH_DATA = {
             {
                 date: "2026-10-25",
                 label: "2026년 10월 25일",
-                season: "가해 연중 제30주일",
+                season: "가해 연중 30주일",
                 images: ["bulletins/20261025_1.jpg", "bulletins/20261025_2.jpg", "bulletins/20261025_3.jpg", "bulletins/20261025_4.jpg"],
                 pdf: "bulletins/20261025.pdf",
                 news: [

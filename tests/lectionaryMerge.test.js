@@ -33,7 +33,7 @@ describe('resolveReadings: 표준+주보 병합', () => {
     it('특별 주일은 주보 독서 전체로 교체하고 표준 주일명을 보존한다 (맥추감사)', () => {
         const r = resolveReadings(std, ov, '2026-07-12');
         expect(r.week).toBe('맥추감사주일');
-        expect(r.standardName).toBe('연중 제15주일');
+        expect(r.standardName).toBe('연중 15주일');
         expect(r.first).toBe('신명 8:1-4');
         expect(r.gospel).toBe('마태 6:25-34');
         expect(r.fromBulletin).toBe(true);

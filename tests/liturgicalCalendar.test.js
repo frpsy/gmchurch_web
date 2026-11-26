@@ -108,22 +108,22 @@ describe('LiturgicalCalendar.compute — season boundaries (2026)', () => {
         { date: [2026,  1,  1], name: '성탄절',      colorName: '백색' },
         { date: [2026,  1,  5], name: '성탄절',      colorName: '백색' },
         // Epiphany (Jan 6 – Ash Wed eve)
-        { date: [2026,  1,  6], name: '공현절 후',   colorName: '녹색' },
-        { date: [2026,  2, 17], name: '공현절 후',   colorName: '녹색' },
+        { date: [2026,  1,  6], name: '공현 후 연중 시기',   colorName: '녹색' },
+        { date: [2026,  2, 17], name: '공현 후 연중 시기',   colorName: '녹색' },
         // Lent (Ash Wed – Palm Sun eve)
         { date: [2026,  2, 18], name: '사순절',      colorName: '자색' },
         { date: [2026,  3, 28], name: '사순절',      colorName: '자색' },
         // Holy Week (Palm Sun – Easter eve)
-        { date: [2026,  3, 29], name: '성주간',      colorName: '적색' },
-        { date: [2026,  4,  4], name: '성주간',      colorName: '적색' },
+        { date: [2026,  3, 29], name: '성주간',      colorName: '홍색' },
+        { date: [2026,  4,  4], name: '성주간',      colorName: '홍색' },
         // Easter (Easter Sun – Pentecost eve)
         { date: [2026,  4,  5], name: '부활절',      colorName: '백색' },
         { date: [2026,  5, 23], name: '부활절',      colorName: '백색' },
         // Pentecost (Pentecost Sunday only)
-        { date: [2026,  5, 24], name: '성령강림절',  colorName: '적색' },
+        { date: [2026,  5, 24], name: '성령강림주일',  colorName: '홍색' },
         // Ordinary Time (day after Pentecost – Advent eve)
-        { date: [2026,  5, 25], name: '성령강림 후', colorName: '녹색' },
-        { date: [2026, 11, 28], name: '성령강림 후', colorName: '녹색' },
+        { date: [2026,  5, 25], name: '성령강림 후 연중 시기', colorName: '녹색' },
+        { date: [2026, 11, 28], name: '성령강림 후 연중 시기', colorName: '녹색' },
         // Advent (Advent Sun – Dec 24)
         { date: [2026, 11, 29], name: '대림절',      colorName: '자색' },
         { date: [2026, 12, 24], name: '대림절',      colorName: '자색' },
