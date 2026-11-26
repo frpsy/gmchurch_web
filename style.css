@@ -1960,7 +1960,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 /* ── Anglican Intro Sections ─────────────────────────────── */
 .anglican-welcome {
     background: var(--white);
-    padding: 4rem 0 1rem;
+    padding: clamp(2rem, 4vw, 3rem) 0 var(--space-5);
     text-align: center;
 }
 .anglican-welcome .container {
@@ -1974,7 +1974,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     width: 40px;
     height: 3px;
     background: var(--green-mid);
-    margin-bottom: 0.75rem;
 }
 .anglican-welcome-lead {
     font-size: clamp(1.5rem, 1rem + 1.6vw, 1.75rem);
@@ -1984,6 +1983,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     margin: 0;
 }
 .anglican-welcome-sub {
+    max-width: var(--content-read);
     font-size: var(--fs-lead);
     line-height: 1.75;
     color: color-mix(in srgb, var(--text) 72%, var(--white));
