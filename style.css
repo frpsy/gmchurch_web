@@ -626,46 +626,19 @@ main:has(.page-hero) {
     font-size: var(--fs-label);
 }
 
-/* ── Page Hero — 사진 배경 변형 ────────────────────────────── */
-.page-hero--photo {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding-block: calc(var(--nav-h) + clamp(2rem, 5vw, 4rem)) clamp(2rem, 5vw, 4rem);
-    border-bottom: none; /* 사진 히어로는 보더 제거 — 색 대비로 인한 이질감 방지 */
+/* ── Page Hero — 이미지와 제목 분리 ──────────────────────── */
+.page-hero--illustrated { padding-inline: 0; }
+.page-hero-layout {
+    display: grid;
+    align-items: center;
+    gap: clamp(1.25rem, 4vw, 3.5rem);
 }
-.page-hero--photo::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom,
-        rgba(8, 26, 20, 0.62) 0%,
-        rgba(8, 26, 20, 0.48) 60%,
-        rgba(8, 26, 20, 0.68) 100%);
-    z-index: 0;
+.page-hero-layout .hero-photo {
+    max-height: 18rem;
+    margin-inline: auto;
 }
-.page-hero--photo > * { position: relative; z-index: 1; }
-.page-hero--photo h1,
-.page-hero--photo p,
-.page-hero--photo .section-eyebrow {
-    color: #fff;
-    text-shadow: 0 1px 10px rgba(0,0,0,0.45);
-}
-
-/* 메뉴 상징 이미지(실제 교회 사진 아님) — 함께 모여 차를 나누는 공동체 공간. 글자 배치는 다른 페이지와 동일 */
-.page-hero--community { background-image: url('images/hero/community.webp'); background-position: center 52%; }
-
-/* 메뉴 상징 이미지(실제 교회 사진 아님) — 모바일은 경량 버전 */
-.page-hero--clergy  { background-image: url('images/hero/clergy.webp');   background-position: 60% 25%; }
-@media (max-width: 768px) {
-    .page-hero--community { background-image: url('images/hero/community-m.webp'); background-position: 60% 50%; }
-    .page-hero--clergy   { background-image: url('images/hero/clergy-m.webp'); background-position: 62% 30%; }
-}
-/* 상패·촛불·인형이 모바일에서도 함께 보이도록 가로 구도의 보정본을 사용한다. */
-.page-hero--greenchurch { background-image: url('images/hero/greenchurch-award.webp'); background-position: center 65%; }
-@media (max-width: 768px) {
-    .page-hero--greenchurch { background-image: url('images/hero/greenchurch-award-m.webp'); background-position: center; }
+@media (min-width: 800px) {
+    .page-hero-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
 .page-trail {
@@ -692,15 +665,6 @@ main:has(.page-hero) {
     .page-trail a:hover { background: var(--green-light); }
 }
 @media print { .page-trail { display: none; } }
-
-@media (prefers-color-scheme: dark) {
-    .page-hero--photo::before {
-        background: linear-gradient(to bottom,
-            rgba(0,0,0,0.70) 0%,
-            rgba(0,0,0,0.56) 60%,
-            rgba(0,0,0,0.74) 100%);
-    }
-}
 
 /* ── Scroll Reveal ───────────────────────────────────────── */
 .reveal {
@@ -1609,6 +1573,23 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     align-items: center;
     min-height: clamp(27rem, 67vh, 37rem);
     min-height: clamp(27rem, 67svh, 37rem);
+}
+.home .hero-content {
+    display: grid;
+    align-items: center;
+    gap: clamp(1.75rem, 4vw, 3.75rem);
+    max-width: 66rem;
+}
+.hero-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+}
+@media (min-width: 800px) {
+    .home .hero-content { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .home .hero h1 { max-width: 12em; }
 }
 .home .hero-label {
     font-weight: 550;

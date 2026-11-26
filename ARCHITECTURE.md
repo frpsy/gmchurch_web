@@ -786,7 +786,7 @@ window DOMContentLoaded
 3. `App.init()` 메서드에서 조건부로 렌더러 호출
    - 페이지별 렌더러는 해당 HTML 페이지에서만 실행 (예: `if (document.getElementById('media-full'))`)
 4. `data.js`의 `navigation` 배열에 새 메뉴 항목 추가
-5. 필요 시 greenchurch.html처럼 `page-hero--photo` 별도 대문 이미지 제공
+5. 첫 화면 이미지가 필요한 페이지는 `page-hero--illustrated`와 `picture`를 사용해 제목과 사진을 분리하고 모바일용 파일을 제공
 6. ARCHITECTURE.md와 docs/ 작업 지시서 동기화
 
 ### Git 워크플로
