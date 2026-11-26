@@ -2111,6 +2111,79 @@ const ScrollProgress = {
     }
 };
 
+/* ── SwipePageTransition ────────────────────────────────── */
+const SwipePageTransition = {
+    _key: 'menu-swipe-transition',
+    _type: 'menu-swipe',
+
+    _read() {
+        try {
+            const state = JSON.parse(sessionStorage.getItem(this._key));
+            if (state?.expires > Date.now()) return state;
+        } catch { /* 저장소를 사용할 수 없으면 일반 이동 */ }
+        return null;
+    },
+
+    prepare(link, travel) {
+        if (!window.PageSwapEvent || !window.PageRevealEvent) return false;
+        const url = new URL(link.href);
+        if (url.origin !== window.location.origin || url.href === window.location.href) return false;
+        try {
+            sessionStorage.setItem(this._key, JSON.stringify({
+                from: window.location.href, to: url.href, travel, expires: Date.now() + 4000,
+            }));
+            return true;
+        } catch {
+            return false;
+        }
+    },
+
+    _activate(transition, travel) {
+        const style = document.documentElement.style;
+        style.setProperty('--menu-swipe-travel', travel + 'px');
+        transition.finished.finally(() => {
+            if (style.getPropertyValue('--menu-swipe-travel') === travel + 'px') {
+                style.removeProperty('--menu-swipe-travel');
+            }
+        }).catch(() => {});
+    },
+
+    init() {
+        window.addEventListener('pageswap', event => {
+            const transition = event.viewTransition;
+            if (!transition) return;
+            transition.ready.catch(() => {});
+            const state = this._read();
+            if (state?.from === window.location.href && (!event.activation?.entry?.url || state.to === event.activation.entry.url)) {
+                transition.types.add(this._type);
+            } else {
+                transition.skipTransition();
+            }
+        });
+        window.addEventListener('pagereveal', event => {
+            const transition = event.viewTransition;
+            transition?.ready.catch(() => {});
+            const state = this._read();
+            try { sessionStorage.removeItem(this._key); } catch {}
+            if (transition && state?.to === window.location.href) {
+                transition.types.add(this._type);
+                this._activate(transition, state.travel);
+            } else {
+                transition?.skipTransition();
+            }
+        });
+    },
+
+    update(travel, callback) {
+        const transition = document.startViewTransition({ update: callback, types: [this._type] });
+        transition.ready.catch(() => {});
+        this._activate(transition, travel);
+        return transition.finished;
+    },
+};
+
+SwipePageTransition.init();
+
 /* ── PageSwitch (주보 ↔ 교회 소식, 전체 새로고침 없이 본문만 전환) ─────── */
 // 같은 메뉴 묶음의 두 페이지를 상단 버튼으로 오갈 때 쓴다. 링크의 새 페이지를 받아
 // <main>만 바꿔 끼우고, 그 페이지의 렌더러를 다시 돌린다. 주소와 뒤로 가기도 따라간다.
@@ -2157,7 +2230,7 @@ const PageSwitch = {
         });
     },
 
-    async go(target, push) {
+    async go(target, push, travel = 0) {
         const file = target.split('#')[0];
         const hash = target.includes('#') ? '#' + target.split('#')[1] : '';
         // 연속 입력이나 뒤로 가기 뒤에 늦게 도착한 응답이 화면을 덮지 않게 한다.
@@ -2182,6 +2255,13 @@ const PageSwitch = {
         const newMain = doc.querySelector('main');
         const oldMain = document.querySelector('main');
         if (!newMain || !oldMain) { location.href = target; return; }
+        const update = () => this._replaceMain(doc, newMain, oldMain, file, hash, push);
+        if (travel) return SwipePageTransition.update(travel, update);
+        update();
+    },
+
+    _replaceMain(doc, newMain, oldMain, file, hash, push) {
+        if (!oldMain.isConnected) return;
         const tabWasFocused = oldMain.querySelector('.page-switch')?.contains(document.activeElement);
         oldMain.replaceWith(document.importNode(newMain, true));
         document.title = doc.title;
@@ -2253,7 +2333,8 @@ const SwipeNavigation = {
             start = null;
             if (!settling) return;
             clearTimeout(settling.timer);
-            settling.animation.cancel();
+            settling.animation?.cancel();
+            if (settling.main) settling.main.style.translate = '';
             settling = null;
         };
         const syncZoom = () => {
@@ -2273,28 +2354,40 @@ const SwipeNavigation = {
                 if (!onTabs) PageSwitch.cancel();
                 next.click();
             };
-            if (!offset || reducedMotion.matches || !main.animate) {
+            if (!offset || reducedMotion.matches || !main.animate || (next && Math.sign(offset) !== direction)) {
                 if (offset) main.style.translate = '';
                 navigate();
                 return;
             }
-            const end = next ? direction * Math.max(Math.abs(offset), window.innerWidth * 0.28) : 0;
-            const duration = next ? Math.min(110, Math.abs(end - offset) * 1.5) : 210;
+            const travel = -direction * gesture.width + offset;
+            const inlineTab = next?.hasAttribute?.('data-switch');
+            if (next && inlineTab && window.PageRevealEvent && document.startViewTransition) {
+                const url = new URL(next.href);
+                const pending = { main, navigating: true, timer: setTimeout(reset, 3500) };
+                settling = pending;
+                const finish = () => { if (settling === pending) reset(); };
+                PageSwitch.go(PageSwitch._file(url.pathname) + url.hash, true, travel).then(finish, finish);
+                return;
+            }
+            if (next && !inlineTab && SwipePageTransition.prepare(next, travel)) {
+                settling = { main, navigating: true, timer: setTimeout(reset, 3500) };
+                navigate();
+                return;
+            }
+            if (next) {
+                main.style.translate = '';
+                navigate();
+                return;
+            }
             const animation = main.animate(
-                [{ translate: offset + 'px' }, { translate: end + 'px' }],
-                { duration, easing: 'cubic-bezier(0.2, 0.75, 0.25, 1)', fill: 'forwards' }
+                [{ translate: offset + 'px' }, { translate: '0px' }],
+                { duration: 210, easing: 'cubic-bezier(0.2, 0.75, 0.25, 1)', fill: 'forwards' }
             );
             main.style.translate = '';
-            settling = { animation, navigating: Boolean(next) };
+            settling = { animation };
             animation.onfinish = () => {
                 if (settling?.animation !== animation) return;
-                if (!next) {
-                    reset();
-                    return;
-                }
-                // 새 문서가 열리면 pagehide에서 정리한다. 이동이 지연돼도 본문을 다시 읽을 수 있게 한다.
-                settling.timer = setTimeout(reset, 500);
-                navigate();
+                reset();
             };
         };
 
