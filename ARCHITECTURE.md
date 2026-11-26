@@ -143,7 +143,6 @@ const CHURCH_DATA = {
 
   home: {                           // index.html 전용 문구 (예배 시간·위치는 worship.main/info에서 파생)
     heroActions: [{ label, href, primary? }],
-    quickLinks: [{ label, href, detail?, worshipTime? }],  // 첫 화면 방문 안내
     about:   { eyebrow, title, facts: [{ label, key }], more },  // key = info의 필드명
     worship: { eyebrow, title, sub, more },     // 카드는 worship.main[].summary(없으면 desc)
     thisSunday: { title, labels: { season, first, second, gospel }, more, bulletin },  // 다가오는 주일 카드
@@ -513,7 +512,6 @@ window DOMContentLoaded
   #hero-title / #hero-sub / #hero-actions   ← IndexRenderer._hero()
 <section id="about-brief">
   #about-brief-header / #about-brief-content           ← IndexRenderer._about()
-  #home-quick-links (예배·오시는 길·주보)                 ← IndexRenderer._hero()
 <section id="worship">
   #worship-header / #worship-grid / #worship-guide / #worship-more ← IndexRenderer._worship()
   #this-sunday (info-card, 독서 파일 로드 실패 시 hidden) ← IndexRenderer._thisSunday() — SundaysRenderer._loadSundays() 재사용
