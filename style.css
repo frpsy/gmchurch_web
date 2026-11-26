@@ -637,11 +637,6 @@ main:has(.page-hero) {
     max-height: 18rem;
     margin-inline: auto;
 }
-.page-hero-layout figcaption {
-    margin-top: var(--space-2);
-    color: var(--text-muted);
-    font-size: var(--fs-label);
-}
 @media (min-width: 800px) {
     .page-hero-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
