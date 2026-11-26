@@ -5670,15 +5670,22 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .children-service > p { line-height: var(--lh-relaxed); color: color-mix(in srgb, var(--text) 72%, var(--white)); text-align: center; }
 /* 광명 희망터 (hopecenter.html) — 어린이 예배 페이지의 lead·요약·참여 블록을 재사용 */
 .hope-intro { padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.hope-intro-photo { max-width: 1000px; margin: 0 auto 2rem; border-radius: var(--radius-md); overflow: hidden; }
+.hope-intro-photo img { display: block; width: 100%; height: auto; }
 .hope-facts { max-width: 560px; margin-inline: auto; }
 .hope-steps { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.75rem; max-width: 1080px; margin: 0 auto; padding: 0; counter-reset: none; }
 .hope-step { display: flex; flex-direction: column; min-width: 0; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+.hope-step figure { margin: 0; aspect-ratio: 3 / 2; overflow: hidden; }
+.hope-step img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .hope-step-body { padding: 1.25rem 1.25rem 1.5rem; text-align: center; }
 .hope-step-num { display: inline-grid; place-items: center; width: 2.25rem; height: 2.25rem; margin-bottom: .7rem; border-radius: 50%; background: color-mix(in srgb, var(--heading) 9%, var(--white)); color: var(--heading); font-size: .85rem; font-weight: 650; }
 .hope-step h3 { margin: 0 0 .5rem; font-size: 1.15rem; line-height: 1.35; color: var(--heading); }
 .hope-step p { margin: 0; color: color-mix(in srgb, var(--text) 72%, var(--white)); line-height: var(--lh-relaxed); word-break: keep-all; }
 .hope-history { padding-block: clamp(3rem, 6vw, 5rem); }
-.hope-history-inner { max-width: var(--content-read); }
+.hope-history-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 3rem; max-width: 1080px; }
+.hope-history-photo { margin: 0; min-width: 0; }
+.hope-history-photo img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+.hope-history-photo figcaption { padding-top: .8rem; color: color-mix(in srgb, var(--text) 72%, var(--white)); font-size: var(--fs-sm); text-align: center; }
 .hope-history-body { min-width: 0; }
 .hope-history-text { margin: 0 0 1.5rem; color: var(--text); line-height: var(--lh-relaxed); word-break: keep-all; }
 .hope-programs { list-style: none; margin: 0; padding: 0; }
@@ -5692,11 +5699,12 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .hope-join .children-service dl > div { grid-template-columns: 5.5rem minmax(0,1fr); }
 @media (max-width: 900px) {
     .hope-steps { grid-template-columns: minmax(0, 1fr); max-width: 560px; gap: 1.25rem; }
-    .hope-history-inner { max-width: 560px; }
+    .hope-history-inner { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; max-width: 560px; }
     .hope-history-body { text-align: center; }
     .hope-programs li { justify-content: center; }
 }
 @media (max-width: 768px) {
+    .hope-intro-photo { margin-bottom: 1.5rem; }
 }
 @media (max-width: 768px) {
     .children-hero-inner { grid-template-columns: minmax(0,1fr); grid-template-areas: "art" "details"; gap: 1.25rem; }
@@ -5805,5 +5813,3 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
     .visit-quick { grid-template-columns: 1fr; }
 }
 
-.children-story .next-step-cta-actions,
-.hope-weekly .next-step-cta-actions { margin-top: var(--space-5); }
