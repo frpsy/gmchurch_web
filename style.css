@@ -1998,7 +1998,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 1.6rem 1.4rem;
-    text-align: center;
     transition: border-color var(--dur-slow) ease, box-shadow var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out), opacity 0.6s ease;
 }
 .anglican-pillar-icon {
@@ -2210,7 +2209,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     font-size: var(--fs-lead);
     line-height: var(--lh-relaxed);
     color: var(--text);
-    text-align: center;
+    width: fit-content;
+    text-align: start;
     word-break: keep-all;
     margin: 0 auto 3rem;
     max-width: 660px;
@@ -3532,7 +3532,6 @@ footer {
 }
 @media (max-width: 768px) { .emmaus-join-grid { grid-template-columns: 1fr; } }
 
-.emmaus-join-card { text-align: center; }
 .emmaus-join-icon { font-size: 2rem; margin-bottom: 1rem; }
 .emmaus-contact-link {
     display: block;
@@ -3599,7 +3598,8 @@ footer {
     font-size: 1.05rem;
     color: var(--text);
     line-height: 1.8;
-    text-align: center;
+    width: fit-content;
+    text-align: start;
     word-break: keep-all;
     letter-spacing: -0.01em;
 }
@@ -5630,8 +5630,10 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 /* 어린이 예배는 그림의 흰 여백을 살리고 사진의 원래 비율을 유지한다. */
 .children-hero-inner { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); grid-template-areas: "art details"; align-items: center; column-gap: 3rem; row-gap: 1.5rem; }
 .children-hero-details { grid-area: details; align-self: center; min-width: 0; }
-.children-lead { max-width: var(--content-read); margin-inline: auto; font-size: var(--fs-lead); line-height: var(--lh-relaxed); color: color-mix(in srgb, var(--text) 72%, var(--white)); text-align: center; word-break: keep-all; overflow-wrap: break-word; }
+.children-lead { max-width: var(--content-read); margin-inline: auto; font-size: var(--fs-lead); line-height: var(--lh-relaxed); color: color-mix(in srgb, var(--text) 72%, var(--white)); width: fit-content; text-align: start; word-break: keep-all; overflow-wrap: break-word; }
 .children-join .next-step-cta-actions { justify-content: center; margin-top: 1.5rem; }
+/* 두 칸 첫 화면의 글 칸은 왼쪽 정렬(docs/dev-guide.md 정렬 규칙 5) */
+.children-hero-details .children-service-summary, .children-hero-details .children-service-summary > div { justify-content: flex-start; }
 .children-join .btn-next { min-height: 44px; }
 .children-illustration { grid-area: art; border-radius: var(--radius-md); overflow: hidden; }
 .children-illustration img { display: block; width: 100%; height: auto; }
@@ -5643,11 +5645,11 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .children-rhythm { padding-block: clamp(2.75rem, 5vw, 4.5rem); }
 .children-rhythm > .container > .section-title { text-align: center; }
 .children-rhythm-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 2rem; margin-top: 2rem; }
-.children-rhythm-grid article { border-top: 1px solid var(--border); padding-top: 1.5rem; text-align: center; }
-.children-rhythm-grid article > div { display: flex; flex-direction: column; align-items: center; gap: .6rem; margin-bottom: .85rem; }
+.children-rhythm-grid article { border-top: 1px solid var(--border); padding-top: 1.5rem; }
+.children-rhythm-grid article > div { display: flex; flex-direction: column; align-items: flex-start; gap: .6rem; margin-bottom: .85rem; }
 .children-rhythm-grid .section-eyebrow { margin: 0; letter-spacing: var(--ls-label); flex-shrink: 0; display: inline-grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: color-mix(in srgb, var(--heading) 9%, var(--white)); font-size: .85rem; }
 .children-rhythm-grid h3 { font-size: 1.2rem; color: var(--heading); margin: 0; line-height: 1.35; }
-.children-rhythm-grid article > p:last-child { max-width: 34rem; margin-inline: auto; color: color-mix(in srgb, var(--text) 72%, var(--white)); line-height: var(--lh-relaxed); word-break: keep-all; text-align: center; }
+.children-rhythm-grid article > p:last-child { max-width: 34rem; color: color-mix(in srgb, var(--text) 72%, var(--white)); line-height: var(--lh-relaxed); word-break: keep-all; }
 .children-story { padding-block: clamp(3rem, 6vw, 5rem); }
 .children-story-heading { max-width: var(--content-read); margin: 0 auto 2.25rem; text-align: center; }
 .children-photo-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2rem 1.5rem; max-width: 960px; margin-inline: auto; }
@@ -5678,7 +5680,7 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .hope-step { display: flex; flex-direction: column; min-width: 0; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
 .hope-step figure { margin: 0; aspect-ratio: 3 / 2; overflow: hidden; }
 .hope-step img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.hope-step-body { padding: 1.25rem 1.25rem 1.5rem; text-align: center; }
+.hope-step-body { padding: 1.25rem 1.25rem 1.5rem; }
 .hope-step-num { display: inline-grid; place-items: center; width: 2.25rem; height: 2.25rem; margin-bottom: .7rem; border-radius: 50%; background: color-mix(in srgb, var(--heading) 9%, var(--white)); color: var(--heading); font-size: .85rem; font-weight: 650; }
 .hope-step h3 { margin: 0 0 .5rem; font-size: 1.15rem; line-height: 1.35; color: var(--heading); }
 .hope-step p { margin: 0; color: color-mix(in srgb, var(--text) 72%, var(--white)); line-height: var(--lh-relaxed); word-break: keep-all; }
@@ -5701,8 +5703,6 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 @media (max-width: 900px) {
     .hope-steps { grid-template-columns: minmax(0, 1fr); max-width: 560px; gap: 1.25rem; }
     .hope-history-inner { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; max-width: 560px; }
-    .hope-history-body { text-align: center; }
-    .hope-programs li { justify-content: center; }
 }
 @media (max-width: 768px) {
     .hope-intro-photo { margin-bottom: 1.5rem; }
