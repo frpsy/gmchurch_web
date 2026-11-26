@@ -2201,7 +2201,7 @@ const PageSwitch = {
 
 /* ── SwipeNavigation — 본문은 상위 메뉴, 탭은 관련 페이지 사이 이동 ── */
 const SwipeNavigation = {
-    _controls: 'a, button, summary, input, select, textarea, label, iframe, video, audio, [contenteditable], [role="button"], [role="dialog"], .shorts-track',
+    _controls: 'button, summary, input, select, textarea, label, iframe, video, audio, [contenteditable], [role="button"], [role="dialog"], .shorts-track',
 
     _context(target) {
         const main = target.closest('main');
@@ -2232,6 +2232,9 @@ const SwipeNavigation = {
     },
 
     init() {
+        const edgeInset = 12;
+        const directionThreshold = 8;
+        const navigationThreshold = 42;
         const mobile = window.matchMedia('(max-width: 768px)');
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const viewport = window.visualViewport;
@@ -2303,7 +2306,7 @@ const SwipeNavigation = {
             if (!context) return;
             const { clientX, clientY, identifier } = event.touches[0];
             // 화면 양끝은 브라우저의 뒤로/앞으로 가기 조작 영역으로 남긴다.
-            if (clientX < 24 || clientX > window.innerWidth - 24) return;
+            if (clientX < edgeInset || clientX > window.innerWidth - edgeInset) return;
             start = {
                 ...context, clientX, clientY, identifier, width: window.innerWidth,
                 horizontal: false, direction: 0, hasDestination: false, offset: 0, paintedOffset: 0,
@@ -2321,11 +2324,11 @@ const SwipeNavigation = {
             const dx = point.clientX - start.clientX;
             const dy = Math.abs(point.clientY - start.clientY);
             if (!start.horizontal) {
-                if (dy >= 10 && dy > Math.abs(dx)) {
+                if (dy >= directionThreshold && dy > Math.abs(dx)) {
                     reset();
                     return;
                 }
-                if (Math.abs(dx) < 10 || Math.abs(dx) < dy * 1.6) return;
+                if (Math.abs(dx) < directionThreshold || Math.abs(dx) < dy * 1.6) return;
                 if (window.getSelection()?.isCollapsed === false) {
                     reset();
                     return;
@@ -2363,12 +2366,13 @@ const SwipeNavigation = {
             start = null;
             const dx = end.clientX - origin.clientX;
             const dy = end.clientY - origin.clientY;
-            const intentional = Math.abs(dx) >= 52 && Math.abs(dx) >= Math.abs(dy) * 1.6;
+            const intentional = Math.abs(dx) >= navigationThreshold && Math.abs(dx) >= Math.abs(dy) * 1.6;
             const next = intentional && window.getSelection()?.isCollapsed !== false
                 ? this._destination(origin, dx)
                 : null;
 
-            if (origin.onTabs && (origin.horizontal || intentional) && event.cancelable) event.preventDefault();
+            // 링크 위에서 시작해도 가로 드래그가 끝날 때 클릭이 따라오지 않게 한다.
+            if ((origin.horizontal || intentional) && event.cancelable) event.preventDefault();
             settle(origin, next, Math.sign(dx));
         }, { passive: false });
     }

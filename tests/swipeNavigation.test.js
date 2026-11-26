@@ -4,13 +4,13 @@ import { createContext, runInContext } from 'node:vm';
 
 const source = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
 
-function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, home = false } = {}) {
+function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, home = false, targetTag, currentIndex = 0 } = {}) {
     const listeners = new Map();
     const animation = { cancel: vi.fn() };
     const main = { isConnected: true, style: {}, animate: vi.fn(() => animation) };
-    const links = [!home, false].map(current => ({
+    const links = [0, 1].map(index => ({
         isConnected: true,
-        getAttribute: name => name === 'aria-current' && current ? 'page' : null,
+        getAttribute: name => name === 'aria-current' && !home && index === currentIndex ? 'page' : null,
         click: vi.fn(),
     }));
     const nav = {
@@ -47,6 +47,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
     const target = { closest: selector => {
         if (selector === 'main') return main;
         if (selector === 'nav[data-swipe-tabs]' && onTabs) return nav;
+        if (targetTag && selector.split(', ').includes(targetTag)) return target;
         return null;
     } };
     function touch(type, clientX, clientY = 150) {
@@ -133,4 +134,31 @@ it('navigates without motion when reduced motion is requested', () => {
     touch('touchend', 150);
     expect(main.animate).not.toHaveBeenCalled();
     expect(links[1].click).toHaveBeenCalledOnce();
+});
+
+it.each([[18, 64, 0], [372, 326, 1]])('recognizes short swipes starting near either edge (%i)', (start, end, next) => {
+    const { links, touch } = setup({ currentIndex: 1 - next, reduced: true });
+    touch('touchstart', start);
+    touch('touchmove', end);
+    touch('touchend', end);
+    expect(links[next].click).toHaveBeenCalledOnce();
+});
+
+it('reserves the outermost edge for browser gestures', () => {
+    const { links, touch } = setup({ reduced: true });
+    touch('touchstart', 382);
+    expect(touch('touchmove', 300).preventDefault).not.toHaveBeenCalled();
+    touch('touchend', 300);
+    expect(links[1].click).not.toHaveBeenCalled();
+});
+
+it('preserves regular link taps and claims horizontal drags over a link early', () => {
+    const { touch, frame, main } = setup({ targetTag: 'a' });
+    touch('touchstart', 240);
+    expect(touch('touchend', 240).preventDefault).not.toHaveBeenCalled();
+    touch('touchstart', 240);
+    expect(touch('touchmove', 232).preventDefault).toHaveBeenCalledOnce();
+    frame();
+    expect(parseFloat(main.style.translate)).toBeLessThan(0);
+    expect(touch('touchend', 232).preventDefault).toHaveBeenCalledOnce();
 });
