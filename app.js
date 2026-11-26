@@ -1119,7 +1119,7 @@ const VisitRenderer = {
                 </div>
                 <div class="info-row">
                     <strong>${L.parking}</strong>
-                    <span>${v.parking.replace('{phone}', tel)}</span>
+                    <span>${v.parking}</span>
                 </div>
                 <p class="visit-note">${v.note}</p>
             </div>
@@ -1502,7 +1502,7 @@ const ClergyRenderer = {
     }
 };
 
-/* ── AboutNavRenderer — 교회 소개 섹션 둘러보기 + 순차 연결 흐름 ─── */
+/* ── AboutNavRenderer — 교회 소개 섹션 둘러보기 ───────────────── */
 const AboutNavRenderer = {
     render() {
         const host = document.getElementById('about-section-nav');
@@ -1510,36 +1510,15 @@ const AboutNavRenderer = {
         const about = (CHURCH_DATA.navigation || []).find(n => n.href === 'clergy.html');
         if (!about || !about.items) return;
         const cfg = CHURCH_DATA.aboutJourney || {};
-        const items = about.items;
-        const onPage = it => it.href.startsWith('clergy.html') && it.href.includes('#');
+        const items = about.items.filter(it => it.href.startsWith('clergy.html#'));
         const anchorOf = it => it.href.split('#')[1];
 
-        // 1) sticky 섹션 내비게이션 — 스크롤 내내 하위 메뉴를 노출
         host.innerHTML = `
             <nav class="gc-page-nav" aria-label="${cfg.navLabel || '교회 소개 둘러보기'}">
                 <div class="container">
-                    ${items.map(it => onPage(it)
-                        ? `<a href="#${anchorOf(it)}" class="gc-nav-link" data-about-section="${anchorOf(it)}">${it.short || it.label}</a>`
-                        : `<a href="${it.href}" class="gc-nav-link gc-nav-link--ext">${it.short || it.label}</a>`
-                    ).join('')}
+                    ${items.map(it => `<a href="#${anchorOf(it)}" class="gc-nav-link" data-about-section="${anchorOf(it)}">${it.short || it.label}</a>`).join('')}
                 </div>
             </nav>`;
-
-        // 2) 섹션 끝마다 '다음' 연결 — 순차적으로 모든 하위 메뉴를 거치게
-        items.forEach((it, i) => {
-            const next = items[i + 1];
-            if (!onPage(it) || !next) return;
-            const section = document.getElementById(anchorOf(it));
-            if (!section) return;
-            const container = section.querySelector('.container') || section;
-            const a = document.createElement('a');
-            a.className = 'about-next';
-            a.href = next.href;
-            a.innerHTML =
-                `<span class="about-next-label">${cfg.nextLabel || '다음'}</span>` +
-                `<span class="about-next-target">${next.label}</span>`;
-            container.appendChild(a);
-        });
 
         this._bindSpy(host);
     },
@@ -2188,8 +2167,6 @@ const PageSwitch = {
         if (canon && newCanon) canon.href = newCanon.href;
         // 화면을 먼저 그리고, 주소 바꾸기는 따로 감싼다(주소를 못 바꾸는 환경에서도 목록이 보이도록)
         this._ROUTES[file](hash);
-        // 교체한 본문에 현재 페이지 기준의 메뉴 이동 링크를 붙인다.
-        PageTrail.init(file);
         if (push) {
             try { history.pushState({}, '', file + hash); } catch (err) { /* 주소 표시만 그대로 둔다 */ }
         }
@@ -3225,25 +3202,6 @@ const TapFeedback = {
     }
 };
 
-const PageTrail = {
-    init(page = location.pathname.split('/').pop() || 'index.html') {
-        const main = document.querySelector('main:has(.page-hero)');
-        if (!main) return;
-        main.querySelector('.page-trail')?.remove();
-        const menu = CHURCH_DATA.navigation;
-        const i = menu.findIndex(item => item.href.split('#')[0] === page);
-        if (i < 0) return;
-        const prev = menu[(i - 1 + menu.length) % menu.length];
-        const next = menu[(i + 1) % menu.length];
-        main.insertAdjacentHTML('beforeend', `
-            <nav class="container page-trail" aria-label="이전·다음 메뉴">
-                <a href="${prev.href}" aria-label="이전 메뉴: ${prev.label}">${prev.label}</a>
-                <a href="${next.href}" aria-label="다음 메뉴: ${next.label}">${next.label}</a>
-            </nav>
-        `);
-    }
-};
-
 /* ── TextFit ─────────────────────────────────────────────── */
 // 모바일 본문 줄 끝 맞춤: 글자 단위로 줄을 바꾸는 왼쪽 정렬 문단마다 자간(-0.02~+0.015em)을 줄 끝 편차가 가장 작은 값으로 정한다.
 // 어절 간격은 건드리지 않고, 변화량은 눈에 띄지 않는 범위로 제한한다. 대상 목록은 style.css의 ≤480px 본문 규칙과 같다.
@@ -3378,7 +3336,6 @@ const App = {
         BackToTop.init();
         MenuOverlay.init();
         TapFeedback.init();
-        PageTrail.init();
         TextFit.init();
         document.addEventListener('click', e => {
             if (e.target.matches('.map-copy-btn')) MapHelper.copyAddr(e.target);

@@ -282,12 +282,9 @@ details[open] .chev{transform:rotate(180deg)}
     // 모바일 주보는 홈페이지에서 연결하지 않고 교우에게만 주소를 알린다(2026-11-01 사용자 결정) — 성가 악보도 화면 안에서 본다
     const scores = it.score ? [it.score] : (it.scores || []);
     scores.forEach((s, i) => { h += scoreHtml(s, `${it.ref || it.label} 악보${scores.length > 1 ? ` ${i + 1}/${scores.length}` : ''}`); });
-    const links = [];
     // 예배 자료 누락을 외부 화면 이동으로 대체하지 않는다.
     if (it.kind && !passage) h += '<p class="hint">말씀 본문을 준비 중입니다.</p>';
     if (isHymn && !scores.length) h += '<p class="hint">악보를 준비 중입니다.</p>';
-    if (it.label === '교회소식') links.push(`<a class="btn" href="#news">교회소식 보기</a>`);
-    if (links.length) h += `<div class="links">${links.join('')}</div>`;
     return h;
   }
 
