@@ -641,31 +641,6 @@ main:has(.page-hero) {
     .page-hero-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
-.page-trail {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-    padding-block: 1rem 1.5rem;
-    border-top: 1px solid var(--border);
-}
-.page-trail a {
-    display: flex;
-    align-items: center;
-    min-height: 44px;
-    width: fit-content;
-    max-width: 100%;
-    padding: 0.45rem 0.7rem;
-    border-radius: var(--radius-sm);
-    color: var(--md-primary);
-    font-weight: 600;
-}
-.page-trail a:last-child { justify-self: end; text-align: end; }
-.page-trail a:active { background: var(--md-secondary-container); }
-@media (hover: hover) {
-    .page-trail a:hover { background: var(--green-light); }
-}
-@media print { .page-trail { display: none; } }
-
 /* ── Scroll Reveal ───────────────────────────────────────── */
 .reveal {
     opacity: 0;
@@ -4543,27 +4518,6 @@ footer {
     .gc-nav-link { padding-left: 0.35rem; padding-right: 0.35rem; }
 }
 
-/* 외부 상세 페이지로 이어지는 섹션 내비 링크 (예: 녹색교회) */
-.gc-nav-link--ext { color: var(--theme); }
-
-/* ── 교회 소개 — 섹션 순차 연결('다음') 흐름 ──────────────── */
-.about-next {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: fit-content;
-    margin: 2.5rem auto 0;
-    padding: 0.7rem 1.4rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-pill);
-    background: var(--white);
-    text-decoration: none;
-    font-size: var(--fs-sm);
-    transition: border-color var(--dur-slow), transform var(--dur-slow), box-shadow var(--dur-slow);
-}
-.about-next-label { color: var(--text-muted); font-weight: 500; }
-.about-next-target { color: var(--heading); font-weight: 700; }
-
 /* ── MenuOverlay (전체 메뉴 + 검색) ──────────────────────── */
 .menu-overlay {
     position: fixed;
@@ -5159,7 +5113,7 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
     .liturgy-guide { margin-top: 1.5rem; }
     .liturgy-section { margin-bottom: 2.25rem; }
     .anglican-body, .minister-category, .philosophy-intro { margin-bottom: 1.75rem; }
-    .philosophy-closing, .logo-refs, .about-next, .emmaus-stages { margin-top: 1.75rem; }
+    .philosophy-closing, .logo-refs, .emmaus-stages { margin-top: 1.75rem; }
     .logo-anglican { margin-top: 2.25rem; padding-top: 1.75rem; }
     .logo-lockup { padding: 1.1rem 1.25rem; }
     .logo-lockup-name { font-size: var(--fs-lead); }
@@ -5281,7 +5235,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
    누르는 카드·링크 상자는 떠오르지 않고, 면 위에 primary 상태 레이어(inset 그림자)를 덮는다.
    썸네일이 있는 카드는 그림 위가 아니라 글자 영역에만 막이 보인다. */
 .newcomer-cta-link, .resource-card, .map-btn, .links-card, .video-card, .shorts-card,
-.about-next, .value-card--link {
+.value-card--link {
     -webkit-tap-highlight-color: transparent;
     /* opacity·transform은 스크롤 등장(.reveal)용 — 이 선언이 .reveal의 transition을 덮으므로 함께 둔다 */
     transition: box-shadow var(--dur) var(--md-ease-standard), border-color var(--dur) var(--md-ease-standard),
@@ -5289,18 +5243,18 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 }
 @media (hover: hover) {
     .newcomer-cta-link:hover, .resource-card:hover, .map-btn:hover, .links-card:hover,
-    .video-card:hover, .shorts-card:hover, .about-next:hover, .value-card--link:hover {
+    .video-card:hover, .shorts-card:hover, .value-card--link:hover {
         border-color: var(--md-outline);
         box-shadow: var(--md-elevation-1), var(--md-layer-hover);
     }
 }
 .newcomer-cta-link:focus-visible, .resource-card:focus-visible, .map-btn:focus-visible,
 .links-card:focus-visible, .video-card:focus-visible, .shorts-card:focus-visible,
-.about-next:focus-visible, .value-card--link:focus-visible {
+.value-card--link:focus-visible {
     box-shadow: var(--md-layer-focus);
 }
 .newcomer-cta-link:active, .resource-card:active, .map-btn:active, .links-card:active,
-.video-card:active, .shorts-card:active, .about-next:active, .value-card--link:active {
+.video-card:active, .shorts-card:active, .value-card--link:active {
     box-shadow: var(--md-layer-pressed);
     transition: none;
 }

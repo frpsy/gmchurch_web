@@ -417,7 +417,6 @@ window DOMContentLoaded
       │
       ├── AboutNavRenderer.render()   → clergy.html 전용
       │     #about-section-nav → sticky 섹션 내비(gc-page-nav 재사용) + 스크롤 스파이
-      │     섹션 끝마다 .about-next 순차 연결('다음') — 마지막은 greenchurch.html로 유도
       │     데이터원: navigation[0].items, aboutJourney
       │
       ├── MediaRenderer.render()      → #media-full (videos.html)
@@ -477,9 +476,6 @@ window DOMContentLoaded
       │
       ├── TapFeedback.init()          (모든 페이지)
       │     iOS :active(눌림 색)용 touchstart 리스너만 — 이동 지연 없음. 터치 기기 hover 이동 제거는 style.css 끝 @media (hover: none)
-      │
-      ├── PageTrail.init()              (.page-hero가 있고 navigation 최상위 메뉴인 페이지)
-      │     본문 아래에 이전/다음 메뉴 이름을 표시(.page-trail) — 메뉴 순서는 CHURCH_DATA.navigation, 양 끝은 순환
       │
       └── MenuOverlay.init()          (모든 페이지)
             nav-menu-trigger 버튼으로 여는 전체 메뉴 + 검색 오버레이
@@ -730,7 +726,6 @@ window DOMContentLoaded
 | `.footer-logo-mark` | 푸터 캔터베리 십자가 컨테이너 (38×38px, 흰색 SVG) |
 | `.ico` | 아이콘 팩 SVG (`images/icons.svg` 심볼, 1em 크기·가는 단색 선) |
 | `.reveal` | ScrollReveal 애니메이션 대상 (fade-in on scroll) |
-| `.page-trail` | 주요 페이지 본문 끝에서 이전/다음 메뉴로 이동하는 이름이 표시된 링크 (최소 44px) |
 | `.page-hero--{clergy,community,greenchurch}` | 교회 정체성과 공동체를 소개하는 사진 상단. 다른 페이지에는 콘텐츠 높이에 맞는 공통 제목 영역을 사용 |
 
 ### 반응형 브레이크포인트
