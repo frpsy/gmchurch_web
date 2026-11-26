@@ -2979,6 +2979,30 @@ const SermonsRenderer = {
     }
 };
 
+/* ── NextStepRenderer ────────────────────────────────────── */
+// 페이지 끝 「다음 걸음」 영역. HTML에는 <section data-next-step="페이지키">만 두고 문구·버튼은 data.js nextStep에서 채운다.
+const NextStepRenderer = {
+    render() {
+        const d = CHURCH_DATA.nextStep;
+        if (!d) return;
+        document.querySelectorAll('[data-next-step]').forEach(el => {
+            const p = d.pages[el.dataset.nextStep];
+            if (!p) return;
+            const actions = p.actions.map((key, i) => {
+                const l = d.links[key];
+                return `<a href="${l.href}" class="btn-next${i === 0 ? ' btn-next--primary' : ''}">${icon(l.icon)} ${l.label}</a>`;
+            }).join('');
+            el.innerHTML = `
+                <div class="container">
+                    <p class="next-step-cta-eyebrow">${p.eyebrow || d.eyebrow}</p>
+                    <h2 class="next-step-cta-title" id="next-step-title">${p.title}</h2>
+                    <p class="next-step-cta-desc">${p.desc}</p>
+                    <div class="next-step-cta-actions">${actions}</div>
+                </div>`;
+        });
+    }
+};
+
 /* ── NewsRenderer ────────────────────────────────────────── */
 const NewsRenderer = {
     // "일시 : …"처럼 라벨이 짧은 줄은 항목표로 보여 일정·장소를 한눈에 찾게 한다
@@ -3844,6 +3868,7 @@ const App = {
         NewsRenderer.render();
         SermonsRenderer.render(signal);
         SundaysRenderer.render(signal);
+        NextStepRenderer.render();
         MoreToggle.render();
         if (animateReveal) ScrollReveal.init(signal);
     },
