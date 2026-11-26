@@ -33,6 +33,11 @@ const LiturgicalCalendar = (() => {
     function startOfDay(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
+    function baptismOfLord(year) {
+        // 주의 세례주일 = 공현일(1/6) 후 첫 주일. 성탄절기는 이 주일 전까지다(기도서 교회력).
+        const jan6 = new Date(year, 0, 6);
+        return addDays(jan6, 7 - jan6.getDay());
+    }
     function adventStart(year) {
         // 대림 1주일 = 성탄절(12/25) 이전의 네 번째 주일
         const dec25 = new Date(year, 11, 25);
@@ -60,11 +65,11 @@ const LiturgicalCalendar = (() => {
         const palmSun   = addDays(easter, -7);
         const pentecost = addDays(easter, 49);
         const dec25     = new Date(y, 11, 25);
-        const jan6      = new Date(y, 0, 6);
+        const baptism   = baptismOfLord(y);
         const advent    = adventStart(y);
 
         let season;
-        if      (day <  jan6)                          season = SEASONS.christmas; // 1/1~1/5
+        if      (day <  baptism)                       season = SEASONS.christmas; // 1/1 ~ 주의 세례주일 전날
         else if (day <  ashWed)                        season = SEASONS.epiphany;
         else if (day <  palmSun)                       season = SEASONS.lent;
         else if (day <  easter)                        season = SEASONS.holyweek;
@@ -74,12 +79,19 @@ const LiturgicalCalendar = (() => {
         else if (day <  dec25)                         season = SEASONS.advent;
         else                                            season = SEASONS.christmas; // 12/25~12/31
 
+        // 그날의 전례색: 연중 시기라도 주의 세례주일·삼위일체 주일·왕이신 그리스도 주일은 백색(기도서 교회력)
+        const t = day.getTime();
+        const white = [baptism, addDays(pentecost, 7), addDays(advent, -7)].some(d => d.getTime() === t);
+        const dayColor = white
+            ? { dayColor: SEASONS.christmas.color, dayInk: SEASONS.christmas.ink, dayColorName: SEASONS.christmas.colorName }
+            : { dayColor: season.color, dayInk: season.ink, dayColorName: season.colorName };
+
         // 표시용 부가 정보
         const yearLabel = `${y}년 ${day.getMonth() + 1}월`;
-        return { ...season, year: y, dateLabel: yearLabel };
+        return { ...season, ...dayColor, year: y, dateLabel: yearLabel };
     }
 
-    return { compute, easterDate, adventStart };
+    return { compute, easterDate, adventStart, baptismOfLord };
 })();
 
 const CHURCH_DATA = {
@@ -1289,7 +1301,7 @@ const CHURCH_DATA = {
                 colorName: "백색·금색",
                 color: "#b8860b",
                 symbol: "star",
-                period: "12월 25일 ~ 1월 5일",
+                period: "12월 25일 ~ 주의 세례주일 전날",
                 desc: "말씀이 사람이 되신 기쁨을 기념합니다. 성탄 후 12일간 이어집니다."
             },
             {
@@ -1299,7 +1311,7 @@ const CHURCH_DATA = {
                 colorName: "녹색",
                 color: "#2f6a52",
                 symbol: "sparkle",
-                period: "1월 6일 ~ 재의 수요일 전날",
+                period: "주의 세례주일 ~ 재의 수요일 전날",
                 desc: "주님께서 세상에 자신을 드러내신 것을 기념합니다. 공현일과 주의 세례주일을 포함합니다."
             },
             {

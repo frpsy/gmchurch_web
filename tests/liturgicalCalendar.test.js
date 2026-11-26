@@ -108,7 +108,7 @@ describe('LiturgicalCalendar.compute — season boundaries (2026)', () => {
         { date: [2026,  1,  1], name: '성탄절',      colorName: '백색' },
         { date: [2026,  1,  5], name: '성탄절',      colorName: '백색' },
         // Epiphany (Jan 6 – Ash Wed eve)
-        { date: [2026,  1,  6], name: '공현 후 연중 시기',   colorName: '녹색' },
+        { date: [2026,  1, 11], name: '공현 후 연중 시기',   colorName: '녹색' },
         { date: [2026,  2, 17], name: '공현 후 연중 시기',   colorName: '녹색' },
         // Lent (Ash Wed – Palm Sun eve)
         { date: [2026,  2, 18], name: '사순절',      colorName: '자색' },
