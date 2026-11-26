@@ -919,8 +919,8 @@ const NewcomerRenderer = {
             <div class="liturgy-guide" id="newcomer">
 
                 <div class="newcomer-intro">
-                    <h2 class="newcomer-intro-title">예배 전에 알아두시면 좋아요</h2>
-                    <p class="newcomer-intro-body">광명교회에 오신 것을 환영합니다. 성공회 예배는 회중이 함께 기도하고 응답하는 전례 예배입니다. 처음에는 흐름이 낯설 수 있으니, 익숙하지 않은 부분은 편안히 지켜보셔도 좋습니다.</p>
+                    <h2 class="newcomer-intro-title">처음 오시는 분을 위한 예배 안내</h2>
+                    <p class="newcomer-intro-body">광명교회에 오신 것을 환영합니다. 성공회 예배에서는 회중이 함께 기도하고 응답합니다. 순서가 낯설다면 처음에는 지켜보셔도 괜찮습니다.</p>
                     <div class="newcomer-key-facts">
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">예배</span>
@@ -940,13 +940,13 @@ const NewcomerRenderer = {
                 <div class="liturgy-section" id="firsttime">
                     <p class="section-eyebrow">First Visit</p>
                     <h2 class="section-title">참여 안내</h2>
-                    <p class="liturgy-body" style="margin-bottom:1rem;">처음 참석하실 때 알아두시면 도움이 되는 내용을 정리했습니다.</p>
+                    <p class="liturgy-body" style="margin-bottom:1rem;">주보와 기도서를 보며 예배 순서를 따라가실 수 있습니다.</p>
                     <div class="liturgy-checklist">
-                        <div class="checklist-item"><span class="check-icon">✓</span><p><strong>앉고 서는</strong> 순서가 있지만, 몸이 불편하시면 그대로 앉아 계셔도 됩니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon">✓</span><p><strong>주보</strong>에 예배 순서가 안내되어 있고, <strong>회중석의 기도서</strong>를 함께 펴고 응답하시면 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon">✓</span><p>예배 중 <strong>앉고 서는</strong> 순서가 있습니다. 몸이 불편하시면 앉아 계셔도 됩니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon">✓</span><p>예배 순서는 <strong>주보</strong>에서 확인하세요. <strong>자리에 놓인 기도서</strong>를 함께 펴고 응답하시면 됩니다.</p></div>
                         <div class="checklist-item"><span class="check-icon">✓</span><p>회중이 함께 부르는 <strong>성가</strong>는 따라 부르지 않으셔도 괜찮습니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon">✓</span><p>처음에는 낯설어도 한두 번 참여하시면 자연스럽게 익숙해지실 수 있습니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon">✓</span><p>궁금하신 점은 옆자리 교우나 안내위원에게 편하게 물어보세요.</p></div>
+                        <div class="checklist-item"><span class="check-icon">✓</span><p>처음부터 모든 순서를 따라 하실 필요는 없습니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon">✓</span><p>도움이 필요하면 옆자리 교우나 안내위원에게 말씀해 주세요.</p></div>
                     </div>
                 </div>
 
@@ -1011,8 +1011,8 @@ const NewcomerRenderer = {
                 </div>
 
                 <div class="newcomer-cta" id="contact">
-                    <h3>더 궁금하신 점이 있으신가요?</h3>
-                    <p>성공회 예배나 광명교회에 대해 궁금하신 점이 있으시면 편하게 문의해 주세요.</p>
+                    <h3>예배 문의</h3>
+                    <p>예배와 교회 생활이 궁금하시면 아래로 연락해 주세요.</p>
                     <div class="newcomer-cta-actions">
                         ${primary.contact ? `<a href="mailto:${primary.contact}" class="newcomer-cta-link">${icon('mail')} ${primary.name} 사제에게 이메일</a>` : ''}
                         <a href="tel:${info.phone}" class="newcomer-cta-link">${icon('phone')} 교회 사무실 ${info.phone}</a>
