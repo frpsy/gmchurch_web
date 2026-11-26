@@ -2238,8 +2238,15 @@ const SwipeNavigation = {
         const isZoomed = () => viewport?.scale > 1.02;
         let start = null;
         let settling = null;
+        let frame = null;
+        const cancelFrame = () => {
+            if (frame === null) return;
+            cancelAnimationFrame(frame);
+            frame = null;
+        };
         const reset = () => {
-            if (start?.offset) start.main.style.translate = '';
+            cancelFrame();
+            if (start?.paintedOffset) start.main.style.translate = '';
             start = null;
             if (!settling) return;
             clearTimeout(settling.timer);
@@ -2256,7 +2263,8 @@ const SwipeNavigation = {
         window.addEventListener('popstate', reset);
 
         const settle = (gesture, next, direction) => {
-            const { main, offset, onTabs } = gesture;
+            cancelFrame();
+            const { main, paintedOffset: offset, onTabs } = gesture;
             const navigate = () => {
                 if (!main.isConnected || !next?.isConnected) return;
                 if (!onTabs) PageSwitch.cancel();
@@ -2268,9 +2276,10 @@ const SwipeNavigation = {
                 return;
             }
             const end = next ? direction * Math.max(Math.abs(offset), window.innerWidth * 0.28) : 0;
+            const duration = next ? Math.min(110, Math.abs(end - offset) * 1.5) : 210;
             const animation = main.animate(
                 [{ translate: offset + 'px' }, { translate: end + 'px' }],
-                { duration: next ? 150 : 210, easing: 'cubic-bezier(0.2, 0.75, 0.25, 1)', fill: 'forwards' }
+                { duration, easing: 'cubic-bezier(0.2, 0.75, 0.25, 1)', fill: 'forwards' }
             );
             main.style.translate = '';
             settling = { animation, navigating: Boolean(next) };
@@ -2295,14 +2304,17 @@ const SwipeNavigation = {
             const { clientX, clientY, identifier } = event.touches[0];
             // 화면 양끝은 브라우저의 뒤로/앞으로 가기 조작 영역으로 남긴다.
             if (clientX < 24 || clientX > window.innerWidth - 24) return;
-            start = { ...context, clientX, clientY, identifier, horizontal: false, offset: 0 };
+            start = {
+                ...context, clientX, clientY, identifier, width: window.innerWidth,
+                horizontal: false, direction: 0, hasDestination: false, offset: 0, paintedOffset: 0,
+            };
         }, { passive: true });
 
         document.addEventListener('touchmove', event => {
             if (!start) return;
             const point = event.touches[0];
             if (point?.identifier !== start.identifier) return;
-            if (!start.main.isConnected || window.getSelection()?.isCollapsed === false) {
+            if (!start.main.isConnected) {
                 reset();
                 return;
             }
@@ -2314,15 +2326,29 @@ const SwipeNavigation = {
                     return;
                 }
                 if (Math.abs(dx) < 10 || Math.abs(dx) < dy * 1.6) return;
+                if (window.getSelection()?.isCollapsed === false) {
+                    reset();
+                    return;
+                }
                 start.horizontal = true;
             }
             // Safari가 가로 드래그를 브라우저 스크롤로 가져가지 않도록 방향 확정 후에만 막는다.
             if (event.cancelable) event.preventDefault();
             if (reducedMotion.matches) return;
-            const hasDestination = Boolean(this._destination(start, dx));
-            const limit = window.innerWidth * (hasDestination ? 0.28 : 0.06);
-            start.offset = Math.sign(dx) * Math.min(Math.abs(dx) * (hasDestination ? 0.88 : 0.2), limit);
-            start.main.style.translate = start.offset ? start.offset + 'px' : '';
+            const direction = Math.sign(dx);
+            if (direction !== start.direction) {
+                start.direction = direction;
+                start.hasDestination = Boolean(this._destination(start, dx));
+            }
+            const limit = start.width * (start.hasDestination ? 0.9 : 0.06);
+            start.offset = direction * Math.min(Math.abs(dx) * (start.hasDestination ? 0.95 : 0.2), limit);
+            if (frame !== null) return;
+            frame = requestAnimationFrame(() => {
+                frame = null;
+                const { main, offset } = start;
+                main.style.translate = offset ? offset + 'px' : '';
+                start.paintedOffset = offset;
+            });
         }, { passive: false });
         document.addEventListener('touchcancel', () => {
             const gesture = start;

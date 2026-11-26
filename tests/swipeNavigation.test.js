@@ -18,7 +18,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         clientWidth: 390,
         scrollWidth: overflow ? 500 : 390,
         querySelector: selector => selector === '.container' || home ? null : links[0],
-        querySelectorAll: () => links,
+        querySelectorAll: vi.fn(() => links),
     };
     const window = {
         innerWidth: 390,
@@ -33,8 +33,14 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         getElementById: () => nav,
         addEventListener: (type, fn) => listeners.set(type, fn),
     };
+    let scheduledFrame;
+    const requestAnimationFrame = vi.fn(callback => {
+        scheduledFrame = callback;
+        return 1;
+    });
     const context = createContext({
         window, document, setTimeout: vi.fn(), clearTimeout: vi.fn(),
+        requestAnimationFrame, cancelAnimationFrame: () => { scheduledFrame = null; },
     });
     runInContext(source, context);
     runInContext('SwipeNavigation.init()', context);
@@ -49,15 +55,22 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         listeners.get(type)(event);
         return event;
     }
-    return { main, links, touch, animation };
+    const frame = () => {
+        const callback = scheduledFrame;
+        scheduledFrame = null;
+        callback?.();
+    };
+    return { main, links, touch, animation, frame, requestAnimationFrame, nav };
 }
 
 it('follows the finger and settles before opening the next menu', () => {
-    const { main, links, touch, animation } = setup();
+    const { main, links, touch, animation, frame } = setup();
     touch('touchstart', 240);
     expect(touch('touchmove', 205).preventDefault).toHaveBeenCalledOnce();
+    frame();
     expect(parseFloat(main.style.translate)).toBeLessThan(0);
     touch('touchmove', 150);
+    frame();
     expect(parseFloat(main.style.translate)).toBeLessThan(-35);
     touch('touchend', 150);
     expect(links[1].click).not.toHaveBeenCalled();
@@ -66,9 +79,10 @@ it('follows the finger and settles before opening the next menu', () => {
 });
 
 it('returns a short drag to its origin without opening a tab', () => {
-    const { main, links, touch, animation } = setup({ onTabs: true });
+    const { main, links, touch, animation, frame } = setup({ onTabs: true });
     touch('touchstart', 240);
     touch('touchmove', 213);
+    frame();
     expect(touch('touchend', 213).preventDefault).toHaveBeenCalled();
     expect(main.animate.mock.calls[0][0][1]).toEqual({ translate: '0px' });
     animation.onfinish();
@@ -87,13 +101,29 @@ it.each([{ zoom: 2 }, { onTabs: true, overflow: true }, {}])('leaves native vert
 });
 
 it('opens the first main menu from the homepage', () => {
-    const { main, links, touch, animation } = setup({ home: true });
+    const { main, links, touch, animation, frame } = setup({ home: true });
     touch('touchstart', 240);
     touch('touchmove', 150);
+    frame();
     expect(parseFloat(main.style.translate)).toBeLessThan(-50);
     touch('touchend', 150);
     animation.onfinish();
     expect(links[0].click).toHaveBeenCalledOnce();
+});
+
+it('paints only the latest position in each frame and keeps tracking past a quarter screen', () => {
+    const { main, touch, frame, requestAnimationFrame, nav } = setup();
+    touch('touchstart', 300);
+    touch('touchmove', 245);
+    touch('touchmove', 170);
+    touch('touchmove', 110);
+    expect(main.style.translate).toBeUndefined();
+    expect(requestAnimationFrame).toHaveBeenCalledOnce();
+    expect(nav.querySelectorAll).toHaveBeenCalledOnce();
+    frame();
+    expect(parseFloat(main.style.translate)).toBeLessThan(-150);
+    touch('touchend', 110);
+    expect(main.animate.mock.calls[0][1].duration).toBeLessThan(100);
 });
 
 it('navigates without motion when reduced motion is requested', () => {
