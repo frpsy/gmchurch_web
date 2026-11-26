@@ -129,33 +129,6 @@
 
     <script src="data.js?v=ce0ce50"></script>
     <script src="app.js?v=ce0ce50"></script>
-    <script>
-    /* 섹션 내비게이션 활성 상태 표시 — 스크롤 기반 */
-    (function () {
-        var links = document.querySelectorAll('[data-sundays-section]');
-        if (!links.length) return;
-        var ids = Array.from(links).map(function (l) { return l.dataset.sundaysSection; });
-        var els = ids.map(function (id) { return document.getElementById(id); });
-        var pads = els.map(function (el) {
-            return el ? parseFloat(window.getComputedStyle(el).paddingTop) || 0 : 0;
-        });
-
-        function update() {
-            var threshold = window.innerHeight * 0.40;
-            var activeId = null;
-            for (var i = 0; i < els.length; i++) {
-                if (!els[i]) continue;
-                if (els[i].getBoundingClientRect().top + pads[i] <= threshold) activeId = ids[i];
-            }
-            links.forEach(function (l) {
-                l.classList.toggle('is-active', l.dataset.sundaysSection === activeId);
-            });
-        }
-
-        window.addEventListener('scroll', update, { passive: true });
-        update();
-    }());
-    </script>
     <span id="swipe-ready" hidden></span>
 </body>
 </html>

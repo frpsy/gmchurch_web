@@ -66,7 +66,10 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         scheduledFrame = null;
         callback?.();
     };
-    return { main, links, touch, animation, frame, requestAnimationFrame, nav, storage: context.sessionStorage, listeners };
+    return {
+        main, links, touch, animation, frame, requestAnimationFrame, nav,
+        storage: context.sessionStorage, listeners, context,
+    };
 }
 
 it('hands off to document navigation from the painted position without a separate finish animation', () => {
@@ -101,6 +104,29 @@ it('returns a short drag to its origin without opening a tab', () => {
     expect(main.animate.mock.calls[0][0][1]).toEqual({ translate: '0px' });
     animation.onfinish();
     expect(links[1].click).not.toHaveBeenCalled();
+});
+
+it.each([true, false])('uses the same document and never freezes a cold destination (prepared=%s)', prepared => {
+    const { main, links, touch, frame, context } = setup({ native: true });
+    links[1].href = 'https://site.test/clergy.html';
+    const go = vi.fn().mockResolvedValue(undefined);
+    const page = runInContext('PageSwitch', context);
+    page.go = go;
+    page.preload = vi.fn();
+    page.isReady = vi.fn(() => prepared);
+    context.document.startViewTransition = vi.fn();
+    touch('touchstart', 240);
+    touch('touchmove', 150);
+    frame();
+    touch('touchend', 150);
+    expect(links[1].click).not.toHaveBeenCalled();
+    if (prepared) {
+        expect(main.animate).not.toHaveBeenCalled();
+        expect(go).toHaveBeenCalledWith('clergy.html', true, 304.5);
+    } else {
+        expect(main.animate.mock.calls[0][0][1]).toEqual({ translate: '0px' });
+        expect(go).toHaveBeenCalledWith('clergy.html', true);
+    }
 });
 
 it.each([{ zoom: 2 }, { onTabs: true, overflow: true }, {}])('leaves native vertical scrolling alone (%j)', options => {

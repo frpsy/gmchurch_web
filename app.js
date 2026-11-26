@@ -1503,7 +1503,7 @@ const ClergyRenderer = {
 
 /* ── AboutNavRenderer — 교회 소개 섹션 둘러보기 ───────────────── */
 const AboutNavRenderer = {
-    render() {
+    render(signal) {
         const host = document.getElementById('about-section-nav');
         if (!host) return;
         const about = (CHURCH_DATA.navigation || []).find(n => n.href === 'clergy.html');
@@ -1519,14 +1519,13 @@ const AboutNavRenderer = {
                 </div>
             </nav>`;
 
-        this._bindSpy(host);
+        this.bindSpy(host.querySelectorAll('[data-about-section]'), 'aboutSection', signal);
     },
 
     // 현재 보고 있는 섹션을 내비에서 강조 (greenchurch 섹션 내비와 동일 방식)
-    _bindSpy(host) {
-        const links = Array.from(host.querySelectorAll('.gc-nav-link[data-about-section]'));
+    bindSpy(links, section, signal) {
         if (!links.length) return;
-        const ids = links.map(l => l.dataset.aboutSection);
+        const ids = Array.from(links, link => link.dataset[section]);
         const els = ids.map(id => document.getElementById(id));
         const pads = els.map(el => el ? parseFloat(getComputedStyle(el).paddingTop) || 0 : 0);
         const update = () => {
@@ -1535,15 +1534,18 @@ const AboutNavRenderer = {
             els.forEach((el, i) => {
                 if (el && el.getBoundingClientRect().top + pads[i] <= threshold) activeId = ids[i];
             });
-            links.forEach(l => l.classList.toggle('is-active', l.dataset.aboutSection === activeId));
+            links.forEach(l => l.classList.toggle('is-active', l.dataset[section] === activeId));
         };
         // 스크롤 이벤트마다 바로 레이아웃을 읽으면 빠른 스크롤에서 진행 막대가 끊긴다.
         // 한 프레임에 한 번만 계산하도록 묶는다.
         let spyRaf = null;
         const onScroll = () => {
-            if (!spyRaf) spyRaf = requestAnimationFrame(() => { spyRaf = null; update(); });
+            if (!spyRaf) spyRaf = requestAnimationFrame(() => {
+                spyRaf = null;
+                if (!signal?.aborted) update();
+            });
         };
-        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('scroll', onScroll, { passive: true, signal });
         update();
     }
 };
@@ -1671,7 +1673,7 @@ const MediaHubRenderer = {
 
 /* ── PhotoGalleryRenderer ────────────────────────────────── */
 const PhotoGalleryRenderer = {
-    render() {
+    render(signal) {
         const el = document.getElementById('gallery-full');
         if (!el || !CHURCH_DATA.photoGallery) return;
         const { intro, badge, note, categories, photos } = CHURCH_DATA.photoGallery;
@@ -1777,14 +1779,17 @@ const PhotoGalleryRenderer = {
         lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
-        });
+        }, { signal });
+        signal?.addEventListener('abort', () => {
+            if (lb.classList.contains('is-open')) document.body.style.overflow = '';
+        }, { once: true });
     }
 };
 
 /* ── PressRenderer ───────────────────────────────────────── */
 // 교회 연혁 (clergy.html#history) — 섬기는 이들 약력과 같은 타임라인 마크업 재사용
 const HistoryRenderer = {
-    render() {
+    render(signal) {
         const el = document.getElementById('history-full');
         const h = CHURCH_DATA.history;
         if (!el || !h) return;
@@ -1826,7 +1831,7 @@ const HistoryRenderer = {
         });
         // Ctrl+F로 접힌 항목을 찾으면 전체 연혁을 펼침
         allList.addEventListener('beforematch', () => set(true));
-        window.addEventListener('beforeprint', () => set(true));
+        window.addEventListener('beforeprint', () => set(true), { signal });
         set(false);
     }
 };
@@ -1929,14 +1934,17 @@ const MoreToggle = {
     _seq: 0,
 
     init() {
+        // 인쇄 시에는 모두 펼쳐서 출력
+        window.addEventListener('beforeprint', () => {
+            document.querySelectorAll('.more-toggle[aria-expanded="false"]').forEach(b => this._set(b, true));
+        });
+    },
+
+    render() {
         this._TARGETS.forEach(t => {
             document.querySelectorAll(t.sel).forEach(el => {
                 if (!el.dataset.moreReady) this._setup(el, t);
             });
-        });
-        // 인쇄 시에는 모두 펼쳐서 출력
-        window.addEventListener('beforeprint', () => {
-            document.querySelectorAll('.more-toggle[aria-expanded="false"]').forEach(b => this._set(b, true));
         });
     },
 
@@ -2000,7 +2008,7 @@ const MoreToggle = {
 };
 
 const ScrollReveal = {
-    init() {
+    init(signal) {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         if (!window.IntersectionObserver) return;
 
@@ -2047,6 +2055,7 @@ const ScrollReveal = {
                 }
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        signal?.addEventListener('abort', () => observer.disconnect(), { once: true });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
@@ -2173,11 +2182,13 @@ const SwipePageTransition = {
         });
     },
 
-    update(travel, callback) {
+    update(travel, callback, signal) {
         const transition = document.startViewTransition({ update: callback, types: [this._type] });
+        const abort = () => transition.skipTransition();
+        signal.addEventListener('abort', abort, { once: true });
         transition.ready.catch(() => {});
         this._activate(transition, travel);
-        return transition.finished;
+        return transition.finished.finally(() => signal.removeEventListener('abort', abort));
     },
 };
 
@@ -2188,10 +2199,13 @@ SwipePageTransition.init();
 // <main>만 바꿔 끼우고, 그 페이지의 렌더러를 다시 돌린다. 주소와 뒤로 가기도 따라간다.
 const PageSwitch = {
     _request: null,
-    _ROUTES: {
-        'bulletin.html': hash => BulletinRenderer.render(hash),
-        'news.html': hash => NewsRenderer.render(hash),
-    },
+    _currentFile: null,
+    _preloaded: new Map(),
+    _routes: new Set([
+        'index.html', 'clergy.html', 'worship.html', 'bulletin.html', 'news.html',
+        'sundays.html', 'newcomer.html', 'community.html', 'media.html', 'visit.html',
+        'gallery.html', 'links.html', 'videos.html',
+    ]),
 
     _file(href) {
         return href.split('/').pop() || 'index.html';
@@ -2201,12 +2215,46 @@ const PageSwitch = {
         return this._request?.file;
     },
 
+    targetFor(link) {
+        const url = new URL(link.href);
+        const base = new URL('.', window.location.href);
+        const file = this._file(url.pathname);
+        if (url.origin !== base.origin || new URL('.', url).pathname !== base.pathname || url.search) return null;
+        return this._routes.has(file) ? file + url.hash : null;
+    },
+
+    preload(link) {
+        const file = this.targetFor(link)?.split('#')[0];
+        if (!file || file === this._currentFile || this._preloaded.has(file)) return;
+        while (this._preloaded.size >= 4) this._preloaded.delete(this._preloaded.keys().next().value);
+        const entry = { doc: null };
+        this._preloaded.set(file, entry);
+        entry.ready = this._load(file).then(doc => {
+            entry.doc = doc;
+            return doc;
+        }).catch(() => {
+            if (this._preloaded.get(file) === entry) this._preloaded.delete(file);
+            return null;
+        });
+    },
+
+    async _load(file, signal) {
+        const res = await fetch(file, { signal });
+        if (!res.ok) throw new Error(String(res.status));
+        return new DOMParser().parseFromString(await res.text(), 'text/html');
+    },
+
+    isReady(target) {
+        return Boolean(this._preloaded.get(target.split('#')[0])?.doc);
+    },
+
     cancel() {
         this._request?.controller.abort();
         this._request = null;
     },
 
     init() {
+        this._currentFile = this._file(location.pathname);
         document.addEventListener('click', e => {
             const a = e.target.closest('a[data-switch]');
             if (!a || e.defaultPrevented || e.button !== 0) return;
@@ -2214,7 +2262,7 @@ const PageSwitch = {
             const url = new URL(a.href, location.href);
             if (url.origin !== location.origin) return;
             const file = this._file(url.pathname);
-            if (!this._ROUTES[file]) return;
+            if (file !== 'bulletin.html' && file !== 'news.html') return;
             e.preventDefault();
             if (file === this._file(location.pathname)) {
                 this.cancel();
@@ -2222,59 +2270,77 @@ const PageSwitch = {
             }
             this.go(file + url.hash, true);
         });
-        window.addEventListener('popstate', () => {
+        window.addEventListener('popstate', event => {
             const file = this._file(location.pathname);
-            if (this._ROUTES[file]) this.go(file + location.hash, false);
-            else this.cancel();
+            if (file === this._currentFile) {
+                this.cancel();
+                return;
+            }
+            if (this._routes.has(file)) this.go(file + location.hash, false, 0, event.state?.swipeScroll);
+            else location.reload();
         });
     },
 
-    async go(target, push, travel = 0) {
-        const file = target.split('#')[0];
-        const hash = target.includes('#') ? '#' + target.split('#')[1] : '';
+    async go(target, push, travel = 0, scrollTop) {
+        const hashIndex = target.indexOf('#');
+        const file = hashIndex < 0 ? target : target.slice(0, hashIndex);
+        const hash = hashIndex < 0 ? '' : target.slice(hashIndex);
         // 연속 입력이나 뒤로 가기 뒤에 늦게 도착한 응답이 화면을 덮지 않게 한다.
         this.cancel();
-        if (!this._ROUTES[file]) { location.href = target; return; }
+        if (!this._routes.has(file)) { location.href = target; return; }
         const controller = new AbortController();
         const request = { file, controller };
         this._request = request;
-        let html;
         try {
-            const res = await fetch(file, { cache: 'no-cache', signal: controller.signal });
-            if (!res.ok) throw new Error(String(res.status));
-            html = await res.text();
-        } catch (err) {
-            if (!controller.signal.aborted) location.href = target; // 가져오지 못하면 일반 이동
-            return;
+            const entry = this._preloaded.get(file);
+            const doc = entry?.doc || await entry?.ready || await this._load(file, controller.signal);
+            this._preloaded.delete(file);
+            if (controller.signal.aborted) return;
+            const newMain = doc.querySelector('main');
+            const oldMain = document.querySelector('main');
+            if (!newMain || !oldMain) throw new Error('Missing main content');
+            const update = () => {
+                if (!controller.signal.aborted) this._replaceMain(doc, newMain, oldMain, file, hash, push, scrollTop);
+            };
+            if (travel) await SwipePageTransition.update(travel, update, controller.signal);
+            else update();
+            if (!controller.signal.aborted) setTimeout(() => {
+                if (this._currentFile === file) TextFit.run();
+            }, 0);
+        } catch {
+            if (!controller.signal.aborted) {
+                if (location.pathname.endsWith('/' + file)) location.reload();
+                else location.href = target;
+            }
         } finally {
             if (this._request === request) this._request = null;
         }
-        if (controller.signal.aborted) return;
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        const newMain = doc.querySelector('main');
-        const oldMain = document.querySelector('main');
-        if (!newMain || !oldMain) { location.href = target; return; }
-        const update = () => this._replaceMain(doc, newMain, oldMain, file, hash, push);
-        if (travel) return SwipePageTransition.update(travel, update);
-        update();
     },
 
-    _replaceMain(doc, newMain, oldMain, file, hash, push) {
+    _replaceMain(doc, newMain, oldMain, file, hash, push, scrollTop) {
         if (!oldMain.isConnected) return;
         const tabWasFocused = oldMain.querySelector('.page-switch')?.contains(document.activeElement);
+        if (push) {
+            history.replaceState({ ...history.state, swipeScroll: window.scrollY }, '');
+            history.pushState({}, '', file + hash);
+        }
+        this._currentFile = file;
+        document.body.classList.toggle('home', doc.body.classList.contains('home'));
         oldMain.replaceWith(document.importNode(newMain, true));
         document.title = doc.title;
         const canon = document.querySelector('link[rel="canonical"]');
         const newCanon = doc.querySelector('link[rel="canonical"]');
         if (canon && newCanon) canon.href = newCanon.href;
-        // 화면을 먼저 그리고, 주소 바꾸기는 따로 감싼다(주소를 못 바꾸는 환경에서도 목록이 보이도록)
-        this._ROUTES[file](hash);
+        const description = document.querySelector('meta[name="description"]');
+        const newDescription = doc.querySelector('meta[name="description"]');
+        if (description && newDescription) description.content = newDescription.content;
+        NavRenderer._updateActive();
+        App.renderMain(false);
         if (tabWasFocused) document.querySelector('.page-switch [aria-current="page"]')?.focus({ preventScroll: true });
-        if (push) {
-            try { history.pushState({}, '', file + hash); } catch (err) { /* 주소 표시만 그대로 둔다 */ }
-        }
-        if (hash) App._scrollToHash(hash);
-        else window.scrollTo({ top: 0, behavior: 'auto' });
+        if (Number.isFinite(scrollTop)) window.scrollTo({ top: scrollTop, behavior: 'instant' });
+        else if (hash) App._scrollToHash(hash);
+        else window.scrollTo({ top: 0, behavior: 'instant' });
+        SwipeNavigation.warm();
     }
 };
 
@@ -2308,6 +2374,22 @@ const SwipeNavigation = {
             ? link.getAttribute('href') === pending
             : link.getAttribute('aria-current') === 'page');
         return current < 0 ? null : links[current + (dx < 0 ? 1 : -1)];
+    },
+
+    warm() {
+        if (!window.matchMedia('(max-width: 768px)').matches) return;
+        const nav = document.getElementById('nav-menu');
+        if (!nav) return;
+        const home = document.body.classList.contains('home');
+        const targets = [{ nav, onTabs: false, onHome: home }];
+        const tabs = document.querySelector('nav[data-swipe-tabs]');
+        if (tabs) targets.push({ nav: tabs, onTabs: true, onHome: false });
+        for (const target of targets) {
+            for (const direction of [-1, 1]) {
+                const link = this._destination(target, direction);
+                if (link) PageSwitch.preload(link);
+            }
+        }
     },
 
     init() {
@@ -2344,10 +2426,44 @@ const SwipeNavigation = {
         syncZoom();
         window.addEventListener('pagehide', reset);
         window.addEventListener('popstate', reset);
+        window.addEventListener('load', () => {
+            const warm = () => this.warm();
+            if (window.requestIdleCallback) window.requestIdleCallback(warm, { timeout: 600 });
+            else setTimeout(warm, 0);
+        }, { once: true });
+
+        const returnToStart = (main, offset) => {
+            if (!offset || !main.animate || reducedMotion.matches) {
+                if (offset) main.style.translate = '';
+                return;
+            }
+            const animation = main.animate(
+                [{ translate: offset + 'px' }, { translate: '0px' }],
+                { duration: 180, easing: 'cubic-bezier(0.2, 0.75, 0.25, 1)', fill: 'forwards' }
+            );
+            main.style.translate = '';
+            settling = { animation };
+            animation.onfinish = () => { if (settling?.animation === animation) reset(); };
+        };
 
         const settle = (gesture, next, direction) => {
             cancelFrame();
             const { main, paintedOffset: offset, onTabs } = gesture;
+            const target = next && PageSwitch.targetFor(next);
+            if (target) {
+                const travel = -direction * gesture.width + offset;
+                if (offset && Math.sign(offset) === direction && !reducedMotion.matches &&
+                    window.PageRevealEvent && document.startViewTransition && PageSwitch.isReady(target)) {
+                    const pending = { main, navigating: true };
+                    settling = pending;
+                    const finish = () => { if (settling === pending) reset(); };
+                    PageSwitch.go(target, true, travel).then(finish, finish);
+                } else {
+                    returnToStart(main, offset);
+                    PageSwitch.go(target, true);
+                }
+                return;
+            }
             const navigate = () => {
                 if (!main.isConnected || !next?.isConnected) return;
                 if (!onTabs) PageSwitch.cancel();
@@ -2359,16 +2475,7 @@ const SwipeNavigation = {
                 return;
             }
             const travel = -direction * gesture.width + offset;
-            const inlineTab = next?.hasAttribute?.('data-switch');
-            if (next && inlineTab && window.PageRevealEvent && document.startViewTransition) {
-                const url = new URL(next.href);
-                const pending = { main, navigating: true, timer: setTimeout(reset, 3500) };
-                settling = pending;
-                const finish = () => { if (settling === pending) reset(); };
-                PageSwitch.go(PageSwitch._file(url.pathname) + url.hash, true, travel).then(finish, finish);
-                return;
-            }
-            if (next && !inlineTab && SwipePageTransition.prepare(next, travel)) {
+            if (next && SwipePageTransition.prepare(next, travel)) {
                 settling = { main, navigating: true, timer: setTimeout(reset, 3500) };
                 navigate();
                 return;
@@ -2378,16 +2485,7 @@ const SwipeNavigation = {
                 navigate();
                 return;
             }
-            const animation = main.animate(
-                [{ translate: offset + 'px' }, { translate: '0px' }],
-                { duration: 210, easing: 'cubic-bezier(0.2, 0.75, 0.25, 1)', fill: 'forwards' }
-            );
-            main.style.translate = '';
-            settling = { animation };
-            animation.onfinish = () => {
-                if (settling?.animation !== animation) return;
-                reset();
-            };
+            returnToStart(main, offset);
         };
 
         document.addEventListener('touchstart', event => {
@@ -2433,7 +2531,9 @@ const SwipeNavigation = {
             const direction = Math.sign(dx);
             if (direction !== start.direction) {
                 start.direction = direction;
-                start.hasDestination = Boolean(this._destination(start, dx));
+                const link = this._destination(start, dx);
+                start.hasDestination = Boolean(link);
+                if (link) PageSwitch.preload(link);
             }
             const limit = start.width * (start.hasDestination ? 0.9 : 0.06);
             start.offset = direction * Math.min(Math.abs(dx) * (start.hasDestination ? 0.95 : 0.2), limit);
@@ -2757,7 +2857,7 @@ const SermonsRenderer = {
         list.append(...rows);
     },
 
-    render() {
+    render(signal) {
         const el = document.getElementById('sermons-full');
         if (!el) return;
         // CHURCH_DATA는 data.js의 const 전역이라 window 속성이 아니다. typeof로 안전하게 확인한다.
@@ -2807,7 +2907,7 @@ const SermonsRenderer = {
             target.scrollIntoView({ block: 'start', behavior: 'instant' });
         };
         openFromHash();
-        window.addEventListener('hashchange', openFromHash);
+        window.addEventListener('hashchange', openFromHash, { signal });
     }
 };
 
@@ -2941,7 +3041,7 @@ const NewsRenderer = {
 
 /* ── SundaysRenderer ─────────────────────────────────────── */
 const SundaysRenderer = {
-    render() {
+    render(signal) {
         const currentEl    = document.getElementById('sundays-current');
         const lectionaryEl = document.getElementById('sundays-lectionary');
         const seasonsEl    = document.getElementById('sundays-seasons');
@@ -2964,7 +3064,7 @@ const SundaysRenderer = {
 
         if (currentEl) {
             currentEl.innerHTML = this._currentSeason(cs, yearDates, advYear);
-            this._bindRibbonPopover(currentEl.querySelector('.season-ribbon-wrap'));
+            this._bindRibbonPopover(currentEl.querySelector('.season-ribbon-wrap'), signal);
         }
         if (lectionaryEl) this._lectionaryAsync(lectionaryEl);
         if (seasonsEl)    seasonsEl.innerHTML  = this._seasons(d.seasons, cs, yearDates, advYear);
@@ -2975,6 +3075,7 @@ const SundaysRenderer = {
             this._bindCalNav(monthlyEl);
         }
         if (specialEl)  specialEl.innerHTML = this._special(d.specialSundays);
+        AboutNavRenderer.bindSpy(document.querySelectorAll('[data-sundays-section]'), 'sundaysSection', signal);
     },
 
     _LECTIONARY_FILES: ['lectionary-year-a.json', 'lectionary-year-b.json'],
@@ -3303,7 +3404,7 @@ const SundaysRenderer = {
             <div class="season-pop" role="tooltip" hidden></div>`;
     },
 
-    _bindRibbonPopover(wrap) {
+    _bindRibbonPopover(wrap, signal) {
         if (!wrap) return;
         const pop = wrap.querySelector('.season-pop');
         if (!pop) return;
@@ -3336,8 +3437,8 @@ const SundaysRenderer = {
             pop.hidden = false;
         });
 
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-        document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); }, { capture: true });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); }, { signal });
+        document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); }, { capture: true, signal });
     },
 
     /* 월간 달력 — 정적 헤더 + 동적 그리드 래퍼 */
@@ -3581,6 +3682,8 @@ const TextFit = {
 };
 
 const App = {
+    _page: null,
+
     init() {
         /* 사이트 대표 테마(--theme)는 녹색 고정(:root 기본값 사용). 절기색(--season)만
            전례 요소(절기 페이지 리본·달력·전례 안내 배지 등)에 주입한다. */
@@ -3598,6 +3701,25 @@ const App = {
         NavRenderer.render();
         FooterRenderer.render();
         VisitorCounter.render();
+        this.renderMain();
+        MoreToggle.init();
+        this._handleHashScroll();
+        ScrollProgress.init();
+        PageSwitch.init();
+        SwipeNavigation.init();
+        BackToTop.init();
+        MenuOverlay.init();
+        TapFeedback.init();
+        TextFit.init();
+        document.addEventListener('click', e => {
+            if (e.target.matches('.map-copy-btn')) MapHelper.copyAddr(e.target);
+        });
+    },
+
+    renderMain(animateReveal = true) {
+        this._page?.abort();
+        this._page = new AbortController();
+        const { signal } = this._page;
         ContactBinder.render();
         IndexRenderer.render();
         BcpRenderer.render();
@@ -3611,31 +3733,20 @@ const App = {
         VisitRenderer.render();
         AnglicanRenderer.render();
         ClergyRenderer.render();
-        HistoryRenderer.render();
-        AboutNavRenderer.render();
+        HistoryRenderer.render(signal);
+        AboutNavRenderer.render(signal);
         PressRenderer.render();
         FaqRenderer.render();
         MediaRenderer.render();
         MediaHubRenderer.render();
-        PhotoGalleryRenderer.render();
+        PhotoGalleryRenderer.render(signal);
         LinksRenderer.render();
         BulletinRenderer.render();
         NewsRenderer.render();
-        SermonsRenderer.render();
-        SundaysRenderer.render();
-        MoreToggle.init();
-        this._handleHashScroll();
-        ScrollReveal.init();
-        ScrollProgress.init();
-        PageSwitch.init();
-        SwipeNavigation.init();
-        BackToTop.init();
-        MenuOverlay.init();
-        TapFeedback.init();
-        TextFit.init();
-        document.addEventListener('click', e => {
-            if (e.target.matches('.map-copy-btn')) MapHelper.copyAddr(e.target);
-        });
+        SermonsRenderer.render(signal);
+        SundaysRenderer.render(signal);
+        MoreToggle.render();
+        if (animateReveal) ScrollReveal.init(signal);
     },
 
     _scrollToHash(hash, { focus = false } = {}) {
