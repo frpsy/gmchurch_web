@@ -1569,17 +1569,35 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 
 .home .hero {
+    position: relative;
+    isolation: isolate;
     display: grid;
     align-items: center;
+    background: var(--green-deep);
     min-height: clamp(27rem, 67vh, 37rem);
     min-height: clamp(27rem, 67svh, 37rem);
 }
-.home .hero-content {
-    display: grid;
-    align-items: center;
-    gap: clamp(1.75rem, 4vw, 3.75rem);
-    max-width: 66rem;
+.hero-background,
+.home .hero::before {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
 }
+.hero-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 58% center;
+    z-index: -2;
+}
+.home .hero::before {
+    content: '';
+    background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.58) 28% 78%, rgba(0,0,0,0.24));
+    z-index: -1;
+}
+.home .hero-content { max-width: 66rem; }
+.home .hero :is(h1, .hero-label, .hero-sub) { color: white; }
+.home .hero a:focus-visible { outline-color: white; }
 .hero-photo {
     width: 100%;
     height: auto;
@@ -1588,7 +1606,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border-radius: var(--radius-xl);
 }
 @media (min-width: 800px) {
-    .home .hero-content { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
     .home .hero h1 { max-width: 12em; }
 }
 .home .hero-label {
@@ -1627,6 +1644,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     padding: 0.35rem 0.35rem 0.35rem 1.15rem;
     min-height: 48px;
     box-shadow: none;
+    background: white;
+    color: var(--ink-on-light);
     font-weight: 650;
     letter-spacing: 0;
 }
@@ -1706,8 +1725,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 50%;
-    background: var(--md-on-primary);
-    color: var(--md-primary);
+    background: var(--ink-on-light);
+    color: white;
 }
 .home .home-link-arrow .ico { width: 1.3rem; height: 1.3rem; }
 @media (hover: hover) {
