@@ -2201,67 +2201,145 @@ const PageSwitch = {
 
 /* ── SwipeNavigation — 본문은 상위 메뉴, 탭은 관련 페이지 사이 이동 ── */
 const SwipeNavigation = {
+    _controls: 'a, button, summary, input, select, textarea, label, iframe, video, audio, [contenteditable], [role="button"], [role="dialog"], .shorts-track',
+
+    _context(target) {
+        const main = target.closest('main');
+        if (!main) return null;
+        const tabs = target.closest('nav[data-swipe-tabs]');
+        const nav = tabs || document.getElementById('nav-menu');
+        if (!nav) return null;
+        if (tabs) {
+            const strip = tabs.querySelector('.container') || tabs;
+            if (strip.scrollWidth > strip.clientWidth + 1) return null;
+        } else if (target.closest('nav') || target.closest(this._controls) || !nav.querySelector('.nav-link[aria-current="page"]')) {
+            return null;
+        }
+        return { main, nav, onTabs: Boolean(tabs) };
+    },
+
+    _destination({ nav, onTabs }, dx) {
+        if (!nav.isConnected || dx === 0) return null;
+        const selector = onTabs ? 'a[href]' : ':scope > .nav-item > .nav-link';
+        const links = Array.from(nav.querySelectorAll(selector));
+        const pending = onTabs && PageSwitch.pendingFile();
+        const current = links.findIndex(link => pending
+            ? link.getAttribute('href') === pending
+            : link.getAttribute('aria-current') === 'page');
+        return current < 0 ? null : links[current + (dx < 0 ? 1 : -1)];
+    },
+
     init() {
         const mobile = window.matchMedia('(max-width: 768px)');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const viewport = window.visualViewport;
         const isZoomed = () => viewport?.scale > 1.02;
-        const syncZoom = () => document.documentElement.classList.toggle('swipe-zoomed', isZoomed());
+        let start = null;
+        let settling = null;
+        const reset = () => {
+            if (start?.offset) start.main.style.translate = '';
+            start = null;
+            if (!settling) return;
+            clearTimeout(settling.timer);
+            settling.animation.cancel();
+            settling = null;
+        };
+        const syncZoom = () => {
+            document.documentElement.classList.toggle('swipe-zoomed', isZoomed());
+            if (isZoomed()) reset();
+        };
         viewport?.addEventListener('resize', syncZoom, { passive: true });
         syncZoom();
-        const controls = 'a, button, summary, input, select, textarea, label, iframe, video, audio, [contenteditable], [role="button"], [role="dialog"], .shorts-track';
-        let start = null;
-        document.addEventListener('touchstart', event => {
-            start = null;
-            if (!mobile.matches || event.touches.length !== 1 || isZoomed()) return;
-            const target = event.target;
-            if (!target.closest('main')) return;
-            const tabs = target.closest('nav[data-swipe-tabs]');
-            const nav = tabs || document.getElementById('nav-menu');
-            if (!nav) return;
-            if (tabs) {
-                const strip = nav.querySelector('.container') || nav;
-                if (strip.scrollWidth > strip.clientWidth + 1) return;
-            } else if (target.closest('nav') || target.closest(controls) || !nav.querySelector('.nav-link[aria-current="page"]')) {
+        window.addEventListener('pagehide', reset);
+        window.addEventListener('popstate', reset);
+
+        const settle = (gesture, next, direction) => {
+            const { main, offset, onTabs } = gesture;
+            const navigate = () => {
+                if (!main.isConnected || !next?.isConnected) return;
+                if (!onTabs) PageSwitch.cancel();
+                next.click();
+            };
+            if (!offset || reducedMotion.matches || !main.animate) {
+                if (offset) main.style.translate = '';
+                navigate();
                 return;
             }
+            const end = next ? direction * Math.max(Math.abs(offset), window.innerWidth * 0.28) : 0;
+            const animation = main.animate(
+                [{ translate: offset + 'px' }, { translate: end + 'px' }],
+                { duration: next ? 150 : 210, easing: 'cubic-bezier(0.2, 0.75, 0.25, 1)', fill: 'forwards' }
+            );
+            main.style.translate = '';
+            settling = { animation, navigating: Boolean(next) };
+            animation.onfinish = () => {
+                if (settling?.animation !== animation) return;
+                if (!next) {
+                    reset();
+                    return;
+                }
+                // 새 문서가 열리면 pagehide에서 정리한다. 이동이 지연돼도 본문을 다시 읽을 수 있게 한다.
+                settling.timer = setTimeout(reset, 500);
+                navigate();
+            };
+        };
+
+        document.addEventListener('touchstart', event => {
+            if (settling?.navigating && event.touches.length === 1) return;
+            reset();
+            if (!mobile.matches || event.touches.length !== 1 || isZoomed()) return;
+            const context = this._context(event.target);
+            if (!context) return;
             const { clientX, clientY, identifier } = event.touches[0];
             // 화면 양끝은 브라우저의 뒤로/앞으로 가기 조작 영역으로 남긴다.
             if (clientX < 24 || clientX > window.innerWidth - 24) return;
-            start = { nav, onTabs: Boolean(tabs), clientX, clientY, identifier };
+            start = { ...context, clientX, clientY, identifier, horizontal: false, offset: 0 };
         }, { passive: true });
 
         document.addEventListener('touchmove', event => {
             if (!start) return;
             const point = event.touches[0];
             if (point?.identifier !== start.identifier) return;
-            const dx = Math.abs(point.clientX - start.clientX);
+            if (!start.main.isConnected || window.getSelection()?.isCollapsed === false) {
+                reset();
+                return;
+            }
+            const dx = point.clientX - start.clientX;
             const dy = Math.abs(point.clientY - start.clientY);
-            // 세로로 읽기 시작한 손길은 나중에 옆으로 비껴도 페이지를 넘기지 않는다.
-            if (dy >= 20 && dy > dx) start = null;
+            if (!start.horizontal) {
+                if (dy >= 10 && dy > Math.abs(dx)) {
+                    reset();
+                    return;
+                }
+                if (Math.abs(dx) < 10 || Math.abs(dx) < dy * 1.6) return;
+                start.horizontal = true;
+            }
+            if (reducedMotion.matches) return;
+            const hasDestination = Boolean(this._destination(start, dx));
+            const limit = window.innerWidth * (hasDestination ? 0.28 : 0.06);
+            start.offset = Math.sign(dx) * Math.min(Math.abs(dx) * (hasDestination ? 0.88 : 0.2), limit);
+            start.main.style.translate = start.offset ? start.offset + 'px' : '';
         }, { passive: true });
-        document.addEventListener('touchcancel', () => { start = null; }, { passive: true });
+        document.addEventListener('touchcancel', () => {
+            const gesture = start;
+            start = null;
+            if (gesture) settle(gesture);
+        }, { passive: true });
         document.addEventListener('touchend', event => {
             const origin = start;
-            start = null;
-            if (!origin?.nav.isConnected || window.getSelection()?.isCollapsed === false) return;
+            if (!origin) return;
             const end = event.changedTouches[0];
             if (end?.identifier !== origin.identifier) return;
+            start = null;
             const dx = end.clientX - origin.clientX;
             const dy = end.clientY - origin.clientY;
-            if (Math.abs(dx) < 52 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+            const intentional = Math.abs(dx) >= 52 && Math.abs(dx) >= Math.abs(dy) * 1.6;
+            const next = intentional && window.getSelection()?.isCollapsed !== false
+                ? this._destination(origin, dx)
+                : null;
 
-            // 탭에 닿은 스와이프가 시작 위치의 링크 클릭으로 이어지지 않게 한다.
-            if (origin.onTabs && event.cancelable) event.preventDefault();
-            const selector = origin.onTabs ? 'a[href]' : ':scope > .nav-item > .nav-link';
-            const links = Array.from(origin.nav.querySelectorAll(selector));
-            const pending = origin.onTabs && PageSwitch.pendingFile();
-            const current = links.findIndex(link => pending
-                ? link.getAttribute('href') === pending
-                : link.getAttribute('aria-current') === 'page');
-            const next = current === -1 ? null : links[current + (dx < 0 ? 1 : -1)];
-            if (!next) return;
-            if (!origin.onTabs) PageSwitch.cancel();
-            next.click();
+            if (origin.onTabs && (origin.horizontal || intentional) && event.cancelable) event.preventDefault();
+            settle(origin, next, Math.sign(dx));
         }, { passive: false });
     }
 };
