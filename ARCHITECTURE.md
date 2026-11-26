@@ -692,6 +692,7 @@ window DOMContentLoaded
 | `.privacy-doc` `.privacy-lead` `.privacy-h2` `.privacy-list` `.privacy-foot` | 개인정보처리방침 본문 |
 | `.container--read` `.container--narrow` | 읽기 폭 760px / 820px 컨테이너 |
 | `.section-title--sub` | 소제목 h2(1.3rem) |
+| `.section-sub--read` | 세 문장 이상 구역 소개. 한 줄이면 가운데, 여러 줄이면 왼쪽(정렬 규칙 3) |
 | `.nowrap` | 줄바꿈 금지 구간(날짜 등) |
 | `.section.gc-section-alt` | 교차 띠 배경(emmaus·greenchurch) |
 | `.sundays-page` | `sundays.html`의 `<main>` 클래스 — PC(769px~)에서 달력·전례독서 섹션을 560px 가운데 칼럼(제목·본문 같은 왼쪽선)으로, 현재 절기 카드를 760px 가운데로 배치. 제목은 좌측 정렬 유지, 모바일 변경 없음 |

@@ -203,7 +203,7 @@ echo "Done: $TODAY"
 7. **문서형 페이지는 왼쪽**: 교회 소식, 설교와 강연, 개인정보 처리방침, 질문 목록. 첫 화면만 가운데.
 8. **손대지 않는 곳**: 순서지(`jubo/`), 설교문 양쪽 정렬.
 
-구현 방법: 구역 머리 아래 소개 문단은 `width: fit-content; max-width: var(--content-read); margin-inline: auto; text-align: start;`로 둔다. 한 줄이면 가운데로 보이고, 여러 줄이면 가운데 칼럼 안에서 왼쪽으로 읽힌다(`.children-lead`, `.story-lead`, `.faq-lead`).
+구현 방법: 구역 머리 아래 소개 문단은 `width: fit-content; max-width: var(--content-read); margin-inline: auto; text-align: start;`로 둔다. 한 줄이면 가운데로 보이고, 여러 줄이면 가운데 칼럼 안에서 왼쪽으로 읽힌다(`.children-lead`, `.story-lead`, `.faq-lead`). 구역 소개가 줄일 수 없는 설명(세 문장 이상, 인용 포함)이면 `.section-sub--read`를 더한다.
 검사: `tests/alignment.test.js`(CI)가 읽는 글 클래스에 `text-align: center`가 다시 생기지 않게 막는다. 화면 전수 점검은 `python3 -m http.server 8000`을 띄우고 `PLAYWRIGHT_MODULE=<playwright 경로> node scripts/audit-alignment.js --list`로 한다. 「가운데 세 줄 이상」이 0건이어야 한다.
 
 ### 로고 글자
