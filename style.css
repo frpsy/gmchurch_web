@@ -5206,7 +5206,7 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
 /* 탭 지연(더블탭 확대 대기) 제거 */
 a, button, summary, [role="button"] { touch-action: manipulation; }
 @media (max-width: 768px) {
-    .page-switch[data-swipe-tabs] { touch-action: pan-y pinch-zoom; }
+    main:has(nav[data-swipe-tabs]) { touch-action: pan-y pinch-zoom; }
 }
 
 /* ── 아이콘 배지 — 컴포넌트별 font-size 뒤에 두어 크기를 통일 ── */
