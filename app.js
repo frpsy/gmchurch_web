@@ -490,13 +490,12 @@ const IndexRenderer = {
 
     _hero() {
         const { name, slogan, vision } = CHURCH_DATA.info;
-        const { heroActions, quickLinks } = CHURCH_DATA.home;
+        const { heroActions } = CHURCH_DATA.home;
 
         const label = document.getElementById('hero-label');
         const title = document.getElementById('hero-title');
         const sub   = document.getElementById('hero-sub');
         const acts  = document.getElementById('hero-actions');
-        const links = document.getElementById('home-quick-links');
 
         if (label) label.textContent = name;
         if (title) title.textContent = slogan;
@@ -505,16 +504,6 @@ const IndexRenderer = {
         if (acts) acts.innerHTML = heroActions.map(a =>
             `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label}${a.primary ? ` <span class="home-link-arrow">${icon('arrow-right')}</span>` : ''}</a>`
         ).join('');
-
-        if (!links) return;
-        const mainTime = CHURCH_DATA.worship.main[0].time;
-        const worshipTime = mainTime.replace(/^매주 일요일\s*/, '');
-        links.innerHTML = quickLinks.map(({ label, href, detail, worshipTime: showTime }) => `
-            <a href="${href}" class="home-quick-link">
-                <span class="home-quick-link-title">${label}</span>
-                <span class="home-quick-link-detail">${showTime ? worshipTime : detail}</span>
-            </a>
-        `).join('');
     },
 
     _about() {
@@ -607,14 +596,12 @@ const IndexRenderer = {
         if (!locationEl) return;
         const { phone } = CHURCH_DATA.info;
         const v = CHURCH_DATA.home.visit;
-        const main = CHURCH_DATA.worship.main[0];
         const g = CHURCH_DATA.home.guide;
         this._header('visit-header', v);
         locationEl.innerHTML = `
             ${MapHelper.html(true)}
             <div class="home-visit-details">
                 <div class="visit-facts">
-                    <div class="info-row"><strong>${v.worshipLabel}</strong><span>${main.time} · ${main.duration}</span></div>
                     <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}">${phone}</a></span></div>
                 </div>
                 <ul class="visit-quick" aria-label="방문 안내 바로가기">
@@ -656,11 +643,6 @@ const ChildrenRenderer = {
         const d = CHURCH_DATA.childrenWorship;
         const service = CHURCH_DATA.worship.main.find(w => w.id === 'children');
         const parents = (CHURCH_DATA.community.smallgroups?.groups || []).find(g => g.id === 'parents');
-        const picture = (name, alt, eager = false, portrait = false) => name === 'welcome'
-            ? `<img src="images/children/welcome.jpg" alt="${alt}" width="600" height="302" fetchpriority="high" decoding="async">`
-            : portrait
-            ? `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 480w, images/children/${name}.webp 640w" sizes="(max-width: 768px) 50vw, 400px" alt="${alt}" width="640" height="914" loading="lazy" decoding="async">`
-            : `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 768px) 100vw, 50vw" alt="${alt}" width="1440" height="1080" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
         el.innerHTML = `
             <div class="page-hero">
                 <p class="section-eyebrow">${d.heroEyebrow}</p>
@@ -669,7 +651,7 @@ const ChildrenRenderer = {
             </div>
             <section class="section children-intro">
                 <div class="container children-hero-inner">
-                    <div class="children-illustration">${picture('welcome', d.heroAlt, true)}<p class="children-illustration-credit">${d.heroCredit}</p></div>
+                    <div class="children-illustration"><img src="images/children/welcome.jpg" alt="${d.heroAlt}" width="600" height="302" fetchpriority="high" decoding="async"><p class="children-illustration-credit">${d.heroCredit}</p></div>
                     <div class="children-hero-details">
                         <p class="children-lead">${d.intro}</p>
                         <dl class="children-service-summary">
@@ -685,9 +667,8 @@ const ChildrenRenderer = {
             </div></section>
             <section class="section gc-section-alt children-story"><div class="container">
                 <div class="children-story-heading"><p class="section-eyebrow">${d.storyEyebrow}</p><h2 class="section-title">${d.storyTitle}</h2><p class="children-lead">${d.storyIntro}</p></div>
-                <div class="children-photo-grid">${d.photos.map(p => `<figure>${picture(p.src,p.alt)}<figcaption>${p.caption}</figcaption></figure>`).join('')}</div>
                 <div class="children-story-heading children-card-heading"><h2 class="section-title">${d.cardTitle}</h2><p class="children-lead">${d.cardIntro}</p></div>
-                <div class="children-photo-grid children-photo-grid--portrait">${d.cardPhotos.map(p => `<figure>${picture(p.src,p.alt,false,true)}<figcaption>${p.caption}</figcaption></figure>`).join('')}</div>
+                <div class="next-step-cta-actions"><a class="btn-next" href="gallery.html">${d.galleryLabel}</a></div>
             </div></section>
             <section class="section" id="join"><div class="container children-join">
                 <div><p class="section-eyebrow">${d.eyebrow}</p><h2 class="section-title">${d.joinTitle}</h2><p class="children-lead">${d.joinIntro}</p></div>
@@ -718,9 +699,6 @@ const HopeCenterRenderer = {
         if (!el) return;
         const d = CHURCH_DATA.hopeCenter;
         const officer = (CHURCH_DATA.officers || []).find(o => o.role === d.officerRole);
-        // 원본보다 큰 1440w 후보를 내지 않도록 실제 너비를 쓴다
-        const picture = (img, sizes, w = 1440, h = 960, eager = false) => `<img src="images/hopecenter/${img.src}.webp?v=${d.imageVersion}" srcset="images/hopecenter/${img.src}-sm.webp?v=${d.imageVersion} 720w, images/hopecenter/${img.src}.webp?v=${d.imageVersion} ${w}w" sizes="${sizes}" alt="${img.alt}" width="${w}" height="${h}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
-        const stepSize = { prayer: [960, 640], dishes: [1440, 960], handoff: [1055, 703] };
         el.innerHTML = `
             <div class="page-hero">
                 <p class="section-eyebrow">${d.heroEyebrow}</p>
@@ -728,7 +706,6 @@ const HopeCenterRenderer = {
                 <p>${d.summary}</p>
             </div>
             <section class="section hope-intro"><div class="container">
-                <figure class="hope-intro-photo">${picture(d.heroImage, '(max-width: 1040px) 100vw, 1000px', d.heroImage.width, d.heroImage.height, true)}</figure>
                 <p class="children-lead hope-intro-lead">${d.intro}</p>
                 <dl class="children-service-summary hope-facts">
                     ${d.facts.map(f => `<div><dt>${f.label}</dt><dd>${f.value}</dd></div>`).join('')}
@@ -736,13 +713,10 @@ const HopeCenterRenderer = {
             </div></section>
             <section class="section gc-section-alt hope-weekly" id="weekly"><div class="container">
                 <div class="children-story-heading"><p class="section-eyebrow">${d.weeklyEyebrow}</p><h2 class="section-title">${d.weeklyTitle}</h2><p class="children-lead">${d.weeklyIntro}</p></div>
-                <ol class="hope-steps">${d.steps.map((st, i) => {
-                    const [w, h] = stepSize[st.image.src] || [1440, 960];
-                    return `<li class="hope-step"><figure>${picture(st.image, '(max-width: 768px) 100vw, 33vw', w, h)}</figure><div class="hope-step-body"><span class="hope-step-num" aria-hidden="true">0${i + 1}</span><h3>${st.title}</h3><p>${st.desc}</p></div></li>`;
-                }).join('')}</ol>
+                <ol class="hope-steps">${d.steps.map((st, i) => `<li class="hope-step"><div class="hope-step-body"><span class="hope-step-num" aria-hidden="true">0${i + 1}</span><h3>${st.title}</h3><p>${st.desc}</p></div></li>`).join('')}</ol>
+                <div class="next-step-cta-actions"><a class="btn-next" href="gallery.html">${d.galleryLabel}</a></div>
             </div></section>
             <section class="section hope-history" id="history"><div class="container hope-history-inner">
-                <figure class="hope-history-photo">${picture(d.historyImage, '(max-width: 768px) 100vw, 50vw', 1280, 853)}<figcaption>${d.historyImage.caption}</figcaption></figure>
                 <div class="hope-history-body">
                     <p class="section-eyebrow">${d.historyEyebrow}</p>
                     <h2 class="section-title">${d.historyTitle}</h2>
@@ -1401,9 +1375,7 @@ const ClergyRenderer = {
             <div class="bishop-card">
                 <p class="bishop-eyebrow">Diocese of Seoul</p>
                 <div class="bishop-card-inner">
-                    ${bishop.photo
-                        ? `<div class="bishop-portrait-wrap"><img src="${bishop.photoThumb || bishop.photo}" data-full="${bishop.photo}" alt="${bishop.name} 주교 초상" class="bishop-portrait" loading="lazy"></div>`
-                        : `<div class="bishop-portrait-wrap bishop-portrait-fallback" aria-hidden="true">${icon('mitre')}</div>`}
+                    <div class="bishop-portrait-wrap bishop-portrait-fallback" aria-hidden="true">${icon('mitre')}</div>
                     <div class="bishop-card-body">
                         <p class="bishop-name">${bishop.name} 주교</p>
                         <p class="bishop-title">${bishop.title}</p>
@@ -1424,11 +1396,7 @@ const ClergyRenderer = {
                     if (isFirstPriest) firstPriestRendered = true;
                     return `
                     <div class="clergy-card" ${isFirstPriest ? 'id="priest"' : ''}>
-                        <div class="clergy-avatar${c.photo ? '' : ' clergy-avatar--fallback'}">
-                            ${c.photo
-                                ? `<img src="${c.photoThumb || c.photo}" data-full="${c.photo}" alt="${c.name} 사제" loading="lazy" class="clergy-avatar-img">`
-                                : icon('cross')}
-                        </div>
+                        <div class="clergy-avatar clergy-avatar--fallback" aria-hidden="true">${icon('cross')}</div>
                         <div>
                             <div class="clergy-name">${c.name} 사제</div>
                             <div class="clergy-title">${c.title}</div>
@@ -2227,62 +2195,6 @@ const PageSwitch = {
         }
         if (hash) App._scrollToHash(hash);
         else window.scrollTo({ top: 0, behavior: 'auto' });
-    }
-};
-
-/* ── Portrait Lightbox ───────────────────────────────────── */
-const PortraitLightbox = {
-    init() {
-        const overlay = document.createElement('div');
-        overlay.id = 'portrait-lightbox';
-        overlay.setAttribute('role', 'dialog');
-        overlay.setAttribute('aria-label', '초상 확대 보기');
-        overlay.setAttribute('aria-modal', 'true');
-        const img = document.createElement('img');
-        img.id = 'portrait-lightbox-img';
-        img.alt = '';
-        overlay.appendChild(img);
-        document.body.appendChild(overlay);
-
-        const SELECTOR = '.clergy-avatar-img, .bishop-portrait';
-        // 마우스 전용이던 확대를 키보드·스크린리더로도 열 수 있게 한다 (화면 모양은 그대로)
-        document.querySelectorAll(SELECTOR).forEach(el => {
-            if (el.tagName !== 'IMG') return;
-            el.tabIndex = 0;
-            el.setAttribute('role', 'button');
-            el.setAttribute('aria-label', `${el.alt} 확대 보기`);
-        });
-        overlay.tabIndex = -1;
-
-        let opener = null;
-        const open = (el) => {
-            opener = el;
-            img.src = el.dataset.full || el.src; // 목록은 작은 썸네일, 확대는 원본
-            img.alt = el.alt;
-            overlay.classList.add('is-open');
-            document.body.style.overflow = 'hidden';
-            overlay.focus();
-        };
-        const close = () => {
-            if (!overlay.classList.contains('is-open')) return;
-            overlay.classList.remove('is-open');
-            document.body.style.overflow = '';
-            if (opener) { opener.focus(); opener = null; }
-        };
-
-        overlay.addEventListener('click', close);
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') { close(); return; }
-            if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches(SELECTOR) && e.target.tagName === 'IMG') {
-                e.preventDefault();
-                open(e.target);
-            }
-        });
-
-        document.addEventListener('click', e => {
-            const el = e.target.closest(SELECTOR);
-            if (el && el.tagName === 'IMG') open(el);
-        });
     }
 };
 
@@ -3464,7 +3376,6 @@ const App = {
         ScrollProgress.init();
         PageSwitch.init();
         BackToTop.init();
-        PortraitLightbox.init();
         MenuOverlay.init();
         TapFeedback.init();
         PageTrail.init();

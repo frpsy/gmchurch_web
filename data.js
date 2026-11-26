@@ -137,42 +137,9 @@ const CHURCH_DATA = {
         "storyEyebrow": "활동 모습",
         "storyTitle": "아이들이 벽에 그린 그림",
         "storyIntro": "아이들이 직접 색을 골라 붓으로 벽에 그림을 그렸습니다.",
-        "photos": [
-            {
-                "src": "painting-joy",
-                "alt": "붓을 들고 벽화 앞에서 두 팔을 펼친 어린이",
-                "caption": "붓을 들고 웃는 아이"
-            },
-            {
-                "src": "painting-together",
-                "alt": "여러 색으로 칠한 벽에 붓질하는 어린이",
-                "caption": "벽에 색을 칠하는 아이"
-            },
-            {
-                "src": "mural-church",
-                "alt": "푸른 하늘과 초록 들판 위에 그린 작은 교회 벽화",
-                "caption": "하늘과 들판 위의 교회 그림"
-            },
-            {
-                "src": "mural-angel",
-                "alt": "여러 색의 바탕 위에 천사와 교회를 그린 벽화",
-                "caption": "천사와 교회를 그린 벽화"
-            }
-        ],
         "cardTitle": "사제님께 드린 카드",
         "cardIntro": "어린이 예배 아이들이 직접 쓰고 그린 카드를 민숙희 사제님께 전했습니다.",
-        "cardPhotos": [
-            {
-                "src": "card-presenting",
-                "alt": "분홍색 카드를 사제님께 건네는 두 어린이의 뒷모습",
-                "caption": "사제님께 카드를 전하는 아이들"
-            },
-            {
-                "src": "card-note",
-                "alt": "손글씨와 교회 그림으로 채운 분홍색 카드",
-                "caption": "아이들이 쓰고 그린 카드"
-            }
-        ],
+        "galleryLabel": "어린이 예배 사진 보기",
         "joinTitle": "참여 안내",
         "placeLabel": "장소",
         "place": "교육관",
@@ -191,13 +158,11 @@ const CHURCH_DATA = {
 
     // 광명 희망터(hopecenter.html) — 소개문은 교회 제공 원문(2026-10-21)
     hopeCenter: {
-        // 사진을 같은 이름으로 교체하면 값을 바꿔 브라우저 캐시를 무효화한다
-        imageVersion: "20261021c",
         heroEyebrow: "Community Ministry",
         title: "광명 희망터",
         summary: "지역의 소외된 이웃과 함께하는 나눔 사역",
         intro: "광명교회는 2004년 3월, 하느님의 사랑을 실천하고 이웃의 필요에 귀 기울이기 위해 부설기관인 광명희망터를 설립하였습니다.",
-        heroImage: { src: "kitchen", alt: "희망터 주방에서 고개 숙여 기도하는 봉사자 세 사람", width: 1440, height: 665 },
+        galleryLabel: "희망터 활동 사진 보기",
         facts: [
             { label: "설립", value: "2004년 3월" },
             { label: "지원", value: "10가정" },
@@ -207,14 +172,13 @@ const CHURCH_DATA = {
         weeklyTitle: "토요일의 나눔",
         weeklyIntro: "광명희망터는 홀로 사는 어르신과 장애인 가정 등 모두 10가정에 반찬을 전합니다. 매주 토요일 봉사자들이 모여 반찬을 만들고 각 가정에 직접 배달합니다.",
         steps: [
-            { title: "한자리에 모입니다", desc: "매주 토요일, 봉사자들이 희망터 주방에 모입니다.", image: { src: "prayer", alt: "주방 조리대 앞에서 두 손을 모으고 기도하는 봉사자들" } },
-            { title: "반찬을 조리합니다", desc: "이웃 가정에 드릴 반찬을 정성껏 만듭니다.", image: { src: "dishes", alt: "용기에 나누어 담은 오이부추무침과 양념장에 담근 달걀" } },
-            { title: "가정에 전합니다", desc: "만든 반찬을 각 가정에 직접 배달합니다.", image: { src: "handoff", alt: "봉사자가 이웃에게 반찬 봉투를 건네는 모습" } }
+            { title: "한자리에 모입니다", desc: "매주 토요일, 봉사자들이 희망터 주방에 모입니다." },
+            { title: "반찬을 조리합니다", desc: "이웃 가정에 드릴 반찬을 정성껏 만듭니다." },
+            { title: "가정에 전합니다", desc: "만든 반찬을 각 가정에 직접 배달합니다." }
         ],
         historyEyebrow: "Our Journey",
         historyTitle: "걸어온 길",
         historyIntro: "광명희망터는 어르신 일자리 사업과 노숙인 급식 사업을 해 왔습니다. 홀로 사는 어르신에게 반찬도 전해 왔습니다.",
-        historyImage: { src: "delivery", alt: "나눔 물품 상자를 가득 실은 차량 앞에 선 봉사자 세 사람", caption: "나눔 물품을 싣고" },
         programs: [
             { title: "노인 일자리 사업", icon: "people" },
             { title: "노숙인 급식 사업", icon: "bowl" },
@@ -239,11 +203,6 @@ const CHURCH_DATA = {
     home: {
         heroActions: [
             { label: "처음 오셨나요?", href: "newcomer.html", primary: true }
-        ],
-        quickLinks: [
-            { label: "주일 예배", href: "worship.html", worshipTime: true },
-            { label: "오시는 길", href: "visit.html", detail: "교통·주차" },
-            { label: "이번 주 주보", href: "bulletin.html", detail: "이미지·PDF" }
         ],
         about: {
             title: "광명교회",
@@ -275,7 +234,6 @@ const CHURCH_DATA = {
         },
         visit: {
             title: "방문 안내",
-            worshipLabel: "예배",
             phoneLabel: "전화"
         }
     },
@@ -1559,7 +1517,7 @@ const CHURCH_DATA = {
     // 사진 갤러리 (gallery.html)
     photoGallery: {
         intro: "예배, 공동체 모임, 교회 풍경 등 광명교회의 순간들을 모았습니다.",
-        categories: ["전체", "예배", "공동체", "교회 풍경"],
+        categories: ["전체", "예배", "공동체", "교회 풍경", "섬기는 이들"],
         photos: [
             {
                 id: "p01",
@@ -1670,6 +1628,86 @@ const CHURCH_DATA = {
                 src: "images/gallery/community/agape-vegan-jjajang.webp",
                 thumb: "images/gallery/community/agape-vegan-jjajang-thumb.webp",
                 alt: "비건(채식) 짜장과 논-비건(채식X) 짜장 안내문이 놓인 애찬 배식대"
+            },
+            {
+                "id": "children-painting-joy",
+                "title": "붓을 들고 웃는 아이",
+                "desc": "",
+                "category": "공동체",
+                "date": "",
+                "src": "images/children/painting-joy.webp",
+                "thumb": "images/children/painting-joy-sm.webp",
+                "alt": "붓을 들고 벽화 앞에서 두 팔을 펼친 어린이"
+            },
+            {
+                "id": "children-card-presenting",
+                "title": "사제님께 카드를 전하는 아이들",
+                "desc": "",
+                "category": "공동체",
+                "date": "",
+                "src": "images/children/card-presenting.webp",
+                "thumb": "images/children/card-presenting-sm.webp",
+                "alt": "분홍색 카드를 사제님께 건네는 두 어린이의 뒷모습"
+            },
+            {
+                "id": "children-card-note",
+                "title": "아이들이 쓰고 그린 카드",
+                "desc": "",
+                "category": "공동체",
+                "date": "",
+                "src": "images/children/card-note.webp",
+                "thumb": "images/children/card-note-sm.webp",
+                "alt": "손글씨와 교회 그림으로 채운 분홍색 카드"
+            },
+            {
+                "id": "hope-kitchen",
+                "title": "희망터 주방",
+                "desc": "",
+                "category": "공동체",
+                "date": "",
+                "src": "images/hopecenter/kitchen.webp",
+                "thumb": "images/hopecenter/kitchen-sm.webp",
+                "alt": "희망터 주방에서 고개 숙여 기도하는 봉사자 세 사람"
+            },
+            {
+                "id": "hope-handoff",
+                "title": "가정에 전합니다",
+                "desc": "",
+                "category": "공동체",
+                "date": "",
+                "src": "images/hopecenter/handoff.webp",
+                "thumb": "images/hopecenter/handoff-sm.webp",
+                "alt": "봉사자가 이웃에게 반찬 봉투를 건네는 모습"
+            },
+            {
+                "id": "clergy-1",
+                "title": "민숙희(마가렛) 사제",
+                "desc": "",
+                "category": "섬기는 이들",
+                "date": "",
+                "src": "images/clergy/priest-portrait.jpg",
+                "thumb": "images/clergy/priest-portrait-450.jpg",
+                "alt": "민숙희(마가렛) 사제 초상"
+            },
+            {
+                "id": "clergy-2",
+                "title": "이남호(사도요한) 사제",
+                "desc": "",
+                "category": "섬기는 이들",
+                "date": "",
+                "src": "images/clergy/priest-portrait-2.jpg",
+                "thumb": "images/clergy/priest-portrait-2-450.jpg",
+                "alt": "이남호(사도요한) 사제 초상"
+            },
+            {
+                "id": "diocesan-bishop",
+                "title": "김장환(엘리야) 주교",
+                "desc": "",
+                "category": "섬기는 이들",
+                "date": "",
+                "src": "images/clergy/bishop-portrait.jpg",
+                "thumb": "images/clergy/bishop-portrait-450.jpg",
+                "alt": "김장환(엘리야) 주교 초상"
             }
         ]
     },
