@@ -41,15 +41,12 @@ describe('다음 걸음 영역', () => {
         }
     });
 
-    it('제목은 한 줄 남짓(22자 이하), 설명은 휴대폰 두 줄 이내(40자 이하)이고 페이지마다 다르다', () => {
+    it('제목이 페이지마다 다르다', () => {
         const pages = Object.entries(nextStep.pages);
         for (const [k, p] of pages) {
             expect(p.title.length, k).toBeLessThanOrEqual(22);
-            expect(p.desc.length, k).toBeLessThanOrEqual(40);
         }
         const titles = pages.map(([, p]) => p.title);
-        const descs = pages.map(([, p]) => p.desc);
         expect(new Set(titles).size).toBe(titles.length);
-        expect(new Set(descs).size).toBe(descs.length);
     });
 });

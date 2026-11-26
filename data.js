@@ -915,22 +915,22 @@ const CHURCH_DATA = {
             smallgroup:  { label: "소그룹 모임",     icon: "footsteps",   href: "smallgroup.html" }
         },
         pages: {
-            bulletin:    { title: "주보와 함께 예배를 준비하세요",     desc: "감사성찬례 순서를 미리 살펴보시면 예배가 한결 편안합니다.", actions: ["eucharist", "calendar"] },
-            clergy:      { title: "주일 예배에서 뵙겠습니다",          desc: "주일 오전 11시 감사성찬례에 누구나 함께하실 수 있습니다.", actions: ["worship", "newcomer", "visit"] },
-            community:   { title: "공동체의 자리에 함께하세요",        desc: "주일 예배에서 교우들을 만나고 마음이 가는 모임을 찾아보세요.", actions: ["worship", "smallgroup", "greenchurch"] },
-            emmaus:      { title: "신앙의 여정을 함께 걷습니다",       desc: "다른 소그룹 모임과 주일 예배에도 함께하실 수 있습니다.", actions: ["community", "newcomer", "worship"] },
-            faq:         { title: "궁금한 점이 남으셨나요?",           desc: "궁금하신 점은 언제든 편히 문의해 주세요.", actions: ["contact", "about"] },
-            gallery:     { title: "사진 속 자리에 함께하세요",         desc: "주일 오전 11시 감사성찬례에 누구나 오실 수 있습니다.", actions: ["newcomer", "worship", "visit"] },
-            giving:      { title: "헌금은 공동체의 삶으로 이어집니다", desc: "보내 주신 정성은 예배와 이웃을 돌보는 일에 쓰입니다.", actions: ["worship", "community"] },
-            greenchurch: { title: "작은 실천으로 창조세계를 돌봅니다", desc: "비건 애찬과 창조절 기도에 함께하실 수 있습니다.", actions: ["worship", "contact"] },
-            links:       { title: "광명교회의 실천도 함께 보세요",     desc: "함께하는 기관과 이어 온 녹색교회 활동을 소개합니다.", actions: ["greenchurch", "worship"] },
-            media:       { title: "예배에서 직접 만나 뵙겠습니다",     desc: "주일 감사성찬례와 공동체 모임에는 누구나 오실 수 있습니다.", actions: ["newcomer", "community", "worship"] },
-            newcomer:    { title: "예배에서 뵙겠습니다",               desc: "방문 전에 예배 순서와 오시는 길을 미리 살펴보세요.", actions: ["worship", "visit"] },
-            smallgroup:  { title: "소그룹에 함께하세요",               desc: "참여하고 싶거나 궁금한 점이 있으면 문의해 주세요.", actions: ["contact", "community"] },
-            sundays:     { title: "교회력을 따라 함께 예배합니다",     desc: "주일마다 감사성찬례에서 절기의 의미를 새깁니다.", actions: ["worship", "newcomer", "visit"] },
-            videos:      { title: "영상으로 만난 예배에 직접 함께하세요", desc: "매주 주일 오전 11시에 감사성찬례를 드립니다.", actions: ["newcomer", "community", "worship"] },
-            visit:       { title: "주일에 반갑게 맞이하겠습니다",      desc: "예배 참여 방법과 전례는 처음 오신 분 안내에 있습니다.", actions: ["newcomer", "worship"] },
-            worship:     { title: "방문 전에 살펴보세요",              desc: "교회 위치와 주차 안내는 오시는 길에서 확인하실 수 있습니다.", actions: ["visit", "newcomer"] }
+            bulletin:    { title: "주보와 함께 예배를 준비하세요",     actions: ["eucharist", "calendar"] },
+            clergy:      { title: "주일 예배에서 뵙겠습니다",          actions: ["worship", "newcomer", "visit"] },
+            community:   { title: "공동체의 자리에 함께하세요",        actions: ["worship", "smallgroup", "greenchurch"] },
+            emmaus:      { title: "신앙의 여정을 함께 걷습니다",       actions: ["community", "newcomer", "worship"] },
+            faq:         { title: "궁금한 점이 남으셨나요?",           actions: ["contact", "about"] },
+            gallery:     { title: "사진 속 자리에 함께하세요",         actions: ["newcomer", "worship", "visit"] },
+            giving:      { title: "헌금은 공동체의 삶으로 이어집니다", actions: ["worship", "community"] },
+            greenchurch: { title: "작은 실천으로 창조세계를 돌봅니다", actions: ["worship", "contact"] },
+            links:       { title: "광명교회의 실천도 함께 보세요",     actions: ["greenchurch", "worship"] },
+            media:       { title: "예배에서 직접 만나 뵙겠습니다",     actions: ["newcomer", "community", "worship"] },
+            newcomer:    { title: "예배에서 뵙겠습니다",               actions: ["worship", "visit"] },
+            smallgroup:  { title: "소그룹에 함께하세요",               actions: ["contact", "community"] },
+            sundays:     { title: "교회력을 따라 함께 예배합니다",     actions: ["worship", "newcomer", "visit"] },
+            videos:      { title: "영상으로 만난 예배에 직접 함께하세요", actions: ["newcomer", "community", "worship"] },
+            visit:       { title: "주일에 반갑게 맞이하겠습니다",      actions: ["newcomer", "worship"] },
+            worship:     { title: "방문 전에 살펴보세요",              actions: ["visit", "newcomer"] }
         }
     },
     sns: {

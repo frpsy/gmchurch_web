@@ -2999,7 +2999,6 @@ const NextStepRenderer = {
                 <div class="container">
                     <p class="next-step-cta-eyebrow">${p.eyebrow || d.eyebrow}</p>
                     <h2 class="next-step-cta-title" id="next-step-title">${p.title}</h2>
-                    <p class="next-step-cta-desc">${p.desc}</p>
                     <div class="next-step-cta-actions">${actions}</div>
                 </div>`;
         });
