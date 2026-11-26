@@ -2129,7 +2129,7 @@ const PageSwitch = {
         return this._request?.file;
     },
 
-    _cancel() {
+    cancel() {
         this._request?.controller.abort();
         this._request = null;
     },
@@ -2145,7 +2145,7 @@ const PageSwitch = {
             if (!this._ROUTES[file]) return;
             e.preventDefault();
             if (file === this._file(location.pathname)) {
-                this._cancel();
+                this.cancel();
                 return;
             }
             this.go(file + url.hash, true);
@@ -2153,7 +2153,7 @@ const PageSwitch = {
         window.addEventListener('popstate', () => {
             const file = this._file(location.pathname);
             if (this._ROUTES[file]) this.go(file + location.hash, false);
-            else this._cancel();
+            else this.cancel();
         });
     },
 
@@ -2161,7 +2161,7 @@ const PageSwitch = {
         const file = target.split('#')[0];
         const hash = target.includes('#') ? '#' + target.split('#')[1] : '';
         // 연속 입력이나 뒤로 가기 뒤에 늦게 도착한 응답이 화면을 덮지 않게 한다.
-        this._cancel();
+        this.cancel();
         if (!this._ROUTES[file]) { location.href = target; return; }
         const controller = new AbortController();
         const request = { file, controller };
@@ -2199,29 +2199,35 @@ const PageSwitch = {
     }
 };
 
-/* ── SwipeTabs — 모바일에서 관련 페이지의 본문을 좌우로 넘긴다 ────── */
-const SwipeTabs = {
+/* ── SwipeNavigation — 본문은 상위 메뉴, 탭은 관련 페이지 사이 이동 ── */
+const SwipeNavigation = {
     init() {
         const mobile = window.matchMedia('(max-width: 768px)');
+        const viewport = window.visualViewport;
+        const isZoomed = () => viewport?.scale > 1.02;
+        const syncZoom = () => document.documentElement.classList.toggle('swipe-zoomed', isZoomed());
+        viewport?.addEventListener('resize', syncZoom, { passive: true });
+        syncZoom();
         const controls = 'a, button, summary, input, select, textarea, label, iframe, video, audio, [contenteditable], [role="button"], [role="dialog"], .shorts-track';
         let start = null;
         document.addEventListener('touchstart', event => {
             start = null;
-            if (!mobile.matches || event.touches.length !== 1) return;
+            if (!mobile.matches || event.touches.length !== 1 || isZoomed()) return;
             const target = event.target;
-            const nav = target.closest('main')?.querySelector('nav[data-swipe-tabs]');
+            if (!target.closest('main')) return;
+            const tabs = target.closest('nav[data-swipe-tabs]');
+            const nav = tabs || document.getElementById('nav-menu');
             if (!nav) return;
-            const onTab = nav.contains(target);
-            if (onTab) {
+            if (tabs) {
                 const strip = nav.querySelector('.container') || nav;
                 if (strip.scrollWidth > strip.clientWidth + 1) return;
-            } else if (target.closest(controls)) {
+            } else if (target.closest('nav') || target.closest(controls) || !nav.querySelector('.nav-link[aria-current="page"]')) {
                 return;
             }
             const { clientX, clientY, identifier } = event.touches[0];
             // 화면 양끝은 브라우저의 뒤로/앞으로 가기 조작 영역으로 남긴다.
             if (clientX < 24 || clientX > window.innerWidth - 24) return;
-            start = { nav, onTab, clientX, clientY, identifier };
+            start = { nav, onTabs: Boolean(tabs), clientX, clientY, identifier };
         }, { passive: true });
 
         document.addEventListener('touchmove', event => {
@@ -2245,13 +2251,17 @@ const SwipeTabs = {
             if (Math.abs(dx) < 52 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
 
             // 탭에 닿은 스와이프가 시작 위치의 링크 클릭으로 이어지지 않게 한다.
-            if (origin.onTab && event.cancelable) event.preventDefault();
-            const links = Array.from(origin.nav.querySelectorAll('a[href]'));
-            const pending = PageSwitch.pendingFile();
+            if (origin.onTabs && event.cancelable) event.preventDefault();
+            const selector = origin.onTabs ? 'a[href]' : ':scope > .nav-item > .nav-link';
+            const links = Array.from(origin.nav.querySelectorAll(selector));
+            const pending = origin.onTabs && PageSwitch.pendingFile();
             const current = links.findIndex(link => pending
                 ? link.getAttribute('href') === pending
                 : link.getAttribute('aria-current') === 'page');
-            if (current !== -1) links[current + (dx < 0 ? 1 : -1)]?.click();
+            const next = current === -1 ? null : links[current + (dx < 0 ? 1 : -1)];
+            if (!next) return;
+            if (!origin.onTabs) PageSwitch.cancel();
+            next.click();
         }, { passive: false });
     }
 };
@@ -3414,7 +3424,7 @@ const App = {
         ScrollReveal.init();
         ScrollProgress.init();
         PageSwitch.init();
-        SwipeTabs.init();
+        SwipeNavigation.init();
         BackToTop.init();
         MenuOverlay.init();
         TapFeedback.init();
