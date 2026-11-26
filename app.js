@@ -2386,7 +2386,10 @@ const SwipeNavigation = {
         const current = links.findIndex(link => pending
             ? link.getAttribute('href') === pending
             : link.getAttribute('aria-current') === 'page');
-        return current < 0 ? null : links[current + (dx < 0 ? 1 : -1)];
+        if (current < 0) return null;
+        // 첫 메뉴(교회 소개)에서 오른쪽으로 밀면 홈으로 돌아간다. 홈에서 왼쪽으로 밀면 첫 메뉴로 가는 것과 짝.
+        if (!onTabs && current === 0 && dx > 0) return document.querySelector('a.nav-logo[href]');
+        return links[current + (dx < 0 ? 1 : -1)];
     },
 
     warm() {

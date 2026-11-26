@@ -14,6 +14,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         getAttribute: name => name === 'aria-current' && !home && index === currentIndex ? 'page' : null,
         click: vi.fn(),
     }));
+    const homeLink = { href: 'https://site.test/index.html', isConnected: true, getAttribute: () => null, click: vi.fn() };
     const nav = {
         isConnected: true,
         clientWidth: 390,
@@ -35,6 +36,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         body: { classList: { contains: name => name === 'home' && home } },
         documentElement: { classList: { toggle() {} } },
         getElementById: () => nav,
+        querySelector: selector => selector === 'a.nav-logo[href]' ? homeLink : null,
         addEventListener: (type, fn) => listeners.set(type, fn),
     };
     let scheduledFrame;
@@ -67,7 +69,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         callback?.();
     };
     return {
-        main, links, touch, animation, frame, requestAnimationFrame, nav,
+        main, links, touch, animation, frame, requestAnimationFrame, nav, homeLink,
         storage: context.sessionStorage, listeners, context,
     };
 }
@@ -149,6 +151,32 @@ it('opens the first main menu from the homepage', () => {
     touch('touchend', 150);
     expect(main.animate).not.toHaveBeenCalled();
     expect(links[0].click).toHaveBeenCalledOnce();
+});
+
+it('returns to the homepage when swiping right on the first main menu', () => {
+    const { main, links, touch, frame, context } = setup({ currentIndex: 0 });
+    const page = runInContext('PageSwitch', context);
+    page.go = vi.fn().mockResolvedValue(undefined);
+    page.preload = vi.fn();
+    touch('touchstart', 150);
+    touch('touchmove', 240);
+    frame();
+    expect(parseFloat(main.style.translate)).toBeGreaterThan(50);
+    touch('touchend', 240);
+    expect(page.go).toHaveBeenCalledWith('index.html', true);
+    expect(links[1].click).not.toHaveBeenCalled();
+});
+
+it('keeps tab strips from jumping to the homepage', () => {
+    const { homeLink, touch, frame, context } = setup({ onTabs: true, currentIndex: 0 });
+    const page = runInContext('PageSwitch', context);
+    page.go = vi.fn().mockResolvedValue(undefined);
+    touch('touchstart', 150);
+    touch('touchmove', 240);
+    frame();
+    touch('touchend', 240);
+    expect(homeLink.click).not.toHaveBeenCalled();
+    expect(page.go).not.toHaveBeenCalled();
 });
 
 it('paints only the latest position in each frame and keeps tracking past a quarter screen', () => {
