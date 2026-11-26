@@ -583,7 +583,7 @@ const IndexRenderer = {
 
         el.innerHTML = `
             <h3>${t.title} · <span class="nowrap">${dateStr}</span> ${s.koreanName}</h3>
-            <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.color};--season-ink:${season.ink || season.color}"><span class="season-dot"></span>${icon(season.symbol)}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">전례색 ${season.colorName}</span></span></div>
+            <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.dayColor};--season-ink:${season.dayInk || season.dayColor}"><span class="season-dot"></span>${icon(season.symbol)}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">전례색 ${season.dayColorName}</span></span></div>
             ${rows}
         `;
         el.hidden = false;
@@ -3330,10 +3330,11 @@ const SundaysRenderer = {
         const pentecost = add(easter, 49);
         const advent     = LiturgicalCalendar.adventStart(advYear);
         const nextAdvent = LiturgicalCalendar.adventStart(ny);
+        const baptism    = LiturgicalCalendar.baptismOfLord(ny);
         return {
             advent:    `${advYear}년 ${fmt(advent)} ~ 12월 24일`,
-            christmas: `${advYear}년 12월 25일 ~ ${ny}년 1월 5일`,
-            epiphany:  `${ny}년 1월 6일 ~ ${fmt(add(ashWed, -1))}`,
+            christmas: `${advYear}년 12월 25일 ~ ${ny}년 ${fmt(add(baptism, -1))}`,
+            epiphany:  `${ny}년 ${fmt(baptism)} ~ ${fmt(add(ashWed, -1))}`,
             lent:      `${fmt(ashWed)} ~ ${fmt(add(palmSun, -1))}`,
             holyweek:  `${fmt(palmSun)} ~ ${fmt(add(easter, -1))}`,
             easter:    `${fmt(easter)} ~ ${fmt(add(pentecost, -1))}`,
@@ -3504,7 +3505,7 @@ const SundaysRenderer = {
                 ? ` aria-label="${n}일 ${label}" title="${label}"`
                 : ` aria-label="${n}일"`;
             cells.push(`
-                <div class="${cls}" style="background:${season.color}${alpha};"${aria}>
+                <div class="${cls}" style="background:${season.dayColor}${alpha};"${aria}>
                     <span class="lit-cal-num">${n}${secondary ? '<span class="lit-cal-commemoration-dot" aria-hidden="true"></span>' : ''}</span>
                     ${primary ? `<span class="lit-cal-label">${primary}</span>` : ''}
                 </div>`);
