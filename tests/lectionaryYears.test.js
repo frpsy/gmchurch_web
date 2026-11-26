@@ -11,17 +11,17 @@ const read = f => JSON.parse(readFileSync(join(__dirname, '..', 'data', f), 'utf
 const files = STANDARD_FILES.map(read);
 const all = mergeStandards(files);
 
-it('교회력 달력은 전례독서의 대림 제1주일을 추모 주일보다 먼저 표시한다', () => {
+it('교회력 달력은 전례독서의 대림 1주일을 추모 주일보다 먼저 표시한다', () => {
     const sandbox = createContext({ window: { addEventListener() {} }, LiturgicalCalendar });
     runInContext(readFileSync(join(__dirname, '..', 'app.js'), 'utf-8'), sandbox);
     const sunday = files.flatMap(file => file.sundays).find(entry => entry.date === '2026-11-29');
     const renderer = runInContext('SundaysRenderer', sandbox);
     const html = renderer._monthlyGrid(2026, 10, renderer._specialDates(2026),
         new Map([[sunday.date, sunday.koreanName]]));
-    expect(html).toContain('aria-label="29일 대림 제1주일 · 에이즈 추모 주일"');
-    const cell = html.match(/aria-label="29일 대림 제1주일[^>]*>([\s\S]*?)<\/div>/)[1];
+    expect(html).toContain('aria-label="29일 대림 1주일 · 에이즈 추모 주일"');
+    const cell = html.match(/aria-label="29일 대림 1주일[^>]*>([\s\S]*?)<\/div>/)[1];
     expect(cell).toContain('lit-cal-commemoration-dot');
-    expect(cell).toContain('<span class="lit-cal-label">대림 제1주일</span>');
+    expect(cell).toContain('<span class="lit-cal-label">대림 1주일</span>');
     expect(cell).not.toContain('에이즈 추모 주일');
     expect(html).toContain('29일 에이즈 추모 주일</li>');
 });
@@ -61,31 +61,31 @@ describe('표준 전례독서 연도 파일', () => {
         }
     });
 
-    it('각 연도는 대림 제1주일로 시작해 왕이신 그리스도 주일로 끝난다', () => {
+    it('각 연도는 대림 1주일로 시작해 왕이신 그리스도 주일로 끝난다', () => {
         for (const f of files) {
-            expect(f.sundays[0].koreanName, f.year).toBe('대림 제1주일');
+            expect(f.sundays[0].koreanName, f.year).toBe('대림 1주일');
             expect(f.sundays.at(-1).koreanName, f.year).toBe('왕이신 그리스도 주일');
         }
     });
 });
 
 describe('나해(B년) 표본 검증', () => {
-    it('2026-11-29 대림 제1주일은 나해다', () => {
+    it('2026-11-29 대림 1주일은 나해다', () => {
         const r = resolveReadings(all, {}, '2026-11-29');
         expect(r.year).toBe('B');
         expect(r.first).toBe('이사야 64:1-9');
         expect(r.gospel).toBe('마르코 13:24-37');
     });
 
-    it('2027-03-28 부활 주일', () => {
+    it('2027-03-28 부활주일', () => {
         const s = all.find(x => x.date === '2027-03-28');
-        expect(s.koreanName).toBe('부활 주일');
+        expect(s.koreanName).toBe('부활주일');
         expect(s.readings.gospel).toBe('요한 20:1-18');
     });
 
-    it('연중 주일은 연속(A)·짝(B) 두 트랙을 모두 가진다 (2027-07-04, 연중 제14주일)', () => {
+    it('연중 주일은 연속(A)·짝(B) 두 트랙을 모두 가진다 (2027-07-04, 연중 14주일)', () => {
         const s = all.find(x => x.date === '2027-07-04');
-        expect(s.koreanName).toBe('연중 제14주일');
+        expect(s.koreanName).toBe('연중 14주일');
         expect(s.readings.firstReadingA).toBe('사무엘하 5:1-5, 9-10');
         expect(s.readings.firstReadingB).toBe('에제키엘 2:1-5');
     });

@@ -3077,8 +3077,7 @@ const SundaysRenderer = {
             const refresh = this._bindCalNav(monthlyEl, sundayNames);
             readings.then(sundays => {
                 if (!monthlyEl.isConnected) return;
-                sundays.forEach(sunday => sundayNames.set(sunday.date,
-                    sunday.bulletinReadings ? sunday.anglicanName : sunday.koreanName));
+                sundays.forEach(sunday => sundayNames.set(sunday.date, sunday.standardName || sunday.koreanName));
                 refresh();
             });
         }
@@ -3125,8 +3124,10 @@ const SundaysRenderer = {
             if (o.psalm && !o.readings) s.readings.psalm = o.psalm;
             if (o.readings) {
                 s.bulletinReadings = true;
-                s.anglicanName = s.koreanName;           // 표준 주일명은 부제로 이동
-                if (o.koreanName) s.koreanName = o.koreanName;
+                if (o.koreanName) {                      // 특별 주일명을 쓰고 표준 주일명은 부제로 이동
+                    s.standardName = s.koreanName;
+                    s.koreanName = o.koreanName;
+                }
                 s.readings = {
                     firstReadingA: o.readings.firstReading,
                     psalm: o.readings.psalm,
@@ -3259,7 +3260,7 @@ const SundaysRenderer = {
             <div class="lectionary-card-head">
                 <p class="lectionary-card-label">${({A:'가해(A년)',B:'나해(B년)',C:'다해(C년)'})[s.year] || s.year} · ${dateStr}</p>
                 <p class="lectionary-card-week">${s.koreanName}</p>
-                ${s.anglicanName && !s.anglicanName.includes('성령강림 후') ? `<p class="lectionary-card-meta">${s.anglicanName}</p>` : ''}
+                ${s.standardName ? `<p class="lectionary-card-meta">${s.standardName}</p>` : ''}
             </div>
             ${toggle}
             <div class="lectionary-card-body">${rows}</div>
@@ -3362,17 +3363,17 @@ const SundaysRenderer = {
         const map = {};
         const set = (d, label) => { map[key(d)] = label; };
 
-        set(new Date(year, 0, 6),   '공현절');                             // 1/6
+        set(new Date(year, 0, 6),   '공현일');                             // 1/6
         set(nthWd(year, 2, 5, 1),   '세계기도일');                         // 3월 첫째 금요일
-        set(add(easter, -7),         '종려주일');                           // 성주간 시작
+        set(add(easter, -7),         '고난주일(성지주일)');                 // 성주간 시작
         set(easter,                  '부활주일');
-        set(add(easter, 42),         '승천주일');                           // easter+39=목요일, 주일 관행=+42
-        set(add(pentecost, 7),       '성삼위일체 주일');                    // 성령강림 다음 주일
+        set(add(easter, 42),         '승천일(옮겨 지킴)');                  // easter+39=목요일, 기도서: 부활 7주일로 옮길 수 있음
+        set(add(pentecost, 7),       '삼위일체 주일');                      // 성령강림 다음 주일
         set(nthWd(year, 5, 0, 1),   '환경주일');                           // 6월 첫째 주일
         /* 창조절: 9/1~10/4의 모든 주일 */
         let d = nthWd(year, 8, 0, 1);
         while (d <= new Date(year, 9, 4)) { set(d, '창조절'); d = add(d, 7); }
-        set(sunOnAfter(new Date(year, 9, 30)), '모든 성인 주일');          // 10/30~11/5 사이 주일
+        set(sunOnAfter(new Date(year, 9, 30)), '모든 성인의 날');          // 10/30~11/5 사이 주일
         set(add(advent, -7),         '왕이신 그리스도 주일');               // 대림절 직전 주일
         set(nearSun(new Date(year, 11, 1)), '에이즈 추모 주일');            // 12/1 인근 주일
 
@@ -3485,7 +3486,7 @@ const SundaysRenderer = {
             const isToday = n === todayDate;
             const isPast  = date < todayStart;
             const special = specialMap[key(date)];
-            const sunday = sundayNames.get(key(date)) || (date.getTime() === adventStart ? '대림 제1주일' : '');
+            const sunday = sundayNames.get(key(date)) || (date.getTime() === adventStart ? '대림 1주일' : '');
             const primary = sunday || special;
             const secondary = sunday && commemorations.has(special) ? special : '';
             if (secondary) {
