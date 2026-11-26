@@ -689,6 +689,8 @@ main:has(.page-hero) {
 }
 .section-header { margin-bottom: clamp(1.25rem, 3vw, 2rem); text-align: center; }
 .section-header .section-sub { margin-inline: auto; }
+/* 세 문장 이상 설명을 담은 구역 소개: 한 줄이면 가운데, 여러 줄이면 왼쪽(docs/dev-guide.md 정렬 규칙 3) */
+.section-header .section-sub--read { width: fit-content; max-width: var(--content-read); text-align: start; }
 .liturgy-section > :is(.section-eyebrow, .section-title) { text-align: center; }
 /* 서브 문구가 없는 헤더는 본문과의 간격을 줄여 리듬 정돈 */
 .section-header:not(:has(.section-sub)) { margin-bottom: var(--space-6); }
