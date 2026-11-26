@@ -54,7 +54,8 @@ lmkhkm/GMSKH_Homepage  main
 # 개발 저장소 클론 안에서 (공식 저장소 push 권한 필요)
 scripts/release-official.sh
 # → 공식 저장소에 merge/official-YYYYMMDD-HHMM 브랜치를 올림
-# → 안내되는 주소에서 PR을 만들고 머지
+# → 안내되는 주소에서 PR을 만든 뒤 아래로 머지(test 통과·충돌 없음 확인 후에만 머지)
+scripts/merge-when-green.sh <PR번호> lmkhkm/GMSKH_Homepage
 ```
 
 스크립트가 하는 일 (손으로 할 때도 같은 순서):
@@ -65,7 +66,7 @@ scripts/release-official.sh
 4. 개발 `robots.txt`(검색 차단)를 `scripts/robots.official.txt`로 바꾼 뒤 `node scripts/set-site-url.js https://gmskh.or.kr`로 HTML·sitemap·robots의 절대주소를 공식 도메인으로 바꾼다. 공식 robots가 검색을 막고 있으면 스크립트가 멈춘다
 5. 루트 `.html`·`.xml`·`.txt`에 `frpsy.github.io/gmchurch_web`이 남지 않았는지 확인한다
 6. `npm ci && npm test`가 통과해야 커밋·push 한다
-7. PR 머지 → 공식 저장소 cache-bust가 `?v=` 갱신 → 2시간 안에 서버가 받아 감
+7. `scripts/merge-when-green.sh <PR번호> lmkhkm/GMSKH_Homepage`로 머지한다. `test` 검사가 뜨고 통과할 때까지 기다리고, 충돌이면 머지하지 않고 멈춘다(종료 코드 3 → PR을 닫고 이 스크립트를 다시 실행) → 공식 저장소 cache-bust가 `?v=` 갱신 → 2시간 안에 서버가 받아 감
 
 ### 매번 생기는 충돌 (정상)
 
