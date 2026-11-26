@@ -2115,6 +2115,7 @@ const ScrollProgress = {
 // 같은 메뉴 묶음의 두 페이지를 상단 버튼으로 오갈 때 쓴다. 링크의 새 페이지를 받아
 // <main>만 바꿔 끼우고, 그 페이지의 렌더러를 다시 돌린다. 주소와 뒤로 가기도 따라간다.
 const PageSwitch = {
+    _request: null,
     _ROUTES: {
         'bulletin.html': hash => BulletinRenderer.render(hash),
         'news.html': hash => NewsRenderer.render(hash),
@@ -2122,6 +2123,15 @@ const PageSwitch = {
 
     _file(href) {
         return href.split('/').pop() || 'index.html';
+    },
+
+    pendingFile() {
+        return this._request?.file;
+    },
+
+    _cancel() {
+        this._request?.controller.abort();
+        this._request = null;
     },
 
     init() {
@@ -2134,32 +2144,45 @@ const PageSwitch = {
             const file = this._file(url.pathname);
             if (!this._ROUTES[file]) return;
             e.preventDefault();
-            if (file === this._file(location.pathname)) return;
+            if (file === this._file(location.pathname)) {
+                this._cancel();
+                return;
+            }
             this.go(file + url.hash, true);
         });
         window.addEventListener('popstate', () => {
             const file = this._file(location.pathname);
             if (this._ROUTES[file]) this.go(file + location.hash, false);
+            else this._cancel();
         });
     },
 
     async go(target, push) {
         const file = target.split('#')[0];
         const hash = target.includes('#') ? '#' + target.split('#')[1] : '';
+        // 연속 입력이나 뒤로 가기 뒤에 늦게 도착한 응답이 화면을 덮지 않게 한다.
+        this._cancel();
         if (!this._ROUTES[file]) { location.href = target; return; }
+        const controller = new AbortController();
+        const request = { file, controller };
+        this._request = request;
         let html;
         try {
-            const res = await fetch(file, { cache: 'no-cache' });
+            const res = await fetch(file, { cache: 'no-cache', signal: controller.signal });
             if (!res.ok) throw new Error(String(res.status));
             html = await res.text();
         } catch (err) {
-            location.href = target; // 가져오지 못하면 일반 이동
+            if (!controller.signal.aborted) location.href = target; // 가져오지 못하면 일반 이동
             return;
+        } finally {
+            if (this._request === request) this._request = null;
         }
+        if (controller.signal.aborted) return;
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const newMain = doc.querySelector('main');
         const oldMain = document.querySelector('main');
         if (!newMain || !oldMain) { location.href = target; return; }
+        const tabWasFocused = oldMain.querySelector('.page-switch')?.contains(document.activeElement);
         oldMain.replaceWith(document.importNode(newMain, true));
         document.title = doc.title;
         const canon = document.querySelector('link[rel="canonical"]');
@@ -2167,11 +2190,53 @@ const PageSwitch = {
         if (canon && newCanon) canon.href = newCanon.href;
         // 화면을 먼저 그리고, 주소 바꾸기는 따로 감싼다(주소를 못 바꾸는 환경에서도 목록이 보이도록)
         this._ROUTES[file](hash);
+        if (tabWasFocused) document.querySelector('.page-switch [aria-current="page"]')?.focus({ preventScroll: true });
         if (push) {
             try { history.pushState({}, '', file + hash); } catch (err) { /* 주소 표시만 그대로 둔다 */ }
         }
         if (hash) App._scrollToHash(hash);
         else window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+};
+
+/* ── SwipeTabs — 모바일 관련 페이지 탭의 보조 입력 ──────────────── */
+const SwipeTabs = {
+    init() {
+        const mobile = window.matchMedia('(max-width: 768px)');
+        let start = null;
+        document.addEventListener('touchstart', event => {
+            start = null;
+            if (!mobile.matches || event.touches.length !== 1) return;
+            const nav = event.target.closest('nav[data-swipe-tabs]');
+            if (!nav) return;
+            const strip = nav.querySelector('.container') || nav;
+            if (strip.scrollWidth > strip.clientWidth + 1) return;
+            const { clientX, clientY, identifier } = event.touches[0];
+            // 화면 양끝은 브라우저의 뒤로/앞으로 가기 조작 영역으로 남긴다.
+            if (clientX < 24 || clientX > window.innerWidth - 24) return;
+            start = { nav, clientX, clientY, identifier };
+        }, { passive: true });
+
+        document.addEventListener('touchcancel', () => { start = null; }, { passive: true });
+        document.addEventListener('touchend', event => {
+            const origin = start;
+            start = null;
+            if (!origin?.nav.isConnected) return;
+            const end = event.changedTouches[0];
+            if (end?.identifier !== origin.identifier) return;
+            const dx = end.clientX - origin.clientX;
+            const dy = end.clientY - origin.clientY;
+            if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+
+            // 가로 스와이프가 시작 위치의 링크 탭으로 이어지지 않게 한다.
+            if (event.cancelable) event.preventDefault();
+            const links = Array.from(origin.nav.querySelectorAll('a[href]'));
+            const pending = PageSwitch.pendingFile();
+            const current = links.findIndex(link => pending
+                ? link.getAttribute('href') === pending
+                : link.getAttribute('aria-current') === 'page');
+            if (current !== -1) links[current + (dx < 0 ? 1 : -1)]?.click();
+        }, { passive: false });
     }
 };
 
@@ -3333,6 +3398,7 @@ const App = {
         ScrollReveal.init();
         ScrollProgress.init();
         PageSwitch.init();
+        SwipeTabs.init();
         BackToTop.init();
         MenuOverlay.init();
         TapFeedback.init();
