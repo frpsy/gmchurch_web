@@ -149,9 +149,42 @@ const CHURCH_DATA = {
         "storyEyebrow": "활동 모습",
         "storyTitle": "아이들이 벽에 그린 그림",
         "storyIntro": "아이들이 직접 색을 골라 붓으로 벽에 그림을 그렸습니다.",
+        "photos": [
+            {
+                "src": "painting-joy",
+                "alt": "붓을 들고 벽화 앞에서 두 팔을 펼친 어린이",
+                "caption": "붓을 들고 웃는 아이"
+            },
+            {
+                "src": "painting-together",
+                "alt": "여러 색으로 칠한 벽에 붓질하는 어린이",
+                "caption": "벽에 색을 칠하는 아이"
+            },
+            {
+                "src": "mural-church",
+                "alt": "푸른 하늘과 초록 들판 위에 그린 작은 교회 벽화",
+                "caption": "하늘과 들판 위의 교회 그림"
+            },
+            {
+                "src": "mural-angel",
+                "alt": "여러 색의 바탕 위에 천사와 교회를 그린 벽화",
+                "caption": "천사와 교회를 그린 벽화"
+            }
+        ],
         "cardTitle": "사제님께 드린 카드",
         "cardIntro": "어린이 예배 아이들이 직접 쓰고 그린 카드를 민숙희 사제님께 전했습니다.",
-        "galleryLabel": "어린이 예배 사진 보기",
+        "cardPhotos": [
+            {
+                "src": "card-presenting",
+                "alt": "분홍색 카드를 사제님께 건네는 두 어린이의 뒷모습",
+                "caption": "사제님께 카드를 전하는 아이들"
+            },
+            {
+                "src": "card-note",
+                "alt": "손글씨와 교회 그림으로 채운 분홍색 카드",
+                "caption": "아이들이 쓰고 그린 카드"
+            }
+        ],
         "joinTitle": "참여 안내",
         "placeLabel": "장소",
         "place": "교육관",
