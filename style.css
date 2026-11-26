@@ -43,8 +43,8 @@
     --red:          #b53737;
     /* Nav glass */
     --nav-glass:    rgba(23, 58, 46, 0.94);
-    /* 섹션 내 sticky 서브 네비 표면 — 모드별 분기 (다크에서 흰 배경 방지) */
-    --surface-nav:  rgba(255, 255, 255, 0.96);
+    /* 서브 내비와 떠 있는 버튼의 반투명 표면 */
+    --surface-nav:  color-mix(in srgb, var(--white) 96%, transparent);
     /* Layout */
     --nav-h:        68px;
     --section-pad:  6rem;
@@ -117,7 +117,7 @@
     --md-primary:                #285a47;  /* 흰 면 7.9:1 */
     --md-on-primary:             #ffffff;
     --md-secondary-container:    color-mix(in srgb, var(--text) 8%, var(--white));
-    --md-on-secondary-container: #173a2e;  /* 9.6:1 */
+    --md-on-secondary-container: var(--heading);
     --md-outline:                #707973;  /* 버튼 테두리 — 흰 면 4.5:1 */
     /* 상태 레이어 투명도 (M3: hover 8%, focus·pressed 10%) */
     --md-state-hover:   0.08;
@@ -680,20 +680,13 @@ main:has(.page-hero) {
 
 /* ── Sections ────────────────────────────────────────────── */
 .section { padding: var(--section-pad) 0; }
-/* 교회력 절기 연동 섹션 배경 — 라이트: --theme-light, 다크: --theme 틴트+dark surface */
-.section.gc-section-alt { background: var(--theme-light); }
-@media (prefers-color-scheme: dark) {
-    .section.gc-section-alt { background: color-mix(in srgb, var(--theme) 20%, var(--white)); }
-    /* 녹색 틴트 배경 위 eyebrow(--theme)는 3.9:1 — 밝게 섞어 AA 확보 */
-    .section.gc-section-alt .section-eyebrow,
-    .section.gc-section-alt a:not(.btn):not(.btn-next) { color: color-mix(in srgb, var(--theme) 60%, var(--heading)); }
-}
+.section.gc-section-alt { background: var(--white); }
 
 .section-eyebrow {
     font-size: var(--fs-label);
     letter-spacing: var(--ls-eyebrow);
     text-transform: uppercase;
-    color: var(--theme);
+    color: var(--md-primary);
     margin-bottom: var(--space-4);
     font-weight: 600;
     display: block;
@@ -802,8 +795,8 @@ main:has(.page-hero) {
 
 /* Guide Banner */
 .guide-banner {
-    background: var(--theme-light);
-    border-left: 4px solid var(--theme);
+    background: var(--md-secondary-container);
+    border-left: 4px solid var(--md-primary);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: 1.6rem 2rem;
     margin-top: 2.5rem;
@@ -1132,7 +1125,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 
 /* Quote Block */
 .quote-block {
-    background: var(--gold-bg);
+    background: var(--md-secondary-container);
     border-left: 4px solid var(--gold);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: 1.4rem 1.75rem;
@@ -1198,7 +1191,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .philosophy-closing {
     margin-top: 2.5rem;
     padding: 1.5rem 2rem;
-    background: var(--green-light);
+    background: var(--md-secondary-container);
     border-radius: var(--radius-md);
     text-align: left;
 }
@@ -1732,17 +1725,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     margin-bottom: 0;
 }
 .home .map-card--compact .map-btn { min-height: 44px; padding-inline: 0.55rem; }
-.home .map-card--compact .map-btn--naver {
-    background: var(--white);
-    border-color: var(--border);
-    color: var(--heading);
-    box-shadow: none;
-}
-.home .map-card--compact .map-btn--naver:hover { border-color: var(--md-primary); }
-.home .map-card--compact .map-btn--naver .map-btn-mark {
-    background: var(--md-primary);
-    color: var(--md-on-primary);
-}
 .home .visit-quick { margin-bottom: var(--space-4); }
 .home .visit-quick a {
     display: flex;
@@ -1899,7 +1881,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     margin-bottom: 1rem;
 }
 .logo-element-item {
-    background: var(--green-light);
+    background: var(--md-secondary-container);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     padding: 0.85rem 1rem;
@@ -2036,7 +2018,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: var(--text-muted);
     line-height: 1.7;
     padding: 0.9rem 1.1rem;
-    background: var(--green-light);
+    background: var(--md-secondary-container);
     border-radius: var(--radius-sm);
     border-left: 4px solid var(--theme);
 }
@@ -2113,7 +2095,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     align-items: flex-start;
     gap: 1rem;
     padding: 1rem 1.25rem;
-    background: var(--green-light);
+    background: var(--md-secondary-container);
     border-radius: var(--radius-sm);
     border-left: 3px solid var(--theme);
     transition: box-shadow var(--dur-slow) ease, transform var(--dur-slow) var(--ease-out), opacity 0.6s ease;
@@ -2125,7 +2107,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 
 /* Bank Card */
 .bank-card {
-    background: var(--green-light);
+    background: var(--md-secondary-container);
     border-radius: var(--radius-md);
     padding: 1.6rem 1.75rem;
     margin-bottom: 1.5rem;
@@ -2391,10 +2373,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .liturgy-guide .liturgy-inner-quote    { border-left-color: var(--season); }
 .liturgy-guide .liturgy-card           { border-left-color: var(--season); }
 .liturgy-guide .step-num               { background: var(--season); color: var(--season-on, #fff); }
-.liturgy-guide .resource-card          { border-top-color: var(--season); }
+.liturgy-guide .resource-card          { border-top: 3px solid var(--season); }
 .liturgy-guide .resource-link          { color: var(--season-ink, var(--season)); }
-#home-guide .resource-card            { border-top-color: var(--theme); }
-#home-guide .resource-link            { color: var(--theme); }
 .liturgy-guide .space-item             { border-top-color: var(--season); }
 .liturgy-guide .communion-season       { border-top-color: var(--season); background: var(--season-light); }
 .liturgy-guide .check-icon             { color: var(--season-ink, var(--season)); }
@@ -2457,7 +2437,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .newcomer-key-facts {
     margin-top: 1.5rem;
     padding: 1.25rem 1.4rem;
-    background: var(--green-light);
+    background: var(--md-secondary-container);
     border-radius: var(--radius-md);
     display: grid;
     gap: 0.7rem;
@@ -2755,7 +2735,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     flex-direction: column;
     background: var(--white);
     border: 1px solid var(--border);
-    border-top: 3px solid;
     border-radius: var(--radius-xl);
     padding: 1.6rem 1.6rem 1.4rem;
     text-decoration: none;
@@ -2787,7 +2766,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     word-break: keep-all;
     overflow-wrap: break-word;
 }
-.resource-link { font-size: var(--fs-md); font-weight: 700; letter-spacing: 0.01em; }
+.resource-link { color: var(--md-primary); font-size: var(--fs-md); font-weight: 700; letter-spacing: 0.01em; }
 
 /* Lectionary Calendar */
 .lectionary-cal-wrap {
@@ -3415,7 +3394,7 @@ footer {
 .emmaus-lead:last-child { margin-bottom: 0; }
 
 .emmaus-scripture-block {
-    background: var(--green-light);
+    background: var(--md-secondary-container);
     border-radius: var(--radius-md);
     padding: 2rem;
     border-left: 4px solid var(--theme);
@@ -3701,7 +3680,7 @@ footer {
     width: 100%;
     border-top: 1px solid var(--border);
     aspect-ratio: 400 / 220;
-    background: var(--green-light);
+    background: var(--cream);
     overflow: hidden;
     position: relative;
 }
@@ -3765,16 +3744,17 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    padding: 0.85rem 1rem;
+    padding: 0.95rem 1.1rem;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     background: var(--white);
-    color: var(--text);
+    color: var(--heading);
     font-size: var(--fs-sm);
-    font-weight: 600;
+    font-weight: 700;
     transition: transform var(--dur-fast), box-shadow var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
     text-decoration: none;
 }
+.map-btn:hover { border-color: var(--md-primary); }
 .map-btn-mark {
     display: inline-flex;
     align-items: center;
@@ -3782,8 +3762,8 @@ footer {
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: #03c75a;       /* 네이버 그린 */
-    color: #ffffff;
+    background: var(--md-primary);
+    color: var(--md-on-primary);
     font-weight: 800;
     font-size: var(--fs-label);
     letter-spacing: -0.04em;
@@ -3799,45 +3779,16 @@ footer {
     padding: 0.35rem 0.7rem;
     font-size: var(--fs-label);
     font-weight: 600;
-    color: var(--theme);
+    color: var(--md-primary);
     background: none;
-    border: 1px solid var(--theme);
+    border: 1px solid var(--md-primary);
     border-radius: 4px;
     cursor: pointer;
     transition: background var(--dur-fast), color var(--dur-fast);
     letter-spacing: 0.02em;
     line-height: 1.6;
 }
-.map-copy-btn:hover { background: var(--theme); color: var(--theme-on); }
-
-/* Naver CTA */
-.map-btn--naver {
-    /* 네이버 초록(#03c75a)은 흰 글자 대비 2.25 — 같은 계열의 짙은 초록으로 AA(4.8:1) 확보 */
-    background: #00843a;
-    color: #fff;
-    border-color: transparent;
-    font-size: var(--fs-sm);
-    font-weight: 700;
-    padding: 0.95rem 1.1rem;
-    box-shadow: 0 2px 8px rgba(3,199,90,0.20);
-}
-.map-btn--naver:hover {
-    background: #00702f;
-    box-shadow: 0 4px 14px rgba(3,199,90,0.32);
-    border-color: transparent;
-}
-.map-btn--naver .map-btn-mark { background: rgba(0,0,0,0.18); color: #fff; }
-
-/* Kakao CTA */
-.map-btn--kakao {
-    background: var(--white);
-    color: var(--heading);
-    border-color: var(--border);
-    font-size: var(--fs-sm);
-    font-weight: 700;
-    padding: 0.95rem 1.1rem;
-}
-.map-btn--kakao:hover { border-color: var(--theme); }
+.map-copy-btn:hover { background: var(--md-primary); color: var(--md-on-primary); }
 
 /* Compact variant (index card) */
 .map-card--compact .map-card-addr { padding: 0.85rem 1rem; }
@@ -4366,7 +4317,6 @@ footer {
         --sage-ink:     #b5c9b0;
         /* Nav */
         --nav-glass:    rgba(9, 26, 20, 0.96);
-        --surface-nav:  rgba(15, 27, 22, 0.96);
         /* Skeleton */
         --skeleton-base: #1a2a23;
         --skeleton-mid:  #22352d;
@@ -4377,7 +4327,6 @@ footer {
         /* Material 3 역할 토큰 — 다크 */
         --md-primary:                #66a284;  /* 카드 면 5.4:1 */
         --md-on-primary:             #0f1b16;  /* 5.9:1 */
-        --md-on-secondary-container: #f0f1f2;
         --md-outline:                #8a948d;  /* 카드 면 5.1:1 */
     }
     /* 전례력 절기색 — JS가 주입하는 밝은 절기색(s.colorLight)은 다크모드에 적응하지
@@ -4403,7 +4352,7 @@ footer {
     .bus-chip { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22); }  /* 어두운 바탕과 칩 경계 */
 }
 
-/* ── Back To Top 버튼 (화이트 반투명, 아이콘 녹색) ───────────────── */
+/* ── Back To Top 버튼 (반투명 표면, 녹색 아이콘) ─────────────────── */
 #back-to-top {
     position: fixed;
     right: clamp(1rem, 3vw, 1.8rem);
@@ -4412,8 +4361,9 @@ footer {
     height: 44px;
     display: grid;
     place-items: center;
-    background: var(--green-deep);
-    border: none;
+    background: var(--surface-nav);
+    color: var(--md-primary);
+    border: 1px solid var(--border);
     border-radius: 50%;
     box-shadow: 0 4px 16px rgba(13, 33, 26, 0.22);
     opacity: 0;
@@ -4424,19 +4374,19 @@ footer {
     pointer-events: none;
 }
 #back-to-top.visible {
-    opacity: 0.45;
+    opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
     cursor: pointer;
 }
 #back-to-top:hover, #back-to-top:focus-visible {
-    background: var(--theme);
+    background: var(--cream);
     box-shadow: 0 6px 24px rgba(13, 33, 26, 0.30);
 }
 #back-to-top svg {
     width: 20px;
     height: 20px;
-    fill: #fff;
+    fill: currentColor;
     display: block;
 }
 @media (max-width: 460px) {
@@ -4565,17 +4515,17 @@ footer {
     transition: color var(--dur), border-color var(--dur);
     white-space: nowrap;
 }
-/* 모든 섹션 탭 공통 — 테마색 단일 톤. 활성 탭만 진한 밑줄 + 옅은 배경 */
+/* 현재 탭은 중립 면과 브랜드색 밑줄로 표시 */
 .gc-nav-link.is-active {
     color: var(--heading);
-    border-bottom-color: var(--theme);
-    background: color-mix(in srgb, var(--theme) 10%, var(--white));
+    border-bottom-color: var(--md-primary);
+    background: var(--md-secondary-container);
 }
 /* 터치 기기에서 sticky-hover 오작동 방지 — 마우스 환경에서만 hover 적용 */
 @media (hover: hover) {
     .gc-nav-link:hover {
         color: var(--heading);
-        border-bottom-color: color-mix(in srgb, var(--theme) 45%, transparent);
+        border-bottom-color: color-mix(in srgb, var(--md-primary) 45%, transparent);
     }
 }
 @media (max-width: 640px) {
@@ -4826,9 +4776,9 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
 .bulletin-row:focus-visible { outline: 2px solid var(--md-primary); outline-offset: -2px; }
 .bulletin-row:active { background: var(--md-secondary-container); }
 @media (hover: hover) {
-    .bulletin-row:hover { background: var(--green-light); }
+    .bulletin-row:hover { background: var(--md-secondary-container); }
 }
-.bulletin-row[aria-expanded="true"] { background: var(--green-light); }
+.bulletin-row[aria-expanded="true"] { background: var(--md-secondary-container); }
 
 .bulletin-row-info {
     flex: 1;
@@ -5094,8 +5044,6 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
 
 @media (prefers-color-scheme: dark) {
     .bulletin-list { background: var(--white); }
-    .bulletin-row:hover,
-    .bulletin-row[aria-expanded="true"] { background: var(--green-light); }
     .bulletin-drawer { background: var(--cream); }
     .bulletin-page { border-color: var(--border); }
     .bulletin-row-count { background: var(--green-light); }
@@ -5402,7 +5350,6 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     font-size: var(--fs-label);
 }
 .sermon-feature .bulletin-list {
-    border-color: var(--green-soft);
     box-shadow: none;
 }
 .sermon-feature .bulletin-row {
@@ -5410,10 +5357,10 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
     align-items: flex-start;
     gap: var(--space-3);
     padding: clamp(1rem, 4vw, 1.5rem);
-    background: var(--green-light);
+    background: var(--white);
 }
 .sermon-feature .bulletin-row:is(:hover, [aria-expanded="true"]) {
-    background: color-mix(in srgb, var(--green-light) 70%, var(--green-soft));
+    background: var(--md-secondary-container);
 }
 .sermon-feature .bulletin-row-info {
     gap: var(--space-2);
@@ -5782,7 +5729,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 .page-switch { display: flex; justify-content: center; margin: 0 0 1.5rem; }
 .page-switch-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.25rem; border-radius: 999px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
 .page-switch-link:hover { color: var(--text); }
-.page-switch-link[aria-current="page"] { background: var(--heading); color: var(--cream); font-weight: 600; }
+.page-switch-link[aria-current="page"] { background: var(--md-primary); color: var(--md-on-primary); font-weight: 600; }
 .page-switch { padding: 0.25rem; border: 1px solid var(--border); border-radius: 999px; background: var(--cream); width: fit-content; margin-left: auto; margin-right: auto; }
 
 /* ── 홈 방문 안내 카드 (2026-11-22): 영어 풀이, 방문 바로가기 ── */

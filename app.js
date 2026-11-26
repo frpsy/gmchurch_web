@@ -1679,11 +1679,11 @@ const MediaHubRenderer = {
         el.innerHTML = `
             <div class="resource-grid">
                 ${CHURCH_DATA.media.hub.cards.map(c => `
-                    <a class="resource-card" href="${c.href}" style="border-top-color: var(--green-mid);">
+                    <a class="resource-card" href="${c.href}">
                         <span class="resource-icon" aria-hidden="true">${icon(c.icon)}</span>
                         <p class="resource-title">${c.title}</p>
                         <p class="resource-desc">${c.desc}</p>
-                        <span class="resource-link" style="color:var(--green-mid);">${c.action}</span>
+                        <span class="resource-link">${c.action}</span>
                     </a>
                 `).join('')}
             </div>
