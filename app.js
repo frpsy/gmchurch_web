@@ -1373,7 +1373,9 @@ const ClergyRenderer = {
             <div class="bishop-card">
                 <p class="bishop-eyebrow">Diocese of Seoul</p>
                 <div class="bishop-card-inner">
-                    <div class="bishop-portrait-wrap bishop-portrait-fallback" aria-hidden="true">${icon('mitre')}</div>
+                    ${bishop.photo
+                        ? `<div class="bishop-portrait-wrap"><img src="${bishop.photoThumb || bishop.photo}" data-full="${bishop.photo}" alt="${bishop.name} 주교 초상" class="bishop-portrait" tabindex="0" role="button" aria-label="${bishop.name} 주교 초상 확대 보기" width="450" height="450" loading="lazy" decoding="async"></div>`
+                        : `<div class="bishop-portrait-wrap bishop-portrait-fallback" aria-hidden="true">${icon('mitre')}</div>`}
                     <div class="bishop-card-body">
                         <p class="bishop-name">${bishop.name} 주교</p>
                         <p class="bishop-title">${bishop.title}</p>
@@ -1394,7 +1396,9 @@ const ClergyRenderer = {
                     if (isFirstPriest) firstPriestRendered = true;
                     return `
                     <div class="clergy-card" ${isFirstPriest ? 'id="priest"' : ''}>
-                        <div class="clergy-avatar clergy-avatar--fallback" aria-hidden="true">${icon('cross')}</div>
+                        ${c.photo
+                            ? `<div class="clergy-avatar"><img src="${c.photoThumb || c.photo}" data-full="${c.photo}" alt="${c.name} 사제 초상" class="clergy-avatar-img" tabindex="0" role="button" aria-label="${c.name} 사제 초상 확대 보기" width="450" height="450" loading="lazy" decoding="async"></div>`
+                            : `<div class="clergy-avatar clergy-avatar--fallback" aria-hidden="true">${icon('cross')}</div>`}
                         <div>
                             <div class="clergy-name">${c.name} 사제</div>
                             <div class="clergy-title">${c.title}</div>
@@ -2566,6 +2570,55 @@ const SwipeNavigation = {
             if ((origin.horizontal || intentional) && event.cancelable) event.preventDefault();
             settle(origin, next, Math.sign(dx));
         }, { passive: false });
+    }
+};
+
+/* ── Portrait Lightbox ─────────────────────────────────────
+   성직자·주교 초상을 누르면 원본을 크게 보여 준다. 키보드(Enter·Space·Esc)로도 쓸 수 있다. */
+const PortraitLightbox = {
+    SELECTOR: '.clergy-avatar-img, .bishop-portrait',
+    init() {
+        // 쪽 전환으로 다시 그려도 동작하도록 위임 방식으로 듣는다(초상의 tabindex·role은 렌더러가 넣는다)
+        const overlay = document.createElement('div');
+        overlay.id = 'portrait-lightbox';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-label', '초상 확대 보기');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.tabIndex = -1;
+        const img = document.createElement('img');
+        img.id = 'portrait-lightbox-img';
+        img.alt = '';
+        overlay.appendChild(img);
+        document.body.appendChild(overlay);
+
+
+        let opener = null;
+        const open = (el) => {
+            opener = el;
+            img.src = el.dataset.full || el.src; // 목록은 작은 그림, 확대는 원본
+            img.alt = el.alt;
+            overlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+            overlay.focus();
+        };
+        const close = () => {
+            if (!overlay.classList.contains('is-open')) return;
+            overlay.classList.remove('is-open');
+            document.body.style.overflow = '';
+            if (opener) { opener.focus(); opener = null; }
+        };
+        overlay.addEventListener('click', close);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { close(); return; }
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.matches?.(this.SELECTOR)) {
+                e.preventDefault();
+                open(e.target);
+            }
+        });
+        document.addEventListener('click', e => {
+            const el = e.target.closest?.(this.SELECTOR);
+            if (el) open(el);
+        });
     }
 };
 
@@ -3743,6 +3796,7 @@ const App = {
         PageSwitch.init();
         SwipeNavigation.init();
         BackToTop.init();
+        PortraitLightbox.init();
         MenuOverlay.init();
         TapFeedback.init();
         TextFit.init();

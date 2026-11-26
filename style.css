@@ -1282,6 +1282,15 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border: 3px solid rgba(58, 114, 82, 0.3);
     box-shadow: 0 4px 14px rgba(13, 33, 26, 0.10);
 }
+/* 초상 그림 — 원 안을 가득 채우고 얼굴이 잘리지 않게 위쪽 기준으로 맞춘다 */
+.clergy-avatar-img, .bishop-portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    cursor: zoom-in;
+    display: block;
+}
 /* 사진 없을 때 그라디언트+이모지 폴백 */
 .clergy-avatar--fallback {
     background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
@@ -4456,6 +4465,33 @@ footer {
 }
 
 /* ── Portrait Lightbox ───────────────────────────────────── */
+#portrait-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;   /* 고정 헤더(1000)보다 위 */
+    background: rgba(13, 33, 26, 0.88);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+}
+#portrait-lightbox.is-open {
+    display: flex;
+    animation: lightbox-in 0.2s var(--ease-out) both;
+}
+#portrait-lightbox:focus { outline: none; }
+#portrait-lightbox-img {
+    width: min(420px, 90vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+    pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+    #portrait-lightbox.is-open { animation: none; }
+}
 @keyframes lightbox-in {
     from { opacity: 0; transform: scale(0.88); }
     to   { opacity: 1; transform: scale(1); }
