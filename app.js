@@ -3186,7 +3186,7 @@ const SundaysRenderer = {
             <div class="section-header">
                 <p class="section-eyebrow">Lectionary</p>
                 <h2 class="section-title">전례독서</h2>
-                <p class="section-sub">교회력에 따라 정해진 주일 성서 본문입니다. 제1독서·제2독서·복음을 봉독하며, 본문을 누르면 공동번역 성서가 열립니다.</p>
+                <p class="section-sub">교회력에 따라 정해진 주일 성서 본문입니다. 제1독서·제2독서·복음을 봉독합니다.</p>
             </div>`;
         el.innerHTML = header + '<p class="lectionary-loading">불러오는 중…</p>';
 
@@ -3686,7 +3686,7 @@ const SundaysRenderer = {
             <div class="section-header">
                 <p class="section-eyebrow">Liturgical Year</p>
                 <h2 class="section-title">교회력 절기</h2>
-                <p class="section-sub">성공회는 교회력에 따라 그리스도의 생애를 한 해 동안 함께 기억합니다. 교회력의 새해는 1월이 아니라 대림절에 시작하며, 아래 ①~⑧의 순서로 이어집니다. 각 절기의 색은 기도서 전례색입니다.</p>
+                <p class="section-sub">성공회는 교회력에 따라 그리스도의 생애를 한 해 동안 함께 기억합니다. 교회력의 새해는 1월이 아니라 대림절에 시작합니다. 아래 ①~⑧의 순서로 이어집니다. 각 절기의 색은 기도서 전례색입니다.</p>
             </div>
             <div class="resource-grid">${cards}</div>`;
     },
