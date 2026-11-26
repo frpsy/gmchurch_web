@@ -2199,37 +2199,53 @@ const PageSwitch = {
     }
 };
 
-/* ── SwipeTabs — 모바일 관련 페이지 탭의 보조 입력 ──────────────── */
+/* ── SwipeTabs — 모바일에서 관련 페이지의 본문을 좌우로 넘긴다 ────── */
 const SwipeTabs = {
     init() {
         const mobile = window.matchMedia('(max-width: 768px)');
+        const controls = 'a, button, summary, input, select, textarea, label, iframe, video, audio, [contenteditable], [role="button"], [role="dialog"], .shorts-track';
         let start = null;
         document.addEventListener('touchstart', event => {
             start = null;
             if (!mobile.matches || event.touches.length !== 1) return;
-            const nav = event.target.closest('nav[data-swipe-tabs]');
+            const target = event.target;
+            const nav = target.closest('main')?.querySelector('nav[data-swipe-tabs]');
             if (!nav) return;
-            const strip = nav.querySelector('.container') || nav;
-            if (strip.scrollWidth > strip.clientWidth + 1) return;
+            const onTab = nav.contains(target);
+            if (onTab) {
+                const strip = nav.querySelector('.container') || nav;
+                if (strip.scrollWidth > strip.clientWidth + 1) return;
+            } else if (target.closest(controls)) {
+                return;
+            }
             const { clientX, clientY, identifier } = event.touches[0];
             // 화면 양끝은 브라우저의 뒤로/앞으로 가기 조작 영역으로 남긴다.
             if (clientX < 24 || clientX > window.innerWidth - 24) return;
-            start = { nav, clientX, clientY, identifier };
+            start = { nav, onTab, clientX, clientY, identifier };
         }, { passive: true });
 
+        document.addEventListener('touchmove', event => {
+            if (!start) return;
+            const point = event.touches[0];
+            if (point?.identifier !== start.identifier) return;
+            const dx = Math.abs(point.clientX - start.clientX);
+            const dy = Math.abs(point.clientY - start.clientY);
+            // 세로로 읽기 시작한 손길은 나중에 옆으로 비껴도 페이지를 넘기지 않는다.
+            if (dy >= 20 && dy > dx) start = null;
+        }, { passive: true });
         document.addEventListener('touchcancel', () => { start = null; }, { passive: true });
         document.addEventListener('touchend', event => {
             const origin = start;
             start = null;
-            if (!origin?.nav.isConnected) return;
+            if (!origin?.nav.isConnected || window.getSelection()?.isCollapsed === false) return;
             const end = event.changedTouches[0];
             if (end?.identifier !== origin.identifier) return;
             const dx = end.clientX - origin.clientX;
             const dy = end.clientY - origin.clientY;
-            if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+            if (Math.abs(dx) < 52 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
 
-            // 가로 스와이프가 시작 위치의 링크 탭으로 이어지지 않게 한다.
-            if (event.cancelable) event.preventDefault();
+            // 탭에 닿은 스와이프가 시작 위치의 링크 클릭으로 이어지지 않게 한다.
+            if (origin.onTab && event.cancelable) event.preventDefault();
             const links = Array.from(origin.nav.querySelectorAll('a[href]'));
             const pending = PageSwitch.pendingFile();
             const current = links.findIndex(link => pending
