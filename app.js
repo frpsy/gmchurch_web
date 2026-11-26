@@ -2203,11 +2203,16 @@ const PageSwitch = {
 const SwipeNavigation = {
     init() {
         const mobile = window.matchMedia('(max-width: 768px)');
+        const viewport = window.visualViewport;
+        const isZoomed = () => viewport?.scale > 1.02;
+        const syncZoom = () => document.documentElement.classList.toggle('swipe-zoomed', isZoomed());
+        viewport?.addEventListener('resize', syncZoom, { passive: true });
+        syncZoom();
         const controls = 'a, button, summary, input, select, textarea, label, iframe, video, audio, [contenteditable], [role="button"], [role="dialog"], .shorts-track';
         let start = null;
         document.addEventListener('touchstart', event => {
             start = null;
-            if (!mobile.matches || event.touches.length !== 1) return;
+            if (!mobile.matches || event.touches.length !== 1 || isZoomed()) return;
             const target = event.target;
             if (!target.closest('main')) return;
             const tabs = target.closest('nav[data-swipe-tabs]');
