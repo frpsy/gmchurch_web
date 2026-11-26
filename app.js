@@ -385,7 +385,6 @@ const FooterRenderer = {
                     </div>
                     <div class="footer-col">
                         <h2>예배 자료</h2>
-                        <a href="sundays.html#lectionary" class="footer-ext-link">전례독서</a>
                         ${resources.map(r => `<a href="${r.url}" target="_blank" rel="noopener" class="footer-ext-link">${r.title}</a>`).join('')}
                     </div>
                     <div class="footer-col">
