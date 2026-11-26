@@ -4,11 +4,11 @@ import { createContext, runInContext } from 'node:vm';
 
 const source = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
 
-function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1 } = {}) {
+function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, home = false } = {}) {
     const listeners = new Map();
     const animation = { cancel: vi.fn() };
     const main = { isConnected: true, style: {}, animate: vi.fn(() => animation) };
-    const links = [true, false].map(current => ({
+    const links = [!home, false].map(current => ({
         isConnected: true,
         getAttribute: name => name === 'aria-current' && current ? 'page' : null,
         click: vi.fn(),
@@ -17,7 +17,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1 } =
         isConnected: true,
         clientWidth: 390,
         scrollWidth: overflow ? 500 : 390,
-        querySelector: selector => selector === '.container' ? null : links[0],
+        querySelector: selector => selector === '.container' || home ? null : links[0],
         querySelectorAll: () => links,
     };
     const window = {
@@ -28,6 +28,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1 } =
         getSelection: () => ({ isCollapsed: true }),
     };
     const document = {
+        body: { classList: { contains: name => name === 'home' && home } },
         documentElement: { classList: { toggle() {} } },
         getElementById: () => nav,
         addEventListener: (type, fn) => listeners.set(type, fn),
@@ -54,7 +55,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1 } =
 it('follows the finger and settles before opening the next menu', () => {
     const { main, links, touch, animation } = setup();
     touch('touchstart', 240);
-    touch('touchmove', 205);
+    expect(touch('touchmove', 205).preventDefault).toHaveBeenCalledOnce();
     expect(parseFloat(main.style.translate)).toBeLessThan(0);
     touch('touchmove', 150);
     expect(parseFloat(main.style.translate)).toBeLessThan(-35);
@@ -77,12 +78,22 @@ it('returns a short drag to its origin without opening a tab', () => {
 it.each([{ zoom: 2 }, { onTabs: true, overflow: true }, {}])('leaves native vertical scrolling alone (%j)', options => {
     const { main, links, touch } = setup(options);
     touch('touchstart', 240);
-    touch('touchmove', 234, 185);
+    expect(touch('touchmove', 234, 185).preventDefault).not.toHaveBeenCalled();
     touch('touchmove', 115, 186);
     touch('touchend', 115, 186);
     expect(main.style.translate).toBeUndefined();
     expect(main.animate).not.toHaveBeenCalled();
     expect(links[1].click).not.toHaveBeenCalled();
+});
+
+it('opens the first main menu from the homepage', () => {
+    const { main, links, touch, animation } = setup({ home: true });
+    touch('touchstart', 240);
+    touch('touchmove', 150);
+    expect(parseFloat(main.style.translate)).toBeLessThan(-50);
+    touch('touchend', 150);
+    animation.onfinish();
+    expect(links[0].click).toHaveBeenCalledOnce();
 });
 
 it('navigates without motion when reduced motion is requested', () => {

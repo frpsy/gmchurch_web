@@ -5206,7 +5206,7 @@ mark { background: var(--gold-bg); color: var(--heading); padding: 0 0.1em; bord
 /* 탭 지연(더블탭 확대 대기) 제거 */
 a, button, summary, [role="button"] { touch-action: manipulation; }
 @media (max-width: 768px) {
-    html:not(.swipe-zoomed) body:has(#nav-menu > .nav-item > .nav-link[aria-current="page"]) > main {
+    html:not(.swipe-zoomed) body:is(.home, :has(#nav-menu > .nav-item > .nav-link[aria-current="page"])) > main {
         touch-action: pan-y pinch-zoom;
     }
 }
