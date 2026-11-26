@@ -203,11 +203,13 @@ const CHURCH_DATA = {
 
     // 광명 희망터(hopecenter.html) — 소개문은 교회 제공 원문(2026-10-21)
     hopeCenter: {
+        // 사진을 같은 이름으로 교체하면 값을 바꿔 브라우저 캐시를 무효화한다
+        imageVersion: "20261021c",
         heroEyebrow: "Community Ministry",
         title: "광명 희망터",
         summary: "지역의 소외된 이웃과 함께하는 나눔 사역",
         intro: "광명교회는 2004년 3월, 하느님의 사랑을 실천하고 이웃의 필요에 귀 기울이기 위해 부설기관인 광명희망터를 설립하였습니다.",
-        galleryLabel: "희망터 활동 사진 보기",
+        heroImage: { src: "kitchen", alt: "희망터 주방에서 고개 숙여 기도하는 봉사자 세 사람", width: 1440, height: 665 },
         facts: [
             { label: "설립", value: "2004년 3월" },
             { label: "지원", value: "10가정" },
@@ -217,13 +219,14 @@ const CHURCH_DATA = {
         weeklyTitle: "토요일의 나눔",
         weeklyIntro: "광명희망터는 홀로 사는 어르신과 장애인 가정 등 모두 10가정에 반찬을 전합니다. 매주 토요일 봉사자들이 모여 반찬을 만들고 각 가정에 직접 배달합니다.",
         steps: [
-            { title: "한자리에 모입니다", desc: "매주 토요일, 봉사자들이 희망터 주방에 모입니다." },
-            { title: "반찬을 조리합니다", desc: "이웃 가정에 드릴 반찬을 정성껏 만듭니다." },
-            { title: "가정에 전합니다", desc: "만든 반찬을 각 가정에 직접 배달합니다." }
+            { title: "한자리에 모입니다", desc: "매주 토요일, 봉사자들이 희망터 주방에 모입니다.", image: { src: "prayer", alt: "주방 조리대 앞에서 두 손을 모으고 기도하는 봉사자들" } },
+            { title: "반찬을 조리합니다", desc: "이웃 가정에 드릴 반찬을 정성껏 만듭니다.", image: { src: "dishes", alt: "용기에 나누어 담은 오이부추무침과 양념장에 담근 달걀" } },
+            { title: "가정에 전합니다", desc: "만든 반찬을 각 가정에 직접 배달합니다.", image: { src: "handoff", alt: "봉사자가 이웃에게 반찬 봉투를 건네는 모습" } }
         ],
         historyEyebrow: "Our Journey",
         historyTitle: "걸어온 길",
         historyIntro: "광명희망터는 어르신 일자리 사업과 노숙인 급식 사업을 해 왔습니다. 홀로 사는 어르신에게 반찬도 전해 왔습니다.",
+        historyImage: { src: "delivery", alt: "나눔 물품 상자를 가득 실은 차량 앞에 선 봉사자 세 사람", caption: "나눔 물품을 싣고" },
         programs: [
             { title: "노인 일자리 사업", icon: "people" },
             { title: "노숙인 급식 사업", icon: "bowl" },

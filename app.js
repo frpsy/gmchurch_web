@@ -701,6 +701,9 @@ const HopeCenterRenderer = {
         if (!el) return;
         const d = CHURCH_DATA.hopeCenter;
         const officer = (CHURCH_DATA.officers || []).find(o => o.role === d.officerRole);
+        // 원본보다 큰 1440w 후보를 내지 않도록 실제 너비를 쓴다
+        const picture = (img, sizes, w = 1440, h = 960, eager = false) => `<img src="images/hopecenter/${img.src}.webp?v=${d.imageVersion}" srcset="images/hopecenter/${img.src}-sm.webp?v=${d.imageVersion} 720w, images/hopecenter/${img.src}.webp?v=${d.imageVersion} ${w}w" sizes="${sizes}" alt="${img.alt}" width="${w}" height="${h}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+        const stepSize = { prayer: [960, 640], dishes: [1440, 960], handoff: [1055, 703] };
         el.innerHTML = `
             <div class="page-hero">
                 <p class="section-eyebrow">${d.heroEyebrow}</p>
@@ -708,6 +711,7 @@ const HopeCenterRenderer = {
                 <p>${d.summary}</p>
             </div>
             <section class="section hope-intro"><div class="container">
+                <figure class="hope-intro-photo">${picture(d.heroImage, '(max-width: 1040px) 100vw, 1000px', d.heroImage.width, d.heroImage.height, true)}</figure>
                 <p class="children-lead hope-intro-lead">${d.intro}</p>
                 <dl class="children-service-summary hope-facts">
                     ${d.facts.map(f => `<div><dt>${f.label}</dt><dd>${f.value}</dd></div>`).join('')}
@@ -715,10 +719,13 @@ const HopeCenterRenderer = {
             </div></section>
             <section class="section gc-section-alt hope-weekly" id="weekly"><div class="container">
                 <div class="children-story-heading"><p class="section-eyebrow">${d.weeklyEyebrow}</p><h2 class="section-title">${d.weeklyTitle}</h2><p class="children-lead">${d.weeklyIntro}</p></div>
-                <ol class="hope-steps">${d.steps.map((st, i) => `<li class="hope-step"><div class="hope-step-body"><span class="hope-step-num" aria-hidden="true">0${i + 1}</span><h3>${st.title}</h3><p>${st.desc}</p></div></li>`).join('')}</ol>
-                <div class="next-step-cta-actions"><a class="btn-next" href="gallery.html">${d.galleryLabel}</a></div>
+                <ol class="hope-steps">${d.steps.map((st, i) => {
+                    const [w, h] = stepSize[st.image.src] || [1440, 960];
+                    return `<li class="hope-step"><figure>${picture(st.image, '(max-width: 768px) 100vw, 33vw', w, h)}</figure><div class="hope-step-body"><span class="hope-step-num" aria-hidden="true">0${i + 1}</span><h3>${st.title}</h3><p>${st.desc}</p></div></li>`;
+                }).join('')}</ol>
             </div></section>
             <section class="section hope-history" id="history"><div class="container hope-history-inner">
+                <figure class="hope-history-photo">${picture(d.historyImage, '(max-width: 768px) 100vw, 50vw', 1280, 853)}<figcaption>${d.historyImage.caption}</figcaption></figure>
                 <div class="hope-history-body">
                     <p class="section-eyebrow">${d.historyEyebrow}</p>
                     <h2 class="section-title">${d.historyTitle}</h2>
