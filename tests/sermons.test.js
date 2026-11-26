@@ -49,6 +49,18 @@ describe('설교 말씀 데이터', () => {
     }
   });
 
+  // 설교와 강연 모두 같은 형식이다(2026-11-26 사용자 지시). 긴 강연은 분량에 맞춰 더 넣는다.
+  it('설교·강연마다 강조와 각주가 분량에 맞게 들어 있다 (1,800자마다 1개, 최소 3개)', () => {
+    for (const s of sermons.items) {
+      const text = s.paragraphs.join('\n');
+      const need = Math.max(3, Math.floor(text.length / 1800));
+      const emphasis = (text.match(/\*\*/g) || []).length / 2;
+      const notes = (s.footnotes || []).length;
+      expect(emphasis, `${s.date} 강조`).toBeGreaterThanOrEqual(need);
+      expect(notes, `${s.date} 각주`).toBeGreaterThanOrEqual(need);
+    }
+  });
+
   it('원문 출처 링크가 있으면 https 주소다', () => {
     for (const s of sermons.items) {
       if (s.source) expect(s.source.url).toMatch(/^https:\/\//);
