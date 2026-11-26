@@ -2775,12 +2775,13 @@ const SermonsRenderer = {
                         <span class="bulletin-row-info">
                             <span class="sermon-row-title">${item.title}</span>
                             <span class="sermon-byline">
+                                ${item.kind ? `<span class="sermon-kind">${item.kind}</span>` : ''}
                                 <time datetime="${item.date}">${this._dateLabel(item.date)}</time>
                                 <span>${item.preacher}</span>
                             </span>
                         </span>
                         <span class="sermon-action">
-                            ${featured ? '<span class="sermon-open-label">설교 읽기</span><span class="sermon-close-label">본문 접기</span>' : ''}
+                            ${featured ? `<span class="sermon-open-label">${item.kind || '설교'} 읽기</span><span class="sermon-close-label">본문 접기</span>` : ''}
                             <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true">
                                 <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -2795,8 +2796,10 @@ const SermonsRenderer = {
     _bodyHtml(item) {
         // 설교자는 목록 줄에 이미 있으므로 펼친 본문에서는 본문 절만 보인다(중복 방지)
         // 성경 봉독 정보(상자)와 설교문을 구분한다. 날짜는 목록 줄에 이미 있으므로 다시 쓰지 않는다.
+        // 강연은 성경 봉독 대신 강연한 자리(포럼 이름)를 보인다
         const meta = [
-            ['성경 봉독', item.scripture]
+            ['성경 봉독', item.scripture],
+            ['자리', item.occasion]
         ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
         const source = item.source
             ? `<p class="news-intro"><a href="${item.source.url}" target="_blank" rel="noopener" aria-label="${item.source.label} (새 창으로 열림)">${item.source.label}</a></p>`
@@ -2807,7 +2810,7 @@ const SermonsRenderer = {
                  aria-labelledby="sermon-btn-${item.date}" hidden>
                 <article class="news-post">
                     ${meta ? `<div class="sermon-meta"><dl class="news-post-meta">${meta}</dl></div>` : ''}
-                    <p class="sermon-text-label">설교문</p>
+                    <p class="sermon-text-label">${item.kind ? `${item.kind}문` : '설교문'}</p>
                     <div class="sermon-body">${item.paragraphs.map(p => this._paraHtml(p, item.date)).join('')}</div>
                     ${note}${source}
                     ${this._notesHtml(item)}
@@ -2815,9 +2818,12 @@ const SermonsRenderer = {
             </div>`;
     },
 
-    // 문단 한 줄. 편집 표시: **강조** → 강조 글씨, [^n] → 각주 위치, "1." 같은 줄 → 절 제목
+    // 문단 한 줄. 편집 표시: **강조** → 강조 글씨, [^n] → 각주 위치, "1." 같은 줄 → 절 제목,
+    // "## 제목" → 장 제목(강연의 Ⅰ. Ⅱ. …), "### 제목" → 장 안의 소제목(1. 2. …)
     _paraHtml(p, date) {
         if (/^\d+\.$/.test(p.trim())) return `<h4 class="sermon-section">${p.trim().slice(0, -1)}</h4>`;
+        if (p.startsWith('## ')) return `<h4 class="sermon-section sermon-chapter">${p.slice(3)}</h4>`;
+        if (p.startsWith('### ')) return `<h5 class="sermon-subsection">${p.slice(4)}</h5>`;
         const html = p
             .replace(/\*\*(.+?)\*\*/g, '<strong class="sermon-em">$1</strong>')
             .replace(/\[\^(\d+)\]/g, (all, n) =>
@@ -2870,14 +2876,14 @@ const SermonsRenderer = {
         const [latest, ...archive] = [...items].sort(this._SORTS['date-desc']);
         el.innerHTML = `
             <section class="sermon-feature" aria-labelledby="sermon-feature-title">
-                <h2 id="sermon-feature-title">최신 설교</h2>
+                <h2 id="sermon-feature-title">최신 ${latest.kind || '설교'}</h2>
                 <div class="bulletin-list">${this._itemHtml(latest, true)}</div>
             </section>
             ${archive.length ? `
                 <section aria-labelledby="sermon-archive-title">
                     <div class="sermon-archive-header">
-                        <h2 id="sermon-archive-title">지난 설교</h2>
-                        <div class="sermon-sort" role="group" aria-label="지난 설교 정렬">
+                        <h2 id="sermon-archive-title">지난 설교${archive.some(item => item.kind) ? '와 강연' : ''}</h2>
+                        <div class="sermon-sort" role="group" aria-label="지난 글 정렬">
                             <button type="button" class="sermon-sort-btn" data-sort="date-desc" aria-pressed="true"><span>최신순</span></button>
                             <button type="button" class="sermon-sort-btn" data-sort="date-asc" aria-pressed="false"><span>오래된순</span></button>
                             <button type="button" class="sermon-sort-btn" data-sort="title" aria-pressed="false"><span>제목순</span></button>

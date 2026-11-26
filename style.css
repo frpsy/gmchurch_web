@@ -5436,6 +5436,12 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .sermon-text-label { margin: 2.25rem 0 1.25rem; padding-top: 0.75rem; border-top: 2px solid var(--heading); font-size: var(--fs-body); font-weight: 700; letter-spacing: 0.04em; color: var(--heading); }
 /* 편집자 강조: 글자색은 제목 색 그대로, 아래쪽에 옅은 색 띠를 깐다(글자 대비 유지) */
 .sermon-em { font-weight: 600; color: var(--heading); background: linear-gradient(transparent 58%, color-mix(in srgb, var(--gold) 55%, transparent) 58%); padding: 0 0.1em; }
+/* 강연 표시: 목록 줄의 날짜 앞에 둔다 */
+.sermon-kind { font-weight: 700; color: var(--md-primary); }
+/* 강연의 장 제목(Ⅰ. Ⅱ. …): 소제목보다 크게, 절 제목처럼 오른쪽에 가는 선을 둔다 */
+.sermon-section.sermon-chapter { margin-top: 2.75rem; font-size: 1.125rem; letter-spacing: 0; line-height: 1.45; word-break: keep-all; }
+/* 강연의 장 안 소제목(1. 2. …): 본문보다 조금 굵고 짙게, 위쪽 여백으로 단락을 나눈다 */
+.sermon-subsection { margin: 1.6rem 0 0.5rem; font-size: var(--fs-body); font-weight: 700; line-height: 1.5; color: var(--heading); word-break: keep-all; }
 /* 절 번호 제목(1. 2. …) */
 .sermon-section { display: flex; align-items: center; gap: 0.6rem; margin: 2rem 0 0.9rem; font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.08em; color: var(--heading); font-variant-numeric: tabular-nums; }
 .sermon-section::after { content: ""; flex: 1; height: 1px; background: var(--border); }
