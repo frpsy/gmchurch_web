@@ -626,17 +626,6 @@ main:has(.page-hero) {
     font-size: var(--fs-label);
 }
 
-/* 소개 문구의 줄 수가 달라도 같은 형식의 히어로 높이를 맞춘다. */
-.page-hero--illustrated h1 + p {
-    min-block-size: 2lh;
-}
-@media (max-width: 640px) {
-    .page-hero:not(.page-hero--illustrated) h1 + p { min-block-size: 2lh; }
-}
-@media (max-width: 420px), (min-width: 800px) and (max-width: 980px) {
-    .page-hero--illustrated h1 + p { min-block-size: 3lh; }
-}
-
 /* ── Page Hero — 이미지와 제목 분리 ──────────────────────── */
 .page-hero--illustrated { padding-inline: 0; }
 .page-hero-layout {
