@@ -3923,22 +3923,32 @@ const ReadingTools = {
         bar.setAttribute('aria-label', '읽기 도구');
         bar.hidden = true;
         bar.innerHTML = `
-            <button type="button" data-reading-action="contents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h12"/></svg><span>목차</span></button>
-            <button type="button" data-reading-action="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><span>검색</span></button>
+            <button type="button" data-reading-action="contents" aria-haspopup="dialog" aria-controls="reading-contents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h12"/></svg><span>목차</span></button>
+            <button type="button" data-reading-action="search" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><span>검색</span></button>
             <button type="button" data-reading-action="top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4M5 11l7-7 7 7"/></svg><span>맨 위</span></button>`;
         const dialog = document.createElement('dialog');
         dialog.className = 'reading-contents';
+        dialog.id = 'reading-contents';
         dialog.setAttribute('aria-labelledby', 'reading-contents-title');
-        dialog.innerHTML = `<div class="reading-contents-head"><h2 id="reading-contents-title">목차</h2>
-            <button type="button" class="reading-contents-close" aria-label="목차 닫기">✕</button></div>
+        dialog.innerHTML = `<div class="reading-contents-head">
+            <div><h2 id="reading-contents-title">목차</h2><p class="reading-contents-source" hidden></p></div>
+            <button type="button" class="reading-contents-close" aria-label="목차 닫기" autofocus>✕</button></div>
             <div class="reading-contents-list"></div>`;
         document.body.append(bar, dialog);
         const list = dialog.querySelector('.reading-contents-list');
-        let targets = [];
+        const source = dialog.querySelector('.reading-contents-source');
+        let lastY = Math.max(0, scrollY);
+        let scrollingUp = false;
         const refresh = () => {
-            const visible = document.documentElement.scrollHeight > innerHeight * 2 && scrollY > innerHeight * 0.6;
-            bar.hidden = !visible;
-            document.body.classList.toggle('reading-tools-visible', visible);
+            const currentY = Math.max(0, scrollY);
+            if (Math.abs(currentY - lastY) >= 12) {
+                scrollingUp = currentY < lastY;
+                lastY = currentY;
+            }
+            const reading = document.documentElement.scrollHeight > innerHeight * 2 && currentY > innerHeight * 0.6;
+            if (!reading) scrollingUp = false;
+            bar.hidden = !(reading && scrollingUp);
+            document.body.classList.toggle('reading-tools-active', reading);
         };
         const openContents = () => {
             const articles = [...main.querySelectorAll('.sermon-body')].filter(el => el.getClientRects().length);
@@ -3948,7 +3958,9 @@ const ReadingTools = {
             });
             const scope = active || main;
             const selector = active ? '.sermon-section, .sermon-subsection' : 'h2, h3';
-            targets = [...scope.querySelectorAll(selector)].filter(el => el.getClientRects().length && el.textContent.trim());
+            const targets = [...scope.querySelectorAll(selector)].filter(el => el.getClientRects().length && el.textContent.trim());
+            source.textContent = active?.closest('.sermon-item')?.querySelector('.sermon-row-title')?.textContent.trim() || '';
+            source.hidden = !source.textContent;
             list.replaceChildren();
             if (!targets.length) {
                 list.textContent = '현재 화면에 표시할 목차가 없습니다.';
@@ -3957,6 +3969,7 @@ const ReadingTools = {
                     const button = document.createElement('button');
                     button.type = 'button';
                     button.textContent = target.textContent.trim();
+                    button.classList.toggle('reading-contents-sub', target.matches('.sermon-subsection'));
                     button.addEventListener('click', () => {
                         dialog.close();
                         target.setAttribute('tabindex', '-1');
@@ -3967,6 +3980,7 @@ const ReadingTools = {
                 });
             }
             dialog.showModal();
+            dialog.scrollTop = 0;
         };
         bar.addEventListener('click', event => {
             const action = event.target.closest('button')?.dataset.readingAction;
@@ -3975,13 +3989,24 @@ const ReadingTools = {
             if (action === 'top') window.scrollTo({ top: 0, behavior: scrollBehavior() });
         }, { signal });
         dialog.querySelector('.reading-contents-close').addEventListener('click', () => dialog.close(), { signal });
+        let pressedBackdrop = false;
+        const isBackdrop = event => {
+            const rect = dialog.getBoundingClientRect();
+            return event.target === dialog && (event.clientX < rect.left || event.clientX >= rect.right
+                || event.clientY < rect.top || event.clientY >= rect.bottom);
+        };
+        dialog.addEventListener('pointerdown', event => { pressedBackdrop = isBackdrop(event); }, { signal });
+        dialog.addEventListener('click', event => {
+            if (pressedBackdrop && isBackdrop(event)) dialog.close();
+            pressedBackdrop = false;
+        }, { signal });
         window.addEventListener('scroll', refresh, { passive: true, signal });
         window.addEventListener('resize', refresh, { passive: true, signal });
         signal.addEventListener('abort', () => {
             dialog.close();
             dialog.remove();
             bar.remove();
-            document.body.classList.remove('reading-tools-visible');
+            document.body.classList.remove('reading-tools-active');
         }, { once: true });
         refresh();
     }
