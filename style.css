@@ -1599,6 +1599,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     margin-bottom: 0.15rem;
 }
 .home-hero-visit .btn-hero-primary { min-height: 44px; padding-inline: 1rem; }
+/* 홈 첫 화면 버튼은 그림자를 옅게 해서 떠 보이지 않게 한다 */
+.home-hero-visit .btn-hero-primary { box-shadow: 0 1px 2px color-mix(in srgb, var(--text) 10%, transparent); }
 .home-hero-image {
     grid-area: image;
     display: block;
