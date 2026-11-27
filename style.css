@@ -1565,7 +1565,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(90deg, var(--white) 0%, color-mix(in srgb, var(--white) 92%, transparent) 36%, color-mix(in srgb, var(--white) 38%, transparent) 100%);
+    background: linear-gradient(90deg, var(--white) 0%, color-mix(in srgb, var(--white) 96%, transparent) 34%, transparent 70%);
     pointer-events: none;
 }
 .home .hero-content {
@@ -1627,20 +1627,23 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .home .home-hero-image {
     position: absolute;
-    inset: 0;
+    inset: auto 0 0 auto;
     z-index: -2;
-    width: 100%;
-    height: 100%;
+    width: auto;
+    max-width: 65%;
+    max-height: calc(100% - var(--nav-h));
+    height: auto;
     aspect-ratio: auto;
-    object-fit: cover;
-    object-position: center 58%;
+    object-fit: contain;
+    object-position: right bottom;
     border-radius: 0;
 }
 @media (max-width: 799px) {
     .home .hero::after {
-        background: linear-gradient(180deg, color-mix(in srgb, var(--white) 91%, transparent) 0%, color-mix(in srgb, var(--white) 85%, transparent) 70%, color-mix(in srgb, var(--white) 65%, transparent) 100%);
+        background: linear-gradient(180deg, var(--white) 0%, var(--white) 48%, transparent 74%);
     }
-    .home .hero-content { min-height: 26rem; }
+    .home .hero-content { padding-block: 1.5rem calc(62.5vw + 1rem); }
+    .home .home-hero-image { width: 100%; max-width: 100%; }
 }
 .home .hero .btn-outline { background: var(--white); }
 @media (min-width: 800px) {
