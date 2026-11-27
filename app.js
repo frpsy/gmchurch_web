@@ -2882,8 +2882,10 @@ const SermonsRenderer = {
 
         const list = el.querySelector('#sermon-list');
         const sortBtns = el.querySelectorAll('.sermon-sort-btn');
-        sortBtns.forEach(btn => btn.addEventListener('click', () => {
+        const sortGroup = el.querySelector('.sermon-sort');
+        sortBtns.forEach((btn, index) => btn.addEventListener('click', () => {
             sortBtns.forEach(control => control.setAttribute('aria-pressed', String(control === btn)));
+            sortGroup.style.setProperty('--sort-index', index);
             this._sort(list, archive, btn.dataset.sort);
         }));
 
