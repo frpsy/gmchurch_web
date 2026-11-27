@@ -21,7 +21,19 @@ function section(text) {
         : { title: heading[2], label: heading[2], depth: 3, className: 'sermon-subsection' };
 }
 
-export function renderSermon(item) {
+// 글 끝 「이전·다음 글」 칸. 날짜 순서로 앞뒤 설교·강연을 잇는다
+function pagerLink(entry, dir) {
+    if (!entry) return '';
+    const [y, m, d] = entry.date.split('-').map(Number);
+    const label = `${dir === 'prev' ? '이전' : '다음'} ${entry.kind || '설교'}`;
+    return `<a class="sermon-pager-link sermon-pager-link--${dir}" href="sermon-${entry.pageId}.html" rel="${dir}">
+                            <span class="sermon-pager-dir">${label}</span>
+                            <span class="sermon-pager-title">${escape(entry.title)}</span>
+                            <span class="sermon-pager-meta">${y}년 ${m}월 ${d}일 · ${escape(entry.preacher)}</span>
+                        </a>`;
+}
+
+export function renderSermon(item, { prev, next } = {}) {
     const { pageId, paragraphs, title, kind = '설교' } = item;
     const sections = paragraphs.map(section);
     const anchor = index => `sermon-section-${pageId}-${index}`;
@@ -73,7 +85,7 @@ export function renderSermon(item) {
     <main id="main-content" class="sermon-reading">
         <article aria-labelledby="sermon-title">
             <header class="sermon-reading-header">
-                <a class="sermon-archive-link" href="sermons.html">설교 말씀 목록</a>
+                <a class="sermon-archive-link" href="sermons.html">설교와 강연 목록</a>
                 <h1 id="sermon-title">${titleText}</h1>
                 <div class="sermon-reading-byline">
                     <span>${escape(item.preacher)}</span>
@@ -99,7 +111,11 @@ ${body}
                     <div class="sermon-reading-footer">
                         ${item.note ? `<p>${escape(item.note)}</p>` : ''}
                         ${source}
-                        <a class="sermon-archive-link" href="sermons.html">설교 말씀 목록</a>
+                        ${prev || next ? `<nav class="sermon-pager" aria-label="다른 설교와 강연">
+                        ${pagerLink(prev, 'prev')}
+                        ${pagerLink(next, 'next')}
+                        </nav>` : ''}
+                        <a class="sermon-archive-link" href="sermons.html">설교와 강연 목록</a>
                     </div>
                 </div>
             </div>
@@ -112,13 +128,15 @@ ${scripts}`.replace(/^[ 	]+$/gm, '');
 export function sermonPages() {
     const pages = new Map();
     const dates = new Set();
+    const byDate = [...context.items].sort((a, b) => a.date.localeCompare(b.date));
     for (const item of context.items) {
         const filename = `sermon-${item.pageId}.html`;
         if (!/^\d{4}-\d{2}-\d{2}$/.test(item.pageId) || pages.has(filename) || dates.has(item.date)) {
             throw new Error(`설교 주소 또는 날짜가 올바르지 않거나 겹칩니다: ${item.pageId}, ${item.date}`);
         }
         dates.add(item.date);
-        pages.set(filename, renderSermon(item));
+        const at = byDate.indexOf(item);
+        pages.set(filename, renderSermon(item, { prev: byDate[at - 1], next: byDate[at + 1] }));
     }
     return pages;
 }

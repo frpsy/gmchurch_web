@@ -3252,7 +3252,12 @@ const SundaysRenderer = {
         '필립비':'php','빌립보':'php','골로사이':'col','골로새':'col',
         '데살로니카전서':'1th','데살로니카후서':'2th','데살로니가전서':'1th','데살로니가후서':'2th','살전':'1th','살후':'2th',
         '디모테오전서':'1ti','디모테오후서':'2ti','디모데전서':'1ti','디모데후서':'2ti','디도':'tit','빌레몬':'phm','필레몬':'phm','히브리':'heb',
-        '야고보':'jas','베드로전서':'1pe','베드로후서':'2pe','유다':'jud','묵시록':'rev','요한계시록':'rev'
+        '야고보':'jas','베드로전서':'1pe','베드로후서':'2pe','유다':'jud','묵시록':'rev','요한계시록':'rev',
+        // 공동번역 약어(설교 봉독 표기)
+        '열왕상':'1ki','열왕하':'2ki','이사':'isa','예레':'jer','에제':'ezk','다니':'dan',
+        '사도':'act','1고린':'1co','2고린':'2co','갈라':'gal','에페':'eph','필립':'php','골로':'col',
+        '1데살':'1th','2데살':'2th','1디모':'1ti','2디모':'2ti','히브':'heb','야고':'jas',
+        '1베드':'1pe','2베드':'2pe','1요한':'1jn','2요한':'2jn','3요한':'3jn','묵시':'rev'
     },
     _bibleUrl(ref) {
         if (!ref) return null;
@@ -3849,6 +3854,7 @@ const App = {
         NextStepRenderer.render();
         MoreToggle.render();
         if (animateReveal) ScrollReveal.init(signal);
+        SermonReading.render(signal);
         ReadingTools.render(signal);
     },
 
@@ -3883,6 +3889,39 @@ const App = {
             ? document.fonts.ready
             : Promise.resolve();
         ready.then(() => requestAnimationFrame(() => this._scrollToHash(hash)));
+    }
+};
+
+/* 설교·강연 읽기 페이지(sermon-*.html): 넓은 화면 목차 펼침·지금 읽는 절 강조, 봉독 구절을 공동번역 본문으로 연결 */
+const SermonReading = {
+    _WIDE: '(min-width: 70rem)',  // style.css 설교 읽기 2단 배치와 같은 기준
+
+    render(signal) {
+        const layout = document.querySelector('.sermon-reading-layout');
+        if (!layout) return;
+        document.querySelectorAll('.sermon-scripture-ref').forEach(span => {
+            const ref = span.textContent.trim();
+            const url = SundaysRenderer._bibleUrl(ref);
+            if (!url) return;
+            const link = document.createElement('a');
+            link.className = 'sermon-scripture-ref sermon-scripture-link';
+            link.href = url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = ref;
+            link.setAttribute('aria-label', `${ref} 공동번역 본문 보기(새 창)`);
+            span.replaceWith(link);
+        });
+
+        const toc = layout.querySelector('.sermon-toc');
+        if (!toc) return;
+        const wide = window.matchMedia(this._WIDE);
+        const sync = () => { toc.open = wide.matches; };
+        sync();
+        wide.addEventListener('change', sync, { signal });
+        const links = [...toc.querySelectorAll('a[href^="#"]')];
+        links.forEach(link => { link.dataset.sermonSection = link.hash.slice(1); });
+        AboutNavRenderer.bindSpy(links, 'sermonSection', signal);
     }
 };
 
