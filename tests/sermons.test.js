@@ -12,8 +12,30 @@ const read = p => readFileSync(resolve(root, p), 'utf8');
 const ctx = {};
 vm.runInNewContext(read('data.js') + '\n;this.CHURCH_DATA = CHURCH_DATA;', ctx);
 const { sermons, navigation } = ctx.CHURCH_DATA;
+// data.js에 본문이 없어야 하므로, 본문을 붙이기 전의 목록 항목을 따로 보관한다
+const sermonsWithoutBodies = structuredClone(sermons.items);
+const sermonBodies = JSON.parse(read('data/sermon-bodies.json'));
+// 아래 본문 검사는 목록 항목과 본문 파일을 합쳐서 한다
+for (const s of sermons.items) Object.assign(s, sermonBodies[s.pageId]);
 
 describe('설교 말씀 데이터', () => {
+  it('data.js에는 본문이 없고 본문 파일과 설교 항목이 한 쌍이다', () => {
+    for (const s of sermonsWithoutBodies) {
+      expect(s, s.date).not.toHaveProperty('paragraphs');
+      expect(s, s.date).not.toHaveProperty('footnotes');
+      expect(s.quote, s.date).toBeTruthy();
+    }
+    const ids = sermonsWithoutBodies.map(s => s.pageId).sort();
+    expect(Object.keys(sermonBodies).sort()).toEqual(ids);
+  });
+
+  it('목록 카드 인용(quote)은 본문의 첫 강조 문장과 같다', () => {
+    for (const s of sermonsWithoutBodies) {
+      const first = (sermonBodies[s.pageId].paragraphs.join('\n').match(/\*\*(.+?)\*\*/) || [])[1];
+      expect(s.quote, s.date).toBe(first.replace(/\[\^\d+\]/g, '').trim());
+    }
+  });
+
   it('각 설교는 날짜·제목·문단·설교자를 갖는다', () => {
     expect(sermons.items.length).toBeGreaterThan(0);
     for (const s of sermons.items) {
@@ -102,6 +124,10 @@ describe('사이트 검색에서 설교와 강연 찾기', () => {
     search._results = {};
     search._sitemap = {};
     const pages = sermonPages();
+    // 본문은 검색을 처음 할 때 받으므로, 받기 전에는 본문 문장으로 설교가 잡히지 않는다
+    search._search('바빌론 유배 시대');
+    expect(search._results.innerHTML).not.toContain('sermon-2026-11-22.html#');
+    search._applySermonBodies(sermonBodies);
     for (const [date, term] of [
       ['2026-11-22', '바빌론 유배 시대'],
       ['2026-11-26', '1988년에 신학과에 입학']

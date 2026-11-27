@@ -2842,10 +2842,9 @@ const SermonsRenderer = {
             </div>`;
     },
 
-    // 매거진 카드에 넣을 인용: 편집자가 강조(**…**)한 첫 문장을 원문 그대로 쓴다. 각주 표시는 뺀다
+    // 매거진 카드에 넣을 인용: 편집자가 강조한 첫 문장(data.js quote). 본문 파일은 목록에서 받지 않는다
     _quote(item) {
-        const m = (item.paragraphs || []).join('\n').match(/\*\*(.+?)\*\*/);
-        return m ? m[1].replace(/\[\^\d+\]/g, '').trim() : '';
+        return item.quote || '';
     },
 
     // 매거진 카드: feature(최신 1편, 크게)와 card(다음 2편, 중간). 목록 줄과 같은 개별 페이지로 간다
@@ -4190,19 +4189,51 @@ const MenuOverlay = {
             add(it.q, 'faq.html#faq', '자주 묻는 질문',
                 join(cat.title, (it.a || '').replace(/<[^>]+>/g, ' ')))));
 
+        // 설교 본문 문단은 여기서 넣지 않는다. 검색어가 처음 들어올 때 _loadSermonBodies가 채운다(passages).
         for (const sermon of d.sermons?.items || []) {
             out.push({
                 label: sermon.title,
                 href: `sermon-${sermon.pageId}.html`,
                 group: sermon.kind || '설교 말씀',
-                text: join(sermon.preacher, sermon.scripture, sermon.occasion),
-                passages: sermon.paragraphs.map((paragraph, index) => ({
-                    text: paragraph.replace(/^#{2,3} |\*\*|\[\^\d+\]/g, '').replace(/\s+/g, ' ').trim(),
-                    anchor: `#sermon-section-${sermon.pageId}-${index}`
-                }))
+                text: join(sermon.preacher, sermon.scripture, sermon.occasion)
             });
         }
         return out;
+    },
+
+    // 설교 본문(data/sermon-bodies.json)은 검색어를 처음 입력할 때만 받아 설교 항목에 문단을 붙인다.
+    // 실패하면 다음 검색 때 다시 받는다. 받는 동안에는 제목·설교자 일치만 보인다.
+    async _loadSermonBodies() {
+        if (this._sermonBodiesLoaded || this._sermonBodiesLoading) return;
+        this._sermonBodiesLoading = true;
+        try {
+            const res = await fetch('data/sermon-bodies.json');
+            if (!res.ok) throw new Error(String(res.status));
+            this._applySermonBodies(await res.json());
+        } catch (_) {
+            this._sermonBodiesLoading = false;
+            return;
+        }
+        // 로드 완료 시점에 검색 중이면 결과 갱신
+        if (this._overlay && this._overlay.classList.contains('is-open') && this._input.value.trim()) {
+            this._search(this._input.value);
+        }
+    },
+
+    // 받은 본문(pageId별 paragraphs)을 설교 색인 항목에 문단 위치와 함께 붙인다.
+    _applySermonBodies(bodies) {
+        const SERMON_HREF = /^sermon-(\d{4}-\d{2}-\d{2})\.html$/;
+        (this._index || []).forEach(item => {
+            const m = item.href.match(SERMON_HREF);
+            const body = m && bodies[m[1]];
+            if (!body) return;
+            item.passages = body.paragraphs.map((paragraph, index) => ({
+                text: paragraph.replace(/^#{2,3} |\*\*|\[\^\d+\]/g, '').replace(/\s+/g, ' ').trim(),
+                anchor: `#sermon-section-${m[1]}-${index}`
+            }));
+        });
+        this._sermonBodiesLoaded = true;
+        this._sermonBodiesLoading = false;
     },
 
     // 정적 HTML 페이지를 fetch해 섹션 단위로 인덱싱 (첫 검색 시 1회). 실패 시 무시.
@@ -4383,6 +4414,7 @@ const MenuOverlay = {
             this._results.innerHTML = '';
             return;
         }
+        this._loadSermonBodies();
         const ql = q.toLowerCase();
         const hits = [];
         this._index.forEach(item => {

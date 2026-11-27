@@ -45,7 +45,7 @@
 
 ## 설교 등록
 
-설교 원문은 `data.js`의 `sermons.items`에 넣는다. `pageId`에는 최초 공개 때의 날짜를 쓰고 표시 날짜를 정정할 때도 주소는 유지한다. 본문에 절 제목이 없으면 `toc`에 문단 위치(0부터 시작)와 편집자 목차 문구를 넣는다. 수정 뒤 `node scripts/build-sermons.js`를 실행하고 생성된 HTML과 원본 데이터를 함께 검토한다. 개별 HTML은 직접 편집하지 않는다.
+설교 항목(날짜·제목·설교자·`quote` 등)은 `data.js`의 `sermons.items`에, 본문(`paragraphs`·`footnotes`)은 `data/sermon-bodies.json`에 같은 `pageId` 키로 넣는다. 본문 파일은 사이트 검색 창에서 검색어를 처음 입력할 때만 받는다. `pageId`에는 최초 공개 때의 날짜를 쓰고 표시 날짜를 정정할 때도 주소는 유지한다. 본문에 절 제목이 없으면 `toc`에 문단 위치(0부터 시작)와 편집자 목차 문구를 넣는다. 수정 뒤 `node scripts/build-sermons.js`를 실행하고 생성된 HTML과 원본 데이터를 함께 검토한다. 개별 HTML은 직접 편집하지 않는다.
 
 ## 내비게이션 구조 (현재)
 
