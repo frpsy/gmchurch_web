@@ -27,7 +27,6 @@
     --brand-sub:    #c4d4c0;  /* 로고 부제 — 항상 어두운 숲 녹 바탕 위(헤더·푸터·로고 소개) */
     --gold:         #a8bd9f;  /* 세이지 — 장식선·어두운 배경 위 강조 전용(밝은 배경 글자 금지) */
     --gold-bg:      #edf2ea;
-    --sermon-feature-bg: #edf2ea;
     --sage-ink:     #3f6046;  /* 밝은 배경 위 세이지 계열 글자 (AA 7.06:1, white) */
     --font-brand:   "BrandSerif", "Pretendard", -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
     /* Neutrals */
@@ -4363,7 +4362,6 @@ footer {
         /* Gold — 다크 배경 대비 밝게 조정 */
         --gold:         #b5c9b0;
         --gold-bg:      #19221c;
-        --sermon-feature-bg: #19221c;
         --sage-ink:     #b5c9b0;
         /* Nav */
         --nav-glass:    rgba(9, 26, 20, 0.96);
@@ -5567,16 +5565,20 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .sermon-toc a:hover { color: var(--md-primary); text-decoration: underline; }
 .sermon-toc-sub { padding-left: 1rem; }
 .sermon-body :is(.sermon-section, .sermon-subsection) { scroll-margin-top: calc(var(--nav-h) + 1rem); }
+/* 최신 설교·강연은 사이트 테마색(초록 포인트)으로 채운다. 라이트 흰 글씨 7.9:1, 다크 짙은 글씨 5.9:1 */
 .sermon-feature .bulletin-row {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-3);
     padding: clamp(1rem, 4vw, 1.5rem);
-    background: var(--sermon-feature-bg);
+    background: var(--md-primary);
+    color: var(--md-on-primary);
 }
 .sermon-feature .bulletin-row:is(:hover, [aria-expanded="true"]) {
-    background: color-mix(in srgb, var(--sermon-feature-bg) 94%, var(--heading));
+    background: color-mix(in srgb, var(--md-primary) 88%, var(--md-on-primary));
 }
+.sermon-feature .sermon-kind,
+.sermon-feature .sermon-byline { color: var(--md-on-primary); }
 .sermon-feature .bulletin-row-info {
     gap: var(--space-2);
 }
@@ -5589,7 +5591,7 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    color: var(--sage-ink);
+    color: var(--md-on-primary);
     font-size: var(--fs-sm);
     font-weight: 600;
 }
