@@ -6062,6 +6062,15 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .sermon-reading .sermon-notes { margin-block-start: 2.5rem; }
 .sermon-reading .sermon-notes h2 { color: var(--heading); font-size: 1rem; margin: 0 0 0.75rem; }
 .sermon-reading .sermon-reading-footer { border-block-start: 1px solid var(--border); margin-block-start: 2rem; padding-block-start: 1rem; }
+.sermon-reading-footer .sermon-archive-link {
+    padding-inline: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.35rem;
+    background: var(--cream);
+    font-weight: 650;
+    text-decoration: none;
+}
+.sermon-reading-footer .sermon-archive-link:hover { text-decoration: underline; }
 .sermon-reading :focus-visible { outline: 2px solid var(--md-primary); outline-offset: 3px; }
 
 @media (min-width: 70rem) {
