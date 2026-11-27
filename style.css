@@ -5528,20 +5528,6 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .news-post-title { font-size: var(--fs-body); line-height: var(--lh-snug); color: var(--heading); margin: 0 0 0.4rem; }
 .news-post p { margin: 0; line-height: 1.8; color: var(--text); }
 .news-post p + p { margin-top: 0.3rem; }
-/* 설교 목록의 따뜻한 종이색 표면 */
-.sermons-page {
-    --cream: #f7f4ee;
-    --white: #fffdf9;
-    --border: #ded8cd;
-}
-@media (prefers-color-scheme: dark) {
-    .sermons-page {
-        --cream: #22211f;
-        --white: #292724;
-        --border: #45413b;
-    }
-}
-
 /* ── 설교 말씀 (sermons.html) ── */
 .sermon-column {
     width: 100%;
