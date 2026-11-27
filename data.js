@@ -1927,6 +1927,7 @@ const CHURCH_DATA = {
             {
                 date: "2026-11-22",
                 title: "왕이신 그리스도는 어디에 계시는가?",
+                toc: [{ index: 0, label: "왕이신 그리스도 주일" }, { index: 2, label: "세상의 왕과 다른 그리스도의 왕권" }, { index: 3, label: "에제키엘이 전하는 목자와 양" }, { index: 5, label: "가장 작은 이들 가운데 계신 왕" }, { index: 7, label: "외면하지 않는 신앙" }, { index: 9, label: "그리스도의 통치를 드러내는 교회" }],
                 scripture: "에제 34:11-16,20-24 / 에페 1:15-23 / 마태 25:31-46",
                 preacher: "민숙희(마가렛) 사제",
                 footnotes: [
@@ -2064,6 +2065,7 @@ const CHURCH_DATA = {
             {
                 date: "2026-05-10",
                 title: "예루살렘과 아테네가 무슨 상관이 있는가?",
+                toc: [{ index: 0, label: "아테네에서 복음을 전한 바울" }, { index: 3, label: "에피쿠로스학파와 마음의 평정" }, { index: 5, label: "스토아학파와 로고스" }, { index: 6, label: "그리스 철학과 기독교의 만남" }, { index: 7, label: "양심과 구원의 가능성" }, { index: 9, label: "양심과 성령이 이끄는 삶" }],
                 scripture: "사도 17:22-31 / 시편 66편 / 1베드 3:13-22 / 요한 14:15-21",
                 preacher: "이남호(사도요한) 사제",
                 source: { label: "원문 보기(네이버 블로그)", url: "https://m.blog.naver.com/brave9955/224288238997" },
@@ -2190,6 +2192,7 @@ const CHURCH_DATA = {
             {
                 date: "2026-09-20",
                 title: "물질을 넘어서는 가치",
+                toc: [{ index: 0, label: "재물과 인간의 갈등" }, { index: 2, label: "물질이 우리의 마음에 미치는 영향" }, { index: 5, label: "돈으로 환산할 수 없는 가치" }, { index: 7, label: "먼저 하느님의 나라를 구하는 삶" }, { index: 9, label: "현재를 충실히 살아가기" }],
                 scripture: "신명 28:1-14 / 시편 65편 / 2고린 9:6-15 / 루가 12:16-30",
                 preacher: "이남호(사도요한) 사제",
                 "footnotes": [

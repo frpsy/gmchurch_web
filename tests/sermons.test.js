@@ -61,6 +61,28 @@ describe('설교 말씀 데이터', () => {
     }
   });
 
+  it('모든 설교의 목차가 유효한 본문 위치로 연결된다', () => {
+    const app = read('app.js');
+    const source = app.slice(app.indexOf('const SermonsRenderer = {'), app.indexOf('/* ── NextStepRenderer'));
+    const context = {};
+    vm.runInNewContext(source + '\n;this.renderer = SermonsRenderer;', context);
+    for (const sermon of sermons.items) {
+      const html = context.renderer._bodyHtml(sermon);
+      const targets = [...html.matchAll(/href="#(sermon-section-[^"]+)"/g)].map(match => match[1]);
+      expect(targets.length, sermon.date).toBeGreaterThan(0);
+      for (const target of targets) expect(html, sermon.date).toContain(`id="${target}"`);
+      if (sermon.toc) {
+        let previous = -1;
+        for (const entry of sermon.toc) {
+          expect(entry.label.trim(), sermon.date).not.toBe('');
+          expect(entry.index, sermon.date).toBeGreaterThan(previous);
+          expect(entry.index, sermon.date).toBeLessThan(sermon.paragraphs.length);
+          previous = entry.index;
+        }
+      }
+    }
+  });
+
   it('원문 출처 링크가 있으면 https 주소다', () => {
     for (const s of sermons.items) {
       if (s.source) expect(s.source.url).toMatch(/^https:\/\//);

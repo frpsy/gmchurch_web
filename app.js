@@ -2849,7 +2849,7 @@ const SermonsRenderer = {
             ? `<p class="news-intro"><a href="${item.source.url}" target="_blank" rel="noopener" aria-label="${item.source.label} (새 창으로 열림)">${item.source.label}</a></p>`
             : '';
         const note = item.note ? `<p class="news-intro">※ ${item.note}</p>` : '';
-        const headings = item.paragraphs.map((text, index) => {
+        const headings = item.toc || item.paragraphs.map((text, index) => {
             if (/^\d+\.$/.test(text.trim())) return { index, label: `${text.trim()} 부분`, sub: false };
             if (text.startsWith('## ')) return { index, label: text.slice(3), sub: false };
             if (text.startsWith('### ')) return { index, label: text.slice(4), sub: true };
@@ -2887,7 +2887,7 @@ const SermonsRenderer = {
             .replace(/\*\*(.+?)\*\*/g, '<strong class="sermon-em">$1</strong>')
             .replace(/\[\^(\d+)\]/g, (all, n) =>
                 `<sup class="sermon-fn-ref"><a href="#fn-${date}-${n}" id="fnref-${date}-${n}" aria-label="주석 ${n}">${n}</a></sup>`);
-        return `<p>${html}</p>`;
+        return `<p id="${id}" tabindex="-1">${html}</p>`;
     },
 
     // 편집자 주석(각주) 목록. 각 주석에서 본문으로 돌아가는 링크를 단다
