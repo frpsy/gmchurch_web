@@ -4432,6 +4432,73 @@ footer {
     z-index: 1050;
     pointer-events: none;
 }
+.reading-tools-visible #back-to-top { visibility: hidden; }
+.reading-tools {
+    position: fixed;
+    left: 50%;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 1050;
+    display: flex;
+    width: min(20rem, calc(100% - 2rem));
+    padding: 0.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--surface-nav);
+    box-shadow: var(--shadow-md);
+}
+.reading-tools[hidden] { display: none; }
+.reading-tools button {
+    display: grid;
+    place-items: center;
+    gap: 0.1rem;
+    flex: 1;
+    min-height: 48px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--heading);
+    font-size: var(--fs-label);
+    cursor: pointer;
+}
+.reading-tools button:is(:hover, :focus-visible) { background: var(--cream); }
+.reading-tools svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.reading-contents {
+    width: min(32rem, calc(100% - 2rem));
+    max-height: min(75vh, 40rem);
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    color: var(--heading);
+}
+.reading-contents::backdrop { background: rgba(0, 0, 0, 0.5); }
+.reading-contents-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.reading-contents-head h2 { margin: 0; font-size: var(--fs-lead); }
+.reading-contents-close { min-width: 44px; min-height: 44px; border: 0; background: transparent; color: var(--heading); cursor: pointer; }
+.reading-contents-list { display: grid; }
+.reading-contents-list button {
+    min-height: 44px;
+    padding: 0.65rem 0.4rem;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+    line-height: 1.5;
+    cursor: pointer;
+}
+.reading-contents-list button:is(:hover, :focus-visible) { color: var(--md-primary); }
+.reading-tools-visible main :is(h2, h3) { scroll-margin-top: calc(var(--nav-h) + 1rem); }
+@media print { .reading-tools, .reading-contents { display: none !important; } }
 #back-to-top.visible {
     opacity: 1;
     transform: translateY(0);
