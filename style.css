@@ -234,6 +234,8 @@ footer a:focus-visible, footer button:focus-visible {
 }
 a:focus:not(:focus-visible),
 button:focus:not(:focus-visible) { outline: none; }
+/* 페이지 전환 뒤 화면 낭독기용으로 옮긴 제목 포커스는 누를 곳이 아니므로 테두리를 그리지 않는다 */
+main h1[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 
 /* ── Scroll Progress Bar ─────────────────────────────────── */
 #scroll-progress-bar {
