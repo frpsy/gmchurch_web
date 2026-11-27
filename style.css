@@ -1769,8 +1769,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .home .visit-facts a { text-decoration: underline; text-underline-offset: 0.18em; }
 
 .home-end-links {
-    padding-bottom: clamp(1.75rem, 4vw, 3rem);
-    background: var(--white);
+    background: var(--cream);
+    border-top: 1px solid var(--border);
 }
 .home-end-links ul {
     display: grid;
@@ -1780,6 +1780,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     overflow: hidden;
+    background: var(--white);
 }
 .home-end-links li + li { border-top: 1px solid var(--border); }
 .home-end-links a {
