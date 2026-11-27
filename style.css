@@ -1644,7 +1644,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .home #visit-preview { background: var(--white); }
 
-#about-brief-content, .home-worship-layout, #location-card {
+#about-brief-content, #location-card {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: clamp(1.25rem, 3.5vw, 2.5rem);
@@ -1734,26 +1734,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     font-weight: 650;
     font-variant-numeric: tabular-nums;
 }
-.home #this-sunday {
-    background: var(--white);
-    border-radius: var(--radius-xl);
-    margin: 0;
-    padding: clamp(1rem, 2.4vw, 1.5rem);
-}
-.home .this-sunday h3 {
-    margin-bottom: 0.25rem;
-    font-weight: 650;
-}
-.this-sunday-date {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.15rem 0.55rem;
-    margin: 0 0 0.8rem;
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
-    word-break: keep-all;
-}
-.this-sunday-date time { white-space: nowrap; }
 .home .home-section-actions { margin-top: var(--space-4); }
 .home .home-detail-link {
     gap: 0.5rem;
@@ -1831,11 +1811,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     .home-end-links li:nth-child(2) { border-top: 0; }
     .home-end-links li:nth-child(even) { border-left: 1px solid var(--border); }
     #about-brief-content { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
-    .home-worship-layout:has(#this-sunday:not([hidden])) {
-        grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    }
-    .home-worship-layout:has(#this-sunday:not([hidden])) #worship-grid { grid-template-columns: 1fr; }
-    .home-worship-layout:has(#this-sunday[hidden]) #worship-grid { column-gap: 1.5rem; }
+    .home #worship-grid { column-gap: 1.5rem; }
     #location-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 768px) {
