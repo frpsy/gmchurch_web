@@ -1651,10 +1651,15 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     align-items: start;
 }
 .home #about-brief .section-title { font-weight: 700; }
+.home #about-brief-content {
+    max-width: 42rem;
+    margin-inline: auto;
+}
 .home-about-copy .about-brief-lead {
     font-size: var(--fs-body);
     line-height: var(--lh-body);
-    text-wrap: pretty;
+    text-align: center;
+    text-wrap: balance;
     font-weight: 500;
     letter-spacing: normal;
     margin-bottom: 0.75rem;
@@ -1735,6 +1740,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     font-variant-numeric: tabular-nums;
 }
 .home .home-section-actions { margin-top: var(--space-4); }
+.home #about-brief-more { text-align: center; }
 .home .home-detail-link {
     gap: 0.5rem;
     min-height: 44px;
@@ -1810,7 +1816,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     .home-end-links ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .home-end-links li:nth-child(2) { border-top: 0; }
     .home-end-links li:nth-child(even) { border-left: 1px solid var(--border); }
-    #about-brief-content { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
     .home #worship-grid { column-gap: 1.5rem; }
     #location-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
