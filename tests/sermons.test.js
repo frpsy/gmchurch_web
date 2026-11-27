@@ -135,6 +135,24 @@ describe('설교 읽기 도구', () => {
     expect(source).toContain('<span>설교</span>');
   });
 
+  it('설교 읽기 페이지가 아니면 하단 도구를 만들지 않는다', () => {
+    const app = read('app.js');
+    const source = app.slice(app.indexOf('const ReadingTools = {'), app.indexOf("window.addEventListener('DOMContentLoaded'", app.indexOf('const ReadingTools = {')));
+    const run = hasReadingLayout => {
+      const created = [];
+      const main = { querySelector: sel => (sel === '.sermon-reading-layout' && hasReadingLayout ? {} : null) };
+      const document = {
+        getElementById: id => (id === 'main-content' ? main : null),
+        createElement: tag => { created.push(tag); throw new Error('stop'); }
+      };
+      const ReadingTools = new Function('document', `${source}; return ReadingTools;`)(document);
+      try { ReadingTools.render({}); } catch (e) { /* 설교 페이지면 만들기 시작한 것만 확인한다 */ }
+      return created.length;
+    };
+    expect(run(false)).toBe(0);
+    expect(run(true)).toBeGreaterThan(0);
+  });
+
   it('성경 봉독 항목은 각 구절을 묶어서 표시한다', () => {
     const html = sermonPages().get('sermon-2026-11-22.html');
     const meta = html.match(/<dd>(.*?)<\/dd>/)[1];
