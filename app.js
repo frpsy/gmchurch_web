@@ -367,7 +367,7 @@ const FooterRenderer = {
                         <p class="footer-brand-slogan">"${info.slogan}"</p>
                         <p class="footer-brand-meta">${info.subName} · 설립 ${info.established}<br>${clergy[0].name} ${clergy[0].title.split('·')[0].trim()}</p>
                     </div>
-                    <div class="footer-col">
+                    <div class="footer-col footer-practical">
                         <h2>${worshipNavLabel}</h2>
                         ${services.map(s => `
                         <div class="footer-service-row">
@@ -516,7 +516,7 @@ const IndexRenderer = {
         this._header('about-brief-header', about);
         el.innerHTML = `
             <div class="home-about-copy">
-                <p class="about-brief-lead">${aboutLead}</p>
+                <p class="about-brief-lead">${aboutLead.map(sentence => `<span>${sentence}</span>`).join(' ')}</p>
                 <p class="about-brief-desc">${aboutDesc}</p>
                 <a href="clergy.html" class="about-brief-link">${about.more}</a>
             </div>
@@ -544,7 +544,7 @@ const IndexRenderer = {
         // 홈 카드는 요약(summary)만 — 전문은 worship.html에서
         el.innerHTML = CHURCH_DATA.worship.main.map(w => `
             <div class="card">
-                <h3>${w.title}${w.en ? ` <span class="term-en" lang="en">${w.en}</span>` : ''}</h3>
+                <h3>${w.title}</h3>
                 <p class="card-time">${w.time}${w.duration ? ` · ${w.duration}` : ''}</p>
                 <p class="card-desc">${w.summary || w.desc}</p>
             </div>
@@ -608,7 +608,7 @@ const IndexRenderer = {
                 </div>
                 <ul class="visit-quick" aria-label="방문 안내 바로가기">
                     ${g.cards.map(c => `
-                        <li><a href="${c.href}"><span>${c.title}${c.en ? ` <span class="term-en" lang="en">${c.en}</span>` : ''}</span></a></li>
+                        <li><a href="${c.href}">${c.title}</a></li>
                     `).join('')}
                 </ul>
             </div>
