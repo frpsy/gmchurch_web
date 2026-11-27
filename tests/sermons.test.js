@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import vm from 'node:vm';
+import { sermonPages } from '../scripts/build-sermons.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = p => readFileSync(resolve(root, p), 'utf8');
@@ -61,26 +62,21 @@ describe('설교 말씀 데이터', () => {
     }
   });
 
-  it('모든 설교의 목차가 유효한 본문 위치로 연결된다', () => {
-    const app = read('app.js');
-    const source = app.slice(app.indexOf('const SermonsRenderer = {'), app.indexOf('/* ── NextStepRenderer'));
-    const context = {};
-    vm.runInNewContext(source + '\n;this.renderer = SermonsRenderer;', context);
-    for (const sermon of sermons.items) {
-      const html = context.renderer._bodyHtml(sermon);
-      const targets = [...html.matchAll(/href="#(sermon-section-[^"]+)"/g)].map(match => match[1]);
-      expect(targets.length, sermon.date).toBeGreaterThan(0);
-      for (const target of targets) expect(html, sermon.date).toContain(`id="${target}"`);
-      if (sermon.toc) {
-        let previous = -1;
-        for (const entry of sermon.toc) {
-          expect(entry.label.trim(), sermon.date).not.toBe('');
-          expect(entry.index, sermon.date).toBeGreaterThan(previous);
-          expect(entry.index, sermon.date).toBeLessThan(sermon.paragraphs.length);
-          previous = entry.index;
-        }
-      }
+  it('모든 설교의 독립 HTML이 최신이며 목차와 각주 링크가 실제 위치를 가리킨다', () => {
+    const pages = sermonPages();
+    expect(pages.size).toBe(sermons.items.length);
+    for (const [file, expected] of pages) {
+      const html = read(file).replaceAll('\r\n', '\n');
+      expect(html, file).toBe(expected);
+      expect(html, file).toContain('<meta name="robots" content="noindex">');
+      const targets = [...html.matchAll(/href="#(sermon-section-[^"]+|fn(?:ref)?-[^"]+)"/g)];
+      expect(targets.some(match => match[1].startsWith('sermon-section-')), file).toBe(true);
+      const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
+      expect(new Set(ids).size, file).toBe(ids.length);
+      for (const [, target] of targets) expect(ids, file).toContain(target);
     }
+    expect(readdirSync(root).filter(name => /^sermon-\d{4}-\d{2}-\d{2}\.html$/.test(name)).sort())
+      .toEqual([...pages.keys()].sort());
   });
 
   it('원문 출처 링크가 있으면 https 주소다', () => {

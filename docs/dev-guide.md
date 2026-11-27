@@ -24,7 +24,7 @@
 | `worship.html` | 예배 | WorshipRenderer |
 | `bulletin.html` | 주일 주보 (noindex, 주보·소식 메뉴) | BulletinRenderer |
 | `news.html` | 교회 소식 — 주보 교회소식 날짜별 목록 (noindex, 주보·소식 메뉴) | NewsRenderer |
-| `sermons.html` | 설교 말씀 — `CHURCH_DATA.sermons` 목록(날짜·제목·설교자), 누르면 본문이 펼쳐지고 최신순·오래된순·제목순으로 정렬 (noindex, 주보·소식 메뉴) | SermonsRenderer |
+| `sermons.html` | 설교 말씀 — `CHURCH_DATA.sermons` 목록(날짜·제목·설교자), 제목을 누르면 독립 읽기 페이지로 이동하며 최신순·오래된순·제목순으로 정렬 (noindex, 주보·소식 메뉴) | SermonsRenderer |
 | `newcomer.html` | 처음 오신 분 | NewcomerRenderer |
 | `community.html` | 공동체 | CommunityRenderer |
 | `giving.html` | 헌금 | GivingRenderer |
@@ -42,6 +42,10 @@
 | `jubo/index.html` | 모바일 주보 (noindex, 단독 페이지 — 홈페이지에서 연결하지 않고 교우에게만 주소 안내, 데이터 `data/jubo/`) | 페이지 안 스크립트 |
 
 ---
+
+## 설교 등록
+
+설교 원문은 `data.js`의 `sermons.items`에 넣는다. `pageId`에는 최초 공개 때의 날짜를 쓰고 표시 날짜를 정정할 때도 주소는 유지한다. 본문에 절 제목이 없으면 `toc`에 문단 위치(0부터 시작)와 편집자 목차 문구를 넣는다. 수정 뒤 `node scripts/build-sermons.js`를 실행하고 생성된 HTML과 원본 데이터를 함께 검토한다. 개별 HTML은 직접 편집하지 않는다.
 
 ## 내비게이션 구조 (현재)
 

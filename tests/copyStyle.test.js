@@ -44,6 +44,8 @@ function dataParagraphs(node, path = '', out = []) {
 function htmlParagraphs() {
     const out = [];
     for (const file of readdirSync(ROOT).filter(f => f.endsWith('.html')).sort()) {
+        // 독립 설교 페이지의 본문은 편집한 사이트 문구가 아니라 원문이다.
+        if (/^sermon-\d{4}-\d{2}-\d{2}\.html$/.test(file)) continue;
         const html = readFileSync(join(ROOT, file), 'utf-8')
             .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '');
         for (const m of html.matchAll(/<(p|li|dd|blockquote)\b[^>]*>([\s\S]*?)<\/\1>/g)) {
