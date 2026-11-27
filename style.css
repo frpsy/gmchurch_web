@@ -1649,14 +1649,19 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     gap: clamp(1.25rem, 3.5vw, 2.5rem);
     align-items: start;
 }
+.home #about-brief .section-title { font-weight: 700; }
+.home-about-copy :is(.about-brief-lead, .about-brief-desc) {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    text-wrap: balance;
+}
 .home-about-copy .about-brief-lead {
-    font-weight: 650;
-    line-height: 1.62;
+    font-weight: 500;
+    letter-spacing: normal;
     margin-bottom: 0.75rem;
 }
 .home-about-copy .about-brief-desc {
     color: var(--text-muted);
-    line-height: var(--lh-body);
     margin-bottom: 0.65rem;
 }
 .home-about-facts .about-brief-facts {
@@ -1665,14 +1670,19 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     padding: 1rem 1.15rem;
     margin: 0 0 0.65rem;
 }
-.home-about-facts .about-brief-facts strong { color: var(--text-muted); }
+.home-about-facts .about-brief-facts strong {
+    min-width: 3em;
+    color: var(--text-muted);
+    font-weight: 550;
+}
 .home-about-facts .about-brief-award {
     background: var(--white);
     border-color: var(--border);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     margin-bottom: 0;
 }
 .home-about-facts .about-brief-award:hover { background: var(--cream); }
+.home-about-facts .about-brief-award-body strong { font-weight: 600; }
 .home-about-facts .about-brief-award-body,
 .home-about-facts .about-brief-facts span { min-width: 0; overflow-wrap: anywhere; }
 .home .about-brief-link {
@@ -1685,7 +1695,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     background: var(--cream);
     color: var(--heading);
     font-size: var(--fs-sm);
-    font-weight: 650;
+    font-weight: 600;
     line-height: var(--lh-heading);
     text-align: left;
 }
@@ -1725,6 +1735,40 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border-radius: var(--radius-xl);
     margin: 0;
     padding: clamp(1rem, 2.4vw, 1.5rem);
+}
+.home .this-sunday h3 {
+    margin-bottom: 0.25rem;
+    font-weight: 650;
+}
+.this-sunday-date {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 0.55rem;
+    margin: 0 0 0.8rem;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    word-break: keep-all;
+}
+.this-sunday-date time { white-space: nowrap; }
+.home .this-sunday .info-row {
+    display: grid;
+    grid-template-columns: 4em minmax(0, 1fr);
+    gap: 0.5rem;
+}
+.home .this-sunday .info-row strong {
+    min-width: 0;
+    color: var(--text-muted);
+    font-weight: 550;
+}
+.this-sunday-season {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 0.55rem;
+    word-break: keep-all;
+}
+.this-sunday-color {
+    color: var(--season-ink, var(--text-muted));
+    font-weight: 550;
 }
 .home #worship-more { margin-top: var(--space-4); }
 
