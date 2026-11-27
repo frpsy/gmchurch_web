@@ -3021,7 +3021,6 @@ const NewsRenderer = {
         const openIdx = wanted === -1 ? 0 : wanted;
 
         el.innerHTML = `
-            <p class="news-intro">${CHURCH_DATA.bulletins.newsIntro}</p>
             <div class="bulletin-list">${weeks.map((item, i) => `
                 <div class="bulletin-item" id="news-item-${item.date}">
                     ${this._rowHtml(item, i === 0, i === openIdx)}
