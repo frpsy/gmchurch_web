@@ -2697,7 +2697,8 @@ const BulletinRenderer = {
 
         // 첫 쪽의 최신 주보는 열 때 펼쳐 둔다(사용자 요청 2026-11-22)
         const listHtml = pageItems.map((item, relIdx) => {
-            const open = selectedDate ? item.date === selectedDate : page === 0 && relIdx === 0;
+            // 기본은 모두 접어 둔다. 날짜 주소로 들어온 경우에만 그 주보를 펼친다.
+            const open = Boolean(selectedDate) && item.date === selectedDate;
             return `
             <div class="bulletin-item">
                 ${this._rowHtml(item, start + relIdx === 0, open)}
