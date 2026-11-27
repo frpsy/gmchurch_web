@@ -100,7 +100,6 @@ const MapHelper = {
                     <div class="map-addr-row">
                         <span class="map-addr-tag">도로명</span>
                         <span class="map-addr-text">${addr}</span>
-                        <button class="map-copy-btn" data-copy="${addr}" aria-label="도로명 주소 복사">복사</button>
                     </div>
                     <div class="map-addr-row">
                         <span class="map-addr-tag">지번</span>
