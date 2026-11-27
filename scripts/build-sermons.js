@@ -60,7 +60,7 @@ export function renderSermon(item) {
     const listTitle = template.match(/<title>([^<]+)<\/title>/)?.[1];
     const listSummary = template.match(/<meta name="description" content="([^"]+)"/)?.[1];
     if (!listTitle || !listSummary) throw new Error('sermons.html의 제목 또는 설명을 찾지 못했습니다.');
-    const head = template.slice(0, template.indexOf('<body>'))
+    const head = template.slice(0, template.indexOf('<body'))
         .replaceAll(listTitle, () => `${titleText} — 대한성공회 광명교회`)
         .replaceAll(listSummary, () => summary)
         .replaceAll('/sermons.html', `/sermon-${pageId}.html`)
