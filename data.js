@@ -266,7 +266,7 @@ const CHURCH_DATA = {
         },
         thisSunday: {
             title: "다가오는 주일",
-            labels: { season: "절기", first: "제1독서", second: "제2독서", gospel: "복음" }
+            readingsLink: "이번 주 독서 보기"
         },
         guide: {
             eyebrow: "Welcome",
