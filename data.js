@@ -259,10 +259,7 @@ const CHURCH_DATA = {
             { label: "사진 갤러리", href: "gallery.html", icon: "camera" },
             { label: "미디어·자료", href: "media.html", icon: "film" }
         ],
-        heroActions: [
-            { label: "처음 오셨나요?", href: "newcomer.html", primary: true },
-            { label: "오시는 길", href: "visit.html" }
-        ],
+        newcomerLabel: "처음 오셨나요?",
         about: {
             title: "광명교회",
             facts: [
@@ -273,22 +270,13 @@ const CHURCH_DATA = {
         },
         worship: {
             title: "예배 안내",
-            sub: "주일에는 감사성찬례와 어린이 예배를 드립니다."
-        },
-        guide: {
-            eyebrow: "Welcome",
-            title: "처음 오셨나요?",
-            sub: "주차와 영성체 등 방문 전에 궁금한 점을 확인하세요.",
-            cards: [
-                { icon: "parking", title: "주차 안내", en: "Parking",      desc: "교회 근처에 무료로 주차할 수 있습니다.",                     href: "visit.html#parking",       action: "주차 안내 보기" },
-                { icon: "chalice", title: "영성체 안내", en: "Communion",    desc: "세례받은 모든 그리스도인이 성체를 모실 수 있습니다.",     href: "newcomer.html#communion",  action: "영성체 안내 보기" },
-                { icon: "question", title: "자주 묻는 질문", en: "FAQ",desc: "성공회와 예배에 관해 자주 묻는 질문을 모았습니다.",       href: "faq.html",                 action: "질문 보기" },
-                { icon: "book", title: "주일 주보", en: "Bulletin",      desc: "이번 주 주보를 이미지와 PDF로 보실 수 있습니다.", href: "bulletin.html",           action: "주보 보기" }
-            ]
+            more: "예배 자세히 보기"
         },
         visit: {
             title: "방문 안내",
-            phoneLabel: "전화"
+            addressLabel: "주소",
+            phoneLabel: "전화",
+            more: "오시는 길"
         }
     },
 

@@ -91,11 +91,11 @@ const MapHelper = {
         }
     },
 
-    html(compact = false) {
+    html() {
         const addr = CHURCH_DATA.info.address;
         const jibun = CHURCH_DATA.info.addressJibun;
         return `
-            <div class="map-card${compact ? ' map-card--compact' : ''}">
+            <div class="map-card">
                 <div class="map-card-addr">
                     <div class="map-addr-row">
                         <span class="map-addr-tag">도로명</span>
@@ -117,10 +117,9 @@ const MapHelper = {
                         <span class="map-btn-label">카카오 길찾기</span>
                     </a>
                 </div>
-                ${compact ? '' : `
                 <div class="map-preview">
                     <iframe class="map-embed" src="${this._embedSrc()}" title="대한성공회 광명교회 위치 — Google 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-                </div>`}
+                </div>
             </div>
         `;
     }
@@ -481,7 +480,6 @@ const IndexRenderer = {
             <li><a href="${link.href}">
                 <span class="home-end-icon">${icon(link.icon)}</span>
                 <span>${link.label}</span>
-                <span class="home-end-arrow">${icon('arrow-right')}</span>
             </a></li>
         `).join('');
     },
@@ -497,23 +495,21 @@ const IndexRenderer = {
 
     _hero() {
         const { slogan, vision } = CHURCH_DATA.info;
-        const { heroActions } = CHURCH_DATA.home;
+        const { newcomerLabel } = CHURCH_DATA.home;
 
         const title = document.getElementById('hero-title');
         const sub   = document.getElementById('hero-sub');
-        const acts  = document.getElementById('hero-actions');
+        const newcomer = document.getElementById('hero-newcomer');
         const service = document.getElementById('hero-service');
         const eucharist = CHURCH_DATA.worship.main.find(item => item.id === 'main');
 
         if (title) title.textContent = slogan;
         if (sub)   sub.textContent   = vision;
         if (service && eucharist) {
-            service.innerHTML = `<span><strong>${eucharist.time}</strong><small>${eucharist.title}</small></span>${icon('arrow-right')}`;
+            service.innerHTML = `<strong>${eucharist.title}</strong><span>${eucharist.time}</span>`;
         }
 
-        if (acts) acts.innerHTML = heroActions.map(a =>
-            `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label}</a>`
-        ).join('');
+        if (newcomer) newcomer.textContent = newcomerLabel;
     },
 
     _about() {
@@ -542,7 +538,7 @@ const IndexRenderer = {
             </div>
         `;
         const more = document.getElementById('about-brief-more');
-        if (more) more.innerHTML = `<a href="clergy.html" class="btn-outline home-detail-link">${about.more} ${icon('arrow-right')}</a>`;
+        if (more) more.innerHTML = `<a href="clergy.html" class="home-detail-link">${about.more} ${icon('arrow-right')}</a>`;
     },
 
     _worship() {
@@ -550,6 +546,8 @@ const IndexRenderer = {
         if (!el) return;
         const home = CHURCH_DATA.home.worship;
         this._header('worship-header', home);
+        const more = document.getElementById('worship-more');
+        if (more) more.innerHTML = `<a href="worship.html" class="home-detail-link">${home.more} ${icon('arrow-right')}</a>`;
         // 홈 카드는 요약(summary)만 — 전문은 worship.html에서
         el.innerHTML = CHURCH_DATA.worship.main.map(w => `
             <div class="card">
@@ -568,26 +566,18 @@ const IndexRenderer = {
         }
     },
 
-    /* 홈에서는 주소와 길찾기 링크를 가장 먼저 보여 준다. */
     _visit() {
         const locationEl = document.getElementById('location-card');
         if (!locationEl) return;
-        const { phone } = CHURCH_DATA.info;
+        const { address, phone } = CHURCH_DATA.info;
         const v = CHURCH_DATA.home.visit;
-        const g = CHURCH_DATA.home.guide;
         this._header('visit-header', v);
         locationEl.innerHTML = `
-            ${MapHelper.html(true)}
-            <div class="home-visit-details">
-                <div class="visit-facts">
-                    <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}">${phone}</a></span></div>
-                </div>
-                <ul class="visit-quick" aria-label="방문 안내 바로가기">
-                    ${g.cards.map(c => `
-                        <li><a href="${c.href}">${c.title}</a></li>
-                    `).join('')}
-                </ul>
+            <div class="visit-facts">
+                <div class="info-row"><strong>${v.addressLabel}</strong><span>${address}</span></div>
+                <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}">${phone}</a></span></div>
             </div>
+            <a href="visit.html" class="home-detail-link">${v.more} ${icon('arrow-right')}</a>
         `;
     }
 };
@@ -1082,7 +1072,7 @@ const VisitRenderer = {
         el.innerHTML = `
             <div class="info-card info-card--wide" id="location">
                 <h3>${v.locationTitle}</h3>
-                ${MapHelper.html(false)}
+                ${MapHelper.html()}
                 <div class="visit-contact">
                     <div class="info-row"><strong>${L.postal}</strong><span>${postalCode}</span></div>
                     <div class="info-row"><strong>${L.phone}</strong><span>${tel}</span></div>
