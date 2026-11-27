@@ -153,6 +153,28 @@ describe('설교 읽기 도구', () => {
     expect(run(true)).toBeGreaterThan(0);
   });
 
+  it('모든 성경 봉독 구절이 공동번역 본문 주소로 바뀐다', () => {
+    const app = read('app.js');
+    const books = app.slice(app.indexOf('    _bibleBooks: {'), app.indexOf('    _refLink(ref)'));
+    const bible = new Function(`return {${books}};`)();
+    const refs = sermons.items.flatMap(s => (s.scripture || '').split(' / ').filter(Boolean));
+    expect(refs.length).toBeGreaterThan(0);
+    for (const ref of refs) expect(bible._bibleUrl(ref), ref).toMatch(/^https:\/\/www\.bskorea\.or\.kr\/bible\/korbibReadpage\.php\?version=COG&book=[0-9a-z]{3}&chap=\d+/);
+    expect(bible._bibleUrl('에제 34:11-16')).toContain('book=ezk&chap=34&sec=11');
+  });
+
+  it('글 끝에서 날짜 순서로 이전·다음 글로 이어진다', () => {
+    const pages = sermonPages();
+    const byDate = [...sermons.items].sort((a, b) => a.date.localeCompare(b.date));
+    byDate.forEach((item, i) => {
+      const html = pages.get(`sermon-${item.pageId}.html`);
+      const prev = html.match(/href="(sermon-[\d-]+\.html)" rel="prev"/)?.[1];
+      const next = html.match(/href="(sermon-[\d-]+\.html)" rel="next"/)?.[1];
+      expect(prev, item.date).toBe(i ? `sermon-${byDate[i - 1].pageId}.html` : undefined);
+      expect(next, item.date).toBe(byDate[i + 1] ? `sermon-${byDate[i + 1].pageId}.html` : undefined);
+    });
+  });
+
   it('성경 봉독 항목은 각 구절을 묶어서 표시한다', () => {
     const html = sermonPages().get('sermon-2026-11-22.html');
     const meta = html.match(/<dd>(.*?)<\/dd>/)[1];

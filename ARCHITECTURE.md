@@ -444,6 +444,10 @@ window DOMContentLoaded
       ├── SermonsRenderer.render()    → #sermons-full (sermons.html)
       │     매거진 형식: 최신 1편 .sermon-card--feature, 지난 글 정렬 순서의 앞 2편 .sermon-card(2열), 나머지 .sermon-list 목록 줄
       │     카드 인용은 편집자 강조(**…**) 첫 문장(_quote), 정렬 버튼은 지난 글 영역을 다시 그린다
+      ├── SermonReading.render()      → 설교 읽기 페이지(sermon-*.html, scripts/build-sermons.js 생성)
+      │     70rem 이상에서 목차(.sermon-toc) 펼침 + 지금 읽는 절 강조(AboutNavRenderer.bindSpy 재사용)
+      │     봉독 구절(.sermon-scripture-ref)을 SundaysRenderer._bibleUrl로 공동번역 본문 링크로 바꾼다(약어는 _bibleBooks에 추가)
+      │     글 끝 .sermon-pager(이전·다음 글)는 생성기가 날짜 순서로 만든다
       │
       ├── LinksRenderer.render()      → #links-full (links.html)
       │     관련 기관 목록.
