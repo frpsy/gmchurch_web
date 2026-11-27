@@ -102,7 +102,7 @@ const CHURCH_DATA = {
         slogan: "모든 생명을 환대하는 교회",
         vision: "하느님 나라를 살아가는 사랑의 공동체",
         diocese: "대한성공회 서울교구 서부교무구",
-        aboutLead: "성공회 기도서로 예배하는 녹색교회입니다. 주일 예배 뒤에는 비건 음식도 곁들여 애찬을 나눕니다.",
+        aboutLead: "성공회 기도서로 예배하는 녹색교회입니다. 주일 예배를 마치면 비건 음식을 곁들인 애찬을 함께합니다.",
         award: { year: "2023", title: "녹색교회 선정", org: "기독교환경운동연대", href: "greenchurch.html#press", newsUrl: "https://www.newsis.com/view/NISX20230515_0002303502" },
         established: "1990년 2월 11일",
         address: "경기도 광명시 아방리 2길 10",
