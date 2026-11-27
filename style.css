@@ -5979,7 +5979,7 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .page-switch-link:hover { color: var(--text); }
 /* 주보·교회 소식 전환: 선택 표시(알약)는 하나의 요소가 두 칸 사이를 미끄러져 옮겨 간다.
    페이지 전환의 뷰 전환이 같은 이름(page-switch-pill)을 따라가므로 새 화면에서도 이어진다. */
-.page-switch { position: relative; isolation: isolate; display: inline-grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.page-switch { position: relative; isolation: isolate; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .page-switch-pill {
     position: absolute;
     z-index: 0;
