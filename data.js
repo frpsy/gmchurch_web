@@ -262,8 +262,7 @@ const CHURCH_DATA = {
         },
         worship: {
             title: "예배 안내",
-            sub: "주일에는 감사성찬례와 어린이 예배를 드립니다.",
-            more: "예배 안내 보기"
+            sub: "주일에는 감사성찬례와 어린이 예배를 드립니다."
         },
         thisSunday: {
             title: "다가오는 주일",
