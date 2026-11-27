@@ -584,8 +584,9 @@ const IndexRenderer = {
         const dateStr = `${sun.getMonth() + 1}월 ${sun.getDate()}일`;
 
         el.innerHTML = `
-            <h3>${t.title} · <span class="nowrap">${dateStr}</span> ${s.koreanName}</h3>
-            <div class="info-row"><strong>${t.labels.season}</strong><span class="liturgy-season-badge this-sunday-season" style="--season:${season.dayColor};--season-ink:${season.dayInk || season.dayColor}"><span class="season-dot"></span>${icon(season.symbol)}&nbsp;${season.name}&nbsp;·&nbsp;<span class="season-name">전례색 ${season.dayColorName}</span></span></div>
+            <h3>${t.title}</h3>
+            <p class="this-sunday-date"><time datetime="${iso}">${dateStr}</time><span>${s.koreanName}</span></p>
+            <div class="info-row"><strong>${t.labels.season}</strong><span class="this-sunday-season" style="--season:${season.dayColor};--season-ink:${season.dayInk || season.dayColor}"><span>${season.name}</span><span class="this-sunday-color">전례색 ${season.dayColorName}</span></span></div>
             ${rows}
         `;
         el.hidden = false;
