@@ -1594,7 +1594,7 @@ const CHURCH_DATA = {
     // 사진 갤러리 (gallery.html)
     photoGallery: {
         intro: "예배, 공동체 모임, 교회 풍경 등 광명교회의 순간들을 모았습니다.",
-        categories: ["전체", "예배", "공동체", "교회 풍경", "섬기는 이들"],
+        categories: ["전체", "예배", "공동체", "교회 풍경"],
         photos: [
             {
                 id: "p01",
@@ -1755,36 +1755,6 @@ const CHURCH_DATA = {
                 "src": "images/hopecenter/handoff.webp",
                 "thumb": "images/hopecenter/handoff-sm.webp",
                 "alt": "봉사자가 이웃에게 반찬 봉투를 건네는 모습"
-            },
-            {
-                "id": "clergy-1",
-                "title": "민숙희(마가렛) 사제",
-                "desc": "",
-                "category": "섬기는 이들",
-                "date": "",
-                "src": "images/clergy/priest-portrait.jpg",
-                "thumb": "images/clergy/priest-portrait-450.jpg",
-                "alt": "민숙희(마가렛) 사제 초상"
-            },
-            {
-                "id": "clergy-2",
-                "title": "이남호(사도요한) 사제",
-                "desc": "",
-                "category": "섬기는 이들",
-                "date": "",
-                "src": "images/clergy/lee-namho-portrait.jpg",
-                "thumb": "images/clergy/lee-namho-portrait-450.jpg",
-                "alt": "이남호(사도요한) 사제 초상"
-            },
-            {
-                "id": "diocesan-bishop",
-                "title": "김장환(엘리야) 주교",
-                "desc": "",
-                "category": "섬기는 이들",
-                "date": "",
-                "src": "images/clergy/bishop-portrait.jpg",
-                "thumb": "images/clergy/bishop-portrait-450.jpg",
-                "alt": "김장환(엘리야) 주교 초상"
             }
         ]
     },
