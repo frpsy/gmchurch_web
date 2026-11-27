@@ -3997,7 +3997,7 @@ const MenuOverlay = {
             } else {
                 map.set(key, {
                     label: item.label, href: item.href, group: item.group,
-                    badge: item.badge || null, text: item.text || ''
+                    badge: item.badge || null, text: item.text || '', passages: item.passages
                 });
             }
         };
@@ -4086,6 +4086,18 @@ const MenuOverlay = {
             add(it.q, 'faq.html#faq', '자주 묻는 질문',
                 join(cat.title, (it.a || '').replace(/<[^>]+>/g, ' ')))));
 
+        for (const sermon of d.sermons?.items || []) {
+            out.push({
+                label: sermon.title,
+                href: `sermon-${sermon.pageId}.html`,
+                group: sermon.kind || '설교 말씀',
+                text: join(sermon.preacher, sermon.scripture, sermon.occasion),
+                passages: sermon.paragraphs.map((paragraph, index) => ({
+                    text: paragraph.replace(/^#{2,3} |\*\*|\[\^\d+\]/g, '').replace(/\s+/g, ' ').trim(),
+                    anchor: `#sermon-section-${sermon.pageId}-${index}`
+                }))
+            });
+        }
         return out;
     },
 
@@ -4273,7 +4285,8 @@ const MenuOverlay = {
             const inLabel = item.label.toLowerCase().includes(ql);
             const inGroup = item.group.toLowerCase().includes(ql);
             const inText  = !!item.text && item.text.toLowerCase().includes(ql);
-            if (inLabel || inGroup || inText) hits.push({ item, inLabel, inGroup, inText });
+            const passage = item.passages?.find(entry => entry.text.toLowerCase().includes(ql));
+            if (inLabel || inGroup || inText || passage) hits.push({ item, inLabel, inGroup, passage });
         });
         // 라벨 일치 우선, 다음 그룹 일치, 그다음 본문 일치
         hits.sort((a, b) => (b.inLabel - a.inLabel) || (b.inGroup - a.inGroup));
@@ -4287,11 +4300,13 @@ const MenuOverlay = {
         }
         this._results.innerHTML = `
             <ul class="menu-results-list">
-                ${hits.slice(0, 40).map(({ item, inLabel, inGroup }) => {
-                    const excerpt = (!inLabel && !inGroup) ? this._excerpt(item.text, q) : '';
+                ${hits.slice(0, 40).map(({ item, inLabel, inGroup, passage }) => {
+                    const excerpt = passage ? this._excerpt(passage.text, q)
+                        : (!inLabel && !inGroup) ? this._excerpt(item.text, q) : '';
+                    const href = item.href + (passage?.anchor || '');
                     return `
                     <li>
-                        <a href="${item.href}">
+                        <a href="${this._escape(href)}">
                             <span class="menu-result-head">
                                 <span class="menu-result-label">${this._highlight(item.label, q)}${this._badgeHtml(item.badge)}</span>
                                 <span class="menu-result-group">${this._escape(item.group)}</span>

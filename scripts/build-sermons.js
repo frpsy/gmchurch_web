@@ -87,11 +87,11 @@ ${body}
                         <h2 id="sermon-notes-title">편집자 주석</h2>
                         <ol>${notes}</ol>
                     </section>` : ''}
-                    <footer class="sermon-reading-footer">
+                    <div class="sermon-reading-footer">
                         ${item.note ? `<p>${escape(item.note)}</p>` : ''}
                         ${source}
                         <a class="sermon-archive-link" href="sermons.html">설교 말씀 목록</a>
-                    </footer>
+                    </div>
                 </div>
             </div>
         </article>
