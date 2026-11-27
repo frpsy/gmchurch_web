@@ -1666,7 +1666,8 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     letter-spacing: normal;
     margin-bottom: 0;
 }
-.home-about-facts {
+.home-about-facts,
+.home #location-card {
     background: var(--cream);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
@@ -1757,20 +1758,26 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .home .home-detail-link .ico { width: 1rem; height: 1rem; flex: none; }
 
 .home #location-card {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 1.25rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     max-width: 42rem;
     margin-inline: auto;
-    padding: 0.85rem 0;
-    border-block: 1px solid var(--border);
 }
+.home .visit-facts { padding: 1rem 1.15rem; }
 .home .visit-facts .info-row { gap: 0.75rem; margin: 0; }
-.home .visit-facts .info-row + .info-row { margin-top: 0.35rem; }
+.home .visit-facts .info-row + .info-row { margin-top: 0.55rem; }
 .home .visit-facts .info-row strong { min-width: 2.5em; }
+.home .visit-facts .info-row span { min-width: 0; overflow-wrap: anywhere; }
 .home .visit-facts a { text-decoration: underline; text-underline-offset: 0.18em; }
+.home #location-card > .home-detail-link {
+    justify-content: space-between;
+    padding: 0.35rem 1.15rem;
+    border-top: 1px solid var(--border);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (hover: hover) {
+    .home #location-card > .home-detail-link:hover { background: var(--md-secondary-container); }
+}
 
 .home-end-links {
     background: var(--cream);
