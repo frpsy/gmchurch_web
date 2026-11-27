@@ -3878,6 +3878,7 @@ const App = {
         NextStepRenderer.render();
         MoreToggle.render();
         if (animateReveal) ScrollReveal.init(signal);
+        ReadingTools.render(signal);
     },
 
     _scrollToHash(hash, { focus = false } = {}) {
@@ -3909,6 +3910,80 @@ const App = {
             ? document.fonts.ready
             : Promise.resolve();
         ready.then(() => requestAnimationFrame(() => this._scrollToHash(hash)));
+    }
+};
+
+/* 긴 페이지에서 현재 보이는 본문의 목차와 사이트 검색을 연다. */
+const ReadingTools = {
+    render(signal) {
+        const main = document.getElementById('main-content');
+        if (!main) return;
+        const bar = document.createElement('nav');
+        bar.className = 'reading-tools';
+        bar.setAttribute('aria-label', '읽기 도구');
+        bar.hidden = true;
+        bar.innerHTML = `
+            <button type="button" data-reading-action="contents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h12"/></svg><span>목차</span></button>
+            <button type="button" data-reading-action="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><span>검색</span></button>
+            <button type="button" data-reading-action="top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4M5 11l7-7 7 7"/></svg><span>맨 위</span></button>`;
+        const dialog = document.createElement('dialog');
+        dialog.className = 'reading-contents';
+        dialog.setAttribute('aria-labelledby', 'reading-contents-title');
+        dialog.innerHTML = `<div class="reading-contents-head"><h2 id="reading-contents-title">목차</h2>
+            <button type="button" class="reading-contents-close" aria-label="목차 닫기">✕</button></div>
+            <div class="reading-contents-list"></div>`;
+        document.body.append(bar, dialog);
+        const list = dialog.querySelector('.reading-contents-list');
+        let targets = [];
+        const refresh = () => {
+            const visible = document.documentElement.scrollHeight > innerHeight * 2 && scrollY > innerHeight * 0.6;
+            bar.hidden = !visible;
+            document.body.classList.toggle('reading-tools-visible', visible);
+        };
+        const openContents = () => {
+            const articles = [...main.querySelectorAll('.sermon-body')].filter(el => el.getClientRects().length);
+            const active = articles.find(el => {
+                const rect = el.getBoundingClientRect();
+                return rect.top < innerHeight * 0.65 && rect.bottom > innerHeight * 0.35;
+            });
+            const scope = active || main;
+            const selector = active ? '.sermon-section, .sermon-subsection' : 'h2, h3';
+            targets = [...scope.querySelectorAll(selector)].filter(el => el.getClientRects().length && el.textContent.trim());
+            list.replaceChildren();
+            if (!targets.length) {
+                list.textContent = '현재 화면에 표시할 목차가 없습니다.';
+            } else {
+                targets.forEach(target => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.textContent = target.textContent.trim();
+                    button.addEventListener('click', () => {
+                        dialog.close();
+                        target.setAttribute('tabindex', '-1');
+                        target.focus({ preventScroll: true });
+                        target.scrollIntoView({ block: 'start', behavior: scrollBehavior() });
+                    });
+                    list.append(button);
+                });
+            }
+            dialog.showModal();
+        };
+        bar.addEventListener('click', event => {
+            const action = event.target.closest('button')?.dataset.readingAction;
+            if (action === 'contents') openContents();
+            if (action === 'search') document.getElementById('nav-menu-trigger')?.click();
+            if (action === 'top') window.scrollTo({ top: 0, behavior: scrollBehavior() });
+        }, { signal });
+        dialog.querySelector('.reading-contents-close').addEventListener('click', () => dialog.close(), { signal });
+        window.addEventListener('scroll', refresh, { passive: true, signal });
+        window.addEventListener('resize', refresh, { passive: true, signal });
+        signal.addEventListener('abort', () => {
+            dialog.close();
+            dialog.remove();
+            bar.remove();
+            document.body.classList.remove('reading-tools-visible');
+        }, { once: true });
+        refresh();
     }
 };
 
