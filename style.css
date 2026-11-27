@@ -1578,13 +1578,13 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     line-height: var(--lh-snug);
     word-break: keep-all;
 }
-/* 휴대폰: 예배 안내 아래에 버튼을 사진과 같은 너비로 펼쳐 한 덩어리로 읽히게 한다 */
 .home-hero-visit {
     grid-area: visit;
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.9rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.25rem;
 }
 .home-hero-service {
     margin: 0;
@@ -1620,15 +1620,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     }
     .home-hero-copy { align-self: end; }
     .home-hero-image { align-self: center; }
-    .home-hero-visit {
-        align-self: start;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0.75rem 1.25rem;
-    }
-    .home-hero-visit .btn-hero-primary { width: auto; }
+    .home-hero-visit { align-self: start; justify-content: flex-start; }
     .home .hero h1 { font-size: clamp(3rem, 4.5vw, 3.6rem); }
 }
 
