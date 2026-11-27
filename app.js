@@ -487,20 +487,23 @@ const IndexRenderer = {
     },
 
     _hero() {
-        const { name, slogan, vision } = CHURCH_DATA.info;
+        const { slogan, vision } = CHURCH_DATA.info;
         const { heroActions } = CHURCH_DATA.home;
 
-        const label = document.getElementById('hero-label');
         const title = document.getElementById('hero-title');
         const sub   = document.getElementById('hero-sub');
         const acts  = document.getElementById('hero-actions');
+        const service = document.getElementById('hero-service');
+        const eucharist = CHURCH_DATA.worship.main.find(item => item.id === 'main');
 
-        if (label) label.textContent = name;
         if (title) title.textContent = slogan;
         if (sub)   sub.textContent   = vision;
+        if (service && eucharist) {
+            service.innerHTML = `<span><strong>${eucharist.time}</strong><small>${eucharist.title}</small></span>${icon('arrow-right')}`;
+        }
 
         if (acts) acts.innerHTML = heroActions.map(a =>
-            `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label}${a.primary ? ` <span class="home-link-arrow">${icon('arrow-right')}</span>` : ''}</a>`
+            `<a href="${a.href}" class="${a.primary ? 'btn-hero-primary' : 'btn-outline'}">${a.label}</a>`
         ).join('');
     },
 
