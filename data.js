@@ -1763,6 +1763,7 @@ const CHURCH_DATA = {
     sermons: {
         intro: "주일 설교와 강연을 날짜별로 모았습니다.",
         empty: "등록된 설교가 없습니다.",
+        editorNote: "본문은 원문을 살려 실었고, 강조와 주석은 편집자가 달았습니다.",
         items: [
             {
                 date: "2026-11-26",

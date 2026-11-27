@@ -2807,9 +2807,7 @@ const SermonsRenderer = {
     // 정렬 기준. 값은 설교 항목 두 개를 받아 순서를 돌려준다.
     _SORTS: {
         'date-desc': (a, b) => b.date.localeCompare(a.date),
-        'date-asc': (a, b) => a.date.localeCompare(b.date),
-        // 제목이 같으면 최신 날짜가 위에 오도록 한다(정렬 결과가 항상 같게)
-        'title': (a, b) => a.title.localeCompare(b.title, 'ko') || b.date.localeCompare(a.date)
+        'date-asc': (a, b) => a.date.localeCompare(b.date)
     },
 
     _dateLabel(date) {
@@ -2833,7 +2831,6 @@ const SermonsRenderer = {
                             </span>
                         </span>
                         <span class="sermon-action">
-                            ${featured ? `<span class="sermon-open-label">${item.kind || '설교'} 읽기</span>` : ''}
                             <svg class="bulletin-row-chevron" viewBox="0 0 10 6" width="12" height="12" aria-hidden="true">
                                 <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -2869,12 +2866,12 @@ const SermonsRenderer = {
             </section>
             ${archive.length ? `
                 <section aria-labelledby="sermon-archive-title">
+                    ${data.editorNote ? `<p class="sermon-editor-note">${data.editorNote}</p>` : ''}
                     <div class="sermon-archive-header">
                         <h2 id="sermon-archive-title">지난 설교${archive.some(item => item.kind) ? '와 강연' : ''}</h2>
                         <div class="sermon-sort" role="group" aria-label="지난 글 정렬">
                             <button type="button" class="sermon-sort-btn" data-sort="date-desc" aria-pressed="true"><span>최신순</span></button>
                             <button type="button" class="sermon-sort-btn" data-sort="date-asc" aria-pressed="false"><span>오래된순</span></button>
-                            <button type="button" class="sermon-sort-btn" data-sort="title" aria-pressed="false"><span>제목순</span></button>
                         </div>
                     </div>
                     <div class="bulletin-list sermon-list" id="sermon-list">${archive.map(item => this._itemHtml(item)).join('')}</div>

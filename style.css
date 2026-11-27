@@ -5587,17 +5587,20 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
     font-weight: 700;
     line-height: 1.35;
 }
+.sermon-feature .bulletin-row { position: relative; }
+.sermon-feature .bulletin-row-info { padding-inline-end: 1.5rem; }
 .sermon-feature .sermon-action {
+    position: absolute;
+    top: clamp(1rem, 4vw, 1.5rem);
+    inset-inline-end: clamp(1rem, 4vw, 1.5rem);
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
     color: var(--md-on-primary);
-    font-size: var(--fs-sm);
-    font-weight: 600;
 }
 .sermon-feature .bulletin-row-chevron { color: inherit; }
 /* 설교 줄은 펼치지 않고 새 페이지로 가므로 화살표가 오른쪽을 향한다 */
 .sermon-item .bulletin-row-chevron { transform: rotate(-90deg); }
+.sermon-editor-note { margin: 0 0 1rem; color: var(--text-muted); font-size: var(--fs-label); line-height: 1.6; }
 .sermon-archive-header {
     display: flex;
     flex-wrap: wrap;
@@ -5629,16 +5632,6 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
     line-height: 1.4;
     word-break: keep-all;
     overflow-wrap: anywhere;
-}
-.sermon-related {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    min-height: 44px;
-    margin: 1.25rem auto 0;
-    color: var(--heading);
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
 }
 /* 줄을 가로로 꽉 채운다: keep-all과 text-wrap: pretty는 어절을 통째로 넘겨 줄이 일찍 끊기므로 쓰지 않는다 */
 .sermon-body p { margin: 0 0 1.1em; font-size: 1rem; line-height: 1.8; letter-spacing: -0.01em; word-break: normal; overflow-wrap: break-word; text-align: justify; text-justify: inter-character; }
@@ -5677,7 +5670,7 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 /* 정렬 세그먼트: 선택 표시가 버튼 사이를 미끄러져 옮겨 간다(JS가 --sort-index를 바꾼다). */
 .sermon-sort {
     --sort-index: 0;
-    --sort-count: 3;
+    --sort-count: 2;
     position: relative;
     isolation: isolate;
     display: inline-grid;
