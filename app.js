@@ -517,7 +517,6 @@ const IndexRenderer = {
         el.innerHTML = `
             <div class="home-about-copy">
                 <p class="about-brief-lead">${aboutLead}</p>
-                <a href="clergy.html" class="btn-outline home-detail-link">${about.more} ${icon('arrow-right')}</a>
             </div>
             <div class="home-about-facts">
                 <ul class="about-brief-facts">
@@ -533,6 +532,8 @@ const IndexRenderer = {
                 </a>` : ''}
             </div>
         `;
+        const more = document.getElementById('about-brief-more');
+        if (more) more.innerHTML = `<a href="clergy.html" class="btn-outline home-detail-link">${about.more} ${icon('arrow-right')}</a>`;
     },
 
     _worship() {

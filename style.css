@@ -1773,7 +1773,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     color: var(--season-ink, var(--text-muted));
     font-weight: 550;
 }
-.home #worship-more { margin-top: var(--space-4); }
+.home .home-section-actions { margin-top: var(--space-4); }
 .home .home-detail-link {
     gap: 0.5rem;
     min-height: 44px;
