@@ -56,9 +56,13 @@ export function renderSermon(item) {
     const date = item.date.split('-').map(Number);
     const titleText = escape(title);
     const summary = escape(`${item.preacher}의 ${kind} · ${date[0]}년 ${date[1]}월 ${date[2]}일`);
+    // 목록 페이지의 제목·설명 문구가 바뀌어도 치환되도록 템플릿에서 읽는다. 없으면 멈춘다.
+    const listTitle = template.match(/<title>([^<]+)<\/title>/)?.[1];
+    const listSummary = template.match(/<meta name="description" content="([^"]+)"/)?.[1];
+    if (!listTitle || !listSummary) throw new Error('sermons.html의 제목 또는 설명을 찾지 못했습니다.');
     const head = template.slice(0, template.indexOf('<body>'))
-        .replaceAll('설교 말씀 — 대한성공회 광명교회', () => `${titleText} — 대한성공회 광명교회`)
-        .replaceAll('광명교회 주일 설교 말씀을 날짜별로 모았습니다.', () => summary)
+        .replaceAll(listTitle, () => `${titleText} — 대한성공회 광명교회`)
+        .replaceAll(listSummary, () => summary)
         .replaceAll('/sermons.html', `/sermon-${pageId}.html`)
         .replace('og:type" content="website"', 'og:type" content="article"');
     const scripts = template.slice(template.indexOf('    <footer id="main-footer">'));

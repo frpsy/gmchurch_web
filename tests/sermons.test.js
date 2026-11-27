@@ -116,6 +116,17 @@ describe('사이트 검색에서 설교와 강연 찾기', () => {
   });
 });
 
+describe('설교 페이지 제목과 공유 정보', () => {
+  it('페이지마다 설교 제목과 설교자 설명을 쓴다', () => {
+    for (const [file, html] of sermonPages()) {
+      const heading = html.match(/<h1 id="sermon-title">([^<]+)<\/h1>/)[1];
+      expect(html, file).toContain(`<title>${heading} — 대한성공회 광명교회</title>`);
+      expect(html, file).toContain(`property="og:title" content="${heading} — 대한성공회 광명교회"`);
+      expect(html, file).not.toContain('content="광명교회 주일 설교와 강연을');
+    }
+  });
+});
+
 describe('설교 읽기 도구', () => {
   it('하단 도구에서 설교 목록으로 이동할 수 있다', () => {
     const app = read('app.js');

@@ -1682,7 +1682,7 @@ const PhotoGalleryRenderer = {
             <div class="photo-filters" role="group" aria-label="사진 분류 필터">
                 ${categories.map((c, i) => `
                     <button class="photo-filter-btn${i === 0 ? ' is-active' : ''}"
-                            data-filter="${c}" type="button">${c}</button>
+                            data-filter="${c}" aria-pressed="${i === 0}" type="button">${c}</button>
                 `).join('')}
             </div>
             <div class="photo-grid" id="photo-grid-items">
@@ -1723,8 +1723,9 @@ const PhotoGalleryRenderer = {
         el.querySelectorAll('.photo-filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 el.querySelectorAll('.photo-filter-btn')
-                  .forEach(b => b.classList.remove('is-active'));
+                  .forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-pressed', 'false'); });
                 btn.classList.add('is-active');
+                btn.setAttribute('aria-pressed', 'true');
                 const filter = btn.dataset.filter;
                 let shown = 0;
                 grid.querySelectorAll('.photo-item').forEach(item => {
@@ -1771,7 +1772,10 @@ const PhotoGalleryRenderer = {
         lbClose.addEventListener('click', closeLb);
         lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
+            if (!lb.classList.contains('is-open')) return;
+            if (e.key === 'Escape') closeLb();
+            // 누를 수 있는 것은 닫기 버튼뿐이라 Tab은 그 자리에 둔다
+            if (e.key === 'Tab') { e.preventDefault(); lbClose.focus(); }
         }, { signal });
         signal?.addEventListener('abort', () => {
             if (lb.classList.contains('is-open')) document.body.style.overflow = '';
@@ -2264,6 +2268,10 @@ const PageSwitch = {
             this.go(file + url.hash, true);
         });
         window.addEventListener('popstate', event => {
+            // 뒤로 가면 열려 있던 확대창과 메뉴를 먼저 닫는다
+            document.getElementById('bulletin-lb')?.close();
+            PortraitLightbox.close?.();
+            MenuOverlay.close?.();
             const file = this._file(location.pathname);
             if (file === this._currentFile) {
                 this.cancel();
@@ -2600,9 +2608,12 @@ const PortraitLightbox = {
             document.body.style.overflow = '';
             if (opener) { opener.focus(); opener = null; }
         };
+        this.close = close;
         overlay.addEventListener('click', close);
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') { close(); return; }
+            // 창 안에서 옮겨 갈 곳이 없으므로 Tab이 뒤쪽 화면으로 빠지지 않게 한다
+            if (e.key === 'Tab' && overlay.classList.contains('is-open')) { e.preventDefault(); overlay.focus(); return; }
             if ((e.key === 'Enter' || e.key === ' ') && e.target.matches?.(this.SELECTOR)) {
                 e.preventDefault();
                 open(e.target);
@@ -2677,7 +2688,7 @@ const BulletinRenderer = {
             return verse + (pdfBtn || `<p class="bulletin-empty-inner">주보가 준비 중입니다.</p>`);
         }
         const imgs = item.images.map((src, i) =>
-            `<img src="${src}" alt="${item.label} 주보 ${i + 1}쪽" loading="lazy" class="bulletin-page">`
+            `<img src="${src}" alt="${item.label} 주보 ${i + 1}쪽" loading="lazy" class="bulletin-page" tabindex="0" role="button">`
         ).join('');
         return `${verse}<div class="bulletin-pages">${imgs}</div>${pdfBtn}`;
     },
@@ -2780,12 +2791,19 @@ const BulletinRenderer = {
             return;
         }
         const dlg = document.getElementById('bulletin-lb') || this._createLightbox();
-        el.addEventListener('click', e => {
-            const img = e.target.closest('.bulletin-page');
-            if (!img) return;
+        const open = img => {
             dlg.querySelector('.bulletin-lb-img').src = img.src;
             dlg.querySelector('.bulletin-lb-img').alt = img.alt;
             dlg.showModal();
+        };
+        el.addEventListener('click', e => {
+            const img = e.target.closest('.bulletin-page');
+            if (img) open(img);
+        });
+        el.addEventListener('keydown', e => {
+            if ((e.key !== 'Enter' && e.key !== ' ') || !e.target.matches('.bulletin-page')) return;
+            e.preventDefault();
+            open(e.target);
         });
         const selected = items.findIndex(item => `#bulletin-${item.date}` === hash);
         const page = selected < 0 ? 0 : Math.floor(selected / this._PER_PAGE);
@@ -3040,7 +3058,7 @@ const NewsRenderer = {
                 drawer.hidden = isOpen;
                 const shift = btn.getBoundingClientRect().top - before;
                 if (shift) window.scrollBy({ top: shift, behavior: 'instant' });
-                if (!isOpen) history.replaceState(null, '', `#${drawer.id}`);
+                history.replaceState(history.state, '', isOpen ? location.pathname + location.search : `#${drawer.id}`);
             });
         });
     }
@@ -3282,9 +3300,17 @@ const SundaysRenderer = {
         if (!container) return;
 
         const rerender = () => {
+            // 다시 그려도 키보드 사용자가 누른 버튼에 머물게 한다
+            const active = container.contains(document.activeElement) ? document.activeElement : null;
+            const again = active?.id ? `#${active.id}`
+                : active?.dataset.track ? `.lect-track-btn[data-track="${active.dataset.track}"]` : null;
             container.innerHTML = this._lectionaryCardHtml(
                 sundays, parseInt(el.dataset.lectionaryIdx), el.dataset.lectionaryTrack);
             this._bindLectionaryNav(el, sundays);
+            if (again) {
+                const button = container.querySelector(again);
+                (button && !button.disabled ? button : container.querySelector('.lect-nav-btn:not([disabled])'))?.focus();
+            }
         };
         const moveTo = i => {
             el.dataset.lectionaryIdx = i;
@@ -3479,7 +3505,8 @@ const SundaysRenderer = {
         const daysInMon  = new Date(year, month + 1, 0).getDate();
         const firstWd    = new Date(year, month, 1).getDay();
         const key        = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-        const monthSeason = LiturgicalCalendar.compute(new Date(year, month, 1));
+        // 이번 달은 오늘의 절기, 다른 달은 1일의 절기를 머리에 적는다
+        const monthSeason = LiturgicalCalendar.compute(new Date(year, month, todayDate > 0 ? todayDate : 1));
         const seasonLabel = monthSeason ? `${icon(monthSeason.symbol)} ${monthSeason.name}` : '';
 
         const cells = [];
@@ -3792,6 +3819,8 @@ const App = {
     },
 
     _scrollToHash(hash, { focus = false } = {}) {
+        // 교회소식 공유 주소는 펼친 본문이 아니라 날짜 줄로 가야 머리가 메뉴에 가리지 않는다
+        hash = hash?.replace(/^#news-(\d{4}-\d{2}-\d{2})$/, '#news-item-$1');
         // '#'만 있거나 선택자로 쓸 수 없는 해시(텍스트 조각 등)는 무시
         let el = null;
         try { el = hash && hash.length > 1 ? document.querySelector(hash) : null; } catch (e) { return; }
@@ -4304,7 +4333,8 @@ const MenuOverlay = {
                 ${hits.slice(0, 40).map(({ item, inLabel, inGroup, passage }) => {
                     const excerpt = passage ? this._excerpt(passage.text, q)
                         : (!inLabel && !inGroup) ? this._excerpt(item.text, q) : '';
-                    const href = item.href + (passage?.anchor || '');
+                    // 제목이 맞으면 본문 중간이 아니라 글 첫머리로 간다
+                    const href = item.href + (!inLabel && passage?.anchor || '');
                     return `
                     <li>
                         <a href="${this._escape(href)}">

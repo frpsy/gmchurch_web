@@ -317,14 +317,27 @@ details[open] .chev{transform:rotate(180deg)}
     return out.join('');
   }
 
+  // 「일시 : …」처럼 짧은 항목 줄. 목록 줄(-·•)과 「오전 10:30」 같은 시각은 제외한다.
+  const KV_LINE = /^(?![\s]*[-·•])([^:：\d]{1,6}?)\s*:\s*(.*)$/;
+
+  // 인쇄 순서를 지키며, 이어지는 항목 줄만 그 자리에서 표로 묶는다
+  function newsContentHtml(lines) {
+    let out = '', rest = [], kv = [];
+    const flushRest = () => { out += newsBodyHtml(rest); rest = []; };
+    const flushKv = () => { if (kv.length) out += `<dl>${kv.map(([k, v]) => `<dt>${esc(k.trim())}</dt><dd>${esc(v.trim())}</dd>`).join('')}</dl>`; kv = []; };
+    lines.forEach(l => {
+      const m = KV_LINE.exec(l);
+      if (m) { flushRest(); kv.push([m[1], m[2]]); } else { flushKv(); rest.push(l); }
+    });
+    flushRest(); flushKv();
+    return out;
+  }
+
   function newsHtml(items) {
     if (!items?.length) return '<p class="card" style="padding:16px;margin:0;color:var(--ink-3)">이번 주 교회소식이 없습니다.</p>';
-    return `<div class="news">${items.map(n => {
-      const lines = n.body.split('\n');
-      const kv = lines.filter(l => /^[^:]{1,6}\s*:\s*/.test(l));
-      const rest = lines.filter(l => !kv.includes(l));
-      return `<article class="card"><h3>${esc(n.title)}</h3>${newsBodyHtml(rest)}${kv.length ? `<dl>${kv.map(l => { const [k, ...v] = l.split(':'); return `<dt>${esc(k.trim())}</dt><dd>${esc(v.join(':').trim())}</dd>`; }).join('')}</dl>` : ''}</article>`;
-    }).join('')}</div>`;
+    return `<div class="news">${items.map(n =>
+      `<article class="card"><h3>${esc(n.title)}</h3>${newsContentHtml(n.body.split('\n'))}</article>`
+    ).join('')}</div>`;
   }
 
   // 예배 시간이 모두 같으면 한 칸으로 합친다(오전 11:00 / 오전 11:00 중복 방지)
@@ -474,7 +487,8 @@ details[open] .chev{transform:rotate(180deg)}
       render({ jubo, book, order: orderAll?.weeks?.[iso], news: newsAll?.weeks?.[iso], verse: versesAll?.weeks?.[iso], readings });
       if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
     } catch (err) {
-      app.innerHTML = `<div id="msg" role="status">주보를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</div>`;
+      const dated = new URLSearchParams(location.search).has('date');
+      app.innerHTML = `<div id="msg" role="status">주보를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.${dated ? '<br><a href="./">최신 주보 보기</a>' : ''}</div>`;
       console.error(err);
     }
   })();
