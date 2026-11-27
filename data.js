@@ -250,7 +250,8 @@ const CHURCH_DATA = {
     // 홈(index.html) 전용 문구 — 예배 시간·위치 등 사실 정보는 info/worship에서 파생
     home: {
         heroActions: [
-            { label: "처음 오셨나요?", href: "newcomer.html", primary: true }
+            { label: "처음 오셨나요?", href: "newcomer.html", primary: true },
+            { label: "오시는 길", href: "visit.html" }
         ],
         about: {
             title: "광명교회",
