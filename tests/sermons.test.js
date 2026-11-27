@@ -115,3 +115,19 @@ describe('사이트 검색에서 설교와 강연 찾기', () => {
     }
   });
 });
+
+describe('설교 읽기 도구', () => {
+  it('하단 도구에서 설교 목록으로 이동할 수 있다', () => {
+    const app = read('app.js');
+    const source = app.slice(app.indexOf('const ReadingTools = {'), app.indexOf("window.addEventListener('DOMContentLoaded'", app.indexOf('const ReadingTools = {')));
+    expect(source).toMatch(/href="sermons\.html"[^>]*>[^<]*<svg/);
+    expect(source).toContain('<span>설교</span>');
+  });
+
+  it('성경 봉독 항목은 각 구절을 묶어서 표시한다', () => {
+    const html = sermonPages().get('sermon-2026-11-22.html');
+    const meta = html.match(/<dd>(.*?)<\/dd>/)[1];
+    expect(meta).toContain('<span class="sermon-scripture-ref">에제 34:11-16,20-24</span>');
+    expect(meta).toContain('<span class="sermon-scripture-ref">마태 25:31-46</span>');
+  });
+});

@@ -4440,7 +4440,7 @@ footer {
     transform: translateX(-50%);
     z-index: 1050;
     display: flex;
-    width: min(17rem, calc(100% - 2rem));
+    width: min(21rem, calc(100% - 2rem));
     gap: 0.125rem;
     padding: 0.25rem 0.4rem;
     border: 1px solid var(--border);
@@ -4450,12 +4450,14 @@ footer {
     backdrop-filter: blur(12px);
 }
 .reading-tools[hidden] { display: none; }
-.reading-tools button {
+.reading-tools :is(button, a) {
     display: grid;
     place-items: center;
     gap: 0.1rem;
     flex: 1;
     min-height: 48px;
+    min-width: 44px;
+    text-decoration: none;
     border: 0;
     border-radius: var(--radius-pill);
     background: transparent;
@@ -4463,7 +4465,7 @@ footer {
     font-size: var(--fs-label);
     cursor: pointer;
 }
-.reading-tools button:is(:hover, :focus-visible) { background: var(--cream); }
+.reading-tools :is(button, a):is(:hover, :focus-visible) { background: var(--cream); }
 .reading-tools svg {
     width: 20px;
     height: 20px;
@@ -6039,10 +6041,11 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .sermon-reading-meta div { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0.55rem; }
 .sermon-reading-meta dt { font-weight: 650; }
 .sermon-reading-meta dd { margin: 0; overflow-wrap: anywhere; }
+.sermon-scripture-ref { display: inline-block; }
 .sermon-reading-layout { position: relative; display: grid; gap: 1.4rem; margin-block-start: 1.3rem; }
 .sermon-reading .sermon-toc { margin: 0; min-inline-size: 0; border-radius: 0.35rem; }
 .sermon-reading .sermon-toc summary { min-block-size: 44px; padding: 0.6rem 0.8rem; }
-.sermon-reading .sermon-toc ol { list-style: none; padding: 0 0.8rem 0.45rem; margin: 0; }
+.sermon-reading .sermon-toc ol { list-style: none; padding: 0 0.8rem 0.45rem; margin: 0; max-block-size: min(55dvh, 30rem); overflow-y: auto; overscroll-behavior: contain; }
 .sermon-reading .sermon-toc a { min-block-size: 44px; font-size: 0.9rem; overflow-wrap: anywhere; }
 .sermon-reading-text { min-inline-size: 0; }
 .sermon-reading .sermon-body p {

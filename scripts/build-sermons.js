@@ -47,7 +47,12 @@ export function renderSermon(item) {
     const source = item.source
         ? `<p><a href="${escape(item.source.url)}" target="_blank" rel="noopener">${escape(item.source.label)}</a></p>` : '';
     const meta = [['성경 봉독', item.scripture], ['강연 자리', item.occasion]]
-        .filter(([, value]) => value).map(([label, value]) => `<div><dt>${label}</dt><dd>${escape(value)}</dd></div>`).join('');
+        .filter(([, value]) => value).map(([label, value]) => {
+            const content = label === '성경 봉독'
+                ? value.split(' / ').map(ref => `<span class="sermon-scripture-ref">${escape(ref)}</span>`).join(' / ')
+                : escape(value);
+            return `<div><dt>${label}</dt><dd>${content}</dd></div>`;
+        }).join('');
     const date = item.date.split('-').map(Number);
     const titleText = escape(title);
     const summary = escape(`${item.preacher}의 ${kind} · ${date[0]}년 ${date[1]}월 ${date[2]}일`);
