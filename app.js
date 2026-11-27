@@ -3835,6 +3835,7 @@ const ReadingTools = {
         bar.innerHTML = `
             <button type="button" data-reading-action="contents" aria-haspopup="dialog" aria-controls="reading-contents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h12"/></svg><span>목차</span></button>
             <button type="button" data-reading-action="search" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><span>검색</span></button>
+            <a href="sermons.html" aria-label="설교와 강연 목록"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg><span>설교</span></a>
             <button type="button" data-reading-action="top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4M5 11l7-7 7 7"/></svg><span>맨 위</span></button>`;
         const dialog = document.createElement('dialog');
         dialog.className = 'reading-contents';
