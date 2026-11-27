@@ -5977,7 +5977,27 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
 .page-switch { display: flex; justify-content: center; margin: 0 0 1.5rem; }
 .page-switch-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.25rem; border-radius: 999px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
 .page-switch-link:hover { color: var(--text); }
-.page-switch-link[aria-current="page"] { background: var(--md-primary); color: var(--md-on-primary); font-weight: 600; }
+/* 주보·교회 소식 전환: 선택 표시(알약)는 하나의 요소가 두 칸 사이를 미끄러져 옮겨 간다.
+   페이지 전환의 뷰 전환이 같은 이름(page-switch-pill)을 따라가므로 새 화면에서도 이어진다. */
+.page-switch { position: relative; isolation: isolate; display: inline-grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.page-switch-pill {
+    position: absolute;
+    z-index: 0;
+    top: 4px;
+    bottom: 4px;
+    inset-inline-start: 4px;
+    width: calc((100% - 8px) / 2);
+    border-radius: 999px;
+    background: var(--md-primary);
+    view-transition-name: page-switch-pill;
+    transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.page-switch:has(.page-switch-link:last-of-type[aria-current="page"]) .page-switch-pill { transform: translateX(100%); }
+.page-switch-link { position: relative; z-index: 1; transition: color 240ms ease; }
+.page-switch-link[aria-current="page"] { color: var(--md-on-primary); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) {
+    .page-switch-pill, .page-switch-link { transition: none; }
+}
 .page-switch { padding: 0.25rem; border: 1px solid var(--border); border-radius: 999px; background: var(--cream); width: fit-content; margin-left: auto; margin-right: auto; }
 
 .term-en {
