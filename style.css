@@ -1771,6 +1771,12 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .home .visit-facts .info-row strong { min-width: 2.5em; }
 .home .visit-facts .info-row span { min-width: 0; overflow-wrap: anywhere; }
 .home .visit-facts a { text-decoration: underline; text-underline-offset: 0.18em; }
+/* 전화번호는 휴대폰에서 바로 누르는 링크라 누르는 영역을 44px 높이로 넓힌다. 바깥 여백을 같은 만큼 줄여 줄 간격은 그대로 둔다 */
+.home .visit-facts a[href^="tel:"] {
+    display: inline-block;
+    padding: 0.85rem 0.35rem;
+    margin: -0.85rem -0.35rem;
+}
 .home #location-card > .home-detail-link {
     justify-content: space-between;
     padding: 0.35rem 1.15rem;
