@@ -474,6 +474,7 @@ const IndexRenderer = {
         this._about();
         this._worship();
         this._visit();
+        this._header('home-explore-header', CHURCH_DATA.home.explore);
         const links = document.getElementById('home-end-links');
         if (links) links.innerHTML = CHURCH_DATA.home.endLinks.map(link => `
             <li><a href="${link.href}">
