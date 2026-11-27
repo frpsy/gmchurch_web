@@ -1774,6 +1774,14 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     font-weight: 550;
 }
 .home #worship-more { margin-top: var(--space-4); }
+.home .home-detail-link {
+    gap: 0.5rem;
+    min-height: 44px;
+    padding-inline: 1rem;
+    border-color: var(--border);
+    background: var(--md-secondary-container);
+}
+.home .home-detail-link .ico { width: 1rem; height: 1rem; }
 
 .home #location-card .map-card {
     border-radius: var(--radius-xl);
