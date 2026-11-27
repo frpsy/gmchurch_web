@@ -251,8 +251,12 @@ const CHURCH_DATA = {
         explore: { title: "둘러보기" },
         endLinks: [
             { label: "교회 소식", href: "news.html", icon: "pen" },
-            { label: "공동체", href: "community.html", icon: "people" },
+            { label: "설교·강연", href: "sermons.html", icon: "book" },
             { label: "교회력", href: "sundays.html", icon: "calendar" },
+            { label: "어린이 예배", href: "children.html", icon: "dove" },
+            { label: "공동체", href: "community.html", icon: "people" },
+            { label: "녹색교회", href: "greenchurch.html", icon: "leaf" },
+            { label: "사진 갤러리", href: "gallery.html", icon: "camera" },
             { label: "미디어·자료", href: "media.html", icon: "film" }
         ],
         heroActions: [
