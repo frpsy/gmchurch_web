@@ -248,6 +248,12 @@ const CHURCH_DATA = {
 
     // 홈(index.html) 전용 문구 — 예배 시간·위치 등 사실 정보는 info/worship에서 파생
     home: {
+        endLinks: [
+            { label: "교회 소식", href: "news.html", icon: "pen" },
+            { label: "공동체", href: "community.html", icon: "people" },
+            { label: "교회력", href: "sundays.html", icon: "calendar" },
+            { label: "미디어·자료", href: "media.html", icon: "film" }
+        ],
         heroActions: [
             { label: "처음 오셨나요?", href: "newcomer.html", primary: true },
             { label: "오시는 길", href: "visit.html" }

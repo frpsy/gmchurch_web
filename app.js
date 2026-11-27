@@ -475,6 +475,14 @@ const IndexRenderer = {
         this._worship();
         this._thisSunday();
         this._visit();
+        const links = document.getElementById('home-end-links');
+        if (links) links.innerHTML = CHURCH_DATA.home.endLinks.map(link => `
+            <li><a href="${link.href}">
+                <span class="home-end-icon">${icon(link.icon)}</span>
+                <span>${link.label}</span>
+                <span class="home-end-arrow">${icon('arrow-right')}</span>
+            </a></li>
+        `).join('');
     },
 
     _header(id, { title, sub }) {
