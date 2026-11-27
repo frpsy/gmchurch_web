@@ -2236,6 +2236,17 @@ const PageSwitch = {
         return Boolean(this._preloaded.get(target.split('#')[0])?.doc);
     },
 
+    // 미리 받는 중이면 잠깐 기다린다. 늦으면 false로 끝내 화면이 멈춰 있지 않게 한다.
+    whenReady(target, ms) {
+        const entry = this._preloaded.get(target.split('#')[0]);
+        if (!entry) return null;
+        if (entry.doc) return Promise.resolve(true);
+        return Promise.race([
+            entry.ready.then(Boolean),
+            new Promise(resolve => setTimeout(() => resolve(false), ms)),
+        ]);
+    },
+
     cancel() {
         this._request?.controller.abort();
         this._request = null;
@@ -2329,10 +2340,22 @@ const PageSwitch = {
         NavRenderer._updateActive();
         App.renderMain(false);
         if (tabWasFocused) document.querySelector('.page-switch [aria-current="page"]')?.focus({ preventScroll: true });
+        else if (!hash) this._focusHeading();
         if (Number.isFinite(scrollTop)) window.scrollTo({ top: scrollTop, behavior: 'instant' });
-        else if (hash) App._scrollToHash(hash);
+        else if (hash) App._scrollToHash(hash, { focus: !tabWasFocused });
         else window.scrollTo({ top: 0, behavior: 'instant' });
         SwipeNavigation.warm();
+    },
+
+    // 본문만 바뀌면 화면 낭독기가 새 페이지를 알 수 없으므로 새 제목으로 포커스를 옮긴다.
+    _focusHeading() {
+        const heading = document.querySelector('main h1') || document.querySelector('main');
+        if (!heading) return;
+        if (!heading.hasAttribute('tabindex')) {
+            heading.setAttribute('tabindex', '-1');
+            heading.addEventListener('blur', () => heading.removeAttribute('tabindex'), { once: true });
+        }
+        heading.focus({ preventScroll: true });
     }
 };
 
@@ -2366,6 +2389,26 @@ const SwipeNavigation = {
             ? link.getAttribute('href') === pending
             : link.getAttribute('aria-current') === 'page');
         if (current < 0) return null;
+        if (!onTabs) {
+            const fileOf = href => (href || '').split('#')[0].split('/').pop() || 'index.html';
+            const parent = links[current];
+            const parentFile = fileOf(parent.getAttribute('href'));
+            const tabs = document.querySelector('main nav[data-swipe-tabs]');
+            const tabLinks = tabs ? Array.from(tabs.querySelectorAll('a[href]')) : [];
+            const tab = tabLinks.findIndex(link => link.getAttribute('aria-current') === 'page');
+            if (tab >= 0) {
+                // 탭이 있는 페이지는 본문을 밀어도 탭 사이를 먼저 오간다.
+                const sibling = tabLinks[tab + (dx < 0 ? 1 : -1)];
+                if (sibling) return sibling;
+                // 탭 묶음에 상위 페이지가 없으면(영상·사진·관련 기관) 끝에서 상위 페이지로만 돌아간다.
+                if (!tabLinks.some(link => fileOf(link.getAttribute('href')) === parentFile)) {
+                    return dx > 0 ? parent : null;
+                }
+            } else if (fileOf(window.location.pathname) !== parentFile) {
+                // 하위 페이지(설교·강연, 녹색교회 등)는 오른쪽으로 밀면 상위 메뉴로 돌아간다.
+                return dx > 0 ? parent : null;
+            }
+        }
         // 첫 메뉴(교회 소개)에서 오른쪽으로 밀면 홈으로 돌아간다. 홈에서 왼쪽으로 밀면 첫 메뉴로 가는 것과 짝.
         if (!onTabs && current === 0 && dx > 0) return document.querySelector('a.nav-logo[href]');
         return links[current + (dx < 0 ? 1 : -1)];
@@ -2391,6 +2434,17 @@ const SwipeNavigation = {
         const edgeInset = 12;
         const directionThreshold = 8;
         const navigationThreshold = 42;
+        const loadWait = 300;
+        // 손을 떼기 직전 속도(px/ms)로 빠른 튕김과 되돌리기를 가린다.
+        const velocityWindow = 100;
+        const flickVelocity = 0.45;
+        const flickDistance = 20;
+        const retreatVelocity = 0.3;
+        const releaseVelocity = (gesture, x, time) => {
+            const sample = gesture.samples.find(point => time - point.t <= velocityWindow);
+            if (!sample || !Number.isFinite(time) || time - sample.t < 16) return 0;
+            return (x - sample.x) / (time - sample.t);
+        };
         const mobile = window.matchMedia('(max-width: 768px)');
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const viewport = window.visualViewport;
@@ -2447,12 +2501,25 @@ const SwipeNavigation = {
             const target = next && PageSwitch.targetFor(next);
             if (target) {
                 const travel = -direction * gesture.width + offset;
-                if (offset && Math.sign(offset) === direction && !reducedMotion.matches &&
-                    window.PageRevealEvent && document.startViewTransition && PageSwitch.isReady(target)) {
+                const animated = offset && Math.sign(offset) === direction && !reducedMotion.matches &&
+                    window.PageRevealEvent && document.startViewTransition;
+                const loading = animated && !PageSwitch.isReady(target) && PageSwitch.whenReady(target, loadWait);
+                if (animated && (PageSwitch.isReady(target) || loading)) {
                     const pending = { main, navigating: true };
                     settling = pending;
                     const finish = () => { if (settling === pending) reset(); };
-                    PageSwitch.go(target, true, travel).then(finish, finish);
+                    if (!loading) {
+                        PageSwitch.go(target, true, travel).then(finish, finish);
+                        return;
+                    }
+                    // 아직 받는 중이면 민 자리에 둔 채 잠깐 기다린다. 늦으면 제자리로 돌린 뒤 넘긴다.
+                    loading.then(ready => {
+                        if (settling !== pending) return;
+                        if (ready) return PageSwitch.go(target, true, travel);
+                        settling = null;
+                        returnToStart(main, offset);
+                        return PageSwitch.go(target, true);
+                    }).then(finish, finish);
                 } else {
                     returnToStart(main, offset);
                     PageSwitch.go(target, true);
@@ -2494,12 +2561,17 @@ const SwipeNavigation = {
             if (clientX < edgeInset || clientX > window.innerWidth - edgeInset) return;
             start = {
                 ...context, clientX, clientY, identifier, width: window.innerWidth,
-                horizontal: false, direction: 0, hasDestination: false, offset: 0, paintedOffset: 0,
+                horizontal: false, direction: 0, hasDestination: false, offset: 0, paintedOffset: 0, samples: [],
             };
         }, { passive: true });
 
         document.addEventListener('touchmove', event => {
             if (!start) return;
+            // 두 번째 손가락이 닿으면 확대 동작이므로 스와이프를 그만둔다.
+            if (event.touches.length > 1) {
+                reset();
+                return;
+            }
             const point = event.touches[0];
             if (point?.identifier !== start.identifier) return;
             if (!start.main.isConnected) {
@@ -2522,6 +2594,12 @@ const SwipeNavigation = {
             }
             // Safari가 가로 드래그를 브라우저 스크롤로 가져가지 않도록 방향 확정 후에만 막는다.
             if (event.cancelable) event.preventDefault();
+            if (Number.isFinite(event.timeStamp)) {
+                start.samples.push({ x: point.clientX, t: event.timeStamp });
+                while (start.samples.length > 1 && event.timeStamp - start.samples[0].t > velocityWindow) {
+                    start.samples.shift();
+                }
+            }
             if (reducedMotion.matches) return;
             const direction = Math.sign(dx);
             if (direction !== start.direction) {
@@ -2553,7 +2631,14 @@ const SwipeNavigation = {
             start = null;
             const dx = end.clientX - origin.clientX;
             const dy = end.clientY - origin.clientY;
-            const intentional = Math.abs(dx) >= navigationThreshold && Math.abs(dx) >= Math.abs(dy) * 1.6;
+            const velocity = releaseVelocity(origin, end.clientX, event.timeStamp);
+            const level = Math.abs(dx) >= Math.abs(dy) * 1.6;
+            // 시작점 쪽으로 되돌리며 놓으면 마음을 바꾼 것으로 보고 넘기지 않는다.
+            const retreating = Math.sign(velocity) === -Math.sign(dx) && Math.abs(velocity) >= retreatVelocity;
+            // 짧아도 빠르게 튕기면 넘긴다.
+            const flicked = Math.sign(velocity) === Math.sign(dx) && Math.abs(velocity) >= flickVelocity &&
+                Math.abs(dx) >= flickDistance;
+            const intentional = level && !retreating && (Math.abs(dx) >= navigationThreshold || flicked);
             const next = intentional && window.getSelection()?.isCollapsed !== false
                 ? this._destination(origin, dx)
                 : null;

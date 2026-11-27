@@ -4,16 +4,26 @@ import { createContext, runInContext } from 'node:vm';
 
 const source = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
 
-function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, home = false, targetTag, currentIndex = 0, native = false } = {}) {
+function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, home = false, targetTag, currentIndex = 0, native = false, page, tabs } = {}) {
     const listeners = new Map();
     const animation = { cancel: vi.fn() };
     const main = { isConnected: true, style: {}, animate: vi.fn(() => animation) };
     const links = [0, 1].map(index => ({
         href: 'https://site.test/menu-' + index + '.html',
         isConnected: true,
-        getAttribute: name => name === 'aria-current' && !home && index === currentIndex ? 'page' : null,
+        getAttribute: name => {
+            if (name === 'href') return 'menu-' + index + '.html';
+            return name === 'aria-current' && !home && index === currentIndex ? 'page' : null;
+        },
         click: vi.fn(),
     }));
+    const tabLinks = (tabs?.files || []).map((file, index) => ({
+        href: 'https://site.test/' + file,
+        isConnected: true,
+        getAttribute: name => name === 'href' ? file : (name === 'aria-current' && index === tabs.current ? 'page' : null),
+        click: vi.fn(),
+    }));
+    const tabNav = tabs && { querySelectorAll: () => tabLinks };
     const homeLink = { href: 'https://site.test/index.html', isConnected: true, getAttribute: () => null, click: vi.fn() };
     const nav = {
         isConnected: true,
@@ -25,7 +35,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
     const window = {
         PageSwapEvent: native,
         PageRevealEvent: native,
-        location: new URL('https://site.test/menu-0.html'),
+        location: new URL('https://site.test/' + (page || (home ? 'index.html' : 'menu-' + currentIndex + '.html'))),
         innerWidth: 390,
         visualViewport: { scale: zoom, addEventListener() {} },
         matchMedia: query => ({ matches: !query.includes('reduced') || reduced }),
@@ -36,7 +46,11 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         body: { classList: { contains: name => name === 'home' && home } },
         documentElement: { classList: { toggle() {} } },
         getElementById: () => nav,
-        querySelector: selector => selector === 'a.nav-logo[href]' ? homeLink : null,
+        querySelector: selector => {
+            if (selector === 'a.nav-logo[href]') return homeLink;
+            if (selector === 'main nav[data-swipe-tabs]') return tabNav || null;
+            return null;
+        },
         addEventListener: (type, fn) => listeners.set(type, fn),
     };
     let scheduledFrame;
@@ -57,9 +71,10 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         if (targetTag && selector.split(', ').includes(targetTag)) return target;
         return null;
     } };
-    function touch(type, clientX, clientY = 150) {
+    function touch(type, clientX, clientY = 150, { timeStamp, fingers = 1 } = {}) {
         const point = { clientX, clientY, identifier: 1 };
-        const event = { target, touches: [point], changedTouches: [point], cancelable: true, preventDefault: vi.fn() };
+        const touches = [point, ...Array.from({ length: fingers - 1 }, (_, i) => ({ clientX, clientY, identifier: i + 2 }))];
+        const event = { target, touches, changedTouches: [point], cancelable: true, preventDefault: vi.fn(), timeStamp };
         listeners.get(type)(event);
         return event;
     }
@@ -69,7 +84,7 @@ function setup({ reduced = false, onTabs = false, overflow = false, zoom = 1, ho
         callback?.();
     };
     return {
-        main, links, touch, animation, frame, requestAnimationFrame, nav, homeLink,
+        tabLinks, main, links, touch, animation, frame, requestAnimationFrame, nav, homeLink,
         storage: context.sessionStorage, listeners, context,
     };
 }
@@ -228,4 +243,103 @@ it('preserves regular link taps and claims horizontal drags over a link early', 
     frame();
     expect(parseFloat(main.style.translate)).toBeLessThan(0);
     expect(touch('touchend', 232).preventDefault).toHaveBeenCalledOnce();
+});
+
+it('stops tracking when a second finger joins so pinch zoom keeps working', () => {
+    const { main, links, touch, frame } = setup({ reduced: true });
+    touch('touchstart', 240);
+    touch('touchmove', 220);
+    const pinch = touch('touchmove', 150, 150, { fingers: 2 });
+    expect(pinch.preventDefault).not.toHaveBeenCalled();
+    frame();
+    touch('touchend', 150);
+    expect(main.style.translate).toBeFalsy();
+    expect(links[1].click).not.toHaveBeenCalled();
+});
+
+it('follows a quick short flick but not a drag pulled back toward the start', () => {
+    const flick = setup({ reduced: true });
+    flick.touch('touchstart', 240, 150, { timeStamp: 0 });
+    flick.touch('touchmove', 228, 150, { timeStamp: 20 });
+    flick.touch('touchmove', 212, 150, { timeStamp: 40 });
+    flick.touch('touchend', 212, 150, { timeStamp: 50 });
+    expect(flick.links[1].click).toHaveBeenCalledOnce();
+
+    const slow = setup({ reduced: true });
+    slow.touch('touchstart', 240, 150, { timeStamp: 0 });
+    slow.touch('touchmove', 228, 150, { timeStamp: 200 });
+    slow.touch('touchmove', 212, 150, { timeStamp: 400 });
+    slow.touch('touchend', 212, 150, { timeStamp: 420 });
+    expect(slow.links[1].click).not.toHaveBeenCalled();
+
+    const back = setup({ reduced: true });
+    back.touch('touchstart', 300, 150, { timeStamp: 0 });
+    back.touch('touchmove', 100, 150, { timeStamp: 200 });
+    back.touch('touchmove', 200, 150, { timeStamp: 260 });
+    back.touch('touchend', 230, 150, { timeStamp: 280 });
+    expect(back.links[1].click).not.toHaveBeenCalled();
+});
+
+it('keeps a loading destination in place briefly before animating to it', async () => {
+    const { main, links, touch, frame, context } = setup({ native: true });
+    links[1].href = 'https://site.test/clergy.html';
+    let resolve;
+    const page = runInContext('PageSwitch', context);
+    page.go = vi.fn().mockResolvedValue(undefined);
+    page.preload = vi.fn();
+    page.isReady = vi.fn(() => false);
+    page.whenReady = vi.fn(() => new Promise(r => { resolve = r; }));
+    context.document.startViewTransition = vi.fn();
+    touch('touchstart', 240);
+    touch('touchmove', 150);
+    frame();
+    touch('touchend', 150);
+    expect(main.animate).not.toHaveBeenCalled();
+    expect(page.go).not.toHaveBeenCalled();
+    resolve(true);
+    await new Promise(r => setTimeout(r, 0));
+    expect(page.go).toHaveBeenCalledWith('clergy.html', true, 304.5);
+    expect(main.animate).not.toHaveBeenCalled();
+});
+
+it.each([[240, 150, null], [150, 240, 0]])('sends a sub page back to its parent menu only on a right swipe (%i→%i)', (from, to, expected) => {
+    const { links, touch } = setup({ reduced: true, page: 'greenchurch.html' });
+    touch('touchstart', from);
+    touch('touchmove', to);
+    touch('touchend', to);
+    expect(links[0].click).toHaveBeenCalledTimes(expected === 0 ? 1 : 0);
+    expect(links[1].click).not.toHaveBeenCalled();
+});
+
+it('moves between tabs from the page body and continues to the next menu after the last tab', () => {
+    const tabs = { files: ['menu-0.html', 'news.html'], current: 0 };
+    const first = setup({ reduced: true, tabs });
+    const page = runInContext('PageSwitch', first.context);
+    page.go = vi.fn().mockResolvedValue(undefined);
+    first.touch('touchstart', 240);
+    first.touch('touchmove', 150);
+    first.touch('touchend', 150);
+    expect(page.go).toHaveBeenCalledWith('news.html', true);
+    expect(first.links[1].click).not.toHaveBeenCalled();
+
+    const last = setup({ reduced: true, page: 'news.html', tabs: { ...tabs, current: 1 } });
+    last.touch('touchstart', 240);
+    last.touch('touchmove', 150);
+    last.touch('touchend', 150);
+    expect(last.links[1].click).toHaveBeenCalledOnce();
+});
+
+it('returns from the first child tab to its parent hub and stops after the last one', () => {
+    const tabs = { files: ['videos.html', 'links.html'] };
+    const first = setup({ reduced: true, page: 'videos.html', tabs: { ...tabs, current: 0 } });
+    first.touch('touchstart', 150);
+    first.touch('touchmove', 240);
+    first.touch('touchend', 240);
+    expect(first.links[0].click).toHaveBeenCalledOnce();
+
+    const last = setup({ reduced: true, page: 'links.html', tabs: { ...tabs, current: 1 } });
+    last.touch('touchstart', 240);
+    last.touch('touchmove', 150);
+    last.touch('touchend', 150);
+    expect(last.links[1].click).not.toHaveBeenCalled();
 });
