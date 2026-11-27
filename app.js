@@ -511,13 +511,12 @@ const IndexRenderer = {
         const el = document.getElementById('about-brief-content');
         if (!el) return;
         const info = CHURCH_DATA.info;
-        const { aboutLead, aboutDesc, award } = info;
+        const { aboutLead, award } = info;
         const about = CHURCH_DATA.home.about;
         this._header('about-brief-header', about);
         el.innerHTML = `
             <div class="home-about-copy">
-                <p class="about-brief-lead">${aboutLead.map(sentence => `<span>${sentence}</span>`).join(' ')}</p>
-                <p class="about-brief-desc">${aboutDesc}</p>
+                <p class="about-brief-lead">${aboutLead}</p>
                 <a href="clergy.html" class="about-brief-link">${about.more}</a>
             </div>
             <div class="home-about-facts">

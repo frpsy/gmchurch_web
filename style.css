@@ -1650,20 +1650,13 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     align-items: start;
 }
 .home #about-brief .section-title { font-weight: 700; }
-.home-about-copy :is(.about-brief-lead, .about-brief-desc) {
+.home-about-copy .about-brief-lead {
     font-size: var(--fs-body);
     line-height: var(--lh-body);
-    text-wrap: balance;
-}
-.home-about-copy .about-brief-lead {
+    text-wrap: pretty;
     font-weight: 500;
     letter-spacing: normal;
     margin-bottom: 0.75rem;
-}
-.home-about-copy .about-brief-lead span { display: block; }
-.home-about-copy .about-brief-desc {
-    color: var(--text-muted);
-    margin-bottom: 0.65rem;
 }
 .home-about-facts {
     background: var(--cream);
@@ -1721,7 +1714,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     .home :is(.about-brief-link, .visit-quick a):hover { background: var(--md-secondary-container); }
 }
 .home :is(.about-brief-link, .visit-quick a):active { background: var(--md-secondary-container); }
-.home .about-brief-desc + .about-brief-link { margin-top: 0.6rem; }
 
 .home #worship-grid { gap: var(--space-3); }
 .home #worship-grid .card {
