@@ -557,8 +557,6 @@ const IndexRenderer = {
                 guide.hidden = true;
             }
         }
-        const more = document.getElementById('worship-more');
-        if (more) more.innerHTML = `<a href="worship.html" class="btn-outline home-detail-link">${home.more} ${icon('arrow-right')}</a>`;
     },
 
     /* 다가오는 주일(오늘이 주일이면 오늘) 전례 정보 — 독서 파일을 못 불러오면 블록을 숨긴다 */
