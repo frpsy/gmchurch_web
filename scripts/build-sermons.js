@@ -6,6 +6,13 @@ const root = new URL('../', import.meta.url);
 const read = name => fs.readFileSync(new URL(name, root), 'utf8');
 const context = {};
 vm.runInNewContext(read('data.js') + '\n;this.items = CHURCH_DATA.sermons.items;', context);
+// 본문(문단·각주)은 data/sermon-bodies.json에 있다. 목록 항목과 pageId로 합친다.
+const bodies = JSON.parse(read('data/sermon-bodies.json'));
+context.items = context.items.map(item => {
+    const body = bodies[item.pageId];
+    if (!body) throw new Error(`본문이 없습니다: ${item.pageId}`);
+    return { ...item, ...body };
+});
 const template = read('sermons.html').replaceAll('\r\n', '\n');
 
 const escape = value => String(value).replace(/[&<>"']/g, char =>

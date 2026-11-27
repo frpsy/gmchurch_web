@@ -448,6 +448,7 @@ window DOMContentLoaded
       │     70rem 이상에서 목차(.sermon-toc) 펼침 + 지금 읽는 절 강조(AboutNavRenderer.bindSpy 재사용)
       │     봉독 구절(.sermon-scripture-ref)을 SundaysRenderer._bibleUrl로 공동번역 본문 링크로 바꾼다(약어는 _bibleBooks에 추가)
       │     글 끝 .sermon-pager(이전·다음 글)는 생성기가 날짜 순서로 만든다
+      │     설교 본문은 data/sermon-bodies.json. MenuOverlay._loadSermonBodies가 검색어 첫 입력 때 받아 설교 색인에 문단을 붙인다(_applySermonBodies)
       │
       ├── LinksRenderer.render()      → #links-full (links.html)
       │     관련 기관 목록.
