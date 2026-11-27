@@ -270,10 +270,6 @@ const CHURCH_DATA = {
             title: "예배 안내",
             sub: "주일에는 감사성찬례와 어린이 예배를 드립니다."
         },
-        thisSunday: {
-            title: "다가오는 주일",
-            readingsLink: "이번 주 독서 보기"
-        },
         guide: {
             eyebrow: "Welcome",
             title: "처음 오셨나요?",

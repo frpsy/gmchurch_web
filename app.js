@@ -473,7 +473,6 @@ const IndexRenderer = {
         this._hero();
         this._about();
         this._worship();
-        this._thisSunday();
         this._visit();
         const links = document.getElementById('home-end-links');
         if (links) links.innerHTML = CHURCH_DATA.home.endLinks.map(link => `
@@ -565,28 +564,6 @@ const IndexRenderer = {
                 guide.hidden = true;
             }
         }
-    },
-
-    /* 다가오는 주일(오늘이 주일이면 오늘) 전례 정보 — 독서 파일을 못 불러오면 블록을 숨긴다 */
-    async _thisSunday() {
-        const el = document.getElementById('this-sunday');
-        if (!el) return;
-        const sundays = await SundaysRenderer._loadSundays();
-        const t = CHURCH_DATA.home.thisSunday;
-        const today = new Date();
-        const sun = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (7 - today.getDay()) % 7);
-        const iso = `${sun.getFullYear()}-${String(sun.getMonth() + 1).padStart(2, '0')}-${String(sun.getDate()).padStart(2, '0')}`;
-        const s = sundays.find(x => x.date === iso);
-        if (!s) { el.hidden = true; return; }
-
-        const dateStr = `${sun.getMonth() + 1}월 ${sun.getDate()}일`;
-
-        el.innerHTML = `
-            <h3>${t.title}</h3>
-            <p class="this-sunday-date"><time datetime="${iso}">${dateStr}</time><span>${s.koreanName}</span></p>
-            <a class="btn-outline home-detail-link" href="sundays.html?date=${iso}#lectionary">${t.readingsLink} ${icon('arrow-right')}</a>
-        `;
-        el.hidden = false;
     },
 
     /* 홈에서는 주소와 길찾기 링크를 가장 먼저 보여 준다. */
