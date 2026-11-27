@@ -511,14 +511,12 @@ const IndexRenderer = {
         const el = document.getElementById('about-brief-content');
         if (!el) return;
         const info = CHURCH_DATA.info;
-        const { aboutLead, aboutDesc, award } = info;
+        const { aboutLead, award } = info;
         const about = CHURCH_DATA.home.about;
         this._header('about-brief-header', about);
         el.innerHTML = `
             <div class="home-about-copy">
-                <p class="about-brief-lead">${aboutLead.map(sentence => `<span>${sentence}</span>`).join(' ')}</p>
-                <p class="about-brief-desc">${aboutDesc}</p>
-                <a href="clergy.html" class="about-brief-link">${about.more}</a>
+                <p class="about-brief-lead">${aboutLead}</p>
             </div>
             <div class="home-about-facts">
                 <ul class="about-brief-facts">
@@ -534,6 +532,8 @@ const IndexRenderer = {
                 </a>` : ''}
             </div>
         `;
+        const more = document.getElementById('about-brief-more');
+        if (more) more.innerHTML = `<a href="clergy.html" class="btn-outline home-detail-link">${about.more} ${icon('arrow-right')}</a>`;
     },
 
     _worship() {
@@ -558,7 +558,7 @@ const IndexRenderer = {
             }
         }
         const more = document.getElementById('worship-more');
-        if (more) more.innerHTML = `<a href="worship.html" class="about-brief-link">${home.more}</a>`;
+        if (more) more.innerHTML = `<a href="worship.html" class="btn-outline home-detail-link">${home.more} ${icon('arrow-right')}</a>`;
     },
 
     /* 다가오는 주일(오늘이 주일이면 오늘) 전례 정보 — 독서 파일을 못 불러오면 블록을 숨긴다 */
