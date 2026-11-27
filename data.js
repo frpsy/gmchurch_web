@@ -250,8 +250,9 @@ const CHURCH_DATA = {
     home: {
         explore: { title: "둘러보기" },
         endLinks: [
-            { label: "교회 주보", href: "bulletin.html", icon: "pen" },
-            { label: "설교·강연", href: "sermons.html", icon: "book" },
+            // size: 둘러보기 벤토 칸 크기(big 2×2, wide 2×1, 없으면 1×1). desc는 큰 칸에만 보인다
+            { label: "교회 주보", href: "bulletin.html", icon: "pen", size: "big", desc: "예배 순서와 공동체 소식을 담은 주간 주보입니다." },
+            { label: "설교·강연", href: "sermons.html", icon: "book", size: "wide", desc: "주일 설교와 강연을 날짜별로 모았습니다." },
             { label: "교회력", href: "sundays.html", icon: "calendar" },
             { label: "어린이 예배", href: "children.html", icon: "dove" },
             { label: "공동체", href: "community.html", icon: "people" },
