@@ -113,6 +113,20 @@ describe('교회 소식', () => {
         expect(html).toContain('<dt>장소</dt><dd>간석교회</dd>');
         expect(html.match(/<dl /g)).toHaveLength(1);
     });
+
+    it('짧은 소식 둘은 나란히, 긴 소식은 한 줄 전체로 두고 인쇄 순서를 지킨다', () => {
+        const { NewsRenderer } = loadRenderers();
+        const long = '가'.repeat(200);
+        const html = NewsRenderer._gridHtml([
+            { title: 'A', body: '짧은 글' },
+            { title: 'B', body: '짧은 글' },
+            { title: 'C', body: long },
+            { title: 'D', body: '짧은 글' },
+            { title: 'E', body: long }
+        ], '2026-11-22');
+        const cards = [...html.matchAll(/news-post--(\w+)"><h2 class="news-post-title">(\w)/g)].map(m => `${m[2]}:${m[1]}`);
+        expect(cards).toEqual(['A:half', 'B:half', 'C:wide', 'D:wide', 'E:wide']);
+    });
 });
 
 describe('전례독서 로딩 실패', () => {

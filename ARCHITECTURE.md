@@ -417,6 +417,7 @@ window DOMContentLoaded
       │
       ├── AboutNavRenderer.render()   → clergy.html 전용
       │     #about-section-nav → sticky 섹션 내비(gc-page-nav 재사용) + 스크롤 스파이
+      │     .side-nav-layout(본문 묶음) 안의 .side-nav-host가 sticky. 1180px 이상은 왼쪽 사이드바 목차, 그 아래는 위쪽 가로 목차
       │     데이터원: navigation[0].items, aboutJourney
       │
       ├── MediaRenderer.render()      → #media-full (videos.html)
@@ -437,7 +438,12 @@ window DOMContentLoaded
       │     bulletins.items[].verse(sync가 data/bulletin-verses.json에서 합침): 첫 쪽 맨 위에 최신 주보의 '이번 주 말씀' 카드(.bulletin-verse), 나머지 주보는 펼침 영역 맨 앞에 표시
       ├── NewsRenderer.render()       → #news-full (news.html)
       │     bulletins.items[].news(sync가 data/bulletin-news.json에서 합침)를 게시판 목록으로 렌더 (주보 목록(bulletin-list) 스타일 재사용, 날짜 클릭 시 그 주 소식 펼침·최신 주 기본 펼침·#news-날짜 딥링크, "일시 : …" 줄은 항목표로 렌더)
+      │     한 주 소식은 .news-grid 카드 그리드(_gridHtml): 짧은 글 둘은 나란히(.news-post--half), 나머지는 한 줄 전체(.news-post--wide), 순서는 인쇄 순서 그대로
       │     '이번 주' 배지는 한국 시간 기준 이번 주 주보에만, 아니면 최신 항목에 '최근 등록'
+      │
+      ├── SermonsRenderer.render()    → #sermons-full (sermons.html)
+      │     매거진 형식: 최신 1편 .sermon-card--feature, 지난 글 정렬 순서의 앞 2편 .sermon-card(2열), 나머지 .sermon-list 목록 줄
+      │     카드 인용은 편집자 강조(**…**) 첫 문장(_quote), 정렬 버튼은 지난 글 영역을 다시 그린다
       │
       ├── LinksRenderer.render()      → #links-full (links.html)
       │     관련 기관 목록.
@@ -515,6 +521,8 @@ window DOMContentLoaded
   #home-guide-header / #home-guide-cards (resource-grid) ← IndexRenderer._guide()
 <section id="visit-preview">
   #visit-header / #location-card                       ← IndexRenderer._visit()
+<section class="home-end-links">
+  #home-end-links (벤토 그리드 .home-end-tile, size big 2×2 / wide 2×1) ← IndexRenderer.render(), 데이터 home.endLinks
 </main>
 <footer id="main-footer">                   ← FooterRenderer
 ```

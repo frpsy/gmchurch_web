@@ -475,10 +475,12 @@ const IndexRenderer = {
         this._visit();
         this._header('home-explore-header', CHURCH_DATA.home.explore);
         const links = document.getElementById('home-end-links');
+        // 둘러보기는 벤토 그리드: 자주 찾는 칸(size)을 크게 두고 나머지는 작은 칸으로 채운다
         if (links) links.innerHTML = CHURCH_DATA.home.endLinks.map(link => `
-            <li><a href="${link.href}">
+            <li class="home-end-tile${link.size ? ` home-end-tile--${link.size}` : ''}"><a href="${link.href}">
                 <span class="home-end-icon">${icon(link.icon)}</span>
-                <span>${link.label}</span>
+                <span class="home-end-label">${link.label}</span>
+                ${link.size && link.desc ? `<span class="home-end-desc">${link.desc}</span>` : ''}
             </a></li>
         `).join('');
     },
@@ -2817,7 +2819,7 @@ const SermonsRenderer = {
     },
 
     // 설교 목록은 각 글의 독립 페이지로 연결한다.
-    _itemHtml(item, featured = false) {
+    _itemHtml(item) {
         return `
             <div class="bulletin-item sermon-item" data-date="${item.date}">
                 <h3 class="sermon-heading" id="sermon-${item.date}">
@@ -2840,12 +2842,36 @@ const SermonsRenderer = {
             </div>`;
     },
 
-    _sort(list, items, key) {
-        const byDate = new Map(items.map(item => [item.date, item]));
-        const cmp = this._SORTS[key] || this._SORTS['date-desc'];
-        const rows = [...list.children].sort((x, y) =>
-            cmp(byDate.get(x.dataset.date), byDate.get(y.dataset.date)));
-        list.append(...rows);
+    // 매거진 카드에 넣을 인용: 편집자가 강조(**…**)한 첫 문장을 원문 그대로 쓴다. 각주 표시는 뺀다
+    _quote(item) {
+        const m = (item.paragraphs || []).join('\n').match(/\*\*(.+?)\*\*/);
+        return m ? m[1].replace(/\[\^\d+\]/g, '').trim() : '';
+    },
+
+    // 매거진 카드: feature(최신 1편, 크게)와 card(다음 2편, 중간). 목록 줄과 같은 개별 페이지로 간다
+    _cardHtml(item, size) {
+        const quote = this._quote(item);
+        return `
+            <article class="sermon-card sermon-card--${size}" data-date="${item.date}">
+                <a class="sermon-card-link" href="sermon-${item.pageId}.html">
+                    <span class="sermon-byline">
+                        ${item.kind ? `<span class="sermon-kind">${item.kind}</span>` : ''}
+                        <time datetime="${item.date}">${this._dateLabel(item.date)}</time>
+                        <span>${item.preacher}</span>
+                    </span>
+                    <h3 class="sermon-card-title" id="sermon-${item.date}">${item.title}</h3>
+                    ${quote ? `<span class="sermon-card-quote">${quote}</span>` : ''}
+                    ${item.scripture ? `<span class="sermon-card-scripture">${item.scripture}</span>` : ''}
+                </a>
+            </article>`;
+    },
+
+    // 지난 글: 정렬 순서의 앞 두 편은 카드로, 나머지는 목록 줄로 보인다
+    _archiveHtml(archive) {
+        const [cards, rest] = [archive.slice(0, 2), archive.slice(2)];
+        return `
+            <div class="sermon-card-grid">${cards.map(item => this._cardHtml(item, 'card')).join('')}</div>
+            ${rest.length ? `<div class="bulletin-list sermon-list" id="sermon-list">${rest.map(item => this._itemHtml(item)).join('')}</div>` : ''}`;
     },
 
     render(signal) {
@@ -2862,7 +2888,7 @@ const SermonsRenderer = {
         el.innerHTML = `
             <section class="sermon-feature" aria-labelledby="sermon-feature-title">
                 <h2 id="sermon-feature-title">최신 ${latest.kind || '설교'}</h2>
-                <div class="bulletin-list">${this._itemHtml(latest, true)}</div>
+                ${this._cardHtml(latest, 'feature')}
             </section>
             ${archive.length ? `
                 <section aria-labelledby="sermon-archive-title">
@@ -2874,16 +2900,17 @@ const SermonsRenderer = {
                             <button type="button" class="sermon-sort-btn" data-sort="date-asc" aria-pressed="false"><span>오래된순</span></button>
                         </div>
                     </div>
-                    <div class="bulletin-list sermon-list" id="sermon-list">${archive.map(item => this._itemHtml(item)).join('')}</div>
+                    <div class="sermon-archive" id="sermon-archive">${this._archiveHtml(archive)}</div>
                 </section>` : ''}`;
 
-        const list = el.querySelector('#sermon-list');
+        const archiveEl = el.querySelector('#sermon-archive');
         const sortBtns = el.querySelectorAll('.sermon-sort-btn');
         const sortGroup = el.querySelector('.sermon-sort');
         sortBtns.forEach((btn, index) => btn.addEventListener('click', () => {
             sortBtns.forEach(control => control.setAttribute('aria-pressed', String(control === btn)));
             sortGroup.style.setProperty('--sort-index', index);
-            this._sort(list, archive, btn.dataset.sort);
+            const cmp = this._SORTS[btn.dataset.sort] || this._SORTS['date-desc'];
+            archiveEl.innerHTML = this._archiveHtml([...archive].sort(cmp));
         }));
 
         // 예전에 공유한 설교·목차·각주 주소를 새 읽기 페이지로 연결한다.
@@ -2961,7 +2988,26 @@ const NewsRenderer = {
         });
     },
 
-    _postHtml(post, bulletinDate) {
+    // 소식 카드 폭: 짧은 글 두 개가 이어지면 나란히(half), 아니면 한 줄 전체(wide). 순서는 주보 인쇄 순서 그대로 둔다
+    _isShort(post) {
+        return post.body.length <= 140 && post.body.split('\n').length <= 3;
+    },
+
+    _gridHtml(posts, bulletinDate) {
+        const widths = [];
+        for (let i = 0; i < posts.length;) {
+            if (this._isShort(posts[i]) && posts[i + 1] && this._isShort(posts[i + 1])) {
+                widths.push('half', 'half');
+                i += 2;
+            } else {
+                widths.push('wide');
+                i += 1;
+            }
+        }
+        return `<div class="news-grid">${posts.map((post, i) => this._postHtml(post, bulletinDate, widths[i])).join('')}</div>`;
+    },
+
+    _postHtml(post, bulletinDate, width) {
         const blocks = [];
         let meta = [];
         const flush = () => {
@@ -2978,7 +3024,7 @@ const NewsRenderer = {
             }
         });
         flush();
-        return `<article class="news-post"><h2 class="news-post-title">${post.title}</h2>${blocks.join('')}</article>`;
+        return `<article class="news-post${width ? ` news-post--${width}` : ''}"><h2 class="news-post-title">${post.title}</h2>${blocks.join('')}</article>`;
     },
 
     _weeks() {
@@ -3025,7 +3071,7 @@ const NewsRenderer = {
                     ${this._rowHtml(item, i === 0, i === openIdx)}
                     <div class="bulletin-drawer" id="news-${item.date}" role="region"
                          aria-labelledby="news-btn-${item.date}"${i === openIdx ? '' : ' hidden'}>
-                        ${item.news.map(post => this._postHtml(post, item.date)).join('')}
+                        ${this._gridHtml(item.news, item.date)}
                     </div>
                 </div>`).join('')}
             </div>`;
