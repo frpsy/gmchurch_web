@@ -16,3 +16,10 @@ jobs:
           node-version: '20'
       - run: npm ci
       - run: npm test
+      # 모든 페이지를 브라우저로 열어 콘솔 오류·404·가로 넘침·페이지 전환 리스너 누적을 막는다
+      # (scripts/site-check.mjs, docs/perf-refactor-plan.md 0단계). Playwright는 package.json에 넣지 않는다.
+      - name: Browser smoke
+        run: |
+          npm i --no-save playwright@1.65.1
+          npx playwright install --with-deps chromium
+          node scripts/site-check.mjs smoke

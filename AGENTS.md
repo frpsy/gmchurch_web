@@ -56,6 +56,7 @@
 | 주보 이미지 등록·주보제작·주보검수·순서지(모바일 주보 `jubo/`) | `docs/mobile-bulletin-rules.md`(운영 원칙, 우선) → `docs/bulletin-procedure.md`(절차) → `.agents/skills/gmchurch-soonseoji/SKILL.md`(순서지 제작 실행 절차) → `.agents/skills/gmchurch-mobile-bulletin/SKILL.md` |
 | 페이지·메뉴·CSS·새 페이지·유튜브 영상/쇼츠 추가 | `docs/dev-guide.md` |
 | 데이터 스키마·렌더러·CSS 목록 | `ARCHITECTURE.md` |
+| 성능·버그·리팩토링(화면 고정, 스크린샷 비교·실측) | `docs/perf-refactor-plan.md`, 도구 `scripts/site-check.mjs` |
 | 교회 사실·용어 | `docs/wiki/README.md`, `docs/church-glossary.md` |
 | 공식 저장소 반영 | `docs/REPO-STRUCTURE.md` |
 | ChatGPT·Gemini 검토·주보 이미지 대조(외부 AI 보조) | `docs/ai-orchestration.md` (래퍼 `scripts/ai-call.py`) |
