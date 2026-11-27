@@ -3886,11 +3886,12 @@ const App = {
     }
 };
 
-/* 긴 페이지에서 현재 보이는 본문의 목차와 사이트 검색을 연다. */
+/* 설교·강연 읽기 페이지(sermon-*.html)에서만 하단 바로 글의 목차와 사이트 검색을 연다.
+   다른 페이지는 오른쪽 아래 「맨 위로」 버튼만 둔다(2026-11-27 사용자 지시). */
 const ReadingTools = {
     render(signal) {
         const main = document.getElementById('main-content');
-        if (!main) return;
+        if (!main || !main.querySelector('.sermon-reading-layout')) return;
         const bar = document.createElement('nav');
         bar.className = 'reading-tools';
         bar.setAttribute('aria-label', '읽기 도구');
