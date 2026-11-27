@@ -45,3 +45,11 @@ describe('정렬 규칙', () => {
         }
     });
 });
+
+// 한글 본문은 어절 단위로 줄을 바꾼다. break-all은 「띕니 / 다.」처럼 낱말 중간을 끊는다(2026-11-27).
+describe('줄바꿈', () => {
+    it('사이트 CSS에 음절 단위 줄바꿈(word-break: break-all)이 없다', () => {
+        expect(css).not.toMatch(/word-break\s*:\s*break-all/);
+        expect(css).not.toMatch(/line-break\s*:\s*anywhere/);
+    });
+});
