@@ -520,9 +520,6 @@ window DOMContentLoaded
   #about-brief-header / #about-brief-content           ← IndexRenderer._about()
 <section id="worship">
   #worship-header / #worship-grid / #worship-guide / #worship-more ← IndexRenderer._worship()
-  #this-sunday (info-card, 독서 파일 로드 실패 시 hidden) ← IndexRenderer._thisSunday() — SundaysRenderer._loadSundays() 재사용
-<section id="home-guide">
-  #home-guide-header / #home-guide-cards (resource-grid) ← IndexRenderer._guide()
 <section id="visit-preview">
   #visit-header / #location-card                       ← IndexRenderer._visit()
 <section class="home-end-links">
