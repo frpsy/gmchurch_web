@@ -2849,13 +2849,27 @@ const SermonsRenderer = {
             ? `<p class="news-intro"><a href="${item.source.url}" target="_blank" rel="noopener" aria-label="${item.source.label} (새 창으로 열림)">${item.source.label}</a></p>`
             : '';
         const note = item.note ? `<p class="news-intro">※ ${item.note}</p>` : '';
+        const headings = item.paragraphs.map((text, index) => {
+            if (/^\d+\.$/.test(text.trim())) return { index, label: `${text.trim()} 부분`, sub: false };
+            if (text.startsWith('## ')) return { index, label: text.slice(3), sub: false };
+            if (text.startsWith('### ')) return { index, label: text.slice(4), sub: true };
+            return null;
+        }).filter(Boolean);
+        const contents = headings.length ? `
+            <details class="sermon-toc">
+                <summary>목차 보기</summary>
+                <nav aria-label="${item.title} 목차"><ul>${headings.map(heading => `
+                    <li class="${heading.sub ? 'sermon-toc-sub' : ''}"><a href="#sermon-section-${item.date}-${heading.index}">${heading.label}</a></li>
+                `).join('')}</ul></nav>
+            </details>` : '';
         return `
             <div class="bulletin-drawer" id="sermon-body-${item.date}" role="region"
                  aria-labelledby="sermon-btn-${item.date}" hidden>
                 <article class="news-post">
                     ${meta ? `<div class="sermon-meta"><dl class="news-post-meta">${meta}</dl></div>` : ''}
                     <p class="sermon-text-label">${item.kind ? `${item.kind}문` : '설교문'}</p>
-                    <div class="sermon-body">${item.paragraphs.map(p => this._paraHtml(p, item.date)).join('')}</div>
+                    ${contents}
+                    <div class="sermon-body">${item.paragraphs.map((p, index) => this._paraHtml(p, item.date, index)).join('')}</div>
                     ${note}${source}
                     ${this._notesHtml(item)}
                 </article>
@@ -2864,10 +2878,11 @@ const SermonsRenderer = {
 
     // 문단 한 줄. 편집 표시: **강조** → 강조 글씨, [^n] → 각주 위치, "1." 같은 줄 → 절 제목,
     // "## 제목" → 장 제목(강연의 Ⅰ. Ⅱ. …), "### 제목" → 장 안의 소제목(1. 2. …)
-    _paraHtml(p, date) {
-        if (/^\d+\.$/.test(p.trim())) return `<h4 class="sermon-section">${p.trim().slice(0, -1)}</h4>`;
-        if (p.startsWith('## ')) return `<h4 class="sermon-section sermon-chapter">${p.slice(3)}</h4>`;
-        if (p.startsWith('### ')) return `<h5 class="sermon-subsection">${p.slice(4)}</h5>`;
+    _paraHtml(p, date, index) {
+        const id = `sermon-section-${date}-${index}`;
+        if (/^\d+\.$/.test(p.trim())) return `<h4 class="sermon-section" id="${id}" tabindex="-1">${p.trim().slice(0, -1)}</h4>`;
+        if (p.startsWith('## ')) return `<h4 class="sermon-section sermon-chapter" id="${id}" tabindex="-1">${p.slice(3)}</h4>`;
+        if (p.startsWith('### ')) return `<h5 class="sermon-subsection" id="${id}" tabindex="-1">${p.slice(4)}</h5>`;
         const html = p
             .replace(/\*\*(.+?)\*\*/g, '<strong class="sermon-em">$1</strong>')
             .replace(/\[\^(\d+)\]/g, (all, n) =>
@@ -2896,6 +2911,15 @@ const SermonsRenderer = {
     _bind(list) {
         list.querySelectorAll('.bulletin-row').forEach(btn => {
             btn.addEventListener('click', () => this._setOpen(btn, btn.getAttribute('aria-expanded') !== 'true'));
+        });
+        list.querySelectorAll('.sermon-toc a').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const target = document.getElementById(link.hash.slice(1));
+                if (!target) return;
+                target.focus({ preventScroll: true });
+                target.scrollIntoView({ block: 'start', behavior: 'auto' });
+            });
         });
     },
 
