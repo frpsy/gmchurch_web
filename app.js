@@ -571,21 +571,12 @@ const IndexRenderer = {
         const s = sundays.find(x => x.date === iso);
         if (!s) { el.hidden = true; return; }
 
-        const season = LiturgicalCalendar.compute(sun);
-        const r = s.readings;
-        // 연중 시기 두 트랙 중 어느 것인지는 주보로만 알 수 있으므로, 기록이 없으면 연속 독서(A) 기본
-        const first = (r.firstReadingB && s.bulletinTrack === 'B') ? r.firstReadingB : r.firstReadingA;
-        const rows = [[t.labels.first, first], [t.labels.second, r.secondReading], [t.labels.gospel, r.gospel]]
-            .filter(([, ref]) => ref)
-            .map(([lbl, ref]) => `<div class="info-row"><strong>${lbl}</strong><span>${SundaysRenderer._refLink(ref)}</span></div>`)
-            .join('');
         const dateStr = `${sun.getMonth() + 1}월 ${sun.getDate()}일`;
 
         el.innerHTML = `
             <h3>${t.title}</h3>
             <p class="this-sunday-date"><time datetime="${iso}">${dateStr}</time><span>${s.koreanName}</span></p>
-            <div class="info-row"><strong>${t.labels.season}</strong><span class="this-sunday-season" style="--season:${season.dayColor};--season-ink:${season.dayInk || season.dayColor}"><span>${season.name}</span><span class="this-sunday-color">전례색 ${season.dayColorName}</span></span></div>
-            ${rows}
+            <a class="btn-outline home-detail-link" href="sundays.html?date=${iso}#lectionary">${t.readingsLink} ${icon('arrow-right')}</a>
         `;
         el.hidden = false;
     },
@@ -3201,7 +3192,9 @@ const SundaysRenderer = {
             return;
         }
 
-        const idx = this._lectionaryFindIdx(sundays);
+        const requestedDate = new URLSearchParams(location.search).get('date');
+        const requestedIdx = sundays.findIndex(s => s.date === requestedDate);
+        const idx = requestedIdx >= 0 ? requestedIdx : this._lectionaryFindIdx(sundays);
         el.dataset.lectionaryIdx = idx;
         const track = sundays[idx].bulletinTrack || 'A';  // 주보 확인 트랙, 없으면 연속 독서 기본
         el.dataset.lectionaryTrack = track;

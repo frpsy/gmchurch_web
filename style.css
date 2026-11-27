@@ -1753,26 +1753,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     word-break: keep-all;
 }
 .this-sunday-date time { white-space: nowrap; }
-.home .this-sunday .info-row {
-    display: grid;
-    grid-template-columns: 4em minmax(0, 1fr);
-    gap: 0.5rem;
-}
-.home .this-sunday .info-row strong {
-    min-width: 0;
-    color: var(--text-muted);
-    font-weight: 550;
-}
-.this-sunday-season {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.15rem 0.55rem;
-    word-break: keep-all;
-}
-.this-sunday-color {
-    color: var(--season-ink, var(--text-muted));
-    font-weight: 550;
-}
 .home .home-section-actions { margin-top: var(--space-4); }
 .home .home-detail-link {
     gap: 0.5rem;
@@ -3870,9 +3850,6 @@ footer {
     #visit-full > .info-card { width: 100%; margin: 0; }
 }
 /* 홈 예배 섹션 — 예배 카드 아래 다가오는 주일 카드 */
-.this-sunday { margin-top: 2rem; }
-.this-sunday .liturgy-season-badge { margin-bottom: var(--space-2); box-shadow: none; }
-.this-sunday .info-row strong { min-width: 72px; }
 
 .visit-contact { margin-top: 1.5rem; }
 
