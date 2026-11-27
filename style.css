@@ -5598,13 +5598,13 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
     .container { padding-left: 1rem; padding-right: 1rem; }
     .story-value { padding: 1.25rem 1rem; }
     /* 모바일 본문: 양쪽 정렬은 한 줄 공백 몇 군데에 남는 폭을 몰아 넣어 어절 사이가 벌어지므로(iOS Safari는 글자 사이 분배 text-justify 미지원) 왼쪽 정렬로 둔다.
-       한글은 음절 단위로 줄을 바꿔 오른쪽 끝 차이를 한 글자 안쪽으로 줄이고, 숫자·영문 어절은 끊지 않는다 */
+       줄은 어절 단위로 바꾼다. 음절 단위(break-all)는 「띕니 / 다.」처럼 낱말 중간을 끊어 읽기 어렵다(2026-11-27 사용자 지적) */
     .story-value-text, .faq-a-text, .faq-a-lead, .info-card p, .liturgy-body, .anglican-para, .space-desc,
     .emmaus-lead, .emmaus-stage-desc, .clergy-desc, .bishop-desc, .newcomer-intro-body,
     .worship-card-desc, .worship-card-detail, .logo-desc, .logo-history, .bio-ministry-note {
         text-align: left;
-        word-break: break-all;
-        overflow-wrap: anywhere;
+        word-break: keep-all;
+        overflow-wrap: break-word;
         hyphens: none;
     }
 }
