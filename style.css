@@ -5998,3 +5998,81 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
     .visit-quick { grid-template-columns: 1fr; }
 }
 
+
+/* ── 설교 읽기 ─────────────────────────────────────────── */
+.sermon-reading {
+    --sermon-measure: 43rem;
+    color: var(--text);
+    background: var(--white);
+    padding: calc(var(--nav-h) + clamp(1rem, 2vw, 2rem)) clamp(1rem, 4vw, 2rem) clamp(3rem, 8vw, 7rem);
+}
+.nav-header:empty:has(+ .sermon-reading) { display: none; }
+.nav-header:empty + .sermon-reading {
+    padding-block-start: clamp(1rem, 2vw, 2rem);
+}
+.sermon-reading article { max-inline-size: var(--sermon-measure); margin-inline: auto; }
+.sermon-reading-header { border-block-end: 1px solid var(--border); padding-block-end: 1.15rem; }
+.sermon-archive-link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    color: var(--heading);
+    font-size: 0.875rem;
+    text-decoration: underline;
+    text-underline-offset: 0.24em;
+}
+.sermon-reading h1 {
+    color: var(--heading);
+    margin: 0.45em 0 0.4em;
+    font-size: clamp(2rem, 5vw, 3.75rem);
+    font-weight: 760;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+}
+.sermon-reading-byline { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; align-items: baseline; }
+.sermon-reading-byline span { color: var(--heading); font-weight: 650; }
+.sermon-reading-byline time, .sermon-reading-meta { color: var(--text-muted); font-size: 0.875rem; }
+.sermon-reading-meta { margin: 1.15rem 0 0; }
+.sermon-reading-meta div { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0.55rem; }
+.sermon-reading-meta dt { font-weight: 650; }
+.sermon-reading-meta dd { margin: 0; overflow-wrap: anywhere; }
+.sermon-reading-layout { position: relative; display: grid; gap: 1.4rem; margin-block-start: 1.3rem; }
+.sermon-reading .sermon-toc { margin: 0; min-inline-size: 0; border-radius: 0.35rem; }
+.sermon-reading .sermon-toc summary { min-block-size: 44px; padding: 0.6rem 0.8rem; }
+.sermon-reading .sermon-toc ol { list-style: none; padding: 0 0.8rem 0.45rem; margin: 0; }
+.sermon-reading .sermon-toc a { min-block-size: 44px; font-size: 0.9rem; overflow-wrap: anywhere; }
+.sermon-reading-text { min-inline-size: 0; }
+.sermon-reading .sermon-body p {
+    font-size: clamp(1.0625rem, 1rem + 0.24vw, 1.1875rem);
+    line-height: 1.92;
+    margin-block-end: 1.28em;
+}
+.sermon-reading .sermon-body :is(h2, h3) { color: var(--heading); }
+.sermon-reading .sermon-body .sermon-chapter { font-size: clamp(1.25rem, 3vw, 1.6rem); }
+.sermon-reading .sermon-body .sermon-subsection { font-size: 1.125rem; overflow-wrap: anywhere; }
+.sermon-reading :is(.sermon-body [id], .sermon-notes li[id], .sermon-fn-ref a) {
+    scroll-margin-top: calc(var(--nav-h) + 1.25rem);
+}
+.sermon-reading :is(.sermon-body [id], .sermon-notes li[id]):target {
+    background: color-mix(in srgb, var(--gold) 17%, transparent);
+}
+.sermon-reading .sermon-notes { margin-block-start: 2.5rem; }
+.sermon-reading .sermon-notes h2 { color: var(--heading); font-size: 1rem; margin: 0 0 0.75rem; }
+.sermon-reading .sermon-reading-footer { border-block-start: 1px solid var(--border); margin-block-start: 2rem; padding-block-start: 1rem; }
+.sermon-reading :focus-visible { outline: 2px solid var(--md-primary); outline-offset: 3px; }
+
+@media (min-width: 70rem) {
+    .sermon-reading article { max-inline-size: 65rem; }
+    .sermon-reading-header { max-inline-size: var(--sermon-measure); margin-inline-start: auto; }
+    .sermon-reading-layout { grid-template-columns: minmax(0, 17rem) minmax(0, var(--sermon-measure)); justify-content: space-between; gap: 3rem; }
+    .sermon-reading .sermon-toc {
+        position: sticky;
+        top: calc(var(--nav-h) + 1rem);
+        align-self: start;
+        max-block-size: calc(100dvh - var(--nav-h) - 2rem);
+        overflow: auto;
+    }
+}
