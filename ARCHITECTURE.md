@@ -611,7 +611,7 @@ window DOMContentLoaded
 ### CSS 변수
 
 ```css
-/* 팔레트: 숲 녹 #173a2e · 세이지 #a8bd9f · 올리브 #636f2a(다크 #b9c57f, 최신 설교·강연 카드) · 크림 #f2f3ef (로고·OG 이미지 등 브랜드 에셋은 기존 #1c4336/#f0ece4 유지) */
+/* 팔레트: 숲 녹 #173a2e · 세이지 #a8bd9f · 크림 #f2f3ef (로고·OG 이미지 등 브랜드 에셋은 기존 #1c4336/#f0ece4 유지) */
 --green-deep:   #173a2e   /* 주 브랜드 색 (nav, footer, 어두운 띠) */
 --green-mid:    #285a47   /* 흰 글자 7.9:1, 크림 위 7.1:1 */
 --green-light:  #e7eee8

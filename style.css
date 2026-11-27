@@ -26,8 +26,6 @@
     /* Accent — luminous amber gold */
     --brand-sub:    #c4d4c0;  /* 로고 부제 — 항상 어두운 숲 녹 바탕 위(헤더·푸터·로고 소개) */
     --gold:         #a8bd9f;  /* 세이지 — 장식선·어두운 배경 위 강조 전용(밝은 배경 글자 금지) */
-    --olive:        #636f2a;  /* 올리브 — 테마색. 흰 글씨 5.47:1 */
-    --olive-on:     #ffffff;
     --gold-bg:      #edf2ea;
     --sage-ink:     #3f6046;  /* 밝은 배경 위 세이지 계열 글자 (AA 7.06:1, white) */
     --font-brand:   "BrandSerif", "Pretendard", -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
@@ -4365,8 +4363,6 @@ footer {
         --gold:         #b5c9b0;
         --gold-bg:      #19221c;
         --sage-ink:     #b5c9b0;
-        --olive:        #b9c57f;  /* 올리브 — 다크. 짙은 글씨 8.91:1 */
-        --olive-on:     #1c2110;
         /* Nav */
         --nav-glass:    rgba(9, 26, 20, 0.96);
         /* Skeleton */
@@ -5575,19 +5571,19 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
     align-items: flex-start;
     gap: var(--space-3);
     padding: clamp(1rem, 4vw, 1.5rem);
-    background: var(--olive);
-    color: var(--olive-on);
+    background: color-mix(in srgb, var(--md-primary) 88%, transparent);
+    color: var(--md-on-primary);
 }
 .sermon-feature .bulletin-row:is(:hover, [aria-expanded="true"]) {
-    background: color-mix(in srgb, var(--olive) 88%, var(--olive-on));
+    background: color-mix(in srgb, var(--md-primary) 88%, var(--md-on-primary));
 }
 .sermon-feature .sermon-kind,
-.sermon-feature .sermon-byline { color: var(--olive-on); }
+.sermon-feature .sermon-byline { color: var(--md-on-primary); }
 .sermon-feature .bulletin-row-info {
     gap: var(--space-2);
 }
 .sermon-feature .sermon-row-title {
-    color: var(--olive-on);
+    color: var(--md-on-primary);
     font-size: clamp(1.25rem, 2.5vw, 1.625rem);
     font-weight: 700;
     line-height: 1.35;
@@ -5600,7 +5596,7 @@ html:active-view-transition-type(menu-swipe)::view-transition-new(root) { animat
     inset-inline-end: clamp(1rem, 4vw, 1.5rem);
     display: inline-flex;
     align-items: center;
-    color: var(--olive-on);
+    color: var(--md-on-primary);
 }
 .sermon-feature .bulletin-row-chevron { color: inherit; }
 /* 설교 줄은 펼치지 않고 새 페이지로 가므로 화살표가 오른쪽을 향한다 */
