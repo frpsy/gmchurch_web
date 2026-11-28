@@ -613,7 +613,7 @@ const ChildrenRenderer = {
             </div>
             <section class="section children-intro">
                 <div class="container children-hero-inner">
-                    <div class="children-illustration"><img src="images/children/welcome.jpg" alt="${d.heroAlt}" width="600" height="302" fetchpriority="high" decoding="async"><p class="children-illustration-credit">${d.heroCredit}</p></div>
+                    <div class="children-illustration"><img src="images/children/welcome-new.webp" alt="${d.heroAlt}" width="1376" height="768" fetchpriority="high" decoding="async"></div>
                     <div class="children-hero-details">
                         <p class="children-lead">${d.intro}</p>
                         <dl class="children-service-summary">
