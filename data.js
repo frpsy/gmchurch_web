@@ -1185,9 +1185,9 @@ const CHURCH_DATA = {
             {
                 title: "수도 공동체",
                 items: [
-                    { name: "대한성공회 성 프란시스 수도회(네이버 지도)", url: "https://naver.me/xB77Wcf2",                                          desc: "아시시의 성 프란시스 영성을 따르는 대한성공회의 남자 수도 공동체", external: true },
+                    { name: "대한성공회 성 프란시스 수도회(네이버 지도)", url: "https://naver.me/xB77Wcf2",                                          desc: "아시시의 성 프란시스 영성을 따르는 대한성공회의 남자 수도\u00a0공동체", external: true },
                     { name: "대한성공회 성가수도회",         url: "https://www.sister.or.kr",                                           desc: "1925년에 설립된 대한성공회의 여성 수도회" },
-                    { name: "대한성공회 성 프란시스 수녀회(구글 지도)", url: "https://maps.app.goo.gl/unKSXKk8tE4JyBNQ8",                          desc: "2001년 경북 구미에 설립된 대한성공회의 여성 수도 공동체", external: true }
+                    { name: "대한성공회 성 프란시스 수녀회(구글 지도)", url: "https://maps.app.goo.gl/unKSXKk8tE4JyBNQ8",                          desc: "2001년 경북 구미에 설립된 대한성공회의 여성 수도\u00a0공동체", external: true }
                 ]
             },
             {
