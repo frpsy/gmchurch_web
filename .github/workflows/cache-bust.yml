@@ -22,14 +22,17 @@ jobs:
       - name: Inject commit SHA as asset version
         run: |
           SHA=$(git rev-parse --short HEAD)
-          sed -i "s/?v=[A-Za-z0-9_-]*/?v=${SHA}/g" *.html
+          # 순서지(jubo/)도 ../data.js를 불러오므로 같은 번호를 붙인다
+          sed -i "s/?v=[A-Za-z0-9_-]*/?v=${SHA}/g" *.html jubo/*.html
 
       - name: Commit if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # 얕은 checkout이라 부모 커밋이 없다. 커밋 전에 지금 HEAD(번호를 만든 커밋)를 잡아 둔다
+          SRC=$(git rev-parse --short HEAD)
           git diff --quiet && echo "No changes" || (
-            git add *.html
-            git commit -m "chore: cache-bust asset refs → $(git rev-parse --short HEAD~1)"
+            git add *.html jubo/*.html
+            git commit -m "chore: cache-bust asset refs → ${SRC}"
           )
           git push
