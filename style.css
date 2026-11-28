@@ -31,7 +31,6 @@
     --font-brand:   "BrandSerif", "Pretendard", -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
     /* Neutrals */
     --cream:        #f3f4f6;
-    --communion-surface: #f8f5eb;
     --white:        #ffffff;
     --text:         #30343a;
     --text-muted:   #555d66;  /* WCAG AA(4.5:1) 충족 — cream/white 배경 위 본문용 */
@@ -2729,7 +2728,7 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     border: 1px solid var(--border);
     border-top: 3px solid var(--green-mid);
     border-radius: var(--radius-md);
-    background: var(--communion-surface);
+    background: var(--white);
     padding: 1.5rem 1.75rem;
 }
 .communion-card h3 {
@@ -4316,7 +4315,6 @@ footer {
 @media (prefers-color-scheme: dark) {
     :root {
         --cream:        #151719;
-        --communion-surface: #292820;
         --white:        #1d1f22;
         --text:         #dfe1e4;
         --text-muted:   #a9afb7;
