@@ -578,8 +578,9 @@ const IndexRenderer = {
                 <div class="info-row"><strong>${v.addressLabel}</strong><span>${address}</span></div>
                 <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}">${phone}</a></span></div>
             </div>
-            <a href="visit.html" class="home-detail-link">${v.more} ${icon('arrow-right')}</a>
         `;
+        document.getElementById('visit-more').innerHTML =
+            `<a href="visit.html" class="home-detail-link">${v.more} ${icon('arrow-right')}</a>`;
     }
 };
 

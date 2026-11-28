@@ -1787,8 +1787,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     padding: 0.85rem 0.35rem;
     margin: -0.85rem -0.35rem;
 }
-.home #location-card > .home-detail-link { justify-self: start; }
-
 .home-end-links {
     background: var(--cream);
     border-top: 1px solid var(--border);
