@@ -863,7 +863,7 @@ const NewcomerRenderer = {
 
                 <div class="newcomer-intro">
                     <h2 class="newcomer-intro-title">예배 안내</h2>
-                    <p class="newcomer-intro-body">성공회 예배에서는 회중이 함께 기도하고 응답합니다. 순서가 낯설면 처음에는 지켜보셔도 괜찮습니다.</p>
+                    <p class="newcomer-intro-body">성공회 예배에서는 회중이 함께 기도하고 응답합니다.</p>
                     <div class="newcomer-key-facts">
                         <div class="newcomer-key-row">
                             <span class="newcomer-key-label">예배</span>
@@ -883,11 +883,10 @@ const NewcomerRenderer = {
                 <div class="liturgy-section" id="firsttime">
                     <p class="section-eyebrow">First Visit</p>
                     <h2 class="section-title">참여 안내</h2>
-                    <p class="liturgy-body" style="margin-bottom:1rem;">처음 오셨을 때 알아 두시면 좋은 것들입니다.</p>
                     <div class="liturgy-checklist">
                         <div class="checklist-item"><span class="check-icon">✓</span><p>예배 중에는 <strong>앉고 서는</strong> 순서가 있습니다. 몸이 불편하시면 앉아 계셔도 됩니다.</p></div>
                         <div class="checklist-item"><span class="check-icon">✓</span><p>예배 순서는 <strong>주보</strong>에 있습니다. 응답은 <strong>자리에 놓인 기도서</strong>를 펴고 함께 읽으시면 됩니다.</p></div>
-                        <div class="checklist-item"><span class="check-icon">✓</span><p><strong>성가</strong>는 따라 부르지 않으셔도 괜찮습니다.</p></div>
+                        <div class="checklist-item"><span class="check-icon">✓</span><p><strong>성가</strong>는 따라 부르지 않으셔도 됩니다.</p></div>
                                                 <div class="checklist-item"><span class="check-icon">✓</span><p>도움이 필요하면 옆자리 교우나 안내위원에게 말씀해 주세요.</p></div>
                     </div>
                 </div>
@@ -946,7 +945,7 @@ const NewcomerRenderer = {
                             <p class="liturgy-body"><strong>제대 앞으로 나오시면 강복(축복)을 받으실 수 있습니다.</strong></p>
                             <ul class="liturgy-list">
                                 <li>두 손을 가슴에 X자로 모으시면 집전자가 머리에 손을 얹고 강복해 드립니다.</li>
-                                <li>편안한 마음으로 나오세요. 이때 하느님께서 여러분을 맞이하십니다.</li>
+                                <li>이때 하느님께서 여러분을 맞이하십니다.</li>
                             </ul>
                         </div>
                     </div>
@@ -1131,7 +1130,7 @@ const AnglicanRenderer = {
 
     _welcome() {
         const el = document.getElementById('anglican-welcome-banner');
-        if (!el || !CHURCH_DATA.anglican) return;
+        if (!el || !CHURCH_DATA.anglican || !CHURCH_DATA.anglican.welcome) return;
         el.innerHTML = `
             <div class="anglican-welcome">
                 <div class="container">
@@ -1491,7 +1490,7 @@ const AboutNavRenderer = {
         const anchorOf = it => it.href.split('#')[1];
 
         host.innerHTML = `
-            <nav class="gc-page-nav" aria-label="${cfg.navLabel || '교회 소개 둘러보기'}">
+            <nav class="gc-page-nav" aria-label="${cfg.navLabel || '교회 소개 목차'}">
                 <div class="container">
                     ${items.map(it => `<a href="#${anchorOf(it)}" class="gc-nav-link" data-about-section="${anchorOf(it)}">${it.short || it.label}</a>`).join('')}
                 </div>
@@ -3483,7 +3482,7 @@ const SundaysRenderer = {
             <div class="section-header">
                 <p class="section-eyebrow">Monthly Calendar</p>
                 <h2 class="section-title">이달의 교회력</h2>
-                <p class="section-sub">이달의 주일과 특별 절기를 한눈에 살펴보세요. 날짜의 배경 색은 그날의 전례색입니다.</p>
+                <p class="section-sub">이달의 주일과 특별 절기입니다. 날짜의 배경 색은 그날의 전례색입니다.</p>
             </div>
             <div class="lit-cal-wrap">${this._monthlyGrid(year, month, specialMap)}</div>`;
     },
@@ -3626,7 +3625,7 @@ const SundaysRenderer = {
             <div class="section-header">
                 <p class="section-eyebrow">Monthly Calendar</p>
                 <h2 class="section-title">이달의 교회력</h2>
-                <p class="section-sub">이달의 주일과 특별 절기를 한눈에 살펴보세요. 날짜의 배경 색은 그날의 전례색이며, 절기가 바뀌는 날부터 색이 달라집니다.</p>
+                <p class="section-sub">이달의 주일과 특별 절기입니다. 날짜의 배경 색은 그날의 전례색이며, 절기가 바뀌는 날부터 색이 달라집니다.</p>
             </div>
             <div class="lit-cal-wrap">${this._monthlyGrid(year, month, specialMap)}</div>`;
     },
