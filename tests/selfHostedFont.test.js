@@ -11,12 +11,15 @@ const pages = [
 const CSS = 'fonts/pretendard/pretendardvariable-dynamic-subset.css';
 
 describe('글꼴 자체 제공', () => {
-    it('어느 페이지도 jsdelivr를 부르지 않고, 모두 자체 글꼴 CSS를 쓴다', () => {
-        const bad = pages.filter(p => {
-            const s = read(p);
-            const local = (p.startsWith('jubo/') ? '../' : '') + CSS;
-            return s.includes('cdn.jsdelivr.net') || !s.includes(`href="${local}"`);
-        });
+    // 공식 저장소에만 있는 404.html처럼 글꼴 CSS를 쓰지 않는 페이지도 있다. 그런 페이지는 자체 경로 검사에서 뺀다.
+    it('어느 페이지도 jsdelivr를 부르지 않는다', () => {
+        expect(pages.filter(p => read(p).includes('cdn.jsdelivr.net'))).toEqual([]);
+    });
+
+    it('Pretendard 글꼴 CSS를 쓰는 페이지는 모두 자체 경로를 쓴다', () => {
+        const usesFont = pages.filter(p => /pretendard[^"']*\.css/i.test(read(p)));
+        const bad = usesFont.filter(p => !read(p).includes(`href="${(p.startsWith('jubo/') ? '../' : '') + CSS}"`));
+        expect(usesFont.length).toBeGreaterThan(30);
         expect(bad).toEqual([]);
     });
 
