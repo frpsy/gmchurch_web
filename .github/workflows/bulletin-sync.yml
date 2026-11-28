@@ -49,8 +49,8 @@ jobs:
           git add bulletins/ data.js data/bulletin-news.json data/bulletin-verses.json
           git diff --cached --quiet && echo "변경 없음" || (
             TODAY=$(date +%Y%m%d)
-            sed -i "s/data\.js?v=[A-Za-z0-9_-]*/data.js?v=${TODAY}/g" *.html
-            git add *.html
+            sed -i "s/data\.js?v=[A-Za-z0-9_-]*/data.js?v=${TODAY}/g" *.html jubo/*.html
+            git add *.html jubo/*.html
             git commit -m "chore: 주보 자동 갱신 ($(date +%Y-%m-%d))"
             git push
           )
