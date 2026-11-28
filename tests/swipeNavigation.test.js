@@ -343,3 +343,28 @@ it('returns from the first child tab to its parent hub and stops after the last 
     last.touch('touchend', 150);
     expect(last.links[1].click).not.toHaveBeenCalled();
 });
+
+it('preloads the destination hero with the candidate the phone would pick', async () => {
+    const { context } = setup();
+    const created = [];
+    context.Image = function () {
+        const img = { decode: vi.fn(() => Promise.resolve()) };
+        created.push(img);
+        return img;
+    };
+    context.window.matchMedia = query => ({ matches: query === '(max-width: 768px)' });
+    const attrs = (map) => ({ getAttribute: name => map[name] ?? null });
+    const sources = [
+        attrs({ media: '(min-width: 2000px)', srcset: 'images/hero/wide.webp' }),
+        attrs({ media: '(max-width: 768px)', srcset: 'images/hero/b-m.webp 1x, images/hero/b.webp 2x' }),
+    ];
+    const picture = { matches: selector => selector === 'picture', querySelectorAll: () => sources };
+    const hero = { ...attrs({ src: 'images/hero/b.webp' }), parentElement: picture };
+    const doc = { querySelector: selector => selector === 'main .hero-illustration' ? hero : null };
+    const page = runInContext('PageSwitch', context);
+    const result = await page._preloadHero(doc);
+    expect(created).toHaveLength(1);
+    expect(result.srcset).toBe('images/hero/b-m.webp 1x, images/hero/b.webp 2x');
+    expect(result.src).toBe('images/hero/b.webp');
+    expect(page._preloadHero({ querySelector: () => null })).toBeNull();
+});

@@ -2220,11 +2220,29 @@ const PageSwitch = {
         this._preloaded.set(file, entry);
         entry.ready = this._load(file).then(doc => {
             entry.doc = doc;
+            entry.hero = this._preloadHero(doc);
             return doc;
         }).catch(() => {
             if (this._preloaded.get(file) === entry) this._preloaded.delete(file);
             return null;
         });
+    },
+
+    // 본문만 미리 받으면 전환 뒤에야 머리 그림을 받기 시작해 빈 자리가 잠시 보인다.
+    // 새 페이지의 머리 그림을 같은 후보(picture source·srcset)로 미리 받아 해독해 둔다.
+    _preloadHero(doc) {
+        const hero = doc.querySelector('main .hero-illustration');
+        if (!hero || typeof Image !== 'function') return null;
+        const source = Array.from(hero.parentElement?.matches?.('picture') ? hero.parentElement.querySelectorAll('source') : [])
+            .find(el => !el.getAttribute('media') || window.matchMedia(el.getAttribute('media')).matches);
+        const img = new Image();
+        const sizes = source?.getAttribute('sizes') || hero.getAttribute('sizes');
+        const srcset = source?.getAttribute('srcset') || hero.getAttribute('srcset');
+        if (sizes) img.sizes = sizes;
+        if (srcset) img.srcset = srcset;
+        img.src = hero.getAttribute('src') || '';
+        const decoded = img.decode ? img.decode() : Promise.resolve();
+        return decoded.then(() => img, () => null);
     },
 
     async _load(file, signal) {
