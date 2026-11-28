@@ -8,7 +8,7 @@
  *   node scripts/site-check.mjs compare <기준> <비교> [차이폴더]   픽셀 비교, 다르면 종료 코드 1
  *   node scripts/site-check.mjs perf [md 파일]      휴대폰 조건 실측(LCP·CLS·TBT·전송량·미사용 CSS/JS)
  *                                                   TBT는 근사값: 불러온 뒤 1.5초까지 모든 긴 작업의 50ms 초과분 합
- *   node scripts/site-check.mjs why                전송량 종류별 분해·큰 파일·레이아웃 흔들림 원인 요소
+ *   node scripts/site-check.mjs why                전송량 종류별 분해·큰 파일·흔들림 원인·LCP 요소·첫 화면 밖 즉시 로딩 이미지
  *
  * 옵션: --pages index.html,worship.html  (일부 페이지만)
  * 환경변수 SITE_ROOT=<폴더>: 그 폴더의 사이트를 대상으로 한다(변경 전 main을 같은 도구로 찍을 때)
@@ -349,13 +349,24 @@ async function why(browser, base) {
                 for (const e of l.getEntries()) if (!e.hadRecentInput && e.value >= 0.005)
                     window.__s.push({ v: +e.value.toFixed(3), t: Math.round(e.startTime), src: e.sources.map(s => name(s.node)).slice(0, 3) });
             }).observe({ type: 'layout-shift', buffered: true });
+            window.__lcp = null;
+            new PerformanceObserver(l => {
+                for (const e of l.getEntries()) window.__lcp = { t: Math.round(e.startTime), el: name(e.element), url: (e.url || '').replace(location.origin, '').slice(0, 80), size: e.size };
+            }).observe({ type: 'largest-contentful-paint', buffered: true });
         });
         await page.goto(base + p, { waitUntil: 'load', timeout: 60000 });
         await page.waitForTimeout(1500);
         const shifts = await page.evaluate(() => window.__s);
+        const lcp = await page.evaluate(() => window.__lcp);
+        // 첫 화면(844px) 밖인데 처음부터 받은 이미지
+        const eager = await page.evaluate(() => [...document.images]
+            .filter(i => i.loading !== 'lazy' && i.complete && i.naturalWidth && i.getBoundingClientRect().top > innerHeight)
+            .map(i => (i.currentSrc || i.src).replace(location.origin, '').slice(0, 60)));
         console.log(`## ${p}  ` + Object.entries(kinds).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k}=${Math.round(v / 1024)}K`).join(' '));
         console.log('   큰 파일: ' + big.sort((a, b) => b[0] - a[0]).slice(0, 5).map(([n, u]) => `${Math.round(n / 1024)}K ${u.slice(0, 70)}`).join(' | '));
         for (const s of shifts) console.log(`   흔들림 ${s.v} @${s.t}ms ← ${s.src.join(', ')}`);
+        if (lcp) console.log(`   LCP ${lcp.t}ms ← ${lcp.el} ${lcp.url} (넓이 ${lcp.size})`);
+        if (eager.length) console.log(`   첫 화면 밖인데 바로 받은 이미지 ${eager.length}개: ${eager.slice(0, 4).join(' | ')}`);
         await ctx.close();
     }
 }
