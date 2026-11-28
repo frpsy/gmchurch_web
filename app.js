@@ -615,7 +615,6 @@ const ChildrenRenderer = {
                 <div class="container children-hero-inner">
                     <div class="children-illustration"><img src="images/children/welcome-hairstyles.webp" alt="${d.heroAlt}" width="1679" height="937" fetchpriority="high" decoding="async"></div>
                     <div class="children-hero-details">
-                        <p class="children-lead">${d.intro}</p>
                         <dl class="children-service-summary">
                             <div><dt>${d.timeLabel}</dt><dd>${service.time}</dd></div>
                             <div><dt>${d.placeLabel}</dt><dd>${d.place}</dd></div>
