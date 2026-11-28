@@ -475,12 +475,11 @@ const IndexRenderer = {
         this._visit();
         this._header('home-explore-header', CHURCH_DATA.home.explore);
         const links = document.getElementById('home-end-links');
-        // 둘러보기는 벤토 그리드: 자주 찾는 칸(size)을 크게 두고 나머지는 작은 칸으로 채운다
         if (links) links.innerHTML = CHURCH_DATA.home.endLinks.map(link => `
-            <li class="home-end-tile${link.size ? ` home-end-tile--${link.size}` : ''}"><a href="${link.href}">
+            <li class="home-end-tile${link.featured ? ' home-end-tile--featured' : ''}"><a href="${link.href}">
                 <span class="home-end-icon">${icon(link.icon)}</span>
                 <span class="home-end-label">${link.label}</span>
-                ${link.size && link.desc ? `<span class="home-end-desc">${link.desc}</span>` : ''}
+                ${icon('arrow-right')}
             </a></li>
         `).join('');
     },
@@ -516,54 +515,45 @@ const IndexRenderer = {
     _about() {
         const el = document.getElementById('about-brief-content');
         if (!el) return;
-        const info = CHURCH_DATA.info;
-        const { aboutLead, award } = info;
-        const about = CHURCH_DATA.home.about;
+        const { aboutLead, award } = CHURCH_DATA.info;
+        const { about, visit, endLinks } = CHURCH_DATA.home;
+        const bulletin = endLinks.find(link => link.href === 'bulletin.html');
         this._header('about-brief-header', about);
         el.innerHTML = `
-            <div class="home-about-copy">
-                <p class="about-brief-lead">${aboutLead}</p>
+            <p class="about-brief-lead">${aboutLead}</p>
+            <div class="home-actions">
+                <a class="btn-next btn-next--primary" href="visit.html">${icon('map')} ${visit.more}</a>
+                ${bulletin ? `<a class="btn-next" href="${bulletin.href}">${icon(bulletin.icon)} ${bulletin.label}</a>` : ''}
             </div>
-            <div class="home-about-facts">
-                <ul class="about-brief-facts">
-                    ${about.facts.map(f => `<li><strong>${f.label}</strong><span>${info[f.key]}</span></li>`).join('')}
-                </ul>
-                ${award ? `
-                <a href="${award.href}" class="about-brief-award">
-                    <span class="about-brief-award-icon" aria-hidden="true">${icon('leaf')}</span>
-                    <span class="about-brief-award-body">
-                        <strong>${award.year} ${award.title}</strong>
-                        <span>${award.org}</span>
-                    </span>
-                </a>` : ''}
+            <div class="home-about-links">
+                <a href="clergy.html" class="home-detail-link">${about.more} ${icon('arrow-right')}</a>
+                ${award ? `<a href="${award.href}" class="home-detail-link">${award.title} ${icon('arrow-right')}</a>` : ''}
             </div>
         `;
-        const more = document.getElementById('about-brief-more');
-        if (more) more.innerHTML = `<a href="clergy.html" class="home-detail-link">${about.more} ${icon('arrow-right')}</a>`;
     },
 
     _worship() {
         const el = document.getElementById('worship-grid');
         if (!el) return;
-        const home = CHURCH_DATA.home.worship;
-        this._header('worship-header', home);
-        const more = document.getElementById('worship-more');
-        if (more) more.innerHTML = `<a href="worship.html" class="home-detail-link">${home.more} ${icon('arrow-right')}</a>`;
-        // 홈 카드는 요약(summary)만 — 전문은 worship.html에서
-        el.innerHTML = CHURCH_DATA.worship.main.map(w => `
-            <div class="card">
-                <h3>${w.title}</h3>
-                <p class="card-time">${w.time}${w.duration ? ` · ${w.duration}` : ''}</p>
-                <p class="card-desc">${w.summary || w.desc}</p>
-            </div>
-        `).join('');
+        const { main, guide: guideText } = CHURCH_DATA.worship;
+        this._header('worship-header', CHURCH_DATA.home.worship);
+        const sharedTime = main.every(service => service.time === main[0].time) ? main[0]?.time : '';
+        el.innerHTML = `
+            ${sharedTime ? `<p class="home-worship-time">${sharedTime}</p>` : ''}
+            <ul class="home-worship-list">
+                ${main.map(w => `
+                    <li><a href="worship.html#${w.id}">
+                        <span><strong>${w.title}</strong>${w.duration ? ` <small>· ${w.duration}</small>` : ''}
+                        ${sharedTime ? '' : `<small class="home-worship-row-time">${w.time}</small>`}</span>
+                        ${icon('arrow-right')}
+                    </a></li>
+                `).join('')}
+            </ul>
+        `;
         const guide = document.getElementById('worship-guide');
         if (guide) {
-            if (CHURCH_DATA.worship.guide) {
-                guide.innerHTML = `<p>${CHURCH_DATA.worship.guide}</p>`;
-            } else {
-                guide.hidden = true;
-            }
+            guide.hidden = !guideText;
+            if (guideText) guide.innerHTML = `<p>${guideText}</p>`;
         }
     },
 
@@ -574,13 +564,12 @@ const IndexRenderer = {
         const v = CHURCH_DATA.home.visit;
         this._header('visit-header', v);
         locationEl.innerHTML = `
-            <div class="visit-facts">
-                <div class="info-row"><strong>${v.addressLabel}</strong><span>${address}</span></div>
-                <div class="info-row"><strong>${v.phoneLabel}</strong><span><a href="tel:${phone}">${phone}</a></span></div>
+            <p class="home-visit-address">${address}</p>
+            <div class="home-actions">
+                <a class="btn-next btn-next--primary" href="visit.html">${icon('map')} ${v.more}</a>
+                <a class="btn-next" href="tel:${phone}">${icon('phone')} ${v.phoneLabel}</a>
             </div>
         `;
-        document.getElementById('visit-more').innerHTML =
-            `<a href="visit.html" class="home-detail-link">${v.more} ${icon('arrow-right')}</a>`;
     }
 };
 
@@ -1134,6 +1123,11 @@ const AnglicanRenderer = {
         this._welcome();
         this._what();
         this._korea();
+        const identity = document.getElementById('church-identity-meta');
+        if (identity) {
+            const { subName, diocese } = CHURCH_DATA.info;
+            identity.textContent = `${subName} · ${diocese}`;
+        }
     },
 
     _welcome() {

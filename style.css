@@ -1638,219 +1638,158 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 
 
 .home main > .section {
-    padding-block: clamp(2rem, 5vw, 4.25rem);
+    padding-block: clamp(1.9rem, 4.5vw, 3.5rem);
     scroll-margin-top: var(--nav-h);
 }
-.home main > .section > .container,
-.home .home-end-links > .container,
+.home main > .section > .container { max-width: 52rem; }
 #main-footer > .container { max-width: 66rem; }
 .home main > .section .section-header {
-    margin-bottom: clamp(1.25rem, 3vw, 2rem);
-    text-align: center;
+    margin-bottom: clamp(0.8rem, 2vw, 1.25rem);
+    text-align: left;
 }
 .home main > .section .section-title { margin-bottom: 0; }
-.home main > .section .section-sub { margin: 0.55rem auto 0; }
-
-.home #about-brief { background: var(--white); }
-.home #worship {
-    background: var(--cream);
-    border-block: 1px solid var(--border);
-}
+.home #about-brief,
 .home #visit-preview { background: var(--white); }
-
-#about-brief-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(1.25rem, 3.5vw, 2.5rem);
-    align-items: start;
-}
-.home #about-brief .section-title { font-weight: 700; }
-.home #about-brief-content {
-    max-width: 42rem;
-    margin-inline: auto;
-}
-.home-about-copy .about-brief-lead {
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    text-align: left;
-    word-break: keep-all;
-    font-weight: 500;
-    letter-spacing: normal;
-    margin-bottom: 0;
-}
-.home-about-facts {
-    background: var(--cream);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border);
-}
-.home-about-facts .about-brief-facts {
-    background: transparent;
-    border: 0;
-    padding: 1rem 1.15rem;
-    margin: 0;
-}
-.home-about-facts .about-brief-facts strong {
-    min-width: 3em;
-    color: var(--text-muted);
-    font-weight: 550;
-}
-.home-about-facts .about-brief-award {
-    background: transparent;
-    border: 0;
-    border-top: 1px solid var(--border);
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    margin-bottom: 0;
-}
-.home-about-facts .about-brief-award:hover { background: var(--md-secondary-container); }
-.home-about-facts .about-brief-award-body strong { font-weight: 600; }
-.home-about-facts .about-brief-award-body,
-.home-about-facts .about-brief-facts span { min-width: 0; overflow-wrap: anywhere; }
-.home .about-brief-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--md-button-height);
-    padding: 0.5rem 1rem;
-    border: 0;
-    border-radius: var(--radius-pill);
-    background: var(--cream);
-    color: var(--heading);
-    font-size: var(--fs-sm);
-    font-weight: 600;
-    line-height: var(--lh-heading);
-    text-align: left;
-}
-.home .home-link-arrow {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 50%;
-    background: var(--ink-on-light);
-    color: white;
-}
-.home .home-link-arrow .ico { width: 1.3rem; height: 1.3rem; }
-@media (hover: hover) {
-    .home .about-brief-link:hover { background: var(--md-secondary-container); }
-}
-.home .about-brief-link:active { background: var(--md-secondary-container); }
-
-.home #worship-grid { gap: var(--space-3); }
-.home #worship-grid .card,
-.home #location-card {
-    padding: clamp(1.05rem, 2.6vw, 1.6rem);
-    background: var(--white);
-    border-radius: var(--radius-xl);
-}
-.home #worship-grid .card { will-change: auto; }
-.home #worship-grid h3 { margin-bottom: 0.25rem; }
-.home #worship-grid .card-desc {
-    word-break: keep-all;
-    text-wrap: balance;
-}
-.home #worship-grid .card-time {
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
-    font-weight: 650;
-    font-variant-numeric: tabular-nums;
-}
-.home .home-section-actions { margin-top: var(--space-4); }
-.home .home-section-actions { text-align: center; }
-.home .home-detail-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    min-height: 44px;
-    color: var(--md-primary);
-    font-size: var(--fs-sm);
-    font-weight: 650;
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-}
-.home .home-detail-link .ico { width: 1rem; height: 1rem; flex: none; }
-
-.home #location-card {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    max-width: 42rem;
-    margin-inline: auto;
-    border: 1px solid var(--border);
-}
-.home .visit-facts .info-row { gap: 0.75rem; margin: 0; }
-.home .visit-facts .info-row + .info-row { margin-top: 0.55rem; }
-.home .visit-facts .info-row strong { min-width: 2.5em; }
-.home .visit-facts .info-row span { min-width: 0; overflow-wrap: anywhere; }
-.home .visit-facts a { text-decoration: underline; text-underline-offset: 0.18em; }
-/* 전화번호는 휴대폰에서 바로 누르는 링크라 누르는 영역을 44px 높이로 넓힌다. 바깥 여백을 같은 만큼 줄여 줄 간격은 그대로 둔다 */
-.home .visit-facts a[href^="tel:"] {
-    display: inline-block;
-    padding: 0.85rem 0.35rem;
-    margin: -0.85rem -0.35rem;
-}
+.home #worship,
 .home-end-links {
     background: var(--cream);
     border-top: 1px solid var(--border);
 }
-/* 둘러보기: 벤토 그리드. 휴대폰 2열(큰 칸은 한 줄 전체), 넓은 화면 4열(주보 2×2, 설교 2×1) */
+.home #visit-preview { border-top: 1px solid var(--border); }
+
+.home #about-brief .about-brief-lead {
+    max-width: 38rem;
+    margin: 0 0 1rem;
+    color: var(--heading);
+    font-size: var(--fs-body);
+    font-weight: 500;
+    letter-spacing: normal;
+    line-height: var(--lh-body);
+    text-align: left;
+    word-break: keep-all;
+}
+.home-actions,
+.home-about-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.home-actions .btn-next {
+    width: auto;
+    max-width: 100%;
+    min-height: var(--md-button-height);
+    padding-inline: 0.9rem;
+    text-align: center;
+    word-break: keep-all;
+}
+.home-about-links { gap: 0 1.15rem; margin-top: 0.35rem; }
+.home-detail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: var(--md-button-height);
+    color: var(--md-primary);
+    font-size: var(--fs-sm);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    word-break: keep-all;
+}
+.home-detail-link .ico { width: 1rem; height: 1rem; flex: none; }
+
+.home-worship-time {
+    margin: 0 0 0.85rem;
+    color: var(--md-primary);
+    font-size: clamp(1.375rem, 4.8vw, 1.9rem);
+    font-weight: 750;
+    line-height: 1.3;
+    font-variant-numeric: tabular-nums;
+    word-break: keep-all;
+}
+.home-worship-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border);
+}
+.home-worship-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    padding: 0.55rem 0.25rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--heading);
+    word-break: keep-all;
+}
+.home-worship-list small {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+}
+.home-worship-row-time { display: block; }
+.home-worship-list a > .ico,
+.home-end-links a > .ico {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    color: var(--md-primary);
+}
+
+.home-visit-address {
+    margin: 0 0 1rem;
+    color: var(--heading);
+    font-size: var(--fs-lead);
+    font-weight: 600;
+    word-break: keep-all;
+}
+
 .home-end-links ul {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-    max-width: 52rem;
-    margin: 0 auto;
+    gap: 0.625rem;
+    margin: 0;
     padding: 0;
     list-style: none;
 }
-.home-end-tile { display: flex; }
-.home-end-tile--big,
-.home-end-tile--wide { grid-column: span 2; }
+.home-end-tile { display: flex; min-width: 0; }
 .home-end-links a {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    gap: 0.5rem;
-    min-height: 5.5rem;
-    padding: 1rem 1.1rem;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(0.3rem, 1.4vw, 0.6rem);
+    min-height: 3.5rem;
+    padding: 0.55rem clamp(0.45rem, 2vw, 0.85rem);
     background: var(--white);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     color: var(--heading);
     font-size: var(--fs-sm);
-    font-weight: 600;
+    font-weight: 650;
+    line-height: 1.3;
     text-decoration: none;
-    transition: border-color var(--dur), box-shadow var(--dur);
 }
-.home-end-links a:focus-visible { outline: 2px solid var(--md-primary); outline-offset: 2px; }
+.home-end-tile--featured a {
+    background: color-mix(in srgb, var(--md-primary) 10%, var(--white));
+    border-color: color-mix(in srgb, var(--md-primary) 24%, var(--border));
+}
+.home-end-label { word-break: keep-all; overflow-wrap: anywhere; }
+.home-end-icon { display: flex; color: var(--md-primary); }
+.home-end-icon .ico { width: 1.15rem; height: 1.15rem; }
+.home :is(.home-actions, .home-about-links, .home-worship-list, .home-end-links) a:focus-visible {
+    outline: 2px solid var(--md-primary);
+    outline-offset: 2px;
+}
 @media (hover: hover) {
-    .home-end-links a:hover { border-color: var(--md-primary); box-shadow: var(--shadow-md); }
-}
-.home-end-icon {
-    display: flex;
-    color: var(--md-primary);
-}
-.home-end-icon .ico { width: 1.25rem; height: 1.25rem; }
-.home-end-tile:is(.home-end-tile--big, .home-end-tile--wide) a { background: var(--md-secondary-container); }
-.home-end-tile--big .home-end-label,
-.home-end-tile--wide .home-end-label { font-size: var(--fs-lead); font-weight: 700; }
-.home-end-desc {
-    color: var(--text);
-    font-size: var(--fs-sm);
-    font-weight: 400;
-    line-height: 1.6;
+    .home-worship-list a:hover { color: var(--md-primary); text-decoration: underline; }
+    .home-end-links a:hover { border-color: var(--md-primary); box-shadow: var(--md-layer-hover); }
 }
 @media (min-width: 720px) {
     .home-end-links ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .home-end-tile--big { grid-row: span 2; }
-    .home-end-tile--big a { padding: 1.5rem; }
-    .home-end-tile--big .home-end-icon .ico { width: 2rem; height: 2rem; }
-    .home-end-tile--big .home-end-label { font-size: clamp(1.25rem, 2.2vw, 1.5rem); }
 }
 
-@media (min-width: 800px) {
-    .home #worship-grid { column-gap: 1.5rem; }
-}
 @media (max-width: 768px) {
     .nav-inner { gap: 0.55rem; }
     .nav-logo { flex-shrink: 1; min-width: 0; }
