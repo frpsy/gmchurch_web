@@ -3874,6 +3874,15 @@ const App = {
     _page: null,
 
     init() {
+        // 무슨 일이 있어도 렌더 전 숨김(html.render-pending)은 푼다
+        try {
+            this._init();
+        } finally {
+            document.documentElement.classList.remove('render-pending');
+        }
+    },
+
+    _init() {
         /* 사이트 대표 테마(--theme)는 녹색 고정(:root 기본값 사용). 절기색(--season)만
            전례 요소(절기 페이지 리본·달력·전례 안내 배지 등)에 주입한다. */
         const cs = CHURCH_DATA.worship && CHURCH_DATA.worship.liturgicalSeason;

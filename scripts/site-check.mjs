@@ -11,6 +11,7 @@
  *   node scripts/site-check.mjs why                전송량 종류별 분해·큰 파일·레이아웃 흔들림 원인 요소
  *
  * 옵션: --pages index.html,worship.html  (일부 페이지만)
+ * 환경변수 SITE_ROOT=<폴더>: 그 폴더의 사이트를 대상으로 한다(변경 전 main을 같은 도구로 찍을 때)
  * Playwright는 package.json에 두지 않는다. CI는 `npm i --no-save playwright`로 받고,
  * 로컬은 설치된 playwright를 PW_MODULE=<경로>로 가리킬 수 있다.
  * 서버는 이 스크립트가 직접 띄운다(빈 포트). 외부 요청은 글꼴 CDN만 허용한다.
@@ -22,7 +23,8 @@ import zlib from 'node:zlib';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// SITE_ROOT로 다른 폴더(예: main 체크아웃)를 같은 방식으로 찍어 비교할 수 있다
+const ROOT = path.resolve(process.env.SITE_ROOT || path.join(path.dirname(fileURLToPath(import.meta.url)), '..'));
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PW_MODULE || 'playwright');
 
@@ -91,7 +93,15 @@ async function settle(page) {
         window.scrollTo(0, 0);
         await Promise.all([...document.images].map(img => img.complete ? null :
             new Promise(r => { img.onload = img.onerror = r; setTimeout(r, 3000); })));
-        await new Promise(r => setTimeout(r, 200));
+        // 위치 표시 탭처럼 스크롤 뒤 늦게 바뀌는 화면을 기다린다: DOM 변화가 300ms 없을 때까지(최대 3초)
+        await new Promise(done => {
+            let quiet;
+            const mo = new MutationObserver(() => { clearTimeout(quiet); quiet = setTimeout(finish, 300); });
+            const finish = () => { mo.disconnect(); clearTimeout(cap); done(); };
+            const cap = setTimeout(finish, 3000);
+            mo.observe(document.documentElement, { subtree: true, attributes: true, childList: true, characterData: true });
+            quiet = setTimeout(finish, 300);
+        });
     });
 }
 
