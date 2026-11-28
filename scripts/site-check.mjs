@@ -14,7 +14,7 @@
  * 환경변수 SITE_ROOT=<폴더>: 그 폴더의 사이트를 대상으로 한다(변경 전 main을 같은 도구로 찍을 때)
  * Playwright는 package.json에 두지 않는다. CI는 `npm i --no-save playwright`로 받고,
  * 로컬은 설치된 playwright를 PW_MODULE=<경로>로 가리킬 수 있다.
- * 서버는 이 스크립트가 직접 띄운다(빈 포트). 외부 요청은 글꼴 CDN만 허용한다.
+ * 서버는 이 스크립트가 직접 띄운다(빈 포트). 외부 요청은 모두 막는다.
  */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -29,7 +29,8 @@ const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PW_MODULE || 'playwright');
 
 const FIXED_NOW = new Date('2026-11-28T10:00:00+09:00');   // 교회력·주보 표시를 고정
-const ALLOWED_EXTERNAL = /^https:\/\/cdn\.jsdelivr\.net\//;
+// 글꼴도 자체 제공(fonts/pretendard)이라 외부 요청은 모두 막는다
+const ALLOWED_EXTERNAL = /^$/;
 const VIEWPORTS = { m: { width: 390, height: 844 }, d: { width: 1280, height: 900 } };
 
 const args = process.argv.slice(2);
