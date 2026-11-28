@@ -3145,9 +3145,8 @@ const NewsRenderer = {
             el.innerHTML = `<p class="news-empty">${CHURCH_DATA.bulletins.newsEmpty}</p>`;
             return;
         }
-        // 공유한 링크(#news-날짜)로 들어오면 그 주를, 아니면 최신 주를 펼친다
-        const wanted = weeks.findIndex(item => `#news-${item.date}` === hash);
-        const openIdx = wanted === -1 ? 0 : wanted;
+        // 기본은 모두 접어 둔다. 공유한 링크(#news-날짜)로 들어온 경우에만 그 주를 펼친다.
+        const openIdx = weeks.findIndex(item => `#news-${item.date}` === hash);
 
         el.innerHTML = `
             <div class="bulletin-list">${weeks.map((item, i) => `
