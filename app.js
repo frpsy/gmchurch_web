@@ -479,7 +479,6 @@ const IndexRenderer = {
             <li class="home-end-tile${link.featured ? ' home-end-tile--featured' : ''}"><a href="${link.href}">
                 <span class="home-end-icon">${icon(link.icon)}</span>
                 <span class="home-end-label">${link.label}</span>
-                ${icon('arrow-right')}
             </a></li>
         `).join('');
     },
@@ -515,19 +514,13 @@ const IndexRenderer = {
     _about() {
         const el = document.getElementById('about-brief-content');
         if (!el) return;
-        const { aboutLead, award } = CHURCH_DATA.info;
-        const { about, visit, endLinks } = CHURCH_DATA.home;
-        const bulletin = endLinks.find(link => link.href === 'bulletin.html');
+        const { aboutLead } = CHURCH_DATA.info;
+        const { about } = CHURCH_DATA.home;
         this._header('about-brief-header', about);
         el.innerHTML = `
             <p class="about-brief-lead">${aboutLead}</p>
-            <div class="home-actions">
-                <a class="btn-next btn-next--primary" href="visit.html">${icon('map')} ${visit.more}</a>
-                ${bulletin ? `<a class="btn-next" href="${bulletin.href}">${icon(bulletin.icon)} ${bulletin.label}</a>` : ''}
-            </div>
-            <div class="home-about-links">
-                <a href="clergy.html" class="home-detail-link">${about.more} ${icon('arrow-right')}</a>
-                ${award ? `<a href="${award.href}" class="home-detail-link">${award.title} ${icon('arrow-right')}</a>` : ''}
+            <div class="home-about-more">
+                <a href="clergy.html" class="home-detail-link">${about.more}</a>
             </div>
         `;
     },
@@ -536,18 +529,25 @@ const IndexRenderer = {
         const el = document.getElementById('worship-grid');
         if (!el) return;
         const { main, guide: guideText } = CHURCH_DATA.worship;
-        this._header('worship-header', CHURCH_DATA.home.worship);
-        const sharedTime = main.every(service => service.time === main[0].time) ? main[0]?.time : '';
+        const home = CHURCH_DATA.home.worship;
+        this._header('worship-header', home);
+        // 첫 섹션에 표기된 시간은 되풀이하지 않고 다른 시간만 안내한다.
+        const heroTime = main.find(service => service.id === 'main')?.time;
         el.innerHTML = `
-            ${sharedTime ? `<p class="home-worship-time">${sharedTime}</p>` : ''}
             <ul class="home-worship-list">
-                ${main.map(w => `
-                    <li><a href="worship.html#${w.id}">
-                        <span><strong>${w.title}</strong>${w.duration ? ` <small>· ${w.duration}</small>` : ''}
-                        ${sharedTime ? '' : `<small class="home-worship-row-time">${w.time}</small>`}</span>
-                        ${icon('arrow-right')}
-                    </a></li>
-                `).join('')}
+                ${main.map(w => {
+                    const time = w.id === 'main' ? '' : w.time === heroTime ? home.sameTime : w.time;
+                    const detail = [time, w.duration].filter(Boolean).join(' · ');
+                    return `
+                        <li><a href="worship.html#${w.id}">
+                            <span class="home-worship-row">
+                                <strong>${w.title}</strong>
+                                ${detail ? `<span class="home-worship-meta">${detail}</span>` : ''}
+                            </span>
+                            ${w.summary ? `<span class="home-worship-summary">${w.summary}</span>` : ''}
+                        </a></li>
+                    `;
+                }).join('')}
             </ul>
         `;
         const guide = document.getElementById('worship-guide');
@@ -566,8 +566,8 @@ const IndexRenderer = {
         locationEl.innerHTML = `
             <p class="home-visit-address">${address}</p>
             <div class="home-actions">
-                <a class="btn-next btn-next--primary" href="visit.html">${icon('map')} ${v.more}</a>
-                <a class="btn-next" href="tel:${phone}">${icon('phone')} ${v.phoneLabel}</a>
+                <a class="btn-next btn-next--primary" href="visit.html">${v.more}</a>
+                <a class="btn-next" href="tel:${phone}">${v.phoneLabel}</a>
             </div>
         `;
     }
