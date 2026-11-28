@@ -614,7 +614,7 @@ const ChildrenRenderer = {
         const parents = (CHURCH_DATA.community.smallgroups?.groups || []).find(g => g.id === 'parents');
         const picture = (name, alt, portrait = false) => portrait
             ? `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 480w, images/children/${name}.webp 640w" sizes="(max-width: 768px) 50vw, 400px" alt="${alt}" width="640" height="914" loading="lazy" decoding="async">`
-            : `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 768px) 100vw, 50vw" alt="${alt}" width="1440" height="1080" loading="lazy" decoding="async">`;
+            : `<img src="images/children/${name}.webp" srcset="images/children/${name}-sm.webp 720w, images/children/${name}.webp 1440w" sizes="(max-width: 1040px) 50vw, 40vw" alt="${alt}" width="1440" height="1080" loading="lazy" decoding="async">`;
         el.innerHTML = `
             <div class="page-hero">
                 <p class="section-eyebrow">${d.heroEyebrow}</p>
@@ -682,7 +682,7 @@ const HopeCenterRenderer = {
                 <p>${d.summary}</p>
             </div>
             <section class="section hope-intro"><div class="container">
-                <figure class="hope-intro-photo">${picture(d.heroImage, '(max-width: 1040px) 100vw, 1000px', d.heroImage.width, d.heroImage.height, true)}</figure>
+                <figure class="hope-intro-photo">${picture(d.heroImage, '(max-width: 1040px) calc(100vw - 2rem), 1000px', d.heroImage.width, d.heroImage.height, true)}</figure>
                 <p class="children-lead hope-intro-lead">${d.intro}</p>
                 <dl class="children-service-summary hope-facts">
                     ${d.facts.map(f => `<div><dt>${f.label}</dt><dd>${f.value}</dd></div>`).join('')}
@@ -692,11 +692,11 @@ const HopeCenterRenderer = {
                 <div class="children-story-heading"><p class="section-eyebrow">${d.weeklyEyebrow}</p><h2 class="section-title">${d.weeklyTitle}</h2><p class="children-lead">${d.weeklyIntro}</p></div>
                 <ol class="hope-steps">${d.steps.map((st, i) => {
                     const [w, h] = stepSize[st.image.src] || [1440, 960];
-                    return `<li class="hope-step"><figure>${picture(st.image, '(max-width: 768px) 100vw, 33vw', w, h)}</figure><div class="hope-step-body"><span class="hope-step-num" aria-hidden="true">0${i + 1}</span><h3>${st.title}</h3><p>${st.desc}</p></div></li>`;
+                    return `<li class="hope-step"><figure>${picture(st.image, '(max-width: 1040px) calc(100vw - 2rem), 33vw', w, h)}</figure><div class="hope-step-body"><span class="hope-step-num" aria-hidden="true">0${i + 1}</span><h3>${st.title}</h3><p>${st.desc}</p></div></li>`;
                 }).join('')}</ol>
             </div></section>
             <section class="section hope-history" id="history"><div class="container hope-history-inner">
-                <figure class="hope-history-photo">${picture(d.historyImage, '(max-width: 768px) 100vw, 50vw', 1280, 853)}<figcaption>${d.historyImage.caption}</figcaption></figure>
+                <figure class="hope-history-photo">${picture(d.historyImage, '(max-width: 768px) calc(100vw - 2rem), 50vw', 1280, 853)}<figcaption>${d.historyImage.caption}</figcaption></figure>
                 <div class="hope-history-body">
                     <p class="section-eyebrow">${d.historyEyebrow}</p>
                     <h2 class="section-title">${d.historyTitle}</h2>
@@ -1677,7 +1677,7 @@ const PhotoGalleryRenderer = {
                 `).join('')}
             </div>
             <div class="photo-grid" id="photo-grid-items">
-                ${photos.map(p => {
+                ${photos.map((p, i) => {
                     const isPending = p.thumb.includes('picsum');
                     return `
                     <button class="photo-item${isPending ? ' photo-item--pending' : ''}"
@@ -1694,7 +1694,7 @@ const PhotoGalleryRenderer = {
                                 <span class="photo-placeholder-label">${p.title}</span>
                                 <span class="photo-placeholder-badge">준비중</span>
                                </div>`
-                            : `<img src="${p.thumb}" alt="${p.alt}" loading="lazy" width="480" height="320">
+                            : `<img src="${p.thumb}" alt="${p.alt}" ${i < 2 ? 'fetchpriority="high"' : 'loading="lazy"'} width="480" height="320">
                                <div class="photo-overlay" aria-hidden="true">
                                    <span class="photo-cat-badge">${p.category}</span>
                                    <p class="photo-caption">${p.title}</p>
