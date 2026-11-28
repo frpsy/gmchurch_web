@@ -8,7 +8,7 @@
 | 배포 | GitHub Pages — `https://frpsy.github.io/gmchurch_web` |
 | 방식 | 빌드 없는 순수 정적 사이트 (HTML + CSS + Vanilla JS) |
 | 브랜치 전략 | 작업 브랜치 → PR → main 머지 → GitHub Pages 자동 배포 |
-| 현재 상태 | 2026년 6월 10일 |
+| 성능·리팩토링 | `docs/perf-refactor-plan.md`, 점검 도구 `scripts/site-check.mjs` |
 
 ---
 
@@ -36,9 +36,9 @@ gmchurch_web/
 ├── videos.html       영상 갤러리 상세 페이지
 ├── gallery.html      사진 갤러리 상세 페이지 (noindex)
 ├── privacy.html      개인정보 처리방침 (noindex)
-├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA (1081줄)
-├── app.js            렌더러 모음 + App bootstrap (2588줄)
-├── style.css         전체 스타일 (5382줄)
+├── data.js           ★ 단일 콘텐츠 소스 — CHURCH_DATA
+├── app.js            렌더러 모음 + App bootstrap
+├── style.css         전체 스타일
 ├── images/icons.svg  ★ 아이콘 팩 — 사이트 전체 아이콘 SVG 스프라이트 (이모티콘 대신 사용)
 ├── favicon.svg       교회 로고 '열린 빛' (숲 녹 배경 + 크림 아치 십자)
 ├── apple-touch-icon.png  180×180 (scripts/brand/icon.html에서 생성)
@@ -344,7 +344,9 @@ const CHURCH_DATA = {
 
 ## app.js 렌더러 구조
 
-총 2588줄, 17개의 렌더러 모듈 + 2개 유틸리티(ScrollReveal, ScrollProgress) + App 부트스트랩.
+렌더러 모듈 여럿과 유틸리티(ScrollReveal, ScrollProgress 등), App 부트스트랩으로 이루어진다. 줄 수·모듈 수는 자주 바뀌므로 적지 않는다.
+
+**오류 격리**: `App.init()`과 `App.renderMain()`은 렌더러와 초기화를 `App._run(이름, 함수)`으로 하나씩 실행한다. 하나가 던지거나 비동기 렌더러가 실패해도 콘솔에 `[광명교회] 이름 실행 중 오류`를 남기고 다음으로 넘어간다. 새 렌더러도 `run('이름', () => X.render())` 형태로 넣는다(`tests/appBootstrap.test.js`가 검사). 페이지 전환(`PageSwitch`) 때는 `<main>`만 바꾸고 `renderMain(false)`를 다시 부른다.
 
 ```
 window DOMContentLoaded
