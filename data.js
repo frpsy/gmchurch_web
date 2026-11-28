@@ -914,7 +914,7 @@ const CHURCH_DATA = {
             greenchurch: { title: "작은 실천으로 창조세계를 돌봅니다", actions: ["worship", "contact"] },
             links:       { title: "광명교회의 활동도 살펴보세요",      actions: ["greenchurch", "worship"] },
             media:       { title: "예배에서 직접 뵙겠습니다",     actions: ["newcomer", "community", "worship"] },
-            news:        { title: "주일 주보도 살펴보세요",             actions: ["bulletin"] },
+            news:        { title: "주일 주보도 살펴보세요",             actions: ["bulletin", "community", "worship"] },
             newcomer:    { title: "예배에서 뵙겠습니다",               actions: ["worship", "visit"] },
             smallgroup:  { title: "소그룹 모임에 함께해 보세요",               actions: ["contact", "community"] },
             sundays:     { title: "교회력을 따라 함께 예배합니다",     actions: ["worship", "newcomer", "visit"] },
