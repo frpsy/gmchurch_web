@@ -629,9 +629,9 @@ const ChildrenRenderer = {
             </div></section>
             <section class="section gc-section-alt children-story"><div class="container">
                 <div class="children-story-heading"><p class="section-eyebrow">${d.storyEyebrow}</p><h2 class="section-title">${d.storyTitle}</h2><p class="children-lead">${d.storyIntro}</p></div>
-                <div class="children-photo-grid">${d.photos.map(p => `<figure>${picture(p.src, p.alt)}<figcaption>${p.caption}</figcaption></figure>`).join('')}</div>
+                <div class="children-photo-grid">${d.photos.map(p => `<figure>${picture(p.src, p.alt)}</figure>`).join('')}</div>
                 <div class="children-story-heading children-card-heading"><h2 class="section-title">${d.cardTitle}</h2><p class="children-lead">${d.cardIntro}</p></div>
-                <div class="children-photo-grid children-photo-grid--portrait">${d.cardPhotos.map(p => `<figure>${picture(p.src, p.alt, true)}<figcaption>${p.caption}</figcaption></figure>`).join('')}</div>
+                <div class="children-photo-grid children-photo-grid--portrait">${d.cardPhotos.map(p => `<figure>${picture(p.src, p.alt, true)}</figure>`).join('')}</div>
             </div></section>
             <section class="section" id="join"><div class="container children-join">
                 <div><p class="section-eyebrow">${d.eyebrow}</p><h2 class="section-title">${d.joinTitle}</h2><p class="children-lead">${d.joinIntro}</p></div>
