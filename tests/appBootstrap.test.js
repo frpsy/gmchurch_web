@@ -15,7 +15,7 @@ function body(name) {
 const BARE_CALL = /^\s+(?:if \([^)]*\) )?[A-Z][A-Za-z]+\.(?:render|init)\([^)]*\);\s*$/;
 
 describe('App 부트스트랩 오류 격리', () => {
-    for (const name of ['init', 'renderMain']) {
+    for (const name of ['_init', 'renderMain']) {
         it(`${name}의 렌더러 호출은 모두 run()으로 감싼다`, () => {
             const bare = body(name).split('\n').filter(line => BARE_CALL.test(line));
             expect(bare).toEqual([]);

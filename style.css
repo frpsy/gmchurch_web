@@ -179,6 +179,14 @@ button, input, select, textarea { font-family: inherit; }
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 
+/* ── 렌더 전 숨김 (docs/perf-refactor-plan.md P1) ─────────────
+   app.js가 채울 빈 칸(:empty[id])이 있는 첫 섹션부터 아래와 푸터를 잠시 숨긴다.
+   채우면서 아래 섹션이 밀리는 화면 흔들림(CLS)을 없애고, 그 위의 머리는 그대로 먼저 보인다.
+   html.render-pending은 <head>에서 달고 App.init 끝(실패하면 load 이벤트)에 뗀다. */
+html.render-pending main > :has(:empty[id]),
+html.render-pending main > :has(:empty[id]) ~ *,
+html.render-pending #main-footer { visibility: hidden; }
+
 /* ── Layout ──────────────────────────────────────────────── */
 .container {
     width: 100%;
