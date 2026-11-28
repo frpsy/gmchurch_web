@@ -3886,60 +3886,74 @@ const App = {
             r.setProperty('--season-on',    cs.onColor || '#fff');
         }
 
-        Analytics.init();
-        NavRenderer.render();
-        FooterRenderer.render();
-        VisitorCounter.render();
+        // 한 부분이 실패해도 나머지 화면과 기능은 살아 있도록 하나씩 따로 실행한다
+        const run = this._run;
+        run('Analytics', () => Analytics.init());
+        run('NavRenderer', () => NavRenderer.render());
+        run('FooterRenderer', () => FooterRenderer.render());
+        run('VisitorCounter', () => VisitorCounter.render());
         this.renderMain();
-        MoreToggle.init();
-        this._handleHashScroll();
-        ScrollProgress.init();
-        PageSwitch.init();
-        SwipeNavigation.init();
-        BackToTop.init();
-        PortraitLightbox.init();
-        MenuOverlay.init();
-        TapFeedback.init();
-        TextFit.init();
+        run('MoreToggle.init', () => MoreToggle.init());
+        run('hashScroll', () => this._handleHashScroll());
+        run('ScrollProgress', () => ScrollProgress.init());
+        run('PageSwitch', () => PageSwitch.init());
+        run('SwipeNavigation', () => SwipeNavigation.init());
+        run('BackToTop', () => BackToTop.init());
+        run('PortraitLightbox', () => PortraitLightbox.init());
+        run('MenuOverlay', () => MenuOverlay.init());
+        run('TapFeedback', () => TapFeedback.init());
+        run('TextFit', () => TextFit.init());
         document.addEventListener('click', e => {
             if (e.target.matches('.map-copy-btn')) MapHelper.copyAddr(e.target);
         });
+    },
+
+    _run(name, fn) {
+        const report = e => console.error(`[광명교회] ${name} 실행 중 오류`, e);
+        try {
+            const result = fn();
+            // 비동기 렌더러(VisitorCounter)의 실패도 같은 방식으로 남긴다
+            if (result && typeof result.catch === 'function') result.catch(report);
+        } catch (e) {
+            report(e);
+        }
     },
 
     renderMain(animateReveal = true) {
         this._page?.abort();
         this._page = new AbortController();
         const { signal } = this._page;
-        ContactBinder.render();
-        IndexRenderer.render();
-        BcpRenderer.render();
-        WorshipRenderer.render();
-        ChildrenRenderer.render();
-        HopeCenterRenderer.render();
-        NewcomerRenderer.render();
-        CommunityRenderer.render();
-        SmallGroupRenderer.render();
-        GivingRenderer.render();
-        VisitRenderer.render();
-        AnglicanRenderer.render();
-        ClergyRenderer.render();
-        HistoryRenderer.render(signal);
-        AboutNavRenderer.render(signal);
-        PressRenderer.render();
-        FaqRenderer.render();
-        MediaRenderer.render();
-        MediaHubRenderer.render();
-        PhotoGalleryRenderer.render(signal);
-        LinksRenderer.render();
-        BulletinRenderer.render();
-        NewsRenderer.render();
-        SermonsRenderer.render(signal);
-        SundaysRenderer.render(signal);
-        NextStepRenderer.render();
-        MoreToggle.render();
-        if (animateReveal) ScrollReveal.init(signal);
-        SermonReading.render(signal);
-        ReadingTools.render(signal);
+        const run = this._run;
+        run('ContactBinder', () => ContactBinder.render());
+        run('IndexRenderer', () => IndexRenderer.render());
+        run('BcpRenderer', () => BcpRenderer.render());
+        run('WorshipRenderer', () => WorshipRenderer.render());
+        run('ChildrenRenderer', () => ChildrenRenderer.render());
+        run('HopeCenterRenderer', () => HopeCenterRenderer.render());
+        run('NewcomerRenderer', () => NewcomerRenderer.render());
+        run('CommunityRenderer', () => CommunityRenderer.render());
+        run('SmallGroupRenderer', () => SmallGroupRenderer.render());
+        run('GivingRenderer', () => GivingRenderer.render());
+        run('VisitRenderer', () => VisitRenderer.render());
+        run('AnglicanRenderer', () => AnglicanRenderer.render());
+        run('ClergyRenderer', () => ClergyRenderer.render());
+        run('HistoryRenderer', () => HistoryRenderer.render(signal));
+        run('AboutNavRenderer', () => AboutNavRenderer.render(signal));
+        run('PressRenderer', () => PressRenderer.render());
+        run('FaqRenderer', () => FaqRenderer.render());
+        run('MediaRenderer', () => MediaRenderer.render());
+        run('MediaHubRenderer', () => MediaHubRenderer.render());
+        run('PhotoGalleryRenderer', () => PhotoGalleryRenderer.render(signal));
+        run('LinksRenderer', () => LinksRenderer.render());
+        run('BulletinRenderer', () => BulletinRenderer.render());
+        run('NewsRenderer', () => NewsRenderer.render());
+        run('SermonsRenderer', () => SermonsRenderer.render(signal));
+        run('SundaysRenderer', () => SundaysRenderer.render(signal));
+        run('NextStepRenderer', () => NextStepRenderer.render());
+        run('MoreToggle', () => MoreToggle.render());
+        if (animateReveal) run('ScrollReveal', () => ScrollReveal.init(signal));
+        run('SermonReading', () => SermonReading.render(signal));
+        run('ReadingTools', () => ReadingTools.render(signal));
     },
 
     _scrollToHash(hash, { focus = false } = {}) {
