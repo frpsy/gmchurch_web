@@ -250,7 +250,7 @@ const CHURCH_DATA = {
     home: {
         explore: { title: "둘러보기" },
         endLinks: [
-            { label: "교회 주보", href: "bulletin.html", icon: "pen", featured: true },
+            { label: "교회 주보", href: "bulletin.html", icon: "pen" },
             { label: "교회 소식", href: "news.html", icon: "mail" },
             { label: "설교·강연", href: "sermons.html", icon: "book" },
             { label: "교회력", href: "sundays.html", icon: "calendar" },
