@@ -50,7 +50,9 @@ Playwright는 `package.json`에 넣지 않는다. 로컬은 `PW_MODULE=<playwrig
 ### 0단계 안전망 — 이 PR
 - `scripts/site-check.mjs`, CI `test` 작업에 브라우저 스모크 단계, 이 문서.
 
-### 1단계 버그 (작은 PR)
+### 1단계 버그 (작은 PR) — 완료 2026-11-28
+B1 #922, B2·B3 #923, B5는 `ARCHITECTURE.md` 갱신 PR에서 끝냈다. 다음은 2단계 P1(흔들림)이다.
+
 | # | 내용 | 조치 |
 |---|---|---|
 | B1 | `App.renderMain()`이 렌더러 약 30개를 오류 격리 없이 차례로 부른다. 하나가 던지면 뒤의 렌더러와 읽기 도구가 모두 멈춘다 | 렌더러마다 `try/catch`로 격리하고 `console.error`로 남긴다 |
