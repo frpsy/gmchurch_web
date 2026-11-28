@@ -1638,109 +1638,105 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 
 
 .home main > .section {
-    padding-block: clamp(1.9rem, 4.5vw, 3.5rem);
+    padding-block: clamp(1.65rem, 4vw, 3.25rem);
+    background: var(--white);
     scroll-margin-top: var(--nav-h);
 }
 .home main > .section > .container { max-width: 52rem; }
 #main-footer > .container { max-width: 66rem; }
 .home main > .section .section-header {
-    margin-bottom: clamp(0.8rem, 2vw, 1.25rem);
-    text-align: left;
+    margin-bottom: clamp(0.9rem, 2.2vw, 1.35rem);
+    text-align: center;
 }
-.home main > .section .section-title { margin-bottom: 0; }
-.home #about-brief,
-.home #visit-preview { background: var(--white); }
-.home #worship,
-.home-end-links {
-    background: var(--cream);
-    border-top: 1px solid var(--border);
+.home main > .section .section-title {
+    margin-bottom: 0;
+    font-size: clamp(1.5rem, 4.5vw, 1.875rem);
+    font-weight: 700;
 }
-.home #visit-preview { border-top: 1px solid var(--border); }
 
 .home #about-brief .about-brief-lead {
-    max-width: 38rem;
-    margin: 0 0 1rem;
-    color: var(--heading);
+    max-width: 34rem;
+    margin: 0 auto;
+    color: var(--text);
     font-size: var(--fs-body);
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: normal;
-    line-height: var(--lh-body);
+    line-height: 1.75;
     text-align: left;
     word-break: keep-all;
 }
-.home-actions,
-.home-about-links {
+.home-actions {
     display: flex;
     flex-wrap: wrap;
+    max-width: 26rem;
+    margin-inline: auto;
     gap: 0.5rem;
 }
 .home-actions .btn-next {
+    flex: 1 1 8em;
     width: auto;
-    max-width: 100%;
+    max-width: none;
+    min-width: 0;
     min-height: var(--md-button-height);
     padding-inline: 0.9rem;
     text-align: center;
     word-break: keep-all;
 }
-.home-about-links { gap: 0 1.15rem; margin-top: 0.35rem; }
+.home-actions .btn-next:not(.btn-next--primary) { background: var(--white); }
+.home-about-more { margin-top: 0.25rem; text-align: center; }
 .home-detail-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
     min-height: var(--md-button-height);
     color: var(--md-primary);
     font-size: var(--fs-sm);
-    font-weight: 650;
+    font-weight: 600;
     text-decoration: underline;
-    text-underline-offset: 0.18em;
-    word-break: keep-all;
-}
-.home-detail-link .ico { width: 1rem; height: 1rem; flex: none; }
-
-.home-worship-time {
-    margin: 0 0 0.85rem;
-    color: var(--md-primary);
-    font-size: clamp(1.375rem, 4.8vw, 1.9rem);
-    font-weight: 750;
-    line-height: 1.3;
-    font-variant-numeric: tabular-nums;
-    word-break: keep-all;
+    text-underline-offset: 0.22em;
 }
 .home-worship-list {
-    list-style: none;
-    padding: 0;
+    padding: 0 clamp(1rem, 3vw, 1.5rem);
     margin: 0;
-    border-top: 1px solid var(--border);
+    list-style: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--md-primary) 4%, var(--white));
 }
+.home-worship-list li + li { border-top: 1px solid var(--border); }
 .home-worship-list a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
+    display: grid;
+    gap: 0.2rem;
     min-height: 3.25rem;
-    padding: 0.55rem 0.25rem;
-    border-bottom: 1px solid var(--border);
+    padding-block: 0.85rem;
     color: var(--heading);
+    line-height: 1.55;
     word-break: keep-all;
+    overflow-wrap: anywhere;
 }
-.home-worship-list small {
+.home-worship-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0 0.75rem;
+}
+.home-worship-row strong {
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--md-outline);
+    text-underline-offset: 0.22em;
+}
+.home-worship-meta,
+.home-worship-summary {
     color: var(--text-muted);
     font-size: var(--fs-sm);
 }
-.home-worship-row-time { display: block; }
-.home-worship-list a > .ico,
-.home-end-links a > .ico {
-    flex: none;
-    width: 1rem;
-    height: 1rem;
-    color: var(--md-primary);
-}
 
 .home-visit-address {
-    margin: 0 0 1rem;
+    margin: 0 0 0.9rem;
     color: var(--heading);
-    font-size: var(--fs-lead);
-    font-weight: 600;
+    font-size: var(--fs-body);
+    text-align: center;
     word-break: keep-all;
 }
 
@@ -1757,33 +1753,33 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
     flex: 1;
     min-width: 0;
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: 1.15em minmax(0, 1fr);
     align-items: center;
-    gap: clamp(0.3rem, 1.4vw, 0.6rem);
-    min-height: 3.5rem;
-    padding: 0.55rem clamp(0.45rem, 2vw, 0.85rem);
+    gap: 0.65em;
+    min-height: 3.75rem;
+    padding: 0.55rem clamp(0.55rem, 3.6vw, 0.95rem);
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     color: var(--heading);
     font-size: var(--fs-sm);
-    font-weight: 650;
+    font-weight: 600;
     line-height: 1.3;
     text-decoration: none;
 }
 .home-end-tile--featured a {
-    background: color-mix(in srgb, var(--md-primary) 10%, var(--white));
-    border-color: color-mix(in srgb, var(--md-primary) 24%, var(--border));
+    background: color-mix(in srgb, var(--md-primary) 7%, var(--white));
+    border-color: color-mix(in srgb, var(--md-primary) 18%, var(--border));
 }
 .home-end-label { word-break: keep-all; overflow-wrap: anywhere; }
 .home-end-icon { display: flex; color: var(--md-primary); }
-.home-end-icon .ico { width: 1.15rem; height: 1.15rem; }
-.home :is(.home-actions, .home-about-links, .home-worship-list, .home-end-links) a:focus-visible {
+.home-end-icon .ico { width: 1.15em; height: 1.15em; }
+.home :is(.home-actions, .home-about-more, .home-worship-list, .home-end-links) a:focus-visible {
     outline: 2px solid var(--md-primary);
     outline-offset: 2px;
 }
 @media (hover: hover) {
-    .home-worship-list a:hover { color: var(--md-primary); text-decoration: underline; }
+    .home-worship-list a:hover strong { color: var(--md-primary); }
     .home-end-links a:hover { border-color: var(--md-primary); box-shadow: var(--md-layer-hover); }
 }
 @media (min-width: 720px) {
