@@ -932,7 +932,7 @@ const NewcomerRenderer = {
                     <p class="section-eyebrow">Holy Communion</p>
                     <h2 class="section-title">영성체 안내</h2>
                     <div class="communion-grid">
-                        <div class="communion-card communion-season">
+                        <div class="communion-card">
                             <h3>세례받으신 분</h3>
                             <p class="liturgy-body">성공회의 성찬은 모든 그리스도인에게 열려 있습니다. 교파에 관계없이 <strong>세례받은 그리스도인이라면 누구나</strong> 그리스도의 몸과 피를 모실 수 있습니다.</p>
                             <ul class="liturgy-list">
@@ -942,7 +942,7 @@ const NewcomerRenderer = {
                                 <li>성찬 받는 방법이 궁금하시면 안내위원에게 문의해 주세요.</li>
                             </ul>
                         </div>
-                        <div class="communion-card" style="border-top-color:var(--green-mid); background:var(--green-light);">
+                        <div class="communion-card">
                             <h3>아직 세례를 받지 않으신 분</h3>
                             <p class="liturgy-body"><strong>제대 앞으로 나오시면 강복(축복)을 받으실 수 있습니다.</strong></p>
                             <ul class="liturgy-list">

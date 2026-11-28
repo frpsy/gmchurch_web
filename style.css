@@ -2410,7 +2410,6 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 .liturgy-guide .resource-card          { border-top: 3px solid var(--season); }
 .liturgy-guide .resource-link          { color: var(--season-ink, var(--season)); }
 .liturgy-guide .space-item             { border-top-color: var(--season); }
-.liturgy-guide .communion-season       { border-top-color: var(--season); background: var(--season-light); }
 .liturgy-guide .check-icon             { color: var(--season-ink, var(--season)); }
 
 .liturgy-guide {
@@ -2727,8 +2726,9 @@ button.season-ribbon-seg:not(.is-current)::before { content: ''; position: absol
 }
 .communion-card {
     border: 1px solid var(--border);
-    border-top: 3px solid;
+    border-top: 3px solid var(--green-mid);
     border-radius: var(--radius-md);
+    background: var(--white);
     padding: 1.5rem 1.75rem;
 }
 .communion-card h3 {
@@ -4348,12 +4348,6 @@ footer {
         --md-primary:                #66a284;  /* 카드 면 5.4:1 */
         --md-on-primary:             #0f1b16;  /* 5.9:1 */
         --md-outline:                #8a948d;  /* 카드 면 5.1:1 */
-    }
-    /* 전례력 절기색 — JS가 주입하는 밝은 절기색(s.colorLight)은 다크모드에 적응하지
-       않으므로, 절기 강조색을 어두운 서피스에 섞어 카드 배경을 어둡게 재계산한다.
-       (color-mix 미지원 시 기존 background 선언으로 자연 폴백) */
-    .liturgy-guide .communion-season {
-        background: color-mix(in srgb, var(--season) 14%, var(--white));
     }
     /* 절기색을 텍스트로 쓰는 요소 — 어두운 배경에서 가독성 확보 위해 밝게 보정 */
     .liturgy-guide .section-eyebrow,
